@@ -1,0 +1,271 @@
+<?php
+// $Id$
+/**
+* @file
+* Tacking User IP, Vist URL, Page render time, Logged in User...etc
+*/
+
+/**
+* Implementation of hook_menu().
+*/
+
+function ajaxtracking_menu() {
+
+   $items = array();
+ 
+   $items['ajaxtracking/delete'] = array(
+         'title' => 'Test Tracking',
+		'page callback' => 'ajaxtracking_delete',
+		'access arguments' => array('delete user tracking'),
+    	'type' => MENU_CALLBACK
+  	);
+	
+   $items['ajaxtracking/list'] = array(
+        'title' => 'Ajax Tracking',
+		'page callback' => 'ajaxtracking_usertracking',
+		'access arguments' => array('access user tracking'),
+    	'type' => MENU_CALLBACK
+  	);
+ 
+  	$items['ajaxtracking/report'] = array(
+	    'title' => 'User Tracking',
+    	'page callback' => 'ajaxtracking_listtrackings',
+		'access arguments' => array('delete user tracking'),
+    	'type' => MENU_NORMAL_ITEM
+  	);
+ 
+  	return $items;
+}
+
+
+/**
+* Implementation of hook_perm().
+*/
+function ajaxtracking_perm() {
+return array('access user tracking','delete user tracking');
+}
+
+/**
+* Implementation of hook_access().
+*/
+function ajaxtracking_access($op, $node, $account) {
+switch ($op) {
+case 'create':
+// Allow if user's role has 'create joke' permission.
+return user_access('access user tracking', $account);
+case 'delete':
+// Allow if user's role has 'delete own joke' permission and user is
+// the author; or if the user's role has 'delete any joke' permission.
+return user_access('delete user tracking', $account);
+}
+}
+
+
+
+/**
+ * Submit callback: clear database log.
+ */
+function ajaxtracking_delete() {
+	
+ db_query("DELETE FROM {ajaxtracking}");
+ drupal_set_message(t('Ajaxtracking log cleared.'));
+ drupal_goto('ajaxtracking/report');
+
+}
+function exp_to_dec($float_str)
+// formats a floating point number string in decimal notation, supports signed floats, also supports non-standard formatting e.g. 0.2e+2 for 20
+// e.g. '1.6E+6' to '1600000', '-4.566e-12' to '-0.000000000004566', '+34e+10' to '340000000000'
+// Author: Bob
+{
+    // make sure its a standard php float string (i.e. change 0.2e+2 to 20)
+    // php will automatically format floats decimally if they are within a certain range
+    $float_str = (string)((float)($float_str));
+
+    // if there is an E in the float string
+    if(($pos = strpos(strtolower($float_str), 'e')) !== false)
+    {
+        // get either side of the E, e.g. 1.6E+6 => exp E+6, num 1.6
+        $exp = substr($float_str, $pos+1);
+        $num = substr($float_str, 0, $pos);
+       
+        // strip off num sign, if there is one, and leave it off if its + (not required)
+        if((($num_sign = $num[0]) === '+') || ($num_sign === '-')) $num = substr($num, 1);
+        else $num_sign = '';
+        if($num_sign === '+') $num_sign = '';
+       
+        // strip off exponential sign ('+' or '-' as in 'E+6') if there is one, otherwise throw error, e.g. E+6 => '+'
+        if((($exp_sign = $exp[0]) === '+') || ($exp_sign === '-')) $exp = substr($exp, 1);
+        else trigger_error("Could not convert exponential notation to decimal notation: invalid float string '$float_str'", E_USER_ERROR);
+       
+        // get the number of decimal places to the right of the decimal point (or 0 if there is no dec point), e.g., 1.6 => 1
+        $right_dec_places = (($dec_pos = strpos($num, '.')) === false) ? 0 : strlen(substr($num, $dec_pos+1));
+        // get the number of decimal places to the left of the decimal point (or the length of the entire num if there is no dec point), e.g. 1.6 => 1
+        $left_dec_places = ($dec_pos === false) ? strlen($num) : strlen(substr($num, 0, $dec_pos));
+       
+        // work out number of zeros from exp, exp sign and dec places, e.g. exp 6, exp sign +, dec places 1 => num zeros 5
+        if($exp_sign === '+') $num_zeros = $exp - $right_dec_places;
+        else $num_zeros = $exp - $left_dec_places;
+       
+        // build a string with $num_zeros zeros, e.g. '0' 5 times => '00000'
+        $zeros = str_pad('', $num_zeros, '0');
+       
+        // strip decimal from num, e.g. 1.6 => 16
+        if($dec_pos !== false) $num = str_replace('.', '', $num);
+       
+        // if positive exponent, return like 1600000
+        if($exp_sign === '+') return $num_sign.$num.$zeros;
+        // if negative exponent, return like 0.0000016
+        else return $num_sign.'0.'.$zeros.$num;
+    }
+    // otherwise, assume already in decimal notation and return
+    else return $float_str;
+}
+
+
+function exp2dec($number) {
+	preg_match('/(.*)E-(.*)/', str_replace(".", "", $number), $matches);
+	$num = "0.";
+	while ($matches[2] > 0) {
+		$num .= "0";
+		$matches[2]--;
+	}
+	return $num . $matches[1];
+}
+
+function ajaxtracking_listtrackings() {
+
+$output = "<div class='alim_userreport'><br /><input type='button' onClick='if(confirm(\"Are you sure you want to clear all.This action cannot be undone.\")==true){ window.location=\"delete\" }' value='Clear All' />";
+
+//define table headers (columns)
+  $headers = array(
+        array('data' => 'Date', 'field' => 'date'),
+        array('data' => 'IP Address', 'field' => 'ip_address'),
+        array('data' => 'User', 'field' => 'username'),
+        array('data' => 'Url', 'field' => 'url'),
+		array('data' => 'Page Generation Time (Sec.)', 'field' => 'page_generation_time'),
+		array('data' => 'Page Rendering Time (Sec.)', 'field' => 'page_rendering_time'),
+		array('data' => 'Remarks', 'field' => 'remarks'),
+  );
+    
+
+$sql = 'SELECT ip_address,username,url,remarks,page_generation_time,page_rendering_time,date FROM {ajaxtracking}';
+$sql .= tablesort_sql($headers);
+$result = pager_query($sql, 25);
+$i=0;	
+while($result_opt = db_fetch_object($result))
+{
+		$data[$i]['date'] 		= $result_opt->date; 
+	    $data[$i]['ip_address'] = $result_opt->ip_address; 
+		$data[$i]['username'] 	= $result_opt->username; 
+		$data[$i]['url'] 		= wordwrap($result_opt->url,20,'<br />',true);
+		//$data[$i]['page_generation_time'] = $result_opt->page_generation_time;
+		$data[$i]['page_generation_time'] 	= exp_to_dec(round($result_opt->page_generation_time/1000,5)); 
+		$data[$i]['page_rendering_time'] 	= round(($result_opt->page_rendering_time)/1000,5); 
+		$data[$i]['remarks'] 	= $result_opt->remarks; 
+		$i++;
+}
+//add table to output
+  $output .= theme('table', $headers, $data);
+
+  //add pager to output
+  $output .= theme('pager', NULL, $limit, 0)."</div>";
+
+  //return output
+  return $output;
+}
+
+
+
+/**
+ * Implementation of hook_init().
+ */
+function ajaxtracking_init() {
+
+global $base_url;
+
+$pageURL = 'http';
+ if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+ $pageURL .= "://";
+ if ($_SERVER["SERVER_PORT"] != "80") {
+  $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+ } else {
+  $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+ }
+ 
+
+
+// JavaScript
+$output = '$(document).ready(function() {
+
+  $(window).load(function() 
+   { 
+
+        var cururl = "'.$pageURL.'";
+		$.ajax({
+   			type: "GET",
+			url: "'.$base_url.'/ajaxtracking/list",
+   			data: "cururl=" + encodeURI(cururl) + "&gtime=" + encodeURI(server_time) + "&rtime="+ encodeURI(browser_time),
+   			success: function(msg){
+				//eval(msg);
+   			}
+ 		});
+		
+
+	
+  });
+
+});';
+
+
+drupal_add_js($output, 'inline', 'footer');
+}
+
+/**
+* Implementation of ajaxtracking_usertracking().
+*/
+function ajaxtracking_usertracking() {
+
+
+global $user;
+
+if($user->uid!=1)
+{
+$ip_address = $_SERVER['REMOTE_ADDR'];
+
+if($user->uid!="")
+{
+	$userobj =  user_load($user->uid);
+	$username = $userobj->name;
+	$remarks = "Authenticated User";
+}
+else
+{
+	$username = "Anonymous";
+	$remarks = "Anonymous User";
+}
+
+if($_GET['cururl'])
+ $url = $_GET['cururl'];
+else
+ $url = "Nil";
+
+
+if($_GET['gtime'])
+ $page_generation_time = $_GET['gtime'];
+else
+ $page_generation_time = "Nil";
+
+if($_GET['rtime'])
+ $page_rendering_time = $_GET['rtime'];
+else
+  $page_rendering_time = "Nil";
+
+
+// Record Dtat in database.
+db_query("INSERT INTO {ajaxtracking} (ip_address,username,url,remarks,page_generation_time,page_rendering_time,date) VALUES ('%s','%s','%s','%s','%s','%s','%s')",$ip_address,$username,$url,$remarks,$page_generation_time,$page_rendering_time,date("Y-m-d H:i:s"));
+//return '';
+print 'tracking inserted';exit;
+}
+
+	 
+}

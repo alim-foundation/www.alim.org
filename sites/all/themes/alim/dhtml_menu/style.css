@@ -1,0 +1,6757 @@
+body {margin:0;padding:0;text-align:center;color:#2e2e2e;background:#e8e1b7;
+	font-family:tahoma, Verdana, Arial, Helvetica, sans-seri ;font-size:13px;
+
+	}
+a
+{
+	text-decoration:none;
+}
+a {
+   outline: none;
+}
+#outer_div
+{
+  width:100%;
+ background:#e8e1b7 url(images/alim.orgbg.jpg) top left repeat-x;
+/* padding-bottom:15px;*/
+}
+.beta_tag
+{
+ background:url(images/beta.png) top left no-repeat;
+ background-attachment:fixed;
+ height:61px;
+ width:62px;
+ position:fixed;
+ left:0px;
+ top:0px;
+ z-index:10;
+ text-align:left;
+}
+.beta_tag1
+{
+ background:url(images/beta.png) top left no-repeat;
+ height:61px;
+ width:62px;
+ position:fixed;
+ left:0px;
+ top:0px;
+  z-index:10;
+}
+#main_div
+{
+	 width:100%;
+	/* background:#e8e1b7 url(images/alim.orgbg.jpg) top left repeat-x;*/
+}
+
+
+
+#main_div
+{
+	/*background:#e8e1b7;*/
+	width:1050px;
+	margin:0px;
+	padding:0px;
+}
+#head_div
+{
+	height:158px;
+}
+#footer_div
+{
+	margin:0px;
+	padding:0px;
+	margin-top:0px;
+	height:125px;
+	/*text-align:center;*/
+	background:#e8e1b7 url(images/alim.orgbottomtile.jpg) top left repeat-x;
+	width:100%;
+	background-color:#8A370B;
+
+}
+#footer_content
+{
+	height:50px;
+	padding-top:10px;
+	width:959px;
+}
+#footer_head
+{
+	 float:left;
+	/* margin-left:60px;*/
+	 width:350px;
+	 height:50px;
+	 text-align:left;
+	 color:#FEF280;
+
+}
+
+#footer_head h1
+{
+	font-size:30px;
+	 color:#7B2A0F;
+	font-weight:bold;
+	margin:0;
+	padding:0;
+	
+}
+
+#footer_menu
+{
+  float:right;
+  margin-right:10px;
+}
+#footer_menu li.leaf
+{
+   list-style:none;
+   display:inline;
+    color:#7B2A0F;
+	 font-weight:bold;
+	 border-right:1px solid #7B2A0F;
+  
+}
+#footer_menu li.last
+{
+	border-right:none;
+}
+#footer_menu li a
+{
+   color:#7B2A0F;
+	font-weight:bold;
+}
+#con_div_top
+{
+  background:url(images/topbg.jpg) top center no-repeat;
+  height:32px;
+  padding-top:2px;
+ 
+
+}
+.sign1{font-family:Times New Roman;color: #FB7600;font-size:0.9em}
+
+#breadcrumb
+{
+ float:left;
+  margin:0px;
+  padding:0px;
+  padding-top:4px;
+   padding-left:20px;
+  padding-right:0px;
+  padding-bottom:0;
+  vertical-align:bottom;
+  width:660px;
+  overflow:hidden;
+  height:24px;
+
+}
+
+#social-face{
+	float:right;
+	width:200px;
+	height:28px;
+}
+
+#social-face .share{
+	padding-top:4px;
+	float:right;
+	padding-right:10px;
+	padding-left:0px;
+	
+}
+/*div.stbutton.horizontal iframe.stcounter {
+height:18px;
+position:absolute;
+right:0;
+top:0;
+width:37px;
+background:none !important;
+}*/
+#social-face .like{
+	float:right;width:70px;padding-top:3px;
+}
+#social-face .share a{
+	color:#000000;
+	font-family:Arial;
+	font-size:11px;
+	/*background:#C7C7C7;
+	padding:2px;*/
+}
+#social-face .share a:hover{
+	text-decoration:none;
+}
+
+#breadcrumb ul{
+ display:block;
+ list-style:none;float:left;
+ margin:0;
+ padding:0;
+}
+#breadcrumb ul li{
+ display:block;float:left;
+ list-style:none;
+ /*background:url(images/c2.jpg) top  right no-repeat;
+	/*background-position:0px -4px;
+ 
+height:24px;
+margin:0;
+ padding:0 20px 0 0;*/
+
+}
+.breadcrumb{
+	padding:0 0 0 0;
+}
+.breadcrumb .seperator
+{
+	width:20px;
+	height:20px;
+	/*margin:0 1px;*/
+	display:block;
+	float:left;
+	background:url(images/c2.jpg) left top no-repeat;
+	background-position:0px -4px;
+}
+.breadcrumb a
+{
+   color:#333333;
+   font-size:11px;
+  /* display:block;
+   float:left;*/
+   padding-top:2px;
+   padding-left:5px;
+   padding-right:5px;
+}
+.breadcrumb img{
+	border:none;
+	vertical-align:bottom;
+	padding:0;
+	margin:0;
+}
+.crumb_back{
+background:url(images/c1.jpg) left center repeat-x;
+/*background-position:0px -4px;*/
+height:28px;
+margin:4px 45px 0px 45px;
+}
+.breadcrumb a. active 
+{
+  font-weight:bold;
+}
+/*#bread_text
+{
+	text-align:left;
+	margin-left:60px;
+	font-weight:bold;
+	float:left;
+	padding-top:8px;
+}*/
+#con_div
+{
+ padding:0px;
+ margin:0px;
+}
+#con_div_middle
+{
+ /* background:url(images/topbgmiddle.jpg) top center repeat-y;*/
+  background:#FFFFFF;
+  text-align:left;
+  width:961px;
+  min-height:310px;
+ 
+ 
+}
+#con_div_bottom
+{
+/*  background:url(images/topbgbottom.jpg) top center no-repeat;*/
+  background:#FFFFFF;
+    height:29px;
+	width:961px;
+ 
+}
+#top_menu
+{
+	 /*margin-left:40px;
+	 margin-right:30px;*/
+	 color:#666666;
+     font-weight:bold;
+	 text-align:center;
+	 height:45px;
+	
+}
+#top_menu_left
+{
+  background:url(images/topmenuleft.png) top center no-repeat;
+  height:45px;
+  width:9px;
+  float:left;
+
+}
+#top_menu_middle
+{
+  background:url(images/topmenumiddletile.png) top center repeat-x;
+  height:45px;
+  width:824px;
+  text-align:center;
+  float:left;
+  height:35px;
+  padding-top:10px;
+
+}
+#top_menu_middle_second
+{
+  background:url(images/topmenumiddletile.png) top center repeat-x;
+  height:45px;
+  width:193px;
+ /* text-align:center;*/
+  float:left;
+  height:35px;
+  padding-top:10px;
+  padding-right:10px;
+
+}
+#top_menu_middle_second h2
+{
+ display:none;
+}#top_menu_middle_second a
+{
+  text-decoration:none;
+  color:#990000;
+  font-weight:bold;
+}
+#top_menu_right
+{
+  background:url(images/topmenuright.png) top center no-repeat;
+  height:45px;
+  width:9px;
+  float:left;
+
+}
+
+#block-nice_menus-1
+{
+  
+   text-align:center;
+
+
+}
+#block-nice_menus-1 .content
+{
+  
+   text-align:center;
+   margin-left:10px;
+}
+#nice-menu-1 li
+{
+   border:0px;
+ /*  background:#F4F4F4;*/
+   background:none;
+   padding-right:10px;
+   padding-left:10px;
+   border-right: 1px solid #ccc;
+}
+
+#nice-menu-1 ul li
+{
+  border-bottom: 1px solid #ccc;
+   background:#F4F4F4;
+   text-align:left;
+/*   padding-top:5px;*/
+}
+
+
+#nice-menu-1 li a
+{
+ color:#666666;
+ font-weight:bold;
+ padding-top:5px;
+
+}
+#nice-menu-1 li a:hover
+{
+ color:#9B4F07;
+ font-weight:bold;
+
+
+}
+#nice-menu-1 li li ul
+{
+display:none;
+
+
+}
+
+#nice-menu-1 li#menu-986
+{
+	 border-right:none;
+}
+
+#second_menu
+{
+	background:url(images/secondmenubg.png) top left no-repeat;
+	/*height:35px;*/
+	text-align:left;
+	margin-left:110px;
+	width:700px;
+	float:left;
+	margin-top:10px;
+
+	
+	
+}
+#second_menu ul
+{
+	margin:0px;
+	padding:0px;
+/*	padding-top:1px;
+    margin-left:15px;*/
+}
+#second_menu li
+{
+
+	float:left;
+	margin:0px;
+	color:#FFFFFF;
+	font-weight:bold;
+    background:url(images/secondmenudivider.png) right center no-repeat;
+	list-style:none;
+	height:33px;
+	width:100px;
+	text-align:center;
+	
+}
+
+#second_menu li.last
+{
+   background:none;
+}
+#second_menu li.active
+{
+    /*padding-left:10px;*/
+	background:url(images/secondmenubgselectmiddle.png) left top repeat-x;
+	width:100px;
+
+}
+#second_menu li.activefirst
+{
+    /*padding-left:10px;*/
+	background:url(images/secondmenubgselectleft.png) left top no-repeat;
+	width:100px;
+
+}
+#second_menu li.active a, #second_menu li.activefirst a
+{
+ color:#000000;
+}
+
+#second_menu li a
+{
+
+	color:#FFFFFF;
+	font-weight:bold;
+	font-size:13px;
+	padding-left:15px;
+	padding-right:10px;
+	padding-top:7px;
+	display:block;
+	outline:none; 
+	text-decoration:none;
+padding-bottom:13px;
+
+}
+
+#second_menu li a:hover
+{
+/*  background:url(images/secondmenubgselectleft.png) top left no-repeat;*/
+
+  color:#D3D985;
+ 
+}
+#second_menu li a:active
+{
+/*  background:url(images/secondmenubgselectleft.png) top left no-repeat;
+  color:red;*/
+ 
+}
+
+#second_menu li.first a:active
+{
+/*  background:url(images/secondmenubgselectleft.png) top left no-repeat;*/
+
+  color:#DDB959;
+ 
+}
+
+#logo
+{
+	text-align:left;
+/*	margin-left:55px;*/
+	float:left;
+	height:70px;
+    width:550px;
+
+	
+
+}
+#logo h1 
+{
+	font-size:30px;
+	color:#ddb959;
+	font-weight:bold;
+	margin:0;
+	padding-top:30px;
+	
+}
+#logo h1 a
+{
+	font-size:30px;
+	color:#ddb959;
+	font-weight:bold;
+	margin:0;
+	padding:0;
+	
+}
+
+#search
+{
+  background:url(images/search.png) top right no-repeat;
+  height:38px;
+  width:303px;
+  float:right;
+  margin-right:70px;
+  margin-top:20px;
+
+}
+#search_content
+{
+
+  padding-left:25px;
+  padding-top:9px;
+
+}
+
+#head_middle
+{
+	height:70px;
+	vertical-align:top;
+	margin-top:0px;
+	
+}
+#left_menu
+{
+  width:210px;
+  height:950px;
+  background:#ddb959;
+  margin-top:1px;
+  float:left;
+
+}
+#left_menu_no
+{
+  width:50px;
+  background:none;
+  margin-top:1px;
+  float:left;
+
+}
+#block-block-1, #block-block-5 ,#block-block-8 ,#block-block-7 ,#block-block-9
+{
+
+  padding:0px;
+  width:220px;
+  height:auto;
+
+   float:left;
+}
+#left_items
+{
+	
+	margin-top:10px;
+	margin-bottom:10px;
+	
+}
+#left_menu ul
+{
+	margin:0px;
+	padding:0px;
+
+}
+#left_menu table
+{
+ border-collapse:separate;
+ background:none;
+}
+#left_menu table td
+{
+  text-align:left;
+
+}
+#left_menu table td.menu_item
+{
+  height:28px;
+    padding-left:10px;
+
+}
+#left_menu table td.menu_item_sub
+{
+  height:28px;
+  padding-left:10px;
+
+
+}
+#left_menu table td.menu_item_active
+{
+	
+	 height:28px;
+	background:#F2F2F2 url(images/menuhighliter.jpg) center left no-repeat;
+	padding-left:10px;
+	
+}
+#left_menu td.sub_menu_active
+{
+   height:28px;
+   background:#F2F2F2 url(images/menuhighliter.jpg) center left no-repeat;
+   padding-left:10px;
+}
+#left_menu table td a
+{
+  color:#810C05;
+  font-weight:400;
+  font-size:14px;
+}
+.menu_divider
+{
+ background:url(images/menudivider.jpg) bottom left repeat-x;
+ height:2px;
+}
+/*#left_menu li
+{
+
+ padding:0px;
+ text-align:left;
+ padding-top:8px;
+ padding-bottom:8px;
+ background:url(images/menudivider.jpg) bottom left repeat-x;
+ list-style:none;
+
+   
+}*/
+
+#left_menu li .arrow
+{
+   padding:0px;
+   margin:0px;
+   padding-right:8px;	
+}
+
+/*#left_menu li.active*/
+
+#left_menu li.active-trail
+{
+	background:url(images/menuhighliter.jpg) center left no-repeat;
+	
+	
+}
+#left_menu li .field-content
+{
+	width:186px;
+	height:28px;
+	
+}
+/*#left_items li.active a
+{
+	color:#006600;
+}
+#left_menu li.active
+{
+	background:url(images/menuhighliter.jpg) center left no-repeat ;
+	
+	
+}
+#left_menu li a.active
+{
+	background:url(images/menuhighliter.jpg) center left no-repeat;
+	
+	
+}
+
+#left_menu li a
+{
+  color:#810C05;
+  font-weight:400;
+  font-size:14px;
+  padding:0px;
+  margin:0px;
+}*/
+#recitation
+{
+	background:url(images/bg.png) center left no-repeat;
+	width:185px;
+	height:344px;
+	margin-top:13px;
+	margin-left:13px;
+	margin-bottom:50px;
+	padding-top:10px;
+}
+#recitation_hadith
+{
+/*	background:url(images/recitationbg.jpg) center left no-repeat;*/
+	width:185px;
+	margin-top:13px;
+	margin-left:13px;
+	margin-bottom:50px;
+
+}
+.rec_top
+{
+ background:url(images/top.jpg) center top no-repeat;
+ height:10px;
+ padding:0px;
+ margin:0px;
+}
+.rec_middle
+{
+   background:url(images/tile.jpg) center top repeat-y;
+   height:500px;
+	 padding:0px;
+   margin:0px;
+}
+.rec_bottom
+{
+ background:url(images/bottom.jpg) center top no-repeat;
+
+ height:10px;
+  padding:0px;
+ margin:0px;
+}
+.tbl_recitation
+{
+  font-weight:bold;
+/*  margin:3px;*/
+  color:#333333;
+}
+.tbl_recitation
+{
+ border-collapse:separate;
+}
+#content
+{
+  width:700px;
+ /* height:310px;*/
+  margin-left:8px;
+  margin-top:12px;
+  float:left;
+}
+#content1
+{
+  /*width:700px;
+  height:310px;*/
+  margin-left:8px;
+  margin-top:12px;
+  margin-right:10px;
+/*  padding:0 50px 20px 100px;*/
+  /*width:850px;*/
+  padding:0 10px 20px 10px;
+  float:left;
+}
+#content2
+{
+  /*width:700px;
+  height:310px;*/
+  margin-left:8px;
+  margin-top:12px;
+  padding:0 10px 20px 10px;
+  font-size:13px;
+  float:left;
+}
+#navmenu{
+	width:200px;
+	float:right;
+}
+#con_head
+{
+/* float:left;*/
+ font-weight:bold;
+ font-size:18px;
+ color:#666666;
+ margin-bottom:3px;
+ width:500px;
+}
+#con_page
+{
+/* float:right;*/
+text-align:right;
+}
+/*#content_data
+{
+	margin-top:20px;
+	
+}*/
+.data_green
+{
+
+	text-align:right;
+	font-size:18px;
+	color:#006600;
+	padding-bottom:7px;
+	border-bottom:1px solid #DEDEDC;
+	width:570px;
+	height:auto;
+}
+.data_black
+{
+
+	text-align:right;
+	font-size:18px;
+	color:#000000;
+	padding-bottom:7px;
+	border-bottom:1px solid #DEDEDC;
+	width:570px;
+	height:auto;
+}
+
+.green
+{
+
+	text-align:right;
+	font-size:12px;
+	color:#006600;
+	padding-bottom:7px;
+	width:570px;
+	height:auto;
+}
+.black
+{
+
+	text-align:right;
+	font-size:12px;
+	color:#000000;
+	padding-bottom:7px;
+	width:570px;
+	height:auto;
+}
+
+.views-table p
+{
+  margin:0px;
+  padding:0px;
+}
+.index_no
+{
+	float:right;
+	margin-left:15px;
+}
+.index_no a
+{
+	font-size:18px;
+	color:#0000FF;
+	text-decoration:underline;
+	font-weight:bold;
+}
+#con_innerhead
+{
+ font-size:18px;
+ color:#a54d1c;
+}
+.blue_class
+{
+ color:#0000FF;
+ font-weight:bold;
+}
+.text_class
+{
+  color:#666666;
+  font-weight:bold;
+}
+#comment
+{
+  background:#FFFFFF url(images/line-tile.jpg) top left repeat-x;
+  height:400px;;
+  width:98%;
+  text-align:center;
+}
+#content_inner
+{
+  width:700px;
+  margin-left:15px;
+  margin-top:20px;
+  float:left;
+  text-align:center;
+}
+#comment_menu
+{ 
+   padding-top:15px;
+  padding-left:30px;
+}
+#comment_menu ul
+{
+ padding:0;
+ margin:0;
+}
+#comment_menu li
+{
+ list-style:none;
+ float:left;
+ padding-bottom:10px;
+ padding-right:20px;
+}
+#comment_menu li a
+{
+  color:#666666;
+  font-weight:bold;
+}
+#comment_menu li .active
+{
+  color:#a54d1c;
+ 
+}
+.comm_link, .comm_link a
+{
+  color:#a54d1c;
+}
+.text_class_normal
+{
+  color:#666666;
+ 
+}
+.color_bold {color: #a54d1c; font-weight: bold; }
+
+.view-arabic-ayah table
+{
+ width:680px;
+ background:none;
+ border:none;
+ border-collapse:separate;
+
+}
+.view-arabic-ayah table tr
+{
+
+ background:none;
+ border:none;
+}
+
+.view-arabic-ayah table td
+{
+
+  text-align:right;
+  vertical-align:middle;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+.view-arabic-ayah .views-table thead
+{
+ display:none;
+ background:none;
+ border:none;
+}
+
+.view-arabic-ayah .views-table th
+{
+ background:none;
+ border-bottom:none;
+}
+.view-arabic-ayah thead tr
+{
+ background:none;
+ border:none;
+}
+
+.view-arabic-ayah .odd
+{
+
+	font-family: Traditional Arabic ;
+	/*font-family: Me Quran,times new roman;*/
+	text-align:right;
+	 font-size: 20pt ;
+	 
+	 font-weight: normal;
+	 
+	font-style: normal; 
+	line-height: normal; 
+	 font-variant: normal; text-decoration: none;
+	color:#006600;
+	padding-bottom:7px;
+	width:570px;
+	height:auto;
+}
+.view-arabic-ayah .even
+{
+
+	font-family: Traditional Arabic ;
+	
+	/*font-family: Me Quran,times new roman;*/
+	
+	text-align:right;
+	 font-size: 20pt ;
+	
+	 font-weight: normal;
+	 
+	 font-style: normal; line-height: normal;  font-variant: normal;text-decoration: none;
+	color:#000000;
+	padding-bottom:7px;
+	width:570px;
+	height:auto;
+}
+.view-arabic-ayah td.views-field-body 
+{
+	border-bottom:1px solid #DEDEDC;
+	padding-right:3px;
+}
+.view-arabic-ayah td.views-field-field-ayah-no-value
+{
+	  font-family:tahoma, Verdana, Arial, Helvetica, sans-seri ;
+  font-size:14px;
+}
+.view-arabic-ayah a
+{
+  color:#0000FF;
+  text-decoration:underline;
+  font-family:tahoma, Verdana, Arial, Helvetica, sans-seri ;
+  font-size:14px;
+}
+
+/*------------------------------- */
+.view-ayah-translation {
+/*	font-size:13px;*/
+}
+.view-ayah-translation table
+{
+ width:680px;
+ background:none;
+ border:none;
+ border-collapse:separate;
+
+
+}
+.view-ayah-translation table tr
+{
+
+ background:none;
+ border:none;
+}
+
+.view-ayah-translation table td
+{
+
+  /*height:30px;
+  text-align:left;*/
+  vertical-align:top;
+/*  font-size:15px;*/
+}
+.view-ayah-translation table td.views-field-field-ayah-no-value-1
+{
+  vertical-align:top;
+  width:120px;
+/*  font-size:11px;*/
+/*  padding-right:5px;*/
+}
+.view-ayah-translation table td.views-field-field-ayah-no-value
+{
+  vertical-align:top;
+  
+/* width:550px; text-align:right;*/
+
+}
+.view-ayah-translation .views-table thead
+{
+ display:none;
+ background:none;
+ border:none;
+}
+
+.view-ayah-translation .views-table th
+{
+ background:none;
+ border-bottom:none;
+}
+.view-ayah-translation thead tr
+{
+ background:none;
+ border:none;
+}
+
+.view-ayah-translation .odd
+{
+
+	/*text-align:left;*/
+	/*font-size:13px;*/
+	color:#006600;
+	/*padding-bottom:10px;*/
+/*	width:570px;*/
+	/*height:auto;*/
+}
+.view-ayah-translation .even
+{
+
+	/*text-align:left;*/
+	/*font-size:13px;*/
+	color:#000000;
+	/*padding-bottom:10px;*/
+/*	width:570px;*/
+	/*height:auto;*/
+}
+.view-ayah-translation td.views-field-body 
+{
+	border-bottom:1px solid #DEDEDC;
+/*	padding-right:3px;*/
+	padding-bottom:7px;
+	
+}
+/*.view-ayah-translation td.views-field-field-ayah-no-value 
+{
+	vertical-align:top;
+}*/
+.view-ayah-translation a
+{
+  color:#0000FF;
+  text-decoration:underline;
+}
+.view-ayah-translation .fn
+{
+ /* font-weight:bold;
+  font-size:14px;
+  color:#FF0000;*/
+}
+/*------------------------------- */
+
+.view-compare-translation table
+{
+ width:550px;
+ background:none;
+ border:none;
+ border-collapse:separate;
+ margin-left:80px;
+
+}
+.view-compare-translation table tr
+{
+
+ background:none;
+ border:none;
+}
+
+.view-compare-translation table td
+{
+
+  height:25px;
+  text-align:left;
+  vertical-align:middle;
+/*  font-size:15px;*/
+}
+.view-compare-translation .views-table thead
+{
+ display:none;
+ background:none;
+ border:none;
+}
+
+.view-compare-translation .views-table th
+{
+ background:none;
+ border-bottom:none;
+}
+.view-compare-translation thead tr
+{
+ background:none;
+ border:none;
+}
+
+
+.view-compare-translation
+{
+
+	text-align:left;
+/*	font-size:12px;*/
+	color:#000000;
+	padding-bottom:7px;
+	width:570px;
+	height:auto;
+}
+.view-compare-translation td.views-field-body 
+{
+		padding-right:3px;
+		height:20px;
+		margin:0px;
+		padding:0px;
+}
+.view-compare-translation td.views-field-name
+{
+  width:130px;
+  height:20px;
+  margin:0px;
+  padding:0px;
+ 
+}
+.view-compare-translation p
+{
+  margin:0px;
+  padding:0px;
+}
+.view-compare-translation a
+{
+  color:#0000FF;
+}
+.view-compare-translation .fn
+{
+ /* font-weight:bold;
+  font-size:14px;
+  color:#FF0000;*/
+}
+.note-a{
+ font-weight:bold;
+  font-size:14px;
+  color:#FF0000;
+  font-style:normal;text-decoration:none;
+}
+.fn .note-a{
+ font-weight:bold;
+  font-size:14px;
+  color:#FF0000;
+  font-style:normal;
+  text-decoration:none;
+  padding-bottom:5px;
+}
+
+
+
+.view-compare-translation-one table
+{
+ width:550px;
+ background:none;
+ border:none;
+ border-collapse:separate;
+ margin-left:80px;
+
+}
+.view-compare-translation-one table tr
+{
+
+ background:none;
+ border:none;
+}
+
+.view-compare-translation-one table td
+{
+
+  height:25px;
+  text-align:left;
+  vertical-align:middle;
+/*  font-size:15px;*/
+}
+.view-compare-translation-one .views-table thead
+{
+ display:none;
+ background:none;
+ border:none;
+}
+
+.view-compare-translation-one .views-table th
+{
+ background:none;
+ border-bottom:none;
+}
+.view-compare-translation-one thead tr
+{
+ background:none;
+ border:none;
+}
+
+
+.view-compare-translation-one
+{
+
+	text-align:left;
+/*	font-size:12px;*/
+	color:#000000;
+	padding-bottom:7px;
+	width:570px;
+	height:auto;
+}
+.view-compare-translation-one td.views-field-body 
+{
+		padding-right:3px;
+		height:20px;
+		margin:0px;
+		padding:0px;
+}
+.view-compare-translation-one td.views-field-name
+{
+  width:130px;
+  height:20px;
+  margin:0px;
+  padding:0px;
+ 
+}
+.view-compare-translation-one p
+{
+  margin:0px;
+  padding:0px;
+}
+.view-compare-translation-one a
+{
+  color:#0000FF;
+}
+.view-compare-translation-one .fn
+{
+ /* font-weight:bold;
+  font-size:14px;
+  color:#FF0000;*/
+}
+/*------------------------------- */
+
+
+.view-ayah-elaboration{
+	display:none;
+}
+
+.view-ayahelaboration-bottom td a {
+	 text-decoration:none;
+	 color:#000000;
+}
+
+.view-ayahelaboration-bottom table
+{
+ width:650px;
+ background:none;
+ border:none;
+ border-collapse:separate;
+ margin:0px;
+ padding:0px;
+
+
+}
+.view-ayahelaboration-bottom table tr
+{
+
+ background:none;
+ border:none;
+}
+
+.view-ayahelaboration-bottom table td
+{
+
+  height:30px;
+  text-align:left;
+  vertical-align:middle;
+}
+.view-ayahelaboration-bottom .views-table thead
+{
+ display:none;
+ background:none;
+ border:none;
+}
+
+.view-ayahelaboration-bottom .views-table th
+{
+ background:none;
+ border-bottom:none;
+}
+.view-ayahelaboration-bottom thead tr
+{
+ background:none;
+ border:none;
+}
+
+
+.view-ayahelaboration-bottom .odd, .view-ayahelaboration-bottom .even
+{
+
+	text-align:left;
+/*	font-size:12px;*/
+	color:#000000;
+	
+	width:570px;
+	height:auto;
+	
+}
+
+.view-ayahelaboration-bottom td.views-field-body 
+{
+		
+		border-bottom:0px;
+		padding-bottom:20px;
+		vertical-align:top;
+}
+.view-ayahelaboration-bottom td.views-field
+{
+	padding-right:3px;
+	vertical-align:top;
+}
+.view-ayahelaboration-bottom td.views-field-name
+{
+  width:100px;
+}
+.view-ayahelaboration-bottom a
+{
+  color:#0000FF;
+}
+.view-ayahelaboration-bottom td.notenumber
+{
+  color:#FF0000;
+/*  font-size:14px;*/
+  font-weight:bold;
+  padding-right:25px;
+  vertical-align:top;
+}
+.view-ayah-translation hr.noteline{
+		border-bottom:1px solid #DEDEDC;
+		height:1px;
+		border-top:none;
+		border-left:none;
+		border-right:none;
+		
+}
+
+/*------------------------------- */
+
+
+.view-ayah-elaborationforoneayah{
+	display:none;
+}
+/*------------------------------- */
+
+.view-compare-translation table
+{
+ width:600px;
+ background:none;
+ border:none;
+ border-collapse:separate;
+ margin:0px;
+ padding:0px;
+
+
+}
+.view-compare-translation table tr
+{
+
+ background:none;
+ border:none;
+}
+
+.view-compare-translation table td
+{
+
+  height:30px;
+  text-align:left;
+  vertical-align:middle;
+}
+.view-compare-translation .views-table thead
+{
+ display:none;
+ background:none;
+ border:none;
+}
+
+.view-compare-translation .views-table th
+{
+ background:none;
+ border-bottom:none;
+}
+.view-compare-translation thead tr
+{
+ background:none;
+ border:none;
+}
+
+
+.view-compare-translation .odd, .view-ayah-elaboration .even
+{
+
+	text-align:left;
+/*	font-size:12px;*/
+	color:#000000;
+	
+	width:570px;
+	height:auto;
+	
+}
+
+.view-compare-translation td.views-field-body 
+{
+		
+		border-bottom:0px;
+		padding-bottom:20px;
+		vertical-align:top;
+}
+.view-compare-translation td.views-field
+{
+	padding-right:3px;
+	vertical-align:top;
+}
+
+.view-compare-translation a
+{
+  color:#0000FF;
+}
+
+/*------------------------------- */
+
+.view-arabic-page table
+{
+ width:600px;
+ background:none;
+ border:none;
+ border-collapse:separate;
+ margin:0px;
+ padding:0px;
+ text-align:center;
+
+
+}
+.view-arabic-page table tr
+{
+
+ background:none;
+ border:none;
+}
+
+.view-arabic-page table td
+{
+
+  height:30px;
+  text-align:center;
+  vertical-align:top;
+}
+.view-arabic-page .views-table thead
+{
+ display:none;
+ background:none;
+ border:none;
+}
+
+.view-arabic-page .views-table th
+{
+ background:none;
+ border-bottom:none;
+}
+.view-arabic-page thead tr
+{
+ background:none;
+ border:none;
+}
+
+
+.view-arabic-page td.views-field-body 
+{
+		
+		border-bottom:0px;
+		vertical-align:top;
+}
+.view-arabic-page td.views-field
+{
+	padding-right:3px;
+	vertical-align:top;
+}
+.view-arabic-page td.views-field-name
+{
+  width:100px;
+}
+.view-arabic-page a
+{
+  color:#0000FF;
+}
+/*.arabic_text_style
+{
+  color:#006600;
+  font-size:18px;
+}*/
+
+/*----------------*/
+.quran_struct
+{
+ font-size:15px;
+ width:961px;
+}
+
+.quran_struct table
+{
+
+ background:none;
+ margin:0px;
+ padding:0px;
+ 
+}
+
+.quran_struct table tr
+{
+
+ background:none;
+
+}
+
+.quran_struct table td, .quran_struct table th
+{
+
+  height:25px;
+  text-align:left;
+  vertical-align:middle;
+ /* border:1px solid #DDDED9;*/
+  width:auto;
+  padding:0px;
+
+  
+}
+
+
+.quran_struct thead
+{
+
+ font-family:Arial, Helvetica, sans-serif;
+/* background:none;*/
+
+}
+
+
+.quran_struct thead tr
+{
+ background:none;
+
+}
+table.quran_struct_table, table.quran_struct_table1, table.quran_struct_table2, table.quran_struct_table3
+{
+ border-collapse:separate;
+ }
+table.quran_struct_table td
+{
+   text-align:left;
+  vertical-align:top;
+}
+.quran_struct a
+{
+  text-decoration:underline;
+  color:#0000FF;
+}
+
+.quran_struct .q_head1
+{
+ font-size:12px;
+ font-weight:bold;
+ background:url('images/surahs-but.jpg');
+ background-repeat:no-repeat;
+ height:24px;
+ width:50px;
+ color:#963210;
+ text-align:center;
+ padding-top:7px;
+}
+.quran_struct .q_head2
+{
+ font-size:12px;
+ font-weight:bold;
+ background:url('images/ajza.jpg');
+ background-repeat:no-repeat;
+ height:24px;
+ width:50px;
+ color:#b5a066;
+ text-align:center;
+ padding-top:7px;
+}
+.quran_struct .q_head3
+{
+ font-size:12px;
+ font-weight:bold;
+ background:url('images/sajdatilawa-but.jpg');
+ background-repeat:no-repeat;
+ height:24px;
+ width:94px;
+ color:#999999;
+ text-align:center;
+ padding-top:7px;
+}
+.quran_struct .view-quran-structure-surah th.views-field-field-surah-no-value
+{
+   background:url('images/surahs-but2.jpg') no-repeat;
+   height:23px;
+   width:52px;
+    color:#963210;
+	text-align:center;
+	border:0px;
+}
+.quran_struct .view-quran-structure-surah th.views-field-name
+{
+   background:url('images/surahs-but4.jpg') no-repeat;
+   height:23px;
+   width:75px;
+    color:#963210;
+	text-align:center;
+	border:0px;
+}
+
+.quran_struct .view-quran-structure-surah th.views-field-field-ayah-count-value
+{
+   background:url('images/surahs-but5.jpg') no-repeat;
+   height:23px;
+   width:49px;
+    color:#963210;
+	text-align:center;
+	border:0px;
+}
+.quran_struct .view-quran-structure-surah th.views-field-field-reveal-city-value
+{
+   background:url('images/surahs-but4.jpg') no-repeat;
+   height:23px;
+   width:75px;
+    color:#963210;
+	text-align:center;
+	border:0px;
+}
+.quran_struct .view-quran-structure-surah th.views-field-field-rukhu-count-value
+{
+   background:url('images/surahs-but3.jpg') no-repeat;
+   height:23px;
+   width:73px;
+    color:#963210;
+	text-align:center;
+	border:0px;
+}
+.quran_struct .views-table td
+{
+ background:#FFFFFF;
+  border:1px solid #EAD8A6;
+ 
+}
+
+.quran_struct .view-quran-structure-Ajza th.views-field-field-juzz-no-value
+{
+   background:url('images/ajza-but2.jpg') no-repeat;
+   height:23px;
+   width:52px;
+    color:#963210;
+	text-align:center;
+	border:0px;
+}
+.quran_struct .view-quran-structure-Ajza th.views-field-field-start-surah-juzz-value
+{
+   background:url('images/ajza-but3.jpg') no-repeat;
+   height:23px;
+   width:95px;
+    color:#963210;
+	text-align:center;
+	border:0px;
+}
+.quran_struct .view-quran-structure-Ajza th.views-field-field-start-ayah-juzz-value
+{
+   background:url('images/ajza-but4.jpg') no-repeat;
+   height:23px;
+   width:75px;
+    color:#963210;
+	text-align:center;
+	border:0px;
+}
+.quran_struct .view-quran-structure-Sajda th.views-field-counter
+{
+   background:url('images/sajdatilawa-but2.jpg') no-repeat;
+   height:23px;
+   width:52px;
+    color:#963210;
+	text-align:center;
+	border:0px;
+}
+.quran_struct .view-quran-structure-Sajda th.views-field-field-surah-no-value
+{
+   background:url('images/sajdatilawa-but3.jpg') no-repeat;
+   height:23px;
+   width:95px;
+    color:#963210;
+	text-align:center;
+	border:0px;
+}
+.quran_struct .view-quran-structure-Sajda th.views-field-field-ayah-no-value
+{
+   background:url('images/sajdatilawa-but4.jpg') no-repeat;
+   height:23px;
+   width:76px;
+    color:#963210;
+	text-align:center;
+	border:0px;
+}
+.view-quran-structure-surah td.views-field-field-surah-no-value
+{
+ text-align:center;
+}
+.quran_struct td.views-field-counter
+{
+ text-align:center;
+}
+.quran_struct td.views-field-field-juzz-no-value
+{
+ text-align:center;
+}
+.quran_struct td.views-field-field-rukhu-count-value
+{
+ text-align:center;
+}
+.quran_struct td.views-field-field-start-ayah-juzz-value
+{
+ text-align:center;
+}
+.quran_struct td.views-field-field-ayah-no-value
+{
+ text-align:center;
+}
+/*-------------- Quick tab 1 -------------*/
+#quicktabs-1 #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ }
+#quicktabs-1 ul
+{
+  height:30px;
+  border:none;
+}
+#quicktabs-1 ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+}
+
+#quicktabs-1 ul li span 
+{
+ background:url("images/2tableft.jpg") no-repeat ;
+ background-position:left;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+}
+#quicktabs-1 ul li span span
+{
+ background:url("images/2tabtile.jpg") repeat-x;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+
+#quicktabs-1 ul li span span span
+{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+}
+#quicktabs-1 ul li.active span{
+background:url(images/1tableft.jpg) no-repeat ;
+background-position:left;
+ padding-left:8px;
+ height:30px;
+ display:block;float:left;
+
+}
+#quicktabs-1 ul li.active span span{
+ background:url(images/1tabtile.jpg) repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+#quicktabs-1 .quicktabs_main.quicktabs-style-basic {
+padding:0;
+}
+#quicktabs-1 ul li.active span span span{
+ background:url(images/1tabright.jpg) no-repeat;
+  background-position:right;
+ padding-left:0px;
+ height:30px;display:block;
+ }
+#quicktabs-1 ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ }
+ #quicktabs-1 ul li.active span span span a{
+
+ color:#810C05;
+ 
+  /*background:url(images/arrowdown.png) bottom no-repeat;
+  background-position:50px 25px;*/
+ 
+ }
+#quicktabs-1 ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:left;
+}
+#quicktabs-1 quicktabs_container_1{
+clear:both;
+}
+#quicktabs-1 ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+#quicktabs-1 table
+{
+ border-collapse:collapse;
+ background:#FFFFFF;
+ margin:0px;
+ padding:0px;
+ border:0px;
+ width:100%;
+
+ }
+#quicktabs-1 table thead tr
+{
+   background:#F0E6A8;
+}
+ #quicktabs-1 table th
+{
+ background:#F0E6A8;
+ color:#810C05;
+ height:30px;
+ margin:0px;
+ padding-left:5px;
+  text-align:left;
+  border:0px;
+ }
+
+#quicktabs-1 table td
+{
+ background:#FFFFFF;
+ color:#666666;
+ height:25px;
+ padding-left:5px;
+ border-bottom:1px solid #F4F2F3;
+ text-align:left;
+ }
+#quicktabs-1 table td a
+{
+  color:#0000FF;
+}
+
+/*............. aya theme */
+#ayatheme
+{
+   width:600px;
+}
+#ayatheme table
+{
+ border-collapse:separate;
+ background:#FFFFFF;
+ margin:0px;
+ padding:0px;
+ border:0px;
+ width:100%;
+
+ }
+#ayatheme table thead tr
+{
+   background:#F0E6A8;
+}
+ #ayatheme table th
+{
+ background:#F0E6A8;
+ color:#810C05;
+ height:30px;
+ margin:0px;
+ padding-left:5px;
+  text-align:left;
+  border:0px;
+ }
+
+#ayatheme table td
+{
+ background:#FFFFFF;
+ color:#666666;
+ height:25px;
+ padding-left:5px;
+ border-bottom:1px solid #F4F2F3;
+ text-align:left;
+ }
+#ayatheme table td a
+{
+  color:#0000FF;
+}
+
+/*............. aya theme */
+.view-quran-structure-Ajza td.views-field-field-juzz-no-value{
+	text-align:right;
+}
+
+/* quran subject */
+#quran_sub_module
+{
+  font-size:15px;
+}
+#quran_sub_module table
+{
+ border-collapse:separate;
+}
+#quran_sub_module .sub_subject
+{
+  padding-left:15px;
+
+}
+#quran_sub_module .sub_text a
+{
+  color:#810C05;
+  text-decoration:underline;
+
+}
+#quran_sub_module .aya_list 
+{
+
+  width:600px;
+}
+#quran_sub_module .aya_list a
+{
+  color:#0000FF;
+  text-decoration:underline;
+
+}
+#quran_sub_module .sub_text
+{
+  margin-bottom:5px;
+
+}
+#quran_sub_module .sub_no
+{
+  color:#006600;
+}
+.index_list
+{
+  margin-bottom:15px;
+}
+.index_data a
+{
+ color:#C09029;
+ font-weight:bold;
+}
+.index_data a:hover
+{
+ color:#BA581B;
+ font-weight:bold;
+}
+.index_data a:active
+{
+ color:#4B1D06;
+ font-weight:bold;
+}
+.index_goto
+{
+ background:url(images/gotobg.jpg) top left no-repeat;
+ height:24px;
+ width:73px;
+ text-align:center;
+ vertical-align:middle;
+ font-size:12px;
+ font-weight:bold;
+
+}
+.go_totext
+{
+  padding-top:4px;
+  display:block;
+}
+.text_index
+{
+  padding-top:8px;
+  display:block;
+}
+.index_data_left
+{
+ background:url(images/abcd-bg-right.jpg) top left no-repeat;
+ height:29px;
+ width:7px;
+ float:left;
+}
+.index_data
+{
+ background:url(images/abcd-bg-tile.jpg) top left repeat-x;
+ height:29px;
+ width:680px;
+ float:left;
+  font-size:11px;
+ text-align:center;
+}
+.index_data_right
+{
+ background:url(images/abcd-bg-left.jpg) top right no-repeat;
+ height:29px;
+ width:7px;
+ float:left;
+}
+/*------------Tooltip------------------*/
+.clicktip_target:hover, .hovertip_target:hover {
+						text-decoration: none;
+					  cursor:pointer;
+					  cursor:hand;
+}
+html body .hovertip_wrap3 {
+        display:block;
+		position: relative;
+		left: -8px;
+		top: -8px;
+	background-color: #ECD29F;
+	color:#810C05;
+	text-align:left;
+}
+.hovertip_wrap3 h3{
+ 	margin:10px 10px 0 0;
+	padding:0;
+	font-size:12px;
+	font-weight:bold;
+	text-align:right;
+}
+.hovertip_wrap3 h3 span{
+ 	text-decoration:underline;
+}
+.hovertip_wrap3 .elab-text{
+
+padding: 0 10px 10px 10px;
+text-align:left;
+
+}
+.hovertip_wrap3 .elab-text a{
+
+text-decoration:none;
+color:#810C05;
+
+}
+.hovertip_wrap3 .elab-text p{
+text-align:left;
+}
+.hovertip, .hoverinfo {
+	position: absolute;
+    display: none; /* in case javascript is disabled */
+	width: 300px;
+}
+
+/* quran intro */
+.view-surah-theme, .view-surah-theme a
+{
+ color:#000000;
+ font-size:15px;
+}
+.view-surah-theme .heading
+{
+  font-size:18px;
+  font-weight:bold;
+  width:100%;
+  border-bottom:1px solid #000000;
+}
+
+/* Ayah Theme */
+.view-ayah-theme-list
+{
+  font-size:15px;
+}
+
+.view-ayah-theme-list a
+{
+  color:#0000FF;
+  text-decoration:underline;
+}
+/*.view-ayah-theme-list .field-content
+{
+  padding-bottom:5px;
+}*/
+.view-ayah-theme-list table
+{
+   border-collapse:separate;
+}
+
+/******Quick tabs comments*****/
+#quicktabs-3 .authorname
+{
+ color:#810C05;
+ font-weight:bold;
+}
+#quicktabs-3  .bar {
+  background-image:none;
+  border: none;
+  height: 1.5em;
+  margin: 0 0.2em;
+  display:none;
+}
+ #quicktabs-3  .message{
+ 	padding:30px;
+ }
+ #quicktabs-3 ul.quicktabs_tabs li a{
+ 	color:#555555;
+ }
+ /*#quicktabs-2 ul.quicktabs_tabs li.active a{
+ 	color:#DDB959;
+ }*/
+ #quicktabs-3 #quicktabs_container_3{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 5px 20px 5px;
+ }
+ #quicktabs-3 .quicktabs_main.quicktabs-style-basic  {
+border-bottom:none;
+border-left:none;
+border-right:none;
+}
+ .view-header {
+ /*	width:600px;*/
+ }
+ 
+  #quicktabs-4 #quicktabs_container_4{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ }
+
+ 
+ 
+ 
+ 
+ 
+ #quicktabs-3 #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ }
+#quicktabs-3 ul
+{
+  height:30px;
+  border:none;
+  padding-right:40px;
+}
+#quicktabs-3 ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+}
+
+#quicktabs-3 ul li span 
+{
+ background:none;
+ 
+ padding-left:0px;
+ height:30px;
+ display:block;float:left;
+}
+#quicktabs-3 ul li span span
+{
+ background:none;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+
+#quicktabs-3 ul li span span span
+{
+ background:none;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+}
+#quicktabs-3 ul li.active span{
+background:url("images/2tableft.jpg") no-repeat  ;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+
+}
+#quicktabs-3 ul li.active span span{
+ background:url("images/2tabtile.jpg") repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+#quicktabs-3 .quicktabs_main.quicktabs-style-basic {
+padding:0;
+}
+#quicktabs-3 ul li.active span span span{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+   padding-left:0px;
+ height:30px;display:block;
+ }
+#quicktabs-3 ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ }
+ #quicktabs-3 ul li.active span span span a{
+
+ color:#555555;
+ 
+  /*background:url(images/arrowdown.png) bottom no-repeat;
+  background-position:50px 25px;*/
+ 
+ }
+#quicktabs-3 ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:right;
+}
+#quicktabs-3 quicktabs_container_1{
+clear:both;
+}
+#quicktabs-3 ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+
+
+
+
+
+
+#quicktabs-2 #quicktabs_container_1
+{
+ border:none;
+ }
+#quicktabs-2 ul
+{
+  height:30px;
+  border:none;
+}
+#quicktabs-2 ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+}
+
+#quicktabs-2  ul.quicktabs-style-nostyle li span 
+{
+ background:none ;
+ padding-left:0px;
+ height:30px;
+ display: inline;float:none;
+}
+#quicktabs-2  ul.quicktabs-style-nostyle li span span
+{
+  background:none ;
+ padding-left:0px;
+ height:30px;
+ display: inline;float:none;
+
+}
+
+#quicktabs-2  ul.quicktabs-style-nostyle li span span span
+{
+  background:none ;
+ padding-left:0px;
+ height:30px;
+ display: inline;float:none;
+
+
+}
+#quicktabs-2  ul.quicktabs-style-nostyle li.active span{
+ background:none ;
+ padding-left:0px;
+ height:30px;
+ display: inline;float:none;
+
+}
+#quicktabs-2  ul.quicktabs-style-nostyle li.active span span{
+  background:none ;
+ padding-left:0px;
+ height:30px;
+ display: inline;float:none;
+}
+#quicktabs-2 .quicktabs_main.quicktabs-style-basic {
+padding:0;
+}
+#quicktabs-2 ul li.active span span span{
+  background:none ;
+ padding-left:0px;
+ height:30px;
+ display: inline;float:none;
+ }
+#quicktabs-2  ul.quicktabs-style-nostyle li span span span a{
+ display:inline;
+ padding:0px 0px 0 0px;
+ color:#810C05;
+ 
+ }
+#quicktabs-2 ul.quicktabs-style-nostyle li.active span span span a{
+
+ color:#810C05;
+ font-weight:bold;
+ 
+ }
+#quicktabs-2 ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:left;
+}
+#quicktabs-2 quicktabs_container_1{
+clear:both;
+}
+#quicktabs-2 ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+
+
+
+/*-----------------------------------------*/
+ .view-ayah-elaboration-author table
+{
+/* width:600px;*/
+ background:none;
+ border:none;
+ border-collapse:separate;
+ margin:0px;
+ padding:0px;
+
+
+}
+.view-ayah-elaboration-author table tr
+{
+
+ background:none;
+ border:none;
+}
+.view-ayah-elaboration-author table td
+{
+
+  text-align:left;
+  vertical-align:top;
+}
+.view-ayah-elaboration-authortable td
+{
+
+  height:30px;
+  text-align:left;
+  vertical-align:middle;
+}
+.view-ayah-elaboration-author .views-table thead
+{
+ display:none;
+ background:none;
+ border:none;
+}
+
+.view-ayah-elaboration-author .views-table th
+{
+ background:none;
+ border-bottom:none;
+}
+.view-ayah-elaboration-author thead tr
+{
+ background:none;
+ border:none;
+}
+
+
+.view-ayah-elaboration-author .odd, .view-ayah-elaboration-author .even
+{
+
+	text-align:left;
+	font-size:12px;
+	color:#000000;
+	
+	width:570px;
+	height:auto;
+	
+}
+
+.view-ayah-elaboration-author td.views-field-body 
+{
+		
+		border-bottom:0px;
+		padding-bottom:20px;
+		vertical-align:top;
+}
+.view-ayah-elaboration-author td.views-field
+{
+	padding-right:3px;
+	vertical-align:top;
+}
+.view-ayah-elaboration-author td.views-field-name
+{
+  width:100px;
+}
+.view-ayah-elaboration-author a
+{
+  color:#000000;
+  text-decoration:none;
+}
+.view-ayah-elaboration-author .views-field-field-note-id-value
+{
+  color:#FF0000;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.view-ayah-elaboration-author  td.views-field-field-quran-bk-code-value
+{
+	 width:80px;
+	
+}
+/*--------------------------------*/
+#contactus
+{
+border-collapse:separate;
+}
+.node-page
+{
+ 
+}
+#content h2,#content1 h2
+{
+ color:#666666;
+}
+#block-quicktabs-1 h2
+{
+ padding:0px;
+}
+#quran_sub_module h2
+{
+  padding:0px;
+}
+
+/******Search********/
+#search_content #search-theme-form #edit-search-theme-form-1-wrapper{
+	margin:0px;padding:0px;
+}
+#search_content #search-theme-form #edit-search-theme-form-1-wrapper label{
+	display:none;
+}
+#search_content #search-theme-form .form-submit
+{
+ margin-left:3px;
+ width:72px;
+ height:20px;
+   background:none repeat scroll 0 0 transparent;
+  border:none;
+  cursor:pointer;
+  font-size:0;
+  line-height:0;
+  text-indent:-99999px;
+ 
+  
+
+}
+#search_content #search-theme-form .form-text{
+	
+	border:none;
+	outline:none;
+	/*background:url(images/textbox_search.PNG) ;*/
+	background:none;
+    width:190px;
+	heigth:19px;
+}
+#edit-keys
+{
+	width:600px;
+}
+
+
+#search_content #search-theme-form-1 #edit-search-theme-form-1-wrapper{
+	margin:0px;padding:0px;
+}
+#search_content #site-search label{
+	/*display:none;*/
+}
+#search_content #search-theme-form-1  .form-submit
+{
+ margin-left:3px;
+ width:72px;
+ height:20px;
+   background:none repeat scroll 0 0 transparent;
+  border:none;
+  cursor:pointer;
+  font-size:0;
+  line-height:0;
+  text-indent:-99999px;
+ 
+  
+
+}
+#search_content #search-theme-form-1 .form-text{
+	
+	border:none;
+	outline:none;
+	background:none;
+	width:190px;
+	heigth:19px;
+}
+#site-search label{
+	/*display:none;*/
+}
+
+fieldset {
+  margin: 1em 0;
+  padding: 1em;
+  border: 1px solid #810C05;
+  
+}
+html.js fieldset.collapsed {
+  background: transparent;
+  padding-top: 0;
+  padding-bottom: .6em;
+}
+
+html.js fieldset.collapsible legend a {
+  padding-left: 2em; /* LTR */
+ color:#810C05;
+}
+
+html.js fieldset.collapsed legend a {
+   color:#DDB959;
+}
+.search-results dt.title a {
+	color:#006600;
+	font-weight:700;
+}
+
+.search-results table{
+	border-collapse:separate;
+}
+.search-results  .facet-block{
+	width:180px;
+}
+.search-results  .result{
+	width:740px;
+}
+.search-results  .facet-block a{
+		display:block;
+		text-decoration:none;
+		color:#660000;
+		font-weight:700;
+		font-size:12px;
+		padding:0px 0 0 8px;
+}
+.search-results  .result-desc {
+	color:#000000;
+	margin-bottom:10px;
+	padding:10px;
+	border:1px solid #DDB959;
+	
+	background:#F7EFE2;
+}
+.search-results  .result-desc a{
+	color:#810C05;
+	font-weight:700;
+	
+	
+}
+.search-results dt {
+font-size:13px;
+}
+.search-results .noresults {
+padding-bottom:10px;
+}
+.ayah_theme
+{
+color:#666666;
+/*font-size:12px;*/
+}
+.arabic_top
+{
+ color:#810C05;
+ font-family: Traditional Arabic ;
+  font-size: 18pt ;
+  font-style: normal; line-height: normal; font-weight: normal; font-variant: normal;  text-decoration: none;
+}
+.arabic_text_style
+{
+  color:#006600;
+ font-family: Traditional Arabic ;
+  font-size: 24pt ;
+  font-style: normal; line-height: normal; font-weight: normal; font-variant: normal;  text-decoration: none;
+  width:570px;
+}
+.arabic_top1
+{
+ color:#810C05;
+ 
+}
+.ss-form-container
+{
+ background:none;
+}
+.ss-base-body
+{
+  background-color:#F4F2F3;
+}
+.ss-form-container
+{
+ padding:20px;
+}
+.view-Hadith-narrator-lists a
+{
+ text-decoration:underline;
+ color:#810C05;
+}
+.view-Hadith-narrators a
+{
+ text-decoration:underline;
+ color:#009900;
+ font-size:12px;
+}
+.view-Hadith-narrators .field-content
+{
+ display:block;
+ padding:5px;
+ padding-left:20px;
+}
+.view-Hadith-narrators .accordion-header
+{
+	color:#810C05;
+	font-size:12px;
+	background:none;
+	border:0px;
+	margin:0px;
+	text-decoration:underline;
+}
+.view-Hadith-narrators .accordion-active
+{
+  border:0px;
+  margin:0px;
+}
+
+.view-hadith-classifications a
+{
+ text-decoration:underline;
+ color:#009900;
+}
+.view-hadith-classifications .field-content
+{
+ display:block;
+ padding:5px;
+ padding-left:20px;
+}
+.view-hadith-classifications .accordion-header
+{
+	color:#810C05;
+	font-size:12px;
+	background:none;
+	border:0px;
+	margin:0px;
+	text-decoration:underline;
+}
+.view-hadith-classifications .accordion-active
+{
+  border:0px;
+  margin:0px;
+}
+.view-Hadith-narrators h3
+{
+	color:#810C05;
+	font-size:12px;
+	background:none;
+	border:0px;
+	margin:0px;
+	margin-bottom:5px;
+	text-decoration:underline;
+	font-weight:normal;
+}
+#quran_sub_module .sub_text a
+{
+  color:#810C05;
+  text-decoration:underline;
+  margin-bottom:5px;
+
+}
+#quran_sub_module .sub_text2 a
+{
+  color:#810C05;
+  margin-bottom:5px;
+  font-weight:bold;
+
+}
+#quran_sub_module .sub_text3 a
+{
+  color:#4A9049;
+  margin-bottom:5px;
+  font-size:12px;
+  text-decoration:underline;
+
+}
+#quran_sub_module .sub_text4 a
+{
+  color:#4A9049;
+  margin-bottom:5px;
+  font-size:14px;
+  text-decoration:none;
+
+}
+.clicktip_target
+{
+ font-style:normal;
+}
+.view-Hadith-list-singlenarrator .view-content
+{
+  padding-left:30px;
+}
+#quran_sub_module .item-list ul li {
+list-style:disc outside none;
+margin:0 0 0 0;
+padding:0;
+}
+.profile{
+display:none;
+}
+
+#content1 ul.primary {
+border-bottom:none;
+}
+#content1  ul.primary li.active a {
+border-color:#FFFFFF;
+border-style:none;
+}#content1 ul.primary li a{
+border-style:none;
+}
+#content1 .view-userdetails tbody{
+border-top:none;
+} 
+div.prov_box{
+background:none;
+
+}
+.view-Quran-Duas a
+{
+ color:#810C05;
+ padding:10px;
+ text-decoration:underline;
+}
+.rpxnow_lightbox_container {
+background-color:#666666;
+}
+#widget{
+background-image:none;
+background:none;
+background-color:#CCCCCC;
+}
+.view-Islamic-History a
+{
+ color:#810C05;
+ padding:10px;
+ text-decoration:underline;
+}
+.view-Islamic-History-content table, .view-Islamic-History-content thead, .view-Islamic-History-content th, .view-Islamic-History-content tr, .view-Islamic-History-content td
+{
+ border-collapse:separate;
+ background:none;
+ border:none;
+}
+.view-Islamic-History-content td
+{
+padding:5px;
+vertical-align:top;
+text-align:left;
+}
+
+.view-Islamic-History td
+{
+padding:5px;
+vertical-align:top;
+text-align:left;
+}
+
+.view-Islamic-History table, .view-Islamic-History thead, .view-Islamic-History td, .view-Islamic-History tbody, .view-Islamic-History tr, .view-Islamic-History th
+{
+ border-collapse:separate;
+ background:none;
+ border:none;
+}
+.view-Islamic-History table caption
+{
+  font-weight:bold;
+  text-align:left;
+  font-size:14px;
+  color:#006600;
+  
+}
+.hist-year-value
+{
+ color:#810C05;
+ font-weight:bold;
+}
+.view-Islamic-History p
+{
+ display:inline;
+}
+.view-Islamic-History .views-accordion-item
+{
+padding:10px;
+padding-left:50px;
+}
+.view-Islamic-History .accordion-active
+{
+ background:none;
+ border:0px;
+}
+.view-Islamic-History h3
+{
+ background:none;
+ border:0px;
+ margin:0px;
+ text-decoration:underline;
+ color:#810C05;
+ font-size:14px;
+ font-weight:normal;
+}
+
+.view-dictionary-content .views-accordion-item
+{
+padding:10px;
+padding-left:50px;
+}
+.view-dictionary-content .accordion-active
+{
+ background:none;
+ border:0px;
+}
+.view-dictionary-content h3
+{
+ background:none;
+ border:0px;
+ margin:0px;
+ text-decoration:underline;
+ color:#810C05;
+ font-size:14px;
+ font-weight:normal;
+}
+.view-dictionary-content .view-header
+{
+ width:700px;
+}
+.view-Fiqh-Sunnah table, .view-Fiqh-Sunnah thead, .view-Fiqh-Sunnah th, .view-Fiqh-Sunnah tr, .view-Fiqh-Sunnah td
+{
+ border-collapse:separate;
+ background:none;
+ border:none;
+}
+.view-Fiqh-Sunnah td
+{
+padding:5px;
+vertical-align:top;
+text-align:left;
+}
+.views-field-field-fq-sec-head-value
+{
+ color:#810C05;
+ font-weight:bold;
+}
+.view-Fiqh-Sunnah p
+{
+ padding:0px;
+ margin:0px;
+}
+.view-ayah-elaboration-author .fivestar-widget label{
+display:none;
+}
+.view-ayah-elaboration-author .terms{
+display:none;
+}
+.view-ayah-elaboration-author h2 a{
+display:none;
+}
+.view-ayah-elaboration-author .vud-widget-plain {
+/*width:615px;
+float:none;
+background-color:#E5E5E5;*/
+}
+.view-ayah-elaboration-author .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+.view-ayah-elaboration-author .vud-widget-plain .up-active, .vud-widget-plain .up-inactive {
+float:right;
+}
+.vud-widget-plain .up-active , .vud-widget-plain .up-inactive:hover{
+
+background:url("images/likebut.png") no-repeat scroll 0 0 transparent;
+}
+.vud-widget-plain .up-inactive {
+background:url("images/likebut.jpg") no-repeat scroll 0 0 transparent;
+}
+.vud-widget-plain .down-inactive {
+background:url("images/unlikebut.jpg") no-repeat scroll 0 0 transparent;
+}
+.vud-widget-plain .down-active , .vud-widget-plain .down-inactive:hover{
+
+background:url("images/unlikebut.png") no-repeat scroll 0 0 transparent;
+}
+.vud-widget-plain a.up-active, .vud-widget-plain a.down-active, .vud-widget-plain span.up-active, .vud-widget-plain span.down-active {
+ cursor:pointer; cursor:hand;
+}
+.vud-widget-plain a.up-inactive, .vud-widget-plain a.down-inactive, .vud-widget-plain span.up-inactive, .vud-widget-plain span.down-inactive {
+cursor:pointer;
+}
+plain.css?G (line 23)
+.vud-widget-plain .up-inactive {
+background:url("images/likebut.jpg") no-repeat scroll 0 0 transparent;
+}
+style.css?G (line 2785)
+.view-ayah-elaboration-author .vud-widget-plain .up-active, .vud-widget-plain .up-inactive {
+float:right;
+}
+style.css?G (line 2778)
+.vud-widget-plain .up-inactive {
+background:url("a_up_inact.png") no-repeat scroll 0 0 transparent;
+float:left;
+}
+
+.vud-widget-plain .up-active, .vud-widget-plain .up-inactive, .vud-widget-plain .down-active, .vud-widget-plain .down-inactive {
+height:20px;
+width:26px;
+}
+.view-biography-companions a
+{
+	 color:#810C05;
+     padding-left:15px;
+	 text-decoration:underline;
+}
+.view-biography-history .views-accordion-item
+{
+padding:10px;
+padding-left:50px;
+}
+.view-biography-history .accordion-active
+{
+ background:none;
+ border:0px;
+}
+.view-biography-history h3
+{
+ background:none;
+ border:0px;
+ margin:0px;
+ text-decoration:underline;
+ color:#810C05;
+ font-size:14px;
+ font-weight:normal;
+}
+.view-biography-history a
+{
+  color:#0000FF;
+  text-decoration:underline;
+}
+
+.view-biography-stories .views-accordion-item
+{
+padding-left:50px;
+}
+.view-biography-stories .accordion-active
+{
+ background:none;
+ border:0px;
+}
+.view-biography-stories h3
+{
+ background:none;
+ border:0px;
+ margin:0px;
+ text-decoration:underline;
+ color:#810C05;
+ font-size:14px;
+ font-weight:normal;
+}
+.view-biography-stories a
+{
+  color:#0000FF;
+  text-decoration:underline;
+}
+.vud-widget-plain {
+height:18px;
+
+}
+
+/******************************/
+
+/*********************/
+
+.view-biography-stories-content table, .view-biography-stories-content thead, .view-biography-stories-content th, .view-biography-stories-content tr, .view-biography-stories-content td
+{
+ border-collapse:separate;
+ background:none;
+ border:none;
+}
+.view-biography-stories-content td
+{
+padding:5px;
+vertical-align:top;
+text-align:left;
+}
+.views-field-field-art-subsec-head-value
+{
+ color:#810C05;
+ font-weight:bold;
+}
+
+.view-islam-world table, .view-islam-world thead, .view-islam-world th, .view-islam-world tr, .view-islam-world td
+{
+ border-collapse:separate;
+ background:none;
+ border:none;
+}
+.view-islam-world td
+{
+padding:5px;
+vertical-align:top;
+text-align:left;
+}
+.view-islam-world .field-content a
+{
+ color:#810C05;
+}
+.view-islam-world caption
+{
+ font-size:16px;
+ color:#006600;
+ text-align:left;
+ font-weight:bold;
+}
+.view-islam-world td.views-field-body
+{
+width:600px;
+}
+
+
+.view-islamic-inroductory-article .views-accordion-item
+{
+padding-left:50px;
+}
+.view-islamic-inroductory-article .accordion-active
+{
+ background:none;
+ border:0px;
+}
+.view-islamic-inroductory-article h3
+{
+ background:none;
+ border:0px;
+ margin:0px;
+ text-decoration:underline;
+ color:#810C05;
+ font-size:14px;
+ font-weight:normal;
+}
+.view-islamic-inroductory-article a
+{
+  color:#0000FF;
+  text-decoration:underline;
+}
+.view-islamic-posters .field-content
+{
+ width:600px;
+}
+
+/**********************Adv search div***********/
+a.search-adv {
+	/*background:#CCCCCC;*/
+	
+}
+#site-search input{
+		
+}
+#adv-searchfrm {
+	clear:both;
+	-moz-border-radius-topleft:5px;
+	-moz-border-radius-topright:5px;
+	-moz-border-radius-bottomleft:5px;
+	-moz-border-radius-bottomright:5px;
+	-webkit-border-top-left-radius:5px;
+	-webkit-border-bottom-left-radius:5px;
+	-webkit-border-bottom-right-radius:5px;
+	-webkit-border-top-right-radius:5px;
+	display:none;
+	background-color:#E7E3D7;
+	position:relative;
+	width:350px;
+	z-index:100;
+	border:1px solid #C2C2C2 ;
+	text-align:left;
+	padding:12px;
+	/*top: 24.5px; 
+	right: 0px; */
+	margin-top:5px;
+	margin-right: 0px;
+	margin-right: -1px;
+	margin-left:-96px;
+	font-size:11px;
+}
+
+#search_content #search-theme-form #adv-searchfrm .action .form-submit, #search_content #search-theme-form #adv-searchfrm input#edit-submit-1, #search_content #search-theme-form #adv-searchfrm input#edit-submit-2 {
+margin-left:3px;
+ width:72px;
+ height:20px;
+   background:#D5D5D5;
+  border:solid 1px #666666;
+  cursor:pointer;
+  font-size:12px;  
+  line-height:normal;
+  text-indent:0;
+  color:#330000;
+ padding-bottom:15px;
+ clear:both;
+}
+
+#adv-searchfrm .container-inline div, #adv-searchfrm .container-inline label {
+/*display:block;*/
+}
+#search_content #adv-searchfrm .container-inline div, #search_content #adv-searchfrm .container-inline label{
+	display:block;
+}
+#adv-searchfrm .form-item label.option{
+	/*display:block;*/
+}
+
+.books-hadith .criterion ,.books-quran .criterion , .books-fiqh .criterion , .books-article .criterion ,.books-biographies .criterion ,.books-index .criterion{
+	padding-left:15px;display:block;
+}	
+#edit-all-1-wrapper  label , #edit-quran-1-wrapper label  , #edit-fiqh-1-wrapper label  , #edit-article-1-wrapper label ,#edit-hadith-1-wrapper label, #edit-islam-1-wrapper label , #edit-biographies-1-wrapper label , #edit-index-1-wrapper label {
+	font-weight:bold;
+}
+
+#edit-all-wrapper label   , #edit-quran-wrapper label  , #edit-fiqh-wrapper label  , #edit-article-wrapper label ,#edit-hadith-wrapper label ,#edit-islam-wrapper label ,#edit-biographies-wrapper label ,#edit-index-wrapper label{
+	font-weight:bold;
+}
+#adv-searchfrm .container-inline div, #adv-searchfrm .container-inline label {
+	display:block;
+}
+#con_div .books-biographies{
+	display:block;
+}
+#con_div .books-quran .form-checkboxes .form-item ,#con_div .books-hadith .form-checkboxes .form-item ,#con_div .books-biographies .form-checkboxes .form-item ,#con_div .books-index .form-checkboxes .form-item{
+	width:220px;float:left;
+}
+#con_div .books-quran .form-checkboxes ,#con_div .books-hadith .form-checkboxes,#con_div .books-biographies .form-checkboxes , #con_div .books-index .form-checkboxes {
+	width:665px;
+}
+#con_div  #edit-hadith-wrapper ,#con_div  #edit-fiqh-wrapper ,#con_div  #edit-quran-wrapper ,#con_div  #edit-islam-wrapper ,#con_div #edit-biographies-wrapper ,#con_div #edit-index-wrapper{
+	clear:both;
+}
+#con_div #adv-searchfrm .action{
+	clear:both;
+}
+
+#search_content #adv-searchfrm .books-quran .form-checkboxes .form-item  ,#search_content #adv-searchfrm .books-hadith .form-checkboxes .form-item , #search_content #adv-searchfrm .books-biographies .form-checkboxes .form-item ,#search_content #adv-searchfrm .books-index .form-checkboxes .form-item{
+	width:160px;display:block;float:left;
+}
+#search_content #adv-searchfrm #search_content .books-quran .form-checkboxes ,#search_content #adv-searchfrm .books-hadith .form-checkboxes,#search_content #adv-searchfrm .books-biographies .form-checkboxes ,#search_content #adv-searchfrm .books-index .form-checkboxes {
+	/*width:400px;*/
+}
+
+#search_content #adv-searchfrm  #edit-hadith-wrapper ,#search_content #adv-searchfrm  #edit-fiqh-wrapper ,#search_content #adv-searchfrm  #edit-quran-wrapper ,#search_content #adv-searchfrm  #edit-islam-wrapper ,#search_content #adv-searchfrm #edit-biographies-wrapper ,#search_content #adv-searchfrm #edit-index-wrapper ,#search_content #adv-searchfrm #edit-quran-1-wrapper ,#search_content #adv-searchfrm #edit-hadith-1-wrapper ,#search_content #adv-searchfrm #edit-fiqh-1-wrapper , #search_content #adv-searchfrm #edit-islam-1-wrapper ,#search_content #adv-searchfrm #edit-biographies-1-wrapper ,#search_content #adv-searchfrm #edit-index-1-wrapper  {
+	clear:both;display:block;
+}
+#search_content .form-item{
+	margin-bottom:3px;
+	margin-top:0px;
+}
+#search_content #adv-searchfrm .action{
+	clear:both;text-align:right;padding-top:10px;display:block;padding-right:30px;
+	
+}
+#con_div .search-results .action{
+	clear:both;padding-top:10px;display:block;padding-right:30px;
+	
+}
+/*#con_div  #adv-searchfrm .action{
+	clear:both;padding-top:10px;display:block;padding-right:30px;
+	
+}*/
+#con_div  .search-results .clicktip{
+margin:10px 0 0 0;
+padding:0 0 10px 10px;
+background:#F7EFE2;
+border:1px solid #DDB959;
+}
+#search-form  .clicktip{
+	margin:10px 0 0 0;
+	padding:0 0 10px 10px;
+	background:#F7EFE2;
+	border:1px solid #DDB959;
+}
+#con_div  .search-results .clicktip_target{
+font-weight:bold;color:#660000;
+}
+#search-form   .clicktip_target{
+font-weight:bold;color:#660000;
+}
+/****************************/
+
+.view-Khalifa-content .view-header  
+{
+ width:100%;
+}
+.view-biography-companions-content .view-header  
+{
+ width:100%;
+}
+.view-biography-stories-content .view-header  
+{
+ width:100%;
+}
+
+.view-ayah-elaboration-author .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+
+
+.view-Hadith-Content-view .clicktip{
+background-color:#F4F2F3;
+border:none;
+
+}
+
+.view-Hadith-Content-view .tips{
+display:none;
+}
+.view-Hadith-Content-view .tips p {
+display:none;
+}
+
+
+
+.view-islam-world .accordion-active
+{
+ background:none;
+ border:0px;
+}
+.view-islam-world h3
+{
+ background:none;
+ border:0px;
+ margin:0px;
+ text-decoration:underline;
+ color:#810C05;
+ font-size:14px;
+ font-weight:normal;
+}
+.view-islam-world a
+{
+  color:#0000FF;
+  text-decoration:underline;
+}
+.view-islam-world .field-content
+{
+ width:600px;
+ padding-left:50px;
+}
+.view-islamic-posters-content .view-header  
+{
+ width:100%;
+}
+.view-islamic-posters a
+{
+	color:#810C05;
+	text-decoration:underline;
+	font-size:14px;
+}
+.view-islamic-posters .views-field-title
+{
+ padding-left:15px;
+}
+.view-ayah-elaboration-author .tips{
+display:none;
+}
+.view-ayah-elaboration-author .tips p {
+display:none;
+}
+
+.view-user-node-comment-scholar .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+.view-user-node-comment-scholar .tips{
+display:none;
+}
+.view-user-node-comment-scholar .tips p {
+display:none;
+}
+
+.view-user-comments-node-comment .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+.view-user-comments-node-comment .tips{
+display:none;
+}
+.view-user-comments-node-comment .tips p {
+display:none;
+} 
+
+.view-user-comments-node-comment tbody{
+border:none;
+}
+
+.view-user-node-comment-scholar tbody{
+border:none;
+}
+
+#popups-body .messages {
+display:none;
+
+}
+
+.flag-report-comment a{
+text-decoration:none;
+color:#333333;
+}
+.flag-throbber{
+display:none;
+}
+.clicktip_target {
+text-decoration:none;
+}
+.view-ayah-elaboration-author p a{
+display:none;
+}
+.view-Hadith-Content-view p a{
+display:none;
+}
+.view-ayah-elaboration-author #edit-preview-1{
+display:none;
+}
+.view-ayah-elaboration-author #edit-preview-2{
+display:none;
+}
+.view-ayah-elaboration-author #edit-preview{
+display:none;
+}
+.view-user-comments-node-comment  p a{
+display:none;
+}
+.view-user-comments-node-comment  #edit-preview-1{
+display:none;
+}
+.view-user-comments-node-comment  #edit-preview-2{
+display:none;
+}.view-user-comments-node-comment  #edit-preview{
+display:none;
+}
+
+.view-user-node-comment-scholar  p a{
+display:none;
+}
+.view-user-node-comment-scholar  #edit-preview-1{
+display:none;
+}
+.view-user-node-comment-scholar  #edit-preview-2{
+display:none;
+}
+.view-user-node-comment-scholar  #edit-preview{
+display:none;
+}
+.view-user-node-comment-scholar .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+float:right;
+}
+
+.view-ayah-elaboration-author .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+float:right;
+}
+
+
+.view-user-comments-node-comment .vud-widget-plain {
+border:none;
+height:auto;
+width:55px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+.view-ayah-elaboration-author #vud_ap_vote{
+/*padding-left:490px;*/
+}
+
+
+.view-user-comments-node-comment .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+.view-ayah-elaboration-author .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+.view-user-node-comment-scholar .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+.view-news-list .views-field-title
+{
+  font-size:14px;
+  color:#006600;
+}
+.view-news-list .view-content 
+{
+ padding-left:15px;
+}
+.view-news-list .views-field-teaser
+{
+  padding:10px;
+}
+.view-news-list .views-field-view-node
+{
+  padding-left:10px;
+}
+.view-news-list .views-field-body p
+{
+  padding:0px;
+  margin:0px;
+}
+
+.view-blogs-list .views-field-title
+{
+  font-size:14px;
+  color:#006600;
+}
+.view-blogs-list .view-content 
+{
+ padding-left:15px;
+}
+.view-blogs-list .views-field-teaser
+{
+  padding:10px;
+}
+.view-blogs-list .views-field-view-node
+{
+  padding-left:10px;
+}
+.view-blogs-list .views-field-body p
+{
+  padding:0px;
+  margin:0px;
+}
+.view-splash-testimonials li.pager-current
+{
+  display:none;
+}
+.view-splash-testimonials .item-list ul.pager
+{
+ margin-left:450px;
+}
+.view-splash-testimonials .item-list ul li.pager-previous 
+{
+  background:url(images/leftarrow.jpg) no-repeat left top;
+  height:17px;
+  width:27px;
+  display:block;
+}
+.view-splash-testimonials .item-list ul li.pager-next
+{
+  background:url(images/rightarrow.jpg) no-repeat left top;
+  height:17px;
+  width:27px;
+  display:block;
+}
+.view-splash-testimonials .item-list ul li
+{
+ float:left;
+ padding:0px;
+}
+.view-splash-testimonials .pager a
+{
+ text-indent:-99999px;
+ font-size:0px;
+ height:17px;
+  width:27px;
+  display:block;
+}
+/*.view-splash-testimonials .views-field-body
+{
+ padding-left:10px;
+}*/
+.view-splash-testimonials .view-content
+{
+ padding-left:10px;
+}
+.flag-report-comment a.popups{
+font-size:11px;
+}
+a.popups{
+font-size:11px;
+}
+#not_log .down-inactive{
+display:none;
+}#not_log .up-inactive{
+display:none;
+}
+
+#not_log .down-active{
+display:none;
+}
+
+
+#not_log .vud-widget-plain {
+/*margin-right:40px;*/
+}
+#not_log .vud-widget-plain {
+float:left;
+}
+.view-ayah-elaboration-author .fivestar-static-form-item{
+display:none;
+}
+
+ ul.menu_account{
+border-bottom:medium none;
+}
+
+ul.menu_account {
+
+height:auto;
+line-height:normal;
+list-style:none outside none;
+margin:5px;
+padding:0 0 0 1em;
+white-space:nowrap;
+}
+
+ul.menu_account li {
+display:inline;
+}
+
+#content1 ul.menu_account li a {
+border-style:none;
+}
+
+ul.menu_account li a {
+background-color:#DDDDDD;
+border-color:#BBBBBB;
+height:auto;
+margin-right:0.5em;
+padding:0 1em;
+text-decoration:none;
+}
+ul.primary{
+display:none;
+}
+#tabs-wrapper ul.primary{
+display:block;
+}
+#node-164535 p{
+display:none;
+}
+
+/***********/
+.view-blogs-list .views-row {
+	padding:10px 0 10px 0;
+	border-bottom:1px solid #D5D5D5;
+	border-top:1px solid #FFFFFF;
+}
+.view-blogs-list .views-row-first {
+	border-top:none;
+}
+.view-blogs-list .views-row-last {
+	border-bottom:none;
+}
+.view-blogs-list .title {
+	font-size:16px;font-weight:bold;color:#006600;text-transform:uppercase;/*font-family:Arial,Helvetica,sans-serif;*/
+	padding-bottom:5px;
+}
+.view-blogs-list .date{
+	font-size:11px;padding-left:3px;color:#666666;
+}
+
+
+.view-news-list .views-row {
+	padding:10px 0 10px 0;
+	border-bottom:1px solid #D5D5D5;
+	border-top:1px solid #FFFFFF;
+}
+.view-news-list .views-row-first {
+	border-top:none;
+}
+.view-news-list .views-row-last {
+	border-bottom:none;
+}
+.view-news-list .title {
+	font-size:16px;font-weight:bold;color:#006600;text-transform:uppercase;
+	/*font-family:Arial,Helvetica,sans-serif;*/
+	padding-bottom:5px;
+}
+.view-news-list .date{
+	font-size:11px;padding-left:3px;color:#666666;
+}
+
+ #quicktabs-4 #quicktabs_container_3{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ }
+
+#quicktabs-4 .authorname
+{
+ color:#810C05;
+ font-weight:bold;
+}
+
+#quicktabs-4  .bar {
+  background-image:none;
+  border: none;
+  height: 1.5em;
+  margin: 0 0.2em;
+  display:none;
+}
+ #quicktabs-4  .message{
+ 	padding:30px;
+ }
+ #quicktabs-4 ul.quicktabs_tabs li a{
+ 	color:#555555;
+ }
+
+ #quicktabs-4 #quicktabs_container_3{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ }
+ #quicktabs-4 .quicktabs_main.quicktabs-style-basic  {
+border-bottom:none;
+border-left:none;
+border-right:none;
+}
+
+ 
+ #quicktabs-4 #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ }
+#quicktabs-4 ul
+{
+  height:30px;
+  border:none;
+  padding-right:40px;
+}
+#quicktabs-4 ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+}
+
+#quicktabs-4 ul li span 
+{
+ background:none;
+ 
+ padding-left:0px;
+ height:30px;
+ display:block;float:left;
+}
+#quicktabs-4 ul li span span
+{
+ background:none;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+
+#quicktabs-4 ul li span span span
+{
+ background:none;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+}
+#quicktabs-4 ul li.active span{
+background:url("images/2tableft.jpg") no-repeat  ;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+
+}
+#quicktabs-4 ul li.active span span{
+ background:url("images/2tabtile.jpg") repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+#quicktabs-4 .quicktabs_main.quicktabs-style-basic {
+padding:0;
+}
+#quicktabs-4 ul li.active span span span{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+   padding-left:0px;
+ height:30px;display:block;
+ }
+#quicktabs-4 ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ }
+ #quicktabs-4 ul li.active span span span a{
+ color:#555555;
+  }
+#quicktabs-4 ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:right;
+}
+#quicktabs-4 quicktabs_container_1{
+clear:both;
+}
+#quicktabs-4 ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+.view-user-comments-hadith .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+.view-user-comments-hadith .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+.view-user-comments-hadith .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+.view-user-comments-hadith .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+#block-quicktabs-4 h2{
+display:none;
+}
+
+
+.view-user-comments-hadith .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+.view-user-comments-hadith .tips{
+display:none;
+}
+.view-user-comments-hadith .tips p {
+display:none;
+}
+.view-user-comments-hadith p a{
+display:none;
+}
+
+
+.view-user-hadith-comment-scholar .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+.view-user-hadith-comment-scholar .tips{
+display:none;
+}
+.view-user-hadith-comment-scholar .tips p {
+display:none;
+}
+.view-user-hadith-comment-scholar p a{
+display:none;
+}
+#node-164495 .comment_add{
+display:none;
+}
+
+#block-block-15  .clicktip{
+background-color:#F4F2F3;
+border:none;
+
+}
+
+#block-block-15 .tips{
+display:none;
+}
+#block-block-15  .tips p {
+display:none;
+}
+
+#block-block-15 p a{
+display:none;
+}
+
+#content_data #comments{
+display:none;
+}
+#content_data .comment_forbidden{
+display:none;
+}
+.view-user-hadith-comment--ProphetMuha .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+.view-user-hadith-comment--ProphetMuha .tips{
+display:none;
+}
+.view-user-hadith-comment--ProphetMuhar .tips p {
+display:none;
+}
+.view-user-hadith-comment--ProphetMuha p a{
+display:none;
+}
+
+.view-user-comments-ProphetMuhammad .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+.view-user-comments-ProphetMuhammad .tips{
+display:none;
+}
+.view-user-comments-ProphetMuhammad .tips p {
+display:none;
+}
+.view-user-comments-ProphetMuhammad p a{
+display:none;
+}
+
+
+
+#popups {
+background:none repeat scroll 0 0 white;
+border:4px solid #666666;
+overflow:auto;
+position:absolute;
+text-align:center;
+vertical-align:middle;
+width:700px;
+z-index:10;
+padding:0px;
+}
+
+#popups-title {
+-moz-border-radius-topleft:5px;
+background-color:#CCCCCC;
+color:#000000;
+border-bottom:none;
+color:#455067;
+margin-bottom:0.25em;
+padding:5px 5px 5px 5px;
+}
+#popups-body{
+	padding:0px 10px 10px 25px;
+	text-align:left;
+}
+#popups-body #search-form{
+	display:none;
+}
+#popups-title #popups-close a{
+	text-decoration:none;
+	font-weight:bold;
+	color:#330000;
+	text-decoration:underline;
+}
+a.popups-processed:after {
+  content: none;
+  vertical-align: super;
+  
+}
+
+#popups-overlay {
+left:0;
+}
+
+
+
+ #quicktabs-5 #quicktabs_container_5{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ }
+
+#quicktabs-5 .authorname
+{
+ color:#810C05;
+ font-weight:bold;
+}
+
+#quicktabs-5  .bar {
+  background-image:none;
+  border: none;
+  height: 1.5em;
+  margin: 0 0.2em;
+  display:none;
+}
+ #quicktabs-5  .message{
+ 	padding:30px;
+ }
+ #quicktabs-5 ul.quicktabs_tabs li a{
+ 	color:#555555;
+ }
+
+ #quicktabs-5 #quicktabs_container_5{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ }
+ #quicktabs-5 .quicktabs_main.quicktabs-style-basic  {
+border-bottom:none;
+border-left:none;
+border-right:none;
+}
+
+ 
+ #quicktabs-5 #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ }
+#quicktabs-5 ul
+{
+  height:30px;
+  border:none;
+  padding-right:40px;
+}
+#quicktabs-5 ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+}
+
+#quicktabs-5 ul li span 
+{
+ background:none;
+ 
+ padding-left:0px;
+ height:30px;
+ display:block;float:left;
+}
+#quicktabs-5 ul li span span
+{
+ background:none;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+
+#quicktabs-5 ul li span span span
+{
+ background:none;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+}
+#quicktabs-5 ul li.active span{
+background:url("images/2tableft.jpg") no-repeat  ;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+
+}
+#quicktabs-5 ul li.active span span{
+ background:url("images/2tabtile.jpg") repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+#quicktabs-5 .quicktabs_main.quicktabs-style-basic {
+padding:0;
+}
+#quicktabs-5 ul li.active span span span{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+   padding-left:0px;
+ height:30px;display:block;
+ }
+#quicktabs-5 ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ }
+ #quicktabs-5 ul li.active span span span a{
+ color:#555555;
+  }
+#quicktabs-5 ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:right;
+}
+#quicktabs-5 quicktabs_container_1{
+clear:both;
+}
+#quicktabs-5 ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+.view-user-comments-ProphetMuhammad .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+.view-user-comments-ProphetMuhammad .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+.view-user-comments-ProphetMuhammad .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+.view-user-comments-ProphetMuhammad .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+#block-quicktabs-5 h2{
+display:none;
+}
+
+.view-user-hadith-comment--ProphetMuha .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+.view-user-hadith-comment--ProphetMuha .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+.view-user-hadith-comment--ProphetMuha .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+.view-user-hadith-comment--ProphetMuha .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+#node-164495 .vud-widget{
+display:none;
+}
+
+
+
+#tabs-wrapper ul.primary{
+	border-bottom:none;
+}
+ul.primary
+{
+ border:0px;
+}
+
+ #quicktabs-6 #quicktabs_container_6{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ }
+
+#quicktabs-6 .authorname
+{
+ color:#810C05;
+ font-weight:bold;
+}
+
+#quicktabs-6 .bar {
+  background-image:none;
+  border: none;
+  height: 1.5em;
+  margin: 0 0.2em;
+  display:none;
+}
+ #quicktabs-6 .message{
+ 	padding:30px;
+ }
+ #quicktabs-6 ul.quicktabs_tabs li a{
+ 	color:#555555;
+ }
+
+ #quicktabs-6 #quicktabs_container_6{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ }
+ #quicktabs-6 .quicktabs_main.quicktabs-style-basic  {
+border-bottom:none;
+border-left:none;
+border-right:none;
+}
+
+ 
+ #quicktabs-6 #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ }
+#quicktabs-6 ul
+{
+  height:30px;
+  border:none;
+  padding-right:40px;
+}
+#quicktabs-6 ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+}
+
+#quicktabs-6 ul li span 
+{
+ background:none;
+ 
+ padding-left:0px;
+ height:30px;
+ display:block;float:left;
+}
+#quicktabs-6 ul li span span
+{
+ background:none;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+
+#quicktabs-6 ul li span span span
+{
+ background:none;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+}
+#quicktabs-6 ul li.active span{
+background:url("images/2tableft.jpg") no-repeat  ;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+
+}
+#quicktabs-6 ul li.active span span{
+ background:url("images/2tabtile.jpg") repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+#quicktabs-6 .quicktabs_main.quicktabs-style-basic {
+padding:0;
+}
+#quicktabs-6 ul li.active span span span{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+   padding-left:0px;
+ height:30px;display:block;
+ }
+#quicktabs-6 ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ }
+ #quicktabs-6 ul li.active span span span a{
+ color:#555555;
+  }
+#quicktabs-6 ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:right;
+}
+#quicktabs-6 quicktabs_container_1{
+clear:both;
+}
+#quicktabs-6 ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+#block-quicktabs-6 h2{
+display:none;
+}
+.view-user-comments-sop .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+.view-user-comments-sop .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+.view-user-scholar-comments-sop .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+.view-user-scholar-comments-sop .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+#quicktabs_container_6  .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+
+#quicktabs_container_6 .tips{
+display:none;
+}
+#quicktabs_container_6 .tips p {
+display:none;
+}
+
+#quicktabs_container_6 p a{
+display:none;
+}
+
+.view-user-author-comments-hadith .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+
+ #quicktabs-7 #quicktabs_container_7{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ }
+
+#quicktabs-7 .authorname
+{
+ color:#810C05;
+ font-weight:bold;
+}
+
+#quicktabs-7 .bar {
+  background-image:none;
+  border: none;
+  height: 1.5em;
+  margin: 0 0.2em;
+  display:none;
+}
+ #quicktabs-7 .message{
+ 	padding:30px;
+ }
+ #quicktabs-7 ul.quicktabs_tabs li a{
+ 	color:#555555;
+ }
+
+ #quicktabs-7 #quicktabs_container_7{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ }
+ #quicktabs-7 .quicktabs_main.quicktabs-style-basic  {
+border-bottom:none;
+border-left:none;
+border-right:none;
+}
+
+ 
+ #quicktabs-7 #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ }
+#quicktabs-7 ul
+{
+  height:30px;
+  border:none;
+  padding-right:40px;
+}
+#quicktabs-7 ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+}
+
+#quicktabs-7 ul li span 
+{
+ background:none;
+ 
+ padding-left:0px;
+ height:30px;
+ display:block;float:left;
+}
+#quicktabs-7 ul li span span
+{
+ background:none;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+
+#quicktabs-7 ul li span span span
+{
+ background:none;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+}
+#quicktabs-7 ul li.active span{
+background:url("images/2tableft.jpg") no-repeat  ;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+
+}
+#quicktabs-7 ul li.active span span{
+ background:url("images/2tabtile.jpg") repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+#quicktabs-7 .quicktabs_main.quicktabs-style-basic {
+padding:0;
+}
+#quicktabs-7 ul li.active span span span{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+   padding-left:0px;
+ height:30px;display:block;
+ }
+#quicktabs-7 ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ }
+ #quicktabs-7 ul li.active span span span a{
+ color:#555555;
+  }
+#quicktabs-7 ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:right;
+}
+#quicktabs-7 quicktabs_container_1{
+clear:both;
+}
+#quicktabs-7 ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+#block-quicktabs-7 h2{
+display:none;
+}
+.view-user-comments-fiq .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+.view-user-comments-fiq .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+.view-user-scholar-comments-fiq .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+.view-user-scholar-comments-fiq .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+#quicktabs_container_7  .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+
+#quicktabs_container_7 .tips{
+display:none;
+}
+#quicktabs_container_7 .tips p {
+display:none;
+}
+
+#quicktabs_container_7 p a{
+display:none;
+}
+
+
+
+.view-user-author-comments-hadith .tips{
+display:none;
+}
+.view-user-author-comments-hadith .tips p {
+display:none;
+}
+
+.view-user-author-comments-hadith p a{
+display:none;
+}
+.view-user-author-comments-hadith  .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+
+
+.view-user-author-comments-hadith .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+.view-user-hadith-comment-scholar  .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+
+
+.view-user-hadith-comment-scholar .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+.view-user-author-comments-hadith .tips{
+display:none;
+}
+.view-user-author-comments-hadith .tips p {
+display:none;
+}
+
+.view-user-author-comments-hadith p a{
+display:none;
+}
+.view-user-author-comments-hadith  .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+
+
+.view-user-author-comments-hadith .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+
+
+
+.view-user-hadith-comment-scholar  .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+
+
+.view-user-hadith-comment-scholar .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+.view-user-author-comments-fiq  .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+
+
+.view-user-author-comments-fiq .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+
+#quicktabs_container_5  .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+
+#quicktabs_container_5 .tips{
+display:none;
+}
+#quicktabs_container_5 .tips p {
+display:none;
+}
+
+#quicktabs_container_5 p a{
+display:none;
+}
+.view-user-author-comments-sop  .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+
+
+.view-user-author-comments-sop .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+
+
+. view-islam-world .clicktip{
+background-color:#F4F2F3;
+border:none;
+
+}
+. view-islam-world .tips{
+display:none;
+}
+. view-islam-world .tips p {
+display:none;
+}
+. view-islam-world p a{
+display:none;
+}
+
+
+
+.view-islamic-inroductory-article .clicktip{
+background-color:#F4F2F3;
+border:none;
+
+}
+.view-islamic-inroductory-article .tips{
+display:none;
+}
+.view-islamic-inroductory-article .tips p {
+display:none;
+}
+.view-islamic-inroductory-article p a{
+display:none;
+}
+
+
+.view-islamic-posters-content .clicktip{
+background-color:#F4F2F3;
+border:none;
+
+}
+.view-islamic-posters-content .tips{
+display:none;
+}
+.view-islamic-posters-content .tips p {
+display:none;
+}
+.view-islamic-posters-content p a{
+display:none;
+}
+
+
+
+
+.view-islam-world .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+.view-islam-world .tips{
+display:none;
+}
+.view-islam-world .tips p {
+display:none;
+}
+.view-islam-world p a{
+display:none;
+}
+
+
+
+
+
+.view-dictionary-content .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+.view-dictionary-content .tips{
+display:none;
+}
+.view-dictionary-content .tips p {
+display:none;
+}
+.view-dictionary-content p a{
+display:none;
+}
+
+
+
+#quicktabs-11 .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+#quicktabs-11 .tips{
+display:none;
+}
+#quicktabs-11 .tips p {
+display:none;
+}
+#quicktabs-11 p a{
+display:none;
+}
+
+#quicktabs-12 .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+#quicktabs-12 .tips{
+display:none;
+}
+#quicktabs-12 .tips p {
+display:none;
+}
+#quicktabs-12 p a{
+display:none;
+}
+
+
+ #quicktabs-7 #quicktabs_container_7{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ }
+
+#quicktabs-7 .authorname
+{
+ color:#810C05;
+ font-weight:bold;
+}
+
+#quicktabs-7 .bar {
+  background-image:none;
+  border: none;
+  height: 1.5em;
+  margin: 0 0.2em;
+  display:none;
+}
+ #quicktabs-7 .message{
+ 	padding:30px;
+ }
+ #quicktabs-7 ul.quicktabs_tabs li a{
+ 	color:#555555;
+ }
+
+ #quicktabs-7 #quicktabs_container_7{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ }
+ #quicktabs-7 .quicktabs_main.quicktabs-style-basic  {
+border-bottom:none;
+border-left:none;
+border-right:none;
+}
+
+ 
+ #quicktabs-7 #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ }
+#quicktabs-7 ul
+{
+  height:30px;
+  border:none;
+  padding-right:40px;
+}
+#quicktabs-7 ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+}
+
+#quicktabs-7 ul li span 
+{
+ background:none;
+ 
+ padding-left:0px;
+ height:30px;
+ display:block;float:left;
+}
+#quicktabs-7 ul li span span
+{
+ background:none;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+
+#quicktabs-7 ul li span span span
+{
+ background:none;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+}
+#quicktabs-7 ul li.active span{
+background:url("images/2tableft.jpg") no-repeat  ;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+
+}
+#quicktabs-7 ul li.active span span{
+ background:url("images/2tabtile.jpg") repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+#quicktabs-7 .quicktabs_main.quicktabs-style-basic {
+padding:0;
+}
+#quicktabs-7 ul li.active span span span{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+   padding-left:0px;
+ height:30px;display:block;
+ }
+#quicktabs-7 ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ }
+ #quicktabs-7 ul li.active span span span a{
+ color:#555555;
+  }
+#quicktabs-7 ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:right;
+}
+#quicktabs-7 quicktabs_container_1{
+clear:both;
+}
+#quicktabs-7 ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+#block-quicktabs-7 h2{
+display:none;
+}
+.view-user-comments-fiq .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+.view-user-comments-fiq .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+
+ #quicktabs-8 #quicktabs_container_8{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ }
+
+#quicktabs-8 .authorname
+{
+ color:#810C05;
+ font-weight:bold;
+}
+
+#quicktabs-8 .bar {
+  background-image:none;
+  border: none;
+  height: 1.5em;
+  margin: 0 0.2em;
+  display:none;
+}
+ #quicktabs-8 .message{
+ 	padding:30px;
+ }
+ #quicktabs-8 ul.quicktabs_tabs li a{
+ 	color:#555555;
+ }
+
+ #quicktabs-8 #quicktabs_container_8{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ }
+ #quicktabs-8 .quicktabs_main.quicktabs-style-basic  {
+border-bottom:none;
+border-left:none;
+border-right:none;
+}
+
+ 
+ #quicktabs-8 #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ }
+#quicktabs-8 ul
+{
+  height:30px;
+  border:none;
+  padding-right:40px;
+}
+#quicktabs-8 ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+}
+
+#quicktabs-8 ul li span 
+{
+ background:none;
+ 
+ padding-left:0px;
+ height:30px;
+ display:block;float:left;
+}
+#quicktabs-8 ul li span span
+{
+ background:none;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+
+#quicktabs-8 ul li span span span
+{
+ background:none;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+}
+#quicktabs-8 ul li.active span{
+background:url("images/2tableft.jpg") no-repeat  ;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+
+}
+#quicktabs-8 ul li.active span span{
+ background:url("images/2tabtile.jpg") repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+}
+#quicktabs-8 .quicktabs_main.quicktabs-style-basic {
+padding:0;
+}
+#quicktabs-8 ul li.active span span span{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+   padding-left:0px;
+ height:30px;display:block;
+ }
+#quicktabs-8 ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ }
+ #quicktabs-8 ul li.active span span span a{
+ color:#555555;
+  }
+#quicktabs-8 ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:right;
+}
+#quicktabs-8 quicktabs_container_1{
+clear:both;
+}
+#quicktabs-8 ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+#block-quicktabs-8 h2{
+display:none;
+}
+ #quicktabs-8 .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+ #quicktabs-8 .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+ #quicktabs-9
+ #quicktabs_container_9{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ } #quicktabs-9
+ .authorname
+{
+ color:#810C05;
+ font-weight:bold;
+} #quicktabs-9
+ .bar {
+  background-image:none;
+  border: none;
+  height: 1.5em;
+  margin: 0 0.2em;
+  display:none;
+} #quicktabs-9
+ .message{
+ 	padding:30px;
+ } #quicktabs-9
+ ul.quicktabs_tabs li a{
+ 	color:#555555;
+ } #quicktabs-9
+ #quicktabs_container_9{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ } #quicktabs-9
+ .quicktabs_main.quicktabs-style-basic  {
+border-bottom:none;
+border-left:none;
+border-right:none;
+} #quicktabs-9
+ #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ } #quicktabs-9
+ ul
+{
+  height:30px;
+  border:none;
+  padding-right:40px;
+} #quicktabs-9
+ ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+} #quicktabs-9
+ ul li span 
+{
+ background:none;
+ 
+ padding-left:0px;
+ height:30px;
+ display:block;float:left;
+} #quicktabs-9
+ ul li span span
+{
+ background:none;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+} #quicktabs-9
+ ul li span span span
+{
+ background:none;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+} #quicktabs-9
+ ul li.active span{
+background:url("images/2tableft.jpg") no-repeat  ;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+
+} #quicktabs-9
+ ul li.active span span{
+ background:url("images/2tabtile.jpg") repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+} #quicktabs-9
+ .quicktabs_main.quicktabs-style-basic {
+padding:0;
+} #quicktabs-9
+ ul li.active span span span{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+   padding-left:0px;
+ height:30px;display:block;
+ } #quicktabs-9
+ ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ } #quicktabs-9
+ ul li.active span span span a{
+ color:#555555;
+  } #quicktabs-9
+ ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:right;
+} #quicktabs-9
+ quicktabs_container_1{
+clear:both;
+} #quicktabs-9
+ ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+#block-quicktabs-9 h2{
+display:none;
+} #quicktabs-9
+ .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+} #quicktabs-9
+ .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+ #quicktabs-10
+ #quicktabs_container_10{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ } #quicktabs-10
+ .authorname
+{
+ color:#810C05;
+ font-weight:bold;
+} #quicktabs-10
+ .bar {
+  background-image:none;
+  border: none;
+  height: 1.5em;
+  margin: 0 0.2em;
+  display:none;
+} #quicktabs-10
+ .message{
+ 	padding:30px;
+ } #quicktabs-10
+ ul.quicktabs_tabs li a{
+ 	color:#555555;
+ } #quicktabs-10
+ #quicktabs_container_10{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ } #quicktabs-10
+ .quicktabs_main.quicktabs-style-basic  {
+border-bottom:none;
+border-left:none;
+border-right:none;
+} #quicktabs-10
+ #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ } #quicktabs-10
+ ul
+{
+  height:30px;
+  border:none;
+  padding-right:40px;
+} #quicktabs-10
+ ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+} #quicktabs-10
+ ul li span 
+{
+ background:none;
+ 
+ padding-left:0px;
+ height:30px;
+ display:block;float:left;
+} #quicktabs-10
+ ul li span span
+{
+ background:none;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+} #quicktabs-10
+ ul li span span span
+{
+ background:none;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+} #quicktabs-10
+ ul li.active span{
+background:url("images/2tableft.jpg") no-repeat  ;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+
+} #quicktabs-10
+ ul li.active span span{
+ background:url("images/2tabtile.jpg") repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+} #quicktabs-10
+ .quicktabs_main.quicktabs-style-basic {
+padding:0;
+} #quicktabs-10
+ ul li.active span span span{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+   padding-left:0px;
+ height:30px;display:block;
+ } #quicktabs-10
+ ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ } #quicktabs-10
+ ul li.active span span span a{
+ color:#555555;
+  } #quicktabs-10
+ ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:right;
+} #quicktabs-10
+ quicktabs_container_1{
+clear:both;
+} #quicktabs-10
+ ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+#block-quicktabs-10 h2{
+display:none;
+} #quicktabs-10
+ .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+} #quicktabs-10
+ .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+
+#left_menu .left_sub ul li a
+{
+ background:none;
+ color:#FFFFFF;
+}
+#left_menu .left_sub ul li.sub_item_active a
+{
+ color:#ffda00;
+}
+.left_sub
+{
+
+
+/*  padding-top:5px;
+  padding-bottom:5px;*/
+  background:#c58c29;
+  width:208px;
+
+}
+
+.left_sub ul li
+{
+ list-style:none;
+ padding-bottom:3px;
+   margin-left:12px;
+ padding-top:3px;
+ background-image:none;
+ border-bottom:1px solid #a14f06;
+}
+.left_sub ul li a
+{
+ background:none;
+ color:#FFFFFF;
+}
+.sub_item_active a
+{
+ color:#ffda00;
+}
+
+ #quicktabs-11
+ #quicktabs_container_11{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ } #quicktabs-11
+ .authorname
+{
+ color:#810C05;
+ font-weight:bold;
+} #quicktabs-11
+ .bar {
+  background-image:none;
+  border: none;
+  height: 1.5em;
+  margin: 0 0.2em;
+  display:none;
+} #quicktabs-11
+ .message{
+ 	padding:30px;
+ } #quicktabs-11
+ ul.quicktabs_tabs li a{
+ 	color:#555555;
+ } #quicktabs-11
+ #quicktabs_container_11{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ } #quicktabs-11
+ .quicktabs_main.quicktabs-style-basic  {
+border-bottom:none;
+border-left:none;
+border-right:none;
+} #quicktabs-11
+ #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ } #quicktabs-11
+ ul
+{
+  height:30px;
+  border:none;
+  padding-right:40px;
+} #quicktabs-11
+ ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+} #quicktabs-11
+ ul li span 
+{
+ background:none;
+ 
+ padding-left:0px;
+ height:30px;
+ display:block;float:left;
+} #quicktabs-11
+ ul li span span
+{
+ background:none;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+} #quicktabs-11
+ ul li span span span
+{
+ background:none;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+} #quicktabs-11
+ ul li.active span{
+background:url("images/2tableft.jpg") no-repeat  ;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+
+} #quicktabs-11
+ ul li.active span span{
+ background:url("images/2tabtile.jpg") repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+} #quicktabs-11
+ .quicktabs_main.quicktabs-style-basic {
+padding:0;
+} #quicktabs-11
+ ul li.active span span span{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+   padding-left:0px;
+ height:30px;display:block;
+ } #quicktabs-11
+ ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ } #quicktabs-11
+ ul li.active span span span a{
+ color:#555555;
+  } #quicktabs-11
+ ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:right;
+} #quicktabs-11
+ quicktabs_container_1{
+clear:both;
+} #quicktabs-11
+ ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+#block-quicktabs-11 h2{
+display:none;
+} #quicktabs-11
+ .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+} #quicktabs-11
+ .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+ #quicktabs-12
+ #quicktabs_container_12{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ } #quicktabs-12
+ .authorname
+{
+ color:#810C05;
+ font-weight:bold;
+} #quicktabs-12
+ .bar {
+  background-image:none;
+  border: none;
+  height: 1.5em;
+  margin: 0 0.2em;
+  display:none;
+} #quicktabs-12
+ .message{
+ 	padding:30px;
+ } #quicktabs-12
+ ul.quicktabs_tabs li a{
+ 	color:#555555;
+ } #quicktabs-12
+ #quicktabs_container_12{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ } #quicktabs-12
+ .quicktabs_main.quicktabs-style-basic  {
+border-bottom:none;
+border-left:none;
+border-right:none;
+} #quicktabs-12
+ #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ } #quicktabs-12
+ ul
+{
+  height:30px;
+  border:none;
+  padding-right:40px;
+} #quicktabs-12
+ ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+} #quicktabs-12
+ ul li span 
+{
+ background:none;
+ 
+ padding-left:0px;
+ height:30px;
+ display:block;float:left;
+} #quicktabs-12
+ ul li span span
+{
+ background:none;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+} #quicktabs-12
+ ul li span span span
+{
+ background:none;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+} #quicktabs-12
+ ul li.active span{
+background:url("images/2tableft.jpg") no-repeat  ;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+
+} #quicktabs-12
+ ul li.active span span{
+ background:url("images/2tabtile.jpg") repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+} #quicktabs-12
+ .quicktabs_main.quicktabs-style-basic {
+padding:0;
+} #quicktabs-12
+ ul li.active span span span{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+   padding-left:0px;
+ height:30px;display:block;
+ } #quicktabs-12
+ ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ } #quicktabs-12
+ ul li.active span span span a{
+ color:#555555;
+  } #quicktabs-12
+ ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:right;
+} #quicktabs-12
+ quicktabs_container_1{
+clear:both;
+} #quicktabs-12
+ ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+#block-quicktabs-12 h2{
+display:none;
+} #quicktabs-12
+ .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+} #quicktabs-12
+ .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+.quicktabs{
+background-color:#F4F2F3;
+}
+.view-news-list .views-field-title a
+{
+ font-size:18px;
+ font-weight:bold;
+ color:#666666;
+}
+.view-news-list .views-field-view-node a
+{
+ color:#666666;font-size:11px;
+}
+
+.view-blogs-list .views-field-title a
+{
+ font-size:18px;
+ font-weight:bold;
+ color:#666666;
+}
+.view-blogs-list .views-field-view-node a
+{
+ color:#666666;font-size:11px;
+}
+.test_left
+{
+ background:url(images/Qu1.png) top center no-repeat;
+ width:37px;
+ height:84px;
+}
+.test_right
+{
+ background:url(images/Qu2.png) bottom center no-repeat;
+ width:37px;
+ height:84px;
+}
+.test_photo
+{
+/* background:url(images/testmoni--photo.png) top left no-repeat;*/
+ width:90px;
+ height:98px;
+ padding-right:10px;
+ }
+#quicktabs-7
+ .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+} #quicktabs-7
+ .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+.spl_text_head
+{
+ font-family:tahoma, Verdana, Arial, Helvetica, sans-seri;
+ color:#660000;
+ font-size:14px;
+ padding-top:4px;
+
+}
+.text_go
+{
+  height:17px;
+  border:1px solid #CAB54A;
+}
+
+
+
+
+.vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+}
+ .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+
+.view-ayah-translation  .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+
+.view-ayah-translation .tips{
+display:none;
+}
+.view-ayah-translation .tips p {
+display:none;
+}
+
+.view-ayah-translation p a{
+display:none;
+}
+
+
+#quicktabs-15  .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+
+#quicktabs-15 .tips{
+display:none;
+}
+#quicktabs-15 .tips p {
+display:none;
+}
+
+#quicktabs-15 p a{
+display:none;
+}
+
+ #quicktabs-15 #quicktabs_container_15{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 5px 10px 5px;
+ } #quicktabs-15
+ .authorname
+{
+ color:#810C05;
+ font-weight:bold;
+} #quicktabs-15
+ .bar {
+  background-image:none;
+  border: none;
+  height: 1.5em;
+  margin: 0 0.2em;
+  display:none;
+} #quicktabs-15
+ .message{
+ 	padding:30px;
+ } #quicktabs-15
+ ul.quicktabs_tabs li a{
+ 	color:#555555;
+ } #quicktabs-15 #quicktabs_container_15{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ } #quicktabs-15
+ .quicktabs_main.quicktabs-style-basic  {
+border-bottom:none;
+border-left:none;
+border-right:none;
+} #quicktabs-15
+ #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ } #quicktabs-15
+ ul
+{
+  height:30px;
+  border:none;
+  padding-right:40px;
+} #quicktabs-15
+ ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+} #quicktabs-15
+ ul li span 
+{
+ background:none;
+ 
+ padding-left:0px;
+ height:30px;
+ display:block;float:left;
+} #quicktabs-15
+ ul li span span
+{
+ background:none;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+} #quicktabs-15
+ ul li span span span
+{
+ background:none;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+} #quicktabs-15
+ ul li.active span{
+background:url("images/2tableft.jpg") no-repeat  ;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+
+} #quicktabs-15
+ ul li.active span span{
+ background:url("images/2tabtile.jpg") repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+} #quicktabs-15
+ .quicktabs_main.quicktabs-style-basic {
+padding:0;
+} #quicktabs-15
+ ul li.active span span span{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+   padding-left:0px;
+ height:30px;display:block;
+ } #quicktabs-15
+ ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ } #quicktabs-15
+ ul li.active span span span a{
+ color:#555555;
+  } #quicktabs-15
+ ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:right;
+} #quicktabs-15
+ quicktabs_container_1{
+clear:both;
+} #quicktabs-15
+ ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+#block-quicktabs-15 h2{
+display:none;
+} #quicktabs-15
+ .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+} #quicktabs-15
+ .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+.node-prophet_muhammads_last_sermon #widget-node-163607{
+
+display:none;
+}
+.node-prophet_muhammads_last_sermon .comment_add{
+
+display:none;
+}
+
+#quicktabs-13  .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+
+#quicktabs-13 .tips{
+display:none;
+}
+#quicktabs-13 .tips p {
+display:none;
+}
+
+#quicktabs-13 p a{
+display:none;
+}
+
+ #quicktabs-13 #quicktabs_container_13{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ } #quicktabs-13
+ .authorname
+{
+ color:#810C05;
+ font-weight:bold;
+} #quicktabs-13
+ .bar {
+  background-image:none;
+  border: none;
+  height: 1.5em;
+  margin: 0 0.2em;
+  display:none;
+} #quicktabs-13
+ .message{
+ 	padding:30px;
+ } #quicktabs-13
+ ul.quicktabs_tabs li a{
+ 	color:#555555;
+ } #quicktabs-13 #quicktabs_container_13{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ } #quicktabs-13
+ .quicktabs_main.quicktabs-style-basic  {
+border-bottom:none;
+border-left:none;
+border-right:none;
+} #quicktabs-13
+ #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ } #quicktabs-13
+ ul
+{
+  height:30px;
+  border:none;
+  padding-right:40px;
+} #quicktabs-13
+ ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+} #quicktabs-13
+ ul li span 
+{
+ background:none;
+ 
+ padding-left:0px;
+ height:30px;
+ display:block;float:left;
+} #quicktabs-13
+ ul li span span
+{
+ background:none;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+} #quicktabs-13
+ ul li span span span
+{
+ background:none;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+} #quicktabs-13
+ ul li.active span{
+background:url("images/2tableft.jpg") no-repeat  ;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+
+} #quicktabs-13
+ ul li.active span span{
+ background:url("images/2tabtile.jpg") repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+} #quicktabs-13
+ .quicktabs_main.quicktabs-style-basic {
+padding:0;
+} #quicktabs-13
+ ul li.active span span span{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+   padding-left:0px;
+ height:30px;display:block;
+ } #quicktabs-13
+ ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ } #quicktabs-13
+ ul li.active span span span a{
+ color:#555555;
+  } #quicktabs-13
+ ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:right;
+} #quicktabs-13
+ quicktabs_container_1{
+clear:both;
+} #quicktabs-13
+ ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+#block-quicktabs-13 h2{
+display:none;
+} #quicktabs-13
+ .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+} #quicktabs-13
+ .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+
+p.search-snippet  span.fn{
+	display:none;
+}
+p.search-snippet  span.fn{
+	display:none;
+}
+
+.search-results .highlight { font-weight:bold; }
+
+#quicktabs-14  .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+
+#quicktabs-14 .tips{
+display:none;
+}
+#quicktabs-14 .tips p {
+display:none;
+}
+
+#quicktabs-14 p a{
+display:none;
+}
+
+ #quicktabs-14 #quicktabs_container_14{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ } #quicktabs-14
+ .authorname
+{
+ color:#810C05;
+ font-weight:bold;
+} #quicktabs-14
+ .bar {
+  background-image:none;
+  border: none;
+  height: 1.5em;
+  margin: 0 0.2em;
+  display:none;
+} #quicktabs-14
+ .message{
+ 	padding:30px;
+ } #quicktabs-14
+ ul.quicktabs_tabs li a{
+ 	color:#555555;
+ } #quicktabs-14 #quicktabs_container_14{
+ 	background-color:#FFFFFF;
+	border:solid 1px #CCCCCC;
+	padding:10px 10px 20px 10px;
+ } #quicktabs-14
+ .quicktabs_main.quicktabs-style-basic  {
+border-bottom:none;
+border-left:none;
+border-right:none;
+} #quicktabs-14
+ #quicktabs_container_1
+{
+ border:1px solid #DE9F42;
+ width:380px;
+ font-size:15px;
+ } #quicktabs-14
+ ul
+{
+  height:30px;
+  border:none;
+  padding-right:40px;
+} #quicktabs-14
+ ul li 
+{
+
+ background-color:none;
+ border:none;
+  height:30px;
+    
+} #quicktabs-14
+ ul li span 
+{
+ background:none;
+ 
+ padding-left:0px;
+ height:30px;
+ display:block;float:left;
+} #quicktabs-14
+ ul li span span
+{
+ background:none;
+ height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+} #quicktabs-14
+ ul li span span span
+{
+ background:none;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+} #quicktabs-14
+ ul li.active span{
+background:url("images/2tableft.jpg") no-repeat  ;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+
+} #quicktabs-14
+ ul li.active span span{
+ background:url("images/2tabtile.jpg") repeat-x;
+  height:30px;
+ display:block;
+  padding-left:0px;padding-right:0px;
+
+} #quicktabs-14
+ .quicktabs_main.quicktabs-style-basic {
+padding:0;
+} #quicktabs-14
+ ul li.active span span span{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+   padding-left:0px;
+ height:30px;display:block;
+ } #quicktabs-14
+ ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ } #quicktabs-14
+ ul li.active span span span a{
+ color:#555555;
+  } #quicktabs-14
+ ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:right;
+} #quicktabs-14
+ quicktabs_container_1{
+clear:both;
+} #quicktabs-14
+ ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+#block-quicktabs-14 h2{
+display:none;
+} #quicktabs-14
+ .vud-widget-plain {
+border:none;
+height:auto;
+width:52px;
+padding:0px;
+margin:0px;
+/*float:right;*/
+} #quicktabs-14
+ .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
+float:right;
+}
+.view-list-testimonials table
+{
+ border-collapse:separate;
+ }
+.view-list-testimonials .views-row
+{
+  border-bottom:1px solid #CCCCCC;
+  width:850px;
+  padding-bottom:10px;
+  padding-top:5px;
+  margin-left:10px;
+}
+
+#quicktabs-10  .clicktip{
+background-color:#FFFFFF;
+border:none;
+
+}
+
+#quicktabs-10 .tips{
+display:none;
+}
+#quicktabs-10 .tips p {
+display:none;
+}
+
+#quicktabs-10 p a{
+display:none;
+}
+.bottom-cnt{
+padding-top:10px;
+}
+.view-islam-world h3 a
+{
+  color:#810C05;
+}
+.view-compare-translation .view-ayah-elaboration-compare
+{
+ display:none;
+}
+
+.search_facet{
+background:none repeat scroll 0 0 #DDB959;
+float:left;
+margin-top:1px;
+width:210px;
+height:960px;
+}
+.view-islam-world .views-field-nid
+{
+  display:none;
+}
+#faceted-search-ui-form-1 #edit-keywords{
+	width:650px;
+}
+
+#block-faceted_search_ui-1_current ,#block-faceted_search_ui-1_guided{
+padding-left:10px;
+
+}
+
+#block-faceted_search_ui-1_current a,#block-faceted_search_ui-1_guided a{
+color:#810C05;
+font-size:14px;
+font-weight:400;
+}
+#block-faceted_search_ui-1_current  h2 ,#block-faceted_search_ui-1_current  h3 ,#block-faceted_search_ui-1_guided h2 ,#block-faceted_search_ui-1_guided h3{
+color:#810C05;
+}
+.faceted-search-facet .item-list ul {
+margin:0;padding:0;
+}
+
+#block-faceted_search_ui-1_guided .faceted-search-facet--content_type--1 h3{
+display:none;
+}
+#block-faceted_search_ui-1_guided .faceted-search-facet--field_hd_book_code--1 .Fiqh-us-Sunnah{
+/*	display:none;*/
+}
+#block-faceted_search_ui-1_guided .faceted-search-facet.faceted-search-guided  {
+/*margin-bottom:0;*/
+}
+#block-faceted_search_ui-1_guided .faceted-search-facet--field_quran_bk_code--1{
+margin-bottom:0;
+}
+.faceted-search-page .faceted-search-guided .faceted-search-facet--content_type--1 h3{
+display:none;
+}
+
+.faceted-search-page .faceted-search-guided  .faceted-search-facet--field_quran_bk_code--1 {
+	margin-bottom:0;
+}
+
+.faceted-search-page .faceted-search-guided .faceted-search-facet--field_hd_book_code--1 .Fiqh-us-Sunnah , #block-faceted_search_ui-1_guided .faceted-search-facet--field_hd_book_code--1 .Fiqh-us-Sunnah{
+	display:none;
+}
+#popups-body .comment{
+display:none;
+}
+
+#popups-body .tips{
+display:none;
+}
+#popups-body .tips p {
+display:none;
+}
+
+#popups-body p a{
+display:none;
+}
+
+#popups-body .node{
+/*display:none; */
+
+}
+#comment_body_comm p{
+margin:0px
+}
+#comment_body_comm {
+/*background-color:#F7F7F7;*/padding:10px;padding-bottom:20px;font-family:tahoma;font-size:12px;line-height:1.6;
+}
+#comment_reply_comm{
+padding-left:350px;font-size:12px;font-weight:bold;/*background-color:#ECECEC;*/padding-top:10px;padding-bottom:10px;
+color:#333333;border-bottom:dotted 1px #333333;
+}
+#comment_reply_comm a{
+color:#333333;
+
+}
+#comment_body_scholar p{
+margin:0px
+}
+#comment_body_scholar {
+/*background-color:#FDEFD4;*/padding:10px;padding-bottom:20px;font-family:tahoma;font-size:12px;line-height:1.6;
+}
+#comment_reply_scholar{
+padding-left:350px;font-size:12px;font-weight:bold;/*background-color:#FCE7BC;*/padding-top:10px;padding-bottom:10px;
+color:#B37F07;border-bottom:dotted 1px #B37F07;
+}
+#comment_reply_scholar a{
+color:#B37F07;
+}
+#comment_body_auth p{
+margin:0px
+}
+#comment_body_auth {
+/*background-color:#F0F2CA;*/padding:10px;padding-bottom:20px;font-family:tahoma;font-size:12px;line-height:1.6;
+}
+#comment_reply_auth{
+padding-left:350px;font-size:12px;font-weight:bold;/* background-color:#E8ECAF;*/padding-top:10px;padding-bottom:10px;
+color:#788101;border-bottom:dotted 1px #788101;
+}
+#comment_reply_auth a{
+color:#788101;
+}
+
+#search-form fieldset.search-advanced{
+	display:none;
+}
+#block-luceneapi_facet-luceneapi_node{
+	padding:0 0 0 10px;
+}
+#block-luceneapi_facet-luceneapi_node  a{
+	color:#810C05;
+font-size:14px;
+font-weight:400;
+}
+#block-luceneapi_facet-luceneapi_node .item-list ul{
+	margin:0;
+	padding:0;
+}
+#block-luceneapi_facet-luceneapi_node .item-list ul li{
+	list-style:none;
+	margin:0;
+}
+#block-luceneapi_facet-luceneapi_node  h2 ,#block-luceneapi_facet-luceneapi_node  h3 {
+color:#810C05;
+}
+.view-Hadith-narrators .views-exposed-form
+{
+ display:none;
+}
+#vud_ap_vote h3{
+margin:0px;
+
+}
+
+.not_log_vote #votes_text{
+display:none;
+}
+#post_comment{
+width:110px;
+}
+#post_comment span span span{
+background:url("images/right.jpg") no-repeat scroll right top transparent;
+padding-left:0;
+padding-right:4px;
+padding-top:3px;
+height:26px;
+display:block;
+padding-left:3px;
+}
+
+#post_comment span span{
+background:url("images/middletile.jpg") repeat-x scroll center top transparent;
+padding-left:0;
+height:26px;display:block;
+
+}
+
+#post_comment span{
+background:url("images/left.jpg") no-repeat scroll left top transparent;
+padding-left:4px;
+height:26px;display:block;
+padding-left:3px;
+
+}
+#Menu1
+{
+ padding-top:0px;
+ margin-left:15px;
+}
+#post_comment_nt{
+width:175px;
+}
+#post_comment_nt span span span{
+background:url("images/right.jpg") no-repeat scroll right top transparent;
+padding-left:0;
+padding-right:4px;
+padding-top:3px;
+height:26px;
+display:block;
+padding-left:3px;
+}
+
+#post_comment_nt span span{
+background:url("images/middletile.jpg") repeat-x scroll center top transparent;
+padding-left:0;
+height:26px;display:block;
+
+}
+
+#post_comment_nt span{
+background:url("images/left.jpg") no-repeat scroll left top transparent;
+padding-left:4px;
+height:26px;display:block;
+padding-left:3px;
+
+}
+table {
+/*border-collapse:separate; */
+}
+#content2 h2
+{
+  font-size:20px;
+  padding-bottom:10px;
+  float:left;
+  width:600px;
+}
+#myform a
+{
+ color:#663300;
+ font-weight:bold;
+}
+#nice-menu-1 #menu-1068
+{
+  border-right:none;
+}
+
+.block ul
+{
+ margin-left:4px;
+}
+/*............. recent_comment */
+
+.view-recent-comments-page
+{
+  width:900px;
+  padding-top:15px;
+  text-align:left;
+}
+
+.view-recent-comments-page table
+{
+ border-collapse:separate;
+ background:#FFFFFF;
+ margin:0px;
+ padding:0px;
+ border:0px;
+ width:100%;
+
+ }
+.view-recent-comments-page table thead tr
+{
+   background:#F0E6A8;
+}
+.view-recent-comments-page table th
+{
+ background:#F0E6A8;
+ color:#810C05;
+ height:30px;
+ margin:0px;
+ padding-left:5px;
+ text-align:left;
+ border:0px;
+}
+
+.view-recent-comments-page table td
+{
+ background:#FFFFFF;
+ color:#666666;
+ height:25px;
+ padding-left:5px;
+ border-bottom:1px solid #F4F2F3;
+ text-align:left;
+ }
+.view-recent-comments-page table td a
+{
+  color:#0000FF;
+}
+.view-recent-comments-page .views-field-comment
+{
+ width:550px;
+}
+.view-recent-comments-page .views-field-comment a
+{
+ color:#000000;
+}
+
+.view-recent-comments-page table {
+border:1px solid #DE9F42;
+
+}
+.view-recent-comments-page h2
+{
+ margin-bottom:0px;
+}
+.view-recent-comments-page #user_image
+{
+ width:40px;
+ height:32px;
+ float:left;
+ background:none;
+}
+.recent_activity #user_image
+{
+ float:left;
+ padding-right:15px;
+}
+.view-recent-comments-page #user_comm
+{
+   width:850px;
+
+}
+.view-recent-comments-page .views-field-timestamp
+{
+  clear:both;
+  padding-top:7px;
+  font-size:11px;
+  color:#99CC33;
+  padding-left:55px;
+}
+.view-recent-comments-page a
+{
+ color:#000000;
+}
+.view-recent-comments-page .views-row
+{
+ clear:both;
+/* border-bottom:1px solid #DE9F42;*/
+ padding:10px;
+ padding-top:12px;
+ padding-bottom:7px;
+
+}
+.view-recent-comments-page .views-row-odd
+{
+ background:#FDEFD4;
+}
+.view-recent-comments-page .views-row-even
+{
+  background:#F7F7f7;
+}
+/*............. recent_comment  */
+.view-manage-singlecoment label , .view-manage-singleusers label{
+	font-weight:bold;
+}
+
+.view-manage-singlecoment a , .view-manage-singleusers a{
+	font-weight:bold;
+	color:#800000;
+}
+.view-user-scholar-comments{
+margin-top:15px;
+}
+.so_image{
+ background:url("images/bkg_scholar.gif") no-repeat;
+ width:69px;
+ height:135px;
+ padding-right:10px;
+}
+.au_image{
+ background:url("images/bkg_author.gif") no-repeat;
+ width:69px;
+ height:135px;
+ padding-right:10px;
+}
+.cm_image{
+ background:url("images/bkg_user.gif") no-repeat;
+ width:69px;
+ height:135px;
+ padding-right:10px;
+}
+#popups-body .node-prophet_muhammads_last_sermon{
+display:none;
+}
+#popups-body .node-quran_ayah{
+display:none;
+}
+#popups-body .node-quran_surah_introduction{
+display:none;
+}#popups-body .node-hadith_content{
+display:none;
+}#popups-body .node-fiqh_sunnah{
+display:none;
+}#popups-body .node-article_content{
+display:none;
+}#popups-body .node-dictionary{
+display:none;
+}
+.stwrapper
+{
+  position:absolute;
+}
+.view-list-all-comments table{
+border-collapse:separate;
+}.view-list-all-comments thead th {
+border:none;
+}
+
+
+.view-list-all-abuse-comments table{
+border-collapse:separate;
+}.view-list-all-abuse-comments thead th {
+border:none;
+}
+
+.view-listofallvotes table{
+border-collapse:separate;
+}.view-listofallvotes thead th {
+border:none;
+}
+
+.front_donate
+{
+  float:right;
+  padding-top:13px;
+}
+.inner_donate
+{
+ float:left;
+ vertical-align:top;
+}
+/********************  Tell a friend *************************/
+#edit-sender-last-name-wrapper
+{
+  display:none;
+}
+.telllink
+{
+  
+  padding-right:30px;
+}
+.telllink a
+{
+ font-size:12px;
+ color:#006600;
+ font-weight:bold;
+ text-decoration:underline;
+}
+
+/********************  Invite Text *************************/
+
+div.invite_text {background:#f4f5d1 url(images/icon-comment.png) top left no-repeat;border:1px solid #e7e9ab; min-height:75px; margin-bottom:10px; }
+div.invite_text p{padding:5px 10px 5px 75px;color:#787952;}

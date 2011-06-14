@@ -1,0 +1,856 @@
+<?php 
+/**
+Drupal search formis altered in this module to  make search in individual books and display results in 
+
+
+**/
+
+/**
+ * Implementation of hook_menu(). 
+ */
+function alimsearch_menu() {
+  $items['alimsearch'] = array(
+    'title' =>  t('Search'),
+    'page callback' => 'alimsearch_view',
+    'access arguments' => array('search content'),
+    'type' => MENU_SUGGESTED_ITEM,
+  );
+     $items['single/view/%'] = array(
+    'title' =>  t('Search'),
+    'page callback' => 'alimsearch_view_single',
+    'access arguments' => array('search content'),
+	'page arguments' => array(2),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+
+function alimsearch_view_single($searchstr ){
+	//alimsearch_view_single
+	if($searchstr)
+		return alimsearch_getsingleresult($searchstr);
+	else
+		return 'Please Enter Keyword';
+
+}
+/******* Implemetation of hook_form_alter
+Alters function Search forms added additional validate function and submit fuctions ********/
+function alimsearch_form_alter(&$form, &$form_state, $form_id) {
+
+		if(arg(0) == 'search' && arg(1) == 'alimsearch' ){
+			
+			$default = $_GET['q'];			
+			$cat = alimsearch_categories();
+			$types = array();
+			foreach($cat as $k => $v){
+				$types = array_merge( $types ,alimsearch_getbooknames($k) ); 
+			}			
+			if ($form_id == 'search_form' ) {
+				
+					$keys = search_get_keys();$selcatarr = array();$selbookarr = array();
+					$new = FALSE;
+					$new1 = FALSE;
+					if ($selcats = search_query_extract($keys, 'ct')) {
+						$new1 = TRUE;						
+						foreach (explode(',', $selcats) as $t) {
+							  $selcatarr[] = $t;
+						}				
+					}					
+					if ($selbooks = search_query_extract($keys, 'bk')) {
+						$new = TRUE;						
+						foreach (explode(',', $selbooks) as $t) {
+							$selbookarr[] = $t;
+						}
+					}
+					
+					//HIGHTLIGHT SEARCH KEYS using js
+					
+					$highlight_keys = explode(' ' , $keys );
+					$high_js = '';$high_js1 = '';
+					foreach($highlight_keys as $ks){
+						if(  strlen($ks) > 2 && strtolower($ks) != 'and' && strtolower($ks) != 'the' && strtolower($ks) != 'not' ){
+							$high_js.='jQuery(".search-snippet ,.search-snippet p , .search-snippet div").highlight("'.$ks.'");';
+							$high_js1 .='$(".search-snippet ,.search-snippet p , .search-snippet div").highlight("'.$ks.'");';
+						}
+					}
+											$sc_pop ='$(document).bind("popups_open_path_done", function() {
+  '.$high_js1.'
+});';
+
+					
+					
+					drupal_add_js(drupal_get_path('module', 'alimsearch') .'/jquery.highlight-3.js', 'module');
+					drupal_add_js($high_js, 'inline', 'footer');
+					drupal_add_js($sc_pop, 'inline', 'footer');
+					
+						/*$sc = '$(document).bind("popups_open_path_done", function() {
+  						'.$high_js.'
+						});';*/
+
+
+		 				//drupal_add_js($sc, 'inline', 'footer');
+
+
+		 			//drupal_add_js($popsc, 'inline', 'footer');
+					
+					jquery_ui_add(array('ui.draggable'));
+					$form['categories'] = array(
+						//'#prefix' => '<span class="clicktip_target12" >Refine your search</span>&nbsp;&nbsp; <div id="adv-books-frm" class="clicktip21" >',
+						'#prefix' => '<div id="adv-books-frm"  ><div style="padding:10px;color:#660000;font-weight:bold;font-size:15px;" >Advanced options</div>',
+						//'#prefix' => '&nbsp;&nbsp; <div id="adv-books-frm" class="test-cls" >',
+						'#suffix' => '</div>',
+					);
+						
+					$i= 1;
+					foreach($cat  as $k => $v ){ 
+						$two = 'books-'.$k;
+						if($new || $new1  ){
+							if(in_array( $k,$selcatarr)){
+								$res = $k;
+							}else{
+								$res = '';
+							}
+						}else
+							$res = $k;
+						$form['categories'][$k] = array(
+							'#type' => 'checkbox',
+							'#title' => $v,
+							'#default_value' => $res
+						);
+						$form['categories'][$two] = array(
+							'#prefix' => "<div class='$two'  >",
+							'#suffix' => '</div>',
+						);
+						
+						$types1 = alimsearch_getbooknames($k) ; $k = 'book-'.$k;
+						if($new || $new1  ){
+							$res = array();$res1 = array();
+							foreach($types1 as $kk => $vv){
+								
+								if(in_array($kk,$selbookarr) ) {//print 'kk='.$kk;
+									$res1 = array_merge( $res ,array($kk) );
+									$res = $res1;
+									}
+								
+									//$res[] = $kk ;
+								//else
+									//$res[] = 0;
+							}
+						}else{  //$res = $types1;
+							$res = array();$res1 = array();
+							foreach($types1 as $kk => $vv){
+									$res1 = array_merge( $res ,array($kk) );
+									$res = $res1;
+							}
+						}
+						if(count($types1) > 0){
+						$form['categories'][$two][$k] = array(
+							'#type' => 'checkboxes',
+							'#title' => t(''),
+							'#prefix' => '<div class="criterion">',
+							'#suffix' => '</div>',
+							'#options' => $types1,
+							'#default_value' => $res1
+						);	
+						}
+						$i++;
+						
+					}
+					
+					
+					$form['categories']['submit'] = array(
+					'#type' => 'submit',
+					'#value' => t('Search'),
+					'#prefix' => '<div class="action">',
+					'#suffix' => '</div>',
+					);
+					
+					
+					//$form['#submit'] = array('alimsearch_form_submit');
+					$form['#validate'][] = 'alimsearch_search_validate';//print_r($form['#validate']);
+					//$form['#submit'] = array('alimsearch_form_submit');
+					$form['basic']['inline']['submit'] = array('#type' => 'submit', '#value' => t('Search'));
+					$form['basic']['inline']['currpage'] = array('#type' => 'hidden', '#default_value' => $default );
+					unset($form['submit']);				
+			
+			}
+			
+	}
+	
+	if(arg(0) == 'search' && arg(1) == 'node' ){
+			if ($form_id == 'search_form' ) {
+				//$form['#submit'][] = 'alimsearch_form_submit';
+				if(arg(0) == 'search' && arg(1) == 'node' ){	
+					//HIGHTLIGHT SEARCH KEYS using js
+					$keys = search_get_keys();
+					$highlight_keys = explode(' ' , $keys );
+					$high_js = '';$high_js1 = '';
+					foreach($highlight_keys as $ks){
+						if( strlen($ks) > 2 && strtolower($ks) != 'and' && strtolower($ks) != 'the' ){
+							$high_js.='$(".search-snippet ,.search-snippet p , .search-snippet div").highlight("'.$ks.'");';
+							$high_js1 .='jQuery("#popups .search-snippet ,#popups .search-snippet p , #popups .search-snippet div").highlight("'.$ks.'");';
+						}
+					}
+					/*$sc_pop ='jQuery(document).bind("popups_open_path_done", function() {
+  '.$high_js1.'
+});';*/
+					
+					drupal_add_js(drupal_get_path('module', 'alimsearch') .'/jquery.highlight-3.js', 'module');
+					drupal_add_js($high_js, 'inline', 'footer');
+					//drupal_add_js($sc_pop, 'inline', 'footer');
+				}	
+			}
+	}
+			if ($form_id == 'search_theme_form' ) {
+				$form['#submit'][] = 'alimsearch_form_submit';		
+				
+							$scr12 = '$(document).bind("popups_open_path_done", function() { 
+					$("#bookmarks-edit-item .form-submit").click(function(){
+						$("a#show-book-menu").removeClass("mymenu-processed");										 
+					});
+				});
+				;';
+				
+				
+	 drupal_add_js($scr12, 'inline', 'footer');
+	 		
+			}
+			//print_r($form['#submit']);	
+	
+}
+
+/**Added this submit function to to redirect 1.1,h.2 etc patterns to the respective quran hadith pages */
+function alimsearch_form_submit($form, &$form_state) {
+		$form_id = $form['form_id']['#value'];  
+		if($form_id == 'search_theme_form' ){
+			$type = $form['module']['#value'];
+			$subject = trim($form_state['values'][$form_id]);
+			$search_comingurl = $form_state['values']['currpage'];
+			$url_array = explode('/',$search_comingurl);
+			$patternq = '/^[0-9]+(\.|:)[0-9]+$/'; // Expresions of the form 11.23 , 0.1 etc for quran 
+			$tq = preg_match($patternq, $subject, $matches);
+			
+			$patterns = '/^[0-9]+$/'; // Expresions of the form 11.23 , 0.1 etc for number only
+			$ts = preg_match($patterns, $subject, $matches);
+			//print "$ts ==  ts value ";
+			//$patternh = '/^h.[0-9]+(\.[0-9]+)*$/';  // Expresions of the form 11.23 , 0.1 etc for hadith only
+			//To redirect hadit h.1.3
+			$patternh = '/^h.[0-9]+((\.|:)[0-9]+)*$/'; 
+			
+			$th = preg_match($patternh, $subject, $matches);
+			//print "$th ==  th value ";
+			
+			if($tq == 1 ){ // pattern matches  for quran 
+				if(  ( $pos = strpos($subject, ':') ) !== false ){
+					$values = explode(':' , $subject );
+				}else{
+					$values = explode('.' , $subject );
+				}
+				
+				$firstnum = $values[0];
+				$secondnum = $values[1];
+				if($firstnum <= 0 ){ $firstnum = 1; }
+				if($secondnum <= 0 ){ $secondnum = 1; }									
+				if(  ( $pos = strpos($search_comingurl, 'library/quran/surah/arabic') ) !== false ){
+					$path1 = 'library/quran/surah/arabic/'.$firstnum.'/ARB';
+					drupal_goto($path1,'',$secondnum);		
+				}	
+				else if( ( $pos = strpos($search_comingurl, 'library/quran/surah/english') ) !== false  ){
+					$path1 = 'library/quran/surah/english/'.$firstnum.'/'.$url_array[5];
+					drupal_goto($path1,'',$secondnum);
+				}
+				else{
+					$path1 = 'library/quran/ayah/compare/'.$firstnum.'/'.$secondnum;
+					drupal_goto($path1);
+				}		
+				
+			}	
+			if($ts == 1 ){
+				$firstnum = $subject;
+				if($firstnum <= 0 ){ $firstnum = 1; }
+				if( ( $pos = strpos($search_comingurl, 'library/quran/surah/english') ) !== false  ){
+					$path1 = 'library/quran/surah/english/'.$firstnum.'/'.$url_array[5];
+					drupal_goto($path1);
+				}
+				else if( ( $pos = strpos($search_comingurl, 'library/quran/ayah/compare') ) !== false ){
+					$path1 = 'library/quran/ayah/compare/'.$firstnum.'/1';
+					drupal_goto($path1);
+				}
+				else {
+					$path1 = 'library/quran/surah/arabic/'.$firstnum.'/ARB';
+					drupal_goto($path1,'',$secondnum);		
+				}	
+				
+			}				
+			if($th == 1 ){
+						
+					if(  ( $pos = strpos($subject, ':') ) !== false ){
+						$values = explode(':' , $subject );
+					}else{
+						$values = explode('.' , $subject );
+					}
+					
+					$firstnum = $values[1];
+					$secondnum = $values[2];
+					if($firstnum <= 0 ){ $firstnum = 1; }
+					if($secondnum <= 0 ){ $secondnum = 1; }								
+					if(  ( $pos = strpos($search_comingurl, 'library/hadith') ) !== false ){			
+						if($secondnum  && ( $url_array[2] == 'SHB' || $url_array[2] == 'AMH' || $url_array[2] == 'FQS'  ) ){	
+								if($url_array[2] == 'FQS' || ( $pos = strpos($search_comingurl, 'library/hadith/fiqh') ) !== false  )
+									$path1 = 'library/hadith/fiqh'.$url_array[2].'/'.$firstnum.'/'.$secondnum;
+								else
+									$path1 = 'library/hadith/'.$url_array[2].'/'.$secondnum.'/'.$firstnum;
+							drupal_goto($path1);	
+						}
+						else{
+						
+							$path1 = 'library/hadith/'.$url_array[2].'/'.$firstnum;
+							drupal_goto($path1);		
+						}
+					}	
+					else{			
+						$path1 = 'library/hadith/SAD/'.$firstnum;
+						drupal_goto($path1);
+					}
+			
+			}
+			//$search_comingurl = $form_state['values']['currpage'];
+			
+			
+		}
+}
+
+/**Return Categaries and book codes **/
+function alimsearch_getbooknames($type){
+	$books = array(
+		'quran' => array(
+			'ASD' => 'Asad Translation',
+			'MAL' => 'Malik Translation',
+			'PIK' => 'Pickthall Translation',
+			'YAT' => 'Yusuf Ali Translation',
+			'QSI' =>  'Surah Introduction',
+			'AY' => 'Ayah Themes',
+			'QCC' => 'Qur\'an Commentary',
+			'QS' => 'Qur\'an Subject Index',
+		
+		),
+		'hadith' => array(
+			'AMH' => 'Al-Muwatta Hadith',
+			'HDQ' => 'Al-Qudsi Hadith',
+			'TIR' => 'Al-Tirmidhi Hadith',
+			'SHB' => 'Sahih Al-Bukhari Hadith' ,
+			'SAD' => 'Sunan of Abu-Dawood',			
+			'SHM' => 'Sahih Muslim Hadith',
+			
+		),
+		'fiqh' => array('FIQ' => 'Fiqh-us-Sunnah'),
+		'islam' => array('ART' => 'Islam Articles'),
+		'biographies' => array(
+			'KAB' => 'Khalifa Abu Bakr',
+			'KUM' => 'Khalifa Umar bin al-Khattab',
+			'KUT' => 'Khalifa Uthman bin Ghani',
+			'KAL' => 'Khalifa Ali bin Talib',
+			'SOP' => 'Stories of the Prophets',
+			'BIO' => 'Biographies of Companions'
+		) ,
+	
+	
+	);
+	if($type == 'full' )
+		return  $books;
+	else if($type == 'all' )
+		return   array();
+	else if($type != '' ){
+		return  $books[$type];
+	}
+	else
+		return array();
+
+}
+/*Diffrent categories of books */
+function alimsearch_categories(){
+	//return array( 'all' => 'All' , 'hadith' => 'Hadith' ,'quran' => 'Quran' ,'article' => 'Articles' , 'biographies' => 'Biographies' );
+	return array( 'all' => 'All' , 
+	'quran' => 'Quran' ,
+	'hadith' => 'Hadith',
+	'fiqh' => 'Fiqh-us-Sunnah' ,
+	'islam' => 'Islam Articles' ,  
+	'biographies' => 'Biography'  ,	
+	 /*'index' => 'Subject Indexes'*/
+	 
+	  );
+
+}
+//Search Combined Queries for individual book , constucting quries for individual books 
+// type => content type and catrgory => taxonomy term
+function alimsearch_getcombined_query($val , $opt = '' ){
+	
+			
+	$arr = array();
+	$arr = array( 
+		'ASD' =>  array('add_query' => ' type:quran_ayah category:1' , 'text' => 'Asad Translation' , 'cat' => 'quran' ) ,
+		'MAL' =>  array('add_query' => ' type:quran_ayah category:2' , 'text' => 'Malik Translation' , 'cat' => 'quran' ) ,
+		'PIK' =>  array('add_query' => ' type:quran_ayah category:3' , 'text' => 'Pickthall Translation' , 'cat' => 'quran' ) ,
+		'YAT' =>  array('add_query' => ' type:quran_ayah category:4' , 'text' => 'Yusuf Ali Translation' , 'cat' => 'quran' ) ,
+		'QSI' =>  array('add_query' => ' type:quran_surah_introduction' , 'text' => 'Surah Introduction' , 'cat' => 'quran' ) ,
+		'AY'  =>  array('add_query' => ' type:quran_ayah_theme' , 'text' => 'Ayah Themes' , 'cat' => 'quran' ) ,
+		'QCC' =>  array('add_query' => ' type:quran_ayah_elaboration' , 'text' => 'Qur\'an Commentary' , 'cat' => 'quran' ) ,
+		'QS'  =>  array('add_query' => ' type:quran_subject,hadith_subject' , 'text' => 'Qur\'an Subject Index' , 'cat' => 'quran' ) ,
+		
+		'AMH' =>  array('add_query' => ' type:hadith_content category:135' , 'text' => 'Al-Muwatta Hadith' , 'cat' => 'hadith' ) ,
+		'HDQ' =>  array('add_query' => ' type:hadith_content category:136' , 'text' => 'Al-Qudsi Hadith' , 'cat' => 'hadith' ) ,
+		'TIR' =>  array('add_query' => ' type:hadith_content category:137' , 'text' => 'Al-Tirmidhi Hadith' , 'cat' => 'hadith' ) ,
+		'SHB' =>  array('add_query' => ' type:hadith_content category:134' , 'text' => 'Sahih Al-Bukhari Hadith' , 'cat' => 'hadith' ) ,
+		'SAD' =>  array('add_query' => ' type:hadith_content category:133' , 'text' => 'Sunan of Abu-Dawood' , 'cat' => 'hadith' ) ,
+		'SHM' =>  array('add_query' => ' type:hadith_content category:138' , 'text' => 'Sahih Muslim Hadith' , 'cat' => 'hadith' ) ,
+		
+			
+		'FIQ' =>  array('add_query' => ' type:fiqh_sunnah' , 'text' => 'Fiqh-us-Sunnah' , 'cat' => 'fiqh' ) ,
+		
+		'KAB' =>  array('add_query' => ' type:article_content category:128' , 'text' => 'Khalifa Abu Bakr' , 'cat' => 'biographies' ) ,
+		'KUM' =>  array('add_query' => ' type:article_content category:129' , 'text' => 'Khalifa Umar bin al-Khattab' , 'cat' => 'biographies' ) ,
+		'KUT' =>  array('add_query' => ' type:article_content category:130' , 'text' => 'Khalifa Uthman bin Ghani' , 'cat' => 'biographies' ) ,
+		'KAL' =>  array('add_query' => ' type:article_content category:131' , 'text' => 'Khalifa Ali bin Talib' , 'cat' => 'biographies' ) ,
+		'SOP' =>  array('add_query' => ' type:article_content category:127' , 'text' => 'Stories of the Prophets' , 'cat' => 'biographies' ) ,
+		'BIO' =>  array('add_query' => ' type:article_content category:132' , 'text' => 'Biographies of Companions' , 'cat' => 'biographies' ) ,
+		
+		
+		'ART' =>  array('add_query' => ' type:article_content category:139,140,' , 'text' => 'Islam Articles' , 'cat' => 'islam' ) ,
+		
+		//'' =>  array('add_query' => ' type: category:' , 'text' => '' , 'cat' => '' ) ,
+
+	
+	);
+	
+	if($val == 'all')
+		return $arr;
+	else
+		return $arr[$val];
+}
+
+
+/** * Implementation of hook_search(). Render search results as categarized category/books */
+function alimsearch_search($op = 'search', $keys = NULL ,$newkeys = array() ) {
+
+	$total_count =  0;
+	//print 'keys- - '.$keys.'-*-';
+	$results = array();
+				global $pager_total;
+			global $pager_total_items;
+  switch ($op) {
+    case 'name':
+     // if ($skip_access_check || user_access('access user profiles')) {
+        return t(' Advanced Search');
+     // }
+    case 'search':
+	   	$keys = search_get_keys();	
+	   if ($cats = search_query_extract($keys, 'ct')) {
+	   	$catarr = array();
+        foreach (explode(',', $cats) as $t) {
+              $catarr[] = $t;
+        }
+       // $conditions1 .= ' AND ('. implode(' OR ', $types) .')';
+        $keys = search_query_insert($keys, 'type');
+		
+      }
+	
+	
+	
+	  if ($books = search_query_extract($keys, 'bk')) {
+        $bookarr = array();
+        foreach (explode(',', $books) as $t) {
+          $bookarr[] = $t;
+        }
+        $keys = search_query_insert($keys, 'type');
+      }
+	 // print ' <br /> B$ KEYS >> '.$keys.'<br />' ;
+	 // $orikey = substr_replace($keys, '', strpos($keys , 'bk:' ), strlen($keys)) ;  print '<br />'.$keys .' KEYS >> '.$orikey .'<br />' ;
+	 // $orikey = substr_replace($keys, '', strpos($keys , 'ct:' ), strlen($keys)) ; //$keys;
+	// print strpos($keys , 'bk:' ) .'>><<<br />';
+	 if( ($n = strpos($keys , 'bk:' ) ) !==  FALSE)
+		 $orikey = substr_replace($keys, '', $n , strlen($keys)) ; //$keys;
+	  else
+	  	$orikey = $keys;
+	if( ($n = strpos($orikey , 'ct:' ) ) !==  FALSE)
+		 $orikey = substr_replace($orikey, '', $n , strlen($orikey)) ; //$keys;
+	else
+		$orikey = $keys;
+	// drupal_set_message( '<br />'.$keys .' KEYS >> '.$orikey .'<br />') ;
+	 
+	  
+	// print '<br />'; print_r($catarr); print '<br />'; print_r($bookarr); print '<br />';
+	   if( ($orikey !='' &&  $cats == '') || ($orikey !='' &&  $books == '') ||   $cats ==  'all' ){
+	  			//$res = node_search('search' , 'nest type:quran_ayah category:2' );
+				//$results = array_merge($results, $res);
+				
+				$book_arr = alimsearch_getcombined_query('all');
+				//print_r($book_arr);
+				foreach($book_arr as $k => $v){
+				// $v1 = $k;
+			    $prop = $book_arr[$k];
+				//print '>>'.$v1.'<<';
+				//print_r($prop);
+				$results[$k]['fullname'] = $prop['text'];
+				$qry = $prop['add_query'];
+				$res1 = node_search('search' , $orikey.$prop['add_query'] );
+				$results[$k]['results'] =  $res1;
+				$outputresult = '';
+				$total_count += $pager_total_items[0];
+				if (count($res1) > 0) {		
+					//$seachpath = 'search/node/'.$orikey.$prop['add_query'];
+					$seachpath = 'single/view/'.$orikey.$prop['add_query'];
+					$outputresult .= '<div class="result-desc" >';
+					if($pager_total_items[0] > 10){						
+						  $t ="Showing 10 of ".$pager_total_items[0]." results. ";
+						$outputresult .= $t;
+						$outputresult .= l('View all results',$seachpath ,array('attributes' => array('class' => 'popups' , 'on-popups-options' => '{width: "800px"}' ) ) );
+						
+						
+							
+					}else{  $outputresult .=   'Showing <b>'.$pager_total_items[0].'</b> results';  }
+					//$outputresult .= '<a name="search-'.$prop['text'].'" >&nbsp;</a>';
+					$outputresult .= '<span style="float:right"><a href="#top">Back to Top</a></span>';
+					$outputresult .='</div>';
+					$search_ind = $prop['text'].'('.$pager_total_items[0].')';					
+				}else{
+					$results[$k]['empty'] = 'Your search yielded no results for the '.$prop['text'];$search_ind = '';
+				}
+				$results[$k]['pagerval'] = $outputresult;
+				$results[$k]['query'] = $prop['add_query'];
+				$results[$k]['search_ind'] =  $search_ind ;
+				$results[$k]['tot_res_cnt'] = $pager_total_items[0];
+				
+				
+			
+			}	
+				
+	  }else{	      
+
+				
+			foreach($bookarr as $v){
+			    $prop = alimsearch_getcombined_query($v);
+				$results[$v]['fullname'] = $prop['text'];
+				$qry = $prop['add_query'];
+				$res1 = node_search('search' , $orikey.$prop['add_query'] );
+				$results[$v]['results'] =  $res1;
+				$outputresult = '';
+				$total_count += $pager_total_items[0];
+				if (count($res1) > 0) {		
+					//$seachpath = 'search/node/'.$orikey.$prop['add_query'];
+					$seachpath = 'single/view/'.$orikey.$prop['add_query'];
+					$outputresult .= '<div class="result-desc" >';
+					if($pager_total_items[0] > 10){						
+						  $t ="Showing 10 of ".$pager_total_items[0]." results. ";
+						$outputresult .=$t;
+						//
+						$outputresult .= l('View all results',$seachpath ,array('attributes' => array('class' => 'popups' , 'on-popups-options' => '{width: "800px"}' ) ) );								
+					}else{ $outputresult .= 'Showing <b>'.$pager_total_items[0].'</b> results'; }
+					//$outputresult .= '<a name="search-'.$prop['text'].'" >&nbsp;</a>';
+					$outputresult .= '<span style="float:right"><a href="#top">Back to Top</a></span>';
+					$outputresult .='</div>';
+					$search_ind = $prop['text'].'('.$pager_total_items[0].')';
+				}else{
+					$results[$v]['empty'] = 'Your search yielded no results for the '.$prop['text'];$search_ind = '';
+				}
+				$results[$v]['pagerval'] = $outputresult;
+				$results[$v]['query'] = $prop['add_query'];
+				$results[$v]['search_ind'] =  $search_ind ;
+				$results[$v]['tot_res_cnt'] = $pager_total_items[0];
+				
+			
+			}	
+			/*if(in_array( 'fiqh' ,$catarr ))
+			{
+				 $v = 'fiqh';
+				 $prop = alimsearch_getcombined_query($v);
+				$results[$v]['fullname'] = $prop['text'];
+				$qry = $prop['add_query'];
+				$res1 = node_search('search' , $orikey.$prop['add_query'] );
+				$results[$v]['results'] =  $res1;
+				$outputresult = '';
+				if (count($res1) > 0) {		
+					$seachpath = 'search/node/'.$orikey.$prop['add_query'];
+					$outputresult .= '<div class="result-desc" >';
+					if($pager_total_items[0] > 10){						
+						  $t ="Showing 10 of ".$pager_total_items[0]." results. ";
+						$outputresult .=$t;
+						$outputresult .=l('View all results',$seachpath ,array('attributes' => array() ) );	
+					}else{  $outputresult .=  'Showing <b>'.$pager_total_items[0].'</b> results'; }
+					$search_ind = $prop['text'].'('.$pager_total_items[0].')';
+					//$outputresult .= '<a name="search-'.$prop['text'].'" >&nbsp;</a>';
+					$outputresult .= '<span style="float:right"><a href="#top">Back to Top</a></span>';
+					$outputresult .='</div>';
+					
+				}else{
+					$results[$v]['empty'] = 'Your search yielded no results for the '.$prop['text'];$search_ind = '';
+				}
+				$results[$v]['pagerval'] = $outputresult;
+				$results[$v]['query'] = $prop['add_query'];
+				$results[$v]['search_ind'] =  $search_ind ;
+			
+			}
+			
+			if(in_array( 'islam' ,$catarr ))
+			{
+				$v = 'islam';
+				$prop = alimsearch_getcombined_query($v);
+				$results[$v]['fullname'] = $prop['text'];
+				$qry = $prop['add_query'];
+				$res1 = node_search('search' , $orikey.$prop['add_query'] );
+				$results[$v]['results'] =  $res1;
+				$outputresult = '';
+				if (count($res1) > 0) {		
+					$seachpath = 'search/node/'.$orikey.$results[$v]['query'];
+					$outputresult .= '<div class="result-desc" >';
+					if($pager_total_items[0] > 10){						
+						  $t ="Showing 10 of ".$pager_total_items[0]." results. ";
+						$outputresult .=$t;
+						$outputresult .=l('View all results',$seachpath ,array('attributes' => array() ) );
+						
+					}else{
+						 $outputresult .=  'Showing <b>'.$pager_total_items[0].'</b> results';
+					}
+					//$outputresult .= '<a name="search-'.$prop['text'].'" >&nbsp;</a>';
+					$outputresult .= '<span style="float:right"><a href="#top">Back to Top</a></span>';
+					$outputresult .='</div>';
+					$search_ind = $prop['text'].'('.$pager_total_items[0].')';
+				}else{
+					$results[$v]['empty'] = 'Your search yielded no results for the '.$prop['text'];$search_ind = '';
+				}
+				$results[$v]['pagerval'] = $outputresult;
+				$results[$v]['query'] = $prop['add_query'];
+				$results[$v]['search_ind'] =  $search_ind ;
+			
+			}*/
+				
+				
+			
+	  }
+	  //$results['res_cnt']['tot_res_cnt'] = $total_count;
+      return $results;
+  }
+}
+
+/**Additional Validation function for Advanced search form*/
+function alimsearch_search_validate($form, &$form_state){
+	$keys = $form_state['values']['processed_keys'];
+	
+	//print_r($form_state['values']);
+	
+	//form_error(t('In the search error'));	
+	//form_set_error('keys', t('Please enter some keywords.'));
+
+	
+ 				 $cat = alimsearch_categories();
+				//	catarr = array();
+				$categories = '';$a ='';
+				foreach($cat as $k => $v){
+					$result = $form_state['values'][$k];
+					if( $result == 1 && $k != 'all'){
+						
+							$categories .=$k ;$categories.=' ';
+					}	$b = 'book-'.$k;
+					$books = $form_state['values'][$b];
+					if(count($books)  > 0){
+							foreach($books as $kk => $vv){
+								if($vv != '' ){
+									$a.=$vv;$a.=' ';
+								}
+							}
+					}
+				}
+		
+  if (isset($form_state['values']['all']) ) {
+     // Retrieve selected types - Forms API sets the value of unselected checkboxes to 0.    
+	 if($form_state['values']['all'] == 1 ){
+	 
+     	$keys = search_query_insert($keys, 'ct', 'all');
+		$keys = search_query_insert($keys, 'bk', '');
+		//print '<br />** >> <br />'.$keys.'<br />';
+     // exit();
+	 
+	 }else{
+	 
+	 			$cat = alimsearch_categories();
+				$categories = '';$a ='';
+				foreach($cat as $k => $v){
+					$result = $form_state['values'][$k];
+					if( $result == 1 && $k != 'all'){
+						
+							$categories .=$k ;$categories.=' ';
+					}	$b = 'book-'.$k;
+					$books = $form_state['values'][$b];
+					
+					if(count($books) > 0 ){
+							foreach($books as $kk => $vv){
+								if($vv != '' ){
+									$a.=$vv;$a.=' ';
+								}
+							}
+					}
+				}
+				
+				
+				$cat = str_replace(' ',',',rtrim($categories)); 
+				$aa = str_replace(' ',',',rtrim($a));
+				$append  = '';
+				if($categories != '' ){
+					//$append = 'cat='.$cat;
+					$keys = search_query_insert($keys, 'ct', $cat);
+				}
+				if($aa != ''){
+					//$append .= '&book='.$aa;
+					$keys = search_query_insert($keys, 'bk', $aa);
+				}
+	 
+	 
+	 }
+  
+  }	
+
+  
+  //exit();
+  if (!empty($keys)) {
+    form_set_value($form['basic']['inline']['processed_keys'], trim($keys), $form_state);
+  }
+  
+	//http://localhost/alim_sep_2010/search/alimsearch/test ct:quran bk:ASD-MAL-PIK-YAT-QSI-AY-QCC-QS
+	
+	
+	
+	
+}
+
+
+/**Search result for the view full result page from categarized search**/
+function alimsearch_getsingleresult($keys ){			
+		global $pager_page_array, $pager_total_items, $pager_total;
+		$output ="";$outputresult ="";
+		$res = node_search('search' , $keys);											
+		$items_per_page = 50;
+		if (count($res) > 0) {			
+			$seachpath = 'search/node/'.$keys;		
+			
+			
+			if ($pager_total[0] == 1) {
+				$t =  'Showing <b>'.$pager_total_items[0].'</b> results';			
+			} else {
+				$start = 1 + ($pager_page_array[0] * $items_per_page);
+				$end = (1 + $pager_page_array[0]) * $items_per_page;
+				if ($end > $pager_total_items[0]) $end = $pager_total_items[0];
+					$t = 'Showing '.$start.'-'.$end.' of <b>'.$pager_total_items[0].'</b> results';
+			
+			}	
+			    $outputresult.= '<div class="result-desc"  >';
+				$outputresult.=$t;
+				$outputresult.='</div>';		
+
+			$txt = $filedsetname.'('.$pager_total_items[0].')';
+			foreach ($res as $ressingle ){
+				$outputresult.=theme('search_result', $ressingle, 'node');			
+			}	
+			
+			
+			
+		}else {
+			$outputresult.= '<div class="noresults" >'.t('Your search yielded no results for the '.$filedsetname).'</div>';			
+		}
+		if (count($res) > 0) {
+			$output .= $outputresult;
+			$output .= theme('pager', NULL, 50, 0);		
+		}else{
+			$output.=$outputresult;
+		}
+		
+		$outputresult = "";
+		return $output;
+		
+
+}
+
+
+//Restrict search results from nodes of some content types eg, homepage contents 
+function alimsearch_db_rewrite_sql($query, $primary_table, $primary_field, $args) {
+	if ($query == '' && $primary_table == 'n' && $primary_field = 'nid' && empty($args)) {
+		$excluded_types = array(
+		'book_head','qurans_left' ,
+		'quran_arabic_page','quran_qrabic_page_info',
+		'quran_rukuhs','quran_sajda_tilawa','quran_structure_general','quran_structure_juzz','quran_subject_location',
+		'quran_surah_overview',
+		'media_library_videolibrary' , 'article_book' , 'dictionary' , 'hadith_book' , 'islamic_history' , 'quran_duas' ,'clippings' , 'page' ,
+		'faq' , 'story' , 'blog' , 'creat_group' , 'group_post' ,'prophet_muhammads_last_sermon' , 'our_advisers_and_scholars'
+		); //variable_get('your_module_types', array());
+		if (!empty($excluded_types)) {
+			 $where = " n.type NOT IN ('". join("','", $excluded_types) ."') ";
+			 return array('where' => $where);
+		}
+	}
+}
+
+
+
+function alimsearch_view(){
+	
+	//global $facet_block ;
+	$form_block = '';
+	$facet_block .= "<div class='facet-block' >";
+	drupal_set_title('Search Result');
+	
+	$output = "";
+	
+	$keys = search_get_keys();
+	$highlight_keys = explode(' ' , $keys );
+	$high_js = '';
+	foreach($highlight_keys as $ks){
+		$ks = strtolower($ks);
+		if($ks != '' &&   $ks != 'or' &&  $ks != 'and' && $ks != 'nor' )
+			$high_js.='$(".search-snippet ,.search-snippet p , .search-snippet div").highlight("'.$ks.'");';
+	}
+	
+	if (!isset($_POST['form_id']) && $keys != '' ) 
+	{
+		 drupal_add_js(drupal_get_path('module', 'alimsearch') .'/jquery.highlight-3.js', 'module');
+		$script = $high_js;
+		
+		$sc = '<script type="text/javascript">'.
+'$(document).bind("popups_open_path_done", function() {
+  '.$high_js.'
+});'.
+'</script>';
+
+
+		 drupal_add_js($script, 'inline', 'footer');
+		$output = "<div >";	
+		
+		$form_block = drupal_get_form('search_form', NULL, $keys, $type);
+		$output .= '<div style="clear:both" >';
+		// Only perform search if there is non-whitespace search term:
+		$results = '';$outputresult = "";$newtypes = array();
+		$keys1 = trim($keys);
+		$category = $_REQUEST['cat'];
+		$catarr = explode('-' , $_REQUEST['cat']);
+		$bookarr = array();
+		$addedkey = '';   $types=array();
+		
+		$i=1;
+		$output.='</div></div>';	
+		$facet_block .= "</div>";
+		$output = alimsearch_getsingleresult($keys );
+		$out = "<div class='search-results' >";
+		$out .= '<table border="0" cellpadding="0" cellspacing="0">
+		  <tr>	
+			<td><div class="result" >'.$form_block.$output.'</div></td>
+		  </tr>
+		</table>';
+				
+		$out .= "</div>";
+		return $out.$sc;
+		
+	}
+	
+	$output .= drupal_get_form('search_form', NULL, empty($keys) ? '' : $keys, 'node');
+	return $output;
+	
+}
+

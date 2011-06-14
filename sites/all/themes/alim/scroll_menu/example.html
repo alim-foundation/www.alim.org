@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>SmartMenus 6 Example - Scrolling for Overlong Menus</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
+
+
+
+
+<!-- SmartMenus 6 config and script core files -->
+<script type="text/javascript" src="c_config.js"></script>
+<script type="text/javascript" src="c_smartmenus.js"></script>
+<!-- SmartMenus 6 config and script core files -->
+
+<!-- SmartMenus 6 Scrolling for Overlong Menus add-on -->
+<script type="text/javascript" src="c_addon_scrolling.js"></script>
+
+
+
+
+</head>
+
+<body style="margin:0;padding:2em;background:#fff;color:#000;">
+
+
+
+
+<!-- Sample menu definition -->
+<ul id="Menu1" class="MM">
+  <li><a href="http://www.smartmenus.org/">Home</a></li>
+  <li><a href="http://www.smartmenus.org/about/">About</a>
+    <ul>
+      <li><a href="http://www.smartmenus.org/about/introduction/">Introduction to SmartMenus</a></li>
+      <li><a href="http://www.smartmenus.org/about/compatibility/">Browser compatibility</a></li>
+      <li><a href="http://www.smartmenus.org/about/vasil-dinkov/">The author</a></li>
+      <li><a href="http://www.smartmenus.org/about/promote/">SmartMenus buttons</a></li>
+    </ul>
+  </li>
+  <li><a href="http://www.smartmenus.org/samples6/">Online Samples</a></li>
+  <li><a href="http://www.smartmenus.org/download/">Download</a></li>
+  <li><a href="http://www.smartmenus.org/license/">Licensing</a>
+    <ul>
+      <li><a href="http://www.smartmenus.org/license/types/">License</a></li>
+      <li><a href="http://www.smartmenus.org/license/purchase/">Purchase</a></li>
+      <li><a href="http://www.smartmenus.org/license/eula/">EULA</a></li>
+    </ul>
+  </li>
+  <li><a href="http://www.smartmenus.org/support/">Support</a>
+    <ul>
+      <li><a href="http://www.smartmenus.org/support/email/">Direct email support</a></li>
+      <li><a href="http://www.smartmenus.org/forum/">Forum</a></li>
+      <li><a href="http://www.smartmenus.org/support/manual/">User's Manual</a></li>
+    </ul>
+  </li>
+  <li><a href="http://www.smartmenus.org/vadikom/">Company</a>
+    <ul>
+      <li><a href="http://www.smartmenus.org/vadikom/about/">About Vadikom</a></li>
+      <li><a href="http://www.smartmenus.org/vadikom/products/">Products</a>
+        <ul>
+          <li><a href="http://www.smartmenus.org/vadikom/products/free-scripts/">Free scripts</a></li>
+        </ul>
+      </li>
+      <li><a href="http://www.smartmenus.org/vadikom/services/">Services</a></li>
+      <li><a href="http://www.smartmenus.org/vadikom/privacy/">Privacy policy</a></li>
+    </ul>
+  </li>
+  <li><a href="#">Sub test</a>
+    <ul>
+      <li><a class="NOLINK">Dummy item</a></li>
+      <li><a class="NOLINK">Dummy item</a></li>
+      <li><a class="NOLINK">Longer dummy item</a>
+        <ul>
+          <li><a class="NOLINK">Test test test</a></li>
+          <li><a class="NOLINK">Sub test</a>
+            <ul>
+              <li><a class="NOLINK">A pretty long text to force the MaxWidth setting of 300 pixels for the sub menus</a></li>
+              <li><a class="NOLINK">Test test test test test test test test</a></li>
+              <li><a class="NOLINK">Test test test test test test test test</a></li>
+              <li><a class="NOLINK">Another sub level</a>
+                <ul>
+                  <li><a class="NOLINK">Another dummy item</a></li>
+                  <li><a class="NOLINK">Another dummy item</a></li>
+                  <li><a class="NOLINK">Another dummy item</a></li>
+                  <li><a class="NOLINK">Another sub level</a>
+                    <ul>
+                      <li><a class="NOLINK">MinWidth</a></li>
+                      <li><a class="NOLINK">of</a></li>
+                      <li><a class="NOLINK">100 pixels</a></li>
+                      <li><a class="NOLINK">forced.</a></li>
+                    </ul>
+                  </li>
+                  <li><a class="NOLINK">Another dummy item</a></li>
+                  <li><a class="NOLINK">Another dummy item</a></li>
+                </ul>
+              </li>
+              <li><a class="NOLINK">Test test test test test test test test</a></li>
+              <li><a class="NOLINK">Test test test test test test test test</a></li>
+            </ul>
+          </li>
+          <li><a class="NOLINK">Test test test</a></li>
+          <li><a class="NOLINK NOROLL">NOROLL item</a></li>
+        </ul>
+      </li>
+      <li><a class="NOLINK">Dummy item</a></li>
+    </ul>
+  </li>
+  <li><a href="http://www.smartmenus.org/contact/">Contact</a></li>
+  <li class="NOSEPARATOR"><a href="#" title="Just a test menu that contains only fictitious links">Test menu</a>
+    <ul>
+      <li><a class="NOLINK">Dummy item</a></li>
+      <li><a class="NOLINK">Dummy item</a></li>
+      <li><a class="NOLINK">Overlong sub menu</a>
+        <ul style="width:12em;">
+          <li><a class="NOLINK">Lorem ipsum dolor sit amet.</a></li>
+          <li><a class="NOLINK">Nec viverra tincidunt.</a></li>
+          <li><a class="NOLINK">Vitae taciti diam.</a></li>
+          <li><a class="NOLINK">Convallis integer.</a></li>
+          <li><a class="NOLINK">Mauris per urna, eu sed mi.</a></li>
+          <li><a class="NOLINK">Lectus volutpat, dolor at.</a></li>
+          <li><a class="NOLINK">Ultricies vitae eget.</a></li>
+          <li><a class="NOLINK">Pede etiam, egestas dolor.</a></li>
+          <li><a class="NOLINK">Lectus montes.</a></li>
+          <li><a class="NOLINK">Hendrerit enim ut.</a></li>
+          <li><a class="NOLINK">Elit nunc.</a></li>
+          <li><a class="NOLINK">Varius placerat amet.</a></li>
+          <li><a class="NOLINK">Posuere id sit.</a></li>
+          <li><a class="NOLINK">Aliquet mauris mus.</a></li>
+          <li><a class="NOLINK">Placerat nec sodales.</a></li>
+          <li><a class="NOLINK">Voluptatem morbi.</a></li>
+          <li><a class="NOLINK">Venenatis imperdiet vitae.</a></li>
+          <li><a class="NOLINK">Integer wisi adipiscing.</a></li>
+          <li><a class="NOLINK">Duis sed, et tortor.</a></li>
+          <li><a class="NOLINK">Malesuada id sed.</a></li>
+          <li><a class="NOLINK">Aptent adipiscing.</a></li>
+          <li><a class="NOLINK">Tristique porttitor mi.</a></li>
+          <li><a class="NOLINK">Id molestie, praesent ut.</a></li>
+          <li><a class="NOLINK">Nonummy eget.</a></li>
+          <li><a class="NOLINK">Platea morbi neque.</a></li>
+          <li><a class="NOLINK">Rutrum turpis sem.</a></li>
+          <li><a class="NOLINK">Justo in lobortis.</a></li>
+          <li><a class="NOLINK">In morbi neque.</a></li>
+          <li><a class="NOLINK">Purus sodales.</a></li>
+          <li><a class="NOLINK">Nulla lorem elementum.</a></li>
+          <li><a class="NOLINK">Vel amet, rutrum libero et.</a></li>
+          <li><a class="NOLINK">Elit phasellus congue.</a></li>
+          <li><a class="NOLINK">A aliquam, diam aliquam.</a></li>
+          <li><a class="NOLINK">In cum neque.</a></li>
+          <li><a class="NOLINK">Aliquam imperdiet.</a></li>
+          <li><a class="NOLINK">Ut facilisis.</a></li>
+          <li><a class="NOLINK">Eu maecenas lorem.</a></li>
+          <li><a class="NOLINK">Pellentesque elit.</a></li>
+          <li><a class="NOLINK">Etiam nam.</a></li>
+          <li><a class="NOLINK">Dictum volutpat, ut sed in.</a></li>
+          <li><a class="NOLINK">Scelerisque libero.</a></li>
+          <li><a class="NOLINK">Sit vel libero.</a></li>
+          <li><a class="NOLINK">Tincidunt mauris, amet pede.</a></li>
+          <li><a class="NOLINK">Sed phasellus.</a></li>
+          <li><a class="NOLINK">Pede felis.</a></li>
+          <li><a class="NOLINK">Vitae magna et.</a></li>
+          <li><a class="NOLINK">Id sollicitudin.</a></li>
+          <li><a class="NOLINK">Dui suscipit tristique.</a></li>
+          <li><a class="NOLINK">Id ultrices.</a></li>
+          <li><a class="NOLINK">Pulvinar laoreet.</a></li>
+          <li><a class="NOLINK">Id lacus tristique.</a></li>
+          <li><a class="NOLINK">Vel lacus leo.</a></li>
+          <li><a class="NOLINK">Morbi leo dictum.</a></li>
+          <li><a class="NOLINK">Quae sodales.</a></li>
+          <li><a class="NOLINK">Amet proin.</a></li>
+          <li><a class="NOLINK">Quis dui placerat.</a></li>
+          <li><a class="NOLINK">Vitae augue tempus.</a></li>
+          <li><a class="NOLINK">Posuere vivamus adipiscing.</a></li>
+          <li><a class="NOLINK">Wisi in a.</a></li>
+          <li><a class="NOLINK">Malesuada libero urna.</a></li>
+          <li><a class="NOLINK">Fames mauris.</a></li>
+          <li><a class="NOLINK">Ut odio, sem erat.</a></li>
+          <li><a class="NOLINK">Nisl cras ante.</a></li>
+          <li><a class="NOLINK">Luctus tincidunt.</a></li>
+          <li><a class="NOLINK">Aliquam vitae id.</a></li>
+          <li><a class="NOLINK">Iaculis morbi, et et neque.</a></li>
+          <li><a class="NOLINK">Consequat ut pulvinar.</a></li>
+          <li><a class="NOLINK">Quisque rhoncus.</a></li>
+          <li><a class="NOLINK">Porttitor fringilla.</a></li>
+          <li><a class="NOLINK">Tincidunt pellentesque.</a></li>
+          <li><a class="NOLINK">Nibh at neque.</a></li>
+          <li><a class="NOLINK">Mauris sem, placerat nisi.</a></li>
+          <li><a class="NOLINK">Hendrerit class.</a></li>
+          <li><a class="NOLINK">Pede nec integer.</a></li>
+          <li><a class="NOLINK">Pellentesque enim aenean.</a></li>
+          <li><a class="NOLINK">Nam non.</a></li>
+          <li><a class="NOLINK">Duis pede.</a></li>
+          <li><a class="NOLINK">Cum wisi, euismod faucibus.</a></li>
+          <li><a class="NOLINK">Nulla lorem cras.</a></li>
+          <li><a class="NOLINK">Lectus eros.</a></li>
+          <li><a class="NOLINK">Quia leo ligula.</a></li>
+          <li><a class="NOLINK">Risus cras turpis.</a></li>
+          <li><a class="NOLINK">Dolor wisi, ante consequat.</a></li>
+          <li><a class="NOLINK">Ac pede.</a></li>
+          <li><a class="NOLINK">Feugiat rhoncus iaculis.</a></li>
+        </ul>
+      </li>
+      <li><a class="NOLINK">Dummy item</a></li>
+    </ul>
+  </li>
+</ul>
+<!-- Please leave at least one new line or white space symbol after the closing </ul>
+     tag of the root ul element of the menu tree. This will allow the browsers to init
+     the menu tree as soon as it is loaded and not wait for the page load event. -->
+
+
+
+
+<!-- =============================================================================== -->
+<!-- ================= YOU DO NOT NEED ANYTHING BELOW THIS COMMENT ================= -->
+<!-- =============================================================================== -->
+
+
+
+
+<div style="padding-top:5.6em;width:60em;font:75% verdana,arial,helvetica,sans-serif;line-height:1.55em;">
+
+<h1 style="margin-top:0;font-size:1.83em;">Scrolling for Overlong Menus</h1>
+<p>[SmartMenus 6 add-on]</p>
+
+<p>This sample demonstrates a small add-on for SmartMenus 6 that adds scrolling ability to overlong menus (with many items) that do not fully fit in the height of the viewport.</p>
+<p>The addon creates dynamically 2 scrolling images for overlong menus and places them at the top and bottom of the viewport. These images serve as both scrolling indicators and triggers (when hovered) and allow such menus to be scrolled up or down by the user so that all their items could be accessed with the mouse cursor. In recent versions of all major browsers scrolling the menus with the mouse wheel (if available) is also supported.</p>
+
+<h2 style="font-size:1.5em;">SmartMenus 6 Add-on: <a href="http://www.smartmenus.org/down/download.php?file=sm6/addons/SM6_addon_ScrollingforOverlongMenus.zip">Scrolling for Overlong Menus</a></h2>
+
+<h3 style="font-size:1.25em;">Example</h3>
+<p>Open the "Test menu" above (the last main menu item).</p>
+
+<h3 style="font-size:1.25em;">Usage</h3>
+<p>Using the add-on is really simple - just link the small <acronym title="JavaScript">JS</acronym> file on your page after the link to the SmartMenus script core (c_smartmenus.js) file.</p>
+
+<h3 style="font-size:1.25em;">Customization</h3>
+<p>The add-on can be customized through the following config array (found in the "c_addon_scrolling.js" file):</p>
+<p style="border:1px solid #FFF4C2;padding:0.25em;background:#FFFBE9;"><code style="font-family:courier,monospace;">c_scrolling=[<br />
+'[scroll_top.gif]',&nbsp; &nbsp; &nbsp;// TopScrollingImageSource ('[image_source]')<br />
+'[scroll_bottom.gif]',&nbsp; // BottomScrollingImageSource<br />
+'Scroll up',&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // TopScrollingImageAlt<br />
+'Scroll down',&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // BottomScrollingImageAlt<br />
+28,&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // ScrollingImagesWidth<br />
+18,&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // ScrollingImagesHeight<br />
+3,&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// ScrollingImagesOffset (pixels) - offset from window's top and bottom edges<br />
+24,&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // ScrollingStep (pixels)<br />
+50&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// ScrollingInterval (1000==1 second)<br />
+];</code></p>
+<p>Just make sure you put the scrolling images in the folder where you keep all your menu images (i.e. the sub menu indicator arrow images etc.) because the global <code style="font-family:courier,monospace;background-color:#f1f1f1;">c_imagesPath</code> variable from the main SmartMenus configuration file (c_config.js) is honored for this add-on too.</p>
+
+<h3 style="font-size:1.25em;">Browser support</h3>
+<p>This add-on is supported in all browsers that are fully supported by the SmartMenus 6 script with the following exceptions:</p>
+<ul>
+ <li>Old Gecko prior to 20020530 (Mozilla&lt;1.0)</li>
+ <li>Internet Explorer on Macintosh</li>
+</ul>
+
+<h3 style="font-size:1.25em;">Notes</h3>
+<ol>
+ <li>It is recommended to set fixed width for overlong menus that have many items for better performance. Please take a look at the "5.2 Features that affect mostly the menu speed" section in the latest revision of the SmartMenus 6 <a href="http://www.smartmenus.org/support/manual/">User's Manual</a> for details.</li>
+ <li>If you are using specifically the "Slide Animation" add-on, make sure the link to the "Scrolling for Overlong Menus" add-on is placed <em>before</em> the link to the "Slide Animation" add-on in the page source.</li>
+</ol>
+
+</div>
+
+
+
+
+</body>
+</html>

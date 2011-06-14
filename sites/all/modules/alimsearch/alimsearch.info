@@ -1,0 +1,4 @@
+name = Alim Search
+description = "Search Alim site Ayah , surahs etc"
+package = "Alim"
+core = 6.x

@@ -1,0 +1,150 @@
+/* <style> */
+
+/* ----- Required ----------------------------------------------------------- */
+
+div.vert_menu
+{
+  position: absolute;
+  visibility: hidden;
+  display: none;
+  z-index:9999999;
+}
+
+div.horz_menu a { display: block; float: left; }
+div.vert_menu a { display: block; float: none; }
+
+
+/* ----- Sample 1 ----------------------------------------------------------- */
+
+div.sample1 div.vert_menu { border-bottom: 1px solid black; }
+
+div.sample1 div.horz_menu a,
+div.sample1 div.vert_menu a
+{
+  padding: 1px 0px 1px 0px;
+/*  width: 70px;*/
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 13px;
+  color: #008000;
+  
+
+}
+div #menu_quran_child, div #menu_hadith_child, div #menu_indexes_child, div #menu_biography_child, div #menu_islam_child, div #menu_references_child
+{
+/*  margin-top:9px;*/
+  text-align:left;
+  border: 1px solid #c5b89b;
+  font: normal 12px Verdana;
+ z-index:9999999;
+}
+div #menu_quran_child .vert_menu, div #menu_hadith_child .vert_menu, div #menu_indexes_child .vert_menu, div #menu_biography_child .vert_menu, div #menu_islam_child .vert_menu, div #menu_references_child .vert_menu, #nav_stories_child .vert_menu
+{
+
+  text-align:left;
+  border: 1px solid #c5b89b;
+  font: normal 12px Verdana;
+  z-index:9999999;
+}
+#menu_quran_child a, #menu_hadith_child a, #menu_indexes_child a, #menu_biography_child a, #menu_islam_child a, #menu_references_child a, #nav_stories_child a
+{
+  background:#E4E4E2;
+  color:#333333;
+  width:200px;
+  padding:5px;
+  border-bottom: 1px solid #c5b89b;
+  font: normal 12px Verdana;
+}
+div #menu_quran_child .vert_menu a, #menu_hadith_child .vert_menu a, #menu_indexes_child .vert_menu a, #menu_biography_child .vert_menu a, #menu_islam_child .vert_menu a, #menu_references_child .vert_menu a
+{
+   background:#f6f0d1;
+   color:#8e3200;
+   width:230px;
+   padding:5px;
+   border-bottom: 1px solid #c5b89b;
+   font: normal 12px Verdana;
+}
+div.sample1 div.horz_menu a { margin-right:  -1px; }
+div.sample1 div.vert_menu a { margin-bottom: -1px; }
+
+div #menu_quran_child a:hover, #menu_hadith_child a:hover, #menu_indexes_child a:hover, #menu_biography_child a:hover, #menu_islam_child a:hover, #menu_references_child a:hover, #nav_stories_child a:hover
+{
+  color:#8e3200;
+  background:#f6f0d1;
+}
+
+div #menu_quran_child .vert_menu a:active, #menu_hadith_child .vert_menu a:active, #menu_indexes_child .vert_menu a:active, #menu_biography_child .vert_menu a:active, #menu_islam_child a:active, #menu_references_child .vert_menu a:active
+{
+  color:#8e3200;
+  background:#f6f0d1;
+}
+
+div #menu_quran_child .vert_menu a:hover, #menu_hadith_child .vert_menu a:hover, #menu_indexes_child .vert_menu a:hover, #menu_biography_child .vert_menu a:hover, #menu_islam_child .vert_menu a:hover, #menu_references_child .vert_menu a:hover
+{
+  color:#8e3200;background:#ffffff;
+}
+div.vert_menu a:active {   color:#8e3200;background:#f6f0d1;
+ }
+
+
+/* ----- Sample 2 ----------------------------------------------------------- */
+
+div.sample2 div.vert_menu { border-bottom: 1px solid black; }
+
+div.sample2 div.horz_menu a,
+div.sample2 div.vert_menu a
+{
+  padding: 1px 0px 1px 0px;
+  width: 70px;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 13px;
+  color: #008000;
+}
+
+
+div.sample2 div.horz_menu a { margin-right:  -1px; }
+div.sample2 div.vert_menu a { margin-bottom: -1px; }
+
+div.sample2 div.horz_menu a:hover,
+div.sample2 div.vert_menu a:hover
+{
+  color: #206060;
+  background-position: 0px 20px;
+}
+
+div.sample2 div.horz_menu a.parent,
+div.sample2 div.vert_menu a.parent
+{
+  background-position: 0px 0px;
+}
+
+div.sample2 div.horz_menu a.active,
+div.sample2 div.vert_menu a.active,
+div.sample2 div.horz_menu a.active:hover,
+div.sample2 div.vert_menu a.active:hover
+{
+  color: #206060;
+  background-position: 0px 60px;
+}
+
+div.sample2 div.horz_menu a { float: right; }
+
+#nav_stories
+{
+  background:#E9D7A7;
+  color:#635322;
+  font-weight:normal;
+  border:1px solid #CAB54A;
+  padding:3px;
+}
+
+div #nav_stories_child
+{
+
+  text-align:left;
+  border: 1px solid #c5b89b;
+  font: normal 12px Verdana;
+  z-index:10;
+
+}

@@ -1,0 +1,420 @@
+<?php  
+/******Hook implemetation of hook_perm****/
+function alim_searchtags_perm() {
+   return array('access my bookmarkmenu');
+}
+/******Hook implemetation of hook_menu****/
+function alim_searchtags_menu() {
+   $items['tags/alltags'] = array( 
+    'title' => 'All Tags',
+    'page callback' => 'alim_searchtags_alltags',
+    'access callback' => 'user_access',
+    'access arguments' => array('access content'),
+    'type' => MENU_SUGGESTED_ITEM,
+  );
+   $items['tags/alltags/%searchtag'] = array(
+   		 'title' => 'Search Tags',
+      'page callback' => 'alim_searchtags_alltags',
+      'page arguments' => array(),
+      'access callback' => 'user_access',
+	  'access arguments' => array('access content'),
+	  'type' => MENU_LOCAL_TASK,
+
+    );
+	$items['tags/myalltags'] = array(
+    'title' =>  t('My Tags'),
+    'page callback' => 'alim_searchtags_myalltags_view',
+    'access arguments' => array('access content'),
+    'type' => MENU_SUGGESTED_ITEM,
+  );
+  
+   $items['tags/all-recent-tags'] = array(
+    'title' =>  t('Recent Tags'),
+    'page callback' => 'alim_searchtags_recenttags',
+    'access arguments' => array('access content'),
+    'type' => MENU_SUGGESTED_ITEM,
+  );
+  
+
+  
+  $items['tags/letter'] = array( 
+    'title' => 'All Tags ',
+    'page callback' => 'alim_searchtags_byletter',
+    'access callback' => 'user_access',
+    'access arguments' => array('access content'),
+    'type' => MENU_SUGGESTED_ITEM,
+  );
+ $items['tags/letter/%letter'] = array( 
+    'title' => 'All Tags ',
+    'page callback' => 'alim_searchtags_byletter',
+	'page arguments' => array(),
+    'access callback' => 'user_access',
+    'access arguments' => array('access content'),
+    'type' => MENU_SUGGESTED_ITEM,
+  );
+  
+  // Bookmark ajax menu for block...
+	$items['boomarks/mybookamrks/mine'] = array(
+		'title' => 'My Bookamrk menu',
+		'page callback' => 'alim_searchtags_mybookmarks_mine',
+		'access arguments' => array('access my bookmarkmenu'),
+		'type' => MENU_CALLBACK
+	);
+	// Ajax page to set the current page as last page bookmark.
+	$items['bookmarks/lastpage/%'] = array(
+    'title' => 'Set Bookmark for last page',
+    'page callback' => 'alim_searchtags_mybookmarks_lastpage',
+    'page arguments' => array(2), // where my wildcard is
+    'access arguments' => array('access my bookmarkmenu'),
+    // always use MENU_CALLBACK for ajax requests
+    'type' => MENU_CALLBACK,
+  );
+ 
+  return $items;
+}
+/**
+ * Implementation of hook_block() - added by sumesh
+ */
+function alim_searchtags_block($op='list', $delta=0, $edit=array()) {
+	switch ($op) {
+		case 'list':
+			$blocks[0]['info'] = t('Block for Latest Tags');
+			return $blocks;
+			
+		case 'view':		
+			
+			//drupal_add_js(drupal_get_path('module', 'taxonomy_other') . '/taxonomy_other.js');
+			
+			$out = '';
+			$output = '<div class="search-tag" >';
+	
+		$output .= '<div class="tag-search-form"  >';
+		$output .= '<div class="tags-list" >';
+		$output .= '<table border="0" width="430" class="tg_each" ><tr>';
+				
+		$pagerq = "select COUNT(*) as count from (
+               SELECT COUNT(*) AS c, d.tid, d.name, d.vid, ct.tid, ct.date FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid LEFT JOIN {community_tags} ct ON ct.tid=d.tid WHERE d.vid IN ('9')  GROUP BY d.tid, d.name, d.vid , ct.tid                   
+       ) as t";
+		
+		$result = pager_query(db_rewrite_sql("SELECT COUNT(*) AS count, d.tid, d.name, d.vid, ct.tid, ct.date FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid LEFT JOIN {community_tags} ct ON ct.tid=d.tid WHERE d.vid IN ('9') GROUP BY d.tid, d.name, d.vid, ct.tid ORDER BY ct.date DESC"), 12,0,$pagerq); 
+		while ($tag = db_fetch_object($result)) {
+		              $dot= "";
+		             if(strlen($tag->name)>11)
+					 {
+					   $dot= "..";
+					 }
+		
+				$output .= '<td><div class="single-tag-rec" >';
+				$path = 'taxonomy/term/'.$tag->tid;
+				$output .=  l(substr($tag->name,0,11).$dot,$path,array('attributes' => array('title' =>$tag->name)));
+				$output .=  '<span>&nbsp;x&nbsp;'.taxonomy_term_count_nodes($tag->tid).'</span></div></td>';
+				$i++;
+	
+		 	if($i%3==0)
+			{
+			  $output .= "</tr><tr>";
+			}
+		}
+		
+		$output .= "</table>";
+		 $output .=  '<div class="read_more" align="right" style="padding-top:3px;display:block;"><img src="'.$base_url.'/sites/all/themes/alim/images/hand.png"  />&nbsp;&nbsp;<a href="'.$base_url.'/tags/all-recent-tags" >Show all recent tags</a></div>';
+		$output .= '</div>';
+		$output .= '</div>';
+
+		$output .= '</div>';
+			
+			
+			$out .= '<div class="latest_tags" >'.$output.'</div>';
+			$blocks['subject'] = t('Latest Tags');
+			$blocks['content'] = $out;
+			return $blocks;
+		}
+}
+/*****Nice menu of my bokmark call by ajax  *****/
+function alim_searchtags_mybookmarks_mine(){
+	 
+ 				 global $user;
+  				 $output ="";
+ 				$mname = 'bookmarks-'.$user->uid;
+				$menu1 = theme('nice_menu', 'bm' , $mname , NULL, 'left');
+  				$replace = 'href="#"' ;
+				$blockcnt = str_replace('a href="/folder"', 'a href="#"', $menu1['content'] );
+				$output  .= '<div class="block-menu" >'.$blockcnt.'<div class="org-bm" >'.l(t('Organize Bookmarks'), 'bookmarks/mine' ).'</div></div>';
+  
+  
+  
+  				return drupal_json(array('mybookmarkmenu'=>$output));
+ 				 exit;
+  
+ 
+
+}
+// lists all  community tags and adds a search box to tags 
+function alim_searchtags_alltags($skey=''){
+
+//WHERE SUBSTR(node.title, 1, 1) = 'a'   ORDER BY node_title ASC >> by lette query
+
+
+	$output = '<div class="search-tag" >';
+	
+	$output .= '<div class="tag-description" ><br />A <strong>tag</strong> is a keyword or label that categorizes the content. Using the right tags makes it easier for you and others to find content. <br /><br /><br /></div>';
+	if (!isset($_POST['form_id']) && $skey  != ''  ) {
+		
+		$output .= '<div class="tag-search-form"  >'.drupal_get_form('alim_searchtags_tags_form' , $skey ).'</div>';
+						
+		$pagerq = "select COUNT(*) as count from (
+               SELECT COUNT(*) AS c, d.tid, d.name, d.vid FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid WHERE d.vid IN ('9') AND  LOWER(d.name) LIKE LOWER('%%".$skey."%')  GROUP BY d.tid, d.name, d.vid                   
+       ) as t";
+		
+		$result = pager_query("SELECT COUNT(*) AS count, d.tid, d.name, d.vid FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid WHERE d.vid IN ('9') AND  LOWER(d.name) LIKE LOWER('%%%s%%')  GROUP BY d.tid, d.name, d.vid  ORDER BY count DESC", 60, 0, $pagerq, $skey);
+		
+		
+		$output .= '<div class="tags-list" >';
+		while ($tag = db_fetch_object($result)) {
+				$has_events = true;
+				$output .= '<div class="single-tag" >';
+				$path = 'taxonomy/term/'.$tag->tid;
+				$output .=  l($tag->name,$path);
+				$output .=  '<span>&nbsp;x&nbsp;'.$tag->count.'</span></div>';
+				$i++;
+		}
+		if(!$has_events){
+			$output .= 'Your search yielded no results.';
+		}
+		$output .= '</div>';
+	
+	}
+	else{
+		$output .= '<div class="tag-search-form"  >';
+		$output .= drupal_get_form('alim_searchtags_tags_form').'</div>
+		<div class="tags-list" >';
+				
+		$pagerq = "select COUNT(*) as count from (
+               SELECT COUNT(*) AS c, d.tid, d.name, d.vid FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid WHERE d.vid IN ('9')  GROUP BY d.tid, d.name, d.vid                   
+       ) as t";
+		
+		$result = pager_query(db_rewrite_sql("SELECT COUNT(*) AS count, d.tid, d.name, d.vid FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid WHERE d.vid IN ('9') GROUP BY d.tid, d.name, d.vid ORDER BY count DESC"), 60,0,$pagerq); 
+		while ($tag = db_fetch_object($result)) {
+				$has_events = true;
+				$output .= '<div class="single-tag" >';
+				$path = 'taxonomy/term/'.$tag->tid;
+				$output .=  l($tag->name,$path);
+				$output .=  '<span>&nbsp;x&nbsp;'.$tag->count.'</span></div>';
+				$i++;
+		}
+		if(!$has_events){
+			$output .= 'No tags assigned yet.';
+		}
+		$output .= '</div>';
+		
+	}
+		$output .= '</div>';
+		$output .= theme('pager', NULL, 60, 0);	 		
+		return $output;
+
+}
+
+
+// Render tag serach
+//tag search form 
+function alim_searchtags_tags_form($form_state, $keys = '' ) {
+	$access = 'access content';
+	$form['tags'] = array(
+    '#type' => 'textfield',
+	'#title' => t('Enter the search keyword.'),
+    '#maxlength' => 100,
+    '#default_value' => $edit['tags'],
+    '#required' => FALSE,
+	'#default_value' => $keys,
+    '#attributes' => array('class' => 'form-tags'),
+    '#access' => $access,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Search Tag'),
+    '#access' => $access,
+  );
+  
+   $form['#submit'][] = 'alim_searchtags_tags_form_submit';
+   return $form;
+
+}
+// submit function of tag search 
+function alim_searchtags_tags_form_submit($form, &$form_state){
+	
+	//$form_state['redirect'] = 'alltagsnum/rub';//print 'mmmmmmmmm';
+	//$form_id = $form['form_id']['#value'];
+ 	 $form_state['redirect'] = 'tags/alltags/'. trim($form_state['values']['tags']);
+  
+  
+	//print_r($form_state['values']['tags']);
+	//exit();
+}
+
+// mytags page in my profile , list of all tags added by current logined  user 
+function alim_searchtags_myalltags_view(){
+	global $user;
+	if(!$user->uid)
+		return 'You Are not authorissed to access this page.';
+	$result = "";
+	$vids = array(9);
+	$output = "<br />";
+		 
+	$result = pager_query(db_rewrite_sql("SELECT node.nid AS nid, node.title AS node_title, users_community_tags.name AS users_community_tags_name, users_community_tags.uid AS users_community_tags_uid, term_data.name AS term_data_name, term_data.vid AS term_data_vid, term_data.tid AS term_data_tid, community_tags.tid AS community_tags_tid
+	FROM node node
+	LEFT JOIN community_tags community_tags ON node.nid = community_tags.nid
+	LEFT JOIN users users_community_tags ON community_tags.uid = users_community_tags.uid
+	LEFT JOIN term_node term_node ON node.vid = term_node.vid
+	LEFT JOIN term_data term_data ON term_node.tid = term_data.tid
+	WHERE (
+	term_data.vid IN ('9'))
+	AND ( users_community_tags.uid =$user->uid )
+	AND (community_tags.tid =  term_node.tid )
+	ORDER BY `term_data`.`name` ASC"), 10); 
+	$output .= '<div class="mytags" >';
+	while ($tag = db_fetch_object($result)) {
+			$has_events = true;
+			//$output.='<tr><td>'.$tag->node_title.'</td><td>'.$tag->users_community_tags_name.'</td><td>'.$tag->term_data_name.'</td></tr>';
+			$output .= '<div class="node-item" >'.'<h2>Tag : '.l($tag->term_data_name ,'taxonomy/term/'.$tag->term_data_tid ,array('attributes' => array( 'class' => 'meroon' )) ).'</h2>';
+			$n = node_load(array('nid' => $tag->nid));
+			$output .= node_view($n, TRUE, FALSE, FALSE);
+			//$output .= community_tags_node_view($n, TRUE);
+			$output .= '</div>';
+			
+	}
+	if(!$has_events){
+			$output .= 'You haven\'t added tags.';
+	}
+	$output .= '</div>';
+	$output .= theme('pager', NULL, 10, 0);	 
+	return $output;
+
+}
+
+
+// tags listed by letter
+function alim_searchtags_byletter($letter=''){
+
+//WHERE SUBSTR(node.title, 1, 1) = 'a'   ORDER BY node_title ASC >> by lette query
+	if($letter == '' )$letter = 'a';
+
+	$output = '<div class="search-tag" >';
+	
+	$output .= '<div class="tag-description" ><br />A <strong>tag</strong> is a keyword or label that categorizes the content. Using the right tags makes it easier for you and others to find content. <br /><br /><br /></div>';
+	
+		$output .= '<div class="tag-search-form"  >';
+		$output .= drupal_get_form('alim_searchtags_tags_form').'</div>
+		<div class="tags-list" >';
+				
+		$pagerq = "select COUNT(*) as count from (
+               SELECT COUNT(*) AS c, d.tid, d.name, d.vid FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid WHERE d.vid IN ('9') AND SUBSTR(d.name, 1, 1) = '$letter'   GROUP BY d.tid, d.name, d.vid                   
+       ) as t";
+		
+		$result = pager_query(db_rewrite_sql("SELECT COUNT(*) AS count, d.tid, d.name, d.vid FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid WHERE d.vid IN ('9') AND SUBSTR(d.name, 1, 1) = '$letter'  GROUP BY d.tid, d.name, d.vid ORDER BY d.name ASC"), 60,0,$pagerq); 
+		while ($tag = db_fetch_object($result)) {
+				$output .= '<div class="single-tag" >';
+				$path = 'taxonomy/term/'.$tag->tid;
+				$output .=  l($tag->name,$path);
+				$output .=  '<span>&nbsp;x&nbsp;'.$tag->count.'</span></div>';
+				$i++;
+		}
+		$output .= '</div>';
+		
+
+		$output .= '</div>';
+		$output .= theme('pager', NULL, 60, 0);	 		
+		return $output;
+
+}
+
+// Set the Bookmark for last location
+// set the last location where user reading to the page as a user profile data 
+function alim_searchtags_mybookmarks_lastpage($last_page = '' ){
+
+			global $user;
+			$book = 'bookmarks-' . $user->uid;
+			if($last_page == ''){
+					print drupal_json(array(
+	 		 			'lastpagerespose' => 'Error'
+				  	));	
+			}
+			//$menuid = db_result(db_query("SELECT mlid FROM {menu_links} WHERE menu_name = '%s' AND link_title = '%s'", $book , 'Last page - default'));
+			$menuid1 = db_result(db_query("SELECT value as lpage FROM {profile_values} WHERE fid='%d' AND uid= '%d'", 12 , $user->uid ));
+			if(!$menuid1) // No Value for profile field 
+			{	$v = 'in insert';
+				$path = base64_decode(drupal_get_normal_path(drupal_get_path_alias(str_replace('bookmarks/lastpage/', '', $_GET['q']))));
+						$sql2 = "INSERT INTO  {profile_values} (fid ,uid ,value)VALUES ('%d',  '%d',  '%s')";
+						$result2 = db_query($sql2, 12 , $user->uid ,$path );
+						print drupal_json(array(
+							'lastpagerespose' => '<em style="font-size:11px;" >This page is set as your last location you were reading.</em>'.$menuid.''
+							  ));
+			}else{ // Profile field already loaded , update current value //update value in profile field
+			
+			$path = base64_decode(drupal_get_normal_path(drupal_get_path_alias(str_replace('bookmarks/lastpage/', '', $_GET['q']))));
+			
+			$sql = "UPDATE {menu_links} set link_path = '%s' where mlid = '%d' ";
+			
+			$sql1 = "UPDATE {profile_values} set value = '%s' where fid='%d' AND uid= '%d'";
+			//$result = db_query($sql, $path , $menuid);
+			
+			$result2 = db_query($sql1, $path, 12 , $user->uid);
+			if($result2){			
+		 				print drupal_json(array(
+							'lastpagerespose' => '<em style="font-size:11px;" >This page is set as your last location you were reading.</em>'
+				 		 ));			
+			}else{
+					 		print drupal_json(array(
+								'lastpagerespose' => 'Error on update'
+				  			));	
+			}
+			
+		}	
+
+		
+		 //return 'in side this function ...'.$last_page;	
+}
+
+
+//Outputs the Community tags node->taxonomy is passed as argument  Called from search result tpl file
+function alim_search_tags_ctags($taxonomy){
+ $ctagid = 9;$out = '';$arr = array();
+ foreach( $taxonomy as $tax ){
+  if($tax->vid == $ctagid ){
+   $arr[] = l($tax->name , 'taxonomy/term/'.$tax->tid );
+  }
+ }
+ if(count($arr) > 0  ){
+  $output = '<div class="cloud" ><b>Tags : </b>'.implode( '&nbsp;,&nbsp;' ,$arr).'</div>';
+ }
+ return $output;
+}
+
+//For creating latest tag pages - added by sumesh
+
+function alim_searchtags_recenttags(){
+
+
+	$output = '<div class="search-tag" >';
+	
+		$output .= '<div class="tags-list" >';
+				
+		$pagerq = "select COUNT(*) as count from (
+               SELECT COUNT(*) AS c, d.tid, d.name, d.vid, ct.date FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid LEFT JOIN {community_tags} ct ON ct.tid=d.tid WHERE d.vid IN ('9')  GROUP BY d.tid, d.name, d.vid                   
+       ) as t";
+		
+		$result = pager_query(db_rewrite_sql("SELECT COUNT(*) AS count, d.tid, d.name, d.vid, ct.date FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid LEFT JOIN {community_tags} ct ON ct.tid=d.tid WHERE d.vid IN ('9') GROUP BY d.tid, d.name, d.vid ORDER BY ct.date DESC"), 60,0,$pagerq); 
+		while ($tag = db_fetch_object($result)) {
+				$output .= '<div class="single-tag" >';
+				$path = 'taxonomy/term/'.$tag->tid;
+				$output .=  l($tag->name,$path);
+				$output .=  '<span>&nbsp;x&nbsp;'.taxonomy_term_count_nodes($tag->tid).'</span></div>';
+				$i++;
+		}
+		$output .= '</div>';
+		
+
+		$output .= '</div>';
+		$output .= theme('pager', NULL, 60, 0);	 		
+		return $output;
+
+}

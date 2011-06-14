@@ -1,0 +1,333 @@
+<?php
+/**
+ * @file
+ * Purpose : For creating Narrtor Index Page.
+ * 
+ */
+//Function for creating Narrator Index Menu
+function narratorindex_menu() {
+
+  $items = array();
+
+  $items['hadith/get'] = array(
+    'title' => 'Hadith Narrator Index',
+    'page callback' => 'narratorindex_get_by_narrator_name',
+    'access arguments' => array('access narratorindex content'),
+    'type' => MENU_CALLBACK
+  );
+
+   $items['library/hadith/narratorindex'] = array(
+    'title' => 'Hadith Narrator Index',
+    'page callback' => 'narratorindex_list_narrator_name',
+    'access arguments' => array('access narratorindex list'),
+    'type' => MENU_CALLBACK
+  );
+
+  return $items;
+}
+
+// Giving access permission option for Narrtor Index Page
+function narratorindex_perm() {
+   return array('access narratorindex content','access narratorindex list');
+}
+
+
+// Narrator Index page set up
+
+function narratorindex_list_narrator_name(){
+
+drupal_add_js(drupal_get_path('module', 'narratorindex') . '/narratorindex.js'); // including narrator index ajax, js file.
+
+global $base_url;
+global $theme_path;
+
+// Set breadcrumb.
+$breadcrumb = array();
+$breadcrumb[] = l('Home', '<front>');
+$breadcrumb[] = l('Qur\'an & Hadith', '<front>');
+$breadcrumb[] = l('Hadith',  $base_url.'/library/hadith/SAD/1');
+$breadcrumb[] = l('Hadith Narrator Index', $base_url.'/library/hadith/narratorindex/'.arg(3).'/'.arg(4));
+drupal_set_breadcrumb($breadcrumb);
+
+// Index Alphabets.
+
+if($select=='a') $linkclassa = "class='hd_select'";
+if($select=='b') $linkclassb = "class='hd_select'";
+if($select=='c') $linkclassc = "class='hd_select'";
+if($select=='d') $linkclassd = "class='hd_select'";
+if($select=='e') $linkclasse = "class='hd_select'";
+if($select=='f') $linkclassf = "class='hd_select'";
+if($select=='g') $linkclassg = "class='hd_select'";
+if($select=='h') $linkclassh = "class='hd_select'";
+if($select=='i') $linkclassi = "class='hd_select'";
+if($select=='j') $linkclassj = "class='hd_select'";
+if($select=='k') $linkclassk = "class='hd_select'";
+if($select=='l') $linkclassl = "class='hd_select'";
+if($select=='m') $linkclassm = "class='hd_select'";
+if($select=='n') $linkclassn = "class='hd_select'";
+if($select=='o') $linkclasso = "class='hd_select'";
+if($select=='p') $linkclassp = "class='hd_select'";
+if($select=='q') $linkclassq = "class='hd_select'";
+if($select=='r') $linkclassr = "class='hd_select'";
+if($select=='s') $linkclasss = "class='hd_select'";
+if($select=='t') $linkclasst = "class='hd_select'";
+if($select=='u') $linkclassu = "class='hd_select'";
+if($select=='v') $linkclassv = "class='hd_select'";
+if($select=='w') $linkclassw = "class='hd_select'";
+if($select=='x') $linkclassx = "class='hd_select'";
+if($select=='y') $linkclassy = "class='hd_select'";
+if($select=='z') $linkclassz = "class='hd_select'";
+
+
+$data_string = "<span class='text_index'>
+<table border='0' ><tr>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/a' ".$linkclassa." >A</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/b' ".$linkclassb." >B</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/c' ".$linkclassc." >C</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/d' ".$linkclassd." >D</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/e' ".$linkclasse." >E</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/f' ".$linkclassf." >F</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/g' ".$linkclassg." >G</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/h' ".$linkclassh." >H</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/i' ".$linkclassi." >I</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/j' ".$linkclassj." >J</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/k' ".$linkclassk." >K</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/l' ".$linkclassl." >L</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/m' ".$linkclassm." >M</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/n' ".$linkclassn." >N</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/o' ".$linkclasso." >O</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/p' ".$linkclassp." >P</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/q' ".$linkclassq." >Q</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/r' ".$linkclassr." >R</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/s' ".$linkclasss." >S</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/t' ".$linkclasst." >T</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/u' ".$linkclassu." >U</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/v' ".$linkclassv." >V</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/w' ".$linkclassw." >W</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/x' ".$linkclassx." >X</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/narratorindex/y' ".$linkclassy." >Y</a></td>
+<td class='spn_sep_last' ><a href='".$base_url."/library/hadith/narratorindex/z' ".$linkclassz." >Z</a></td>
+</tr></table>
+</span>";
+
+$output .= "<div id='quran_sub_module'>";
+$output  .= "<div class='index_list'>
+<div class='index_goto'><span class='go_totext'>Go To</span></div>
+<div>
+<div class='index_data'>".$data_string."</div>
+<div style='clear:both'></div>
+</div>
+<div style='clear:both'></div>
+</div>";
+
+if(arg(3)) { $select = arg(3); }
+else { $select = 'a'; }
+
+// Prevoius and Next button link generation.
+$query_count = db_query("SELECT node.nid AS nid, node_data_field_hd_narrator_name.field_hd_narrator_name_value AS node_data_field_hd_narrator_name_field_hd_narrator_name_value, node.type AS node_type, node.vid AS node_vid FROM node node  LEFT JOIN content_type_hadith_content node_data_field_hd_narrator_name ON node.vid = node_data_field_hd_narrator_name.vid WHERE (node.type in ('hadith_content')) AND (node_data_field_hd_narrator_name.field_hd_narrator_name_value IS NOT NULL) AND (node_data_field_hd_narrator_name.field_hd_narrator_name_value like '".$select."%') GROUP BY node_data_field_hd_narrator_name.field_hd_narrator_name_value ORDER BY node_data_field_hd_narrator_name_field_hd_narrator_name_value ASC");
+
+$total_nar =0;
+while($result_cnt = db_fetch_object($query_count))
+{
+$total_nar++;
+}
+
+$flag =0;
+
+if(arg(4))
+ $limit = arg(4);
+else
+ $limit = 0;
+ 
+$count = 40;
+
+if($select=='a' && $limit==38)
+{
+ $pageprev = $limit-38;
+ 
+}
+else
+{
+ $pageprev  = $limit-40;
+}
+
+if($select=='a' && $limit==0)
+{
+ $pagenext = $limit+38;
+ if(($limit+38) > $total_nar)
+   $flag =1;
+}
+else
+{
+ $pagenext = $limit+40;
+  if(($limit+40) > $total_nar)
+   $flag =1;
+}
+
+$i=$limit;
+if($select=='a')
+{
+ $i=$limit+2;
+}
+
+if($select=='a')
+{
+$from = $limit+3;
+if($limit == 0)
+$from = 1;
+$to = $pagenext+2;
+$total = $total_nar+2;
+if(($limit+38) > $total_nar)
+  $to = $total_nar;
+}
+else
+{
+$from = $i+1;
+$to = $pagenext;
+$total = $total_nar;
+ if(($limit+40) > $total_nar)
+   $to = $total_nar;
+}
+
+// Previous and Next Button display
+
+$output .="</div>
+
+<script language='javascript'>
+$(document).ready(function () {
+ $('#topDiv').show();
+  $('#load_div').hide();
+});
+ </script>
+<div class='hadith_narrator' ><div class='hd_content' id='hd_content' >";
+
+$output .= "<div align='left' style='padding-bottom:10px;padding-left:15px;font-size:18px;float:left;'><b>".strtoupper($select)."</b></div><div align='right' style='padding-bottom:10px;float:right'>";
+
+if( $limit != 0)
+ $output .= "<a href='".$base_url."/library/hadith/narratorindex/".arg(3)."/$pageprev'><img src='".$base_url."/".$theme_path."/images/previous.jpg' border='0' align='absmiddle' ></a>";
+if($total>0)
+ $output .= "&nbsp;&nbsp;<b>$from to $to of $total</b>&nbsp;&nbsp;";
+ if( $flag != 1)
+$output .= "<a href='".$base_url."/library/hadith/narratorindex/".arg(3)."/$pagenext'><img src='".$base_url."/".$theme_path."/images/next3.jpg' border='0' align='absmiddle' ></a>";
+$output .= "</div>";
+
+$output .= "<div style='clear:both' ></div><div class='hd_hline' style='margin-bottom:10px;' ></div>";
+
+
+$output .= "<div align='center' style='padding-top:40px;' id='load_div'><img src='http://www.virtualliveworks.com/Alim.org/sites/all/themes/alim/images/ajax-loader.gif' /></div><div id='topDiv' style='display:none;' ><table border='0'  style='width:673px;background-color:#ffffff' ><tr><td width='335px;' valign='top'>";
+$output .= " <div style='padding:10px;' >";
+if($total==0)
+{
+  $output .= "<div><b>No Narrators Found.</b></div>";
+}
+
+// For Index 'a' adding 2 narrator index as first and second place.
+if($select=='a' && $limit==0)
+		{
+
+$output .= "<div style='padding-bottom:8px;width:25px;float:left'>1 . </div>";
+$output .= "<div style='padding-bottom:8px;float:left'><a class='NarrtorName' href=\"".$base_url."/hadith/get/'Aisha\">'Aisha</a>";
+$output .= "</div><div style='clear:both'></div>";
+$output .= "<div style='padding-bottom:8px;width:25px;float:left'>2 . </div>";
+$output .= "<div style='padding-bottom:8px;float:left'><a class='NarrtorName' href=\"".$base_url."/hadith/get/'Aisha and Abdullah bin Abbas\">'Aisha and Abdullah bin Abbas</a>";
+$output .= "</div><div style='clear:both'></div>";
+           $count = 38;
+
+		}
+//Query the narrator name from the hadith content
+$query = db_query("SELECT node.nid AS nid, node_data_field_hd_narrator_name.field_hd_narrator_name_value AS node_data_field_hd_narrator_name_field_hd_narrator_name_value, node.type AS node_type, node.vid AS node_vid FROM node node  LEFT JOIN content_type_hadith_content node_data_field_hd_narrator_name ON node.vid = node_data_field_hd_narrator_name.vid WHERE (node.type in ('hadith_content')) AND (node_data_field_hd_narrator_name.field_hd_narrator_name_value IS NOT NULL) AND (node_data_field_hd_narrator_name.field_hd_narrator_name_value like '".$select."%') GROUP BY node_data_field_hd_narrator_name.field_hd_narrator_name_value ORDER BY node_data_field_hd_narrator_name_field_hd_narrator_name_value ASC LIMIT $limit,$count");
+
+// lists the narrators
+while($result = db_fetch_object($query)) {
+$i++;
+$output .= "<div style='padding-bottom:8px;width:30px;float:left'>".$i." . </div>";
+
+$output .= "<div style='padding-bottom:8px;float:left'><a class='NarrtorName' href=\"".$base_url."/hadith/get/".$result->node_data_field_hd_narrator_name_field_hd_narrator_name_value."/$i\">".wordwrap($result->node_data_field_hd_narrator_name_field_hd_narrator_name_value,45,'<br />',true)."</a>";
+
+$output .= "</div><div style='clear:both'></div>";
+
+ 	if($i%20==0)
+			{
+			  $output .= "</td><td valign='top'>";
+			}
+}
+$output .= "</div>";
+$output .= "</td></tr>";
+$output .= "</table></div>";
+
+//<div class='hd_hline'></div><div>".theme('pager', NULL, 20, 0)."</div>
+$output .= "<a name='anch'></a></div></div><div id='divNarrtors' style='background-color:#ffffff;'></div>";
+return $output;
+
+}
+
+// Click on the narrtor name will fetch his hadiths from the following function using ajax.
+
+function narratorindex_get_by_narrator_name($name){
+
+global $base_url;
+global $theme_path;
+
+  $items = "";
+  
+  // query the hadith using narrator name, get from ajax url.
+  
+   $query2 = db_query("SELECT node.nid AS nid, node_data_field_hd_vol_number.field_hd_vol_number_value AS node_data_field_hd_vol_number_field_hd_vol_number_value, node.type AS node_type, node.vid AS node_vid, node_data_field_hd_book_code.field_hd_book_code_value AS node_data_field_hd_book_code_field_hd_book_code_value, node_data_field_hd_number.field_hd_number_value AS node_data_field_hd_number_field_hd_number_value, node_data_field_hd_narrator_name.field_hd_narrator_name_value AS node_data_field_hd_narrator_name_field_hd_narrator_name_value, node.title AS node_title FROM node node  LEFT JOIN content_type_hadith_content node_data_field_hd_narrator_name ON node.vid = node_data_field_hd_narrator_name.vid LEFT JOIN content_field_hd_vol_number node_data_field_hd_vol_number ON node.vid = node_data_field_hd_vol_number.vid LEFT JOIN content_field_hd_book_code node_data_field_hd_book_code ON node.vid = node_data_field_hd_book_code.vid LEFT JOIN content_field_hd_number node_data_field_hd_number ON node.vid = node_data_field_hd_number.vid WHERE (node.type in ('hadith_content')) AND (node_data_field_hd_narrator_name.field_hd_narrator_name_value IS NOT NULL) AND (node_data_field_hd_narrator_name.field_hd_narrator_name_value = '".addslashes($name)."') ORDER BY node_data_field_hd_narrator_name_field_hd_narrator_name_value ASC");
+   
+   
+
+ 
+    $j=0;
+	$items .= "<div class='list_hadith_data'><div style='padding:10px;padding-top:20px;'>";
+	$items .= "<span style='font-size:14px;'><b>".stripslashes($name)."</b></span><br /><br />";
+   $items .= "<table border='0' class='hd_each'><tr>";
+   
+   // Lists the hadiths of corresponding narraor
+   while($result2 = db_fetch_object($query2))
+   {
+   		$j++;
+		
+		if($result2->node_data_field_hd_vol_number_field_hd_vol_number_value!="")
+		{
+			$url = $base_url."/library/hadith/".$result2->node_data_field_hd_book_code_field_hd_book_code_value."/".$result2->node_data_field_hd_number_field_hd_number_value."/".$result2->node_data_field_hd_vol_number_field_hd_vol_number_value;
+		}
+		else
+		{
+		  $url = $base_url."/library/hadith/".$result2->node_data_field_hd_book_code_field_hd_book_code_value."/".$result2->node_data_field_hd_number_field_hd_number_value;
+		}
+	
+		
+		 $items .= "<td><div class='".$cl."'><span class='hd_span'><img src='".$base_url."/".$theme_path."/images/blist.png' /></span><a href='".$url."' aling='absmiddle' >".$result2->node_title."</a></div></td>";
+/*		 
+		  $items .= "<div class='".$cl."'><span class='hd_span'><img src='".$base_url."/".$theme_path."/images/blist.png' /></span><a href='".$url."' aling='absmiddle' >".$result2->node_title."</a></div>";*/
+		 
+		 	if($j%2==0)
+			{
+			  $items .= "</tr><tr>";
+			}
+   }
+   
+   $items .= "</table></div></div>";
+// create a JSON object. The object will contain a property named “hadiths” that will be set with the $items variable. 
+  return drupal_json(array('hadiths'=>$items));
+  exit;
+}
+
+ 
+ // Theme the javascript file
+function narratorindex_theme() {
+   return array(
+      'narratorindex_javascript' => array(
+         'arguments' => array(),
+      ),
+   );   
+}
+
+/*function narratorindex_init() {
+  theme('narratorindex_javascript');
+}*/
+/*
+function theme_narratorindex_javascript() {
+  drupal_add_js(drupal_get_path('module', 'narratorindex') . '/narratorindex.js');
+}
+*/

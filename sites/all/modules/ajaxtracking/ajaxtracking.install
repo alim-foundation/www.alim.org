@@ -1,0 +1,78 @@
+<?php
+// $Id$
+/**
+* Implementation of hook_install().
+*/
+function ajaxtracking_install() {
+drupal_install_schema('ajaxtracking');
+}
+/**
+* Implementation of hook_uninstall().
+*/
+function ajaxtracking_uninstall() {
+drupal_uninstall_schema('ajaxtracking');
+}
+/**
+* Implementation of hook_schema().
+*/
+function ajaxtracking_schema() {
+
+$schema['ajaxtracking'] = array(
+
+'description' => t("Stores IP Address for nodes of type 'ajaxtracking'."),
+
+'fields' => array(
+
+'ip_address' => array(
+'type' => 'varchar',
+'length' => '255',
+'not null' => TRUE,
+'description' => t('IP Address of the ajaxtracking.'),
+),
+'username' => array(
+'type' => 'varchar',
+'length' => '255',
+'not null' => TRUE,
+'description' => t('Username/Anonymous of the ajaxtracking.'),
+),
+'url' => array(
+'type' => 'varchar',
+'length' => '255',
+'not null' => TRUE,
+'description' => t('URL of the ajaxtracking.'),
+),
+'remarks' => array(
+'type' => 'text',
+'not null' => TRUE,
+'description' => t('Remarks of the ajaxtracking.'),
+),
+'page_generation_time' => array(
+'type' => 'varchar',
+'length' => '255',
+'not null' => TRUE,
+'description' => t('Page Generation Time of the ajaxtracking.'),
+),
+'page_rendering_time' => array(
+'type' => 'varchar',
+'length' => '255',
+'not null' => TRUE,
+'description' => t('Page Rendering Time of the ajaxtracking.'),
+),
+'date' => array(
+'type' => 'datetime',
+'not null' => TRUE,
+'description' => t('Date of the ajaxtracking.'),
+),
+
+
+),
+
+
+'indexes' => array(
+'ip_address' => array('ip_address'),
+'username' => array('username')
+
+),
+);
+return $schema;
+}

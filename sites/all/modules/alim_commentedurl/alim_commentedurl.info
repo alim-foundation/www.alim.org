@@ -1,0 +1,4 @@
+name = Alim Commentedurl
+description = "Module to save Commented url to the node."
+package = "Alim"
+core = 6.x

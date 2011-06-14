@@ -1,0 +1,5 @@
+; $Id$
+name = "Narrtor Index"
+description = "Returns a list of products according to category."
+core = 6.x
+package = Example Ajax Modules

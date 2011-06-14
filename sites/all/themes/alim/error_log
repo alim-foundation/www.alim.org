@@ -1,0 +1,3 @@
+[23-Mar-2010 01:45:36] PHP Fatal error:  Call to undefined function  db_query() in /home1/virutall/public_html/Alim.org/sites/all/themes/alim/list_ajax.php on line 9
+[23-Mar-2010 01:45:42] PHP Fatal error:  Call to undefined function  db_query() in /home1/virutall/public_html/Alim.org/sites/all/themes/alim/list_ajax.php on line 9
+[23-Mar-2010 01:49:37] PHP Fatal error:  Call to undefined function  db_query() in /home1/virutall/public_html/Alim.org/sites/all/themes/alim/template.php on line 430

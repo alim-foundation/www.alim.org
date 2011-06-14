@@ -1,0 +1,239 @@
+<?php 
+/**
+ * @file
+ * This module provides a hook_form_alter, hook_form_alter_submit for alter the form layout and submission. 
+ * Purpose : For altering Group and Group Post Forms and implementing email functionality for Group Posts.
+ * An E-mail will be sending to group members , if one who create new 'group post' and 'group reply'.
+ */
+
+/*
+ * Implementation of hook_form_alter()
+ * 1. Function removes the audience checkbox from the group post form, for making the post to single group.
+ * 2. Function alter the form submission by invoke mail to group members while posting and reply to groups.
+ * 3. Function removes the ‘replies’ options from comment delete form
+*/
+   
+function testmd_form_alter(&$form, &$form_state, $form_id) {
+	//print $form_id;
+	//drupal_set_message('<pre>' .$form_id .'</pre>' ,$type = 'status', $repeat = TRUE );
+	//drupal_set_message('<pre>' . print_r($form, TRUE) .'</pre>' ,$type = 'status', $repeat = TRUE );
+	global $base_url;
+	switch ($form_id) {
+	    // Alter the group post form layout by checking the form id. Code removes the input format and audience checkbox fields.
+		case "group_post_node_form" : 
+			   $form['body_field']['teaser_include']['#access'] = FALSE;
+				$form['body_field']['teaser_js']['#access'] = FALSE;
+				$form['body_field']['format']['#access'] = FALSE; // removes the input filtering option.
+				$form['comment_settings']['#access'] = FALSE;
+		 if (!empty($form['og_nodeapi']['visible']['og_groups'])) {
+			$form['og_nodeapi']['visible']['og_groups']['#multiple'] = FALSE;  // removes the audience from the form.
+			$form['og_nodeapi']['visible']['og_groups'] = FALSE;
+			$form['#submit'][] = 'testmd_form_alters_audience_form_alter_submit'; // call the function for submission using single group and implementing email functionality
+		  }
+		break;
+		// Alter the group post reply form submission. Call hook_form_alter_submit().
+		case "comment_form":
+	    $urlcomm = $_SERVER['HTTP_REFERER']; // // For getting parent page url in popup. Alter the comment form layout of group pages by checking the url.
+		$newvalurl = str_replace($base_url.'/' , "" ,$urlcomm );
+		$urlexp = explode("/",$newvalurl);
+		if($urlexp[0]=='groupdetails')
+		{
+		 $form['#submit'][] = 'testmd_form_alters_commreply_form_alter_submit'; // call the function for implementing email functionality
+		}
+		break;
+		// Alter the group post 'reply delete form' layout. Remove 'replies' option from group comment delete page.
+		case "comment_delete_form":
+		$urlcomm = $_SERVER['HTTP_REFERER']; // For getting parent page url in popup.
+		$newvalurl = str_replace($base_url.'/' , "" ,$urlcomm );
+		$urlexp = explode("/",$newvalurl);
+		if($urlexp[0]=='groupdetails')
+		{
+		  $form['actions']['cancel']['#value'] = '';
+		  $form['replies']['#access']  = FALSE; //Remove 'replies' option from group comment delete page.
+		}
+		break;
+	    case "og_confirm_subscribe":
+		//$ret_val = drupal_retrieve_form();
+		//drupal_set_message('<pre>' . print_r($form, TRUE) . '</pre>' ,$type = 'status', $repeat = TRUE );
+		drupal_set_title("Do you want to join <i>".$form['#parameters'][3]->title."</i>?");
+		if(isset($_GET['a']))
+		{
+		drupal_set_title("Are you sure you want to join the group <i>".$form['#parameters'][3]->title."</i>?");
+		}
+		break;
+		
+		
+	}
+	
+}
+
+/*
+ * Implementation of hook_form_alter_submit(). Function for implementing group post mail to all group members.
+*/
+
+function testmd_form_alters_audience_form_alter_submit($form, &$form_state){
+      global $user;
+      global $base_url;
+	  
+
+	// Submit handler; Since we permit only a single group per content, we need to accept argument (group id) from url and convert into an array.
+
+	  $result =  array();
+	  $result[0] = arg(3);
+	  $form_state['values']['og_groups'] =  $result;
+	 // $last_id = db_last_insert_id('node','nid');
+	 
+	 // Change the publish option for private posts
+	   if($form_state['values']['og_public']==0)
+	  {
+		unset($form_state['options']);
+		$form_state['values']['status'] = 0;
+	  }
+	 
+	 // Query the group details for mailing
+	   		 $grname = db_query("SELECT node.nid AS nid, node.title AS node_title FROM node node WHERE (node.status <> 0) AND (node.type IN ('creat_group')) AND (node.nid = ".arg(3).")");
+		 $grname_res = db_fetch_object($grname);
+		 $groupname = $grname_res->node_title;
+		 $groupname_val .= "<a href='".$base_url."/groupdetails/".$grname_res->nid."'>".$grname_res->node_title."</a>";
+		 
+    // Set up the mail parameters for mailing
+	$title = "[Alim.Org] ".$groupname." Post: ".$form_state['values']['title'];
+	$body_val  = $form_state['values']['body'];
+	$subject = $title;
+	
+	$temp_user = user_load(array('name' => strip_tags($user->name))); // taking owner's Full name from username.
+	if($temp_user->rpx_data['profile']['name']['givenName']!="")
+	{
+	  $owner = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
+	}
+	else
+	{
+	  $owner = strip_tags($output);
+	}
+
+	$body     = $owner." has just posted a message to ".$groupname.":<br /><br />";
+	$body    .= $body_val."<br /><br />";
+	$body    .= "<a href='".$base_url."/groupdetails/".$grname_res->nid."'>Click To View Group</a><br /><br />";
+	$body    .= "<a href='".$base_url."/groupdetails/".$grname_res->nid."'>Click To Reply<br /><br />";
+	$body    .= "<a href='".$base_url."/emailsetting'>Click To Stop Receiving Group Emails</a><br /><br />";
+	 
+	$headers["MIME-Version"] = '1.0';
+	$headers["Content-Type"] = "text/html; charset=iso-8859-1";
+	$headers["From"] = 'Alim Foundation <do-not-reply@alim.org>';
+	
+	// Query the group members
+
+	$mygroupmeb = db_query("SELECT DISTINCT(users.uid) AS uid, users.name AS users_name, users.mail AS users_mail, og_uid.is_admin AS og_uid_is_admin FROM users users  LEFT JOIN og_uid og_uid ON users.uid = og_uid.uid WHERE (users.status <> 0) AND (og_uid.is_active <> 0) AND (og_uid.nid =".$grname_res->nid." )ORDER BY og_uid_is_admin DESC, users_name ASC");
+	
+	$em_count = count($mygroups_res);
+	$j=0;
+	while($mygroups_res = db_fetch_object($mygroupmeb))
+	{
+	    
+		// Cheking that member enabled 'group post email' functionality in the preference setting.
+		$sel_poemail = db_query("SELECT value as poemail_sel,count(value) as poemail_count FROM profile_values WHERE fid=17 AND uid=".$mygroups_res->uid);
+		$fetch_poemail = db_fetch_object($sel_poemail);
+		($fetch_poemail->poemail_sel) ? $select_pemail = $fetch_poemail->poemail_sel : $select_pemail = 0;
+		
+		if($fetch_poemail->poemail_count==0) 
+		  $select_pemail = 1;
+		  
+		if($select_pemail==1) // if 'group post email' functionality enabled, sending an email to the user's mail id.
+		{
+		 
+			$j++;
+			$groups = $mygroups_res->users_name."<".$mygroups_res->users_mail.">";
+			$message = array(
+			'to' => $groups,
+			'subject' => t($subject),
+			'body' => t($body),
+			'headers' => $headers
+			);
+					 
+			 drupal_mail_send($message); // calling drupal mail function
+		}
+	}
+}
+
+/*
+ * Implementation of hook_form_alter_submit(). Function for implementing group post reply mail to all group members.
+*/
+function testmd_form_alters_commreply_form_alter_submit($form, &$form_state){
+          global $user;
+		  global $base_url;
+		  // $result =  array();
+	
+		 $urlcomm = $_SERVER['HTTP_REFERER']; // For getting parent page url in popup.
+		$newvalurl = str_replace($base_url.'/' , "" ,$urlcomm );
+		$urlexp = explode("/",$newvalurl);
+		
+		   // Query the group details for mailing
+			 $grname = db_query("SELECT node.nid AS nid, node.title AS node_title FROM node node WHERE (node.status <> 0) AND (node.type IN ('creat_group')) AND (node.nid = ".$urlexp[1].")");
+			 $grname_res = db_fetch_object($grname);
+			 $groupname = $grname_res->node_title;
+			 $groupname_val .= "<a href='".$base_url."/groupdetails/".$grname_res->nid."'>".$grname_res->node_title."</a>";
+			 
+			 $comm = substr($form_state['values']['comment'],0,25);
+			 
+			$pquery = db_query("SELECT node.nid AS nid, node.title AS node_title FROM node node WHERE (node.status <> 0) AND (node.type IN ('group_post')) AND (node.nid = ".$form_state['values']['nid'].")");
+			$pquery_res = db_fetch_object($pquery);
+	
+	     // Set up the mail parameters for mailing
+		$title = "[Alim.Org] ".$groupname." Reply: ".$pquery_res->node_title;
+		$body_val  = $form_state['values']['comment'];
+			
+		$subject = $title;
+		
+		$temp_user = user_load(array('name' => strip_tags($user->name)));
+		if($temp_user->rpx_data['profile']['name']['givenName']!="")
+		{
+		  $owner = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
+		}
+		else
+		{
+		  $owner = strip_tags($output);
+		}
+		
+		$body     = $owner." has just posted a reply in ".$groupname.":<br /><br />";
+		$body    .= $body_val."<br /><br />";
+		$body    .= "<a href='".$base_url."/groupdetails/".$grname_res->nid."#post_".$form_state['values']['nid']."'>Click To View Group</a><br /><br />";
+		$body    .= "<a href='".$base_url."/groupdetails/".$grname_res->nid."#post_".$form_state['values']['nid']."'>Click To Reply<br /><br />";
+		$body    .= "<a href='".$base_url."/emailsetting'>Click To Stop Receiving Group Emails</a> <br /><br />";
+		 
+		$headers["MIME-Version"] = '1.0';
+		$headers["Content-Type"] = "text/html; charset=iso-8859-1";
+		$headers["From"] = 'Alim Foundation <do-not-reply@alim.org>';
+	
+		// Query the group members
+		$mygroupmeb = db_query("SELECT DISTINCT(users.uid) AS uid, users.name AS users_name, users.mail AS users_mail, og_uid.is_admin AS og_uid_is_admin FROM users users  LEFT JOIN og_uid og_uid ON users.uid = og_uid.uid WHERE (users.status <> 0) AND (og_uid.is_active <> 0) AND (og_uid.nid =".$grname_res->nid." )ORDER BY og_uid_is_admin DESC, users_name ASC");
+		
+		$em_count = count($mygroups_res);
+		$j=0;
+		while($mygroups_res = db_fetch_object($mygroupmeb))
+		{
+			
+		// Cheking that member enabled 'group post email' functionality in the preference setting.
+		$sel_poemail = db_query("SELECT value as poemail_sel,count(value) as poemail_count FROM profile_values WHERE fid=17 AND uid=".$mygroups_res->uid);
+		$fetch_poemail = db_fetch_object($sel_poemail);
+		($fetch_poemail->poemail_sel) ? $select_pemail = $fetch_poemail->poemail_sel : $select_pemail = 0;
+		if($fetch_poemail->poemail_count==0) 
+		  $select_pemail = 1;
+		  
+		if($select_pemail==1) // if 'group post email' functionality enabled, sending an email to the user's mail id.
+		{
+			$j++;
+			$groups = $mygroups_res->users_name."<".$mygroups_res->users_mail.">";
+		
+			$message = array(
+			'to' => $groups,
+			'subject' => t($subject),
+			'body' => t($body),
+			'headers' => $headers
+			);
+					 
+			 drupal_mail_send($message); // calling drupal mail function
+		}
+	}
+		 $type_name = $form_state['values']['comment_url_val']; // Hidden url field of comment posting page.
+		 drupal_goto($type_name); // re-direct to current page
+}

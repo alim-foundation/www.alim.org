@@ -1,0 +1,5 @@
+; $Id$
+name = Ajax User Tacking
+description = Tacking User IP, Vist URL, Page render time, Logged in User.
+core = 6.x
+package = User Tracking

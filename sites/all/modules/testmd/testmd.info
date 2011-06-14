@@ -1,0 +1,4 @@
+name = Test MD
+description = "Module for altering forms."
+package = "MD"
+core = 6.x

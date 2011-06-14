@@ -1,0 +1,793 @@
+<?php
+/**
+ * @file
+ * Purpose : For creating Quran Subject Index Page.
+ * 
+ */
+/**
+ * Implementation of hook_perm().
+ */
+function quran_subject_perm() {
+  return array('access subjects','access subject parent','access subject ayah');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function quran_subject_menu() {
+
+  $items['library/quran/subject'] = array(
+    'title' => 'Qur\'an Subject Index',
+    'page callback' => 'subject_view',
+	'access arguments' => array('access subjects'),
+
+  );
+   $items['library/quran/subject/parent'] = array(
+    'page callback' => 'subject_parent',
+	'access arguments' => array('access subject parent'),
+
+  );
+   
+/*   $items['library/quran/subject/ayah'] = array(
+    'title' => 'Subject Index Ayah',
+    'page callback' => 'subject_ayah',
+	'access arguments' => array('access subject ayah'),
+
+  );
+*/
+     $items['library/quran/subject/ayah'] = array(
+    'page callback' => 'subject_ayah',
+	'access arguments' => array('access subject ayah'),
+
+  );
+
+  return $items;
+}
+
+
+// Quran Index page set up
+function subject_view($param) {
+
+global $base_url;
+global $theme_path;
+
+// Index Alphabets.
+
+ $output = "";
+
+ $output .= '<div id="quran_sub_module">';
+
+$data_string = "<span class='text_index'>
+<table border='0' ><tr>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/a' ".$linkclassa." >A</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/b' ".$linkclassb." >B</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/c' ".$linkclassc." >C</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/d' ".$linkclassd." >D</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/e' ".$linkclasse." >E</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/f' ".$linkclassf." >F</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/g' ".$linkclassg." >G</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/h' ".$linkclassh." >H</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/i' ".$linkclassi." >I</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/j' ".$linkclassj." >J</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/k' ".$linkclassk." >K</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/l' ".$linkclassl." >L</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/m' ".$linkclassm." >M</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/n' ".$linkclassn." >N</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/o' ".$linkclasso." >O</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/p' ".$linkclassp." >P</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/q' ".$linkclassq." >Q</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/r' ".$linkclassr." >R</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/s' ".$linkclasss." >S</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/t' ".$linkclasst." >T</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/u' ".$linkclassu." >U</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/v' ".$linkclassv." >V</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/w' ".$linkclassw." >W</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/x' ".$linkclassx." >X</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/y' ".$linkclassy." >Y</a></td>
+<td class='spn_sep_last' ><a href='".$base_url."/library/quran/subject/z' ".$linkclassz." >Z</a></td>
+</tr></table>
+</span>";
+
+$output  .= "<div class='index_list'>
+<div class='index_goto'><span class='go_totext'>Go To</span></div>
+<div>
+<div class='index_data_left'></div>
+<div class='index_data'>".$data_string."</div>
+<div class='index_data_right'></div>
+<div style='clear:both'></div>
+</div>
+<div style='clear:both'></div>
+</div>
+<script language='javascript'>
+function res_show(a)
+{
+  
+  if(document.getElementById('res_'+a).style.display=='none')
+  {
+   document.getElementById('res_'+a).style.display='block';
+   document.getElementById('res_sign_'+a).innerHTML='-';
+  }
+  else
+  {
+   document.getElementById('res_'+a).style.display='none';
+   document.getElementById('res_sign_'+a).innerHTML='+';
+  }
+}
+function res_show_op(a)
+{
+  
+  if(document.getElementById('resop_'+a).style.display=='none')
+  {
+   document.getElementById('resop_'+a).style.display='block';
+   document.getElementById('res_sign_op_'+a).innerHTML='-';
+  }
+  else
+  {
+   document.getElementById('resop_'+a).style.display='none';
+   document.getElementById('res_sign_op_'+a).innerHTML='+';
+  }
+}
+</script>";
+
+
+// Prevoius and Next button link generation.
+
+$total = 0;
+$flag  = 0;
+$count = 10;
+
+ $query_cnt = db_query("SELECT 
+   count(node_revisions.body ) AS total_sub,
+   node_data_field_sub_number.field_sub_number_value AS sub_no,
+   node_data_field_sub_letter.field_sub_letter_value AS node_data_field_sub_letter_field_sub_letter_value
+ FROM node node 
+ LEFT JOIN content_type_quran_subject node_data_field_sub_parent ON node.vid = node_data_field_sub_parent.vid
+ LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ LEFT JOIN content_type_quran_subject node_data_field_sub_letter ON node.vid = node_data_field_sub_letter.vid
+ WHERE (node.status <> 0) AND (node.type in ('quran_subject')) AND (node_data_field_sub_parent.field_sub_parent_value IS NULL) AND (node_data_field_sub_parent.field_sub_letter_value = '".arg(3)."')
+   ORDER BY node_data_field_sub_letter_field_sub_letter_value ASC, node_revisions.body ASC");
+   
+$result_cnt = db_fetch_object($query_cnt);
+$total = $result_cnt->total_sub;
+
+if(arg(4))
+ $limit = arg(4);
+else
+ $limit = 0;
+ 
+$start = $limit+1;
+$from = $start;
+
+$pageprev  = $limit-10;
+$pagenext =  $limit+10;
+
+
+$to = $pagenext;
+
+if(($limit+10) > $total)
+   $flag =1;
+   
+if(($limit+10) > $total)
+  $to = $total;
+
+
+// Previous and Next Button display
+$output .= "<div class='hadith_narrator' ><div class='hd_content' id='hd_content' >";
+
+$output .= "<div align='left' style='padding-bottom:10px;padding-left:15px;font-size:18px;float:left;'><b>".strtoupper($select)."</b></div><div align='right' style='padding-bottom:10px;float:right'>";
+
+if( $limit != 0)
+ $output .= "<a href='".$base_url."/library/quran/subject/".arg(3)."/$pageprev'><img src='".$base_url."/".$theme_path."/images/previous.jpg' border='0' align='absmiddle' ></a>";
+if($total>0)
+$output .= "&nbsp;&nbsp;<b>$from to $to of $total</b>&nbsp;&nbsp;";
+if( $flag != 1)
+$output .= "<a href='".$base_url."/library/quran/subject/".arg(3)."/$pagenext'><img src='".$base_url."/".$theme_path."/images/next3.jpg' border='0' align='absmiddle' ></a>";
+$output .= "</div>";
+
+$output .= "<div style='clear:both' ></div><div class='hd_hline' style='margin-bottom:10px;' ></div>";
+
+//Query the subject index using the alphabet
+
+ $query = db_query("SELECT 
+   node_revisions.body AS sub_text,
+   node_data_field_sub_number.field_sub_number_value AS sub_no,
+   node_data_field_sub_letter.field_sub_letter_value AS node_data_field_sub_letter_field_sub_letter_value
+ FROM node node 
+ LEFT JOIN content_type_quran_subject node_data_field_sub_parent ON node.vid = node_data_field_sub_parent.vid
+ LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ LEFT JOIN content_type_quran_subject node_data_field_sub_letter ON node.vid = node_data_field_sub_letter.vid
+ WHERE (node.status <> 0) AND (node.type in ('quran_subject')) AND (node_data_field_sub_parent.field_sub_parent_value IS NULL) AND (node_data_field_sub_parent.field_sub_letter_value = '".arg(3)."')
+   ORDER BY node_data_field_sub_letter_field_sub_letter_value ASC, node_revisions.body ASC LIMIT $limit,$count");
+   
+$i=0;
+  
+  // lists the quran parent subject indexes 
+  while ($result = db_fetch_object($query))
+  {
+     $i++;
+     $result1 ="";
+	 $result_count = "";
+
+    $sub_count = db_query("SELECT count(node_data_field_surah_no.field_surah_no_value) AS subject_count
+  FROM node node 
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+ WHERE (node.type in ('quran_subject_location')) AND (node_data_field_sub_number.field_sub_number_value = ".$result->sub_no.")");
+   
+   $result_count = db_fetch_object($sub_count);
+   
+/*		 $output .= "<div class='sub_text' id='subnum-".$result->sub_no."' ><b>".$result->sub_text."</b>&nbsp;<span class='sub_no'>(".$result_count->subject_count.")</span> </div>";*/
+	 
+	  $output .= "<div class='sub_text' id='subnum-".$result->sub_no."' ><b>".$result->sub_text."</b></div>";
+	 
+	 // lists the quran child subject indexes 
+	 
+	 $subquery = db_query("SELECT 
+   node_revisions.body AS sub_subject,
+   node_data_field_sub_number.field_sub_number_value AS subject_no
+   FROM node node 
+ LEFT JOIN content_type_quran_subject node_data_field_sub_parent ON node.vid = node_data_field_sub_parent.vid
+ LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ WHERE (node.type in ('quran_subject')) AND (node_data_field_sub_parent.field_sub_parent_value IS NOT NULL) AND (node_data_field_sub_parent.field_sub_parent_value = ".$result->sub_no.")");
+
+     $j=0;
+	 while($result1 = db_fetch_object($subquery))
+	 {
+         $j++;
+		 $result_count1 = "";
+		 
+		/* $sub_count1 = db_query("SELECT count(node_data_field_surah_no.field_surah_no_value) AS subject_count
+  FROM node node 
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+ WHERE (node.type in ('quran_subject_location')) AND (node_data_field_sub_number.field_sub_number_value = ".$result1->subject_no.")");
+   
+       $result_count1 = db_fetch_object($sub_count1);
+		
+		// $split_res = explode("::",$result1->sub_subject);
+		//$seo1 =  strtolower($split_res[0]);
+	   //  $seo2 =  strtolower(str_replace(" ","-",$split_res[1]));
+		
+		$output .= "<div class='sub_text sub_subject' id='subnum-".$result1->subject_no."' ><a href='javascript:void(0);' onclick='res_show(".$result1->subject_no.")'><span class='sub_no'>+</span>&nbsp;".$result1->sub_subject."</a> <span class='sub_no'>(".$result_count1->subject_count.")</span></div>";
+		*/
+		
+		$sub_values = explode("::",$result1->sub_subject);
+		
+		$output .= "<div class='sub_text sub_subject' id='subnum-".$result1->subject_no."' style='clear:both' ><div class='sub_text4' style='float:left;width:15px;height:15px;' ><a href='javascript:void(0);' onclick='res_show(".$result1->subject_no.")'><span id='res_sign_".$result1->subject_no."'>+</span>&nbsp;</a></div><div style='float:left;width:600px;' ><a href='javascript:void(0);' onclick='res_show(".$result1->subject_no.")'>".$sub_values[1]."</a></div><div  style='clear:both'></div></div>";
+		
+		//modified
+		  $output .= "<div  style='clear:both'></div>";
+		   
+		   // lists the ayah for corresponding subjects 
+		
+		$aya_list = db_query("SELECT node.nid AS nid,
+   node_data_field_surah_no.field_surah_no_value AS node_data_field_surah_no_field_surah_no_value,
+   node.type AS node_type,
+   node.vid AS node_vid,
+   node_data_field_ayah_no.field_ayah_no_value AS node_data_field_ayah_no_field_ayah_no_value,
+   node_data_field_sub_number.field_sub_number_value AS node_data_field_sub_number_field_sub_number_value
+ FROM node node 
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+ LEFT JOIN content_field_ayah_no node_data_field_ayah_no ON node.vid = node_data_field_ayah_no.vid
+ WHERE (node.type in ('quran_subject_location')) AND (node_data_field_sub_number.field_sub_number_value = ".$result1->subject_no.")
+   ORDER BY node_data_field_sub_number_field_sub_number_value ASC");
+   
+   	  $output .= "<div class='aya_list' style='color:#000000;padding:20px;margin-left:30px;margin-top:20px;margin-bottom:20px;background-color:#FFFFFF;border:1px solid #AC9046;display:none' id='res_".$result1->subject_no."'>";
+	  
+	   $output .= '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+while($res_aya_list = db_fetch_object($aya_list))
+{
+   
+  // query the ayah informations
+  $aya_disp = db_query("SELECT node.nid AS nid,
+   node_data_field_surah_no.field_surah_no_value AS node_data_field_surah_no_field_surah_no_value,
+   node.type AS node_type,
+   node.vid AS node_vid,
+   node_data_field_ayah_no.field_ayah_no_value AS node_data_field_ayah_no_field_ayah_no_value,
+   node_revisions.body AS node_revisions_body,
+   node_revisions.format AS node_revisions_format
+ FROM node node 
+ LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+ LEFT JOIN content_field_ayah_no node_data_field_ayah_no ON node.vid = node_data_field_ayah_no.vid
+ LEFT JOIN content_field_quran_bk_code node_data_field_quran_bk_code ON node.vid = node_data_field_quran_bk_code.vid
+ LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+ WHERE (node.type in ('quran_ayah')) AND (node_data_field_surah_no.field_surah_no_value = ".$res_aya_list->node_data_field_surah_no_field_surah_no_value.") AND (node_data_field_ayah_no.field_ayah_no_value = ".$res_aya_list->node_data_field_ayah_no_field_ayah_no_value.") AND (node_data_field_quran_bk_code.field_quran_bk_code_value = 'MAL')");
+
+$res_text = db_fetch_object($aya_disp);
+
+
+ 
+  $output .= '<tr>';
+  $output .= " <td width='10%' align='left' valign='top' class='aya_list'><a href='".$base_url."/library/quran/ayah/compare/".$res_aya_list->node_data_field_surah_no_field_surah_no_value."/".$res_aya_list->node_data_field_ayah_no_field_ayah_no_value."'>".$res_aya_list->node_data_field_surah_no_field_surah_no_value.".".$res_aya_list->node_data_field_ayah_no_field_ayah_no_value."</a>&nbsp;&nbsp;</td>";
+  $output .= " <td width='90%' align='left' valign='top'>".$res_text->node_revisions_body."</td>";
+$output .= '</tr>';
+	
+	 
+	
+   
+   
+}
+ $output .= '</table>';
+ 
+   $output .= "</div>";
+ 
+ 
+		
+		
+		//modified	
+		
+		
+		
+
+		
+		
+		
+	 }
+	 
+	 // if child subject is empty execute this.
+	 if($result_count->subject_count>0 && $j==0)
+	 {
+			   
+			 // lists ayah using the subject no.
+			 $aya_list2 = db_query("SELECT node.nid AS nid,
+			   node_data_field_surah_no.field_surah_no_value AS node_data_field_surah_no_field_surah_no_value,
+			   node.type AS node_type,
+			   node.vid AS node_vid,
+			   node_data_field_ayah_no.field_ayah_no_value AS node_data_field_ayah_no_field_ayah_no_value,
+			   node_data_field_sub_number.field_sub_number_value AS node_data_field_sub_number_field_sub_number_value
+			 FROM node node 
+			 LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+			 LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+			 LEFT JOIN content_field_ayah_no node_data_field_ayah_no ON node.vid = node_data_field_ayah_no.vid
+			 WHERE (node.type in ('quran_subject_location')) AND (node_data_field_sub_number.field_sub_number_value = ".$result->sub_no.")
+			   ORDER BY node_data_field_sub_number_field_sub_number_value ASC");
+			   
+			
+			
+				 $result1 ="";
+				 $result_count = "";
+				 
+				    // Taking the ayah count using subject no.
+					$sub_count2 = db_query("SELECT count(node_data_field_surah_no.field_surah_no_value) AS subject_count
+			  FROM node node 
+			 LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+			 LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+			 WHERE (node.type in ('quran_subject_location')) AND (node_data_field_sub_number.field_sub_number_value = ".$result->sub_no.")");
+			   
+			   $result_count2 = db_fetch_object($sub_count2);
+			   
+			   
+
+			   $output .= "<div class='sub_text sub_subject'>";
+				 $output .= "<div style='clear:both'><div class='sub_text4' style='float:left;width:15px;height:15px;' ><a href='javascript:void(0)' onclick='res_show_op($i)' ><span id='res_sign_op_".$i."'>+</span>&nbsp;</a></div><div style='float:left;width:600px;' ><a href='javascript:void(0)' onclick='res_show_op($i)' >".$result->sub_text."</a> </div></div>";
+
+				  $j=0;
+				   $output .= "<div  style='clear:both'></div>";
+				     	  $output .= "<div class='aya_list1' style='color:#000000;padding:20px;margin-left:30px;margin-top:20px;margin-bottom:20px;background-color:#FFFFFF;border:1px solid #AC9046;display:none' id='resop_$i'>";
+			
+			$output .= '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+						  
+			while($res_aya_list2 = db_fetch_object($aya_list2))
+			{
+			   $j++;
+			   
+			     // query the ayah informations
+			     $aya_disp2 = db_query("SELECT node.nid AS nid,
+   node_data_field_surah_no.field_surah_no_value AS node_data_field_surah_no_field_surah_no_value,
+   node.type AS node_type,
+   node.vid AS node_vid,
+   node_data_field_ayah_no.field_ayah_no_value AS node_data_field_ayah_no_field_ayah_no_value,
+   node_revisions.body AS node_revisions_body,
+   node_revisions.format AS node_revisions_format
+ FROM node node 
+ LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+ LEFT JOIN content_field_ayah_no node_data_field_ayah_no ON node.vid = node_data_field_ayah_no.vid
+ LEFT JOIN content_field_quran_bk_code node_data_field_quran_bk_code ON node.vid = node_data_field_quran_bk_code.vid
+ LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+ WHERE (node.type in ('quran_ayah')) AND (node_data_field_surah_no.field_surah_no_value = ".$res_aya_list2->node_data_field_surah_no_field_surah_no_value.") AND (node_data_field_ayah_no.field_ayah_no_value = ".$res_aya_list2->node_data_field_ayah_no_field_ayah_no_value.") AND (node_data_field_quran_bk_code.field_quran_bk_code_value = 'MAL')");
+
+				$res_text2 = db_fetch_object($aya_disp2);
+				
+				
+			   
+			   $output .= '<tr>';
+  $output .= " <td width='10%' align='left' valign='top' class='aya_list'><a href='".$base_url."/library/quran/ayah/compare/".$res_aya_list2->node_data_field_surah_no_field_surah_no_value."/".$res_aya_list2->node_data_field_ayah_no_field_ayah_no_value."' style='color:#0000FF'>".$res_aya_list2->node_data_field_surah_no_field_surah_no_value.".".$res_aya_list2->node_data_field_ayah_no_field_ayah_no_value."</a>&nbsp;&nbsp;</td>";
+  $output .= " <td width='90%' align='left' valign='top'>".$res_text2->node_revisions_body."</td>";
+$output .= '</tr>';
+	
+	
+				
+			}
+			$output .= '</table>';
+ 
+			$output .= "</div>";
+
+			
+			$output .= "</div>";
+	 }
+	 
+	 $output .= "<br>";
+  }
+   if($i==0)
+	 {
+	   $output .= "<b><span style='font-size:12px;'>No Qur'an Subject Index Found.</span></b>";
+	 }
+ $output .= "</div></div>";
+ return $output;
+
+}
+
+
+// for creating parent pages. Not using now.
+function subject_parent() {
+
+global $base_url;
+global $theme_path;
+
+ $output = "";
+ 
+$output .= "<div align='right' style='width:100%'><a href='javascript:void(0)' onclick='javascript:history.back()' ><img src='".$base_url."/".$theme_path."/images/back.jpg' border='0'/></a></div>";
+ 
+  drupal_set_title(ucfirst(arg(6)));
+  
+  // Build Breadcrumbs
+$breadcrumb = array();
+$breadcrumb[] = l('Home', '<front>');
+$breadcrumb[] = l('Qur\'an & Hadith',  $base_url.'/library/quran/surah/arabic/1/ARB');
+$breadcrumb[] = l('Qur\'an',  $base_url.'/library/quran/surah/arabic/1/ARB');
+$breadcrumb[] = l('Qur\'an Subject Index', $base_url.'/library/quran/subject/'.arg(4));
+$breadcrumb[] = l(drupal_get_title(),  $base_url.'/library/quran/subject/parent/'.arg(4).'/'.arg(5).'/'.arg(6)); // Link to current URL
+
+// Set Breadcrumbs
+drupal_set_breadcrumb($breadcrumb);
+
+ $output .= '<div id="quran_sub_module">';
+   
+
+$data_string = "<span class='text_index'>
+<table border='0' ><tr>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/a' ".$linkclassa." >A</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/b' ".$linkclassb." >B</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/c' ".$linkclassc." >C</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/d' ".$linkclassd." >D</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/e' ".$linkclasse." >E</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/f' ".$linkclassf." >F</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/g' ".$linkclassg." >G</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/h' ".$linkclassh." >H</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/i' ".$linkclassi." >I</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/j' ".$linkclassj." >J</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/k' ".$linkclassk." >K</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/l' ".$linkclassl." >L</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/m' ".$linkclassm." >M</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/n' ".$linkclassn." >N</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/o' ".$linkclasso." >O</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/p' ".$linkclassp." >P</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/q' ".$linkclassq." >Q</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/r' ".$linkclassr." >R</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/s' ".$linkclasss." >S</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/t' ".$linkclasst." >T</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/u' ".$linkclassu." >U</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/v' ".$linkclassv." >V</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/w' ".$linkclassw." >W</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/x' ".$linkclassx." >X</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/y' ".$linkclassy." >Y</a></td>
+<td class='spn_sep_last' ><a href='".$base_url."/library/quran/subject/z' ".$linkclassz." >Z</a></td>
+</tr></table>
+</span>";
+
+$output  .= "<div class='index_list'>
+<div class='index_goto'><span class='go_totext'>Go To</span></div>
+<div>
+<div class='index_data_left'></div>
+<div class='index_data'>".$data_string."</div>
+<div class='index_data_right'></div>
+<div style='clear:both'></div>
+</div>
+<div style='clear:both'></div>
+</div>";
+$output .= "<div class='hadith_narrator' ><div class='hd_content' id='hd_content' >";
+ 
+ $query = db_query("SELECT node.nid AS nid,
+   node_revisions.body AS sub_text,
+   node_revisions.format AS node_revisions_format,
+   node_data_field_sub_number.field_sub_number_value AS sub_no,
+   node.type AS node_type,
+   node.vid AS node_vid,
+   node_data_field_sub_letter.field_sub_letter_value AS node_data_field_sub_letter_field_sub_letter_value
+ FROM node node 
+ LEFT JOIN content_type_quran_subject node_data_field_sub_parent ON node.vid = node_data_field_sub_parent.vid
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+ LEFT JOIN content_type_quran_subject node_data_field_sub_letter ON node.vid = node_data_field_sub_letter.vid
+ WHERE (node.status <> 0) AND (node.type in ('quran_subject')) AND (node_data_field_sub_parent.field_sub_parent_value IS NULL) AND (node_data_field_sub_parent.field_sub_letter_value = '".arg(4)."') AND (node_data_field_sub_number.field_sub_number_value = ".arg(5).")
+   ORDER BY node_data_field_sub_letter_field_sub_letter_value ASC");
+   
+$result = db_fetch_object($query);
+   
+ $aya_list = db_query("SELECT node.nid AS nid,
+   node_data_field_surah_no.field_surah_no_value AS node_data_field_surah_no_field_surah_no_value,
+   node.type AS node_type,
+   node.vid AS node_vid,
+   node_data_field_ayah_no.field_ayah_no_value AS node_data_field_ayah_no_field_ayah_no_value,
+   node_data_field_sub_number.field_sub_number_value AS node_data_field_sub_number_field_sub_number_value
+ FROM node node 
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+ LEFT JOIN content_field_ayah_no node_data_field_ayah_no ON node.vid = node_data_field_ayah_no.vid
+ WHERE (node.type in ('quran_subject_location')) AND (node_data_field_sub_number.field_sub_number_value = ".$result->sub_no.")
+   ORDER BY node_data_field_sub_number_field_sub_number_value ASC");
+   
+
+
+	 $result1 ="";
+	 $result_count = "";
+	 
+	 
+	    $sub_count = db_query("SELECT count(node_data_field_surah_no.field_surah_no_value) AS subject_count
+  FROM node node 
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+ WHERE (node.type in ('quran_subject_location')) AND (node_data_field_sub_number.field_sub_number_value = ".$result->sub_no.")");
+   
+   $result_count = db_fetch_object($sub_count);
+   
+ 
+   
+	 $output .= "<div class='sub_text'><a href='".$base_url."/library/quran/subject/ayah/".$result->sub_no."/".arg(4)."/".strtolower($result->sub_text)."'>".$result->sub_text."</a> <span class='sub_no'>(".$result_count->subject_count.")</span> </div>";
+	  $output .= "<div class='aya_list' align='left'>";
+	  $j=0;
+while($res_aya_list = db_fetch_object($aya_list))
+{
+   $j++;
+   $output .= "<a href='".$base_url."/library/quran/ayah/compare/".$res_aya_list->node_data_field_surah_no_field_surah_no_value."/".$res_aya_list->node_data_field_ayah_no_field_ayah_no_value."/".arg(6)."'>".$res_aya_list->node_data_field_surah_no_field_surah_no_value.".".$res_aya_list->node_data_field_ayah_no_field_ayah_no_value."</a>&nbsp;&nbsp;";
+   if($j%14==0)
+   {
+    $output .= "<br>";
+   }
+}
+
+$output .= "</div><br>";
+	 
+	 $subquery = db_query("SELECT 
+   node_revisions.body AS sub_subject,node_data_field_sub_number.field_sub_number_value AS subject_no
+  FROM node node 
+ LEFT JOIN content_type_quran_subject node_data_field_sub_parent ON node.vid = node_data_field_sub_parent.vid
+ LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ WHERE (node.type in ('quran_subject')) AND (node_data_field_sub_parent.field_sub_parent_value IS NOT NULL) AND (node_data_field_sub_parent.field_sub_parent_value = ".$result->sub_no.")");
+ 
+ $output .= '<table width="100%" height="34" border="0" cellpadding="0" cellspacing="0">';
+
+
+	 while($result1 = db_fetch_object($subquery))
+	 {
+  
+		 $result_count1 = "";
+		 
+		 $sub_count1 = db_query("SELECT count(node_data_field_surah_no.field_surah_no_value) AS subject_count
+  FROM node node 
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+ WHERE (node.type in ('quran_subject_location')) AND (node_data_field_sub_number.field_sub_number_value = ".$result1->subject_no.")");
+   
+       $result_count1 = db_fetch_object($sub_count1);
+	   
+	   
+	    $aya_list_sub = db_query("SELECT node.nid AS nid,
+   node_data_field_surah_no.field_surah_no_value AS node_data_field_surah_no_field_surah_no_value,
+   node.type AS node_type,
+   node.vid AS node_vid,
+   node_data_field_ayah_no.field_ayah_no_value AS node_data_field_ayah_no_field_ayah_no_value,
+   node_data_field_sub_number.field_sub_number_value AS node_data_field_sub_number_field_sub_number_value
+ FROM node node 
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+ LEFT JOIN content_field_ayah_no node_data_field_ayah_no ON node.vid = node_data_field_ayah_no.vid
+ WHERE (node.type in ('quran_subject_location')) AND (node_data_field_sub_number.field_sub_number_value = ".$result1->subject_no.")
+   ORDER BY node_data_field_sub_number_field_sub_number_value ASC");
+   
+   
+	   
+	   	 $output .= '<tr>';
+	
+			 $split_res = explode("::",$result1->sub_subject);
+		 $seo1 =  strtolower($split_res[0]);
+		 $seo2 =  strtolower(str_replace(" ","-",$split_res[1]));
+		
+		$output .= " <td width='70%' align='left' valign='top' style='padding-left:15px;'><div class='sub_text'><a href='".$base_url."/library/quran/subject/ayah/".$result1->subject_no."/".arg(4)."/".$seo1."/".$seo2."/".$result->sub_no."'>".$result1->sub_subject."</a> <span class='sub_no'>(".$result_count1->subject_count.")</span></div></td>";
+		$output .= " <td width='30%' align='left' valign='top' style='padding-left:10px;' class='aya_list' >";
+		    $i=0;
+			
+			$url45 = strtolower(str_replace("::","-",$result1->sub_subject));
+			$url_new = str_replace(" ","-",$url45);
+			
+		while($res_sub_aya_list = db_fetch_object($aya_list_sub))
+		{
+		   $i++;
+		   $output .= "<a href='".$base_url."/library/quran/ayah/compare/".$res_sub_aya_list->node_data_field_surah_no_field_surah_no_value."/".$res_sub_aya_list->node_data_field_ayah_no_field_ayah_no_value."/".$url_new."'>".$res_sub_aya_list->node_data_field_surah_no_field_surah_no_value.".".$res_sub_aya_list->node_data_field_ayah_no_field_ayah_no_value."</a>&nbsp;&nbsp;";
+		   if($i%5==0)
+		   {
+		   	 $output .= "<br>";
+		   }
+		}
+
+		$output .= "</td>";
+		
+		  	 $output .= '<tr>';
+	 }
+	 
+	 $output .= '</table>';
+
+
+ $output .= "</div></div>";
+ return $output;
+
+}
+
+// for creating child ayah list pages. Not using now.
+ function subject_ayah()
+ {
+ 
+global $base_url;
+global $theme_path;
+
+ $output = "";
+ 
+$output .= "<div align='right' style='width:100%'><a href='javascript:void(0)' onclick='javascript:history.back()' ><img src='".$base_url."/".$theme_path."/images/back.jpg' border='0'/></a></div>";
+
+
+	 $subquery = db_query("SELECT node.nid AS nid,
+   node_revisions.body AS node_revisions_body,
+   node_revisions.format AS node_revisions_format,
+   node_data_field_sub_number.field_sub_number_value AS node_data_field_sub_number_field_sub_number_value,
+   node.type AS node_type,
+   node.vid AS node_vid,
+   node.title AS node_title
+ FROM node node 
+ LEFT JOIN content_type_quran_subject node_data_field_sub_parent ON node.vid = node_data_field_sub_parent.vid
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+ WHERE (node.type in ('quran_subject')) AND (node_data_field_sub_number.field_sub_number_value = ".arg(4).")
+   ORDER BY node_title ASC");
+ 
+  $res = db_fetch_object($subquery);
+ 
+ $title_last = $res->node_revisions_body;
+ 
+ 
+ 
+
+ if(arg(7))
+ {
+ 	if($title_last==ucfirst(arg(6)))
+	  $title = ucfirst(arg(6))." - ".ucfirst(str_replace("-"," ",arg(7)));
+	else
+	  $title = ucfirst($title_last);
+ }
+ else
+ {
+   $title = ucfirst($title_last);
+ }
+ 
+ drupal_set_title($title);
+ 
+   // Build Breadcrumbs
+$breadcrumb = array();
+$breadcrumb[] = l('Home', '<front>');
+$breadcrumb[] = l('Qur\'an & Hadith', '<front>');
+$breadcrumb[] = l('Qur\'an', '<front>');
+$breadcrumb[] = l('Qur\'an Subject Index', $base_url.'/library/quran/subject/'.arg(5));
+if(arg(7))
+{
+ $breadcrumb[] = l(ucfirst(arg(6)), $base_url.'/library/quran/subject/parent/'.arg(5).'/'.arg(8).'/'.arg(6));
+}
+//$breadcrumb[] = l(drupal_get_title(),  $base_url.'/library/quran/subject/ayah/'.arg(4).'/'.arg(5).'/'.arg(6).'/'.arg(7)); // Link to current URL
+
+// Set Breadcrumbs
+drupal_set_breadcrumb($breadcrumb);
+
+ 
+ $output .= '<div id="quran_sub_module">';
+   
+$data_string = "<span class='text_index'>
+<table border='0' ><tr>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/a' ".$linkclassa." >A</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/b' ".$linkclassb." >B</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/c' ".$linkclassc." >C</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/d' ".$linkclassd." >D</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/e' ".$linkclasse." >E</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/f' ".$linkclassf." >F</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/g' ".$linkclassg." >G</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/h' ".$linkclassh." >H</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/i' ".$linkclassi." >I</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/j' ".$linkclassj." >J</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/k' ".$linkclassk." >K</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/l' ".$linkclassl." >L</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/m' ".$linkclassm." >M</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/n' ".$linkclassn." >N</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/o' ".$linkclasso." >O</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/p' ".$linkclassp." >P</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/q' ".$linkclassq." >Q</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/r' ".$linkclassr." >R</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/s' ".$linkclasss." >S</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/t' ".$linkclasst." >T</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/u' ".$linkclassu." >U</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/v' ".$linkclassv." >V</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/w' ".$linkclassw." >W</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/x' ".$linkclassx." >X</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/quran/subject/y' ".$linkclassy." >Y</a></td>
+<td class='spn_sep_last' ><a href='".$base_url."/library/quran/subject/z' ".$linkclassz." >Z</a></td>
+</tr></table>
+</span>";
+
+$output  .= "<div class='index_list'>
+<div class='index_goto'><span class='go_totext'>Go To</span></div>
+<div>
+<div class='index_data_left'></div>
+<div class='index_data'>".$data_string."</div>
+<div class='index_data_right'></div>
+<div style='clear:both'></div>
+</div>
+<div style='clear:both'></div>
+</div>";
+$output .= "<div class='hadith_narrator' ><div class='hd_content' id='hd_content' >";
+
+/*$output .="<div class='back'><a href='#' onclick='javascript:history.back();'>&laquo;Back</a></div><br>";*/
+
+ $aya_list = db_query("SELECT node.nid AS nid,
+   node_data_field_surah_no.field_surah_no_value AS node_data_field_surah_no_field_surah_no_value,
+   node.type AS node_type,
+   node.vid AS node_vid,
+   node_data_field_ayah_no.field_ayah_no_value AS node_data_field_ayah_no_field_ayah_no_value,
+   node_data_field_sub_number.field_sub_number_value AS node_data_field_sub_number_field_sub_number_value
+ FROM node node 
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+ LEFT JOIN content_field_ayah_no node_data_field_ayah_no ON node.vid = node_data_field_ayah_no.vid
+ WHERE (node.type in ('quran_subject_location')) AND (node_data_field_sub_number.field_sub_number_value = ".arg(4).")
+   ORDER BY node_data_field_sub_number_field_sub_number_value ASC");
+   
+   	  $output .= "<div class='aya_list'>";
+	  
+	   $output .= '<table width="100%" border="0" cellpadding="0" cellspacing="0">';
+while($res_aya_list = db_fetch_object($aya_list))
+{
+   
+  $aya_disp = db_query("SELECT node.nid AS nid,
+   node_data_field_surah_no.field_surah_no_value AS node_data_field_surah_no_field_surah_no_value,
+   node.type AS node_type,
+   node.vid AS node_vid,
+   node_data_field_ayah_no.field_ayah_no_value AS node_data_field_ayah_no_field_ayah_no_value,
+   node_revisions.body AS node_revisions_body,
+   node_revisions.format AS node_revisions_format
+ FROM node node 
+ LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+ LEFT JOIN content_field_ayah_no node_data_field_ayah_no ON node.vid = node_data_field_ayah_no.vid
+ LEFT JOIN content_field_quran_bk_code node_data_field_quran_bk_code ON node.vid = node_data_field_quran_bk_code.vid
+ LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+ WHERE (node.type in ('quran_ayah')) AND (node_data_field_surah_no.field_surah_no_value = ".$res_aya_list->node_data_field_surah_no_field_surah_no_value.") AND (node_data_field_ayah_no.field_ayah_no_value = ".$res_aya_list->node_data_field_ayah_no_field_ayah_no_value.") AND (node_data_field_quran_bk_code.field_quran_bk_code_value = 'MAL')");
+
+$res_text = db_fetch_object($aya_disp);
+ 
+  $output .= '<tr>';
+  $output .= " <td width='10%' align='left' valign='top' class='aya_list'><a href='".$base_url."/library/quran/ayah/compare/".$res_aya_list->node_data_field_surah_no_field_surah_no_value."/".$res_aya_list->node_data_field_ayah_no_field_ayah_no_value."/".arg(6)."-".arg(7)."'>".$res_aya_list->node_data_field_surah_no_field_surah_no_value.".".$res_aya_list->node_data_field_ayah_no_field_ayah_no_value."</a>&nbsp;&nbsp;</td>";
+  $output .= " <td width='90%' align='left' valign='top'><div class='sub_text'>".$res_text->node_revisions_body."</div></td>";
+$output .= '<tr>';
+	
+	 
+	
+   
+   
+}
+ $output .= '</table>';
+ 
+$output .= "</div><br>";
+
+ $output .= "</div></div>";
+ return $output;
+
+}

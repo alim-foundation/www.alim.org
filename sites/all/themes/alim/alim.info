@@ -1,0 +1,46 @@
+; $Id: garland.info,v 1.5 2007/07/01 23:27:32 goba Exp $
+name = Alim
+description = Tableless, recolorable, multi-column, fluid width theme (default).
+version = VERSION
+core = 6.x
+engine = phptemplate
+stylesheets[all][] = style.css
+stylesheets[print][] = print.css
+
+regions[left] = Left sidebar
+regions[top_sub] = Top of content
+regions[header] = Header
+regions[footer] = Footer
+regions[content] = Content
+regions[bottom_comment] = Bottom Comment
+regions[search_text] = Search Box	
+regions[rpx_login] = rpx login
+regions[clips] = Top of content Clippings Details 
+regions[clipcategory] = Clippings Category
+
+
+regions[splash_header] = Splash Header
+regions[splash_about] = Splash Aboutus
+regions[splash_nonprofit] = Splash Non Profit
+regions[splash_library] = Splash Library
+regions[splash_applications] = Splash Applications
+regions[splash_testimonialst] = Splash Testimonials
+regions[splash_partners] = Splash Partners
+regions[splash_news] = Splash News
+regions[splash_topblogs] = Splash Top Blogs
+regions[splash_twitter] = Splash Twitter
+regions[comment_display] = comment display
+regions[nav_menu] = Navigation Menu
+regions[splash_recent] = Spalsh Recent
+regions[splash_rss] =  Spalsh Rss
+regions[user_profile] =  User profile
+regions[goto] =  Go To
+regions[cat_count] =  category Count
+regions[menu_tab] =  Menu Tab
+regions[splash_recent_right] = Spalsh Recent Right
+
+; Information added by drupal.org packaging script on 2009-12-16
+version = "6.15"
+project = "drupal"
+datestamp = "1260996916"
+

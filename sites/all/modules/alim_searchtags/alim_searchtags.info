@@ -1,0 +1,6 @@
+name = Alim Search Tags
+description = "Module to search tags , all tags , add delete to node edit form url to the node."
+package = "Alim"
+dependencies[] = taxonomy
+dependencies[] = community_tags
+core = 6.x

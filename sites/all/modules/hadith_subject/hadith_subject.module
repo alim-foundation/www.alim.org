@@ -1,0 +1,248 @@
+<?php
+/**
+ * @file
+ * Purpose : For creating Hadith Subject Index Page.
+ * 
+ */
+/**
+ * Implementation of hook_perm().
+ */
+function hadith_subject_perm() {
+  return array('access subjects');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function hadith_subject_menu() {
+
+  $items['library/hadith/subject'] = array(
+     'page callback' => 'hadith_subject_view',
+	'access arguments' => array('access subjects')
+
+  );
+ 
+
+
+  return $items;
+}
+
+
+// Hadith Index page set up
+function hadith_subject_view($param) {
+
+$i=0;
+
+global $base_url;
+
+ $output = "";
+ drupal_set_title("Hadith Subject Index");
+ $output .= '<div id="quran_sub_module">';
+
+
+// Index Alphabets.
+$data_string = "<span class='text_index'>
+<table border='0' ><tr>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/a' ".$linkclassa." >A</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/b' ".$linkclassb." >B</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/c' ".$linkclassc." >C</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/d' ".$linkclassd." >D</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/e' ".$linkclasse." >E</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/f' ".$linkclassf." >F</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/g' ".$linkclassg." >G</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/h' ".$linkclassh." >H</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/i' ".$linkclassi." >I</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/j' ".$linkclassj." >J</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/k' ".$linkclassk." >K</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/l' ".$linkclassl." >L</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/m' ".$linkclassm." >M</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/n' ".$linkclassn." >N</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/o' ".$linkclasso." >O</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/p' ".$linkclassp." >P</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/q' ".$linkclassq." >Q</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/r' ".$linkclassr." >R</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/s' ".$linkclasss." >S</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/t' ".$linkclasst." >T</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/u' ".$linkclassu." >U</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/v' ".$linkclassv." >V</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/w' ".$linkclassw." >W</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/x' ".$linkclassx." >X</a></td>
+<td class='spn_sep'><a href='".$base_url."/library/hadith/subject/y' ".$linkclassy." >Y</a></td>
+<td class='spn_sep_last' ><a href='".$base_url."/library/hadith/subject/z' ".$linkclassz." >Z</a></td>
+</tr></table>
+</span>";
+
+$output  .= "<div class='index_list'>
+<div class='index_goto'><span class='go_totext'>Go To</span></div>
+<div>
+<div class='index_data_left'></div>
+<div class='index_data'>".$data_string."</div>
+<div class='index_data_right'></div>
+<div style='clear:both'></div>
+</div>
+<div style='clear:both'></div>
+</div>
+<script language='javascript'>
+function show_hd_div(id)
+{
+  if(document.getElementById('sub-'+id).style.display=='none')
+  {
+  	document.getElementById('sub-'+id).style.display='block';
+	document.getElementById('sub-sign-'+id).innerHTML='-&nbsp;';
+  }
+  else
+  {
+  	document.getElementById('sub-'+id).style.display='none';
+	document.getElementById('sub-sign-'+id).innerHTML='+';
+  }
+}
+</script>";
+
+$output .= "<div class='hadith_narrator' ><div class='hd_content' id='hd_content' >";
+ 
+ //Query the hadith index using the alphabet
+
+ $query = db_query("SELECT node.nid AS nid,
+   node_data_field_hd_topic.field_hd_topic_value AS node_data_field_hd_topic_field_hd_topic_value,
+   node.type AS node_type,
+   node.vid AS node_vid,
+   node_data_field_hd_topic.field_hd_subtopic_value AS node_data_field_hd_topic_field_hd_subtopic_value
+ FROM node node 
+ LEFT JOIN content_type_hadith_subject node_data_field_hd_topic ON node.vid = node_data_field_hd_topic.vid
+ WHERE node.type in ('hadith_subject') and node_data_field_hd_topic.field_hd_topic_value like '".arg(3)."%' group by node_data_field_hd_topic.field_hd_topic_value");
+   
+
+  // lists the hadith parent subject indexes 
+  while ($result = db_fetch_object($query))
+  {
+     
+	 $result1 ="";
+	 $result_count = "";
+	 
+	 
+	    $sub_count = db_query("SELECT node.nid AS nid,
+   node_data_field_hd_topic.field_hd_topic_value AS node_data_field_hd_topic_field_hd_topic_value,
+   node.type AS node_type,
+   node.vid AS node_vid,
+   node_data_field_hd_topic.field_hd_subtopic_value AS node_data_field_hd_topic_field_hd_subtopic_value,
+   node_data_field_hd_vol_number.field_hd_vol_number_value AS node_data_field_hd_vol_number_field_hd_vol_number_value,
+   node_data_field_hd_book_code.field_hd_book_code_value AS node_data_field_hd_book_code_field_hd_book_code_value,
+   node_data_field_hd_number.field_hd_number_value AS node_data_field_hd_number_field_hd_number_value
+ FROM node node 
+ LEFT JOIN content_type_hadith_subject node_data_field_hd_topic ON node.vid = node_data_field_hd_topic.vid
+ LEFT JOIN content_field_hd_vol_number node_data_field_hd_vol_number ON node.vid = node_data_field_hd_vol_number.vid
+ LEFT JOIN content_field_hd_book_code node_data_field_hd_book_code ON node.vid = node_data_field_hd_book_code.vid
+ LEFT JOIN content_field_hd_number node_data_field_hd_number ON node.vid = node_data_field_hd_number.vid
+ WHERE node.type in ('hadith_subject') and node_data_field_hd_topic.field_hd_topic_value ='".addslashes($result->node_data_field_hd_topic_field_hd_topic_value)."' group by node_data_field_hd_topic.field_hd_subtopic_value");
+ 
+
+
+   $output .= "<div class='sub_text2'><a href='#'>".$result->node_data_field_hd_topic_field_hd_topic_value."</a> </div>";
+     // lists the hadith child subject indexes 
+	 while($result1 = db_fetch_object($sub_count))
+	 {
+	      	$i++;
+			
+			if($result1->node_data_field_hd_topic_field_hd_subtopic_value!="")
+			{
+		 
+			$output .= "<div class='sub_text'  >&nbsp;&nbsp;&nbsp;&nbsp;<span class='sub_text4' ><a href='javascript:void(0);' onclick='show_hd_div(".$i.")'><span id='sub-sign-".$i."'>+</span></a></span><a href='javascript:void(0);' onclick='show_hd_div(".$i.")' style='padding-left:5px;'>".$result1->node_data_field_hd_topic_field_hd_subtopic_value."</a></div>";
+			
+			 $sub_count_notgroup = db_query("SELECT node.nid AS nid,
+   node_data_field_hd_topic.field_hd_topic_value AS node_data_field_hd_topic_field_hd_topic_value,
+   node.type AS node_type,
+   node.vid AS node_vid,
+   node.title AS node_title,
+   node_data_field_hd_topic.field_hd_subtopic_value AS node_data_field_hd_topic_field_hd_subtopic_value,
+   node_data_field_hd_vol_number.field_hd_vol_number_value AS node_data_field_hd_vol_number_field_hd_vol_number_value,
+   node_data_field_hd_book_code.field_hd_book_code_value AS node_data_field_hd_book_code_field_hd_book_code_value,
+   node_data_field_hd_number.field_hd_number_value AS node_data_field_hd_number_field_hd_number_value
+ FROM node node 
+ LEFT JOIN content_type_hadith_subject node_data_field_hd_topic ON node.vid = node_data_field_hd_topic.vid
+ LEFT JOIN content_field_hd_vol_number node_data_field_hd_vol_number ON node.vid = node_data_field_hd_vol_number.vid
+ LEFT JOIN content_field_hd_book_code node_data_field_hd_book_code ON node.vid = node_data_field_hd_book_code.vid
+ LEFT JOIN content_field_hd_number node_data_field_hd_number ON node.vid = node_data_field_hd_number.vid
+ WHERE node.type in ('hadith_subject') and node_data_field_hd_topic.field_hd_subtopic_value ='".addslashes($result1->node_data_field_hd_topic_field_hd_subtopic_value)."'");
+   
+		$output .="<div id='sub-".$i."' style='display:none' class='sub_text3'>";	
+		 while($result2 = db_fetch_object($sub_count_notgroup))
+	     {
+
+							if($result2->node_data_field_hd_vol_number_field_hd_vol_number_value!="") // if volume number present.
+							{
+							
+							// Generate link to hadith pages.
+							
+							$query23 =  db_query("SELECT node.nid AS nid,
+				   node_data_field_hd_narrator_name.field_hd_narrator_name_value AS node_data_field_hd_narrator_name_field_hd_narrator_name_value,
+				   node.type AS node_type,
+				   node.vid AS node_vid,
+				   node_revisions.body AS node_revisions_body,
+				   node_revisions.format AS node_revisions_format,
+				   node.title AS node_title
+				 FROM node node 
+				 LEFT JOIN content_field_hd_book_code node_data_field_hd_book_code ON node.vid = node_data_field_hd_book_code.vid
+				 LEFT JOIN content_field_hd_number node_data_field_hd_number ON node.vid = node_data_field_hd_number.vid
+				 LEFT JOIN content_field_hd_vol_number node_data_field_hd_vol_number ON node.vid = node_data_field_hd_vol_number.vid
+				 LEFT JOIN content_type_hadith_content node_data_field_hd_narrator_name ON node.vid = node_data_field_hd_narrator_name.vid
+				 LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+				 WHERE (node.type in ('hadith_content')) AND (node_data_field_hd_book_code.field_hd_book_code_value = '".$result2->node_data_field_hd_book_code_field_hd_book_code_value."') AND (node_data_field_hd_number.field_hd_number_value = '".$result2->node_data_field_hd_number_field_hd_number_value."') AND (node_data_field_hd_vol_number.field_hd_vol_number_value = '".$result2->node_data_field_hd_vol_number_field_hd_vol_number_value."') order by node_data_field_hd_vol_number.field_hd_vol_number_value asc,node_data_field_hd_number.field_hd_number_value asc");
+				 
+				  $url = $base_url."/library/hadith/".$result2->node_data_field_hd_book_code_field_hd_book_code_value."/".$result2->node_data_field_hd_number_field_hd_number_value."/".$result2->node_data_field_hd_vol_number_field_hd_vol_number_value;
+				  
+					
+					}
+					else // if volume number not present.
+					{
+				 
+							$query23 =  db_query("SELECT node.nid AS nid,
+				   node_data_field_hd_narrator_name.field_hd_narrator_name_value AS node_data_field_hd_narrator_name_field_hd_narrator_name_value,
+				   node.type AS node_type,
+				   node.vid AS node_vid,
+				   node_revisions.body AS node_revisions_body,
+				   node_revisions.format AS node_revisions_format,
+				   node.title AS node_title
+				 FROM node node 
+				 LEFT JOIN content_field_hd_book_code node_data_field_hd_book_code ON node.vid = node_data_field_hd_book_code.vid
+				 LEFT JOIN content_field_hd_number node_data_field_hd_number ON node.vid = node_data_field_hd_number.vid
+				 LEFT JOIN content_type_hadith_content node_data_field_hd_narrator_name ON node.vid = node_data_field_hd_narrator_name.vid
+				 LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+				 WHERE (node.type in ('hadith_content')) AND (node_data_field_hd_book_code.field_hd_book_code_value = '".$result2->node_data_field_hd_book_code_field_hd_book_code_value."') AND (node_data_field_hd_number.field_hd_number_value = '".$result2->node_data_field_hd_number_field_hd_number_value."') order by node_data_field_hd_number.field_hd_number_value asc");
+				 
+			
+				 $url = $base_url."/library/hadith/".$result2->node_data_field_hd_book_code_field_hd_book_code_value."/".$result2->node_data_field_hd_number_field_hd_number_value;
+			
+					   }
+					   
+					   
+					if($result2->node_data_field_hd_book_code_field_hd_book_code_value=="FQS")
+			        {
+						$url = $base_url."/library/hadith/fiq/".$result2->node_data_field_hd_book_code_field_hd_book_code_value."/".$result2->node_data_field_hd_vol_number_field_hd_vol_number_value."/".$result2->node_data_field_hd_number_field_hd_number_value;
+					}
+		
+
+			//while($result23 = db_fetch_object($query23))
+	 		//{
+					$output .= "<div class='sub_text'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='".$url."'>".$result2->node_title."</a></div>";
+			//}
+	      }
+			 $output .= "</div>";
+			 
+	    }	 
+		
+     }
+
+	 
+	 $output .= "<br>";
+ }
+ 	 if($i==0)
+	 {
+	   $output .= "<b><span style='font-size:12px;'>No Hadith Subject Index Found.</span></b>";
+	 }
+ $output .= "</div></div>";
+ return $output;
+
+}
+
+
+

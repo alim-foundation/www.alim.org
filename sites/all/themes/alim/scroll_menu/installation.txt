@@ -1,0 +1,13 @@
+
+  SmartMenus 6 Installation
+============================
+
+    This is just a demonstration example of the SmartMenus 6 script and it does
+    not include the basic SmartMenus 6 installation and configuration instructions.
+
+    If you are not already familiar with the basic SmartMenus 6 installation and
+    configuration steps, please download the SmartMenus 6 package from:
+
+    http://www.smartmenus.org/download/
+
+    and read the instructions in the User's Manual before trying to use the script.
