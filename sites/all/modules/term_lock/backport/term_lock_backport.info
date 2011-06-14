@@ -1,0 +1,12 @@
+; $Id: term_lock_backport.info,v 1.1.2.1 2009/11/29 13:27:50 pounard Exp $
+name = Taxonomy term lock backport
+description = Provide some options to default form elements that will get to D7
+core = 6.x
+php = 5.1
+
+; Information added by drupal.org packaging script on 2010-04-08
+version = "6.x-2.0-beta3"
+core = "6.x"
+project = "term_lock"
+datestamp = "1270741845"
+

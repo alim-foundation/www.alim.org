@@ -1,0 +1,27 @@
+//$Id: CHANGELOG.txt,v 1.1.2.18 2009/07/22 21:27:39 mikeryan Exp $
+
+Table Wizard 1.1
+===========
+
+Features
+- #433840 - Added support for Views joins as well as relationships
+- #426650 - Allow tables managed by other modules (such as the node table) to be added 
+            and used in relationships.
+- #433656 - Added support for exporting views definitions
+- #430376 - Added support for Views arguments
+- #521210 - Option to skip full analysis when adding tables
+- #506708 - Order tables to be added alphabetically in pgsql
+- #463552 - Improved cache flushing, major performance improvement. Also use Batch API
+            when removing tables.
+- Added help directory (support for advanced_help)
+- Added CHANGELOG.txt
+
+Bug fixes
+- #479614, #495234, #519748 - Fixes to postgres support
+- #513534 - Clear menu cache so new default views are accessible
+- #462004 - Handle lack of available keys on Relationships page
+- #450170 - Another place requiring tw_quote_identifier()
+- #460808 - Bad link to analyze link from default view
+- #463544 - Make need to define Available Key (FK) more clear
+- #519166 - Typo in relationships form
+- #507374 - Missing unsigned on existing_view_data in schema

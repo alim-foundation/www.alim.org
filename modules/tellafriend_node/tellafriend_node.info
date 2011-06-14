@@ -1,0 +1,11 @@
+; $Id: tellafriend_node.info,v 1.5 2008/11/18 21:27:35 ggaetz Exp $
+name = Tell A Friend Node
+description = Tell A Friend node type for creating tell a friend pages
+core = "6.x"
+
+; Information added by drupal.org packaging script on 2008-11-23
+version = "6.x-1.4"
+core = "6.x"
+project = "tellafriend_node"
+datestamp = "1227481525"
+

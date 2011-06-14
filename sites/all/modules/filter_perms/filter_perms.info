@@ -1,0 +1,12 @@
+; $Id:$
+name = "Filter Permissions"
+description = "Provides role and module filters for the user permissions page."
+package = Util
+core = 6.x
+
+; Information added by drupal.org packaging script on 2009-09-07
+version = "6.x-1.1"
+core = "6.x"
+project = "filter_perms"
+datestamp = "1252359336"
+

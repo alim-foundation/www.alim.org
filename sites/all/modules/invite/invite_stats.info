@@ -1,0 +1,13 @@
+; $Id: invite_stats.info,v 1.5 2008/09/02 17:02:14 smk Exp $
+name = Invite Statistics
+description = "Displays some statistics about sent invitations."
+dependencies[] = invite
+package = Invite
+core = 6.x
+
+; Information added by drupal.org packaging script on 2009-04-19
+version = "6.x-2.0-alpha1"
+core = "6.x"
+project = "invite"
+datestamp = "1240176048"
+

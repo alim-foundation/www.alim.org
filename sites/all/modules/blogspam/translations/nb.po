@@ -1,0 +1,220 @@
+# $Id: nb.po,v 1.1.2.5 2009/01/16 18:08:55 chrissearle Exp $
+#
+# Norwegian Bokmål translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  blogspam.module,v 1.1.2.14 2009/01/16 12:14:02 chrissearle
+#  blogspam.info,v 1.1.2.1 2009/01/05 21:54:29 chrissearle
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-01-16 19:05+0100\n"
+"PO-Revision-Date: 2009-01-16 19:07+0100\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Norwegian Bokmål <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: blogspam.module:34
+msgid "Connection settings"
+msgstr "Tilkobling"
+
+#: blogspam.module:39
+msgid "Blogspam server to use"
+msgstr "Server som blogspam kjører på"
+
+#: blogspam.module:41
+msgid "Which blogspam server do you wish to use?"
+msgstr "Hvilken server ønsker du å bruke"
+
+#: blogspam.module:46
+msgid "Allow comment post if blogspam server is down?"
+msgstr "Hva skjer hvis blogspam serveren ikke svarer?"
+
+#: blogspam.module:47
+msgid "Allow all comments"
+msgstr "Kommentarene tillat"
+
+#: blogspam.module:48
+msgid "Block all comments"
+msgstr "Kommentarene sperret"
+
+#: blogspam.module:50
+msgid "If the server is down - how should we handle comments?"
+msgstr "Hvis serveren ikke svarer - hvordan håndteres kommentarer?"
+
+#: blogspam.module:55
+msgid "Configuration settings"
+msgstr "Instillinger"
+
+#: blogspam.module:68
+msgid "Node types"
+msgstr "Nodetyper"
+
+#: blogspam.module:71
+msgid "On which node types should blogspam be activated?"
+msgstr "På hvilken nodetyper skal blogspam brukes?"
+
+#: blogspam.module:76
+msgid "Advanced settings"
+msgstr "Avansert instillinger"
+
+#: blogspam.module:83
+msgid "Link count"
+msgstr "Antall lenker"
+
+#: blogspam.module:85
+msgid "If a comment contains this many links or more then it will be rejected. Will not be applied if lotsaurls plugin is excluded."
+msgstr ""
+"Hvis en kommentar inneholde så mange lenker eller flere så er den "
+"nektet. Denne har ingen effekt hvis lotsaurls plugin er ekskludert."
+
+#: blogspam.module:90
+msgid "Minimum size"
+msgstr "Minimum størrelse"
+
+#: blogspam.module:92
+msgid "Minimum size in bytes (you can add k at the end for kilobytes). Leave empty or set to 0 to ignore this option. Will not be applied if size plugin is excluded."
+msgstr ""
+"Minimum størrelse (bytes). Du kan legge 'k' til på slutten for "
+"kilobytes. Tom eller 0 betyr at minimum størrelse ikke testes. Denne "
+"har ingen effekt hvis size plugin er ekskludert."
+
+#: blogspam.module:97
+msgid "Maximum size"
+msgstr "Maksimum størrelse"
+
+#: blogspam.module:99
+msgid "Maximum size in bytes (you can add k at the end for kilobytes). Leave empty or set to 0 to ignore this option. Will not be applied if size plugin is excluded."
+msgstr ""
+"Maksimum størrelse (bytes). Du kan legge 'k' til på slutten for "
+"kilobytes. Tom eller 0 betyr at maksimum størrelse ikke testes. Denne "
+"har ingen effekt hvis size plugin er ekskludert."
+
+#: blogspam.module:104;111
+msgid "Minimum number of words"
+msgstr "Minimum antall ord"
+
+#: blogspam.module:106;113
+msgid "Minimum number of words. Will not be applied if wordcount plugin is excluded."
+msgstr ""
+"Minimum antall ord. Denne har ingen effekt hvis wordcount plugin er "
+"ekskludert."
+
+#: blogspam.module:118
+msgid "Whitelist"
+msgstr "Whitelist"
+
+#: blogspam.module:120
+msgid "Whitelisted IP addresses/ranges. One IP address or range per line. Either a literal IP address (\"192.168.1.1\") or a CIDR range (\"192.168.1.0/8\"). Will not be applied if 00whitelist plugin is excluded."
+msgstr ""
+"IP adresser som automatisk godkjennes. En IP eller subnett per linje. "
+"Enten IP (\"192.168.1.1\") eller CIDR gruppering (\"192.168.1.0/8\"). "
+"Denne har ingen effekt hvis 00whitelist plugin er ekskludert."
+
+#: blogspam.module:125
+msgid "Blacklist"
+msgstr "Svarteliste"
+
+#: blogspam.module:127
+msgid "Blacklisted IP addresses/ranges. One IP address or range per line. Either a literal IP address (\"192.168.1.1\") or a CIDR range (\"192.168.1.0/8\"). Will not be applied if 00blacklist plugin is excluded."
+msgstr ""
+"IP adresser som automatisk blokkeres. En IP eller subnett per linje. "
+"Enten IP (\"192.168.1.1\") eller CIDR gruppering (\"192.168.1.0/8\"). "
+"Denne har ingen effekt hvis 00blacklist plugin er ekskludert."
+
+#: blogspam.module:138
+msgid "Exclude plugins"
+msgstr "Ekskludere plugin"
+
+#: blogspam.module:141
+msgid "You may choose to exclude a server side check. Select those server side plugins to <em>exclude</em>. See <a href=\"@url\">the api docs</a> for more information on these plugins."
+msgstr "Du kan velge å ekskludere en test på serveren. Velg fra listen de som du vil <em>ekskludere</em>. Se <a href=\\\"@url\\\">api dokumentasjon</a> for mere informasjon om dette."
+
+#: blogspam.module:146
+msgid "Statistics to date"
+msgstr "Statistikk"
+
+#: blogspam.module:153
+msgid "Accepted"
+msgstr "Akseptert"
+
+#: blogspam.module:159
+msgid "Rejected as spam"
+msgstr "Kastet som søppel"
+
+#: blogspam.module:171
+msgid "The server must be specified."
+msgstr "Serveren må spesifiseres."
+
+#: blogspam.module:175
+msgid "The number of links must be numeric."
+msgstr "Antall linjer må være et tall."
+
+#: blogspam.module:180
+msgid "If provided, the minimum size must be numeric or numeric with trailing k - e.g. 200 or 2k - no spaces"
+msgstr ""
+"Hvis spesifisert må minimum størrelse være et tall (evt. med k til "
+"slutt) - f.e. 200 eller 2k. Ingen mellomrom"
+
+#: blogspam.module:186
+msgid "If provided, the maximum size must be numeric or numeric with trailing k - e.g. 200 or 2k - no spaces"
+msgstr ""
+"Hvis spesifisert må maksimum størrelse være et tall (evt. med k til "
+"slutt) - f.e. 200 eller 2k. Ingen mellomrom"
+
+#: blogspam.module:191
+msgid "The minimum number of words must be numeric."
+msgstr "Minimum antall ord må være et tall"
+
+#: blogspam.module:285
+msgid "Unable to check comment with blogspam - please try again later"
+msgstr "Kunne ikke sjekke med blogspam - vennligst prøv igjen senere"
+
+#: blogspam.module:289
+msgid "Blogspam checker has blocked this post due to: "
+msgstr "Blogspam har sperret denne post pga: "
+
+#: blogspam.module:308;309
+msgid "Unknown"
+msgstr "Ukjent"
+
+#: blogspam.module:280;304;322;0
+msgid "blogspam"
+msgstr "blogspam"
+
+#: blogspam.module:280
+msgid "Call to Blogspam checker failed with code %code and message %msg"
+msgstr "Feil ved Blogspam med kode %code og melding %msg"
+
+#: blogspam.module:304
+msgid "Call to Blogspam stats failed with code %code and message %msg"
+msgstr ""
+"Feil ved Blogspam med kode %code og melding %msg ved henting av "
+"statistikk"
+
+#: blogspam.module:322
+msgid "Call to Blogspam getPlugins failed with code %code and message %msg"
+msgstr ""
+"Feil ved Blogspam med kode %code og melding %msg ved henting av "
+"plugins"
+
+#: blogspam.module:336
+msgid "post comments without checking"
+msgstr "kommentere uten sjekking"
+
+#: blogspam.module:17 blogspam.info:0
+msgid "Blogspam"
+msgstr "Blogspam"
+
+#: blogspam.module:18
+msgid "Configure server to use for blogspam."
+msgstr "Server konfigurasjon for blogspam."
+
+#: blogspam.info:0
+msgid "Blogspam from http://blogspam.net/"
+msgstr "Blogspam fra http://blogspam.net/"
+

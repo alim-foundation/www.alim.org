@@ -1,0 +1,41 @@
+// $Id: changelog.txt,v 1.2 2010/03/21 09:24:07 ppblaauw Exp $Changelog for the Views Slideshow: ddblock module.
+
+2010-03-21
+Updated readme.txt to reflect version 1.0 of the module
+Clean up code (with coder module)
+Create pot.file
+
+2009-10-18
+#566766 fixed slideshow does not appear
+#580204 fixed imagecache not used 
+Changed speed values
+Add image imagecache slide to debug info
+add nr_of_items to jquery variables
+Use integer values for number values
+
+2009-09-07
+#566766 Fixed bug with not calling preprocess function
+Fixed bug with default values for prev/next pager position checkboxes
+Set default slide text position to bottom
+Set default prev and next caption for slide to an empty space
+
+2009-09-01 
+Add functionality for scrollable pager
+Add view_display_id to preprocess function for selecting a display fom the view
+Set default pause from disabled to enabled
+Set default next from enabled to disabled
+Fixed bug in pager2 position default value
+Fixed bug in view_display_id in pager settings
+Fixed bug with slide_text not shown in templates
+Fixed bug with link to node in readmore, add base_path()
+Fixed bug with link in image, remove base_path() from function, add in template
+Placed debug info at top of preprocess functions
+
+Please download the latest version of the theme and export_package vsd-upright10-50-v1-1.zip
+vsd_export_files-v1-1.zip
+
+2009-08-29 
+Initial Commit to Drupal.org
+
+2009-05-12 
+Initial conversion of ddblock module to views_slideshow_ddblock module.

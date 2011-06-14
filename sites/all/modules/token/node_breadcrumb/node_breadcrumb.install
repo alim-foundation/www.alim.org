@@ -1,0 +1,46 @@
+<?php
+// $Id: node_breadcrumb.install,v 1.8 2009/08/13 19:40:38 edhel Exp $
+
+function node_breadcrumb_install() {
+  switch ($GLOBALS['db_type']) {
+    case 'mysql':
+    case 'mysqli':
+      db_query("CREATE TABLE {node_breadcrumb_rule} (
+        rid int NOT NULL auto_increment,
+        node_type varchar(255) default NULL,
+        tid1 int default NULL,
+        tid2 int default NULL,
+        mid int default NULL,
+        weight tinyint NOT NULL default '0',
+        `condition` text,
+        PRIMARY KEY  (rid)
+      ) /*!40100 DEFAULT CHARACTER SET UTF8 */ ");
+      break;
+    case 'pgsql':
+      db_query("CREATE TABLE {node_breadcrumb_rule} (
+        rid serial,
+        node_type varchar(255) default NULL,
+        tid1 integer default NULL,
+        tid2 integer default NULL,
+        mid integer default NULL,
+        weight smallint NOT NULL default '0',
+        condition text,
+        PRIMARY KEY  (rid)
+      )");
+      break;
+  }
+  drupal_set_message("node_breadcrumb_rule table created.");
+}
+
+function node_breadcrumb_uninstall() {
+  if (db_table_exists('node_breadcrumb_rule')) {
+    db_query("DROP TABLE {node_breadcrumb_rule}");
+  }
+  variable_del('node_breadcrumb_add_active_class');
+  drupal_set_message("node_breadcrumb_rule table dropped.");
+}
+
+function node_breadcrumb_update_1() {
+  $ret[] = update_sql("ALTER TABLE {node_breadcrumb_rule} ADD condition text");
+  return $ret;
+}

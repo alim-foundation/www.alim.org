@@ -1,0 +1,337 @@
+<?php
+// $Id: blogspam.module,v 1.1.2.17 2009/01/16 18:08:54 chrissearle Exp $
+
+/**
+ * @file
+ *
+ * Use blogspam (http://blogspam.net) for testing comments
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function blogspam_menu() {
+  $items = array();
+
+  $items['admin/settings/blogspam'] = array(
+    'title' => 'Blogspam',
+    'description' => 'Configure server to use for blogspam.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('blogspam_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Generate the admin form.
+ */
+function blogspam_admin_settings() {
+  $form['blogspam_server_group'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Connection settings'),
+  );
+
+  $form['blogspam_server_group']['blogspam_server'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Blogspam server to use'),
+    '#default_value' => variable_get('blogspam_server', 'http://test.blogspam.net:8888/'),
+    '#description' => t('Which blogspam server do you wish to use?'),
+  );
+
+  $form['blogspam_server_group']['blogspam_xmlrpc_error'] = array(
+    '#type' => 'radios',
+    '#title' => t('Allow comment post if blogspam server is down?'),
+    '#options' => array(t('Allow all comments'),
+      t('Block all comments')),
+    '#default_value' => variable_get('blogspam_xmlrpc_error', 0),
+    '#description' => t('If the server is down - how should we handle comments?'),
+  );
+
+  $form['blogspam_settings_group'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Configuration settings'),
+  );
+
+  $node_types = node_get_types();
+
+  $options = array();
+
+  foreach ($node_types as $type => $node_type) {
+    $options[$type] = $node_type->name;
+  }
+
+  $form['blogspam_settings_group']['blogspam_node_types'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Node types'),
+    '#options' => $options,
+    '#default_value' => variable_get('blogspam_node_types', array()),
+    '#description' => t('On which node types should blogspam be activated?'),
+  );
+
+  $form['blogspam_settings_group']['blogspam_advanced_settings_group'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Advanced settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+
+  $form['blogspam_settings_group']['blogspam_advanced_settings_group']['blogspam_option_maxlinks'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Link count'),
+    '#default_value' => variable_get('blogspam_option_maxlinks', 10),
+    '#description' => t('If a comment contains this many links or more then it will be rejected. Will not be applied if lotsaurls plugin is excluded.'),
+  );
+
+  $form['blogspam_settings_group']['blogspam_advanced_settings_group']['blogspam_option_minsize'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Minimum size'),
+    '#default_value' => variable_get('blogspam_option_minsize', 0),
+    '#description' => t('Minimum size in bytes (you can add k at the end for kilobytes). Leave empty or set to 0 to ignore this option. Will not be applied if size plugin is excluded.'),
+  );
+
+  $form['blogspam_settings_group']['blogspam_advanced_settings_group']['blogspam_option_maxsize'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Maximum size'),
+    '#default_value' => variable_get('blogspam_option_maxsize', 0),
+    '#description' => t('Maximum size in bytes (you can add k at the end for kilobytes). Leave empty or set to 0 to ignore this option. Will not be applied if size plugin is excluded.'),
+  );
+
+  $form['blogspam_settings_group']['blogspam_advanced_settings_group']['blogspam_option_minwords'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Minimum number of words'),
+    '#default_value' => variable_get('blogspam_option_minwords', 4),
+    '#description' => t('Minimum number of words. Will not be applied if wordcount plugin is excluded.'),
+  );
+
+  $form['blogspam_settings_group']['blogspam_advanced_settings_group']['blogspam_option_minwords'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Minimum number of words'),
+    '#default_value' => variable_get('blogspam_option_minwords', 4),
+    '#description' => t('Minimum number of words. Will not be applied if wordcount plugin is excluded.'),
+  );
+
+  $form['blogspam_settings_group']['blogspam_advanced_settings_group']['blogspam_option_whitelist'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Whitelist'),
+    '#default_value' => variable_get('blogspam_option_whitelist', ''),
+    '#description' => t('Whitelisted IP addresses/ranges. One IP address or range per line. Either a literal IP address ("192.168.1.1") or a CIDR range ("192.168.1.0/8"). Will not be applied if 00whitelist plugin is excluded.'),
+  );
+
+  $form['blogspam_settings_group']['blogspam_advanced_settings_group']['blogspam_option_blacklist'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Blacklist'),
+    '#default_value' => variable_get('blogspam_option_blacklist', ''),
+    '#description' => t('Blacklisted IP addresses/ranges. One IP address or range per line. Either a literal IP address ("192.168.1.1") or a CIDR range ("192.168.1.0/8"). Will not be applied if 00blacklist plugin is excluded.'),
+  );
+
+  $plugins = array();
+
+  foreach (_blogspam_plugins() as $plugin) {
+    $plugins[$plugin] = $plugin;
+  }
+
+  $form['blogspam_settings_group']['blogspam_advanced_settings_group']['blogspam_option_plugins'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Exclude plugins'),
+    '#options' => $plugins,
+    '#default_value' => variable_get('blogspam_option_plugins', array()),
+    '#description' => t('You may choose to exclude a server side check. Select those server side plugins to <em>exclude</em>. See <a href="@url">the api docs</a> for more information on these plugins.', array('@url' => url("http://blogspam.net", array('absolute' => TRUE)))),
+  );
+
+  $form['blogspam_stats'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Statistics to date'),
+  );
+
+  $stats = _blogspam_stats();
+
+  $form['blogspam_stats']['ok'] = array(
+    '#type' => 'item',
+    '#title' => t('Accepted'),
+    '#value' => $stats['ok'],
+  );
+
+  $form['blogspam_stats']['spam'] = array(
+    '#type' => 'item',
+    '#title' => t('Rejected as spam'),
+    '#value' => $stats['spam'],
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Validate admin form.
+ */
+function blogspam_admin_settings_validate($form, &$form_state) {
+  if ($form_state['values']['blogspam_server'] == "") {
+    form_set_error('blogspam_server', t('The server must be specified.'));
+  }
+
+  if (!is_numeric($form_state['values']['blogspam_option_maxlinks'])) {
+    form_set_error('blogspam_option_maxlinks', t('The number of links must be numeric.'));
+  }
+
+  if ($form_state['values']['blogspam_option_minsize']) {
+    if (!is_numeric(str_replace('k', '', $form_state['values']['blogspam_option_minsize']))) {
+      form_set_error('blogspam_option_minsize', t('If provided, the minimum size must be numeric or numeric with trailing k - e.g. 200 or 2k - no spaces'));
+    }
+  }
+
+  if ($form_state['values']['blogspam_option_maxsize']) {
+    if (!is_numeric(str_replace('k', '', $form_state['values']['blogspam_option_maxsize']))) {
+      form_set_error('blogspam_option_maxsize', t('If provided, the maximum size must be numeric or numeric with trailing k - e.g. 200 or 2k - no spaces'));
+    }
+  }
+
+  if (!is_numeric($form_state['values']['blogspam_option_minwords'])) {
+    form_set_error('blogspam_option_minwords', t('The minimum number of words must be numeric.'));
+  }
+}
+
+/**
+ * Implementation of hook_comment().
+ */
+function blogspam_comment($comment, $op) {
+  global $user;
+  global $base_url;
+
+  switch ($op) {
+    case 'validate':
+      // Can a user post unchecked?
+      if (user_access('post comments without checking', $user)) {
+        return;
+      }
+
+      // Is this node type protected?
+      $node_types = variable_get('blogspam_node_types', array());
+
+      $node = node_load($comment['nid']);
+
+      if (!$node_types[$node->type]) {
+        return;
+      }
+
+      // Call the blogspam service
+      $version = drupal_parse_info_file(drupal_get_path("module", "blogspam") .'/blogspam.info');
+
+      $options = array('max-links='. variable_get('blogspam_option_maxlinks', 10),
+                       'min-words='. variable_get('blogspam_option_minwords', 4),
+      );
+
+      $minsize = variable_get('blogspam_option_minsize', 0);
+      $maxsize = variable_get('blogspam_option_maxsize', 0);
+
+      if ($minsize) {
+        $options[] = 'min-size='. $minsize;
+      }
+
+      if ($maxsize) {
+        $options[] = 'max-size='. $maxsize;
+      }
+
+      foreach (variable_get('blogspam_option_plugins', array()) as $plugin) {
+        if ($plugin) {
+          $options[] = 'exclude='. $plugin;
+        }
+      }
+
+      foreach (preg_split('/\s+/', variable_get('blogspam_option_whitelist', '')) as $ip) {
+        if ($ip) {
+          $options[] = 'whitelist='. $ip;
+        }
+      }
+
+      foreach (preg_split('/\s+/', variable_get('blogspam_option_blacklist', '')) as $ip) {
+        if ($ip) {
+          $options[] = 'blacklist='. $ip;
+        }
+      }
+
+      $struct = array(
+          'ip'      => ip_address(),
+          'comment' => $comment['comment'],
+          'agent' => $_SERVER['HTTP_USER_AGENT'],
+          'site' => $base_url,
+          'version' => 'drupal '. VERSION .' '. ($version['version'] ? $version['version'] : 'dev'),
+          'options' => implode(',', $options),
+      );
+
+      if ($comment['name']) {
+        $struct['name'] = $comment['name'];
+      }
+
+      if ($comment['mail']) {
+        $struct['email'] = $comment['mail'];
+      }
+
+      if ($comment['subject']) {
+        $struct['subject'] = $comment['subject'];
+      }
+
+      $check = xmlrpc(variable_get('blogspam_server', 'http://test.blogspam.net:8888/'), 'testComment', $struct);
+
+      $xmlrpc_error_flag = variable_get('blogspam_xmlrpc_error', 0);
+
+      if ($check == FALSE) {
+        watchdog('blogspam',
+                   "Call to Blogspam checker failed with code %code and message %msg",
+        array('%code' => xmlrpc_errno(), '%msg' => xmlrpc_error_msg()));
+
+        if ($xmlrpc_error_flag == 1) {
+          form_set_error('comment', t("Unable to check comment with blogspam - please try again later"));
+        }
+      }
+      elseif ($check != "OK") {
+        form_set_error('comment', t("Blogspam checker has blocked this post due to: ") . $check);
+      }
+      break;
+  }
+}
+
+/**
+ * Get stats.
+ */
+function _blogspam_stats() {
+  global $base_url;
+
+  $stats = xmlrpc(variable_get('blogspam_server', 'http://test.blogspam.net:8888/'), 'getStats', $base_url);
+
+  if ($stats == FALSE) {
+    watchdog('blogspam',
+             "Call to Blogspam stats failed with code %code and message %msg",
+    array('%code' => xmlrpc_errno(), '%msg' => xmlrpc_error_msg()));
+
+    return array('ok' => t('Unknown'),
+                 'spam' => t('Unknown'));
+  }
+
+  return $stats;
+}
+
+/**
+ * Get enabled plugins.
+ */
+function _blogspam_plugins() {
+  $plugins = xmlrpc(variable_get('blogspam_server', 'http://test.blogspam.net:8888/'), 'getPlugins');
+
+  if ($plugins == FALSE) {
+    watchdog('blogspam',
+             "Call to Blogspam getPlugins failed with code %code and message %msg",
+    array('%code' => xmlrpc_errno(), '%msg' => xmlrpc_error_msg()));
+
+    return array();
+  }
+
+  return $plugins;
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function blogspam_perm() {
+  return array('post comments without checking');
+}

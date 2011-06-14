@@ -1,0 +1,128 @@
+<?php
+// $Id: term_lock_backport.module,v 1.1.2.3 2009/12/02 17:20:32 pounard Exp $
+
+/**
+ * @file
+ * Taxonomy term lock backport
+ * 
+ * This file includes some form elements redefinition, to be able to use some
+ * features that will come natively in D7, like disabled flag for form select
+ * options.
+ */
+
+/**
+ * Implementation of hook_elements().
+ */
+function term_lock_backport_elements() {
+  $type = array();
+  $type['select_backport'] = array(
+    '#input' => TRUE,
+    '#size' => 0,
+    '#multiple' => FALSE,
+    '#process' => array('term_lock_backport_flatten_options', 'form_expand_ahah'),
+    '#disabled_options' => array(),
+  );
+  return $type;
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function term_lock_backport_theme() {
+  $items = array();
+  $items['select_backport'] = array();
+  return $items;
+}
+
+function term_lock_backport_flatten_options($element) {
+  $element['#options'] = _term_lock_backport_flatten_options($element['#options']);
+  return $element;
+}
+
+/**
+ * This is a really awful hack, but we had no other choice. The only other
+ * choice would have been to patch form.inc to get rid of this ugly hardcoded
+ * flatten for select elements. 
+ */
+function _term_lock_backport_flatten_options($array, $reset = TRUE) {
+  static $return;
+
+  if ($reset) {
+    $return = array();
+  }
+
+  foreach ($array as $key => $value) {
+    if (is_object($value)) {
+      _term_lock_backport_flatten_options($value->option, FALSE);
+    }
+    else if (is_array($value)) {
+      _term_lock_backport_flatten_options($value, FALSE);
+    }
+    else {
+      $return[$key] = $value;
+    }
+  }
+
+  return $return;
+}
+
+/**
+ * Override of form_select_options().
+ */
+function form_select_backport_options($element, $choices = NULL) {
+  if (!isset($choices)) {
+    $choices = $element['#options'];
+  }
+  // array_key_exists() accommodates the rare event where $element['#value'] is NULL.
+  // isset() fails in this situation.
+  $value_valid = isset($element['#value']) || array_key_exists('#value', $element);
+  $value_is_array = is_array($element['#value']);
+  $options = '';
+  foreach ($choices as $key => $choice) {
+    if (is_array($choice)) {
+      $options .= '<optgroup label="'. $key .'">';
+      $options .= form_select_backport_options($element, $choice);
+      $options .= '</optgroup>';
+    }
+    elseif (is_object($choice)) {
+      $options .= form_select_backport_options($element, $choice->option);
+    }
+    else {
+      $key = (string)$key;
+      if ($value_valid && (!$value_is_array && (string)$element['#value'] === $key || ($value_is_array && in_array($key, $element['#value'])))) {
+        $selected = ' selected="selected"';
+      }
+      else {
+        $selected = '';
+      }
+      // Begin: custom code, add the disabled option.
+      if (empty($selected) && isset($element['#disabled_options']) && in_array($key, $element['#disabled_options'])) {
+        $disabled = ' disabled="disabled"';
+      }
+      else {
+        $disabled = '';
+      }
+      $options .= '<option value="' . check_plain($key) . '"' . $selected . $disabled . '>' . check_plain($choice) . '</option>';
+      // End: custom code.
+    }
+  }
+  return $options;
+}
+
+/**
+ * Wrapper for form_type_select_value().
+ */
+function form_type_select_backport_value($form, $edit = FALSE) {
+  return form_type_select_value($form, $edit);
+}
+
+/**
+ * Wrapper for theme_select().
+ */
+function theme_select_backport($element) {
+  $select = '';
+  $size = $element['#size'] ? ' size="'. $element['#size'] .'"' : '';
+  _form_set_class($element, array('form-select'));
+  $multiple = $element['#multiple'];
+  return theme('form_element', $element, '<select name="'. $element['#name'] .''. ($multiple ? '[]' : '') .'"'. ($multiple ? ' multiple="multiple" ' : '') . drupal_attributes($element['#attributes']) .' id="'. $element['#id'] .'" '. $size .'>'. form_select_backport_options($element) .'</select>');
+}

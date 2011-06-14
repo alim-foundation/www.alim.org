@@ -1,0 +1,11 @@
+; $Id$
+name = "RPX"
+description = Adds the RPX Sign In widget to your site
+core = 6.x
+
+; Information added by drupal.org packaging script on 2010-01-08
+version = "6.x-1.2"
+core = "6.x"
+project = "rpx"
+datestamp = "1262988011"
+

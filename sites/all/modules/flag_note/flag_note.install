@@ -1,0 +1,44 @@
+<?php
+// $Id: flag_note.install,v 1.1.2.2 2009/07/04 19:46:42 gunzip Exp $
+
+/**
+ * @file
+ * Flag note module install/schema/update hooks.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function flag_note_install() {
+  $success = drupal_install_schema('flag_note');
+  if (empty($success[0]['success'])) {
+    drupal_set_message(st('The installation of Flag Note module failed.'), 'error');
+  }
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function flag_note_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE 'flag_note_%'");
+  drupal_uninstall_schema('flag_note');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function flag_note_schema() {
+  $flag_content = drupal_get_schema_unprocessed('flag', 'flag_content');
+  $flag_content['fields']['fcid']['type'] = 'int';
+  $schema['flag_note']['fields'] = array_merge($flag_content['fields'],
+      array('note' => array('type' => 'text', 'not null' => TRUE))
+  );
+  $schema['flag_note']['fields']['fnid'] = array('type' => 'serial');
+  $schema['flag_note']['primary key'] = array('fnid');
+  $schema['flag_note']['indexes'] = array(
+    'fcid' => array('fcid'),
+    'fid' => array('fid'),
+    'content_type_content_id' => array('content_type', 'content_id'),
+  );
+  return $schema;
+}

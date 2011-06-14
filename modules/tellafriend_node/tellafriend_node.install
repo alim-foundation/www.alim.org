@@ -1,0 +1,186 @@
+<?php
+// $Id: tellafriend_node.install,v 1.4 2008/10/27 19:31:46 ggaetz Exp $
+
+/**
+ * @file
+ * Install file for tellafriend_node module
+ */
+
+function tellafriend_node_install() {
+  drupal_install_schema('tellafriend_node');
+}
+
+function tellafriend_node_uninstall() {
+  drupal_uninstall_schema('tellafriend_node');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function tellafriend_node_schema() {
+  $schema['tellafriend_node_data'] = array(
+    'fields' => array(
+      'nid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0
+      ),
+      'tellafriend_node_max_allowed_recipients' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+      'tellafriend_node_include_plaxo' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+      'tellafriend_node_subject' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'tellafriend_node_subject_is_editable' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 1,
+      ),
+      'tellafriend_node_message' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+      'tellafriend_node_message_is_editable' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 1,
+      ),
+      'tellafriend_node_message_constant_text' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+      'tellafriend_node_show_opt_in' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 1,
+      ),
+      'tellafriend_node_opt_in_text' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'tellafriend_node_show_opt_out' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 0,
+      ),
+      'tellafriend_node_opt_out_text' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'tellafriend_node_first_name_is_required' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 1,
+      ),
+      'tellafriend_node_last_name_is_required' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default' => 1,
+      ),
+      'tellafriend_node_thank_you_page' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+    ),
+    'indexes' => array(
+      'tellafriend_node_nid' => array('nid')
+    ),
+    'primary key' => array('nid'),
+  );
+  $schema['tellafriend_node_results'] = array(
+    'fields' => array(
+      'nid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0
+      ),
+      'message_id' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => 0
+      ),
+      'timestamp' => array(
+        'type' => 'int',
+         'not null' => TRUE,
+         'default' => 0
+      ),
+      'sender_first_name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+      'sender_last_name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+      'sender_email' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'recipient' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'opt_in' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'opt_out' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      )
+    ),
+    'indexes' => array(
+      'tellafriend_node_timestamp' => array('timestamp'),
+      'tellafriend_node_message_id' => array('message_id'),
+      'tellafriend_node_sender_email' => array('sender_email'),
+      'tellafriend_node_recipient' => array('recipient'),
+    ),
+  );
+  return $schema;
+}
+
+function tellafriend_node_update_6000() {
+  $ret = array();
+  db_add_field($ret, 'tellafriend_node_results', 'opt_out', array('type' => 'int', 'not null' => FALSE, 'size' => 'tiny', 'unsigned' => TRUE));
+  return $ret;
+}
+
+function tellafriend_node_update_6001() {
+  $ret = array();
+  db_add_field($ret, 'tellafriend_node_data', 'tellafriend_node_include_plaxo', array('type' => 'int', 'not null' => TRUE, 'size' => 'tiny', 'unsigned' => TRUE, 'default' => 1));
+  return $ret;
+}

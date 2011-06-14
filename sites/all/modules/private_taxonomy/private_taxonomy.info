@@ -1,0 +1,11 @@
+name = Private Taxonomy
+description = "Allows per-user taxonomy terms for a given vocabulary."
+dependencies[] = taxonomy
+package = Taxonomy
+core = 6.x
+; Information added by drupal.org packaging script on 2009-04-02
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "private_taxonomy"
+datestamp = "1238674837"
+

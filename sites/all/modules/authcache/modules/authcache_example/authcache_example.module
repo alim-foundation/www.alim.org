@@ -1,0 +1,142 @@
+<?php
+// $Id: authcache_example.module,v 1.2 2009/07/13 02:55:01 jonahellison Exp $
+
+/**
+ * @file authcache_example.module
+ *
+ * Example module that displays a Drupal block of customized user content.
+ */
+ 
+
+/**
+ * Implentation of hook_menu()
+ */
+function authcache_example_menu() {
+  $items['user/%user/authcache_example'] = array(
+    'title' => 'Authcache Example',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('authcache_example_block_form', 1),
+    'access callback' => 'user_edit_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+  );
+  
+  return $items;
+}
+
+/**
+ * Form to modify user's block
+ */
+function authcache_example_block_form($form_state, $account) {
+
+  $text = db_result(db_query("SELECT block_text FROM {authcache_example} WHERE uid = %d", $account->uid));
+
+  $form['block_text'] = array(
+    '#title' => 'Your Custom Block Text',
+    '#type' => 'textarea',
+    '#default_value' => ($text) ? $text : '',
+  );
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Save',
+  );
+
+  return $form;
+}
+
+/**
+ * User updated their block
+ */
+function authcache_example_block_form_submit($form, &$form_state) {
+  $account = $form['#parameters'][2];
+  
+  db_query("INSERT INTO {authcache_example} (uid,block_text) VALUES (%d, '%s') ON DUPLICATE KEY UPDATE block_text='%s'", $account->uid, $form_state['values']['block_text'], $form_state['values']['block_text']);
+
+  // Invalidate browser cache by modify our cache cookie time
+  setcookie('authcache_example', time(), 0, ini_get('session.cookie_path'), ini_get('session.cookie_domain'), ini_get('session.cookie_secure') == '1');
+  
+  drupal_set_message(t("Your block has been updated."));
+}
+
+/**
+ * Implementation of hook_block()
+ */
+function authcache_example_block($op = 'list', $delta = 0, $edit = array()) {
+  switch($op) {
+    case 'list':
+      $blocks[0] = array(
+        'info' => t('Authcache Example Block'),
+        'weight' => 10,
+        'status' => 1,
+        'region' => 'left',
+        'cache' => BLOCK_NO_CACHE,
+      );
+
+      return $blocks;
+      break;
+    case 'configure':
+
+      break;
+    case 'view':
+      $block = array(
+        'subject' => t('Authcache Example'),
+        'content' => authcache_example_display_block_0(),
+      );
+      return $block;
+      break;
+    case 'save':
+
+      break;
+
+
+  }
+}
+
+/**
+ * Display user-customized block
+ */
+function authcache_example_display_block_0() {
+  global $user, $is_page_authcache;
+
+  if(!$user->uid) {
+    return 'Please login to test this block.';
+  }
+  // Do not cache block if page is to be cached
+  else if($is_page_authcache) {
+    // Use JS to retrieve block content
+    drupal_add_js(drupal_get_path('module', 'authcache_example') .'/js/authcache_example.js', 'module', 'header');
+    return '&nbsp;';
+  }
+  
+  $block_text = check_plain(db_result(db_query("SELECT block_text FROM {authcache_example} WHERE uid = %d", $user->uid)));
+
+  $output = t("Hello, !user, this is a customized block of content that can be cached by the browser.  Update it <a href=\"!url\">here</a>!", array('!user' => $user->name, '!url' => url("user/$user->uid/authcache_example")));
+
+  $output .= "<p><strong class=\"error\">$block_text</strong></p>";
+  
+  return $output;
+}
+
+/**
+ * Implementation of hook_user()
+ *
+ * Cookies need to be reset in case user logs in under a different account
+ */
+function authcache_example_user($op, &$edit, &$account, $category = NULL) {
+
+  // cookie expiration
+  $expires = ini_get('session.cookie_lifetime');
+  $expires = (!empty($expires) && is_numeric($expires) ? time() + (int)$expires : 0);
+
+  switch($op) {
+    case 'login':
+      setcookie('authcache_example', time(), $expires, ini_get('session.cookie_path'), ini_get('session.cookie_domain'), ini_get('session.cookie_secure') == '1');
+      break;
+    case 'logout':
+      setcookie('authcache_example', "", time() - 86400, ini_get('session.cookie_path'), ini_get('session.cookie_domain'), ini_get('session.cookie_secure') == '1');
+      break;
+    default:
+      break;
+  }
+}

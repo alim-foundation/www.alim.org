@@ -1,0 +1,12 @@
+; $Id: node_breadcrumb.info,v 1.10 2008/11/13 18:32:11 edhel Exp $
+name = Node breadcrumb
+description = Customize breadcrumb and menu location of nodes depending on their content type, associated terms and others conditions.
+dependencies[] = menu
+core = 6.x
+
+; Information added by drupal.org packaging script on 2009-10-22
+version = "6.x-1.0-beta6"
+core = "6.x"
+project = "node_breadcrumb"
+datestamp = "1256211056"
+

@@ -1,0 +1,25 @@
+<?php
+// $Id: term_lock.theme,v 1.1.2.3.2.2 2010/04/08 15:43:27 pounard Exp $
+
+/**
+ * @file
+ * Taxonomy term lock theme functions
+ */
+
+function theme_term_lock_locked() {
+  $alt = t("Locked");
+  $img = url(drupal_get_path('module', 'term_lock') . '/img/lock16.png');
+  return '<img src="' . $img . '" alt="' . $alt . '" title="' . $alt .'"/>';
+}
+
+function theme_term_lock_childlocked() {
+  $alt = t("No child");
+  $img = url(drupal_get_path('module', 'term_lock') . '/img/child16.png');
+  return '<img src="' . $img . '" alt="' . $alt . '" title="' . $alt .'"/>';
+}
+
+function theme_term_lock_nodelocked() {
+  $alt = t("No node");
+  $img = url(drupal_get_path('module', 'term_lock') . '/img/node16.png');
+  return '<img src="' . $img . '" alt="' . $alt . '" title="' . $alt .'"/>';
+}

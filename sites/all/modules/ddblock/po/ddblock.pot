@@ -1,0 +1,627 @@
+# $Id: ddblock.pot,v 1.2 2008/08/31 04:37:11 ppblaauw Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  ddblock.admin.inc: n/a
+#  ddblock.module: n/a
+#  ddblock.info: n/a
+#  ddblock.install: n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-08-30 07:54+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: ddblock.admin.inc:21
+msgid "Edit"
+msgstr ""
+
+#: ddblock.admin.inc:22;180
+msgid "Delete"
+msgstr ""
+
+#: ddblock.admin.inc:23
+msgid "Configure block"
+msgstr ""
+
+#: ddblock.admin.inc:27
+msgid "No dynamic display blocks available."
+msgstr ""
+
+#: ddblock.admin.inc:29
+msgid "Name"
+msgstr ""
+
+#: ddblock.admin.inc:29
+msgid "Operation"
+msgstr ""
+
+#: ddblock.admin.inc:35
+msgid "Dynamic display blocks"
+msgstr ""
+
+#: ddblock.admin.inc:47
+msgid "Add dynamic display block."
+msgstr ""
+
+#: ddblock.admin.inc:52;106
+msgid "Block title"
+msgstr ""
+
+#: ddblock.admin.inc:53
+msgid "A block with this same name will be created."
+msgstr ""
+
+#: ddblock.admin.inc:60
+msgid "Add block"
+msgstr ""
+
+#: ddblock.admin.inc:79;138
+msgid "Dynamic display block %s already exists. Please use a different name."
+msgstr ""
+
+#: ddblock.admin.inc:89
+msgid "Dynamic display block %s added."
+msgstr ""
+
+#: ddblock.admin.inc:107
+msgid "The block name must be unique."
+msgstr ""
+
+#: ddblock.admin.inc:114
+msgid "Save"
+msgstr ""
+
+#: ddblock.admin.inc:150
+msgid "Dynamic display block block updated."
+msgstr ""
+
+#: ddblock.admin.inc:160
+msgid "The block with delta @delta was not found."
+msgstr ""
+
+#: ddblock.admin.inc:167
+msgid "Are you sure you want to delete the dynamic display block instance %title?"
+msgstr ""
+
+#: ddblock.admin.inc:171
+msgid "Are you sure you want to delete the dynamic display block %title?"
+msgstr ""
+
+#: ddblock.admin.inc:177
+msgid "This action cannot be undone."
+msgstr ""
+
+#: ddblock.admin.inc:183
+msgid "Cancel"
+msgstr ""
+
+#: ddblock.admin.inc:211
+msgid "Dynamic display block successfully deleted!"
+msgstr ""
+
+#: ddblock.admin.inc:214
+msgid "Dynamic display block instance successfully deleted!"
+msgstr ""
+
+#: ddblock.admin.inc:220
+msgid "There was a problem deleting the dynamic display block"
+msgstr ""
+
+#: ddblock.admin.inc:223
+msgid "There was a problem deleting the dynamic display block instance"
+msgstr ""
+
+#: ddblock.admin.inc:257
+msgid "Content types"
+msgstr ""
+
+#: ddblock.admin.inc:258
+msgid "The content type(s) that can be used with the dynamic display block module."
+msgstr ""
+
+#: ddblock.admin.inc:282
+msgid "Blocks"
+msgstr ""
+
+#: ddblock.admin.inc:283
+msgid "The block(s) that can be used with the dynamic display block module."
+msgstr ""
+
+#: ddblock.module:15
+msgid "Display content dynamically in a block using the jQuery Cycle plugin and the jQuery Easing plugin"
+msgstr ""
+
+#: ddblock.module:16
+msgid "There are three methods to provide content for a dynamic display block. An input folder with images, a node from a content type or by making an instance of any block to use the block content of the original block as content for the dynamic display block"
+msgstr ""
+
+#: ddblock.module:28 ddblock.info:0
+msgid "Dynamic display block"
+msgstr ""
+
+#: ddblock.module:29
+msgid "Configure settings for dynamic display block module."
+msgstr ""
+
+#: ddblock.module:39
+msgid "List"
+msgstr ""
+
+#: ddblock.module:48;369
+msgid "Settings"
+msgstr ""
+
+#: ddblock.module:58
+msgid "Edit dynamic display block"
+msgstr ""
+
+#: ddblock.module:68
+msgid "Delete dynamic display block"
+msgstr ""
+
+#: ddblock.module:78
+msgid "Instances"
+msgstr ""
+
+#: ddblock.module:79
+msgid "Create and delete instances of blocks."
+msgstr ""
+
+#: ddblock.module:233
+msgid "Content settings"
+msgstr ""
+
+#: ddblock.module:237
+msgid "Image folder"
+msgstr ""
+
+#: ddblock.module:237
+msgid "Content type"
+msgstr ""
+
+#: ddblock.module:240
+msgid "Input type"
+msgstr ""
+
+#: ddblock.module:245
+msgid "Input of the dynamic display block."
+msgstr ""
+
+#: ddblock.module:254
+msgid "Image folder settings"
+msgstr ""
+
+#: ddblock.module:260
+msgid "Image Folder"
+msgstr ""
+
+#: ddblock.module:265
+msgid "The folder containing image files to be used as the content of dynamic display block. Use a relative path. Use a relative path, like <strong>files/images/ddblock</strong>."
+msgstr ""
+
+#: ddblock.module:270
+msgid "Number of images"
+msgstr ""
+
+#: ddblock.module:273
+msgid "The number of images to show in the block."
+msgstr ""
+
+#: ddblock.module:280
+msgid "Content type settings"
+msgstr ""
+
+#: ddblock.module:293;432;439;803
+msgid "None"
+msgstr ""
+
+#: ddblock.module:297
+msgid "Content Type"
+msgstr ""
+
+#: ddblock.module:300
+msgid "The nodes of the content type to be used as content of dynamic display block."
+msgstr ""
+
+#: ddblock.module:315;695
+msgid "Content container settings"
+msgstr ""
+
+#: ddblock.module:321;701
+msgid "Content container"
+msgstr ""
+
+#: ddblock.module:324;704
+msgid "Container of the content to show, eg. img, to show images."
+msgstr ""
+
+#: ddblock.module:329;352;574
+msgid "Height"
+msgstr ""
+
+#: ddblock.module:332;712
+msgid "Height of the content to show"
+msgstr ""
+
+#: ddblock.module:337;360;582
+msgid "Width"
+msgstr ""
+
+#: ddblock.module:340;720
+msgid "Width of the content to show"
+msgstr ""
+
+#: ddblock.module:347;727
+msgid "Image settings"
+msgstr ""
+
+#: ddblock.module:355;736
+msgid "Height of the image to show"
+msgstr ""
+
+#: ddblock.module:363;744
+msgid "Width of the image to show"
+msgstr ""
+
+#: ddblock.module:376;750
+msgid "Transition Effect"
+msgstr ""
+
+#: ddblock.module:381;755
+msgid "The transition effect between content."
+msgstr ""
+
+#: ddblock.module:388;761
+msgid "Speed"
+msgstr ""
+
+#: ddblock.module:392;765
+msgid "Speed of the transitions (1000 = 1 second)."
+msgstr ""
+
+#: ddblock.module:398;771
+msgid "Timeout"
+msgstr ""
+
+#: ddblock.module:402;775
+msgid "The time (in milliseconds) between transitions (1000 = 1 second, 0 to disable auto advance)."
+msgstr ""
+
+#: ddblock.module:405;782
+msgid "Random"
+msgstr ""
+
+#: ddblock.module:405;782
+msgid "Ascending"
+msgstr ""
+
+#: ddblock.module:405;782
+msgid "Descending"
+msgstr ""
+
+#: ddblock.module:408;780
+msgid "Sort Order"
+msgstr ""
+
+#: ddblock.module:413;785
+msgid "The display order of the content."
+msgstr ""
+
+#: ddblock.module:418;790
+msgid "Pause"
+msgstr ""
+
+#: ddblock.module:420;792
+msgid "Enable users to pause the cycle by hovering on the content."
+msgstr ""
+
+#: ddblock.module:425;797
+msgid "Next"
+msgstr ""
+
+#: ddblock.module:427;799
+msgid "Enable users to advanced to the next content by clicking on the content."
+msgstr ""
+
+#: ddblock.module:433;440;804
+msgid "Number Pager"
+msgstr ""
+
+#: ddblock.module:434
+msgid "Image pager"
+msgstr ""
+
+#: ddblock.module:447;809
+msgid "Pager"
+msgstr ""
+
+#: ddblock.module:451
+msgid "Add a pager to the block. You can only add a image pager if your images are from an image folder"
+msgstr ""
+
+#: ddblock.module:474;834
+msgid "Custom Settings"
+msgstr ""
+
+#: ddblock.module:476;836
+msgid "If you use custom options, the other settings are not used."
+msgstr ""
+
+#: ddblock.module:481;841
+msgid "Custom Options"
+msgstr ""
+
+#: ddblock.module:486;846
+msgid "Custom options for the cycle plug-in."
+msgstr ""
+
+#: ddblock.module:522
+msgid "No content type selected."
+msgstr ""
+
+#: ddblock.module:536
+msgid "Node"
+msgstr ""
+
+#: ddblock.module:538
+msgid "The node to show in the Dynamic display block"
+msgstr ""
+
+#: ddblock.module:566
+msgid "No pager selected."
+msgstr ""
+
+#: ddblock.module:577
+msgid "Height of the pager"
+msgstr ""
+
+#: ddblock.module:585
+msgid "Width of the pager"
+msgstr ""
+
+#: ddblock.module:662
+msgid "Default"
+msgstr ""
+
+#: ddblock.module:663
+msgid "Cycleblock"
+msgstr ""
+
+#: ddblock.module:667
+msgid "Display Method"
+msgstr ""
+
+#: ddblock.module:671
+msgid "Choose a way to display content."
+msgstr ""
+
+#: ddblock.module:686
+msgid "Dynamic display block settings"
+msgstr ""
+
+#: ddblock.module:709
+msgid "Container height"
+msgstr ""
+
+#: ddblock.module:717
+msgid "Container width"
+msgstr ""
+
+#: ddblock.module:733
+msgid "Image height"
+msgstr ""
+
+#: ddblock.module:741
+msgid "Image width"
+msgstr ""
+
+#: ddblock.module:813
+msgid "Add a pager to the block."
+msgstr ""
+
+#: ddblock.module:853
+msgid "Submit"
+msgstr ""
+
+#: ddblock.module:1192
+msgid "BlindX"
+msgstr ""
+
+#: ddblock.module:1193
+msgid "BlindY"
+msgstr ""
+
+#: ddblock.module:1194
+msgid "BlindZ"
+msgstr ""
+
+#: ddblock.module:1195
+msgid "Cover"
+msgstr ""
+
+#: ddblock.module:1196
+msgid "CurtainX"
+msgstr ""
+
+#: ddblock.module:1197
+msgid "CurtainY"
+msgstr ""
+
+#: ddblock.module:1198
+msgid "Fade"
+msgstr ""
+
+#: ddblock.module:1199
+msgid "FadeZoom"
+msgstr ""
+
+#: ddblock.module:1200
+msgid "GrowX"
+msgstr ""
+
+#: ddblock.module:1201
+msgid "GrowY"
+msgstr ""
+
+#: ddblock.module:1202
+msgid "Scroll Up"
+msgstr ""
+
+#: ddblock.module:1203
+msgid "Scroll Down"
+msgstr ""
+
+#: ddblock.module:1204
+msgid "Scroll Left"
+msgstr ""
+
+#: ddblock.module:1205
+msgid "Scroll Right"
+msgstr ""
+
+#: ddblock.module:1206
+msgid "Scroll Horz"
+msgstr ""
+
+#: ddblock.module:1207
+msgid "Scroll Vert"
+msgstr ""
+
+#: ddblock.module:1208
+msgid "Shuffle"
+msgstr ""
+
+#: ddblock.module:1209
+msgid "Slide X"
+msgstr ""
+
+#: ddblock.module:1210
+msgid "Slide Y"
+msgstr ""
+
+#: ddblock.module:1211
+msgid "Toss"
+msgstr ""
+
+#: ddblock.module:1212
+msgid "Turn Up"
+msgstr ""
+
+#: ddblock.module:1213
+msgid "Turn Down"
+msgstr ""
+
+#: ddblock.module:1214
+msgid "Turn Left"
+msgstr ""
+
+#: ddblock.module:1215
+msgid "Turn Right"
+msgstr ""
+
+#: ddblock.module:1216
+msgid "Uncover"
+msgstr ""
+
+#: ddblock.module:1217
+msgid "Wipe"
+msgstr ""
+
+#: ddblock.module:1218
+msgid "Zoom"
+msgstr ""
+
+#: ddblock.module:1455
+msgid "Instance Title"
+msgstr ""
+
+#: ddblock.module:1476
+msgid "Block type"
+msgstr ""
+
+#: ddblock.module:1483;1592
+msgid "Add Instance"
+msgstr ""
+
+#: ddblock.module:1574
+msgid "Title"
+msgstr ""
+
+#: ddblock.module:1575
+msgid "Original Module"
+msgstr ""
+
+#: ddblock.module:1576
+msgid "Original Block Title"
+msgstr ""
+
+#: ddblock.module:1590
+msgid "Manage Instances"
+msgstr ""
+
+#: ddblock.module:108
+msgid "administer dynamic display blocks"
+msgstr ""
+
+#: ddblock.module:108
+msgid "view dynamic display blocks"
+msgstr ""
+
+#: ddblock.module:0
+msgid "ddblock"
+msgstr ""
+
+#: ddblock.install:14
+msgid "The base tables for ddblocks."
+msgstr ""
+
+#: ddblock.install:17
+msgid "Number of the block."
+msgstr ""
+
+#: ddblock.install:23
+msgid "Title of the block."
+msgstr ""
+
+#: ddblock.install:30
+msgid "The name of the module that provided the original block."
+msgstr ""
+
+#: ddblock.install:37
+msgid "The delta of the original block."
+msgstr ""
+
+#: ddblock.install:44
+msgid "Support for dynamic display block enabled."
+msgstr ""
+
+#: ddblock.install:63
+msgid "Dynamic display block module installed successfully. Module settings are available under !link"
+msgstr ""
+
+#: ddblock.install:67
+msgid "The installation of the dynamic display block module was unsuccessful."
+msgstr ""
+
+#: ddblock.install:80
+msgid "Dynamic display block module uninstalled successfully."
+msgstr ""
+
+#: ddblock.info:0
+msgid "Displays dynamic content in a block."
+msgstr ""
+
+#: ddblock.info:0
+msgid "Jquery"
+msgstr ""
+

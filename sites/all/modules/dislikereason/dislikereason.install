@@ -1,0 +1,56 @@
+<?php
+// $Id: dislikereason.install,v 1.2 2009/04/27 06:20:55 primerg Exp $
+
+/**
+ * 'Safe' version of content_types() to use in updates and installs.
+ *
+ * Can't safely use content_fields() or content_types() in an update to get
+ * a fields array, especially without knowing what field modules are enabled,
+ * or the current state of the database and cache, so create a fields array
+ * from database info that is limited to fields from modules that are
+ * currently enabled.
+ */
+function dislikereason_install() {
+  drupal_install_schema('dislikereason');
+  
+}
+ 
+function dislikereason_uninstall() {
+  drupal_uninstall_schema('dislikereason');
+}
+
+function dislikereason_schema() {
+ $schema['dislikereason'] = array(
+    'description' => 'Stores the general data for a dislikereason to display.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        
+      ),
+      'reason' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+       'reason_description' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'comment_id' => array(
+        'type' => 'int',
+        
+      ),      
+      'user_id' => array(
+        'type' => 'int',
+        
+      ),    
+    ),
+    'primary key' => array('id'),
+    
+  );
+  
+  return $schema;
+}

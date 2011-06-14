@@ -1,0 +1,6 @@
+Lineage 1.4
+  o #110861: Fix a bug which caused lineage to think that any new terms had no
+  parents
+Lineage 1.1
+  o #83580: Provide missing lineage_term_delete function.
+  o #93249: Add sortable field to views data

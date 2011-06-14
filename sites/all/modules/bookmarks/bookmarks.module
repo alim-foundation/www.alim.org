@@ -1,0 +1,406 @@
+<?php
+// $Id: bookmarks.module,v 1.47.2.11 2010/04/18 21:32:34 darthclue Exp $
+/**
+ * @file
+ * Provides unique menus for each user.
+ */
+
+/**
+ * Maximum length of menu name as entered by the user. Database length is 32
+ * and we add a bookmarks- prefix.
+ */
+define('BOOKMARKS_MENU_MAX_MENU_NAME_LENGTH_UI', 23);
+define('BOOKMARKS_PRESETS_URL', 'bookmarks/mine/presets');
+
+/**
+ * Implementation of hook_help().
+ */
+function bookmarks_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#bookmarks':
+      $output = '<p>' . t("The bookmarks module provides an interface to control and customize user bookmarks. Bookmarks are based on the menu system and can be represented as a hierarchical collection of links, or menu items.  The bookmarks module creates a unique bookmarks menu for each authenticated user.") . '</p>';
+      $output .= '<p>' . t('The <a href="@bookmarks">bookmarks page</a> displays the administrative bookmarks on yoursite.  Select a group to add or edit items.') . '</p>';
+      return $output;
+    case 'admin/build/bookmarks':
+      return '<p>' . t('Bookmark groups are a collection of links used to navigate the web. The bookmark groups currently available on your site are displayed below. Select an item from this list to manage its bookmarks.') . '</p>';
+    case 'admin/build/bookmarks/add':
+      return '<p>' . t('Enter the name for your new bookmark group. The name should match the name of a currently registered user.') . '</p>';
+    case 'admin/build/bookmarks-customize/%':
+      return '<p>' . t('To rearrange menu items, grab a drag-and-drop handle under the <em>Menu item</em> column and drag the items (or group of items) to a new location in the list. (Grab a handle by clicking and holding the mouse while hovering over a handle icon.) Remember that your changes will not be saved until you click the <em>Save configuration</em> button at the bottom of the page.') . '<p>';
+    case 'admin/build/bookmarks-customize/item/add':
+      return '<p>' . t('Enter the title and path for your new menu item.') . '</p>';
+  }
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function bookmarks_perm() {
+  return array('administer bookmarks', 'administer own bookmarks');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function bookmarks_menu() {
+  global $user;
+  $items['folder'] = array(
+    'title' => 'Folder Holder',
+    'description' => 'Placeholder to allow users to create folders',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('bookmarks_overview_form', array('menu_name' => 'enumresuym')),
+    'access arguments' => array('administer own bookmarks'),
+    'type' => MENU_CALLBACK,
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['bookmarks/mine'] = array(
+    'title' => 'My bookmarks',
+    'description' => "Manage your bookmarks.",
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('bookmarks_overview_form', array('menu_name' => 'enumresuym')),
+    'access arguments' => array('administer own bookmarks'),
+    'type' => MENU_CALLBACK,
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['bookmarks/mine/list'] = array(
+    'title' => 'List items',
+    'weight' => -10,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'access arguments' => array('administer own bookmarks'),
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['bookmarks/mine/add'] = array(
+    'title' => 'Add item',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('bookmarks_edit_item', 'add', NULL, array('menu_name' => 'enumresuym')),
+    'access arguments' => array('administer own bookmarks'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['bookmarks/mine/presets'] = array(
+    'title' => 'Preset Bookmarks',
+    'description' => "Preset bookmarks for you to use.",
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('bookmarks_overview_form', array('menu_name' => 'bookmarks-presets')),
+    'access arguments' => array('administer own bookmarks'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['bookmarks/mine/presets/add/%menu_link'] = array(
+    'title' => 'Add Preset Bookmarks',
+    'page callback' => 'bookmarks_add_preset',
+    'page arguments' => array(4),
+    'access arguments' => array('administer own bookmarks'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['bookmarks/item/addpage'] = array(
+    'title' => 'Add item',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('bookmarks_edit_item', 'addpage', NULL, array('menu_name' => 'enumresuym')),
+    'access arguments' => array('administer own bookmarks'),
+    'type' => MENU_CALLBACK,
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['bookmarks/item/edit/%menu_link'] = array(
+    'title' => 'Edit menu item',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('bookmarks_edit_item', 'edit', 3, array('menu_name' => 'enumresuym')),
+    'access arguments' => array('administer own bookmarks'),
+    'type' => MENU_CALLBACK,
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['bookmarks/item/delete/%menu_link'] = array(
+    'title' => 'Delete menu item',
+    'page callback' => 'bookmarks_item_delete_page',
+    'page arguments' => array(3),
+    'access arguments' => array('administer own bookmarks'),
+    'type' => MENU_CALLBACK,
+    'file' => 'bookmarks.admin.inc',
+  );
+
+  $items['admin/build/bookmarks'] = array(
+    'title' => 'Bookmarks',
+    'description' => "Manage bookmarks.",
+    'page callback' => 'bookmarks_overview_page',
+    'access arguments' => array('administer bookmarks'),
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['admin/build/bookmarks/distribute/%menu_link'] = array(
+    'title' => 'Distribute',
+    'description' => "Distribute bookmarks.",
+    'page callback' => 'bookmarks_distribute',
+    'page arguments' => array(4),
+    'access arguments' => array('administer bookmarks'),
+    'file' => 'bookmarks.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['admin/build/bookmarks/list'] = array(
+    'title' => 'List',
+    'access arguments' => array('administer bookmarks'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['admin/build/bookmarks-customize/%bookmarks'] = array(
+    'title' => 'Customize menu',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('bookmarks_overview_form', 3),
+    'title callback' => 'bookmarks_overview_title',
+    'title arguments' => array(3),
+    'access arguments' => array('administer bookmarks'),
+    'type' => MENU_CALLBACK,
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['admin/build/bookmarks-customize/%bookmarks/list'] = array(
+    'title' => 'List items',
+    'access arguments' => array('administer bookmarks'),
+    'weight' => -10,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['admin/build/bookmarks-customize/%bookmarks/add'] = array(
+    'title' => 'Add item',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('bookmarks_edit_item', 'add', NULL, 3),
+    'access arguments' => array('administer bookmarks'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['admin/build/bookmarks-customize/%bookmarks/edit'] = array(
+    'title' => 'Edit menu',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('bookmarks_edit_menu', 'edit', 3),
+    'access arguments' => array('administer bookmarks'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['admin/build/bookmarks-customize/%bookmarks/delete'] = array(
+    'title' => 'Delete menu',
+    'page callback' => 'bookmarks_delete_menu_page',
+    'page arguments' => array(3),
+    'access arguments' => array('administer bookmarks'),
+    'type' => MENU_CALLBACK,
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['admin/build/bookmarks-customize/item/edit/%menu_link'] = array(
+    'title' => 'Edit menu item',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('bookmarks_edit_item', 'edit', 5, NULL),
+    'access arguments' => array('administer bookmarks'),
+    'type' => MENU_CALLBACK,
+    'file' => 'bookmarks.admin.inc',
+  );
+  $items['admin/build/bookmarks-customize/item/delete/%menu_link'] = array(
+    'title' => 'Delete menu item',
+    'page callback' => 'bookmarks_item_delete_page',
+    'page arguments' => array(5),
+    'access arguments' => array('administer bookmarks'),
+    'type' => MENU_CALLBACK,
+    'file' => 'bookmarks.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function bookmarks_theme() {
+  return array(
+    'bookmarks_overview_form' => array(
+      'file' => 'bookmarks.admin.inc',
+      'arguments' => array('form' => NULL),
+    ),
+  );
+}
+
+/**
+ * Title callback for the menu overview page and links.
+ */
+function bookmarks_overview_title($menu) {
+  return $menu['title'];
+}
+
+/**
+ * Load the data for a single custom menu.
+ */
+function bookmarks_load($menu_name) {
+  return db_fetch_array(db_query("SELECT * FROM {menu_bookmarks} WHERE menu_name = '%s'", $menu_name));
+}
+
+/**
+ * Implementation of hook_block().
+ */
+function bookmarks_block($op = 'list', $delta = 0) {
+  global $user, $conf;
+  $folder_path = '/folder';
+
+  $menus = bookmarks_get_menus(TRUE);
+  if ($op == 'list') {
+    $block[0]["info"] = t("Bookmarks");
+    return $block;
+  }
+  elseif ($op == 'view' && user_access('administer own bookmarks')) {
+    foreach ($menus as $name => $title) {
+      // Menu blocks can't be cached because each menu item can have
+      // a custom access callback. menu.inc manages its own caching.
+      $block['cache'] = BLOCK_NO_CACHE;
+      $block['subject'] = $title;
+     // $block['content'] = str_replace('a href="' . $folder_path . '"', 'a href="#"', menu_tree_output(menu_tree_all_data($name)));
+	  //print $folder_path;
+	 $block['content'] = str_replace('a href="/Alim.org/folder"', 'a href="#"', menu_tree_output(menu_tree_all_data($name)));
+	  $patternq = '/href="\/Alim.org\/folder"/' ; 
+   $replace = 'href="#"' ;
+  // $res =  preg_match($patternq, $subject, $matches);   
+	//print_r($matches);
+	//$blockcnt = preg_replace($patternq, $replace, $block['content']);
+	//$block['content'] = $blockcnt ;
+	 
+	 
+    }
+    if (empty($block['content'])) {
+      //Early versions of this module used the username for menus.  This corrects those to use uid instead.
+      $sql = "SELECT menu_name FROM {menu_bookmarks} WHERE menu_name = '%s'";
+      $result = db_query($sql, 'bookmarks-' . $user->name);
+      if ($my_menu = db_fetch_array($result)) {
+        $sql = "UPDATE {menu_bookmarks} set menu_name = '%s', title = '%s' where menu_name = '%s'";
+        $result = db_query($sql, 'bookmarks-' . $user->uid, 'Bookmarks for ' . $user->name, 'bookmarks-' . $user->name);
+        $sql = "UPDATE {menu_links} set menu_name = '%s' where menu_name = '%s'";
+        $result = db_query($sql, 'bookmarks-' . $user->uid, 'bookmarks-' . $user->name);
+      }
+      $sql = "SELECT menu_name FROM {menu_bookmarks} WHERE menu_name = '%s'";
+      $result = db_query($sql, 'bookmarks-' . $user->uid);
+      if (!$my_menu = db_fetch_array($result)) {
+        $path = 'admin/build/bookmarks-customize/';
+        $link['link_title'] = 'bookmarks-' . $user->uid;
+        $link['link_path'] = $path . 'bookmarks-' . $user->uid;
+        $link['router_path'] = $path . '%';
+        $link['module'] = 'bookmarks';
+        $link['plid'] = db_result(db_query("SELECT mlid FROM {menu_links} WHERE link_path = '%s' AND module = '%s'", 'admin/build/bookmarks', 'system'));
+        menu_link_save($link);
+        $res = db_query("INSERT INTO {menu_bookmarks} (menu_name, title, description) VALUES ('%s', '%s', '%s')", 'bookmarks-' . $user->uid, 'bookmarks-' . $user->uid, '');
+        //Purge from navigation menu.  We don't want these to show under Site Building / Bookmarks.
+        db_query("DELETE FROM {menu_links} WHERE link_title = '%s'", 'bookmarks-' . $user->uid);
+        //Insert default bookmarks
+        $result = db_query("SELECT m.mlid FROM {menu_links} m WHERE m.menu_name='bookmarks-defaults'");
+        $mobjs = array();
+        while ($mlid = db_fetch_object($result)) {
+          $mlid = menu_link_load($mlid->mlid);
+          $mlidc = $mlid['mlid'];
+          $mobjs[$mlidc]['orig']=$mlid;
+          $mlid['mlid'] = 0;
+          $mlid['menu_name'] = 'bookmarks-' . $user->uid;
+          if ($mlid['plid']!=0) {
+            $mlid['plid'] = $mobjs[$mlid['plid']]['new'];
+          }
+          $mobjs[$mlidc]['new'] = menu_link_save($mlid);
+        }
+        $menus = bookmarks_get_menus(TRUE);
+        foreach ($menus as $name => $title) {
+          // Menu blocks can't be cached because each menu item can have
+          // a custom access callback. menu.inc manages its own caching.
+          $block['cache'] = BLOCK_NO_CACHE;
+          $block['subject'] = $title;
+          $block['content'] = str_replace('a href="' . $folder_path . '"', 'a href="#"', menu_tree_output(menu_tree_all_data($name)));
+        }
+      }
+    }
+    // Add admin options to bottom of block.
+    $block['content'] .= '<div style="text-align:center;">';
+    $path = drupal_urlencode(drupal_get_normal_path(drupal_get_path_alias($_GET['q'])));
+    $query_variables = $_GET;
+    unset($query_variables['q']);
+    $query_string = '';
+    foreach ($query_variables as $key => $value) {
+      $query_string .= '&' . $key . '=' . $value;
+    }
+    
+    /*if (!empty($path)) {
+      if (!empty($query_string)) {
+        $path .= '?' . $query_string;
+      }
+      //$block['content'] .= l(t('Add this page'), 'bookmarks/item/addpage/' . base64_encode($path), array('attributes' => array('id' => 'bookmarks_addthispage')));
+      //$block['content'] .= '&nbsp;|&nbsp;' . l(t('Customize'), 'bookmarks/mine');
+    }
+    else {
+     // $block['content'] .= l(t('Customize'), 'bookmarks/mine');
+    }*/
+    $block['content'] .= '</div>';
+
+    return $block;
+  }
+}
+
+/**
+ * Find the depth limit for items in the parent select.
+ */
+function _bookmarks_parent_depth_limit($item) {
+  return MENU_MAX_DEPTH - 1 - (($item['mlid'] && $item['has_children']) ? menu_link_children_relative_depth($item) : 0);
+}
+
+/**
+ * Decompose the selected menu parent option into the menu_name and plid.
+ */
+function bookmarks_node_form_submit($form, &$form_state) {
+  list($form_state['values']['bookmarks']['menu_name'], $form_state['values']['bookmarks']['plid']) = explode(':', $form_state['values']['bookmarks']['parent']);
+}
+
+/**
+ * Return an associative array of the custom menus names.
+ *
+ * @param $CUSER
+ *   If FALSE return only user-added menus, or if TRUE also include
+ *   the menus defined by the system.
+ * @param $menu
+ *   If not null, return only items that are below this menu.
+ * @return
+ *   An array with the machine-readable names as the keys, and human-readable
+ *   titles as the values.
+ */
+function bookmarks_get_menus($CUSER = FALSE, $menu = NULL) {
+  global $user;
+  $system_menus = menu_list_system_menus();
+  //drupal_set_message('<pre>'.print_r($system_menus, TRUE).'</pre>');
+   
+  $sql = 'SELECT * FROM {menu_bookmarks}';
+  //Limit to only the current user
+  if ($CUSER) {
+    $sql .= ' WHERE menu_name=\'bookmarks-' . $user->uid . '\'';
+  }
+  //Limit to only the specified menu
+   if (!$CUSER && !empty($menu)) {
+    $sql .= ' WHERE menu_name=\'' . $menu . '\'';
+   }
+  $sql .= ' ORDER BY title';
+   //drupal_set_message($sql);
+ 
+  $result = db_query($sql);
+   //$result = db_query($sql);
+  $rows = array();
+  while ($r = db_fetch_array($result)) {
+    $rows[$r['menu_name']] = $r['title'];
+  }
+ // drupal_set_message('<pre>'.print_r($rows, TRUE).'</pre>');
+  return $rows;
+}
+
+/**
+ * Alter menu item editing form so that we can update bookmarks if menu items are changed.
+ */
+function bookmarks_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id=='menu_edit_item' && isset($form['menu']['#item'])) {
+    $form['#submit'][] = 'bookmarks_menu_edit_item_submit';
+  }
+}
+
+/**
+ * Update bookmarks when menu items get changed
+ */
+function bookmarks_menu_edit_item_submit($form_id, $form_values) {
+  // $form_values['values']['menu']['link_path']
+  // $form_values['values']['menu']['original_item']['link_path']
+  // select * from menu_links where menu_name like 'bookmarks-%' and link_path='';
+  $sql = "UPDATE {menu_links} set link_path = '%s' where menu_name like 'bookmarks-%' and link_path = '%s'";
+  $result = db_query($sql, $form_values['values']['menu']['link_path'], $form_values['values']['menu']['original_item']['link_path']);
+}

@@ -1,0 +1,64 @@
+<?php
+// $Id: community_tags.install,v 1.9 2008/07/18 03:32:55 herc Exp $
+
+/**
+ * @file
+ * The install file for the community_tags module.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function community_tags_install() {
+  // Install schema
+  drupal_install_schema('community_tags');
+  
+  // Drop module weight so we act after taxonomy.
+  $weight = (int)db_result(db_query("SELECT weight FROM {system} WHERE name = 'taxonomy'"));
+  db_query("UPDATE {system} SET weight = %d WHERE name = 'community_tags'", $weight + 1);
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function community_tags_uninstall() {
+  drupal_uninstall_schema('community_tags');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function community_tags_schema() {
+  $schema['community_tags'] = array(
+    'fields' => array(
+      'tid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+      'nid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+      'uid' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+      'date' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+    ),
+    'indexes' => array(
+      'tid' => array('tid'),
+      'nid' => array('nid'),
+      'uid' => array('uid'),
+    ),
+    'primary key' => array('tid', 'uid', 'nid'),
+  );
+  return $schema;
+}
+
+/**
+ * Update: Add tid column key.
+ */
+function community_tags_update_1() {
+  $ret = array();
+  db_add_index($ret, 'community_tags', 'tid', array('tid'));
+  community_tags_rehash(TRUE);
+  return $ret;
+}
+
+/**
+ * Implementation of hook_enable().
+ */
+function community_tags_enable() {
+  community_tags_rehash();
+}

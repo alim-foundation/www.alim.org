@@ -1,0 +1,667 @@
+<?php
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function term_lock_form_alter(&$form, $form_state, $form_id) {
+  global $user;
+
+  /*
+   * taxonomy_form_vocabulary override
+   */
+
+  if ($form_id == 'taxonomy_form_vocabulary') {
+
+    $vid = $form['vid']['#value'];
+    $disabled = ! user_access('administer taxonomy', $user);
+
+    $form['term_lock_vocabulary'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Lock control'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#weight' => 0,
+    );
+
+    $form['term_lock_vocabulary']['term_lock_vocabulary_depth'] = array(
+      '#type' => 'textfield',
+      '#size' => 7,
+      '#title' => t('Locking depth'),
+      '#default_value' => $vid ? term_lock_vocabulary_depth($vid) : 0,
+      '#disabled' => $disabled,
+      '#description' => t('All term with inferior depth will be locked. Set to 0 for no depth locking.'),
+    );
+
+    $form['#validate'][] = 'term_lock_taxonomy_form_vocabulary_validate';
+  }
+
+  /*
+   * taxonomy_form_term override
+   */
+
+  else if ($form_id == 'taxonomy_form_term') {
+    $vid = $form['#vocabulary']['vid'];
+
+    $tid = $form['#term']['tid'];
+
+    // Simple flag that allow us to check this module went here
+    // This will be used for aggressive caching feature.
+    $form['term_lock_flag'] = array(
+      '#type' => 'value',
+      '#value' => TRUE,
+    );
+
+    // Allow some deep check in validate
+    $form['term_lock_parent'] = array(
+      '#type' => 'value',
+      '#value' => $form['advanced']['parent']['#default_value'],
+    );
+
+    // Remove childlocked parents, except the one already affected
+    _term_lock_prune_options($form['advanced']['parent'], 'child', $form['advanced']['parent']['#default_value']);
+
+    if (empty($form['advanced']['parent']['#options'])) {
+      unset($form['advanced']['parent']);
+    }
+
+    // Mark the form as treated for validation
+    $form['term_lock_alterd'] = array(
+      '#type' => 'value',
+      '#value' => TRUE,
+    );
+
+    // May be this validation function should be appended only to the save
+    // button in order to ensure this won't be run when the user asked for
+    // deletion.
+    $form['#validate'][] = 'term_lock_taxonomy_form_term_validate';
+  }
+
+  /*
+   * taxonomy_overview_terms override
+   */
+
+  else if ($form_id == 'taxonomy_overview_terms') {
+    $vid = $form['#vocabulary']['vid'];
+
+    $form['#theme'] = 'term_lock_overview_terms';
+
+    if (user_access('administer taxonomy', $account)) {
+      $form['term_lock'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Lock control'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+      );
+  
+      $form['term_lock']['term_lock_op'] = array(
+        '#type' => 'select',
+        '#options' => array(
+          'lock' => t('Prevent selected to be moved (lock)'),
+          'unlock' => t('Unlock "lock" selected'),
+          'childlock' => t('Prevent child to be added to selected (no child)'),
+          'childunlock' => t('Unlock "child" selected'),
+          'nodelock' => t('Prevent node to be added to selected (no node)'),
+          'nodeunlock' => t('Unlock "node" selected'),
+        ),
+      );
+
+      $form['term_lock']['term_lock_submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Update'),
+        '#submit' => array('term_lock_taxonomy_overview_terms_submit'),
+      );
+  
+      $checkboxes = array();
+  
+      foreach (element_children($form) as $key) {
+        $tmp = explode(':', $key);
+        $tid = $tmp[1];
+        if ($tid) {
+          $checkboxes[$tid] = '';
+        }
+      }
+  
+      $form['term_lock_checkboxes'] = array(
+        '#type' => 'checkboxes',
+        '#options' => isset($checkboxes) ? $checkboxes : array(),
+      );
+    }
+  }
+
+  else if ($form_id == 'taxonomy_overview_vocabularies') {
+    foreach (element_children($form) as $key) {
+      if ($vocabulary = taxonomy_vocabulary_load($key)) {
+        if (! term_lock_vocabulary_access('list', $vocabulary)) {
+          unset($form[$key]);
+        }
+      }
+    }
+  }
+  
+  /*
+   * node_form override
+   */
+
+  else if (isset($form['type']) && isset($form['#node']) && $form['type']['#value'] .'_node_form' == $form_id) {
+    if (! empty($form['taxonomy']) && is_array($form['taxonomy'])) {
+      // Iterate over all catagories
+      foreach ($form['taxonomy'] as $vid => &$element) {
+        // Prune lock enabled vocabulary term select boxes
+        if (! user_access('administer taxonomy', $account)) {
+          if (isset($element['#type'])) {
+            _term_lock_prune_options($element, 'node', $element['#default_options']);
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Remove locked terms from an options array. This will alter the reference
+ * passed array.
+ * 
+ * Be careful, you must not call this with a non enabled vocabulary (per term
+ * options may still exists as garbage in database, and alter this function
+ * behavior).
+ * 
+ * Always do a term_lock_vocabulary_enabled() check before using this function.
+ * 
+ * @param array $options
+ *   Select type form element to alter
+ * @param string $type = 'lock'
+ *   Can be:
+ *     - 'lock': remove elements if locked
+ *     - 'child': remove elements if childlocked
+ *     - 'node' : remove elements if nodelocked
+ * @param mixed $defaults = NULL
+ *   Array of default values to keep in options array rr a single default value
+ *   General use case is to put your '#default_value' form element value
+ * @return void
+ */
+function _term_lock_prune_options(&$element, $type = 'lock', $defaults = NULL) {
+  if ($element['#type'] != 'select') {
+    return;
+  }
+
+  $disabled_options = array();
+
+  switch ($type) {
+    case 'node':
+      $callback = 'term_lock_is_nodelocked';
+      break;
+    case 'child':
+      $callback = 'term_lock_is_childlocked';
+      break;
+    case 'lock':
+    default:
+      $callback = 'term_lock_is_locked';
+  }
+
+  if (empty($defaults)) {
+    $defaults = array();
+  }
+  else {
+    $defaults = (is_array($defaults) ? $defaults : array($defaults));
+  }
+
+  foreach ($element['#options'] as $key => &$option) {
+    if (is_array($option->option)) {
+
+      $tid = array_shift(array_keys($option->option));
+
+      if ($callback($tid) && ! in_array($tid, $defaults)) {
+        $disabled_options[] = $tid;
+      }
+    }
+  }
+
+  // Alter only if we found something to hide
+  if (! empty($disabled_options)) {
+    $element['#type'] = 'select_backport';
+    $element['#disabled_options'] = $disabled_options;
+    unset($element['#theme']);
+  }
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function term_lock_theme() {
+  $items = array();
+  $items['term_lock_overview_terms'] = array(
+    'arguments' => array('form' => array()),
+    'file' => 'term_lock.admin.inc',
+  );
+  $items['term_lock_locked'] = array(
+    'file' => 'term_lock.theme',
+  );
+  $items['term_lock_childlocked'] = array(
+    'file' => 'term_lock.theme',
+  );
+  $items['term_lock_nodelocked'] = array(
+    'file' => 'term_lock.theme',
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_flush_caches().
+ */
+function term_lock_flush_caches() {
+  return array('term_lock_cache');
+}
+
+/**
+ * Return associated vocabulary permission string
+ * 
+ * @param string $op
+ *   Any string, see hook_perm() implementation for full list.
+ * @return string
+ *   Permission name   
+ */
+function _term_lock_get_perm($op, $vocabulary) {
+  return $op . ' for vocabulary ' . $vocabulary->vid;
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function term_lock_perm() {
+  $permissions = array();
+  foreach (taxonomy_get_vocabularies() as $vocabulary) {
+    $permissions[] .= _term_lock_get_perm('administer terms', $vocabulary);
+  }
+  return $permissions;
+}
+
+/**
+ * Function which will replace user_access for taxonomy menu access pages
+ * 
+ * @param string $op = 'edit'
+ *   Can be 'edit'
+ */
+function term_lock_term_access($op = 'edit', $tid) {
+  // TODO use lock control if enabled on vocabulary
+  if ($term = taxonomy_get_term($tid)) {
+    switch ($op) {
+      case 'edit':
+        return user_access(_term_lock_get_perm('administer terms', taxonomy_vocabulary_load($term->vid)));
+    }
+  }
+}
+
+/**
+ * Function which will replace user_access for taxonomy menu access pages
+ * 
+ * @param string $op = 'list'
+ *   Can be 'list', 'add'
+ */
+function term_lock_vocabulary_access($op = 'edit', $vocabulary) {
+  // TODO use lock control if enabled on vocabulary
+  switch ($op) {
+    case 'list':
+    case 'add':
+      return user_access(_term_lock_get_perm('administer terms', $vocabulary));
+  }
+}
+
+/**
+ * Implementation of hook_menu_alter().
+ */
+function term_lock_menu_alter(&$items) {
+  // Access taxonomy admin pages
+  $items['admin/content/taxonomy']['access arguments'] = array('access administration pages');
+
+  // Edit term page
+  $term_edit = &$items['admin/content/taxonomy/edit/term'];
+  $term_edit['access callback'] = 'term_lock_term_access';
+  $term_edit['access arguments'] = array('edit', 5);
+
+  // List terms page
+  $term_list_a = &$items['admin/content/taxonomy/%taxonomy_vocabulary'];
+  $term_list_a['access callback'] = 'term_lock_vocabulary_access';
+  $term_list_a['access arguments'] = array('list', 3);
+  $term_list_b = &$items['admin/content/taxonomy/%taxonomy_vocabulary/list'];
+  $term_list_b['access callback'] = 'term_lock_vocabulary_access';
+  $term_list_b['access arguments'] = array('list', 3);
+
+  // Add term page
+  $term_add = &$items['admin/content/taxonomy/%taxonomy_vocabulary/add/term'];
+  $term_add['access callback'] = 'term_lock_vocabulary_access';
+  $term_add['access arguments'] = array('add', 3);
+
+  // Add term page
+  $edit_vocabulary = &$items['admin/content/taxonomy/%taxonomy_vocabulary/add/term'];
+  $edit_vocabulary['access callback'] = 'term_lock_vocabulary_access';
+  $edit_vocabulary['access arguments'] = array('add', 3);
+}
+
+/**
+ * taxonomy_form_vocabulary() validate handler. 
+ */
+function term_lock_taxonomy_form_vocabulary_validate($form, &$form_state) {
+  $enabled = $form_state['values']['term_lock_vocabulary']['term_lock_vocabulary_enabled'];
+  $depth = $form_state['values']['term_lock_vocabulary']['term_lock_vocabulary_depth'];
+
+  if ($enabled && ! empty($depth) && ! is_numeric($depth)) {
+    form_set_error('term_lock_vocabulary_depth', t('Depth must be an integer'));
+  }
+}
+
+/**
+ * taxonomy_form_term() validate handler.
+ */
+function term_lock_taxonomy_form_term_validate($form, &$form_state) {
+  global $user;
+
+  $tid = $form_state['tid'];
+  $vid = $form_state['vid'];
+
+  if (term_lock_is_locked($tid) && ! user_access('administer taxonomy', $account)) {
+    form_set_error('foo', t('Term is locked, you can\'t modify it.'));
+  }
+
+  if (! user_access('administer taxonomy', $account)) {
+    if (isset($form_state['values']['parent']) && !empty($form_state['values']['parent'])) {
+      foreach ($form_state['values']['parent'] as $parent_tid) {
+        if (term_lock_is_childlocked($parent_tid) &&
+            ! in_array($parent_tid, $form_state['values']['term_lock_parent']))
+        {
+          form_set_error('parent', t('Parent term @name is child-locked, you can\'t add it as parent.', array('@name' => taxonomy_get_term($parent_tid)->name)));
+        }
+      }
+    }
+  }
+}
+
+/**
+ * taxonomy_overview_terms() submit handler, handles mass lock state update.
+ */
+function term_lock_taxonomy_overview_terms_submit($form, &$form_state) {
+  $values = $form_state['values'];
+
+  $op = isset($values['term_lock_op']) ? $values['term_lock_op'] : $values['term_lock']['term_lock_op'];
+  $selected = $form_state['values']['term_lock_checkboxes'];
+
+  if ($op && ! empty($selected)) {
+    foreach ($selected as $tid => $checked) {
+      if ($checked) {
+
+        $term_lock = term_lock_load($tid);
+
+        switch ($op) {
+          case 'lock':
+            term_lock_toggle($tid, TRUE, $term_lock->childlocked, $term_lock->nodelocked);
+            break;
+          case 'unlock':
+            term_lock_toggle($tid, FALSE, $term_lock->childlocked, $term_lock->nodelocked);
+            break;
+          case 'childlock':
+            term_lock_toggle($tid, $term_lock->locked, TRUE, $term_lock->nodelocked);
+            break;
+          case 'childunlock':
+            term_lock_toggle($tid, $term_lock->locked, FALSE, $term_lock->nodelocked);
+            break;
+          case 'nodelock':
+            term_lock_toggle($tid, $term_lock->locked, $term_lock->childlocked, TRUE);
+            break;
+          case 'nodeunlock':
+            term_lock_toggle($tid, $term_lock->locked, $term_lock->childlocked, FALSE);
+            break;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implementation of hook_taxonomy().
+ */
+function term_lock_taxonomy($op, $type, $array = NULL) {
+  if ($type == 'vocabulary') {
+    switch ($op) {
+      case 'delete':
+        term_lock_vocabulary_free($array['vid']);
+        break;
+  
+      case 'insert':
+      case 'update':
+        // isset() test allow us to skip this lock/unlock step when save method
+        // is called from another module.
+        if (isset($array['term_lock_vocabulary_depth'])) {
+          term_lock_vocabulary_toggle($array['vid'], $array['term_lock_vocabulary_depth']);
+        }
+        break;
+    }
+  }
+  else if ($type == 'term') {
+    switch ($op) {
+      case 'delete':
+        term_lock_free($array['tid']);
+        break;
+    }
+  }
+}
+
+/**
+ * Get term depth, cached and linear algorithm
+ */
+function term_lock_term_get_depth($tid) {
+  static $cache = array();
+
+  if (! isset($cache[$tid])) {
+
+    $parent = $tid;
+    $current = array($tid => 0);
+    $depth = 0;
+
+    while ($parent) {
+      if ($parent = db_result(db_query("SELECT parent FROM {term_hierarchy} WHERE tid = %d", $parent))) {
+        $depth++;
+        $current[$parent] = $depth;
+      }
+    }
+
+    foreach ($current as $current_tid => $current_depth) {
+      $cache[$current_tid] = $depth - $current_depth;
+    }
+  }
+
+  return $cache[$tid];
+}
+
+/**
+ * Tell if term is locked by a vocabulary global option, like depth.
+ * 
+ * @param int $tid
+ * @return boolean
+ */
+function term_lock_is_vocabulary_lock($tid) {
+  $vid = db_result(db_query("SELECT vid FROM {term_data} WHERE tid = %d", $tid));
+
+  // Check for depth
+  if ($vid && ($depth = term_lock_vocabulary_depth($vid))) {
+    return term_lock_term_get_depth($tid) < $depth;
+  }
+}
+
+/**
+ * Tell if a term is locked for edition
+ * 
+ * @ingroup term_handling
+ * 
+ * @param int $tid
+ * @return boolean
+ */
+function term_lock_is_locked($tid) {
+  // Check for depth
+  if (term_lock_is_vocabulary_lock($tid)) {
+    return TRUE;
+  }
+
+  // If depth ok, check our tid has single lock flag
+  if ($term_lock = term_lock_load($tid)) {
+    return (bool) $term_lock->locked;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Tell if user can add nodes to term
+ * 
+ * @ingroup term_handling
+ * 
+ * @param int $tid
+ * @return boolean
+ */
+function term_lock_is_nodelocked($tid) {
+  if ($term_lock = term_lock_load($tid)) {
+    return (bool) $term_lock->nodelocked;
+  }
+  return FALSE;
+}
+
+/**
+ * Tell if user can add child to term
+ * 
+ * @ingroup term_handling
+ * 
+ * @param int $tid
+ * @return boolean
+ */
+function term_lock_is_childlocked($tid) {
+  if ($term_lock = term_lock_load($tid)) {
+    return (bool) $term_lock->childlocked;
+  }
+  return FALSE;
+}
+
+/**
+ * Tells if a term is locked
+ * 
+ * @ingroup term_handling
+ * 
+ * @param int $tid
+ * @return boolean
+ */
+function term_lock_load($tid) {
+  static $cache = array();
+  if (! isset($cache[$tid])) {
+    $cache[$tid] = db_fetch_object(db_query("SELECT l.* FROM {term_lock} l JOIN {term_data} d ON d.tid = l.tid WHERE l.tid = %d", $tid));
+  }
+  return $cache[$tid];
+}
+
+/**
+ * Toggle term status
+ * 
+ * @ingroup term_handling
+ * 
+ * @param int $tid
+ * @param boolean $locked = TRUE
+ * @param boolean $childlocked = TRUE
+ */
+function term_lock_toggle($tid, $locked = TRUE, $childlocked = TRUE, $nodelocked = TRUE) {
+  db_query("DELETE FROM {term_lock} WHERE tid = %d", $tid);
+  if ($locked || $childlocked || $nodelocked) {
+    db_query("INSERT INTO {term_lock} (tid, locked, childlocked, nodelocked) VALUES (%d, %d, %d, %d)", array(
+      $tid, $locked, $childlocked, $nodelocked));
+  }
+}
+
+/**
+ * Remove a term from this module handling.
+ * 
+ * @ingroup term_handling
+ * 
+ * @param int $tid
+ */
+function term_lock_free($tid) {
+  db_query("DELETE FROM {term_lock} WHERE tid = %d", $tid);
+}
+
+/**
+ * Unset vocabulary parameters and unlock all term among.
+ * 
+ * @ingroup vocabulary_handling
+ * 
+ * @param int $vid
+ */
+function term_lock_vocabulary_free($vid) {
+  db_query("DELETE FROM {term_lock} WHERE tid IN (SELECT tid FROM {term_data} WHERE vid = %d)", $vid);
+  db_query("DELETE FROM {term_lock_vocabulary} WHERE vid = %d", $vid);
+}
+
+/**
+ * Is vocabulary lock enabled?
+ * 
+ * @ingroup vocabulary_handling
+ * 
+ * @param int $vid
+ * @return boolean
+ */
+function term_lock_vocabulary_enabled($vid) {
+  $voc_opt = term_lock_vocabulary_load($vid);
+  return ! empty($voc_opt);
+}
+
+/**
+ * Is vocabulary in aggressive mode?
+ * 
+ * @ingroup vocabulary_handling
+ * 
+ * @param int $vid
+ * @return boolean
+ */
+function term_lock_vocabulary_is_aggresive($vid) {
+  $voc_opt = term_lock_vocabulary_load($vid);
+  return (bool) $voc_opt->aggressive;
+}
+
+
+/**
+ * Is vocabulary in aggressive mode?
+ * 
+ * @ingroup vocabulary_handling
+ * 
+ * @param int $vid
+ * @return boolean
+ */
+function term_lock_vocabulary_depth($vid) {
+  $voc_opt = term_lock_vocabulary_load($vid);
+  return (int) $voc_opt->depth;
+}
+
+/**
+ * Load vocabulary options
+ * 
+ * @ingroup vocabulary_handling
+ * 
+ * @param int $vid
+ * @return object
+ */
+function term_lock_vocabulary_load($vid) {
+  static $cache = array();
+
+  if (! isset($cache[$vid])) {
+    $cache[$vid] = db_fetch_object(db_query("SELECT * FROM {term_lock_vocabulary} WHERE vid = %d", $vid));
+  }
+
+  return $cache[$vid];
+}
+
+/**
+ * Toggle vocabulary status
+ * 
+ * @ingroup term_handling
+ * 
+ * @param int $vid
+ * @param boolean $aggressive = FALSE
+ * @param int $depth = 0
+ */
+function term_lock_vocabulary_toggle($vid, $depth = 0) {
+  db_query("DELETE FROM {term_lock_vocabulary} WHERE vid = %d", $vid);
+  db_query("INSERT INTO {term_lock_vocabulary} (vid, depth) VALUES (%d, %d)", array($vid, $depth));
+}

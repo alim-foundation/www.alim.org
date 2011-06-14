@@ -1,0 +1,662 @@
+# $Id: views_slideshow_ddblock.pot,v 1.2 2010/03/21 09:24:07 ppblaauw Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  views_slideshow_ddblock.views_slideshow.inc,v 1.1.2.4 2009/10/18 03:11:01 ppblaauw
+#  views_slideshow_ddblock.module,v 1.1.2.4 2009/10/18 03:11:01 ppblaauw
+#  views_slideshow_ddblock.info,v 1.1.2.2 2009/09/07 10:43:02 ppblaauw
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2010-03-21 04:34+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: views_slideshow_ddblock.views_slideshow.inc:15
+msgid "DDblock"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:63
+msgid "prev"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:64
+msgid "next"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:117
+msgid "DDblock options"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:124
+msgid "Default"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:125
+msgid "Cycleblock"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:131
+msgid "Display Method"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:135
+msgid "Choose a way to display content."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:141;327;373
+msgid "None"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:142
+msgid "Using drupal_set_message"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:145
+msgid "Using devel module"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:151
+msgid "Show debug info"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:155
+msgid "Show debug info to determine view name/display id, fieldnames, settings, number of items"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:172
+msgid "Template"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:177
+msgid "Template for themable output. Template name will become:<br />views-slideshow-ddblock-cycle-block-content-[TEMPLATENAME].tpl.php"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:184
+msgid "Custom template"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:189
+msgid "Custom template for themable output. Template name will become: <br />ddblock-cycle-block-content-[TEMPLATENAME].tpl.php"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:208
+msgid "Imagecache preset to use for slide image"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:209
+msgid "Imagecache preset to use for pager-item image. Only for themes that use an image in the pager"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:214
+msgid "Use imagecache presets"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:217
+msgid "Use imagecache presets for images"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:225
+msgid "Image cache preset settings"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:234
+msgid "Imagecache slide image"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:246
+msgid "Imagecache pager-item image"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:261
+msgid "Content container settings"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:267
+msgid "Content container"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:270
+msgid "Container of the content to slide, eg. CSS selector img, to show images.<br />This can be any CSS selector containing a slide. e.g div.slide"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:275
+msgid "Overflow hidden"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:280
+msgid "Hide the overflow of the container"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:287
+msgid "Dynamic display block settings"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:294
+msgid "Transition Effect"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:299
+msgid "The transition effect between content. Multiple effects can be set in the Custom jQuery Cycle Plugin Settings."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:305
+msgid "Speed"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:309
+msgid "Speed of the transitions (1000 = 1 second, 0 = direct)."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:315
+msgid "Timeout"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:319
+msgid "The time (in milliseconds) between transitions (1000 = 1 second, 0 to disable auto advance)."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:324
+msgid "Sort Order"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:328
+msgid "Ascending"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:329
+msgid "Descending"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:330;743
+msgid "Random"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:334
+msgid "The display order of the content. None for using the original content order."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:339
+msgid "Pause"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:341
+msgid "Enable users to pause the cycle by hovering on the content."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:346
+msgid "Next"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:348
+msgid "Enable users to advanced to the next content by clicking on the content."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:354
+msgid "Use Pager"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:357
+msgid "Use a pager to select slides"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:369
+msgid "Pager settings"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:374
+msgid "Number pager"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:375
+msgid "Prev next pager"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:376
+msgid "Custom pager"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:377
+msgid "Scrollable pager"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:382;485
+msgid "Pager"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:386
+msgid "Type of pager to add."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:391
+msgid "Pager container"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:394
+msgid "Container of a pager-item, eg. CSS selector li.<br />This can be any CSS selector containing a pager-item.<br /> For a custom pager this needs to be .custom-pager-item<br />For a scrollable pager this needs to be .scrollable-pager-item"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:398;618
+msgid "Top"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:399;619
+msgid "Right"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:400;620
+msgid "Bottom"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:401;621
+msgid "Left"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:402
+msgid "Both"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:407;491
+msgid "Pager position"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:413
+msgid "Possible position for the pager.<br />The position must be supported by the template used to be effective."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:417;557
+msgid "Click"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:418;558
+msgid "Mouseover"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:423;475
+msgid "Pager event"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:429
+msgid "The event on which the pager reacts."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:434
+msgid "Fast Pager"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:439
+msgid "Use fast pager event when clicked or hovered."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:444
+msgid "Pager pause"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:449
+msgid "Pause the slideshow when pager hovered."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:455
+msgid "Use Prev/Next Pager"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:458
+msgid "Use a Prev/Next Pager to select slides"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:470
+msgid "Prev/next pager settings"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:481
+msgid "The event on which the prev/next pager reacts."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:486
+msgid "Slide"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:498
+msgid "Possible position for the prev/next pager.<br />The position must be supported by the template used to be effective."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:510
+msgid "Pager Pager"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:515
+msgid "Prev text in pager"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:521
+msgid "Caption for the prev pager in the pager.<br />Can also be empty if you use an image to go to the previous slide."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:526
+msgid "Next text in pager"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:532
+msgid "Caption for the next pager in the pager.<br />Can also be empty if you use an image to go to the next slide."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:538;586
+msgid "Prev/Next Hide"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:541;589
+msgid "Hide Prev/Next Pager when no slide available."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:553
+msgid "Slide Pager"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:563
+msgid "Prev text on slide"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:569
+msgid "Caption for the prev pager on the slide.<br />Can also be empty if you use an image to go to the previous slide."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:574
+msgid "Next text on slide"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:580
+msgid "Caption for the next pager on the slide.<br />Can also be empty if you use an image to go to the next slide."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:594
+msgid "Use slide text"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:597
+msgid "Show slide text when available in content."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:603
+msgid "Slide text settings"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:611
+msgid "Slide text container"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:614
+msgid "Container of the slide text."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:626
+msgid "Slide text position"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:631
+msgid "Position of the slide text."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:636
+msgid "Use jQuery effects for text of a slide"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:639
+msgid "The jQuery effects will be added to the text in the Slide text container"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:652
+msgid "Slide text jquery settings"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:657
+msgid "Basics - Hide"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:658
+msgid "Fading - Fade Out"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:659
+msgid "Sliding - Slide Up"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:664
+msgid "Before effect"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:669
+msgid "Before effect of the slide text"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:676
+msgid "Speed before effect"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:680;705
+msgid "Speed of the before effect (1000 = 1 second, 0 = direct)."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:684
+msgid "Basics - Show"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:685
+msgid "Fading - Fade In"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:686
+msgid "Sliding - Slide Down"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:691
+msgid "After effect"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:696
+msgid "After effect of the slide text"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:701
+msgid "Speed after effect"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:712
+msgid "Custom jQuery Cycle Plugin Settings"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:713
+msgid "If you use custom jQuery options, they will override your other settings."
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:725
+msgid "Custom Options"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:730
+msgid "Use valid JSON syntax, with double quotes for key/and string value pairs.<br />The total script needs to be enclosed in curly brackets.<br />No comma allowed after the last statement like in an array.<br />e.g.<br />{\"fx\":\"fade\",<br />\"startingSlide\":2,<br />\"autostop\":1}"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:744
+msgid "blindX"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:745
+msgid "blindY"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:746
+msgid "blindZ"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:747
+msgid "cover"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:748
+msgid "curtainX"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:749
+msgid "curtainY"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:750
+msgid "fade"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:751
+msgid "fadeZoom"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:752
+msgid "growX"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:753
+msgid "growY"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:754
+msgid "scrollUp"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:755
+msgid "scrollDown"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:756
+msgid "scrollLeft"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:757
+msgid "scrollRight"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:758
+msgid "scrollHorz"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:759
+msgid "scrollVert"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:760
+msgid "shuffle"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:761
+msgid "slideX"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:762
+msgid "slideY"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:763
+msgid "soss"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:764
+msgid "turnUp"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:765
+msgid "turnDown"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:766
+msgid "turnLeft"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:767
+msgid "turnRight"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:768
+msgid "uncover"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:769
+msgid "wipe"
+msgstr ""
+
+#: views_slideshow_ddblock.views_slideshow.inc:770
+msgid "zoom"
+msgstr ""
+
+#: views_slideshow_ddblock.module:50
+msgid "View - name"
+msgstr ""
+
+#: views_slideshow_ddblock.module:51
+msgid "View - display_id"
+msgstr ""
+
+#: views_slideshow_ddblock.module:52
+msgid "Number of slides"
+msgstr ""
+
+#: views_slideshow_ddblock.module:53
+msgid "Imgcache_slide"
+msgstr ""
+
+#: views_slideshow_ddblock.module:54
+msgid "Content first slide:"
+msgstr ""
+
+#: views_slideshow_ddblock.module:55
+msgid "Content first slide"
+msgstr ""
+
+#: views_slideshow_ddblock.module:58
+msgid "View - name =>"
+msgstr ""
+
+#: views_slideshow_ddblock.module:59
+msgid "View - display_Id =>"
+msgstr ""
+
+#: views_slideshow_ddblock.module:60
+msgid "Number of slides =>"
+msgstr ""
+
+#: views_slideshow_ddblock.module:61
+msgid "Imgcache_slide =>"
+msgstr ""
+
+#: views_slideshow_ddblock.module:62
+msgid "Content first slide =>"
+msgstr ""
+
+#: views_slideshow_ddblock.module:78
+msgid "Pager Settings:"
+msgstr ""
+
+#: views_slideshow_ddblock.module:79
+msgid "Pager Settings"
+msgstr ""
+
+#: views_slideshow_ddblock.module:82
+msgid "Pager Settings =>"
+msgstr ""
+
+#: views_slideshow_ddblock.info:0
+msgid "Views slideshow: DDblock"
+msgstr ""
+
+#: views_slideshow_ddblock.info:0
+msgid "Adds ddblock functionality to Views Slideshows."
+msgstr ""
+
+#: views_slideshow_ddblock.info:0
+msgid "Views"
+msgstr ""
+

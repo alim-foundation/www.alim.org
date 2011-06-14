@@ -1,0 +1,373 @@
+<?php
+// $Id: views_slideshow_ddblock.module,v 1.2 2010/03/21 09:24:07 ppblaauw Exp $
+
+/**
+ *  @file
+ *  Views Slideshow: ddblock adds ddblock functionality to Views Slideshows.
+ *
+ */
+
+/**
+ *  Implements hook_init().
+ */
+function views_slideshow_ddblock_init() {
+  // add views_slideshow_ddblock.admin. js file
+  drupal_add_js(drupal_get_path('module', 'views_slideshow_ddblock') . '/js/views_slideshow_ddblock.admin.js');
+}
+
+/**
+ *  Implements hook_theme().
+ */
+function views_slideshow_ddblock_theme($existing, $type, $theme, $path) {
+  return array(
+    'views_slideshow_ddblock' => array(
+      'arguments' => array('view' => NULL,
+                           'options' => array(),
+                           'rows' => array(),
+                           'title' => ''
+      ),
+      'template' => 'views-slideshow-ddblock',
+    ),
+    'views_slideshow_ddblock_pager_content' => array(
+      'arguments' => array(
+        'views_slideshow_ddblock_pager_settings' => NULL,
+        'views_slideshow_ddblock_content' => NULL,
+      ),
+      'template' => 'views-slideshow-ddblock-pager-content',
+    ),
+  );
+}
+
+/**
+ * Show debug information for content preprocess function helper function
+ *
+ * @param $vars             - An array of variables to pass to the theme template.
+ */
+function views_slideshow_ddblock_show_content_debug_info($vars) {
+  $settings = $vars['views_slideshow_ddblock_slider_settings'];
+  switch ($settings['debug_info']) {
+    case 'devel':
+      dpm($settings['view_name'], t('View - name'));
+      dpm($settings['view_display_id'], t('View - display_id'));
+      dpm(count($vars['views_slideshow_ddblock_content']), t('Number of slides'));
+      dpm($settings['imgcache_slide'], t('Imgcache_slide'));
+      drupal_set_message('<pre>' . t('Content first slide:') . '</pre>');
+      dvm($vars['views_slideshow_ddblock_content'][0], t('Content first slide'));
+      break;
+    case 'drupal':
+      drupal_set_message('<pre>' . t('View - name =>') . ' ' . var_export($settings['view_name'], TRUE) . '</pre>');
+      drupal_set_message('<pre>' . t('View - display_Id =>') . ' ' . var_export($settings['view_display_id'], TRUE) . '</pre>');
+      drupal_set_message('<pre>' . t('Number of slides =>') . ' ' . count($vars['views_slideshow_ddblock_content']) .'</pre>');
+      drupal_set_message('<pre>' . t('Imgcache_slide =>') . ' ' . var_export($settings['imgcache_slide'], TRUE) .'</pre>');
+      drupal_set_message('<pre>' . t('Content first slide =>') . ' ' . var_export($vars['views_slideshow_ddblock_content'][0], TRUE) . '</pre>');
+      break;
+    case 'none':
+    break;
+  }
+}
+
+/**
+ * Show debug information for pager preprocess function helper function
+ *
+ * @param $vars             - An array of variables to pass to the theme template.
+ */
+function views_slideshow_ddblock_show_pager_debug_info($vars) {
+  $settings = $vars['views_slideshow_ddblock_pager_settings'];
+  switch ($settings['debug_info']) {
+    case 'devel':
+      drupal_set_message('<pre>' . t('Pager Settings:') . ' '. '</pre>');
+      dpm($vars['views_slideshow_ddblock_pager_settings'], t('Pager Settings'));
+      break;
+    case 'drupal':
+      drupal_set_message('<pre>' . t('Pager Settings =>') . ' ' . var_export($settings, TRUE) . '</pre>');
+      break;
+    case 'none':
+      break;
+  }
+}
+
+/**
+ * Add slide image variable helper function
+ *
+ * @param $vars             - An array of variables to pass to the theme template.
+ *        $image_type       - Slider image or pager image
+ *        $cck_imagefield   - CCK generated image field name
+ *        $alt              - Alternative text for the image
+ *        $cck_content_type - Content type for getting default image
+ *        $cck_field_name   - CCK field name for getting default image
+ *        $link             - URL to link the image to
+ */
+function views_slideshow_ddblock_add_image($vars, $image_type, $cck_image_field, $alt=NULL, $cck_content_type=NULL, $cck_field_name=NULL, $link=NULL) {
+
+  $link_prefix = '';
+  $link_suffix = '';
+  if ($vars['views_slideshow_ddblock_slider_settings']['imgcache_toggle'] == 1) {
+    if ($image_type == 'slider_item_image') {
+      $used_image_type = $vars['views_slideshow_ddblock_slider_settings']['imgcache_slide'];
+    }
+    if ($image_type == 'pager_item_image') {
+      $used_image_type = $vars['views_slideshow_ddblock_pager_settings']['imgcache_pager_item'];
+    }
+  }
+  // add slide_image variable
+  if (isset($cck_image_field)) {
+    // get image id
+    $fid = $cck_image_field;
+    // get path to image
+    $filepath = db_result(db_query("SELECT filepath FROM {files} WHERE fid = %d", $fid));
+  }
+  // if image does not exist, try to find default content type imagefield image
+  else {
+    if (module_exists('imagefield')) {
+      // cck fieldname, cck content type in use
+      $field = content_fields($cck_field_name, $cck_content_type);
+      if (!empty($field)) {
+        $filepath = $field['widget']['default_image']['filepath'];
+      }
+    }
+  }
+  // if image or default imga e exists
+  if (!empty($filepath)) {
+    // add link to image if link exsist
+    if (!empty($link)) {
+      $link_prefix = '<a href="' . $link . '">';
+      $link_suffix = '</a>';
+    }
+    //  use imagecache (imagecache, preset_name, file_path, alt, title, array of attributes)
+    if (module_exists('imagecache') &&
+        $vars['views_slideshow_ddblock_slider_settings']['imgcache_toggle'] == 1 &&
+        is_array(imagecache_presets()) &&
+        $used_image_type <> '<none>') {
+      $image =
+        $link_prefix .
+        theme('imagecache',
+              $used_image_type,
+              $filepath,
+              check_plain($alt)) .
+        $link_suffix;
+    }
+    else {
+      $image =
+        $link_prefix .
+        '<img src="' . base_path() . $filepath .
+        '" alt="' . check_plain($alt) . '"/>' .
+        $link_suffix;
+    }
+  }
+  return $image;
+}
+
+/**
+ * Add youtube thumbnail slide image variable helper function
+ *
+ * @param $cck_imagefield   - CCK generated image field name
+ *        $alt              - Alternative text for the image
+ *        $link             - URL to link the image to
+ */
+function views_slideshow_ddblock_add_thumbnail_image($cck_image_field, $alt=NULL, $link=NULL) {
+  $link_prefix = '';
+  $link_suffix = '';
+  if (!empty($link)) {
+    $link_prefix = '<a href="' . $link . '">';
+    $link_suffix = '</a>';
+  }
+  if (isset($cck_image_field)) {
+    $data=unserialize($cck_image_field);
+    if (isset($data['thumbnail']['url'])) {
+      $image = $link_prefix . '<img src="' . $data['thumbnail']['url'] . '" alt="' . $alt . '"/>' . $link_suffix;
+    }
+  }
+  return $image;
+}
+
+/**
+ *  content preprocess function.
+ */
+function template_preprocess_views_slideshow_ddblock(&$vars) {
+  // simplify variable names
+  $options = $vars['options']['ddblock'];
+
+  // DDblock template used
+  if ($options['template'] <> 'none') {
+    $view = $vars['view'];
+
+    // get view result
+    $rows = $view->result;
+    $rows1 = &$view->field;
+
+    // sort the result using ddblock, none for using order of view
+    if (!empty($rows)) {
+      switch ($options['settings']['order']) {
+        case 'random':
+          shuffle($rows);
+          break;
+        case 'asc' :
+          asort($rows);
+          break;
+        case 'desc':
+          rsort($rows);
+          break;
+        case 'none':
+          break;
+      }
+
+      // set jquery cycle settings
+      $settings['viewsSlideshowDdblockContent'][$vars['id']] = array(
+      'block'                      => $vars['id'],
+      'nrOfItems'                  => count($rows),
+      'setDimensions'              => $options['template'],
+      'contentContainer'           => $options['content_container']['container'],
+      'sideFx'                     => $options['content_container']['side_fx'],
+      'sideSpeed'                  => (int) $options['content_container']['side_speed'],
+      'custom'                     => $options['custom']['custom_jquery'],
+      'fx'                         => $options['settings']['fx'],
+      'speed'                      => (int) $options['settings']['speed'],
+      'timeOut'                    => (int) $options['settings']['timeout'],
+      'pause'                      => (int) $options['settings']['pause'],
+      'next'                       => (int) $options['settings']['next'],
+      'overflow'                   => $options['settings']['overflow'],
+      'pager'                      => $options['settings']['pager_settings']['pager'],
+      'pagerContainer'             => $options['settings']['pager_settings']['pager_container'],
+      'pagerEvent'                 => $options['settings']['pager_settings']['pager_event'],
+      'pagerFast'                  => (int) $options['settings']['pager_settings']['pager_fast'],
+      'pagerPause'                 => (int) $options['settings']['pager_settings']['pager_pause'],
+      'pager2'                     => (int) $options['settings']['pager2'],
+      'pager2Event'                => $options['settings']['pager2_settings']['pager2_event'],
+      'pager2PagerHide'            => $options['settings']['pager2_settings']['pager2_pager']['pager2_pager_hide'],
+      'pager2SlideHide'            => $options['settings']['pager2_settings']['pager2_slide']['pager2_slide_hide'],
+      'slideText'                  => (int) $options['settings']['slide_text'],
+      'slideTextjQuery'            => $options['settings']['slide_text_settings']['slide_text_jquery'],
+      'slideTextPosition'          => $options['settings']['slide_text_settings']['slide_text_position'],
+      'slideTextDelay'             => (int) $options['settings']['slide_text_settings']['slide_text_delay'],
+      'slideTextDisplayTime'       => (int) $options['settings']['slide_text_settings']['slide_text_display_time'],
+      'slideTextContainer'         => $options['settings']['slide_text_settings']['slide_text_container'],
+      'slideTextEffectBefore'      => $options['settings']['slide_text_settings']['slide_jquery']['slide_text_before_effect'],
+      'slideTextEffectBeforeSpeed' => (int) $options['settings']['slide_text_settings']['slide_jquery']['slide_text_before_speed'],
+      'slideTextEffectAfter'       => $options['settings']['slide_text_settings']['slide_jquery']['slide_text_after_effect'],
+      'slideTextEffectAfterSpeed'  => (int) $options['settings']['slide_text_settings']['slide_jquery']['slide_text_after_speed'],
+      );
+
+      // set template variables
+      $vars['views_slideshow_ddblock_slider_settings']['delta']               = $vars['id'];
+      $vars['views_slideshow_ddblock_slider_settings']['debug_info']          = $options['debug_info'];
+      $vars['views_slideshow_ddblock_slider_settings']['output_type']         = 'view_fields';
+      $vars['views_slideshow_ddblock_slider_settings']['pager']               = $options['settings']['pager_settings']['pager'];
+      $vars['views_slideshow_ddblock_slider_settings']['pager_position']      = $options['settings']['pager_settings']['pager_position'];
+      $vars['views_slideshow_ddblock_slider_settings']['pager2']              = $options['settings']['pager2'];
+      $vars['views_slideshow_ddblock_slider_settings']['pager2_position']     = $options['settings']['pager2_settings']['pager2_position'];
+      $vars['views_slideshow_ddblock_slider_settings']['pager2_pager_prev']   = $options['settings']['pager2_settings']['pager2_pager']['pager2_pager_prev'];
+      $vars['views_slideshow_ddblock_slider_settings']['pager2_pager_next']   = $options['settings']['pager2_settings']['pager2_pager']['pager2_pager_next'];
+      $vars['views_slideshow_ddblock_slider_settings']['pager2_slide_prev']   = $options['settings']['pager2_settings']['pager2_slide']['pager2_slide_prev'];
+      $vars['views_slideshow_ddblock_slider_settings']['pager2_slide_next']   = $options['settings']['pager2_settings']['pager2_slide']['pager2_slide_next'];
+      $vars['views_slideshow_ddblock_slider_settings']['slide_text']          = $options['settings']['slide_text'];
+      $vars['views_slideshow_ddblock_slider_settings']['slide_text_position'] = $options['settings']['slide_text_settings']['slide_text_position'];
+      $vars['views_slideshow_ddblock_slider_settings']['slide_text_info_button'] = $options['settings']['slide_text_settings']['slide_text_info_button'];
+      $vars['views_slideshow_ddblock_slider_settings']['view_name']           = $view->name;
+      $vars['views_slideshow_ddblock_slider_settings']['view_display_id']     = $view->current_display;
+
+
+      if ($options['imgcache_toggle'] == 1) {
+        $vars['views_slideshow_ddblock_slider_settings']['imgcache_toggle']     = $options['imgcache_toggle'];
+        $vars['views_slideshow_ddblock_slider_settings']['imgcache_pager_item'] = $options['imgcache']['imgcache_pager_item'];
+        $vars['views_slideshow_ddblock_slider_settings']['imgcache_slide']      = $options['imgcache']['imgcache_slide'];
+      }
+
+      if ($vars['views_slideshow_ddblock_slider_settings']['slide_text_position'] == "top" ||
+          $vars['views_slideshow_ddblock_slider_settings']['slide_text_position'] == "bottom") {
+        $vars['views_slideshow_ddblock_slider_settings']['slide_direction'] = "horizontal";
+      }
+      else {
+        $vars['views_slideshow_ddblock_slider_settings']['slide_direction'] = "vertical";
+      }
+      $vars['views_slideshow_ddblock_slider_settings']['template'] = $options['template'];
+      if ($vars['views_slideshow_ddblock_slider_settings']['template'] == 'custom' ) {
+        $vars['views_slideshow_ddblock_slider_settings']['custom_template'] = $options['custom_template'];
+      }
+
+      $vars['views_slideshow_ddblock_content'] = $rows;
+
+      // Add the required JS and CSS.
+      // get module path to views_slideshow_ddblock module.
+      $path = drupal_get_path('module', 'views_slideshow_ddblock');
+
+      //add jcycle plugin
+      drupal_add_js($path .'/js/jquery.cycle.all.min.js', 'module');
+
+      //add easing plugin
+      drupal_add_js($path .'/js/jquery.easing.1.2.js', 'module');
+
+      // add ddblock js file
+      drupal_add_js($path .'/js/json2.pack.js', 'module');
+
+      // add ddblock js file
+      drupal_add_js($path .'/js/views_slideshow_ddblock.js', 'module');
+
+      // add Cascading style sheet
+      //drupal_add_css($path .'/views_slideshow_ddblock.css', 'module', 'all', TRUE);
+
+      drupal_add_js($settings, 'setting');
+
+      // additional candidate template files
+      if ($options['template'] == 'custom') {
+        $vars['template_files'][] = 'views-slideshow-ddblock-cycle-block-content-'. $options['custom_template'];
+        $vars['template_files'][] = 'views-slideshow-ddblock-cycle-block-content-'. $vars['id'];
+      }
+      else {
+        $vars['template_files'][] = 'views-slideshow-ddblock-cycle-block-content-'. $options['template'];
+        $vars['template_files'][] = 'views-slideshow-ddblock-cycle-block-content-'. $vars['id'];
+      }
+
+      // pager content settings
+      $pager_settings['delta']               = $vars['id'];
+      $pager_settings['debug_info']          = $options['debug_info'];
+      $pager_settings['output_type']         = 'view_fields';
+      $pager_settings['pager']               = $options['settings']['pager_settings']['pager'];
+      $pager_settings['pager_container']     = $options['settings']['pager_settings']['pager_container'];
+      $pager_settings['pager_event']         = $options['settings']['pager_settings']['pager_event'];
+      $pager_settings['pager_position']      = $options['settings']['pager_settings']['pager_position'];
+      $pager_settings['pager2']              = $options['settings']['pager2'];
+      $pager_settings['pager2_position']     = $options['settings']['pager2_settings']['pager2_position'];
+      $pager_settings['pager2_pager_prev']   = $options['settings']['pager2_settings']['pager2_pager']['pager2_pager_prev'];
+      $pager_settings['pager2_pager_next']   = $options['settings']['pager2_settings']['pager2_pager']['pager2_pager_next'];
+      $pager_settings['pager2_slide_prev']   = $options['settings']['pager2_settings']['pager2_slide']['pager2_slide_prev'];
+      $pager_settings['pager2_slide_next']   = $options['settings']['pager2_settings']['pager2_slide']['pager2_slide_next'];
+      $pager_settings['slide_text']          = $options['settings']['slide_text'];
+      $pager_settings['slide_text_info_button']      = $options['settings']['slide_text_settings']['slide_text_info_button'];
+      $pager_settings['template']            = $options['template'];
+      $pager_settings['custom_template']     = $options['custom_template'];
+      $pager_settings['view_name']           = $view->name;
+      $pager_settings['view_display_id']     = $view->current_display;
+
+      if ($options['imgcache_toggle'] == 1) {
+        $pager_settings['imgcache_pager_item'] = $options['imgcache']['imgcache_pager_item'];
+      }
+
+      $vars['views_slideshow_ddblock_pager_content'] = theme(
+        'views_slideshow_ddblock_pager_content',
+        $pager_settings,
+        $vars['views_slideshow_ddblock_content']
+      );
+    }
+  }
+}
+/**
+ *  Pager-items preprocess function.
+ */
+function template_preprocess_views_slideshow_ddblock_pager_content(&$vars) {
+  if (!empty($vars['views_slideshow_ddblock_content'])) {
+
+    //simplify variable
+    $settings = $vars['views_slideshow_ddblock_pager_settings'];
+
+    // additional candidate template files
+    if ($settings['template'] == 'custom') {
+      $vars['template_files'][] = 'views-slideshow-ddblock-cycle-pager-content-'. $settings['custom_template'];
+      $vars['template_files'][] = 'views-slideshow-ddblock-cycle-pager-content-'. $settings['delta'];
+    }
+    else {
+      $vars['template_files'][] = 'views-slideshow-ddblock-cycle-pager-content-'. $settings['template'];
+      $vars['template_files'][] = 'views-slideshow-ddblock-cycle-pager-content-'. $settings['delta'];
+    }
+  }
+}
+

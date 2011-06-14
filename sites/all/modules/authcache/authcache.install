@@ -1,0 +1,38 @@
+<?php
+// $Id: authcache.install,v 1.3 2009/09/12 16:41:00 jonahellison Exp $
+
+/**
+ * Implementation of hook_enable().
+ */
+function authcache_enable() {
+
+  // Did admin follow install instructions?
+  if(substr(variable_get('cache_inc',false), -13) != 'authcache.inc') {
+    drupal_set_message(st('Your settings.php file must be modified to enable Authcache ($conf[\'cache_inc\']). See <a href="@url">README.txt</a>.', array('@url' => base_path().drupal_get_path('module', 'authcache').'/README.txt')), 'error');
+  }
+
+  drupal_set_message(st('Authcache has been enabled.  Please configure your caching settings under <a href="@url">Site Configuration -> Performance -> Authcache</a>.', array('@url' => base_path().'admin/settings/performance/authcache')), 'warning');
+}
+
+/**
+ * Implementation of hook_disable().
+ */
+function authcache_disable() {
+
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function authcache_install() {
+  // Ensure that the module is loaded early in the bootstrap:
+  db_query("UPDATE {system} SET weight = -90 WHERE name = '%s'", 'authcache');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function authcache_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE '%s_%%'", 'authcache');
+  cache_clear_all('variables', 'cache');
+}

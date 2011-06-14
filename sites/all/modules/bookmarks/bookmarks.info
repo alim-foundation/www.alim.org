@@ -1,0 +1,14 @@
+; $Id: bookmarks.info,v 1.3.2.2 2009/10/19 17:00:59 darthclue Exp $
+name = Bookmarks
+description = Provides a unique menu for each authenticated user.
+version = VERSION
+core = 6.x
+package = Bookmarks
+dependencies[] = menu
+
+; Information added by drupal.org packaging script on 2010-04-18
+version = "6.x-2.9"
+core = "6.x"
+project = "bookmarks"
+datestamp = "1271626503"
+

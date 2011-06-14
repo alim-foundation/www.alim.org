@@ -1,0 +1,197 @@
+# $Id: blogspam.pot,v 1.1.2.4 2009/01/16 18:08:55 chrissearle Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  blogspam.module,v 1.1.2.14 2009/01/16 12:14:02 chrissearle
+#  blogspam.info,v 1.1.2.1 2009/01/05 21:54:29 chrissearle
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2009-01-16 19:04+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: blogspam.module:34
+msgid "Connection settings"
+msgstr ""
+
+#: blogspam.module:39
+msgid "Blogspam server to use"
+msgstr ""
+
+#: blogspam.module:41
+msgid "Which blogspam server do you wish to use?"
+msgstr ""
+
+#: blogspam.module:46
+msgid "Allow comment post if blogspam server is down?"
+msgstr ""
+
+#: blogspam.module:47
+msgid "Allow all comments"
+msgstr ""
+
+#: blogspam.module:48
+msgid "Block all comments"
+msgstr ""
+
+#: blogspam.module:50
+msgid "If the server is down - how should we handle comments?"
+msgstr ""
+
+#: blogspam.module:55
+msgid "Configuration settings"
+msgstr ""
+
+#: blogspam.module:68
+msgid "Node types"
+msgstr ""
+
+#: blogspam.module:71
+msgid "On which node types should blogspam be activated?"
+msgstr ""
+
+#: blogspam.module:76
+msgid "Advanced settings"
+msgstr ""
+
+#: blogspam.module:83
+msgid "Link count"
+msgstr ""
+
+#: blogspam.module:85
+msgid "If a comment contains this many links or more then it will be rejected. Will not be applied if lotsaurls plugin is excluded."
+msgstr ""
+
+#: blogspam.module:90
+msgid "Minimum size"
+msgstr ""
+
+#: blogspam.module:92
+msgid "Minimum size in bytes (you can add k at the end for kilobytes). Leave empty or set to 0 to ignore this option. Will not be applied if size plugin is excluded."
+msgstr ""
+
+#: blogspam.module:97
+msgid "Maximum size"
+msgstr ""
+
+#: blogspam.module:99
+msgid "Maximum size in bytes (you can add k at the end for kilobytes). Leave empty or set to 0 to ignore this option. Will not be applied if size plugin is excluded."
+msgstr ""
+
+#: blogspam.module:104;111
+msgid "Minimum number of words"
+msgstr ""
+
+#: blogspam.module:106;113
+msgid "Minimum number of words. Will not be applied if wordcount plugin is excluded."
+msgstr ""
+
+#: blogspam.module:118
+msgid "Whitelist"
+msgstr ""
+
+#: blogspam.module:120
+msgid "Whitelisted IP addresses/ranges. One IP address or range per line. Either a literal IP address (\"192.168.1.1\") or a CIDR range (\"192.168.1.0/8\"). Will not be applied if 00whitelist plugin is excluded."
+msgstr ""
+
+#: blogspam.module:125
+msgid "Blacklist"
+msgstr ""
+
+#: blogspam.module:127
+msgid "Blacklisted IP addresses/ranges. One IP address or range per line. Either a literal IP address (\"192.168.1.1\") or a CIDR range (\"192.168.1.0/8\"). Will not be applied if 00blacklist plugin is excluded."
+msgstr ""
+
+#: blogspam.module:138
+msgid "Exclude plugins"
+msgstr ""
+
+#: blogspam.module:141
+msgid "You may choose to exclude a server side check. Select those server side plugins to <em>exclude</em>. See <a href=\"@url\">the api docs</a> for more information on these plugins."
+msgstr ""
+
+#: blogspam.module:146
+msgid "Statistics to date"
+msgstr ""
+
+#: blogspam.module:153
+msgid "Accepted"
+msgstr ""
+
+#: blogspam.module:159
+msgid "Rejected as spam"
+msgstr ""
+
+#: blogspam.module:171
+msgid "The server must be specified."
+msgstr ""
+
+#: blogspam.module:175
+msgid "The number of links must be numeric."
+msgstr ""
+
+#: blogspam.module:180
+msgid "If provided, the minimum size must be numeric or numeric with trailing k - e.g. 200 or 2k - no spaces"
+msgstr ""
+
+#: blogspam.module:186
+msgid "If provided, the maximum size must be numeric or numeric with trailing k - e.g. 200 or 2k - no spaces"
+msgstr ""
+
+#: blogspam.module:191
+msgid "The minimum number of words must be numeric."
+msgstr ""
+
+#: blogspam.module:285
+msgid "Unable to check comment with blogspam - please try again later"
+msgstr ""
+
+#: blogspam.module:289
+msgid "Blogspam checker has blocked this post due to: "
+msgstr ""
+
+#: blogspam.module:308;309
+msgid "Unknown"
+msgstr ""
+
+#: blogspam.module:280;304;322;0
+msgid "blogspam"
+msgstr ""
+
+#: blogspam.module:280
+msgid "Call to Blogspam checker failed with code %code and message %msg"
+msgstr ""
+
+#: blogspam.module:304
+msgid "Call to Blogspam stats failed with code %code and message %msg"
+msgstr ""
+
+#: blogspam.module:322
+msgid "Call to Blogspam getPlugins failed with code %code and message %msg"
+msgstr ""
+
+#: blogspam.module:336
+msgid "post comments without checking"
+msgstr ""
+
+#: blogspam.module:17 blogspam.info:0
+msgid "Blogspam"
+msgstr ""
+
+#: blogspam.module:18
+msgid "Configure server to use for blogspam."
+msgstr ""
+
+#: blogspam.info:0
+msgid "Blogspam from http://blogspam.net/"
+msgstr ""
+

@@ -1,0 +1,11 @@
+; $Id: blogspam.info,v 1.1.2.1 2009/01/05 21:54:29 chrissearle Exp $
+name = Blogspam
+description = Blogspam from http://blogspam.net/
+core = 6.x
+
+; Information added by drupal.org packaging script on 2009-01-16
+version = "6.x-1.4"
+core = "6.x"
+project = "blogspam"
+datestamp = "1232130005"
+

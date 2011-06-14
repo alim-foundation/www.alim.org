@@ -1,0 +1,6 @@
+// $Id: CHANGELOG.txt,v 1.2.2.1 2009/04/02 08:27:47 electricmonk Exp $
+
+6--1.0
+===========
+
+- initial 6.x release

@@ -1,0 +1,6 @@
+; $Id: user.info,v 1.4 2007/06/08 05:50:57 dries Exp $
+name = dislikereason
+description = dislikereason module .
+package = others
+version = VERSION
+core = 6.x

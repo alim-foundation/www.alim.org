@@ -1,0 +1,14 @@
+/* $Id: term_lock.css,v 1.1.2.1 2009/11/29 15:32:04 pounard Exp $ */
+
+/**
+ * Taxonomy term lock UI display workarrounds
+ */
+
+/* Indentation for locked terms */
+.false-indentation {
+  float: left;
+  height: 1.7em;
+  margin: -0.4em 0.2em -0.4em -0.4em;
+  padding: 0.42em 0 0.42em 0.6em;
+  width: 20px;
+}

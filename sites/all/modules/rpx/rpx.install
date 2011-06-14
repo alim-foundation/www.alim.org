@@ -1,0 +1,18 @@
+<?php
+// $Id$
+
+/**
+ * The first Drupal 6 update
+ */
+function rpx_update_6000() {
+  $ret = array();
+  // An empty update to make sure updates are run so the menu cache is cleared
+  return $ret;
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function rpx_uninstall() {
+  db_query('DELETE FROM {variable} WHERE name LIKE "rpx_%"');
+}

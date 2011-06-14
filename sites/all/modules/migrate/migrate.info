@@ -1,0 +1,13 @@
+; $Id: migrate.info,v 1.1.2.1 2009/03/20 13:18:20 mikeryan Exp $
+name = "Migrate"
+description = "Import content from external sources"
+package = "Development"
+core = 6.x
+dependencies[] = views
+dependencies[] = tw
+; Information added by drupal.org packaging script on 2010-02-17
+version = "6.x-1.0"
+core = "6.x"
+project = "migrate"
+datestamp = "1266365409"
+

@@ -1,0 +1,89 @@
+<?php
+// $Id: private_taxonomy.install,v 1.2.2.1 2009/04/02 08:27:47 electricmonk Exp $
+
+/**
+ * @file
+ * Install file for taxonomy module
+ */
+
+function private_taxonomy_install() {
+  $success = drupal_install_schema('private_taxonomy');
+  // make all existing vocabularies non-private by default
+  if ($success) {
+    $vocabularies = taxonomy_get_vocabularies();
+    foreach ($vocabularies as $vocabulary) {
+      db_query('INSERT INTO {private_vocabularies} VALUES (%d, 0)', $vocabulary->vid);
+    }
+  }
+  if ($success) {
+    drupal_set_message(st('Private Taxonomy module installed tables successfully.'));
+  }
+  else {
+    drupal_set_message(st('The installation of Private Taxonomy module failed.'), 'error');
+  }
+}
+
+/**
+ * Gets all private vocabularies from the db
+ */
+function _get_private_vocabulary_names() {
+  $private_vocabularies = array();
+  $result = db_query('SELECT name FROM {vocabulary} v INNER JOIN {private_vocabularies} p WHERE p.vid = v.vid AND p.is_private = 1');
+  if ($result) {
+    while ($v = db_fetch_object($result)) {
+      $private_vocabularies[] = $v->name;
+    }
+  }
+  return $private_vocabularies;
+}
+
+/**
+ * Need to decide whether to delete private vocabularies or make them non-private
+ */
+function private_taxonomy_uninstall() {
+  $names = _get_private_vocabulary_names();
+  if (count($names)) {
+    $names = array();
+    drupal_set_message(t("The following private vocabularies have been made public; you may want to delete them: !vocabs", array("!vocabs" => implode(', ', $names))), 'warning');
+  }
+  drupal_uninstall_schema('private_taxonomy');
+}
+
+function private_taxonomy_schema() {
+  $schema = array();
+  $schema['user_term'] = array(
+    'description' => 'A table to link terms to users.',
+    'fields' => array(
+      'uid' => array(
+        'description' => 'The primary identifier for a user.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0),
+      'tid' => array(
+        'description' => 'The primary identifier for a term.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0),
+      ),
+    'primary key' => array('uid', 'tid'),
+  );
+
+  $schema['private_vocabularies'] = array(
+    'description' => 'Stores information about private vocabularies.',
+    'fields' => array(
+      'vid' => array(
+        'description' => 'The primary identifier for a vocabulary.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0),
+      'is_private' => array(
+        'description' => 'Set the vocabulary to private.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0),
+      ),
+    'primary key' => array('vid'),
+  );
+  return $schema;
+}

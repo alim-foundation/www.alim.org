@@ -1,0 +1,57 @@
+<?php
+// $Id: hidden_comment.install,v 1.1 2010/05/29 18:40:00 jcisio Exp $
+
+/** @file
+ * This module allows site admin to hide certain comments contents, without unpublish or delete them
+ * By jcisio
+ */
+
+function hidden_comment_schema() {
+  $schema['comments_hide'] = array(
+    'description' => t('Table for hidden comments.'),
+    'fields' => array(
+      'cid' => array(
+        'description' => t('The identifier of comment.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0),
+      'nid' => array(
+        'description' => t('The identifier of node.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0),
+      'changed' => array(
+        'description' => t('Last time when comment was hidden/unhidden.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0),
+      'user' => array(
+        'description' => t('User in action.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0),
+      'reason' => array(
+        'description' => t('Reason why comment was hidden.'),
+        'type' => 'text',
+        'not null' => TRUE,
+        'default' => ''),
+      ),
+    'indexes' => array(
+      'nid' => array('nid'),
+      ),
+    'primary key' => array('cid'),
+  );
+  return $schema;
+}
+
+function hidden_comment_install() {
+  drupal_install_schema('hidden_comment');
+}
+
+function hidden_comment_uninstall() {
+  drupal_uninstall_schema('hidden_comment');
+}

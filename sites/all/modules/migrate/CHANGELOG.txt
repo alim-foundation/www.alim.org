@@ -1,0 +1,133 @@
+//$Id: CHANGELOG.txt,v 1.1.2.104 2010/02/16 22:55:32 mikeryan Exp $
+
+Migrate 1.0
+===========
+Bug fixes
+- #712752 - Fix missing semicolons on export
+- #704768 - Fix default_value nullability
+
+Migrate 1.0 RC1
+===========
+Features and enhancements
+- #484404 - Basic content set export feature added
+- #698178 - Add unique alphanumeric ids to content sets
+- #679216, #678378 - Implement hook_migrate_api(), and move contrib module support
+    to migrate_extras.
+- #682762 - Extend separator length
+
+Bug fixes
+- #685116 - Missing fields for mapping with missing view argument
+- #683402 - Errors saving non-desttype destinations in strict mode
+
+Migrate 1.0 Beta 4
+===========
+Features and enhancements
+- #429306 - Support for content sets designed to update existing objects
+    Note a slight change to the migrate_fields hook API - the primary key of
+    destination objects should now be [bracketed]. If you have written any code
+    to retrieve fields from the hook, you need to be aware of this and will probably
+    need to strip the brackets.
+- #638770 - Add status field to comments
+- #661934 - Support for external tables using views/tw dbname.tablename support
+- #670838 - Add status to user fields
+- #669358 - Add input format to node fields
+- #648276 - Help on using external tables as sources
+- #661844 - Display PHP config values on settings page
+- #661942 - Redirect to dashboard after content set submit
+- #650472 - Major workflow refactoring, page rearrangement:
+     Content set list and dashboard pages have been combined.
+     UI considerably simplified.
+     Support for stopping active processes/clearing stuck status flags added to
+       drush (drush migrate stop) and dashboard page.
+     Interactive imports now support an update option (previously added to drush with
+       the --update flag).
+     Processing functions now recognize if memory usage is approaching the limit and
+       return cleanly. Interactive runs will automatically start a new batch - drush
+       support for resumption is TBI.
+     Using the dashboard page to define a default workflow has been removed, along
+       with the "drush migrate all" command and cron processing. Using drush, you can
+       define a workflow simply with a sequence of drush commands. Cron processing
+       requires a means of defining what tasks to perform in cron before it can be
+       restored.
+     Tools page (deleting all nodes of a given type) removed. This is supported by
+       the "drush migrate wipe" command - if you really need to do this via a browser,
+       views_bulk_operations is recommended.
+- #648952 - Add drush migrate stop command
+- #649368 - Add --all option to drush commands
+- #601656 - Support updating migrated content in-place (via Drush only)
+- #649762 - Insert migrate info into views and destination objects
+- #630088 - Improved performance of migrate_schema_alter()
+- #551254 - Support 'show summary in full view'
+- #429070 - Allow content sets to share views, using distinct arguments
+- #620418 - Mail and hostname fields for comments
+- #623030 - Language field for nodes
+- #614532 - Hard-coded separator for CCK multiple fields
+- #610078 - Default weight to 0, and require it
+- #610084 - Use FAPI required property for description
+- #576356 - Documentation improvements, migrate.api.php added
+- #589824 - Set multiple separator per content set
+- #526856 - Mark already-used fields when mapping
+- #547772 - Support for taxonomy synonyms
+
+Bug fixes
+- #655298 - Make sure msgs are truncated after a full clear
+- #662058 - Don't force full HTML filter on nodes
+- #665006 - Eliminate notice on unset
+- #640744 - Improved created/changed date handling for nodes.
+- #631756 - Fixes to clear and wipe commands
+- #625006 - Clear sources with string ids
+- #619250 - Continue migrating remaining content sets when one is busy
+- #590768 - Use array_merge instead of += in accumulating errors
+- #560380 - Missing message table affects Views lists
+- #588602 - Typo
+- #586152 - Call migrate_init hooks once
+
+Migrate 1.0 Beta 3
+===========
+- #430100 - Fix to filefield support
+- #576330 - Cleanup of comment migration
+- #392404 - More simpletest work.
+- #579064 - Fixed semaphore handling.
+- #579068 - Added a toggle to control cron processing. Note that it defaults to on for
+            existing installations, but off for new installations.
+- #572896 - Fix xlat support (mapping of source URLs to Drupal URLs)
+- #567686 - Fixed sorting, tweaked layout of content set listing
+- #531474 - Support for comment parent IDs
+- #546398 - Drush improvements - message and timer logging
+- #572670 - Drush - import specific IDs
+- #568558 - Support for datetime fields
+- #430100 - Filefield support
+Validation functions for content set creation/editing.
+Fixed a couple of annoying notices.
+
+Migrate 1.0 Beta 2
+===========
+- #566562 - Objects not being passed by reference to prepare and complete hooks
+- #566588 - Provide public API functions for map and message table names.
+            _migrate_map_table_name() and _migrate_message_table_name() are now
+            deprecated.
+
+Migrate 1.0 Beta 1
+===========
+
+IMPORTANT!
+
+If you have been using a pre-beta version of the migrate module, please note that
+shortly before the release of beta 1 some refactoring was done that requires manual attention.
+
+Updating from a version before 2009/08/23:
+
+All hook names containing "destination" no longer contain "destination". The update function
+will attempt to identify hook implementations you will need to rename, but please go through
+your code carefully to make sure there's nothing else that needs to change. Also, the content
+set pages are now under admin/content/migrate/content_sets (rather than
+admin/content/migrate/destinations).
+
+The map and message table names have been renamed. If you have constructed any views
+specifically accessing these tables, the views will need to be reconstructed.
+
+Updating from a version before 2009/08/18:
+
+The way content_profile mappings are stored has changed - if you are migrating users
+using content_profile, you must edit your user content sets and reestablish your mappings
+to any content_profile fields.

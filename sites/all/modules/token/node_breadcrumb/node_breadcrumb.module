@@ -1,0 +1,340 @@
+<?php
+// $Id: node_breadcrumb.module,v 1.26 2009/10/22 11:27:09 edhel Exp $
+
+function _node_breadcrumb_set_location($mid, $last_path, $last_title) {
+  $add_active_class = variable_get('node_breadcrumb_add_active_class', FALSE);
+  $menu_item = menu_link_load($mid);
+  menu_local_tasks(0);
+  menu_local_tasks(1);
+  menu_set_item($_GET['q'], $menu_item);
+  if ($add_active_class) {
+    $q = $_GET['q'];
+    $_GET['q'] = $menu_item['link_path'];
+  }
+  $breadcrumb = array();
+  while ($mid && ($item = menu_link_load($mid))) {
+    if (!isset($menu_name) && $add_active_class) {
+      menu_tree($menu_name = $item['menu_name']);
+    }
+    array_unshift($breadcrumb, l($item['link_title'], $item['link_path']));
+    $mid = $item['plid'];
+  }
+  array_unshift($breadcrumb, l(t('Home'), NULL));
+  drupal_set_breadcrumb($breadcrumb);
+  if ($add_active_class) {
+    $_GET['q'] = $q;
+  }
+}
+
+function node_breadcrumb_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
+  if ($op == 'view' && $page) {
+    $db_rules = db_query("select * from {node_breadcrumb_rule} order by weight, rid");
+    while ($rule = db_fetch_object($db_rules)) {
+      // check node type
+      if ($rule->node_type != '' && $node->type != $rule->node_type) continue;
+      // check terms
+      foreach (array($rule->tid1, $rule->tid2) as $tid) {
+        if ($tid > 0) {
+          if (empty($node->taxonomy[$tid])) continue 2;
+        }
+        elseif ($tid < 0) {
+          foreach ($node->taxonomy as $term) {
+            if ($term->vid == -$tid) continue 2;
+          }
+          continue 2;
+        }
+      }
+      // check php condition
+      if ($rule->condition != '') {
+        eval("\$condition=$rule->condition;");
+        if (!$condition) {
+          continue;
+        }
+      }
+      // apply menu location
+      _node_breadcrumb_set_location($rule->mid, "node/$node->nid", $node->title);
+      break;
+    }
+    module_invoke_all("node_breadcrumb", $node);
+  }
+}
+
+function node_breadcrumb_perm() {
+  return array('administer node breadcrumb');
+}
+
+function node_breadcrumb_init() {
+  $menu_item = menu_get_item();
+  if ($menu_item) {
+	$menu = db_result(db_query("select menu_name from {menu_links} where link_path='%s'", $menu_item['href']));
+	if ($menu != 'admin_menu') {
+		menu_set_active_menu_name($menu);
+	}
+  }
+}
+
+function node_breadcrumb_menu() {
+  $items = array();
+  $items['admin/settings/node_breadcrumb'] = array(
+    'title' => 'Node breadcrumb',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('node_breadcrumb_admin_settings'),
+    'access arguments' => array('administer node breadcrumb'),
+  );
+  return $items;
+}
+
+function _node_breadcrumb_rule_form($fieldset_title, $node_type, $tids, $condition, $mid, $weight, $weight_delta, $submit) {
+  $form = array('#type' => 'fieldset', '#title' => $fieldset_title);
+
+  // node type
+  $types = node_get_types();
+  $types_select = array(
+    '#type' => 'select',
+    '#title' => t('Content type'),
+    '#options' => array('' => "<". t('none') .">")
+  );
+  foreach ($types as $type) {
+    $types_select['#options'][$type->type] = $type->name;
+  }
+  if ($type) {
+    $types_select['#default_value'] = $node_type;
+  }
+  $form['node_type'] = $types_select;
+
+  // term
+  if (module_exists('taxonomy')) {
+    $form['tid'] = array('#type' => 'fieldset', '#title' => t('Categories'), '#attributes' => array('class' => 'node_breadcrumb_categories'));
+    $vocabularies = taxonomy_get_vocabularies();
+    $none_option = "<". t('none') .">";
+    $vid2tid = array();
+    if (is_array($tids)) {
+      foreach ($tids as $tid) {
+        if ($tid > 0) {
+          $term = taxonomy_get_term($tid);
+          $vid2tid[$term->vid] = $tid;
+        }
+        elseif ($tid < 0) {
+          $vid2tid[-$tid] = $tid;
+        }
+      }
+    }
+    foreach ($vocabularies as $vocabulary) {
+      $taxonomy_form = taxonomy_form($vocabulary->vid);
+      unset($taxonomy_form['#options']['']);
+      $taxonomy_form['#multiple'] = FALSE;
+      $taxonomy_form['#default_value'] = $vid2tid[$vocabulary->vid] ? $vid2tid[$vocabulary->vid] : 0;
+      unset($taxonomy_form['#size']);
+      unset($all_option);
+      $all_option->option = array(-$vocabulary->vid => "<". t("any") .">");
+      array_unshift($taxonomy_form['#options'], $all_option);
+      array_unshift($taxonomy_form['#options'], $none_option);
+      $form['tid']["vid_$vocabulary->vid"] = $taxonomy_form;
+    }
+  }
+
+  // php condition
+  $form['condition'] = array(
+    '#type' => 'textarea',
+    '#rows' => 1,
+    '#title' => t('Condition'),
+    '#description' => t('Additional PHP expression, e. g., $node->type == \'story\' || $node->type == \'news\''),
+    '#default_value' => $condition,
+  );
+
+  // menu item
+  $menu_item = menu_link_load($mid);
+  $form['mid'] = array(
+    '#type' => 'select',
+    '#title' => t('Menu item'),
+    '#required' => TRUE,
+    '#options' => menu_parent_options(menu_get_menus(), array('mlid' => 0)),
+    '#default_value' => "$menu_item[menu_name]:$mid",
+  );
+
+  // weight
+  $form['weight'] = array(
+    '#type' => 'weight',
+    '#title' => t('Weight'),
+    '#default_value' => $weight,
+    '#required' => TRUE,
+    '#delta' => $weight_delta,
+  );
+
+  // submit
+  $form['submit'] = array('#type' => 'submit', '#value' => $submit);
+
+  return $form;
+}
+
+function node_breadcrumb_admin_settings($dummy = NULL, $rid = NULL) {
+  drupal_add_css(drupal_get_path('module', 'node_breadcrumb') .'/node_breadcrumb.css');
+
+  $weight_delta = max(5, db_result(db_query("select max(abs(weight)) from {node_breadcrumb_rule}")) + 1);
+  if (module_exists('taxonomy')) $vocabularies = taxonomy_get_vocabularies();
+  $types = node_get_types();
+  
+  // add rule
+  $form['add'] = _node_breadcrumb_rule_form(t('Add rule'), NULL, NULL, NULL, NULL, 0, $weight_delta, t('Add rule'));
+  
+  // edit rule
+  if ($rid) {
+    $db_rule = db_query("select * from {node_breadcrumb_rule} where rid=%d", $rid);
+    $rule = db_fetch_object($db_rule);
+    if ($rule->rid) {
+      $form['edit'] = _node_breadcrumb_rule_form(t('Edit rule'), $rule->node_type, array($rule->tid1, $rule->tid2), $rule->condition, $rule->mid, $rule->weight, $weight_delta, t('Save rule'));
+      $form['edit']['rid'] = array('#type' => 'hidden', '#value' => $rid);
+      $form['edit']['cancel'] = array('#type' => 'submit', '#value' => t('Cancel'));
+      unset($form['add']);
+    }
+  }
+
+  // rules
+  $db_rules = db_query("select * from {node_breadcrumb_rule} order by weight, rid");
+  while ($rule = db_fetch_object($db_rules)) {
+    $menu_item = menu_link_load($rule->mid);
+    $terms = array();
+    if (module_exists('taxonomy')) {
+      if ($rule->tid1) {
+        $term = taxonomy_get_term($rule->tid1);
+        $terms[] = $rule->tid1 > 0 ? l($term->name, "taxonomy/term/$rule->tid1") : (t("any of") ." &lt;". $vocabularies[-$rule->tid1]->name ."&gt;");
+      }
+      if ($rule->tid2) {
+        $term = taxonomy_get_term($rule->tid2);
+        $terms[] = l($term->name, "taxonomy/term/$rule->tid2");
+      }
+    }
+    unset($condition);
+    if ($rule->condition != '') {
+      $condition = check_plain($rule->condition);
+      $js_condition = check_plain(str_replace("'", "\\'", $rule->condition));
+      $condition = "<a title=\"$condition\" href=\"javascript:prompt('". t('Condition') ."','$js_condition');void(0);\">PHP</a>";
+    }
+    $rids[$rule->rid] = '';
+    $form['rules']['node_type'][$rule->rid] = array('#value' => $types[$rule->node_type]->name);
+    $form['rules']['tid'][$rule->rid] = array('#value' => empty($terms) ? "<". t('none') .">" : join(", ", $terms));
+    $form['rules']['condition'][$rule->rid] = array('#value' => $condition);
+    $form['rules']['mid'][$rule->rid] = array('#value' => l($menu_item['title'], $menu_item['href']));
+    $form['rules']['weight']["weight_$rule->rid"] = array('#type' => 'weight', '#default_value' => $rule->weight, '#required' => TRUE, '#delta' => $weight_delta);
+    $form['rules']['edit'][$rule->rid] = array('#value' => l(t('edit'), "admin/settings/node_breadcrumb/$rule->rid"));
+  }
+  $form['rules']['delete'] = array('#type' => 'checkboxes', '#options' => $rids);
+  if ($form['rules']['node_type']) {
+    $form['rules']['submit'] = array('#type' => 'submit', '#value' => t('Delete rule'));
+    $form['rules']['save']   = array('#type' => 'submit', '#value' => t('Save weights'));
+  }
+  
+  // more options
+  $form['more'] = array('#type' => 'fieldset', '#title' => 'More options');
+  $form['more']['add_active_class'] = array('#type' => 'checkbox', '#title' => 'Add <strong>active</strong> class for menu item', '#default_value' => variable_get('node_breadcrumb_add_active_class', FALSE));
+  $form['more']['save'] = array('#type' => 'submit', '#value' => t('Save options'));
+
+  return $form;
+}
+
+function node_breadcrumb_theme() {
+  return array(
+    'node_breadcrumb_admin_settings' => array(
+      'arguments' => array('form' => NULL),
+    ),
+  );
+}
+
+function theme_node_breadcrumb_admin_settings($form) {
+  $output = "";
+  if (!empty($form['rules']['node_type'])) {
+    $header = array(theme('table_select_header_cell'), t('Type'), t('Term'), t('Condition'), t('Menu item'), t('Weight'), t('Operations'));
+    foreach (element_children($form['rules']['node_type']) as $rid) {
+      $rows[] = array(
+        drupal_render($form['rules']['delete'][$rid]),
+        drupal_render($form['rules']['node_type'][$rid]),
+        drupal_render($form['rules']['tid'][$rid]),
+        drupal_render($form['rules']['condition'][$rid]),
+        drupal_render($form['rules']['mid'][$rid]),
+        drupal_render($form['rules']['weight']["weight_$rid"]),
+        drupal_render($form['rules']['edit'][$rid]),
+      );
+    }
+    $rows[] = array(
+      array('data' => drupal_render($form['rules']['submit']), 'colspan' => 5),
+      array('data' => drupal_render($form['rules']['save'])),
+      array('data' => ''),
+    );
+    $rules = theme('table', $header, $rows);
+    $output .= "<fieldset><legend>". t("Rules") ."</legend>$rules</fieldset>";
+  }
+  $output .= drupal_render($form);
+  return $output;
+}
+
+function node_breadcrumb_admin_settings_validate($form, &$form_state) {
+  if ($form_state['values']['op'] == t('Delete rule') || $form_state['values']['op'] == t('Save weights') || $form_state['values']['op'] == t('Save options')) {
+    return;
+  }
+
+  foreach ($form_state['values'] as $key => $value) {
+    if (substr($key, 0, 4) == 'vid_' && $value != 0) $tids++;
+  }
+  if ($tids > 2) {
+    form_set_error('tid', t('You may select not more than 2 terms.'));
+  }
+  elseif ($form_state['values']['node_type'] == '' && $tids == 0 && empty($form_state['values']['condition'])) {
+    form_set_error('', t('Fill the form below.'));
+  }
+}
+
+function node_breadcrumb_admin_settings_submit($form, &$form_state) {
+  if (isset($form_state['values']['mid'])) {
+    $mid = $form_state['values']['mid'];
+    $mid_colon = strpos($mid, ":");
+    $mid = $mid_colon === FALSE ? NULL : substr($mid, $mid_colon + 1);
+  }
+  if ($form_state['values']['op'] == t('Delete rule')) {
+    foreach ($form_state['values']['delete'] as $value) {
+      if ($value) {
+        $rids[] = $value + 0;
+      }
+    }
+    if ($rids) {
+      db_query("DELETE FROM {node_breadcrumb_rule} WHERE rid IN (%s)", join(",", $rids));
+      drupal_set_message(t('Rule(s) has been deleted.'));
+    }
+  }
+  elseif ($form_state['values']['op'] == t('Save weights')) {
+    foreach ($form_state['values'] as $key => $weight) {
+      if (substr($key, 0, 7) == 'weight_') {
+        $rid = substr($key, 7);
+        db_query("update {node_breadcrumb_rule} set weight=%d where rid=%d", $weight, $rid);
+      }
+    }
+    drupal_set_message(t("Weights has been applied."));
+  }
+  elseif ($form_state['values']['op'] == t('Add rule')) {
+    $tid = array();
+    foreach ($form_state['values'] as $key => $value) {
+      if (substr($key, 0, 4) == 'vid_' && $value != 0) $tid[] = $value;
+    }
+    $a = $GLOBALS['db_type'] == 'pgsql' ? "" : "`";
+    db_query("INSERT INTO {node_breadcrumb_rule} (node_type, tid1, tid2, mid, weight, %scondition%s) VALUES ('%s', %d, %d, %d, %d, '%s')", $a, $a, $form_state['values']['node_type'], $tid[0], $tid[1], $mid, $form_state['values']['weight'], $form_state['values']['condition']);
+    drupal_set_message(t('Rule has been added.'));
+  }
+  elseif ($form_state['values']['op'] == t('Save rule')) {
+    $tid = array();
+    foreach ($form_state['values'] as $key => $value) {
+      if (substr($key, 0, 4) == 'vid_' && $value != 0) $tid[] = $value;
+    }
+    $a = $GLOBALS['db_type'] == 'pgsql' ? "" : "`";
+    db_query("UPDATE {node_breadcrumb_rule} SET node_type='%s', tid1=%d, tid2=%d, mid=%d, weight=%d, %scondition%s='%s' WHERE rid=%d", $form_state['values']['node_type'], $tid[0], $tid[1], $mid, $form_state['values']['weight'], $a, $a, $form_state['values']['condition'], $form_state['values']['rid']);
+    drupal_set_message(t('Rule has been saved.'));
+    $form_state['redirect'] = "admin/settings/node_breadcrumb";
+  }
+  elseif ($form_state['values']['op'] == t('Cancel')) {
+    $form_state['redirect'] = "admin/settings/node_breadcrumb";
+  }
+  elseif ($form_state['values']['op'] == t('Save options')) {
+    variable_set('node_breadcrumb_add_active_class', $form_state['values']['add_active_class'] ? TRUE : FALSE);
+    drupal_set_message(t('Options have been saved.'));
+  }
+}
+
+//function _d($var) {if ($GLOBALS['user']->uid == 1) drupal_set_message("<pre>" . print_r($var, 1) . "</pre>");}

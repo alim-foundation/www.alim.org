@@ -1,0 +1,12 @@
+<?php
+function blogspam_update_6100() {
+  $ret = array();
+
+  $url = variable_get('blogspam_server', 'http://test.blogspam.net:8888/');
+
+  if ($url == 'http://test.blog.spam.steve.org.uk:8888/') {
+    variable_set('blogspam_server', 'http://test.blogspam.net:8888/');
+  }
+
+  return $ret;
+}

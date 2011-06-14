@@ -1,0 +1,15 @@
+; $Id: bookmarks_public.info,v 1.2.2.2 2009/10/19 17:00:59 darthclue Exp $
+name = Bookmarks Public Profiles
+description = Publishes public bookmarks on user profile pages.
+version = VERSION
+core = 6.x
+package = Bookmarks
+dependencies[] = bookmarks
+dependencies[] = menu
+
+; Information added by drupal.org packaging script on 2010-04-18
+version = "6.x-2.9"
+core = "6.x"
+project = "bookmarks"
+datestamp = "1271626503"
+

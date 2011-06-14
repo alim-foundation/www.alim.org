@@ -1,0 +1,2 @@
+community_tags.js is edited .
+Added the code to refresh the page after submit the ajax to save the community tags

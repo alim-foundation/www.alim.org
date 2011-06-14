@@ -1,0 +1,199 @@
+2010-04-18
+----------------------
+- 6.x-2.9
+-- Code cleanup.
+-- SQL Error: Table names not enclused in curly brackets.
+
+2010-04-05
+----------------------
+- 6.x-2.8
+-- #761934 : define() clash with Core.
+
+2010-03-01
+----------------------
+- 6.x-2.7
+-- #698836 : Strings not translatable.
+
+2009-11-14
+----------------------
+- 6.x-2.6
+-- #606456 : Path modification of preset and default bookmarks now works.
+-- #606456 : Default and Preset bookmarks can now be distributed to all users.
+
+2009-10-19
+----------------------
+- 6.x-2.5
+-- #606456 : Updates to preset and default bookmarks will now update all existing bookmarks to new link.
+-- #575290 : If a user clicks Add this page they will be redirected back to the same page after adding the bookmark.
+
+2009-06-20
+----------------------
+- 6.x-2.4
+-- #388654 : Bookmarks now support query strings
+-- #470692 : Block is not shown unless the role has administer own bookmarks permission
+-- #419486 : Curly brackets now included at no extra charge
+
+2009-03-17
+----------------------
+- 6.x-2.3
+-- #372460 : Bookmark defaults broken
+-- #373005 : Added README.TXT
+-- #365698 : Block Translations
+-- #298772 : Options block condensed to single line
+-- FEATURE : When menu items are updated anywhere in Drupal, the bookmarks module will now check to see if it contains a reference
+             to the link being changed and update bookmarks to the new link.
+
+2009-01-24
+----------------------
+- 6.x-2.2
+-- BUG FIX : Path not showing when editting items.
+-- BUG FIX : Permissions weren't being checked when editting an item.  This permitted users to edit items that didn't belong to them.
+
+2009-01-23
+----------------------
+- 6.x-2.1
+-- BUG FIX : Deep Items / Folders not properly processed.
+
+2009-01-23
+----------------------
+- 6.x-2.0
+-- BUG FIX : Adding items to the default list was not working.
+-- FEATURE : Presets can now be defined.
+-- SUPPORT : D5 Support is officially dropped.
+
+2009-01-20
+----------------------
+- 6.x-1.7-0
+-- BUG FIX : Editing a bookmark item gave access to place bookmarks in other user bookmarks.
+-- FEATURE : Parent items are no longer listed as <bookmarks-x> but now reflect the username.
+
+2008-12-24
+----------------------
+- 6.x-1.6-0
+-- #284311 : Update function now returns an array.
+
+2008-12-17
+----------------------
+- 6.x-1.5-0
+-- #342055 : Default bookmarks can now be specified.
+-- DHTML Menus 3.2 no longer provides theme functions.  Using straight menu functions instead.
+
+2008-07-11
+----------------------
+- 6.x-1.4-4
+-- #280874 : DHTML Menu private functions aren't always available.  Using theme() instead.
+
+2008-07-10
+----------------------
+- 6.x-1.4-3
+-- #280557 : DHTML Menu private functions aren't always available.  Using theme() instead.
+
+2008-07-09
+----------------------
+- 6.x-1.4-2
+-- #280151 : Edit / Delete operations not working.
+
+2008-07-09
+----------------------
+- 6.x-1.4-1
+-- #280151 : Unable to get external URL to resolve.
+
+2008-06-16
+----------------------
+- 6.x-1.4-0
+-- #269498 : Show bookmark description as visible text in addition / instead of as alt text.
+-- Moved public bookmark pages to bookmarks/public and bookmarks/public/user.
+-- Changed the way public bookmarks are shown on the user profile page.
+-- Changed the way bookmarks are named in the database.
+
+2008-06-12
+----------------------
+- 6.x-1.3-2 : #266735 : Allow bookmarks to be viewed by the public as part of the user profile.
+
+2008-06-11
+----------------------
+- 6.x-1.3-1 : Fixed bug that required dhtml_menus 6.x-1.05.
+
+2008-06-04
+----------------------
+- 6.x Version : Direct port of User Menus code
+
+2006-08-05
+----------------------
+- Removed (undocumented) support for the discontinued weblinks module. (smsimms)
+
+2006-08-03
+----------------------
+- Added German translation (yaph)
+
+2006-08-02
+----------------------
+- Issue 47947, Bug in PostgreSQL DB schema (smsimms)
+- Added Polish translation (mumonzan)
+- Added Spanish translation (Sergio Gonzalez)
+- Rename class name "icon" to "bookmark-icon" to avoid conflicts with
+  themes and other modules (moshe weitzman)
+- Have MySQL create the bookmarks table with UTF-8 encoding
+
+2005-08-09
+----------------------
+Issue 27109, PostgreSQL DB schema. (Daniel)
+
+2004-10-11
+----------------------
+Drupal 4.5 compatibility. (Matt)
+
+2004-03-18
+----------------------
+Fixed bug 6386. Index.php was not being stripped off stored URL's. (Matt)
+
+2004-02-27
+----------------------
+Rewritten the module to allow offsite links and use cleaner links (Matt)
+
+2004-01-13
+----------------------
+Use theme("image", ...) to theme the delete icon emitted by default. (Ax)
+
+2003-12-07
+----------------------
+Use drupal_set_message() to provide the bookmark action status
+messages. (Moshe)
+
+2003-11-29
+----------------------
+Adopt the module to the new title management scheme, so the bookmark
+links will better remember the title of the bookmarked page. (Goba)
+
+2003-11-14
+----------------------
+Add a theme function for the delete icon, so it can be customized
+in the theme this way. (Goba)
+
+2003-10-11
+----------------------
+Complete rewrite to allow arbitrary pages to be bookmarked
+on the site. Also as most of the pages provide no title,
+let the users edit the bookmark titles. (Goba)
+
+2003-02-25
+----------------------
+Updated to fit CVS, uses new menu hooks, cleaned out drupal_url calls,
+generally patched and fixed. Changed name from hotlist => bookmarks.
+
+2002-06-11
+----------------------
+- added _system() hook
+
+2002-04-29
+----------------------
+- expanded help for theme authors
+- updated to use new l() and drupal_url() functions
+
+2002-01-07
+----------------------
+- small bugfix (bluto)
+
+2002-01-01
+----------------------
+- initial release. (berserk)

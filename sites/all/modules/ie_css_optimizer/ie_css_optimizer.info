@@ -1,0 +1,14 @@
+; $Id: ie_css_optimizer.info,v 1.1 2009/06/08 09:22:39 johnalbin Exp $
+
+name = "IE CSS Optimizer"
+description = "Optimizes CSS files for development in Internet Explorer."
+
+core = 6.x
+package = Development
+
+; Information added by drupal.org packaging script on 2010-07-14
+version = "6.x-1.0"
+core = "6.x"
+project = "ie_css_optimizer"
+datestamp = "1279102208"
+

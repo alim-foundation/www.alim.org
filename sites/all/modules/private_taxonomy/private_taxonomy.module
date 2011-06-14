@@ -1,0 +1,141 @@
+<?php
+// $Id: private_taxonomy.module,v 1.2.2.1 2009/04/02 08:27:47 electricmonk Exp $
+
+/**
+ * @file
+ * A module to allow taxonomy terms per user
+ */
+
+/**
+ * Implementation of hook_db_rewrite_sql().
+ */
+function private_taxonomy_db_rewrite_sql($query, $primary_table, $primary_field, $args) {
+  global $user;
+  if ($primary_field == 'tid') {
+    // this query deals with taxonomy objects
+    $ret = array();
+    $ret['join'] = "LEFT JOIN {user_term} ON t.tid = user_term.tid "."LEFT JOIN {private_vocabularies} ON t.vid = private_vocabularies.vid";
+    $ret['where'] = "({private_vocabularies}.is_private = 1 AND user_term.uid = $user->uid) "."OR (private_vocabularies.is_private = 0)";
+    return $ret;
+    break;
+  }
+}
+
+/**
+ * Implementation of hook_taxonomy().
+ */
+function private_taxonomy_taxonomy($op, $type, $array = NULL) {
+  global $user;
+  if ($type == 'term') {
+    // find out if the term is indeed private
+    $term = taxonomy_get_term($array['tid']);
+    if (private_taxonomy_is_vocabulary_private($term->vid)) {
+      switch ($op) {
+        case 'delete':
+          db_query('DELETE FROM {user_term} WHERE uid = %d AND tid = %d', $user->uid, $array['tid']); // just to be safe, we also limit on uid
+          break;
+        case 'insert':
+          db_query('INSERT INTO {user_term} VALUES (%d, %d)', $user->uid, $array['tid']);
+          break;
+      }
+    }
+  }
+  else if ($type == 'vocabulary' && $op == 'insert') {
+    db_query('INSERT INTO {private_vocabularies} VALUES (%d, 0)', $array['vid']);
+  }
+}
+
+/**
+ * @param $vid
+ * @return true if the specified vocabulary is private
+ */
+function private_taxonomy_is_vocabulary_private($vid) {
+  $result = db_query("SELECT is_private FROM {private_vocabularies} WHERE vid = %d", $vid);
+  if ($result) {
+    $a = db_fetch_array($result);
+    return $a['is_private'];
+  }
+  else { // should only happen when the vocabulary hasn't been created yet
+    return FALSE;
+  }
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function private_taxonomy_form_alter(&$form, &$form_state, $form_id) {
+  // add the is_private field to the Vocabulary edit form
+  if ($form_id == 'taxonomy_form_vocabulary') {
+    $vid = $form['vid']['#value'];
+    $form['is_private'] = array('#type' => 'checkbox',
+    '#title' => t('Private'),
+    '#default_value' => private_taxonomy_is_vocabulary_private($vid),
+    '#weight' => 1,
+    '#description' => t('If enabled, user will be able to manage their own terms and only be able to see their own terms. <strong>Enabling this on an existing vocabulary will associate all existing terms with the enabling user.</strong>'),
+    );
+    // push elements below our added field
+    $form['weight']['#weight'] = 2;
+    $form['submit']['#weight'] = 3;
+    $form['delete']['#weight'] = 3;
+    // add submit function
+    $form['#submit'][] = 'private_taxonomy_form_vocabulary_submit';
+  }
+}
+/**
+ * Sets this vocabulary to be private, if necessary
+ */
+function private_taxonomy_form_vocabulary_submit($form, &$form_state) {
+  global $user;
+  $vid = $form_state['values']['vid'];
+  $is_private = $form_state['values']['is_private'];
+  // we'll only arrive here after hook_taxonomy has been invoked, so even if
+  // this vocabulary has just been created, we only need to update our table.
+  // we pay for this with an extra DML operation but we gain simplicity.
+  db_query('UPDATE {private_vocabularies} SET is_private = %d WHERE vid = %d', $is_private, $vid);
+  if ($is_private) {
+    // now we need to check if any terms exist for this vocabulary which don't have
+    // records in the user_term table
+    $sql = "SELECT tid FROM {term_data} t WHERE NOT EXISTS(SELECT 1 FROM {user_term} u WHERE u.tid = t.tid) AND vid = %d";
+    $result = db_query($sql, $vid);
+  if ($result) {
+    // associate each term with the current user
+    while ($a = db_fetch_array($result)) {
+      db_query("INSERT INTO {user_term} VALUES (%d, %d)", $user->uid, $a['tid']);
+    }
+  }
+  }
+  else {
+    // remove data for the current vocabulary from the user_term table
+    db_query("DELETE FROM {user_term} WHERE EXISTS (SELECT 1 FROM {term_data} t WHERE t.tid = {user_term}.tid AND t.vid = %d)", $vid);
+  }
+}
+
+/**
+ * Gets all private vocabularies from the db
+ */
+function private_taxonomy_get_private_vocabularies() {
+  $private_vocabularies = array();
+  $result = db_query('SELECT * FROM {vocabulary} v INNER JOIN {private_vocabularies} p WHERE p.vid = v.vid AND p.is_private = 1');
+  if ($result) {
+    while ($v = db_fetch_object($result)) {
+      $private_vocabularies[] = $v;
+    }
+  }
+  return $private_vocabularies;
+}
+/**
+ * @TODO
+ */
+function private_taxonomy_disable() {
+  $private_vocabularies = private_taxonomy_get_private_vocabularies();
+
+  if (count($private_vocabularies)) {
+    $names = array();
+    foreach ($private_vocabularies as $v) {
+      $names[] = $v->name;
+    }
+    drupal_set_message(t("Notice, the following private vocabulries have been made public: !vocabs", array("!vocabs" => implode(', ', $names))), 'warning');
+  }
+}
+
+

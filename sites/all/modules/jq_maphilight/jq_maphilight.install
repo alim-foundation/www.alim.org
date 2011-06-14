@@ -1,0 +1,18 @@
+<?php
+// $Id: jq_maphilight.install,v 1.1.2.1 2009/06/19 21:38:16 worldfallz Exp $
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function jq_maphilight_uninstall() {
+  variable_del('jq_maphilight_fill');
+  variable_del('jq_maphilight_fillcolor');
+  variable_del('jq_maphilight_fillopacity');  
+  variable_del('jq_maphilight_stroke');
+  variable_del('jq_maphilight_strokecolor');
+  variable_del('jq_maphilight_strokeopacity');
+  variable_del('jq_maphilight_strokewidth');
+  variable_del('jq_maphilight_fade');
+  variable_del('jq_maphilight_allmaps_enabled');
+  drupal_set_message(t('jQuery Map Hilight module uninstalled.'));
+}

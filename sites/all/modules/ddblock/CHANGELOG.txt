@@ -1,0 +1,115 @@
+/*
+ * Change Log for ddblock module
+ * Copyright (c) 2008-2009 ppblaauw
+ */
+
+2009-feb-26
+Fixed advanced settings not shown on initial configuration page view
+Changed cycle plugin to version 2.55
+
+#issues
+#380746 Fixed view no content issue
+
+2009-feb-18
+
+Destroy views object when not needed anymore to save memory
+Make image folder file path relative to drupal file path instead of drupal root
+Changed cycle plugin to version 2.51 (multiple effects)
+Javascript for admin page included only on admin page
+Added longer speed and timeout settings
+Improved jquery custom options helptext
+changed install.txt file
+changed readme.txt file
+removed file ddblock-cycle-block-content-array.tpl.php
+removed file ddblock-cycle-block-images.tpl.php
+Some minor code and text improvements
+
+#issues
+
+#351030 thanks to acouch Added image cache presets for images
+#355888 Fixed image size issue
+#358147 Fixed not recognizing long view_names
+#359297 Fixed JavaScript and CSS included only on ddblcok pages
+#359810 Fixed ddblock injects itself into other block configuration form
+#361447 by mrfelton Fixed get right views block when multiple views blocks used
+#361452 Fixed sort order support for advanced dynamic display blocks
+
+2009-jan-04
+
+Fixed custom-pager issue in config page
+Fixed prev-next pager issue
+Add speed direct
+
+#Issues
+#351453 Fixed wrong Content template
+#351159 Fixed number of nodes issue
+
+2008-dec-24
+
+Add init hook to add js and css files
+Remove ahah functionality for pager dimensions
+Don't cache ddblock blocks
+Node teaser or full node view
+Overflow hidden checkbox
+Add advanced dynamic display block functionality
+Add standard templates
+Add custom templates
+Add prev/next pager
+Add custom pager
+Add pagercontainer
+Add pager position
+Add pager event setting
+Add slidetext functionality
+Add jQuery effect for Slide text
+Add better CCK and Views support
+Longer timeout and speed settings
+Made admin form more dynamic with jQuery functionality
+
+#issues
+#334663 by ppblaauw: fixed all images display briefly on page load
+
+2008-oct-30 ddblock 6.x-1.0-rc2
+
+#311352 by ppblaauw: fixed insert of views instance.
+#312622 by ppblaauw: fixed block caching.
+#327459 by ppblaauw: make custom image size possible.
+
+2008-sep-01 ddblock 6.x-1.0-rc1
+
+        by ppblaauw: removed the ddblock-block-headerimage.tpl.php file.
+#302393 by ppblaauw: fixed unknown column issue.
+#302155 by ppblaauw: fixed pager issue.
+#302393 by ppblaauw: fixed insert of block bug.
+
+2008-aug-31
+add functionality for block instances so all blocks can be used with
+    the dynamic display block module
+change headerimage specific template file to a block content template file.
+add settings for block instances.
+add maximum image to show for image folder.
+add input type to choose which input method to use.
+add clear-block in template files.
+add fieldsets to make settings more grouped.
+
+rename some function to better names.
+optimize get_blocks code.
+remove headerimage specific code.
+strip css file to minimum.
+clean up AHAH callbacks.
+
+issues
+
+#295606 regular expression fix
+#299500 CSS changed
+
+
+
+
+
+
+
+
+
+
+
+

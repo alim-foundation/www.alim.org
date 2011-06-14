@@ -1,0 +1,15 @@
+; $Id: term_lock_yamm.info,v 1.1.2.2 2009/08/10 15:38:06 pounard Exp $
+name = Term lock Yamm
+description = Yamm integration for term_lock module
+package = Yamm third party integration
+dependencies[] = term_lock
+dependencies[] = yamm_api
+core = 6.x
+php = 5.1
+
+; Information added by drupal.org packaging script on 2010-04-08
+version = "6.x-2.0-beta3"
+core = "6.x"
+project = "term_lock"
+datestamp = "1270741845"
+

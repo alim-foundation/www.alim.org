@@ -1,0 +1,95 @@
+/* deafult dynamic display block */ 
+.ddblock-container {
+  position: relative;
+}
+
+/* default dynamic display block number pager */
+.ddblock-number-pager a.activeSlide  { 
+  background: #88f; 
+}
+.ddblock-number-pager a:focus { 
+  outline: none; 
+}
+.ddblock-number-pager  { 
+/*  padding-bottom: 3px;     /* margin between bottom of pager and content */
+  position: relative; 
+  left: 0; 
+  display: block;
+}
+.ddblock-number-pager a { 
+  margin: 0 2px 2px 0;      /* margin right and bottom between pagers */
+  padding: 0px 6px;         /* pading left and right inside pager */
+  border: 1px solid #ccc; 
+  background: #fc0; 
+  text-decoration: none; 
+  display: block;
+  float: left;
+  font-size:.9em;          /* adjust fontsize */
+}
+
+/* default dynamic display block prev-next pager */
+.ddblock-prev-next-pager a.activeSlide  { 
+  background: #88f; 
+}
+.ddblock-prev-next-pager a:focus { 
+  outline: none; 
+}
+.ddblock-prev-next-pager  { 
+/*  padding-bottom: 3px;     /* margin between bottom of pager and content */
+  position: relative; 
+  left: 0; 
+  display: block;
+}
+.ddblock-prev-next-pager a { 
+  margin: 0 2px 2px 0;      /* margin right and bottom between pagers */
+  padding: 0px 6px;         /* pading left and right inside pager */
+  border: 1px solid #ccc; 
+  background: #fc0; 
+  text-decoration: none; 
+  display: block;
+  float: left;
+  font-size:.9em;          /* adjust fontsize */
+}
+
+/* default dynamic display block image pager */
+.ddblock-image-pager a.activeSlide  { 
+  background: #ddd; 
+}
+.ddblock-image-pager a:focus { 
+  outline: none; 
+}
+ul.ddblock-image-pager { 
+  margin: 0 0 3px 0; 
+  padding: 0; 
+  line-height:1em;
+}
+.ddblock-image-pager li { 
+/* width: 61px;         /*width of list item 55 from picture width + 2 X 3px padding*/
+  float: left; 
+  margin: 0 3px 3px 0; /* margin right and bottom between pagers */
+  padding: 0;
+  list-style: none; 
+  border: 1px solid #ccc; 
+  background: #fff;
+}
+.ddblock-image-pager li a { 
+/*  width: 55px;         /* width of list item*/
+/*  height: 55px;        /*height of list item*/
+  padding: 3px; 
+  display: block; 
+  background: #fff;
+}
+.ddblock-image-pager li img { 
+  border: none; 
+  display: inline; 
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* default dynamic display block custom pager */
+.ddblock-custom-pager a.activeSlide  { 
+background: #eee; 
+}
+.ddblock-custom-pager a:focus { 
+  outline: none; 
+}

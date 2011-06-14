@@ -1,0 +1,137 @@
+<?php 
+
+
+
+function dislikereason_perm() {
+ return array('reason manage','reason content');
+}
+
+ function dislikereason_menu(){
+ 	  $items['dislikereason/result/%/vote'] = array(
+      'access arguments' =>  array('reason manage'),
+      'title' => t('Reasons why you dislike the comment'),
+      'page callback' => 'dislikereason_item',
+	  
+     );
+     
+	 $items['allreasons'] = array(
+    'title' => 'Manage Reason',
+    'page callback' => 'dislikereason_item_full',
+    'access arguments' => array('reason content'),
+    'type' => MENU_CALLBACK,
+  );
+ 
+  return $items;  
+}
+
+
+
+
+
+
+function dislikereason_item_form(){
+$form = array();
+ 
+ $form['reason']['reason_item_length'] = array(
+  '#type' => 'select',
+  '#title' => t('Reasons why you dislike the comment'),
+  '#default_value' => variable_get('reason_item_length','Off topic / irrelevant to source text'),
+  '#options' => array(
+    'Off topic / irrelevant to source text' => t('Off topic / irrelevant to source text'),
+    'Not supported by the language of source text' => t('Not supported by the language of source text'),
+    'Contradicts the Quran' => t('Contradicts the Quran'),
+	'Contradicts another source text' => t('Contradicts another source text'),
+	'Irrational / contradicts reality' => t('Irrational / contradicts reality'),
+	'Contains statements / lacking references' => t('Contains statements / lacking references'),
+	'Other ' => t('Other'),
+  ),
+  '#description' => t('Select a reason'),
+);
+
+ $form['title'] = array(
+    '#type'          => 'textarea',
+    '#title'         => t('Reason'),
+    '#required'      => FALSE,
+   '#default_value' => $item['title'],
+  ); 
+  
+  
+
+ $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+  );
+  
+   
+  
+  
+  
+  
+  return $form;
+}
+
+
+
+function dislikereason_item_full(){
+$result1=db_query("SELECT * FROM {votingapi_vote} where content_id=%d   ",452);
+
+ 	 while ($row = db_fetch_array($result1)) {
+	$output.=" <tr> <td>". $row['content_id']."</td><td align='center'> ".$row['value']."</td> <td>".$row['uid'].'.....'.$row['vote_id']."</td></tr>";
+	
+
+}
+
+$output.="mmmmmmmmmmmmmmmmmmm";
+return $output;
+
+}
+
+function dislikereason_item(){
+	 global $user;
+return drupal_get_form('dislikereason_item_form');
+}
+
+
+function dislikereason_item_form_submit($form, &$form_state){
+ global $user;
+$form_title = $form['title']['#value'];
+	$form_num = $form['reason']['reason_item_length']['#value'];
+	$rr=$form_title.$form_num;
+ $result = db_query('SELECT vote_id FROM {votingapi_vote} ORDER BY vote_id DESC ');
+	$row = db_fetch_array($result);
+	$vote_id1=$row['vote_id'];
+	$vote_id1=$vote_id1+1;
+	$comment="comment";
+	$content_id=arg(2);
+	$value=-1;
+	$value_type="points";
+	$tag="vote";
+	$userid=$user->uid;
+	$timestamp=time();
+	$vote_source=$_SERVER['REMOTE_ADDR'];
+	$ttee=0;
+	
+	$result1=db_query("SELECT * FROM {votingapi_vote} where content_id=%d and uid=%d  ",$content_id,$userid);
+    while($row = db_fetch_array($result1)){
+		
+		 $vote_id=$row['vote_id'];}
+		 
+	
+		  if($vote_id!=""){
+		   $ttee=1;
+		   
+		    db_query(" UPDATE {votingapi_vote} SET value=%d  WHERE vote_id = %d ",$value,$vote_id );
+		   db_query("INSERT INTO {dislikereason} SET  reason='%s',reason_description='%s' , comment_id=%d ,user_id=%d ",$form_num,$form_title,$content_id,$userid);
+		   drupal_set_message(t('Your Information Saved Sucessfully'));
+		  }
+
+	else{
+		  db_query("INSERT INTO {votingapi_vote} SET  vote_id=%d , content_type='%s',content_id=%d ,value=%d,value_type='%s',tag='%s',uid=%d,timestamp=%d,vote_source='%s'",$vote_id1,$comment,$content_id,$value,$value_type,$tag,$userid,$timestamp,$vote_source);
+		 
+		 db_query("INSERT INTO {dislikereason} SET  reason='%s',reason_description='%s' , comment_id=%d ,user_id=%d ",$form_num,$form_title,$content_id,$userid);
+
+ drupal_set_message(t('Your Information Saved Sucessfully'));
+}
+
+}
+

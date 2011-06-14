@@ -1,0 +1,110 @@
+<?php
+
+/**
+ * Implementation of hook_install().
+ */
+function term_lock_install() {
+  drupal_install_schema('term_lock');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function term_lock_uninstall() {
+  drupal_uninstall_schema('term_lock');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function term_lock_schema() {
+  $schema = array();
+
+  $schema['term_lock_cache'] = drupal_get_schema_unprocessed('system', 'cache');
+
+  $schema['term_lock_vocabulary'] = array(
+    'fields' => array(
+      'vid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Vocabulary identifier'
+      ),
+      'depth' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'All terms locked until depth'
+      ),
+    ),
+    'primary key' => array('vid')
+  );
+
+  $schema['term_lock'] = array(
+    'fields' => array(
+      'tid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Term identifier'
+      ),
+      'locked' => array(
+        'type' => 'int',
+        'size' => 'small',
+        'not null' => TRUE,
+        'description' => 'Term is locked'
+      ),
+      'childlocked' => array(
+        'type' => 'int',
+        'size' => 'small',
+        'not null' => TRUE,
+        'description' => 'Can affect child to term'
+      ),
+      'nodelocked' => array(
+        'type' => 'int',
+        'size' => 'small',
+        'not null' => TRUE,
+        'description' => 'Cann add nodes to term'
+      ),
+    ),
+    'primary key' => array('tid')
+  );
+
+  return $schema;
+}
+
+function term_lock_update_6001() {
+  $ret = array();
+
+  db_create_table($ret, 'term_lock_cache',
+    drupal_get_schema_unprocessed('system', 'cache'));
+
+  db_create_table($ret, 'term_lock_vocabulary',
+    drupal_get_schema_unprocessed('term_lock', 'term_lock_vocabulary'));
+
+  return $ret;
+}
+
+function term_lock_update_6002() {
+  $ret = array();
+
+  db_add_field($ret, 'term_lock', 'nodelocked', array(
+    'type' => 'int',
+    'size' => 'small',
+    'not null' => TRUE,
+    'description' => 'Cann add nodes to term')
+  );
+
+  return $ret;
+}
+
+/**
+ * Update to V2 branch
+ */
+function term_lock_update_6003() {
+  $ret = array();
+
+  db_drop_field($ret, 'term_lock_vocabulary', 'aggressive');
+
+  return $ret;
+}

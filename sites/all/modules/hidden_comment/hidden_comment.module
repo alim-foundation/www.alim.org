@@ -1,0 +1,160 @@
+<?php
+// $Id: hidden_comment.module,v 1.7 2010/07/02 13:15:48 jcisio Exp $
+
+/** @file
+ * This module allows privilege users to hide certain comments contents, without unpublish or delete them
+ * By jcisio
+ */
+
+/**
+ * Implementation of hook_perm().
+ */
+function hidden_comment_perm() {
+  return array('hide comments', 'hide personal comments');
+}
+
+/**
+ * Implementation of hook_init().
+ */
+function hidden_comment_init() {
+  drupal_add_css(drupal_get_path('module', 'hidden_comment') .'/hidden_comment.css', 'module');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function hidden_comment_menu() {
+  $items['comment/hide'] = array(
+    'title' => 'Hide comment',
+    'page callback' => 'hidden_comment_hide',
+    'access callback' => 'hidden_comment_access',
+    'access arguments' => array('hide', 2),
+    'type' => MENU_CALLBACK,
+    'file' => 'hidden_comment.pages.inc',
+  );
+  $items['comment/unhide'] = array(
+    'title' => 'Show comment',
+    'page callback' => 'hidden_comment_unhide',
+    'access callback' => 'hidden_comment_access',
+    'access arguments' => array('unhide', 2),
+    'type' => MENU_CALLBACK,
+    'file' => 'hidden_comment.pages.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_comment().
+ */
+function hidden_comment_comment(&$a1, $op) {
+  switch ($op) {
+    case 'view':
+      if (($reason = _hidden_comment_comment_hidden($a1->nid, $a1->cid)) !== FALSE) {
+        $a1->subject = t('Comment was hidden');
+        $a1->comment = '<em>'. $reason .'</em>';
+        $a1->hidden_comment = TRUE;
+      }
+      break;
+    case 'delete':
+      db_query('DELETE FROM {comments_hide} WHERE cid=%d', $a1->cid);
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_link().
+ *
+ * Add show/hide comment link
+ */
+function hidden_comment_link($type, $object = NULL, $teaser = FALSE) {
+  if ($type == 'comment') {
+    if (hidden_comment_access('hide', $object->cid)) {
+      if (_hidden_comment_comment_hidden($object->nid, $object->cid) !== FALSE) {
+        $links['hidden_comment_show'] = array(
+          'title' => t('show'),
+          'href' => 'comment/unhide/'. $object->cid,
+          'attributes' => array(
+            'title' => t('Show this comment.'),
+            'rel' => 'nofollow'
+          ),
+        );
+      }
+      else {
+        $links['hidden_comment_hide'] = array(
+          'title' => t('hide'),
+          'href' => 'comment/hide/'. $object->cid,
+          'attributes' => array(
+            'title' => t('Hide this comment.'),
+            'rel' => 'nofollow'
+          ),
+        );
+      }
+    }
+  }
+  return $links;
+}
+
+/**
+ * Implementation of hook_link_alter().
+ *
+ * Remove edit/reply/remove links if comment is hidden
+ */
+function hidden_comment_link_alter(&$links, $node, $comment = NULL) {
+  if ($comment && _hidden_comment_comment_hidden($comment->nid, $comment->cid)) {
+    $links = array_intersect_key($links, array('hidden_comment_show' => TRUE));
+  }
+}
+
+/**
+ * Override or insert variables into the comment templates.
+ *
+ * @param $variables
+ *   An array of variables to pass to the theme template.
+ */
+function hidden_comment_preprocess_comment(&$variables) {
+  if (_hidden_comment_comment_hidden($variables['comment']->nid, $variables['comment']->cid) !== FALSE) {
+    $variables['status'] .= ' hidden_comment-hidden';
+  }
+}
+
+function hidden_comment_access($op, $cid, $account = NULL) {
+  if (! $account) {
+    $account =& $GLOBALS['user'];
+  }
+
+  switch ($op) {
+    case 'hide':
+      if (user_access('hide comments')) {
+        return true;
+      }
+      if (user_access('hide personal comments')) {
+        if ($nid = db_result(db_query('SELECT nid FROM {comments} WHERE cid=%d', $cid))) {
+          $node = node_load($nid);
+          return $node->uid == $account->uid;
+        }
+        else {
+          return false;
+        }
+      }
+      break;
+    case 'unhide':
+      return user_access('hide comments');
+  }
+  
+  return false;
+}
+
+function _hidden_comment_comment_hidden($nid, $cid) {
+  static $hidden_comments = array();
+
+  if (! isset($hidden_comments[$nid])) {
+    $result = db_query('SELECT cid, reason FROM {comments_hide} WHERE nid=%d', $nid);
+    $hidden_comments[$nid] = array();
+    while ($row = db_fetch_object($result)) {
+      $hidden_comments[$nid][$row->cid] = $row->reason;
+    }
+  }
+
+  return isset($hidden_comments[$nid][$cid]) ? $hidden_comments[$nid][$cid] : FALSE;
+}

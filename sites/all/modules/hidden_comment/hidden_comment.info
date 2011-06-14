@@ -1,0 +1,12 @@
+; $Id: hidden_comment.info,v 1.1 2010/05/29 00:43:48 jcisio Exp $
+name = Hidden Comment
+description = This module allows site admin to hide certain comments contents, without unpublish or delete them
+core = 6.x
+
+
+; Information added by drupal.org packaging script on 2010-07-02
+version = "6.x-1.2"
+core = "6.x"
+project = "hidden_comment"
+datestamp = "1278076811"
+

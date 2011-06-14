@@ -1,0 +1,200 @@
+<?php
+// $Id: bookmarks_public.module,v 1.2.2.2 2010/03/01 15:29:26 darthclue Exp $
+
+/**
+ * @file
+ * Provides public access to user bookmarks.
+ */
+
+/**
+ * Implementation of hook_help().
+ */
+function bookmarks_public_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#bookmarks_public':
+      $output = '<p>'. t("The bookmarks public module permits users to specify bookmarks for public access.") .'</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function bookmarks_public_perm() {
+  return array('create public bookmarks', 'view public bookmarks');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function bookmarks_public_menu() {
+  global $user;
+  $items['bookmarks/public'] = array(
+    'title' => 'Bookmarks',
+    'description' => "View All Public Bookmarks.",
+    'page callback' => 'bookmarks_public_view_all',
+    'access arguments' => array('view public bookmarks'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['bookmarks/public/%user'] = array(
+    'title' => 'Bookmarks',
+    'description' => "View Public Bookmarks.",
+    'page callback' => 'bookmarks_public_view',
+    'page arguments' => array(2),
+    'access arguments' => array('view public bookmarks'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['folder'] = array(
+    'title' => 'Bookmarks',
+    'description' => "View Public Bookmarks.",
+    'page callback' => 'bookmarks_public_view',
+    'page arguments' => array(1),
+    'access arguments' => array('view public bookmarks'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Build a list of public bookmarks for all users.
+ */
+function bookmarks_public_view_all() {
+  $result = db_query("SELECT * FROM {menu_bookmarks} ORDER BY title");
+  $content = array();
+  while ($menu = db_fetch_array($result)) {
+    if (is_numeric(str_replace('bookmarks-','',$menu['menu_name']))) {
+      $menu['href'] = 'bookmarks/public/'. str_replace('bookmarks-','',$menu['menu_name']);
+      $menu['localized_options'] = array();
+      $content[] = $menu;
+    }
+  }
+  return theme('admin_block_content', $content);
+}
+
+
+/**
+ * Build the public page output for bookmarks at bookmarks/public/%user.
+ */
+function bookmarks_public_view($account) {
+  $folder_path='/folder';
+  drupal_set_title(check_plain(t('Bookmarks for !account', array('!account' => $account->name))));
+  $menus = bookmarks_public_get_menus($account);
+
+  foreach ($menus as $name => $title) {
+    $menu_data = _bookmarks_public_checkaccess(menu_tree_all_data($name));
+    $menu_new = _bookmarks_public_alterkeys($menu_data);
+    $content = str_replace('a href="'. $folder_path .'"', 'a href="#"', menu_tree_output($menu_new));
+  }
+
+  if (empty($content)) {
+    $content = t('No Public Bookmarks');
+  }
+  else {
+    $content .= '</ul>';
+    $content .= '</li></ul>';
+  }
+
+  return $content;
+}
+
+/**
+ * Build the profile page output for bookmarks.
+ */
+function _bookmarks_public_profile($account) {
+  $folder_path='/folder';
+  $menus = bookmarks_public_get_menus($account);
+
+  foreach ($menus as $name => $title) {
+    $menu_data = _bookmarks_public_checkaccess(menu_tree_all_data($name));
+    $menu_new = _bookmarks_public_alterkeys($menu_data);
+    $content = str_replace('a href="'. $folder_path .'"', 'a href="#"', menu_tree_output($menu_new));
+  }
+
+  if (empty($content)) {
+    $content = t('No Public Bookmarks');
+  }
+  else {
+    $content .= '</ul>';
+    $content .= '</li></ul>';
+  }
+
+  return $content;
+}
+
+/**
+ * Alter the menu keys so that the DHTML display doesn't crush itself on the profile page.
+ */
+function _bookmarks_public_alterkeys($menu_orig) {
+    $menu_new = array();
+    foreach ($menu_orig as $key => $value) {
+      if (is_array($value['below'])) {
+        $value['below'] = _bookmarks_public_alterkeys($value['below']);
+      }
+      $menu_new[$key.' bookmarks-profile'] = $value;
+    }
+  return $menu_new;
+}
+
+/**
+ * Remove any item that isn't public.
+ */
+function _bookmarks_public_checkaccess($menu_data) {
+  foreach ($menu_data as $key => $value) {
+    if (!$value['link']['options']['attributes']['public']) {
+      unset($menu_data[$key]);
+    }
+    else {
+      if (is_array($value['below'])) {
+        $value['below'] = _bookmarks_public_checkaccess($value['below']);
+      }
+      $menu_data[$key] = $value;
+    }
+  }
+  return $menu_data;
+}
+
+/**
+ * Return an associative array of the custom menus names.
+ *
+ * @param $account
+ *   The user account to retreive bookmarks from.
+ * @param $menu
+ *   If not null, return only items that are below this menu.
+ * @return
+ *   An array with the machine-readable names as the keys, and human-readable
+ *   titles as the values.
+ */
+function bookmarks_public_get_menus($account, $menu = NULL) {
+  global $user;
+  $system_menus = menu_list_system_menus();
+  $sql = 'SELECT * FROM {menu_bookmarks}';
+  $sql .= ' WHERE menu_name=\'bookmarks-'. check_plain($account->uid) .'\'';
+  //Limit to only the specified menu
+  if (!empty($menu)) {
+    $sql .= ' AND menu_name=\''. $menu .'\'';
+  }
+  $sql .= ' ORDER BY title';
+  $result = db_query($sql, $system_menus);
+  $rows = array();
+  while ($r = db_fetch_array($result)) {
+    $rows[$r['menu_name']] = $r['title'];
+  }
+  return $rows;
+}
+
+/**
+ * Implementation of hook_user().
+ */
+function bookmarks_public_user($type, &$edit, &$user, $category = NULL) {
+  switch ($type) {
+    case 'view':
+      $user->content['bookmarks_url'] = array(
+        '#type' => 'user_profile_item',
+        '#title' => t('Bookmarks'),
+        '#value' => _bookmarks_public_profile($user),
+        '#weight' => 50,
+      );
+      break;
+  }
+}

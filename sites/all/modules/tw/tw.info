@@ -1,0 +1,14 @@
+; $Id: tw.info,v 1.1 2009/03/04 21:43:00 mikeryan Exp $
+name = Table Wizard
+description = The Table Wizard provides services for managing database tables
+package = Database
+core = 6.x
+dependencies[] = schema
+dependencies[] = views
+
+; Information added by drupal.org packaging script on 2009-07-22
+version = "6.x-1.1"
+core = "6.x"
+project = "tw"
+datestamp = "1248298277"
+

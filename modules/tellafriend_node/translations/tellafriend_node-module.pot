@@ -1,0 +1,161 @@
+# $Id: tellafriend_node-module.pot,v 1.2 2008/10/08 19:54:24 ggaetz Exp $
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  tellafriend_node.module
+#  tellafriend_node.info
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2008-06-23 22:26+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: tellafriend_node.module:21
+msgid "Tell A Friend Page"
+msgstr ""
+
+#: tellafriend_node.module:23
+msgid "Node type for creating tell a friend pages"
+msgstr ""
+
+#: tellafriend_node.module:25
+msgid "Title"
+msgstr ""
+
+#: tellafriend_node.module:27
+msgid "Body"
+msgstr ""
+
+#: tellafriend_node.module:172
+msgid "Max Allowed Recipients"
+msgstr ""
+
+#: tellafriend_node.module:174
+msgid "This is the number of recipients allowed per sender per submission. Enter 0 for unlimited."
+msgstr ""
+
+#: tellafriend_node.module:178
+msgid "Subject"
+msgstr ""
+
+#: tellafriend_node.module:183
+msgid "Subject is editable"
+msgstr ""
+
+#: tellafriend_node.module:188
+msgid "Message"
+msgstr ""
+
+#: tellafriend_node.module:194
+msgid "Message is editable"
+msgstr ""
+
+#: tellafriend_node.module:199
+msgid "Constant message text"
+msgstr ""
+
+#: tellafriend_node.module:201
+msgid "Content that will appear at the bottom of TAF messages. This content will not be editable by users."
+msgstr ""
+
+#: tellafriend_node.module:205
+msgid "Include Opt-In"
+msgstr ""
+
+#: tellafriend_node.module:210
+msgid "Opt-In Text"
+msgstr ""
+
+#: tellafriend_node.module:215
+msgid "Include Opt-Out"
+msgstr ""
+
+#: tellafriend_node.module:220
+msgid "Opt-Out Text"
+msgstr ""
+
+#: tellafriend_node.module:225
+msgid "First name field is required"
+msgstr ""
+
+#: tellafriend_node.module:230
+msgid "Last name field is required"
+msgstr ""
+
+#: tellafriend_node.module:235
+msgid "Destination thank you page"
+msgstr ""
+
+#: tellafriend_node.module:237
+msgid "The page to redirect users to after they complete the tell a friend form"
+msgstr ""
+
+#: tellafriend_node.module:274
+msgid "Recipients"
+msgstr ""
+
+#: tellafriend_node.module:284;291
+msgid "Message Subject"
+msgstr ""
+
+#: tellafriend_node.module:302;309
+msgid "Message Content"
+msgstr ""
+
+#: tellafriend_node.module:320
+msgid "Message footer"
+msgstr ""
+
+#: tellafriend_node.module:322
+msgid "This text will appear at the bottom of your message"
+msgstr ""
+
+#: tellafriend_node.module:334
+msgid "Your First Name"
+msgstr ""
+
+#: tellafriend_node.module:341
+msgid "Your Last Name"
+msgstr ""
+
+#: tellafriend_node.module:348
+msgid "Your Email"
+msgstr ""
+
+#: tellafriend_node.module:377
+msgid "Submit"
+msgstr ""
+
+#: tellafriend_node.module:385
+msgid "Please enter at least one recipient."
+msgstr ""
+
+#: tellafriend_node.module:388
+msgid "The subject can not be blank."
+msgstr ""
+
+#: tellafriend_node.module:391
+msgid "The message can not be blank."
+msgstr ""
+
+#: tellafriend_node.module:412
+msgid "None of the recipient email addresses are valid."
+msgstr ""
+
+#: tellafriend_node.info:0
+msgid "Tell A Friend Node"
+msgstr ""
+
+#: tellafriend_node.info:0
+msgid "Tell A Friend node type for creating tell a friend pages"
+msgstr ""
+

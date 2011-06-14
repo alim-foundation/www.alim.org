@@ -1,0 +1,586 @@
+<?php
+// $Id: tellafriend_node.module,v 1.11 2008/11/23 22:56:41 ggaetz Exp $
+
+/**
+ * @file
+ * Tell A Friend Node module
+ *
+ * Tell A Friend node type for creating tell a friend pages
+ * 
+ * Written by Glenn Gaetz (glenn@harveymckinnon.com)
+ */
+
+global $user;
+
+function tellafriend_node_perm() {
+  return array('access tellafriend nodes', 'administer tellafriend nodes');
+}
+
+
+function tellafriend_node_node_info() {
+  return array(
+    'tellafriend_node' => array(
+      'name' => t('Tell A Friend Page'),
+      'module' => 'tellafriend_node',
+      'description' => t("Node type for creating tell a friend pages"),
+      'has_title' => TRUE,
+      'title_label' => t('Title'),
+      'has_body' => TRUE,
+      'body_label' => t('Body'),
+    )
+  );
+}
+
+function tellafriend_node_access($op, $node, $account) {
+  if ($op == 'create' || $op == 'update' || $op == 'delete') {
+    return user_access('administer tellafriend nodes', $account);
+  }
+  else if ($op == 'view') {
+    return user_access('access tellafriend nodes', $account);
+  }
+}
+
+function tellafriend_node_menu() {
+  $items = array();
+
+  $items['tellafriend_node_plaxo_cb'] = array(
+    'title' => 'Plaxo callback page',
+    'page callback' => 'tellafriend_node_plaxo_cb',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+
+function tellafriend_node_load($node) {
+  $additions = db_fetch_object(db_query('SELECT
+    tellafriend_node_max_allowed_recipients,
+    tellafriend_node_include_plaxo,
+    tellafriend_node_subject,
+    tellafriend_node_subject_is_editable,
+    tellafriend_node_message,
+    tellafriend_node_message_is_editable,
+    tellafriend_node_message_constant_text,
+    tellafriend_node_show_opt_in,
+    tellafriend_node_opt_in_text,
+    tellafriend_node_show_opt_out,
+    tellafriend_node_opt_out_text,
+    tellafriend_node_first_name_is_required,
+    tellafriend_node_last_name_is_required,
+    tellafriend_node_thank_you_page
+    FROM {tellafriend_node_data} WHERE nid = %d', $node->nid));
+  return $additions;
+}
+
+function tellafriend_node_insert($node) {
+  db_query("INSERT INTO {tellafriend_node_data} (
+    nid,
+    tellafriend_node_max_allowed_recipients,
+    tellafriend_node_include_plaxo,
+    tellafriend_node_subject,
+    tellafriend_node_subject_is_editable,
+    tellafriend_node_message,
+    tellafriend_node_message_is_editable,
+    tellafriend_node_message_constant_text,
+    tellafriend_node_show_opt_in,
+    tellafriend_node_opt_in_text,
+    tellafriend_node_show_opt_out,
+    tellafriend_node_opt_out_text,
+    tellafriend_node_first_name_is_required,
+    tellafriend_node_last_name_is_required,
+    tellafriend_node_thank_you_page
+  )
+    VALUES (
+      %d,
+      %d,
+      %d,
+      '%s',
+      %d,
+      '%s',
+      %d,
+      '%s',
+      %d,
+      '%s',
+      %d,
+      '%s',
+      %d,
+      %d,
+      '%s'
+    )",
+    $node->nid,
+    $node->tellafriend_node_max_allowed_recipients,
+    $node->tellafriend_node_max_allowed_recipients,
+    $node->tellafriend_node_subject,
+    $node->tellafriend_node_subject_is_editable,
+    $node->tellafriend_node_message,
+    $node->tellafriend_node_message_is_editable,
+    $node->tellafriend_node_message_constant_text,
+    $node->tellafriend_node_show_opt_in,
+    $node->tellafriend_node_opt_in_text,
+    $node->tellafriend_node_show_opt_out,
+    $node->tellafriend_node_opt_out_text,
+    $node->tellafriend_node_first_name_is_required,
+    $node->tellafriend_node_last_name_is_required,
+    $node->tellafriend_node_thank_you_page
+    );
+}
+
+function tellafriend_node_update($node) {
+  db_query("UPDATE {tellafriend_node_data} SET
+    tellafriend_node_max_allowed_recipients = %d,
+    tellafriend_node_include_plaxo = %d,
+    tellafriend_node_subject = '%s',
+    tellafriend_node_subject_is_editable = %d,
+    tellafriend_node_message = '%s',
+    tellafriend_node_message_is_editable = %d,
+    tellafriend_node_message_constant_text = '%s',
+    tellafriend_node_show_opt_in = %d,
+    tellafriend_node_opt_in_text = '%s',
+    tellafriend_node_show_opt_out = %d,
+    tellafriend_node_opt_out_text = '%s',
+    tellafriend_node_first_name_is_required = %d,
+    tellafriend_node_last_name_is_required = %d,
+    tellafriend_node_thank_you_page = '%s'
+    WHERE nid = %d",
+    $node->tellafriend_node_max_allowed_recipients,
+    $node->tellafriend_node_include_plaxo,
+    $node->tellafriend_node_subject,
+    $node->tellafriend_node_subject_is_editable,
+    $node->tellafriend_node_message,
+    $node->tellafriend_node_message_is_editable,
+    $node->tellafriend_node_message_constant_text,
+    $node->tellafriend_node_show_opt_in,
+    $node->tellafriend_node_opt_in_text,
+    $node->tellafriend_node_show_opt_out,
+    $node->tellafriend_node_opt_out_text,
+    $node->tellafriend_node_first_name_is_required,
+    $node->tellafriend_node_last_name_is_required,
+    $node->tellafriend_node_thank_you_page,
+    $node->nid
+    );
+  }
+
+function tellafriend_node_form(&$node) {
+  // The site admin can decide if this node type has a title and body, and how
+  // the fields should be labeled. We need to load these settings so we can
+  // build the node form correctly.
+  $type = node_get_types('type', $node);
+
+  if ($type->has_title) {
+    $form['title'] = array(
+      '#type' => 'textfield',
+      '#title' => check_plain($type->title_label),
+      '#required' => TRUE,
+      '#default_value' => $node->title,
+      '#weight' => -5
+    );
+  }
+
+  if ($type->has_body) {
+    // In Drupal 6, we can use node_body_field() to get the body and filter
+    // elements. This replaces the old textarea + filter_form() method of
+    // setting this up. It will also ensure the teaser splitter gets set up
+    // properly.
+    $form['body_field'] = node_body_field($node, $type->body_label, $type->min_word_count);
+  }
+
+  // Now we define the form elements specific to our node type.
+
+  $form['tellafriend_node_max_allowed_recipients'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Max Allowed Recipients'),
+    '#default_value' => isset($node->tellafriend_node_max_allowed_recipients) ? $node->tellafriend_max_allowed_recipients : 0,
+    '#description' => t("This is the number of recipients allowed per sender per submission. Enter 0 for unlimited.")
+  );
+  $form['tellafriend_node_include_plaxo'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Include Plaxo contact importer?'),
+    '#default_value' => isset($node->tellafriend_node_include_plaxo) ? $node->tellafriend_node_include_plaxo : 1,
+  );
+  $form['tellafriend_node_subject'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Subject'),
+    '#default_value' => isset($node->tellafriend_node_subject) ? $node->tellafriend_node_subject : '',
+  );
+  $form['tellafriend_node_subject_is_editable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Subject is editable'),
+    '#default_value' => isset($node->tellafriend_node_subject_is_editable) ? $node->tellafriend_node_subject_is_editable : 1,
+  );
+  $form['tellafriend_node_message'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Message'),
+    '#default_value' => isset($node->tellafriend_node_message) ? $node->tellafriend_node_message : '',
+    '#rows' => 10,
+  );
+  $form['tellafriend_node_message_is_editable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Message is editable'),
+    '#default_value' => isset($node->tellafriend_node_message_is_editable) ? $node->tellafriend_node_message_is_editable : 1,
+  );
+  $form['tellafriend_node_message_constant_text'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Constant message text'),
+    '#default_value' => isset($node->tellafriend_node_message_constant_text) ? $node->tellafriend_node_message_constant_text : '',
+    '#description' => t('Content that will appear at the bottom of TAF messages. This content will not be editable by users.'),
+  );
+  $form['tellafriend_node_show_opt_in'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Include Opt-In'),
+    '#default_value' => isset($node->tellafriend_node_show_opt_in) ? $node->tellafriend_node_show_opt_in : 1,
+  );
+  $form['tellafriend_node_opt_in_text'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Opt-In Text'),
+    '#default_value' => isset($node->tellafriend_node_opt_in_text) ? $node->tellafriend_node_opt_in_text : '',
+  );
+  $form['tellafriend_node_show_opt_out'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Include Opt-Out'),
+    '#default_value' => isset($node->tellafriend_node_show_opt_out) ? $node->tellafriend_node_show_opt_out : 0,
+  );
+  $form['tellafriend_node_opt_out_text'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Opt-Out Text'),
+    '#default_value' => isset($node->tellafriend_node_opt_out_text) ? $node->tellafriend_node_opt_out_text : '',
+  );
+  $form['tellafriend_node_first_name_is_required'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('First name field is required'),
+    '#default_value' => isset($node->tellafriend_node_first_name_is_required) ? $node->tellafriend_node_first_name_is_required : 1,
+  );
+  $form['tellafriend_node_last_name_is_required'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Last name field is required'),
+    '#default_value' => isset($node->tellafriend_node_last_name_is_required) ? $node->tellafriend_node_last_name_is_required : 1,
+  );
+  $form['tellafriend_node_thank_you_page'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Destination thank you page'),
+    '#default_value' => isset($node->tellafriend_node_thank_you_page) ? $node->tellafriend_node_thank_you_page : '',
+    '#description' => t('The page to redirect users to after they complete the tell a friend form. Defaults to the front page.'),
+  );
+  return $form;
+}
+
+function tellafriend_node_view($node, $teaser = FALSE, $page = FALSE) {
+  if ($node->tellafriend_node_include_plaxo == TRUE) {
+    $scripts = '<script type="text/javascript" src="http://www.plaxo.com/css/m/js/util.js"></script>';
+    $scripts .= '<script type="text/javascript" src="http://www.plaxo.com/css/m/js/basic.js"></script>';
+    $scripts .= '<script type="text/javascript" src="http://www.plaxo.com/css/m/js/abc_launcher.js"></script>';
+    drupal_set_html_head($scripts);
+  }
+
+  $node = node_prepare($node, $teaser);
+  $node->content['tellafriend_node_page_form'] = array(
+    '#value' => drupal_get_form('tellafriend_node_page_form', $node),
+    '#weight' => 1,
+  );
+  return $node;
+}
+
+function tellafriend_node_page_form(&$form_state, $node) {
+global $user;
+
+  if ($node->tellafriend_node_max_allowed_recipients > 0) {
+    $description = 'Enter email addresses one per line, '. $node->tellafriend_node_max_allowed_recipients .' maximum.';
+  }
+  else {
+    $description = 'Enter email addresses one per line.';
+  }
+  $form['recipients'] = array(
+    '#type' => 'fieldset',
+  );
+  if ($node->tellafriend_node_include_plaxo == TRUE) {
+    $form['recipients']['plaxo'] = array(
+      '#type' => 'item',
+      '#value' => '<a href="#" onclick="showPlaxoABChooser(\'edit-recipients\',\'/tellafriend_node_plaxo_cb\'); return false"><img src="http://www.plaxo.com/images/abc/buttons/add_button.gif" alt="Add from my address book" /></a>',
+    );
+  }
+  $form['recipients']['recipients'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Recipients'),
+	'#rows' => 1,
+    '#description' => t($description),
+    //'#default_value' => isset($form_state['storage']['recipients']) ? $form_state['storage']['recipients'] : '',
+  );
+  $form['message'] = array(
+    '#type' => 'fieldset',
+  );
+  if ($node->tellafriend_node_subject_is_editable == TRUE) {
+    $form['message']['subject'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Subject'),
+      '#size' => 40,
+      '#default_value' => $node->tellafriend_node_subject,
+    );
+  }
+  else {
+    $form['message']['subject_display'] = array(
+      '#type' => 'item',
+      '#title' => t('Subject'),
+      '#value' => $node->tellafriend_node_subject,
+    );
+    $form['message']['subject'] = array(
+      '#type' => 'value',
+      '#value' => $node->tellafriend_node_subject,
+    );
+    $form['message']['subject_value'] = array(
+      '#type' => 'value',
+      '#value' => $node->tellafriend_node_subject,
+    );
+  }
+  if ($node->tellafriend_node_message_is_editable == TRUE) {
+    $form['message']['message_content'] = array(
+      '#type' => 'textarea',
+      '#title' => t('Message'),
+      '#rows' => 3,
+      '#default_value' => $node->tellafriend_node_message,
+    );
+  }
+  else {
+    $form['message']['message_content_display'] = array(
+      '#type' => 'item',
+      '#title' => t('Message'),
+      '#value' => check_markup($node->tellafriend_node_message),
+    );
+    $form['message']['message_content'] = array(
+      '#type' => 'value',
+	  '#rows' => 5,
+      '#value' => $node->tellafriend_node_message,
+    );
+    $form['message']['message_content_value'] = array(
+      '#type' => 'value',
+      '#value' => $node->tellafriend_node_message,
+    );
+  }
+  if ($node->tellafriend_node_message_constant_text != '') {
+    $form['message']['message_constant_text'] = array(
+      '#type' => 'item',
+      '#title' => t('Message footer'),
+      '#value' => $node->tellafriend_node_message_constant_text,
+      '#description' => t('This text will appear at the bottom of your message'),
+    );
+  }
+  $form['message']['message_constant_text_value'] = array(
+    '#type' => 'value',
+    '#value' => $node->tellafriend_node_message_constant_text,
+  );
+  if(arg(1)==163673){ 
+  
+   $form['sender'] = array(
+    '#type' => '',
+  );
+  $form['sender']['sender_first_name'] = array(
+    '#type' => 'hidden',
+    '#title' => t('Your Name'),
+    '#size' => 30,
+    '#required' => isset($node->tellafriend_node_first_name_is_required) ? $node->tellafriend_node_first_name_is_required : TRUE,
+    '#default_value' =>$user->name,
+  );
+
+    $form['sender']['sender_last_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Your Last Name'),
+    '#size' => 30,
+    '#required' => isset($node->tellafriend_node_last_name_is_required) ? $node->tellafriend_node_last_name_is_required : TRUE,
+   //  '#default_value' =>"kkkkkkkkkk",
+  );
+  $form['sender']['sender_email'] = array(
+    '#type' => 'hidden',
+    '#title' => t('Your Email'),
+    '#required' => FALSE,
+    '#size' => 30,
+ '#default_value' => $user->mail,
+  );
+  
+  
+  }else{
+  
+  $form['sender'] = array(
+    '#type' => 'fieldset',
+  );
+   $form['sender']['sender_first_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Your Name'),
+    '#size' => 30,
+    '#required' => isset($node->tellafriend_node_first_name_is_required) ? $node->tellafriend_node_first_name_is_required : TRUE,
+    //'#default_value' => isset($form_state['storage']['sender_first_name']) ? $form_state['storage']['sender_first_name'] : '',
+  );
+  $form['sender']['sender_last_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Your Last Name'),
+    '#size' => 30,
+    '#required' => isset($node->tellafriend_node_last_name_is_required) ? $node->tellafriend_node_last_name_is_required : TRUE,
+    //'#default_value' => isset($form_state['storage']['sender_last_name']) ? $form_state['storage']['sender_last_name'] : '',
+  );
+  $form['sender']['sender_email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Your Email'),
+    '#required' => TRUE,
+    '#size' => 30,
+    //'#default_value' => isset($form_state['storage']['sender_email']) ? $form_state['storage']['sender_email'] : '',
+  );
+  
+  }
+  if ($node->tellafriend_node_show_opt_in == TRUE) {
+    $form['opt_in'] = array(
+      '#type' => 'checkbox',
+      '#title' => $node->tellafriend_node_opt_in_text,
+      '#default_value' => TRUE,
+    );
+  }
+  if ($node->tellafriend_node_show_opt_out == TRUE) {
+    $form['opt_out'] = array(
+      '#type' => 'checkbox',
+      '#title' => $node->tellafriend_node_opt_out_text,
+      '#default_value' => FALSE,
+    );
+  }
+  $form['thank_you_page'] = array(
+    '#type' => 'value',
+    '#value' => isset($node->tellafriend_node_thank_you_page) ? $node->tellafriend_node_thank_you_page : '<front>',
+  );
+  $form['nid'] = array(
+    '#type' => 'value',
+    '#value' => $node->nid,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Send')
+  );
+  return $form;
+}
+
+function tellafriend_node_page_form_validate($form, &$form_state) {
+  if ($form_state['values']['recipients'] == FALSE) {
+    form_set_error('recipients', t('Please enter at least one recipient.'));
+  }
+  if ($form_state['values']['subject'] == FALSE) {
+    form_set_error('subject', t('The subject can not be blank.'));
+  }
+  if ($form_state['values']['message_content'] == FALSE) {
+    form_set_error('message_content', t('The message can not be blank.'));
+  }
+  if ($form_state['values']['recipients'] == TRUE) {
+    $recipients = preg_split('/\n|,|\t/', $form_state['values']['recipients']);
+    $form_state['storage']['valid_recipients'] = array();
+    $form_state['storage']['invalid_recipients'] = array();
+    foreach ($recipients as $recipient) {
+      preg_match('/[\\w\\.\\-+=*_]*@[\\w\\.\\-+=*_]*/', $recipient, $matches);
+      $email = $matches[0];
+      if ($email && valid_email_address($email)) {
+        $form_state['storage']['valid_recipients'][] = $recipient;
+      }
+      else {
+        $form_state['storage']['invalid_recipients'][] = $recipient;
+      }
+    }
+    $form_state['storage']['valid_recipients'] = array_unique($form_state['storage']['valid_recipients']);
+    $form_state['storage']['invalid_recipients'] = array_unique($form_state['storage']['invalid_recipients']);
+
+    if (count($form_state['storage']['valid_recipients']) == 0) {
+      form_set_err('recipients', t('None of the recipient email addresses are valid.'));
+    }
+  }
+}
+
+function tellafriend_node_page_form_submit($form, &$form_state) {
+global $user;
+$temp_user = user_load(array('name' => $user->name ));
+if($temp_user->rpx_data['profile']['name']['givenName']==""){
+$name= $user->name ;
+}
+else{
+$name= $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName']." ";
+}
+  $errors = '';
+  $successes = '';
+  $timestamp = time();
+  $message_id = $timestamp;
+  $rr=arg(2);
+  $result1=db_query("SELECT * FROM {comments} where cid=%d ",$rr);
+
+ 	 while ($row = db_fetch_array($result1)) {
+	  $tt=$row['comment'];
+	 
+	 }
+	 
+  if (count($form_state['storage']['valid_recipients']) > 0) {
+    foreach ($form_state['storage']['valid_recipients'] as $recipient) {
+      $params = array(
+        'first_name' => ucfirst($name),
+        'last_name' => $form_state['values']['sender_last_name'], 
+        'subject' => isset($form_state['values']['subject']) ? '[Alim.org ] '.ucfirst($name).' has shared a comment'.' : '.$form_state['values']['subject'] : '[Alim.org ] '.ucfirst($name).' has shared a comment'.' : '.$form_state['values']['subject_value'],
+        'message' => isset($form_state['values']['message_content']) ? $form_state['values']['message_content'] : $form_state['values']['message_content_value'],
+        'constant_text' => "<br /><br />"."<b>"."Comment</b>"."- "."'".$tt."'"."<br /><br />",
+		'constant_text2' => "To view the full page and comment ".$_SERVER['HTTP_REFERER']."<br /><br /><br />",
+		'constant_text1' => "This e-mail was sent on behalf of user ".ucfirst($name)." from http://www.Alim.org. If you think this message was inappropriate please forward it to moderate@alim.org and tell us why you think it was not appropriate."."<br /><br />",
+      );
+      $from = 'Alim Foundation'.' <'.'do-not-reply@alim.org'.'>';
+      $message = drupal_mail('tellafriend_node', 'taf', $recipient, user_preferred_language($account), $params,  $from, $send = TRUE);
+      if ($message['result'] == TRUE) {
+        db_query("Insert into {tellafriend_node_results} (
+          nid,
+          message_id,
+          timestamp,
+          sender_first_name,
+          sender_last_name,
+          sender_email,
+          recipient,
+          opt_in,
+          opt_out
+        ) values (
+          %d,
+          %d,
+          %d,
+          '%s',
+          '%s',
+          '%s',
+          '%s',
+          %d,
+          %d
+        )", $form_state['values']['nid'],
+          $message_id,
+          $timestamp,
+          $form_state['values']['sender_first_name'],
+          $form_state['values']['sender_last_name'],
+          $form_state['values']['sender_email'],
+          $recipient,
+          $form_state['values']['opt_in'],
+          $form_state['values']['opt_out']
+        );
+        $successes[] = check_plain($recipient);
+      }
+      else {
+        $errors[]  = check_plain($recipient);
+      }
+    }
+    if ($successes) {
+      drupal_set_message($message = "Emails sent to: " . implode(', ', $successes), $type = 'status', $repeat = FALSE);
+    }
+    if ($errors) {
+      drupal_set_message($message = "Sending email to the following failed: " . implode(', ', $errors), $type = 'warning', $repeat = FALSE);
+    }
+  }
+  $form_state['redirect'] = $form_state['values']['thank_you_page'];
+  $form_state['storage'] = NULL;
+}
+
+function tellafriend_node_mail($key, &$message, $params) { $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+  $message['subject'] .= str_replace(array("\r", "\n"), '', $params['subject']);
+ 
+  $message['body'][] = $params['message'];
+  $message['body'][] = $params['constant_text']; $message['body'][] = $params['constant_text2'];
+  $message['body'][] = $params['constant_text1'];
+ 
+}
+
+function tellafriend_node_plaxo_cb() {
+  drupal_set_html_head('<script type="text/javascript" src="https://www.plaxo.com/ab_chooser/abc_comm.jsdyn"></script>');
+  return 'Hello';
+}
+
+

@@ -1,0 +1,12 @@
+/* $Id$ */
+#edit-roles-wrapper {
+  float: left;
+  padding-right: 2em;
+}
+#edit-modules-wrapper {
+  float:left;
+  padding-right: 2em;
+}
+#edit-submit {
+ margin-top: 11em;
+}

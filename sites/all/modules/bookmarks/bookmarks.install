@@ -1,0 +1,88 @@
+<?php
+// $Id: bookmarks.install,v 1.3.2.3 2009/01/23 16:14:35 darthclue Exp $
+
+/**
+ * @file
+ * Installation routines for bookmarks module.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function bookmarks_install() {
+  // Create tables.
+  drupal_install_schema('bookmarks');
+  $ret = array();
+  $ret[] = update_sql("INSERT INTO {menu_bookmarks} VALUES ('bookmarks-defaults','Defaults','The default bookmarks for all users.  This list will be used to pre-populate bookmarks for new users.')");
+  $ret[] = update_sql("INSERT INTO {menu_bookmarks} VALUES ('bookmarks-presets','Presets','The preset bookmarks for all users.  This list will be used to provide a list or presets for all users.')");
+  return $ret;
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function bookmarks_uninstall() {
+  // Remove tables.
+  drupal_uninstall_schema('bookmarks');
+  // Remove entries in menu_links
+  db_query("DELETE FROM {menu_links} WHERE menu_name LIKE 'bookmarks%';");
+  menu_rebuild();
+}
+
+/**
+ * Implementation of hook_Update_N().
+ */
+function bookmarks_update_6100() {
+  $ret = array();
+  $ret[] = update_sql("INSERT INTO {menu_bookmarks} VALUES ('bookmarks-defaults','Defaults','The default bookmarks for all users.  This list will be used to pre-populate bookmarks for new users.')");
+  return $ret;
+}
+
+/**
+ * Implementation of hook_Update_N().
+ */
+function bookmarks_update_6200() {
+  $ret = array();
+  if (db_result(db_query("SELECT count(1) as Cnt FROM {menu_bookmarks} WHERE menu_name='defaults'"))>0) {
+    $ret[] = update_sql("UPDATE {menu_bookmarks} SET menu_name='bookmarks-defaults' WHERE menu_name='defaults'");
+    $ret[] = update_sql("UPDATE {menu_links} SET menu_name='bookmarks-defaults' WHERE menu_name='defaults'");
+  }
+  else {
+    $ret[] = update_sql("INSERT INTO {menu_bookmarks} VALUES ('bookmarks-defaults','Defaults','The default bookmarks for all users.  This list will be used to pre-populate bookmarks for new users.')");
+  }
+  $ret[] = update_sql("INSERT INTO {menu_bookmarks} VALUES ('bookmarks-presets','Presets','The preset bookmarks for all users.  This list will be used to provide a list of presets for all users.')");
+  return $ret;
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function bookmarks_schema() {
+  $schema['menu_bookmarks'] = array(
+    'description' => t('Holds definitions for user bookmark menus.'),
+    'fields' => array(
+      'menu_name' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => t('Primary Key: Unique key for menu. This is used as a block delta so length is 32.'),
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => t('Menu title; displayed at top of block.'),
+      ),
+      'description' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'description' => t('Menu description.'),
+      ),
+    ),
+    'primary key' => array('menu_name'),
+  );
+
+  return $schema;
+}

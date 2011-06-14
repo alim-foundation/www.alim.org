@@ -1,0 +1,547 @@
+<?php
+// $Id: community_tags.module,v 1.37.2.10 2009/12/03 01:48:41 entrigan Exp $
+
+/**
+ * @file
+ * Implements community tagging of nodes using a specific vocabulary for Drupal v6.x
+ */
+
+/**
+ * Display modes.
+ */
+define('COMMUNITY_TAGS_MODE_BLOCK', 0);
+define('COMMUNITY_TAGS_MODE_TAB', 1);
+define('COMMUNITY_TAGS_MODE_INLINE', 2);
+
+/**
+ * Implementation of hook_help().
+ */
+function community_tags_help($path, $arg) {
+  switch ($path) {
+    case 'admin/settings/community-tags':
+      return t('To set up community tagging, you must first <a href="@taxonomy">create a normal free tagged vocabulary</a>. Then activate community tagging on such a vocabulary below, and set the <a href="@workflow">workflow options</a> for node types to control how users can tag nodes.', array('@taxonomy' => url('admin/content/taxonomy'), '@workflow' => url('admin/content/types')));
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function community_tags_theme() {
+  return array(
+    'community_tags_form' => array(
+      'arguments' => array('form' => NULL),
+      'file' => 'community_tags.pages.inc',
+    ),
+    'community_tags' => array(
+      'arguments' => array('tags' => NULL),
+    ),    
+  );
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function community_tags_menu() {
+  $items = array();
+
+  $items['admin/settings/community-tags'] = array(
+    'title' => 'Community tags',
+    'description' => 'Configure community tagging.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('community_tags_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'community_tags.pages.inc',
+  );
+
+  $items['community-tags/js/%node'] = array(
+    'page callback' => 'community_tags_from_js',
+    'page arguments' => array(2),
+    'access callback' => '_community_tags_menu_access',
+    'type' => MENU_CALLBACK,
+    'file' => 'community_tags.ajax.inc',  
+  );
+  
+  $items['community-tags/user'] = array(
+    'page callback' => 'community_tags_by_user',
+    'access callback' => '_community_tags_menu_access',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['node/%node/tag'] = array(
+    'title' => 'Tags',
+    'page callback' => 'community_tags_node_view',
+    'page arguments' => array(1, FALSE),
+    'access callback' => '_community_tags_tab_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+    'file' => 'community_tags.pages.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Resync community_tags table with term_node table, after vocabulary change.
+ */
+function community_tags_rehash($silent = FALSE) {
+  // Get the community tagged vocabularies.
+  $community_tagged = variable_get('community_tags_vocabularies', array());
+
+  $changed = FALSE;
+
+  // If community tagging is in use, resync.
+  if (count($community_tagged)) {
+    // Delete all community tag relations that are no longer in one of these vocabularies.
+
+    $placeholders = implode(',', array_fill(0, count($community_tagged), '%d'));
+    $result = db_query('SELECT c.tid FROM {community_tags} c
+                        INNER JOIN {term_data} d ON c.tid = d.tid
+                        WHERE d.vid NOT IN ('. $placeholders .')',
+                        $community_tagged);
+    while ($term = db_fetch_object($result)) {
+      db_query('DELETE FROM {community_tags} WHERE tid = %d', $term->tid);
+      $changed = TRUE;
+    }
+
+    // Insert new community tag relations for new tags based on the original node author.
+    $result = db_query('SELECT t.tid, t.nid, n.uid, n.created FROM {term_node} t INNER JOIN {node} n ON t.nid = n.nid LEFT JOIN {community_tags} c ON c.tid = t.tid AND c.nid = t.nid INNER JOIN {term_data} d ON t.tid = d.tid WHERE c.tid IS NULL AND d.vid IN ('. $placeholders .')', $community_tagged);
+    while ($term = db_fetch_object($result)) {
+      db_query('INSERT INTO {community_tags} (tid, nid, uid, date) VALUES (%d, %d, %d, %d)', $term->tid, $term->nid, $term->uid, $term->created);
+      $changed = TRUE;
+    }
+  }
+  else {
+    // Delete all community tag relations.
+    if (db_result(db_query('SELECT COUNT(*) FROM {community_tags}'))) {
+      db_query('DELETE FROM {community_tags}');
+      $changed = TRUE;
+    }
+  }
+
+  if (!$silent && $changed) {
+    drupal_set_message('Your community tags have been updated.');
+  }
+}
+
+/**
+ * Implementation of hook_block().
+ */
+function community_tags_block($op = 'list', $delta = 0, $edit = array()) {
+  global $user;
+  switch ($op) {
+
+    case 'list':
+      $block[0]['info'] = t('Community tagging form');
+      return $block;
+
+    case 'view':
+      if (user_access('access content') && user_access('tag content')) {
+        if (arg(0) == 'node' && is_numeric(arg(1)) && (arg(2) == '' || arg(2) == 'view')) {
+          $node = menu_get_object();
+          if ($node && variable_get('community_tags_display_'. $node->type, COMMUNITY_TAGS_MODE_TAB) == COMMUNITY_TAGS_MODE_BLOCK) {
+            $block['subject'] = t('Tag this');
+            $block['content'] = community_tags_node_view($node, TRUE);
+            return $block;
+          }
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Check whether a given node has one or more community tagged vocabularies associated with its type.
+ */
+function community_tags_vids_for_node($node) {
+  // Allow both nids and nodes
+  if (is_numeric($node)) {
+    $node = node_load($node);
+  }
+
+  $community_tagged = variable_get('community_tags_vocabularies', array());
+  $result = db_query("SELECT vid FROM {vocabulary_node_types} WHERE type = '%s'", $node->type);
+  $vids = array();
+  while ($vid = db_fetch_object($result)) {
+    if (isset($community_tagged[$vid->vid])) {
+      $vids[] = $vid->vid;
+    }
+  }
+  return $vids;
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function community_tags_perm() {
+  return array('tag content', 'edit own tags');
+}
+
+/**
+ * Implementation of hook_nodeapi().
+ */
+function community_tags_nodeapi(&$node, $op, $teaser) {
+  switch ($op) {
+    case 'load':
+      $node->tags = tagadelic_node_get_terms($node);
+      $node->community_tags_form = variable_get('community_tags_display_'. $node->type, COMMUNITY_TAGS_MODE_TAB) == COMMUNITY_TAGS_MODE_INLINE;
+      break;
+
+    case 'insert':
+    case 'update':
+      // If this node has tags associated with it, we want to save these in
+      // the community_tags table so we can keep track of the count.
+      // When adding a tag from the add/edit node page, the count will always
+      // be one.  Only when using a "quick add" form can we increase the count.
+      if (is_array($node->taxonomy['tags'])) {
+        global $user;
+        community_tags_taxonomy_node_save($node, $node->taxonomy, TRUE, $user->uid);
+      }
+      break;
+
+    case 'view':
+      global $user;
+      // Show quick tag form for this node if we're on a node page view and the
+      // form is enabled for this node and the default quick tag vocab is set.
+      if (!$teaser && $node->community_tags_form) {
+        $node->content['community_tags'] = array(
+          '#value' => community_tags_node_view($node, TRUE),
+          '#weight' => 50,
+        );
+      }
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function community_tags_form_alter(&$form, &$form_state, $form_id) {
+  // Provide option to enable Community Tags per node type.
+  if ($form_id == 'node_type_form' && isset($form['identity']['type'])) {
+    $modes = array(
+      COMMUNITY_TAGS_MODE_BLOCK => t('Block'),
+      COMMUNITY_TAGS_MODE_TAB => t('Tab'),
+      COMMUNITY_TAGS_MODE_INLINE => t('Inline'),
+    );
+    $form['workflow']['community_tags_display'] = array(
+      '#type' => 'radios',
+      '#title' => t('Community tagging form'),
+      '#default_value' => variable_get('community_tags_display_'. $form['#node_type']->type, COMMUNITY_TAGS_MODE_TAB),
+      '#options' => $modes,
+      '#description' => t('How should users be allowed to tag content?')
+    );
+  }
+}
+
+/**
+ * Retrieve list of tags for a given node that belong to a user.
+ */
+function community_tags_get_user_node_tags($uid, $nid) {
+  $tags = array();
+  $result = db_query("SELECT t.tid, t.name, c.uid, c.nid FROM {term_data} t INNER JOIN {community_tags} c ON c.tid = t.tid WHERE c.nid = %d AND c.uid = %d ORDER BY t.name", $nid, $uid);
+  while ($term = db_fetch_object($result)) {
+    $tags[$term->tid] = $term;
+  }
+
+  return $tags;
+}
+
+/**
+ * Save community_tags term associations and counts for a given node.
+ */
+function community_tags_taxonomy_node_save($node, $terms, $is_owner, $uid) {
+  $community_tagged = variable_get('community_tags_vocabularies', array());
+  if (count($community_tagged) == 0) {
+    return;
+  }
+  $nid = $node->nid;
+
+  // If we're adding tags from the node add/edit page, then we want to delete
+  // any tags that aren't entered to allow admins to remove node tags.
+  // If not, we at least want the existing counts to update them.
+
+  $old_tags_by_uid = array();
+  $result = db_query('SELECT * FROM {community_tags} ttn WHERE nid = %d', $nid);
+  while ($old_tag_node = db_fetch_object($result)) {
+    $old_tags_by_uid[$old_tag_node->uid][$old_tag_node->tid] = $old_tag_node;
+  }
+
+  $tag_nodes = array();
+  $inserted_tids = array();
+
+  $tids = array();
+  // Free tagging vocabularies do not send their tids in the form,
+  // so we'll detect them here and process them independently.
+  if (isset($terms['tags'])) {
+    $typed_input = $terms['tags'];
+    unset($terms['tags']);
+    
+      foreach ($typed_input as $vid=>$vid_value) {
+        if (isset($community_tagged[$vid])) {
+
+        $typed_terms = is_array($vid_value)?$vid_value:drupal_explode_tags($vid_value);
+        foreach ($typed_terms as $typed_term) {
+          // See if the term exists in the chosen vocabulary
+          // and return the tid, otherwise, add a new record.
+          $possibilities = taxonomy_get_term_by_name($typed_term);
+          $typed_term_tid = NULL; // tid match if any.
+          foreach ($possibilities as $possibility) {
+            if ($possibility->vid == $vid) {
+              $typed_term_tid = $possibility->tid;
+            }
+          }
+    
+          if (!$typed_term_tid) {
+            $edit = array ('vid'=>$vid, 'name'=>$typed_term);
+            $status = taxonomy_save_term($edit);
+            $typed_term_tid = $edit['tid'];
+    
+            // Add only new terms to return value
+            $tids[$typed_term_tid] = $typed_term;
+          }
+    
+          // If we already added this term in this cycle, skip this duplicate.
+          if ( isset ($inserted_tids[$typed_term_tid])) {
+            continue ;
+          }
+    
+          // If there was an existing tag by this user, load that data.
+          $tag_node = new stdClass ();
+          $tag_node->tid = $typed_term_tid;
+          $tag_node->nid = $nid;
+          $tag_node->uid = $uid;
+          $tag_node->date = time();
+          $tag_node->vid = $node->vid;
+    
+          // So we don't add this tag again on this run or re-insert the old tag for this user.
+          $inserted_tids[$typed_term_tid] = $typed_term_tid;
+          $tag_nodes[] = $tag_node;
+        }
+      }
+    }
+  }
+
+  // Re-insert the existing tags we haven't already added back in (incl. other users' tags).
+  foreach ($old_tags_by_uid as $old_uid => $old_tags) {
+    foreach ($old_tags as $old_tag) {
+      // If we're editing as the owner, only re-insert this other user's old tag
+      // when I've kept this tag in the node edit form.
+      if ($is_owner && isset($inserted_tids[$old_tag->tid]) && $old_tag->uid != $uid) {
+        $tag_nodes[] = $old_tag;
+      }
+      elseif (!$is_owner && $old_tag->uid != $uid) {
+        $tag_nodes[] = $old_tag;
+      }
+    }
+  }
+
+  // Get existing term-node associations to see if we need to re-insert a term-node
+  // relation for each old tag we're putting back in since we're acting after
+  // taxonomy.module has done its business.
+  $result = db_query('SELECT tid FROM {term_node} WHERE nid = %d', $nid);
+  $existing_term_nodes = array();
+  $add_term_nodes = array();
+  while ($term_node = db_fetch_object($result)) {
+    $existing_term_nodes[$term_node->tid] = TRUE;
+  }
+
+  // Re-insert tag-node-user associations and term-node if not existing.
+  db_lock_table('{community_tags}');
+  db_query('DELETE FROM {community_tags} WHERE nid = %d', $nid);
+  foreach ($tag_nodes as $tag_node) {
+    db_query('INSERT INTO {community_tags} (tid, nid, uid, date) VALUES (%d, %d, %d, %d)', $tag_node->tid, $tag_node->nid, $tag_node->uid, $tag_node->date);
+
+    // Remember to insert term-node relation into term_node table if it doesn't exist already.
+    if (!isset($existing_term_nodes[$tag_node->tid])) {
+      $add_term_nodes[] = $tag_node;
+      $existing_term_nodes[$tag_node->tid] = TRUE;
+    }
+  }
+  db_unlock_tables();
+
+  // Avoid locking term_node so we loop again.
+  foreach ($add_term_nodes as $tag_node) {
+    // Insert term-node relation into term_node table since it doesn't exist already.
+    db_query('INSERT INTO {term_node} (nid, tid, vid) VALUES (%d, %d, %d)', $tag_node->nid, $tag_node->tid, $tag_node->vid);
+  }
+
+  // Match real tags to community tags, if necessary (e.g. after quick tagging).
+  if (!$is_owner) {
+    $placeholders = implode(',', array_fill(0, count($community_tagged), '%d'));
+    $args = $community_tagged;
+    array_unshift($args, $nid);
+    $result = db_query('SELECT n.tid, n.nid FROM {term_node} n LEFT JOIN {community_tags} c ON n.tid = c.tid AND n.nid = c.nid INNER JOIN {term_data} d ON n.tid = d.tid WHERE n.nid = %d AND c.nid IS NULL AND d.vid IN ('. $placeholders .')', $args);
+    while ($tag = db_fetch_object($result)) {
+      db_query('DELETE FROM {term_node} WHERE nid = %d AND tid = %d', $tag->nid, $tag->tid);
+    }
+  }
+  
+  // Force re-indexing to include new tags in the search index.
+  if (module_exists('search')) {
+    search_touch_node($node->nid);
+  }
+
+}
+
+/**
+ * Helper function for retrieving a query result to pass along to the Tagadelic
+ * functions prior to theming.
+ *
+ * @param $type
+ *   The type of query to perform. Possible values:
+ *   - node: get tag count for a given node.
+ *   - type: get tag count for a given node type.
+ *   - user: get tag count for a given user.
+ *   - user_node: get tag count for a given user on a given node.
+ *   - global: get tag count across entire site (default).
+ * @param $args
+ *   An array of arguments that correspond to the result type:
+ *   - If type is 'node', $arg1 is a node ID.
+ *   - If type is 'type', $arg1 is a node type.
+ *   - If type is 'user', $arg1 is a user ID.
+ *   - If type is 'user_node', $arg1 is a user ID, and $arg2 is a node ID.
+ *   - If type is 'global', neither $args are used.
+ * @param $limit
+ *   Only display a certain number of tags.
+ * @return $result
+ *  A database result set.
+ */
+function _community_tags_get_tag_result($type = 'global', $limit = NULL, $arg1 = NULL, $arg2 = NULL) {
+  $sql = '';
+
+  switch ($type) {
+    case 'node':
+      $arg1 = (int)$arg1;
+      $arg2 = NULL;
+      $sql = "SELECT COUNT(t.tid) AS count, t.tid, t.name, t.vid FROM {term_data} t INNER JOIN {community_tags} c ON c.tid = t.tid WHERE c.nid = %d GROUP BY t.tid, t.name, t.vid ORDER BY count DESC";
+      break;
+    case 'type':
+      $arg1 = (string)$arg1;
+      $arg2 = NULL;
+      $sql = "SELECT COUNT(t.tid) AS count, t.tid, t.name, t.vid FROM {term_data} t INNER JOIN {community_tags} c ON c.tid = t.tid INNER JOIN {node} n ON n.nid = c.nid WHERE n.type = '%s' GROUP BY t.tid, t.name, t.vid ORDER BY count DESC";
+      break;
+    case 'user':
+      $arg1 = (int)$arg1;
+      $arg2 = NULL;
+      $sql = "SELECT COUNT(t.tid) AS count, t.tid, t.name, t.vid FROM {term_data} t INNER JOIN {community_tags} c ON c.tid = t.tid WHERE c.uid = %d GROUP BY t.tid, t.name, t.vid ORDER BY count DESC";
+      break;
+    case 'user_node':
+      $arg1 = (int)$arg1;
+      $arg2 = (int)$arg2;
+      $sql = "SELECT COUNT(t.tid) AS count, t.tid, t.name, t.vid FROM {term_data} t INNER JOIN {community_tags} c ON c.tid = t.tid WHERE c.nid = %d AND c.uid = %d GROUP BY t.tid, t.name, t.vid ORDER BY count DESC";
+    default:
+      $sql = "SELECT COUNT(t.tid) AS count, t.tid, t.name, t.vid FROM {term_data} t INNER JOIN {community_tags} c ON c.tid = t.tid GROUP BY t.tid, t.name, t.vid ORDER BY count DESC";
+  }
+
+  if ($limit) {
+    $limit = (int)$limit;
+    return db_query_range($sql, $arg1, $arg2, 0, $limit);
+  }
+  else {
+    return db_query($sql, $arg1, $arg2);
+  }
+}
+
+/**
+ * Community tags callback for node view.
+ */
+function community_tags_node_view($node, $inline = TRUE) {
+  global $user;
+  if (is_numeric($node)) {
+    $node = node_load($node);
+  }
+
+  if (!$inline) {
+    drupal_set_title(check_plain($node->title));
+  }
+
+  $cloud = community_tags_display('node', NULL, $node->nid);
+
+  $vid = array_shift(community_tags_vids_for_node($node));
+  $tags = community_tags_get_user_node_tags($user->uid, $node->nid);
+  $names = array();
+  $output = '';
+  
+  module_load_include('inc', 'community_tags', 'community_tags.pages');
+
+  if (!count($tags)) {
+    // User has not yet added tags to this node yet. Show form.
+    $output .= drupal_get_form('community_tags_form', array('node' => $node, 'cloud' => $cloud, 'nid' => $node->nid, 'vid' => $vid, 'tags' => NULL, 'inline' => $inline));
+  } 
+  elseif (user_access('edit own tags')) {
+    // User has already tagged this node, but can edit their tags. Show form
+    // with the user's tags pre-populated.
+    $names = community_tags_flatten($tags);
+    $tags = taxonomy_implode_tags($tags);
+    $output .= drupal_get_form('community_tags_form', array('node' => $node, 'cloud' => $cloud, 'nid' => $node->nid, 'vid' => $vid, 'tags' => $tags, 'inline' => $inline));
+  }
+  else {
+    // Sorry, no more adding tags for you!
+    $output .= '<p>'. t('You have already tagged this post. Your tags: ') . theme('community_tags', $tags) .'</p>';
+  }
+
+  drupal_add_js(array('communityTags' => array('n_'. $node->nid => array('tags' => $names, 'url' => url('community-tags/js/'. $node->nid), 'add' => t('Add')))), 'setting');
+
+  return $output;
+}
+
+/**
+ * Display community tags. See _community_tags_get_tag_result() for definitions
+ * of $type and the arguments.
+ */
+function community_tags_display($type = 'global', $limit = NULL, $arg1 = NULL, $arg2 = NULL) {
+  $result = _community_tags_get_tag_result($type, $limit, $arg1, $arg2);
+  $weighted_tags = tagadelic_build_weighted_tags($result);
+  $sorted_tags = tagadelic_sort_tags($weighted_tags);
+  return theme('community_tags', $sorted_tags);
+}
+
+/**
+ * Theme function to display a list of community tags.
+ *
+ * @ingroup themeable
+ */
+function theme_community_tags($tags) {
+  return '<div class="cloud">'. (count($tags) ? theme('tagadelic_weighted', $tags) : t('None')) .'</div>';
+}
+
+/**
+ * Menu access callback; Common access check for tag operations.
+ */
+function _community_tags_menu_access() {
+  return user_access('access content') && user_access('tag content');
+}
+
+/**
+ * Menu access callback; Check if the user can access the 'Tags' local task on
+ * node pages.
+ */
+function _community_tags_tab_access($node) {
+  return variable_get('community_tags_display_'. $node->type, COMMUNITY_TAGS_MODE_TAB) == COMMUNITY_TAGS_MODE_TAB &&
+    count(community_tags_vids_for_node($node)) &&
+    _community_tags_menu_access();
+}
+
+/**
+ * Helper function for the JS tagger.
+ */
+function community_tags_flatten($tags) {
+  $names = array();
+  foreach ($tags as $tag) {
+    $names[] = $tag->name;
+  }
+  return $names;
+}
+
+/**
+ * Implementation of hook_views_api
+ * See community_tags.views.inc for the actual views integration
+ */
+function community_tags_views_api()
+{
+  return array (
+  'api'=>2,
+  );
+}

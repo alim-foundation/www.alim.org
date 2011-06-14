@@ -1,0 +1,99 @@
+<?php
+
+/**
+ * Implementation of hook_taxonomy().
+ */
+function lineage_taxonomy($op, $type, $array = null) {
+  // we care not about vocabularies
+  if ($type == 'vocabulary')
+    return;
+
+  switch ($op) {
+    case 'delete':
+      lineage_delete_term($array['tid']);
+      break;
+    case 'insert':
+    case 'update':
+      lineage_update_term($array);
+      break;
+  }
+}
+
+function lineage_enable() {
+  drupal_set_message(t("Updated @number taxonomy records.", array('@number' => lineage_update_all())));
+}
+
+function lineage_update_all() {
+  $count = 0;
+
+  $result = db_query("SELECT td.tid, td.name, td.weight FROM {term_data} td LEFT JOIN {term_hierarchy} th ON th.tid = td.tid WHERE th.parent = 0");
+  while ($term = db_fetch_object($result)) {
+    $count += lineage_update_term($term);
+  }
+
+  return $count;
+}
+
+function lineage_update_term($term) {
+  if (is_array($term)) $term = (object) $term;
+  $base = _lineage_get_parent_lineage($term->parent);
+  return count(lineage_update_term_r($term, $base));
+}
+
+function lineage_update_term_r($term, $base, $tids = array()) {
+  // Extend the base.
+  $base['base'] .= lineage_string($term);
+
+  // Update the hierarchy for the current tid.
+  db_query("DELETE FROM {term_lineage} WHERE tid = '%d'", $term->tid);
+  db_query("INSERT INTO {term_lineage} (tid, lineage, depth) VALUES ('%d', '%s', '%d')", $term->tid, $base['base'], $base['depth']);
+
+  $base['depth']++;
+  // Mark that we've done this one to prevent looping.
+  $tids[$term->tid] = true;
+
+  // Update all the children.
+  $result = db_query("SELECT td.tid, td.name, td.weight FROM {term_hierarchy} th LEFT JOIN {term_data} td ON td.tid = th.tid WHERE th.parent = '%d'", $term->tid);
+  while ($child = db_fetch_object($result)) {
+    // loop protection, just in case.
+    if (!isset($tids[$child->tid])) {
+      $tids = lineage_update_term_r($child, $base, $tids);
+    }
+  }
+  return $tids;
+}
+
+function lineage_delete_term($tid) {
+  db_query("DELETE FROM {term_lineage} WHERE tid = '%d'", $tid);
+}
+
+function lineage_string($term) {
+  // add 10 to the weight cause negative numbers don't sort the same
+  // in strong form as they do numerically.
+  return sprintf("%02d", $term->weight + 10) . $term->name . "\n";
+}
+
+function _lineage_get_parent_lineage($tid) {
+  $result = db_query("SELECT td.tid, td.name, td.weight, th.parent FROM {term_hierarchy} th LEFT JOIN {term_data} td ON td.tid = th.tid WHERE td.tid = '%d'", $tid);
+
+  if ($term = db_fetch_object($result)) {
+    $ret = _lineage_get_parent_lineage($term->parent);
+
+    $ret['base'] .= lineage_string($term);
+    $ret['depth'] += 1;
+
+    return $ret;
+  }
+
+  return array();
+}
+
+/**
+ * Implementation of hook_views_api().
+ */
+function lineage_views_api() {
+  return array(
+     'api' => 2.0
+  );
+}
+

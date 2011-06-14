@@ -1,0 +1,170 @@
+<?php
+// $Id: jq_maphilight.module,v 1.1.2.4 2009/08/26 20:11:53 worldfallz Exp $
+
+/**
+ * @file
+ * Configurable javascript based image map hilighting using the jquery map hilight plugin.
+ */
+ 
+ /**
+ *  add the jquery map hilight plugin code to all pages
+ */
+function jq_maphilight_init() {
+  $available = _jq_maphilight_available();
+  if ($available !== FALSE) {
+
+    $script = "\$(document).ready(function() { \$.fn.maphilight.defaults = { "
+      ."fill: ". variable_get('jq_maphilight_fill', 'true') .","
+      ."fillColor: '". variable_get('jq_maphilight_fillcolor', 'ff0000') ."',"
+      ."fillOpacity: ". (variable_get('jq_maphilight_fillopacity', '2') / 10) .","
+      ."stroke: ". variable_get('jq_maphilight_stroke', 'true') .","
+      ."strokeColor: '". variable_get('jq_maphilight_strokecolor', 'D51910') ."',"
+      ."strokeOpacity: ". (variable_get('jq_maphilight_strokeopacity', '10') / 10) .","
+      ."strokeWidth: ". variable_get('jq_maphilight_strokewidth', '2') .","
+      ."fade: ". variable_get('jq_maphilight_fade', 'true') .","
+      ."alwaysOn: false}; ";
+      
+    if (variable_get('jq_maphilight_allmaps_enabled', 1) == 0) {
+      $script .= "\$('.jq_maphilight').maphilight();});";
+    } else {
+      $script .= "\$('img[usemap]').maphilight();});";
+    }
+    
+    jquery_plugin_add('metadata');
+    jquery_plugin_add('maphilight');
+    drupal_add_js($script, 'inline');     
+  
+  }
+  return '';
+}
+ 
+/**
+ * Implemention of hook_menu().
+ */
+function jq_maphilight_menu() {
+  $items = array();
+  $items['admin/settings/jq_maphilight'] = array(
+    'title' => 'JQuery Map Hilight',
+    'description' => 'Javascript image map highlighting using the jQuery Map Hilight plugin.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('jq_maphilight_admin_settings'),
+    'access callback' => 'user_access',
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ *  jq_maphilight admin/settings page; implements hook_form
+ */
+function jq_maphilight_admin_settings() {
+  $form['jq_maphilight_status'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('jQuery Map Hilight Plugin Status'),
+    '#weight' => -10,
+    '#description' => (_jq_maphilight_available() !== false) ? t('The Map Hilight jQuery plugin is available at: /') . _jq_maphilight_available() : '<em><span style="color: #A50000;">'. t('The Map Hilight jQuery plugin is unavailable or not located in the jquery_plugin module directory.') .'</span></em>'
+  );
+
+  $form['jq_maphilight_allmaps'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('jQuery Map Hilight All Maps'),
+    '#weight' => -9,
+  );
+  
+  $form['jq_maphilight_allmaps']['jq_maphilight_allmaps_enabled'] = array(
+    '#type' => 'radios',
+    '#title' => t('Enable highlighting for all image maps'),
+    '#default_value' => variable_get(jq_maphilight_allmaps_enabled, 1),
+    '#options' => array(t('No'), t('Yes')),
+    '#disabled' => !is_file(drupal_get_path('module', 'jquery_plugin') .'/jquery.maphilight.min.js'),
+    '#description' => 'If no, be sure to add <strong><em>class="jq_maphilight"</em></strong> to the &lt;img&gt; tag of all image maps you want highlighted.'
+  );
+  
+  $form['jq_maphilight_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('jQuery Map Hilight Plugin Settings'),
+    '#description' => 'You can override the default settings on individual image maps by adding an additional class to the &lt;img&gt; tag. See the README.txt file for more information.'
+  );
+
+  $form['jq_maphilight_settings']['jq_maphilight_fill'] = array(
+    '#type' => 'select',
+    '#title' => t('Fill'),
+    '#default_value' => variable_get('jq_maphilight_fill', 'true'),
+    '#options' => array('true' => t('TRUE'), 'false' => t('FALSE')),
+    '#description' => 'Specify whether or not the hilighted area should be filled.'
+  );
+
+  $form['jq_maphilight_settings']['jq_maphilight_fillcolor'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Fill Color'),
+    '#default_value' => variable_get('jq_maphilight_fillcolor', 'ff0000'),
+    '#size' => 8,
+    '#description' => 'Specify the color of the fill. Use HTML # notation without the #.'
+  );
+
+  $form['jq_maphilight_settings']['jq_maphilight_fillopacity'] = array(
+    '#type' => 'select',
+    '#title' => t('Fill Opacity'),
+    '#default_value' => variable_get('jq_maphilight_fillopacity', 2),
+    '#options' => drupal_map_assoc(array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)),
+    '#description' => 'Specify the opacity of the fill (0 = lightest, 10 = darkest).'
+  );
+
+  $form['jq_maphilight_settings']['jq_maphilight_stroke'] = array(
+    '#type' => 'select',
+    '#title' => t('Stroke (outline)'),
+    '#options' => array('true' => t('TRUE'), 'false' => t('FALSE')),
+    '#default_value' => (variable_get('jq_maphilight_stroke', 'true')),
+    '#description' => 'Specify whether or not the hilighted area will be outlined.'
+  );
+
+  $form['jq_maphilight_settings']['jq_maphilight_strokecolor'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Stroke Color'),
+    '#default_value' => variable_get('jq_maphilight_strokecolor', 'D51910'),
+    '#size' => 8,
+    '#description' => 'Specify the color of the outline. Use HTML # notation without the #.'
+  );
+
+  $form['jq_maphilight_settings']['jq_maphilight_strokewidth'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Stroke Width'),
+    '#default_value' => variable_get('jq_maphilight_strokewidth', 2),
+    '#size' => 8,
+    '#description' => 'Specify the width of the outline in pixels.'
+  );
+
+  $form['jq_maphilight_settings']['jq_maphilight_strokeopacity'] = array(
+    '#type' => 'select',
+    '#title' => t('Stroke Opacity'),
+    '#default_value' => variable_get('jq_maphilight_strokeopacity', 10),
+    '#options' => drupal_map_assoc(array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)),
+    '#description' => 'Specify the opacity of the outline (0 = lightest, 10 = darkest).'
+  );
+
+  $form['jq_maphilight_settings']['jq_maphilight_fade'] = array(
+    '#type' => 'select',
+    '#title' => t('Fade'),
+    '#options' => array('true' => t('TRUE'), 'false' => t('FALSE')),
+    '#default_value' => (variable_get('jq_maphilight_fade', 'true')),
+    '#description' => 'Specify whether or not the hilighting uses a fade transition.'
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * check jquery_plugin directory for the jquery.maphilight.min.js file
+ */
+function _jq_maphilight_available() {
+
+  $available = drupal_get_path('module', 'jquery_plugin') .'/jquery.maphilight.min.js'; 
+
+  if (!is_file($available)) {
+    return FALSE;
+  }
+
+  return $available;
+}

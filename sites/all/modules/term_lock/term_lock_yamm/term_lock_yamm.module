@@ -1,0 +1,64 @@
+<?php
+// $Id: term_lock_yamm.module,v 1.1.2.4 2009/11/29 15:35:35 pounard Exp $
+
+/**
+ * @file
+ * Taxonomy term lock YAMM integration
+ */
+
+/**
+ * Implementation of hook_yamm_entity_alter().
+ */
+function term_lock_yamm_yamm_entity_alter($op, $type, $identifier, $object, $data = NULL) {
+  if ($type == 'vocabulary') {
+    switch ($op) {
+      case 'post_construct':
+        if ($voc_opt = term_lock_vocabulary_load($identifier)) {
+          return array(
+            'term_lock_vocabulary_depth' => $voc_opt->depth
+          );
+        }
+        else {
+          return array();
+        }
+        break;
+
+      case 'post_update':
+      case 'post_save':
+        if (isset($data['term_lock_vocabulary_depth'])) {
+          term_lock_vocabulary_toggle($identifier, $data['term_lock_vocabulary_depth']);
+        }
+        else {
+          term_lock_vocabulary_free($identifier);
+        }
+        break;
+    }
+  }
+
+  else if ($type == 'term') {
+    switch ($op) {
+      case 'post_construct':
+        if ($term_lock = term_lock_load($identifier)) {
+          return array(
+            'term_lock_locked' => $term_lock->locked,
+            'term_lock_childlocked' => $term_lock->childlocked,
+            'term_lock_nodelocked' => $term_lock->nodelocked
+          );
+        }
+        else {
+          return array();
+        }
+        break;
+
+      case 'post_update':
+      case 'post_save':
+        if (isset($data['term_lock_locked'])) {
+          term_lock_toggle($identifier, $data['term_lock_locked'], $data['term_lock_childlocked'], $data['term_lock_nodelocked']);
+        }
+        else {
+          term_lock_free($identifier);
+        }
+        break;
+    }
+  }
+}
