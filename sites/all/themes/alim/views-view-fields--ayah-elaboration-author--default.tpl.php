@@ -81,7 +81,7 @@ $_SESSION['msg'] ='';
 else{?>
 	 <span id="not_log"  ><?php
 print vud_votes_proxy($nid, 'node', 'vote', 'plain');
-?>	<a style="float:right;" class="rpxnow" style="text-decoration:none;color:#333333;font-size:11px;" onclick="return false;" href="https://alim-foundation.rpxnow.com/openid/v2/signin?token_url=<?php print $base_url; ?>/rpx/end_point">  <img style="padding-right:5px;" height="18px"  width="18px" src="<?php print $img_theme_path; ?>/likebut.png" /><img style="padding-right:5px;"  height="18px"  width="18px"   src="<?php print $img_theme_path; ?>/unlikebut.png" /></a>
+?>	<a class="rpxnow" style="text-decoration:none;color:#333333;font-size:11px;float:right;" onclick="return false;" href="https://alim-foundation.rpxnow.com/openid/v2/signin?token_url=<?php print $base_url; ?>/rpx/end_point">  <img style="padding-right:5px;" height="18px"  width="18px" src="<?php print $img_theme_path; ?>/likebut.png" /><img style="padding-right:5px;"  height="18px"  width="18px"   src="<?php print $img_theme_path; ?>/unlikebut.png" /></a>
 </span>
 <?php }
 //print vud_widget_proxy($nid, 'node', 'vote', 'plain', $readonly=NULL);
