@@ -62,7 +62,7 @@ $name_auth="Yusuf Ali";
 
  <div style="padding-left:40px;">
 
-<div style="width:615px;height:20px;color:#993300;background-color:#E5E5E5;padding-top:7px;padding-left:10px;font-size:12px;">
+<div style="width:615px;color:#993300;background-color:#E5E5E5;padding-top:7px;padding-left:10px;font-size:12px;">
 	<div style="width:450px;float:left;" ><b><?php //print $name_auth;
 				
  	 ?></b>&nbsp;&nbsp;&nbsp;</div>
