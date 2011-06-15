@@ -585,7 +585,7 @@ function vote_up_down_vote($type, $cid, $value, $tag = NULL, $ajax = FALSE, $alt
  */
 function template_preprocess_vote_up_down_widget(&$variables) {
   global $user;
-  print "hhhhh11";
+ // print "hhhhh11";
   $cid = $variables['cid'];
   $type = $variables['type'];
   $tag = isset($variables['tag']) ? $variables['tag'] : variable_get('vote_up_down_tag', 'vote');
@@ -665,7 +665,7 @@ function template_preprocess_vote_up_down_widget(&$variables) {
  */
 function template_preprocess_vote_up_down_widget_alt(&$variables) {
   global $user;
-  print "hhhhh222";
+  //print "hhhhh222";
   $cid = $variables['cid'];
   $type = $variables['type'];
   $tag = isset($variables['tag']) ? $variables['tag'] : variable_get('vote_up_down_tag', 'vote');
@@ -712,7 +712,7 @@ function template_preprocess_vote_up_down_widget_alt(&$variables) {
  */
 function template_preprocess_vote_up_down_points(&$variables) {
 //print_r($variables); 
-print "hhhhh";
+//print "hhhhh";
   $tag = isset($variables['tag']) ? $variables['tag'] : variable_get('vote_up_down_tag', 'vote');
 
   $criteria = array(
