@@ -75,7 +75,7 @@ $_SESSION['msg'] ='';
 	 <?php	if ($user->uid){ ?>
 	 
 	  <?php
- print vud_votes_proxy($nid, 'node', 'vote', 'plain');
+ print vud_votes_proxy($nid, 'node', 'vote', 'plain', $readonly=NULL);
 ?>	<?php }
 
 else{?>
