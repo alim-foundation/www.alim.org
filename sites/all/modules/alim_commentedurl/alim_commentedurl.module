@@ -1412,9 +1412,7 @@ function alim_commentedurl_block($op='list', $delta=0, $edit=array()) {
 			$out .= '<a href="#" id="btn-clip-add-sel" >Add to clip</a>&nbsp;<a href="#" id="btn-clip-clear" >Clear all</a>&nbsp;';
 			$out .= l("Save clip" , "node/add/clippings" , array("attributes" => array("class" => "popups" , "id" => "btn-clip-save" )  ) ) ;  
 			
-			$out .= l('Bookmark this page', 'bookmarks/item/addpage/' . base64_encode($path), array('attributes' => array('id' => 'bookmarks_add' , 'class' => 'popups' , 'title' => 'Bookmark the current page / Add this page to My Bookmarks ')  ));
-			
-			$out .= '<div id="clip-sel-content"  ></div>';
+   		    $out .= '<div id="clip-sel-content"  ></div>';
 			$out .= '<div class="help" >Use the mouse to select text from page and click on \'Add to clip\' . The text clipped is saved temporarily. To save the clipped text to Your Notebook click on the \'Save Clip\' button.</div>';
 			//Use the mouse to select text from page and click on 'Add to clip' . The text clipped is saved  temporarily. To save the clipped text to Your Notebook click on the 'Save Clip' button.
 			$tit = drupal_get_title();
