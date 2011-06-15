@@ -62,7 +62,7 @@ $name_auth="Yusuf Ali";
 
  <div style="padding-left:40px;">
 
-<div style="width:615px;height:20px;color:#993300;padding-top:7px;padding-left:10px;font-size:12px;">
+<div style="width:615px;height:20px;color:#993300;background-color:#E5E5E5;padding-top:7px;padding-left:10px;font-size:12px;">
 	<div style="width:450px;float:left;" ><b><?php //print $name_auth;
 				
  	 ?></b>&nbsp;&nbsp;&nbsp;</div>
@@ -77,7 +77,7 @@ $name_auth="Yusuf Ali";
 else{?>
 	 <span id="not_log"  ><?php //print vud_widget_proxy($cid, 'comment', 'vote', 'plain', $readonly=NULL);
 //print vud_widget_proxy($nid, 'node', 'vote', 'plain', $readonly=NULL);
-?>	<a style="float:right;" class="rpxnow" style="text-decoration:none;color:#333333;font-size:11px;" onclick="return false;" href="https://alim-foundation.rpxnow.com/openid/v2/signin?token_url=<?php print $base_url; ?>/rpx/end_point">  <img style="padding-right:5px;" height="18px"  width="18px" src="<?php print $img_theme_path; ?>/likebut.png" /><img style="padding-right:5px;"  height="18px"  width="18px"   src="<?php print $img_theme_path; ?>/unlikebut.png" /></a>
+?>	<a class="rpxnow" style="text-decoration:none;color:#333333;font-size:11px;float:right;" onclick="return false;" href="https://alim-foundation.rpxnow.com/openid/v2/signin?token_url=<?php print $base_url; ?>/rpx/end_point">  <img style="padding-right:5px;" height="18px"  width="18px" src="<?php print $img_theme_path; ?>/likebut.png" /><img style="padding-right:5px;"  height="18px"  width="18px"   src="<?php print $img_theme_path; ?>/unlikebut.png" /></a>
 </span>
 <?php }
 
