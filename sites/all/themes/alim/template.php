@@ -2093,7 +2093,7 @@ function bookmark(){   //<span class="bookmarks" > print $bookmark; </span>
 		}
 		$out .=   $sep.'</div><div class="bottom" ></div></div>';
 		$out .= '<div id="popup-bookmark" style="display:none;" ><div class="mybookmark-inner" >';//print_r($query_variables);
-		$out .= l('<nobr>Bookmark this page</nobr>', 'bookmarks/item/addpage/' . base64_encode($path), array('attributes' => array('id' => 'bookmarks_add' , 'class' => 'popups' , 'title' => 'Bookmark the current page / Add this page to My Bookmarks ' , 'on-popups-options' => '{width: "450px"}' ) , 'html' => TRUE  ));
+		$out .= l('<nobr>Bookmark this page</nobr>', 'bookmarks/item/addpage/' . base64_encode($path), array('attributes' => array('id' => 'bookmarks_add' , 'class' => 'popups' , 'title' => 'Bookmark the current page / Add this page to My Bookmarks '  ) , 'html' => TRUE  ));
 		$out .= '<a href="#" class="mymenu" id="dialog-mymenu" title="View the list of bookmarked pages"  >My Bookmarks</a>';
 		$out .=  l( t('Set Last'), 'bookmarks/lastpage/'.base64_encode($path) ,array('attributes' => array(  'class' => 'bm-last' , 'id' => 'bm-lastpage' , 
 		'title' => 'Set this page as the last page you were reading so that you can return to it easily on your next visit to alim.org' ) )  );
