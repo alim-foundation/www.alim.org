@@ -2111,7 +2111,7 @@ function bookmark(){   //<span class="bookmarks" > print $bookmark; </span>
 			&& arg(3) != 'theme'   ){			
 				$out .= '<div id="popup-clip-menu" style="display:none;" ><div class="mybookmark-inner" >';		
 				$out .= l('Clip this Page' , 'node/add/clippings' , array( 'attributes' => array('class' => 'popups pop-clip-one' , 'id' => 'clip-btn-all' ,
-				'title' => 'Clip the whole page and save to your notebook' ,'on-popups-options' => '{width: "700px"}' ) , 'html' => TRUE ) ); 		
+				'title' => 'Clip the whole page and save to your notebook' ) , 'html' => TRUE ) ); 		
 				$out .= '<a class="pop-clip-two" href="#" title="Clip the selected text from this page" id="clip-btn-sel" >Clip the selected text</a>';
 				$out .= '<a class="pop-clip-three"  href="/user/clippings" title="Go to my notebook"  >My NoteBook</a>';
 				$out .= '</div></div>';
