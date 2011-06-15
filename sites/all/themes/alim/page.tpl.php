@@ -870,7 +870,7 @@ if(arg(3)=='compare') {
 					
 					<?php 
 					// RPX Login. if getting user id shows 'My Profile' Link on top grey menu bar.
-					if($user->uid){?><?php print l("My Profile",'userprofile'); ?>&nbsp;&nbsp;
+					if($user->uid){?><?php print l("Profile",'userprofile'); ?>&nbsp;&nbsp;
 					<?php print l("Logout","logout"); ?><? } else {?>
 					<?php print $rpx_login ; ?> <? }?>&nbsp;&nbsp;
 					<a href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-home.png"  border="0" align="absmiddle" title="Home" alt="Home" /></a>
