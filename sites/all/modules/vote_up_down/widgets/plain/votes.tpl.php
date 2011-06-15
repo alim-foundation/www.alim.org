@@ -7,4 +7,4 @@
  * Plain widget votes display for Vote Up/Down
  */
 ?>
-<span id="<?php print $id; ?>" class="total-votes-plain"><span class="<?php print $class; ?> total"><?php print $up_votes.$down_votes.'..'; ?> <?php //print $vote_label; ?></span></span>
+<span id="<?php print $id; ?>" class="total-votes-plain"><span class="<?php print $class; ?> total"><?php print $up_votes; ?>&nbsp;votes&nbsp;<?php print $down_votes; ?>&nbsp;&nbsp;dislikes<?php //print $vote_label; ?></span></span>
