@@ -870,6 +870,9 @@ function alimcommentedurl_insertprefer($form, $form_state){
 
 	//db_query("DELETE FROM {profile_values}");
 	global $user;
+	
+	$user_id = arg(1);
+		
 	$arb_font 	 = $form_state['values']['arb_font'];
 	$arb_font_size 	 = $form_state['values']['arb_font_size'];
 	$eng_font    = $form_state['values']['eng_font'];
@@ -902,84 +905,84 @@ function alimcommentedurl_insertprefer($form, $form_state){
 	$select_follower      = $form_state['values']['show_follower']; 
 	
 	//Boigraphy.
-	$chk_bio  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 20, $user->uid));
+	$chk_bio  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 20, $user_id));
 	if($chk_bio==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 20, $user->uid, $biography);
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 20, $user_id, $biography);
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $biography , $user->uid, 20);	
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $biography , $user_id, 20);	
 	}
 	
 	//Gender.
-	$chk_gen  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 21, $user->uid));
+	$chk_gen  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 21, $user_id));
 	if($chk_gen==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 21, $user->uid, $gender);
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 21, $user_id $gender);
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $gender , $user->uid, 21);	
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $gender , $user_id, 21);	
 	}
 	
 	
 	//Show me on " Following " List.
-	$chk_in_following  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 13, $user->uid));
+	$chk_in_following  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 13, $user_id));
 	if($chk_in_following==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 13, $user->uid, $select_in_following);
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 13, $user_id, $select_in_following);
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_in_following , $user->uid, 13);	
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_in_following , $user_id, 13);	
 	}
 	
 	
 	//Show me on " Follower " List.
-	$chk_in_follower  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 14, $user->uid));
+	$chk_in_follower  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 14, $user_id));
 	if($chk_in_follower==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 14, $user->uid, $select_in_follower);
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 14, $user_id, $select_in_follower);
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_in_follower , $user->uid, 14);	
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_in_follower , $user_id, 14);	
 	}
 	
 	//Show " Following List " in my profile page.
-	$chk_following  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 15, $user->uid));
+	$chk_following  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 15, $user_id));
 	if($chk_following==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 15, $user->uid, $select_following);
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 15, $user_id, $select_following);
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_following , $user->uid, 15);	
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_following , $user_id, 15);	
 	}
 	
 	//Show " Follower List " in my profile page.
-	$chk_follower  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 16, $user->uid));
+	$chk_follower  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 16, $user_id));
 	if($chk_follower==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 16, $user->uid, $select_follower);
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 16, $user_id, $select_follower);
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_follower , $user->uid, 16);	
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_follower , $user_id, 16);	
 	}
 	
 	
 	// remember post email
-	$chk_pemail = db_query("SELECT count(*) as pemail_cnt FROM profile_values WHERE fid=17 AND uid=".$user->uid);
+	$chk_pemail = db_query("SELECT count(*) as pemail_cnt FROM profile_values WHERE fid=17 AND uid=".$user_id);
 	$result_pemail = db_fetch_object($chk_pemail);
 	if(($result_pemail->pemail_cnt)==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (17,".$user->uid.",'".$pemail_sel."')");
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (17,".$user_id.",'".$pemail_sel."')");
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$pemail_sel , $user->uid, 17);	
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$pemail_sel , $user_id, 17);	
 	}
 	
 	//remember me prefer
@@ -996,104 +999,104 @@ function alimcommentedurl_insertprefer($form, $form_state){
 	
 
 	// arabic prefer
-	$chk_arbic = db_query("SELECT count(*) as arb_cnt FROM profile_values WHERE fid=2 AND uid=".$user->uid);
+	$chk_arbic = db_query("SELECT count(*) as arb_cnt FROM profile_values WHERE fid=2 AND uid=".$user_id);
 	$result_arb = db_fetch_object($chk_arbic);
 	if(($result_arb->arb_cnt)==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (2,".$user->uid.",'".$arb_font."')");
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (2,".$user_id.",'".$arb_font."')");
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%d' WHERE uid = %d AND fid = %d",$arb_font , $user->uid, 2 );	
+		db_query("UPDATE {profile_values} SET value = '%d' WHERE uid = %d AND fid = %d",$arb_font , $user_id, 2 );	
 	}
 	
 	// arabic size
-	$chk_arbic_size = db_query("SELECT count(*) as arbsize_cnt FROM profile_values WHERE fid=4 AND uid=".$user->uid);
+	$chk_arbic_size = db_query("SELECT count(*) as arbsize_cnt FROM profile_values WHERE fid=4 AND uid=".$user_id);
 	$result_arb_size = db_fetch_object($chk_arbic_size);
 	if(($result_arb_size->arbsize_cnt)==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (4,".$user->uid.",'".$arb_font."')");
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (4,".$user_id.",'".$arb_font."')");
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%d' WHERE uid = %d AND fid = %d",$arb_font_size , $user->uid, 4 );	
+		db_query("UPDATE {profile_values} SET value = '%d' WHERE uid = %d AND fid = %d",$arb_font_size , $user_id, 4 );	
 	}
 	
 	
 	//eng prefer
-	$chk_eng = db_query("SELECT count(*) as eng_cnt FROM profile_values WHERE fid=1 AND uid=".$user->uid);
+	$chk_eng = db_query("SELECT count(*) as eng_cnt FROM profile_values WHERE fid=1 AND uid=".$user_id);
 	$result_eng = db_fetch_object($chk_eng);
 	if(($result_eng->eng_cnt)==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (1,".$user->uid.",'".$eng_font."')");
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (1,".$user_id.",'".$eng_font."')");
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%d' WHERE uid = %d AND fid = %d",$eng_font , $user->uid, 1 );	
+		db_query("UPDATE {profile_values} SET value = '%d' WHERE uid = %d AND fid = %d",$eng_font , $user_id, 1 );	
 	}
 	
 	//eng size
-	$chk_eng_size = db_query("SELECT count(*) as eng_cnt_size FROM profile_values WHERE fid=3 AND uid=".$user->uid);
+	$chk_eng_size = db_query("SELECT count(*) as eng_cnt_size FROM profile_values WHERE fid=3 AND uid=".$user_id);
 	$result_eng_size = db_fetch_object($chk_eng_size);
 	if(($result_eng_size->eng_cnt_size)==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (3,".$user->uid.",'".$eng_font_size."')");
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (3,".$user_id.",'".$eng_font_size."')");
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%d' WHERE uid = %d AND fid = %d",$eng_font_size , $user->uid, 3);	
+		db_query("UPDATE {profile_values} SET value = '%d' WHERE uid = %d AND fid = %d",$eng_font_size , $user_id, 3);	
 	}
 	
 	//reciter prefer
-	$chk_res = db_query("SELECT count(*) as res_cnt FROM profile_values WHERE fid=5 AND uid=".$user->uid);
+	$chk_res = db_query("SELECT count(*) as res_cnt FROM profile_values WHERE fid=5 AND uid=".$user_id);
 	$result_res = db_fetch_object($chk_res);
 	if(($result_res->res_cnt)==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (5,".$user->uid.",'".$reciter_sel."')");
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (5,".$user_id.",'".$reciter_sel."')");
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$reciter_sel , $user->uid, 5 );	
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$reciter_sel , $user_id, 5 );	
 	}
 	
     //ayahtheme prefer
-	$chk_theme = db_query("SELECT count(*) as theme_cnt FROM profile_values WHERE fid=6 AND uid=".$user->uid);
+	$chk_theme = db_query("SELECT count(*) as theme_cnt FROM profile_values WHERE fid=6 AND uid=".$user_id);
 	$result_theme = db_fetch_object($chk_theme);
 	if(($result_theme->theme_cnt)==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (6,".$user->uid.",'".$theme_sel."')");
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (6,".$user_id.",'".$theme_sel."')");
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$theme_sel , $user->uid, 6 );	
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$theme_sel , $user_id, 6 );	
 	}
 	
 	//asd prefer
-	$chk_asd = db_query("SELECT count(*) as asd_cnt FROM profile_values WHERE fid=7 AND uid=".$user->uid);
+	$chk_asd = db_query("SELECT count(*) as asd_cnt FROM profile_values WHERE fid=7 AND uid=".$user_id);
 	$result_asd = db_fetch_object($chk_asd);
 	if(($result_asd->asd_cnt)==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (7,".$user->uid.",'".$asd_sel."')");
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (7,".$user_id.",'".$asd_sel."')");
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$asd_sel , $user->uid, 7 );	
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$asd_sel ,$user_id, 7 );	
 	}
 	
 	//mal prefer
-	$chk_mal = db_query("SELECT count(*) as mal_cnt FROM profile_values WHERE fid=8 AND uid=".$user->uid);
+	$chk_mal = db_query("SELECT count(*) as mal_cnt FROM profile_values WHERE fid=8 AND uid=".$user_id);
 	$result_mal = db_fetch_object($chk_mal);
 	if(($result_mal->mal_cnt)==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (8,".$user->uid.",'".$mal_sel."')");
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (8,".$user_id.",'".$mal_sel."')");
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$mal_sel , $user->uid, 8 );	
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$mal_sel , $user_id, 8 );	
 	}
 	
 	//pic prefer
-	$chk_pic = db_query("SELECT count(*) as pic_cnt FROM profile_values WHERE fid=9 AND uid=".$user->uid);
+	$chk_pic = db_query("SELECT count(*) as pic_cnt FROM profile_values WHERE fid=9 AND uid=".$user_id);
 	$result_pic = db_fetch_object($chk_pic);
 	if(($result_pic->pic_cnt)==0)
 	{
@@ -1101,19 +1104,19 @@ function alimcommentedurl_insertprefer($form, $form_state){
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$pic_sel , $user->uid, 9 );	
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$pic_sel , $user_id, 9 );	
 	}
 	
 	//yuf prefer
-	$chk_yuf = db_query("SELECT count(*) as yuf_cnt FROM profile_values WHERE fid=10 AND uid=".$user->uid);
+	$chk_yuf = db_query("SELECT count(*) as yuf_cnt FROM profile_values WHERE fid=10 AND uid=".$user_id);
 	$result_yuf = db_fetch_object($chk_yuf);
 	if(($result_yuf->yuf_cnt)==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (10,".$user->uid.",'".$yuf_sel."')");
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (10,".$user_id.",'".$yuf_sel."')");
 	}
 	else
 	{
-		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$yuf_sel , $user->uid, 10 );	
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$yuf_sel , $user_id, 10 );	
 	}
 	if($theme_sel==1)
 	 $theme_sel = 0 ;
