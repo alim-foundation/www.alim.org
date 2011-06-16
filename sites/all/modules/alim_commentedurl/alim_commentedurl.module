@@ -919,7 +919,7 @@ function alimcommentedurl_insertprefer($form, $form_state){
 	$chk_gen  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 21, $user_id));
 	if($chk_gen==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 21, $user_id $gender);
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 21, $user_id, $gender);
 	}
 	else
 	{
