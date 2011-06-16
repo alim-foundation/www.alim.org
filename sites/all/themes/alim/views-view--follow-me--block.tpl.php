@@ -20,15 +20,16 @@
  * @ingroup views_templates
  */
  
-  global $user;
+global $user;
  if(arg(1))
  {
    $temp_user = user_load(array('name' => arg(1)));
    $user_uid = $temp_user->uid;
+   print_r($temp_user);
  }
  else
  {
-  $user_uid = $user->uid;
+   $user_uid = $user->uid;
  }
  
  
