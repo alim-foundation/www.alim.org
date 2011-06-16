@@ -40,7 +40,7 @@ global $user;
  if($fetch_follower->follower_count==0) 
   $select_follower = 1;
   
- if($select_follower!=1 || arg(1)=="")
+ if($select_follower==1 || arg(1)=="")
  {
 ?>
 <div class="view view-<?php print $css_name; ?> view-id-<?php print $name; ?> view-display-id-<?php print $display_id; ?> view-dom-id-<?php print $dom_id; ?>">
@@ -67,7 +67,7 @@ global $user;
     </div>
   <?php endif; ?>
     <?php
- if($select_follower!=1)
+ if($select_follower==1)
   {
   ?>
 
