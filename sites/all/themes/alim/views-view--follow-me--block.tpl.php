@@ -67,7 +67,7 @@ global $user;
     </div>
   <?php endif; ?>
     <?php
- if($select_follower==1)
+ if($select_follower!=1)
   {
   ?>
 
