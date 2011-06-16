@@ -25,7 +25,7 @@ global $user;
  {
    $temp_user = user_load(array('name' => arg(1)));
    $user_uid = $temp_user->uid;
-   print_r($temp_user);
+
  }
  else
  {
