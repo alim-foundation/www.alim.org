@@ -9790,3 +9790,7 @@ height:11px;
 {
 	border-bottom: 1px solid #ebc56e;
 }
+#bm-nice-menu .block-menu
+{
+  overflow:hidden;
+}
