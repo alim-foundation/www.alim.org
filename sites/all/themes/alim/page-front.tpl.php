@@ -3,6 +3,32 @@ global $base_url;
 global $theme_path;
 $start_time = microtime(TRUE);
 
+		
+                  //Cookie setting for login remeber for 14 days..   
+				 if(!($_COOKIE['remember']))
+				 {
+					 if(($_COOKIE['rem_uid'])!=$user->uid||$user->uid==0)
+					 {
+							  watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
+							  session_destroy();
+							  $null = NULL;
+							  user_module_invoke('logout', $null, $user);
+							  $user = drupal_anonymous_user();							
+							  $domain = $_SERVER['HTTP_HOST'];
+							  $path = $_SERVER['SCRIPT_NAME'];	
+							  $queryString = $_SERVER['QUERY_STRING'];
+							  $url = "http://" . $domain . $path . "?" . $queryString;
+							  $goodUrl = str_replace('index.php?','', $url);
+							  header('location:'.$goodUrl);
+							  
+					}
+					else
+							{
+									  setcookie("rem_uid",$user->uid, time()+1209600, "/");
+							}
+					setcookie("remember","a", 0, "/");
+				 }
+
 /**
  * Set Cookie expired on browser close.
 */
@@ -20,8 +46,83 @@ $start_time = microtime(TRUE);
 							  }
 			
 						 }
-						 
-?>
+
+			
+				 if(!($_COOKIE['rem_prof']))
+					  {
+				         if($user->uid!=0)
+							{
+									if(!$user->user_relationships_ui_auto_approve)
+								   {
+									  $apv = array();
+									  $apv[1] = 1;
+									  $extra_data = array('user_relationships_ui_auto_approve' => $apv);
+									   user_save($user, $extra_data); 
+									}
+									
+									$chk_ful    = db_query("SELECT count(*) as ful_cnt,value FROM profile_values WHERE fid=18 AND uid=".$user->uid);
+									$result_ful = db_fetch_object($chk_ful);
+									// For setting full name as profile field
+									if(($result_ful->ful_cnt)==0)
+									{
+										$temp_user = user_load(array('name' => strip_tags($user->name)));
+										if($temp_user->rpx_data['profile']['name']['givenName']!="")
+										{
+										 $res_ful = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
+										}
+										else
+										{
+										 $res_ful = $user->name;
+										}
+										db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (18,".$user->uid.",'".$res_ful."')");
+									}
+									else
+									{
+										$temp_user = user_load(array('name' => strip_tags($user->name)));
+										if($temp_user->rpx_data['profile']['name']['givenName']!="")
+										{
+										 $res_ful = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
+										}
+										else
+										{
+										 $res_ful = $user->name;
+										}
+										if($result_ful->value!=$res_ful)
+										{
+										 db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$res_ful , $user->uid, 18);
+										}
+									}
+									
+									
+									// Relationship Privacy
+									$select_in_following  = 1;
+									$select_in_follower   = 1; 
+								
+								
+								
+								//Show me on " Following " List.
+								$chk_in_following  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 13, $user->uid));
+								if($chk_in_following==0)
+								{
+									db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 13, $user->uid, $select_in_following);
+								}
+																
+								
+								//Show me on " Follower " List.
+								$chk_in_follower  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 14, $user->uid));
+								if($chk_in_follower==0)
+								{
+									db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 14, $user->uid, $select_in_follower);
+								}
+								
+								
+							
+								setcookie("rem_prof","a", 0, "/");
+								header("location:".$base_url."/userprofile");
+							}
+						}
+				
+				?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language ?>" lang="<?php print $language->language ?>" dir="<?php print $language->dir ?>">
@@ -104,107 +205,7 @@ $(document).ready(function(){
 			 
 			    <?php print $header; ?> </div> <div id="top_menu_middle_second" style="color:#990000;font-weight:bold;" align="right">
 					
-			    <?php
-			
-				 if(!($_COOKIE['rem_prof']))
-					  {
-				         if($user->uid!=0)
-							{
-									if(!$user->user_relationships_ui_auto_approve)
-								   {
-									  $apv = array();
-									  $apv[1] = 1;
-									  $extra_data = array('user_relationships_ui_auto_approve' => $apv);
-									   user_save($user, $extra_data); 
-									}
-									
-									$chk_ful    = db_query("SELECT count(*) as ful_cnt,value FROM profile_values WHERE fid=18 AND uid=".$user->uid);
-									$result_ful = db_fetch_object($chk_ful);
-									// For setting full name as profile field
-									if(($result_ful->ful_cnt)==0)
-									{
-										$temp_user = user_load(array('name' => strip_tags($user->name)));
-										if($temp_user->rpx_data['profile']['name']['givenName']!="")
-										{
-										 $res_ful = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
-										}
-										else
-										{
-										 $res_ful = $user->name;
-										}
-										db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (18,".$user->uid.",'".$res_ful."')");
-									}
-									else
-									{
-										$temp_user = user_load(array('name' => strip_tags($user->name)));
-										if($temp_user->rpx_data['profile']['name']['givenName']!="")
-										{
-										 $res_ful = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
-										}
-										else
-										{
-										 $res_ful = $user->name;
-										}
-										if($result_ful->value!=$res_ful)
-										{
-										 db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$res_ful , $user->uid, 18);
-										}
-									}
-									
-									
-									// Relationship Privacy
-									$select_in_following  = 1;
-									$select_in_follower   = 1; 
-								
-								
-								
-								//Show me on " Following " List.
-								$chk_in_following  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 13, $user->uid));
-								if($chk_in_following==0)
-								{
-									db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 13, $user->uid, $select_in_following);
-								}
-																
-								
-								//Show me on " Follower " List.
-								$chk_in_follower  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 14, $user->uid));
-								if($chk_in_follower==0)
-								{
-									db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 14, $user->uid, $select_in_follower);
-								}
-								
-								
-							
-								setcookie("rem_prof","a", 0, "/");
-								header("location:".$base_url."/userprofile");
-							}
-						}
-						
-                  //Cookie setting for login remeber for 14 days..   
-				 if(!($_COOKIE['remember']))
-				 {
-					 if(($_COOKIE['rem_uid'])!=$user->uid||$user->uid==0)
-					 {
-							  watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
-							  session_destroy();
-							  $null = NULL;
-							  user_module_invoke('logout', $null, $user);
-							  $user = drupal_anonymous_user();							
-							  $domain = $_SERVER['HTTP_HOST'];
-							  $path = $_SERVER['SCRIPT_NAME'];	
-							  $queryString = $_SERVER['QUERY_STRING'];
-							  $url = "http://" . $domain . $path . "?" . $queryString;
-							  $goodUrl = str_replace('index.php?','', $url);
-							  header('location:'.$goodUrl);
-							  
-					}
-					else
-							{
-									  setcookie("rem_uid",$user->uid, time()+1209600, "/");
-							}
-					setcookie("remember","a", 0, "/");
-				 }
-				?>  
+			    
 				<?php 
 				// RPX Login. if getting user id shows 'My Profile' Link on top grey menu bar.
 				if($user->uid){
