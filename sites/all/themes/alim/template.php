@@ -637,7 +637,7 @@ function phptemplate_preprocess_page(&$vars) {
     if($c > 1 ){  	 unset($crumb[0]);	 }
 	 $crumblast = strip_tags($crumb[$c-1]);
 	 if($crumblast != '' ){
-		 if(substr_count($head_title ,$crumblast) > 0   ){
+		 if(@substr_count($head_title ,$crumblast) > 0   ){
 	 		unset($crumb[$c-1]);
 	 	}
 	}
