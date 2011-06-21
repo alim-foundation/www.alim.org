@@ -27,15 +27,7 @@ function quran_subject_menu() {
 	'access arguments' => array('access subject parent'),
 
   );
-   
-/*   $items['library/quran/subject/ayah'] = array(
-    'title' => 'Subject Index Ayah',
-    'page callback' => 'subject_ayah',
-	'access arguments' => array('access subject ayah'),
-
-  );
-*/
-     $items['library/quran/subject/ayah'] = array(
+  $items['library/quran/subject/ayah'] = array(
     'page callback' => 'subject_ayah',
 	'access arguments' => array('access subject ayah'),
 
@@ -171,18 +163,37 @@ if(($limit+10) > $total)
 if(($limit+10) > $total)
   $to = $total;
 
+$noofpages = ceil($total/10);
+$pageno    = 0;
 
 // Previous and Next Button display
 $output .= "<div class='hadith_narrator' ><div class='hd_content' id='hd_content' >";
 
-$output .= "<div align='left' style='padding-bottom:10px;padding-left:15px;font-size:18px;float:left;'><b>".strtoupper($select)."</b></div><div align='right' style='padding-bottom:10px;float:right'>";
+$output .= "<div align='right' style='padding-bottom:10px;padding-left:15px;font-size:18px;float:right;'><b>".strtoupper($select)."</b></div><div align='right' style='padding-bottom:10px;'>";
 
 if( $limit != 0)
- $output .= "<a href='".$base_url."/library/quran/subject/".arg(3)."/$pageprev'><img src='".$base_url."/".$theme_path."/images/previous.jpg' border='0' align='absmiddle' ></a>";
+ $output .= "<a href='".$base_url."/library/quran/subject/".arg(3)."/$pageprev'><img src='".$base_url."/".$theme_path."/images/previous.jpg' border='0' align='absmiddle' ></a>&nbsp;";
 if($total>0)
-$output .= "&nbsp;&nbsp;<b>$from to $to of $total</b>&nbsp;&nbsp;";
+{
+	for($i=1;$i<=$noofpages;$i++)
+	{
+	   if($pageno==arg(4) || ($i==1 && arg(4)==""))
+	    $active = "font-weight:bold";
+	   else 
+	    $active = "";		
+		
+	   $output .= "<a href='".$base_url."/library/quran/subject/".arg(3)."/$pageno' style='color:#810C05;$active'>".$i."</a>&nbsp;";
+	   $pageno = $pageno+10;
+	}
+	
+}
+
 if( $flag != 1)
-$output .= "<a href='".$base_url."/library/quran/subject/".arg(3)."/$pagenext'><img src='".$base_url."/".$theme_path."/images/next3.jpg' border='0' align='absmiddle' ></a>";
+$output .= "&nbsp;<a href='".$base_url."/library/quran/subject/".arg(3)."/$pagenext'><img src='".$base_url."/".$theme_path."/images/next3.jpg' border='0' align='absmiddle' ></a>";
+/*if($total>0)
+{
+  $output .= "<br />&nbsp;&nbsp;<b>$from to $to of $total</b>&nbsp;&nbsp;";
+}*/
 $output .= "</div>";
 
 $output .= "<div style='clear:both' ></div><div class='hd_hline' style='margin-bottom:10px;' ></div>";
