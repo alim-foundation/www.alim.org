@@ -34,6 +34,6 @@ elseif (isset($return)) {
   // Print any value (including an empty string) except NULL or undefined:
   print theme('page', $return);
 }
-
+flush();
 drupal_page_footer();
 ?>
