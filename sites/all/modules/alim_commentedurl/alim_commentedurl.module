@@ -730,6 +730,11 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 				
 			case "bookmarks_edit_item":  //  bookmarks edit add form from bookmarks module 
 				global $user;
+				$sql = "SELECT menu_name FROM {menu_bookmarks} WHERE menu_name = '%s'";
+      			$result = db_query($sql, 'bookmarks-' . $user->uid);
+     			if (!$my_menu = db_fetch_array($result)) {
+				 db_query("INSERT INTO {menu_bookmarks} (menu_name, title, description) VALUES ('%s', '%s', '%s')", 'bookmarks-' . $user->uid, 'bookmarks-' . $user->uid, '');
+				}
 				drupal_set_title($title = 'Add Bookmarks');
 				$mname = 'bookmarks-'.$user->uid;
 				$sql = "SELECT * FROM `menu_links` WHERE `menu_name` = '$mname' AND `link_path` = 'folder'";
