@@ -193,7 +193,10 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 				 //print_r($form);
 			     global $user;
 				 
+				 $user_id = arg(1);
+				 
 				 $temp_user = user_load(array('name' => $user->name));
+						 
 				if($temp_user->rpx_data['profile']['name']['givenName']!="")
 				{
 				  $profile_name = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
@@ -250,59 +253,62 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 					}
 					
 				// Selected Values
-					$sel_res = db_query("SELECT value as res_sel FROM profile_values WHERE fid=5 AND uid=".$user->uid);
+					$sel_res = db_query("SELECT value as res_sel FROM profile_values WHERE fid=5 AND uid=".$user_id);
 					$fetch_res = db_fetch_object($sel_res);
 					
-					$sel_arb = db_query("SELECT value as arb_sel FROM profile_values WHERE fid=2 AND uid=".$user->uid);
+					$sel_arb = db_query("SELECT value as arb_sel FROM profile_values WHERE fid=2 AND uid=".$user_id);
 					$fetch_arb = db_fetch_object($sel_arb);
 					
-					$sel_arb_size = db_query("SELECT value as arbsize_sel FROM profile_values WHERE fid=4 AND uid=".$user->uid);
+					$sel_arb_size = db_query("SELECT value as arbsize_sel FROM profile_values WHERE fid=4 AND uid=".$user_id);
 					$fetch_arb_size = db_fetch_object($sel_arb_size);
 					
-					$sel_eng = db_query("SELECT value as eng_sel FROM profile_values WHERE fid=1 AND uid=".$user->uid);
+					$sel_eng = db_query("SELECT value as eng_sel FROM profile_values WHERE fid=1 AND uid=".$user_id);
 					$fetch_eng = db_fetch_object($sel_eng);
 					
-					$sel_eng_size = db_query("SELECT value as engsize_sel FROM profile_values WHERE fid=3 AND uid=".$user->uid);
+					$sel_eng_size = db_query("SELECT value as engsize_sel FROM profile_values WHERE fid=3 AND uid=".$user_id);
 					$fetch_eng_size = db_fetch_object($sel_eng_size);
 					
-				   $sel_ayatheme = db_query("SELECT value as theme_sel,count(value) as theme_count FROM profile_values WHERE fid=6 AND uid=".$user->uid);
+				   $sel_ayatheme = db_query("SELECT value as theme_sel,count(value) as theme_count FROM profile_values WHERE fid=6 AND uid=".$user_id);
 					$fetch_ayatheme = db_fetch_object($sel_ayatheme);
 					
-					$sel_asd = db_query("SELECT value as asd_sel,count(value) as asd_count FROM profile_values WHERE fid=7 AND uid=".$user->uid);
+					$sel_asd = db_query("SELECT value as asd_sel,count(value) as asd_count FROM profile_values WHERE fid=7 AND uid=".$user_id);
 					$fetch_asd = db_fetch_object($sel_asd);
 					
-					$sel_mal = db_query("SELECT value as mal_sel,count(value) as mal_count FROM profile_values WHERE fid=8 AND uid=".$user->uid);
+					$sel_mal = db_query("SELECT value as mal_sel,count(value) as mal_count FROM profile_values WHERE fid=8 AND uid=".$user_id);
 					$fetch_mal = db_fetch_object($sel_mal);
 					
-					$sel_pic = db_query("SELECT value as pic_sel,count(value) as pic_count FROM profile_values WHERE fid=9 AND uid=".$user->uid);
+					$sel_pic = db_query("SELECT value as pic_sel,count(value) as pic_count FROM profile_values WHERE fid=9 AND uid=".$user_id);
 					$fetch_pic = db_fetch_object($sel_pic);
 					
-					$sel_yuf = db_query("SELECT value as yuf_sel,count(value) as yuf_count FROM profile_values WHERE fid=10 AND uid=".$user->uid);
+					$sel_yuf = db_query("SELECT value as yuf_sel,count(value) as yuf_count FROM profile_values WHERE fid=10 AND uid=".$user_id);
 					$fetch_yuf = db_fetch_object($sel_yuf);
 					
 			/*		$sel_rem = db_query("SELECT value as rem_sel,count(value) as rem_count FROM profile_values WHERE fid=11 AND uid=".$user->uid);
 					$fetch_rem = db_fetch_object($sel_rem);
 					*/
-					$sel_poemail = db_query("SELECT value as poemail_sel,count(value) as poemail_count FROM profile_values WHERE fid=17 AND uid=".$user->uid);
+					$sel_poemail = db_query("SELECT value as poemail_sel,count(value) as poemail_count FROM profile_values WHERE fid=17 AND uid=".$user_id);
 					$fetch_poemail = db_fetch_object($sel_poemail);
 					
-					$sel_in_following  =  db_query("SELECT value as in_following_sel, count(*) as in_following_count FROM {profile_values} WHERE fid=%d AND uid=%d", 13, $user->uid);
+					$sel_in_following  =  db_query("SELECT value as in_following_sel, count(*) as in_following_count FROM {profile_values} WHERE fid=%d AND uid=%d", 13, $user_id);
 				   $fetch_in_following = db_fetch_object($sel_in_following);
 				   
-				   $sel_in_follower  =  db_query("SELECT value as in_follower_sel, count(*) as in_follower_count FROM {profile_values} WHERE fid=%d AND uid=%d", 14, $user->uid);
+				   $sel_in_follower  =  db_query("SELECT value as in_follower_sel, count(*) as in_follower_count FROM {profile_values} WHERE fid=%d AND uid=%d", 14, $user_id);
 				   $fetch_in_follower = db_fetch_object($sel_in_follower);
 				   
-				   $sel_following  =  db_query("SELECT value as following_sel, count(*) as following_count FROM {profile_values} WHERE fid=%d AND uid=%d", 15, $user->uid);
+				   $sel_following  =  db_query("SELECT value as following_sel, count(*) as following_count FROM {profile_values} WHERE fid=%d AND uid=%d", 15, $user_id);
 				   $fetch_following = db_fetch_object($sel_following);
 				   
-				     $sel_follower  =  db_query("SELECT value as follower_sel, count(*) as follower_count FROM {profile_values} WHERE fid=%d AND uid=%d", 16, $user->uid);
+				     $sel_follower  =  db_query("SELECT value as follower_sel, count(*) as follower_count FROM {profile_values} WHERE fid=%d AND uid=%d", 16, $user_id);
 				     $fetch_follower = db_fetch_object($sel_follower);
 					 
-					 $sel_biography  =  db_query("SELECT value as profile_biography, count(*) as biography_count FROM {profile_values} WHERE fid=%d AND uid=%d", 20, $user->uid);
+					 $sel_grppriv    =  db_query("SELECT value as grppriv_sel, count(*) as grppriv_count FROM {profile_values} WHERE fid=%d AND uid=%d", 22, $user_id);
+				     $fetch_grppriv = db_fetch_object($sel_grppriv);
+					 
+					 $sel_biography  =  db_query("SELECT value as profile_biography, count(*) as biography_count FROM {profile_values} WHERE fid=%d AND uid=%d", 20, $user_id);
 				     $fetch_biography  = db_fetch_object($sel_biography);
 					// print_r($fetch_biography);
 					 
-					 $sel_gender  =  db_query("SELECT value as profile_gender, count(*) as gender_count FROM {profile_values} WHERE fid=%d AND uid=%d", 21, $user->uid);
+					 $sel_gender  =  db_query("SELECT value as profile_gender, count(*) as gender_count FROM {profile_values} WHERE fid=%d AND uid=%d", 21, $user_id);
 				     $fetch_gender  = db_fetch_object($sel_gender);
 	
 					
@@ -324,6 +330,7 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 					($fetch_follower->follower_sel) ? $select_follower = $fetch_follower->follower_sel : $select_follower = 0;
 					($fetch_biography->profile_biography) ? $select_biography = $fetch_biography->profile_biography : $select_biography = '';
 					($fetch_gender->profile_gender) ? $select_gender = $fetch_gender->profile_gender : $select_gender = '';
+					($fetch_grppriv->grppriv_sel) ? $select_group_privacy = $fetch_grppriv->grppriv_sel : $select_group_privacy = 0;
 					
 					
 												
@@ -362,7 +369,9 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 				     $select_following = 1;
 				   if($fetch_follower->follower_count==0) 
 				     $select_follower = 1;
-					 
+				   if($fetch_grppriv->grppriv_count==0) 
+				     $select_group_privacy = 1; 
+		
 				 
 						 
 				  //Display Fields
@@ -419,6 +428,12 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 					'#type' => 'checkbox',
 					'#title' => t('Show me as being followed on profile pages of users who follow me.'),
 					'#default_value' => $select_in_follower
+				  );
+				  
+				 $form['user_relationships_ui_settings']['rel_privacy']['group_privacy'] = array(
+					'#type' => 'checkbox',
+					'#title' => t('Allow other users to see which groups I am a part of.'),
+					'#default_value' => $select_group_privacy
 				  );
 				  
 				  $form['group_post'] = array(
@@ -903,6 +918,18 @@ function alimcommentedurl_insertprefer($form, $form_state){
 	$select_in_follower   = $form_state['values']['me_follower']; 
 	$select_following     = $form_state['values']['show_following']; 
 	$select_follower      = $form_state['values']['show_follower']; 
+	$select_grprv         = $form_state['values']['group_privacy'];
+	
+	//Show me on " Group Privacy " List.
+	$chk_in_grpprv  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 22, $user_id));
+	if($chk_in_grpprv==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 22, $user_id, $select_grprv);
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_grprv , $user_id, 22);	
+	}
 	
 	//Boigraphy.
 	$chk_bio  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 20, $user_id));
