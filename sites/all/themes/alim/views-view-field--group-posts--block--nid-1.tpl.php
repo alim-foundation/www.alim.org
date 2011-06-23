@@ -54,6 +54,10 @@ $i=0;
 while ($row = db_fetch_array($result1)) {
 
 $temp_user = user_load(array('name' => $row['comments_name'])); // take rpx user details
+
+if($temp_user->profile_group_privacy==1 || !isset($temp_user->profile_group_privacy))
+{
+
 if($temp_user->rpx_data['profile']['name']['givenName']!="")
 {
   $comm_auth = "<a href='".$base_url."/userprofile/".$row['comments_name']."'>".$temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName']."</a>";
@@ -61,6 +65,11 @@ if($temp_user->rpx_data['profile']['name']['givenName']!="")
 else
 {
   $comm_auth = "<a href='".$base_url."/userprofile/".$row['comments_name']."'>".$row['comments_name']."</a>";
+}
+}
+else
+{
+ $comm_auth = "( <i>Hidden User</i> )";
 }
 	if($row['comments_comment']!="")
 	{

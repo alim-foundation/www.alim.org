@@ -4,6 +4,8 @@ global $base_url;
 global $theme_path;
 print "Posted By : ";
 $temp_user = user_load(array('name' => strip_tags($output)));
+if($temp_user->profile_group_privacy==1 || !isset($temp_user->profile_group_privacy))
+{
 if($temp_user->rpx_data['profile']['name']['givenName']!="")
 {
   print "<a href='".$base_url."/userprofile/".strip_tags($output)."'>".$temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName']."</a>";
@@ -11,5 +13,10 @@ if($temp_user->rpx_data['profile']['name']['givenName']!="")
 else
 {
   print "<a href='".$base_url."/userprofile/".strip_tags($output)."'>".strip_tags($output)."</a>";
+}
+}
+else
+{
+ print "( <i>Hidden User</i> )";
 }
 ?>

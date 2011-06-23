@@ -36,7 +36,8 @@ else
 }
 
 $picture = $temp_user->picture; 
-
+if($temp_user->profile_group_privacy==1 || !isset($temp_user->profile_group_privacy))
+{
 ?>
 
 <div class="followme_div"  style="width:65px;text-align:center;vertical-align:top;background-color:#E5E5E5;padding:3px;padding-top:5px"  >
@@ -73,9 +74,19 @@ else
 }
 ?>
 </div>
-
-
 </div>
 </a>
-
 </div>
+<?php
+}
+else
+{
+?>
+<div class="followme_div"  style="width:65px;text-align:center;vertical-align:top;background-color:#E5E5E5;padding:3px;padding-top:15px;height:55px;color: #999999"  >
+<div class="follower_pic">
+<i>Hidden User</i>
+</div>
+</div>
+<?php
+}
+?>
