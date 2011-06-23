@@ -9798,3 +9798,7 @@ height:11px;
 div.stbutton.horizontal div.stoverlay {
     z-index: 99;
 }
+#community-tags-form #edit-submit
+{
+display:none;
+}
