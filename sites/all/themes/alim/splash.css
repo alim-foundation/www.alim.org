@@ -15,7 +15,6 @@
 #logo1 {
 float:left;
 height:50px;
-/*margin-top:20px;*/
 margin-left:10px;
 text-align:left;
 margin-right:120px;
@@ -23,7 +22,7 @@ width:250px;
 }
 #div_about_us
 {
-  	background:url(images/aboutbg.png) top left no-repeat;
+  	background:url(images/aboutbg.gif) top left no-repeat;
 	height:200px;
 	width:925px;
 	text-align:left;
@@ -53,7 +52,7 @@ width:250px;
 }
 #testimony
 {
-	background:url(images/testimonoalsbg.png) top left no-repeat;
+	background:url(images/testimonoalsbg.gif) top left no-repeat;
 	height:485px;
 	width:605px;
 	margin-botton:4px;
@@ -61,8 +60,7 @@ width:250px;
 .test_top
 {
 	background:url(images/topbgtile.png)  top left no-repeat;
-	width:968px;/*#F7F4E2*/
-	/*height:60px;*/
+	width:968px;
 	padding-top:22px;		
 }
 .test_topinner{
@@ -88,7 +86,7 @@ width:250px;
 
 .newsblog
 {
-	background:url(images/newstwitterblog-bg.png) top left no-repeat;
+	background:url(images/newstwitterblog-bg.gif) top left no-repeat;
 	width:311px;
 	height:200px;
 	margin-bottom:4px;
@@ -96,7 +94,7 @@ width:250px;
 }
 #partners
 {
-	background:url(images/partnersbg.png) top left no-repeat;
+	background:url(images/partnersbg.gif) top left no-repeat;
 	width:605px;
 	height:122px;
 }
@@ -240,8 +238,6 @@ width:250px;
   width:925px;
   height:120px;
   text-align:left;
-/*  padding-left:25px;
-  padding-top:6px;*/
 }
 #top_heading h1
 {
@@ -262,7 +258,6 @@ width:250px;
 #splash_search
 {
  height:60px;
-/* background:#F7F4E2;*/
  width:900px;
   text-align:center;
 
@@ -328,7 +323,6 @@ padding:0;
  border:none;
   vertical-align:top;
 }
-/*******Search *****/
 #splash_search #site-search #edit-search-theme-form-1-wrapper label{
 	display:none;
 	
@@ -355,7 +349,7 @@ padding:0;
   font-size:0;
   line-height:0;
   text-indent:-99999px;
-  margin-bottom:1px;display:block;/*float:left;*/
+  margin-bottom:1px;display:block;
 }
 
 
@@ -386,33 +380,6 @@ padding:0;
 	margin:0;
 }
 
-/*#search-home #adv-searchfrm {
-	clear:both;
-	-moz-border-radius-topleft:5px;
-	-moz-border-radius-topright:5px;
-	-moz-border-radius-bottomleft:5px;
-	-moz-border-radius-bottomright:5px;
-	-webkit-border-top-left-radius:5px;
-	-webkit-border-bottom-left-radius:5px;
-	-webkit-border-bottom-right-radius:5px;
-	-webkit-border-top-right-radius:5px;
-	display:none;
-	background-color:#E5CF94;
-	position:absolute;
-	width:520px;
-	z-index:100;
-	border:1px solid #937330 ;
-	text-align:left;
-	padding:12px;
-	/*top: 24.5px; 
-	right: 0px; *
-	margin-top:26px;
-	margin-right: 0px;
-	margin-right: -1px;
-	margin-left:0px;
-	font-size:11px;
-}*/
-
 
 #search-home #adv-searchfrm {
 	clear:both;
@@ -425,15 +392,13 @@ padding:0;
 	-webkit-border-bottom-right-radius:5px;
 	-webkit-border-top-right-radius:5px;
 	display:none;
-	background-color:#E5CF94;/*:#E5CF94;*/
+	background-color:#E5CF94;
 	position:relative;
 	width:555px;
 	z-index:1000;
-	border:2px solid #DCA837; /*#DCA837 ;*/
+	border:2px solid #DCA837; 
 	text-align:left;
 	padding:12px;
-	/*top: 24.5px; 
-	right: 0px; */
 	margin-top:0px;
 	margin-right: 0px;
 	margin-right: -1px;
@@ -462,15 +427,11 @@ padding:0;
   
 
 }
-#search-home #adv-searchfrm .container-inline div, #adv-searchfrm .container-inline label {
-/*display:block;*/
-}
+
 #search-home #adv-searchfrm .container-inline div, #search-home #adv-searchfrm .container-inline label{
 	display:block;
 }
-#search-home #adv-searchfrm .form-item label.option{
-	/*display:block;*/
-}
+
 
 .books-hadith .criterion ,.books-quran .criterion , .books-fiqh .criterion , .books-article .criterion ,.books-biographies .criterion ,.books-index .criterion{
 	padding-left:15px;display:block;
@@ -491,10 +452,7 @@ padding:0;
 #search-home #adv-searchfrm .books-quran .form-checkboxes .form-item  ,#search-home #adv-searchfrm .books-hadith .form-checkboxes .form-item , #search-home #adv-searchfrm .books-biographies .form-checkboxes .form-item ,#search-home #adv-searchfrm .books-index .form-checkboxes .form-item{
 	width:160px;display:block;float:left;
 }
-#search-home #adv-searchfrm .books-quran .form-checkboxes ,#search-home #adv-searchfrm .books-hadith .form-checkboxes,#search-home #adv-searchfrm .books-biographies .form-checkboxes #search-home #adv-searchfrm .books-index .form-checkboxes {
-	/*width:400px;*/
-}
-
+#search-home #adv-searchfrm .books-quran .form-checkboxes ,#search-home #adv-searchfrm .books-hadith .form-checkboxes,#search-home #adv-searchfrm .books-biographies .form-checkboxes 
 #search-home #adv-searchfrm  #edit-hadith-wrapper ,#search-home #adv-searchfrm  #edit-fiqh-wrapper ,#search-home #adv-searchfrm  #edit-quran-wrapper ,#search-home #adv-searchfrm  #edit-islam-wrapper ,#search-home #adv-searchfrm #edit-biographies-wrapper ,#search-home #adv-searchfrm #edit-index-wrapper ,#search-home #adv-searchfrm #edit-quran-1-wrapper ,#search-home #adv-searchfrm #edit-hadith-1-wrapper ,#search-home #adv-searchfrm #edit-fiqh-1-wrapper , #search-home #adv-searchfrm #edit-islam-1-wrapper ,#search-home #adv-searchfrm #edit-biographies-1-wrapper ,#search-home #adv-searchfrm #edit-index-1-wrapper  {
 	clear:both;display:block;
 }
@@ -506,21 +464,7 @@ padding:0;
 	clear:both;text-align:right;padding-top:0px;display:block;padding-right:30px;clear:both;
 	
 }
-#search-home #adv-searchfrm .action{
-	/*clear:both;padding-top:0px;display:block;padding-right:30px;height:20px;float:left;*/
-	
-}
 
-
-
-
-
-
-
-
-
-
-/*****************/
 #juitterContainer .twittLI:hover{background:none;font-size:12px;}
 #juitterContainer .twittLI{list-style:none;margin:0;padding:5px 0 0 0;border-bottom:#9B3411 dashed 1px ;padding:3px;clear:both;height:auto;font-size:12px;} 
 #juitterTabsWrapper{
@@ -572,14 +516,12 @@ background:none;
 }
 #top_menu_middle2
 {
- /* background:url(images/start-withalim.png) top center repeat-x;*/
   height:50px;
   width:234px;
   text-align:center;
   height:35px;
-/*  margin-top:30px;*/
-   float:left;
-/*  padding-top:60px;*/
+  float:left;
+
 }
 #top_menu_middle2 .read_more a
 {
@@ -639,11 +581,9 @@ background:none;
 }
 .view-splash-header .views_slideshow_thumbnailhover_breakout_teasers
 {
-/*   margin-top:15px;*/
    width:924px;
- /*  margin-left:90px;*/
    text-align:center;
-/*   padding-top:15px;*/
+
 }
 
 .view-splash-header .views_slideshow_thumbnailhover_div_breakout_teaser
@@ -664,7 +604,6 @@ background:none;
 .view-splash-header .views-field-field-header-thumb-fid
 {
 float:left;
-/*border:3px solid #ac6800;*/
 width:54px;
 height:50px;
 
@@ -706,12 +645,11 @@ height:50px;
 {
  background-color:#F4B323;
 
-  /*border:3px solid #006600;*/
 
 }
 .view-splash-header #views_slideshow_thumbnailhover_main_1
 {
-/* margin-bottom:9px;*/
+
 height:230px;
 }
 
@@ -759,17 +697,17 @@ height:230px;
  border:none;
 
 }
-/*............. recent_activity */
+
 .recent_activity
 {
-/*  width:926px;*/
+
   height:513px;
   padding-left:25px;
   padding-top:15px;
   text-align:left;
    color:#513A18;
    font-size:14px;
-   background:url(images/bg-recentactivity.png) left no-repeat;
+   background:url(images/bg-recentactivity.gif) left no-repeat;
    margin-left:20px;
    clear:both;
 }
@@ -1018,4 +956,4 @@ a.gotouser
 {
  word-wrap:break-word;width: 275px; float: left;
 }
-/*............. recent_activity */
+
