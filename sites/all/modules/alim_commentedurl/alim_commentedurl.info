@@ -1,4 +1,4 @@
 name = Alim Commentedurl
-description = "Module to save Commented url to the node."
+description = "Module to save Commented url to the node.And form alteration "
 package = "Alim"
 core = 6.x
