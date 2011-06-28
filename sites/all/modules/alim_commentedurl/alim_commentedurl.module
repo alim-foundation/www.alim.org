@@ -118,8 +118,9 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 				
 				$form['admin']['#collapsed'] = FALSE;
 				// unset($form['preview']);
-			 //if (in_array('Scholar', array_values($user->roles)) || in_array('Book Author', array_values($user->roles))){  }
-			 //else 
+			 if (in_array('Scholar', array_values($user->roles)) || in_array('Book Author', array_values($user->roles))){  }
+			 
+			 else {
 			 if($_COOKIE['Comment_cookie'])
 				{}
 				else
@@ -128,6 +129,7 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 			      '#type' => 'captcha',
 			     '#captcha_type' => 'image_captcha/Image',);
 			    $out->my_captcha_element = drupal_render($form['my_captcha_element']);
+				}
 				}
 				break;
 				
