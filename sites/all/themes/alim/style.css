@@ -2966,6 +2966,8 @@ float:left;
 .vud-widget-plain .up-active, .vud-widget-plain .up-inactive, .vud-widget-plain .down-active, .vud-widget-plain .down-inactive {
 height:20px;
 width:26px;
+display:inline;
+float:right;
 }
 
 
