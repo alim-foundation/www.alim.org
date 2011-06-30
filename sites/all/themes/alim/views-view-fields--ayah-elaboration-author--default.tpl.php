@@ -93,6 +93,7 @@ $_SESSION['msg'] ='';
 	  <div style="clear:both;">
 	   <div style="padding-right:10px;">
 	  <?php 
+
   print vud_votes_proxy($nid, 'node', 'vote', 'plain', $readonly=NULL); ?>
 
  </div>

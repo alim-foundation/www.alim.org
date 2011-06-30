@@ -63,10 +63,10 @@ $name_auth="Yusuf Ali";
  <div style="padding-left:40px;">
 
 <div style="width:615px;height:20px;color:#993300;background-color:#E5E5E5;padding-top:7px;padding-left:10px;font-size:12px;padding-bottom:3px;">
-	<div style="width:450px;float:left;" ><b><?php //print $name_auth;
+	<div style="width:430px;float:left;" ><b><?php //print $name_auth;
 				
  	 ?></b>&nbsp;&nbsp;&nbsp;</div>
-	 <div style="width:165px;float:left;">
+	 <div style="width:175px;float:left;">
 	  <style>
 	 #quicktabs_tabpage_12_1 #vud_ap_vote , #quicktabs_tabpage_12_1 #votes_text
 	 {
@@ -86,6 +86,7 @@ $name_auth="Yusuf Ali";
 	 <div style="clear:both;">
 	   <div style="">
 	  <?php
+
  print vud_votes_proxy($nid, 'node', 'vote', 'plain', $readonly=NULL); 
  ?>
  </div>
