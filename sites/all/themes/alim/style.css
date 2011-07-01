@@ -2966,6 +2966,8 @@ float:left;
 .vud-widget-plain .up-active, .vud-widget-plain .up-inactive, .vud-widget-plain .down-active, .vud-widget-plain .down-inactive {
 height:20px;
 width:26px;
+display:inline;
+float:right;
 }
 
 
@@ -7529,8 +7531,7 @@ position:absolute;*/
 }
 #bm-nice-menu a{color:#333333;}
 #bm-nice-menu a:hover{color:#4B1D06;}
-#bm-nice-menu .org-bm{border-top:none;border-bottom:#ECC874 1px solid;border-left:#ECC874 1px solid;border-right:#ECC874 1px solid;padding:3px 3px 3px 23px;;width:156px;
-text-align:left;background:url(images/organisebookmarks.png) 4px center no-repeat;}
+.mybookmark-inner .org-bm{text-align:left;background:url(images/organisebookmarks.png) 1px  center no-repeat;}
 #bm-nice-menu ul.nice-menu-left li ul {
     left: -14.15em;
     width: 14em;
@@ -7558,7 +7559,7 @@ text-align:left;background:url(images/organisebookmarks.png) 4px center no-repea
 
 #popup-bookmark .mybookmark-inner #dialog-mymenu{background:url(images/mybookmarksmenu.png) no-repeat left;padding:10px 0 5px 20px;}
 #popup-bookmark .mybookmark-inner a , #popup-clip-menu .mybookmark-inner a {color:#333333;font-size:12px;display:block;padding:10px 0 5px 20px;
-background:none;}
+}
 #popup-clip-menu .mybookmark-inner a {padding:5px 0 10px 24px;background:none;}
 #popup-bookmark .mybookmark-inner em{display:block;padding:6px 0 5px 20px;}
 #popup-bookmark #mymenu-show{}
@@ -9799,6 +9800,34 @@ div.stbutton.horizontal div.stoverlay {
     z-index: 99;
 }
 #community-tags-form #edit-submit
+{
+display:none;
+}
+#bookmarks-overview .form-item
+{
+display:none;
+}
+#bookmarks-overview th .checkbox
+{
+display:none;
+}
+
+#demo
+{
+float:right;
+* float:left;
+* margin-top:-20px;
+* margin-left:50px;
+}
+.a2
+{
+margin-top:-16px;
+}
+.user-form-clippings fieldset,.admin
+{
+display:none;
+}
+.user-form-clippings .description
 {
 display:none;
 }

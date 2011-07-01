@@ -247,17 +247,20 @@ $(document).ready(function(){
 			    
 	        </div>
 			<div style="clear:both"></div>
-		<div class="test_top">
-			<div class="test_topinner" >
+	<div class="test_top">
+			<!--<div class="test_topinner" >
 				<div id="splash_search">
 			<div  class="splash_searchinner" align="center" >
 			  <div class="splash_search_box"><?php if ($search_box): ?><div id="search-home" ><?php print $search_box ?></div><?php endif; ?></div>
 			  </div>
 			 </div>
-			 </div>
+			 </div>-->
 		</div>
+
 	<div class="test_middle" align="center">
-	
+				<div style="clear:both"></div>
+			<?php print $splash_top; ?>
+			<div style="clear:both;"></div>
 			<div id="head_content">
 			      
 				   <div id="top_heading">

@@ -79,28 +79,28 @@ $(document).ready(function() {
 			});	*/		
 			// advanced search jquery to select the check boxes etc. 
 			
-			$("div#search-home  div#site-search :input[type='text'].form-text:first").val('Al-Qur\'an, Hadith, Fiqh, Biographies, References and other books');
+			$("div#search-home  div#site-search :input[type='text'].form-text:first").val('Search Al-Qur\'an, Hadith, Fiqh, Biographies, References and other books');
 			
-$("div#search-home  div#site-search :input[type='text'].form-text:first , div#search_content #search-theme-form :input[type='text'].form-text:first , #search-form .form-text ").mouseup(function() {
+$("div#search-home  div#site-search :input[type='text'].form-text:first , div#search_content #search-block-form :input[type='text'].form-text:first , #search-form .form-text ").mouseup(function() {
 				//$("div#adv-searchfrm").toggle();
-				if ($(this).val() == 'Al-Qur\'an, Hadith, Fiqh, Biographies, References and other books'){
+				if ($(this).val() == 'Search Al-Qur\'an, Hadith, Fiqh, Biographies, References and other books'){
             			$(this).val("");
         		}	
 				if ($(this).val() == 'Enter Search Keyword here') { $(this).val("");  	}
 				
 			});
-			$("#search-theme-form :input[type='text'].form-text:first , #search-form :input[type='text'].form-text:first ").keypress(function () {											
+			$("#search-block-form :input[type='text'].form-text:first , #search-form :input[type='text'].form-text:first ").keypress(function () {											
 					 if ($(this).val() == 'Enter Search Keyword here'){
 												$(this).val("");
 												//$(this).css("color","#893D00");
 						}
 			 });	
-			$('#search-theme-form .form-submit').click(function(ev) {
-			   key = $("#search-theme-form .form-text").val();
-			   if(key == '' || key == 'Al-Qur\'an, Hadith, Fiqh, Biographies, References and other books' || key == 'Enter Search Keyword here'  ){				   
-						$("#search-theme-form :input[type='text'].form-text:first").val('Enter Search Keyword here') ;
+			$('#search-block-form .form-submit').click(function(ev) {
+			   key = $("#search-block-form .form-text").val();
+			   if(key == '' || key == 'Search Al-Qur\'an, Hadith, Fiqh, Biographies, References and other books' || key == 'Enter Search Keyword here'  ){				   
+						$("#search-block-form :input[type='text'].form-text:first").val('Enter Search Keyword here') ;
 						//$("#search-theme-form :input[type='text'].form-text:first").css("color","#AB392E");
-						$("#search-theme-form .form-text").focus();
+						$("#search-block-form .form-text").focus();
 						//$("div#adv-searchfrm").toggle();
 						$("div#adv-searchfrm").hide();
 						ev.preventDefault();
@@ -108,7 +108,7 @@ $("div#search-home  div#site-search :input[type='text'].form-text:first , div#se
 			});
 			$("#search-form .form-submit").click(function(evt) {
 				key = $("#search-form .form-text").val(); 
-				 if(key == '' || key == 'Al-Qur\'an, Hadith, Fiqh, Biographies, References and other books' || key == 'Enter Search Keyword here'  ){
+				 if(key == '' || key == 'Search Al-Qur\'an, Hadith, Fiqh, Biographies, References and other books' || key == 'Enter Search Keyword here'  ){
 					    $("#search-form :input[type='text'].form-text:first").val('Enter Search Keyword here') ;
 						//$("#search-form :input[type='text'].form-text:first").css("color","#AB392E");
 						$("#search-form .form-text").focus();
@@ -131,7 +131,7 @@ $("div#search-home  div#site-search :input[type='text'].form-text:first , div#se
 					if ($(this).val() == "")
 					{
 						$(this).addClass("defaultTextActive");
-						$(this).val('Al-Qur\'an, Hadith, Fiqh, Biographies, References and other books');
+						$(this).val('Search Al-Qur\'an, Hadith, Fiqh, Biographies, References and other books');
 					}
 				});
 				$("div#search-home  div#site-search :input[type='text'].form-text:first").blur(); 
