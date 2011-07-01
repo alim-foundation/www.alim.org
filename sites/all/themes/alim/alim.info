@@ -18,7 +18,7 @@ regions[rpx_login] = rpx login
 regions[clips] = Top of content Clippings Details 
 regions[clipcategory] = Clippings Category
 
-
+regions[splash_top] = Splash Top
 regions[splash_header] = Splash Header
 regions[splash_about] = Splash Aboutus
 regions[splash_nonprofit] = Splash Non Profit
