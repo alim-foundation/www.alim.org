@@ -139,7 +139,7 @@ function alim_searchtags_mybookmarks_mine(){
 				$menu1 = theme('nice_menu', 'bm' , $mname , NULL, 'left');
   				$replace = 'href="#"' ;
 				$blockcnt = str_replace('a href="/folder"', 'a href="#"', $menu1['content'] );
-				$output  .= '<div class="block-menu" >'.$blockcnt.'<div class="org-bm" >'.l(t('Organize Bookmarks'), 'bookmarks/mine' ).'</div></div>';
+				$output  .= '<div class="block-menu" >'.$blockcnt.'</div>';
   
   
   
