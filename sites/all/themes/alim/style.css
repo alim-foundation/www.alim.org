@@ -9823,11 +9823,19 @@ float:right;
 {
 margin-top:-16px;
 }
-.user-form-clippings fieldset,.admin
+.user-form-clippings fieldset,.user-form-clippings .admin
 {
 display:none;
 }
 .user-form-clippings #edit-taxonomy-8-wrapper .description
 {
 display:none;
+}
+#bookmarks-edit-item #edit-bookmarks-parent
+{
+width: 230px;}
+
+#bookmarks-edit-item #edit-bookmarks-link-title
+{
+width: 450px;
 }
