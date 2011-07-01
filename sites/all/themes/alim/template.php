@@ -7,10 +7,11 @@
  * Adds 'sidebar-left', 'sidebar-right' or 'sidebars' classes as needed.
  */
 /**Default function in garland template.php */
+global $user;
 function phptemplate_body_class($left, $right) {
   if ($left != '' && $right != '') {
     $class = 'sidebars';
-  }
+  } 
   else {
     if ($left != '') {
       $class = 'sidebar-left';
@@ -44,7 +45,7 @@ return theme_stylesheet_import($stylesheet, $media);
 function phptemplate_breadcrumb($breadcrumb) { 
 	global $base_url;
 	global $theme_path;
-	
+	 
 	$links = array();
 	$path = '';
 	// Get URL arguments
@@ -456,6 +457,14 @@ $val = arg(2);
 		$breadcrumb[] =  l(t('Surah '.arg(4) . ' , Ayah '.arg(5)), $q) ;
 
 	}
+	if(arg(1)=='clippings')
+	{
+	unset($breadcrumb);
+	global $user;
+	$breadcrumb[] =  l(t('Home'), '<front>') ;
+	$breadcrumb[] =  l(t($user->name), 'user/clippings') ;
+	$breadcrumb[] =  l(t('Notebook'), 'user/clippings') ;
+	}
 
 
 	
@@ -637,7 +646,7 @@ function phptemplate_preprocess_page(&$vars) {
     if($c > 1 ){  	 unset($crumb[0]);	 }
 	 $crumblast = strip_tags($crumb[$c-1]);
 	 if($crumblast != '' ){
-		 if(@substr_count($head_title ,$crumblast) > 0   ){
+		 if(substr_count($head_title ,$crumblast) > 0   ){
 	 		unset($crumb[$c-1]);
 	 	}
 	}
@@ -1950,9 +1959,9 @@ global $theme_path;
 		 drupal_add_js($x, 'inline', 'header');
 		   $val="<div class='tooltop1'></div><div class='toolmiddle1'>Any content page on the site can be “tagged” by clicking on the “Add Tag” button. A tag is any word or group of words which best describes the subject of the page it belongs to. So for example, let’s say you want to search for ayaat pertaining to the subject of tawhid (i.e. Islamic monotheism). Searching for the word tawhid itself won’t yield many results. What you really need is a way to find ayaat whose subject is tawhid but the word tawhid doesn’t necessarily appear in them. Tagging solves this problem. If you were to be reading, for example, Surah Ash-Shura ayah 11 it might come to your mind that the subject of the ayah includes the topic of tawhid. So you can now tag that page with the word “tawhid”. Thereafter, whenever someone searches for the word “tawhid”, Surah Ash-Shura ayah 11 would appear in the search results.
 </div><div class='toolbottom1'></div>";
-		  $temp = '<div id="demo" style="float:right;"><img src="'.$imghtnl.'" title="'.$val.'" />
+		  $temp = '<div id="demo"><img src="'.$imghtnl.'" title="'.$val.'" />
 </div>';
-  	$output .= '<div><div class="head" >Tags&nbsp;'.$temp.'</div><div class="tag-login" >'. t('<a  class="rpxnow" style="text-decoration:none;" onclick="return false;" href="https://alim.rpxnow.com/openid/v2/signin?token_url='.$base_url.'/rpx/end_point">Add Tags</a>') .' &nbsp; '.l('Search Tags','tags/alltags').'</div></div>';
+  	$output .= '<div><div class="head" >Tags&nbsp;'.$temp.'</div><div class="tag-login" >'. t(' <div class="a1"> <a  class="rpxnow" style="text-decoration:none;" onclick="return false;" href="https://alim.rpxnow.com/openid/v2/signin?token_url='.$base_url.'/rpx/end_point">Add Tags</a></div>') .' &nbsp; <div class="a2">'.l('Search Tags','tags/alltags').'</div></div></div>';
   }
   $output .= '<div class="pagecloud" >';
   
@@ -2093,8 +2102,11 @@ function bookmark(){   //<span class="bookmarks" > print $bookmark; </span>
 		}
 		$out .=   $sep.'</div><div class="bottom" ></div></div>';
 		$out .= '<div id="popup-bookmark" style="display:none;" ><div class="mybookmark-inner" >';//print_r($query_variables);
-		$out .= l('<nobr>Bookmark this page</nobr>', 'bookmarks/item/addpage/' . base64_encode($path), array('attributes' => array('id' => 'bookmarks_add' , 'class' => 'popups' , 'title' => 'Bookmark the current page / Add this page to My Bookmarks '  ) , 'html' => TRUE  ));
 		$out .= '<a href="#" class="mymenu" id="dialog-mymenu" title="View the list of bookmarked pages"  >My Bookmarks</a>';
+		$out .= l('<nobr>Bookmark this page</nobr>', 'bookmarks/item/addpage/' . base64_encode($path), array('attributes' => array('id' => 'bookmarks_add' , 'class' => 'popups' , 'title' => 'Bookmark the current page / Add this page to My Bookmarks '  ) , 'html' => TRUE  ));
+        $out .= l(t('Organize Bookmarks'), 'bookmarks/mine',array('attributes' => array(  'class' => 'org-bm' , 'id' => 'bm-org-bm' , 
+		'title' => 'Organise book mark' ) )  );
+
 		$out .=  l( t('Set Last'), 'bookmarks/lastpage/'.base64_encode($path) ,array('attributes' => array(  'class' => 'bm-last' , 'id' => 'bm-lastpage' , 
 		'title' => 'Set this page as the last page you were reading so that you can return to it easily on your next visit to alim.org' ) )  );
 		//$out .= '<em style="font-size:8px;"> </em>';
@@ -2110,8 +2122,8 @@ function bookmark(){   //<span class="bookmarks" > print $bookmark; </span>
 			if (  arg(2) != 'prophet' && arg(2) != 'subject' && arg(2) != 'narratorindex' && arg(2) != 'narrator' && arg(2) != 'page' && arg(2) != 'structure' && arg(2) != 'duas'
 			&& arg(3) != 'theme'   ){			
 				$out .= '<div id="popup-clip-menu" style="display:none;" ><div class="mybookmark-inner" >';		
-				$out .= l('Clip this Page' , 'node/add/clippings' , array( 'attributes' => array('class' => 'popups pop-clip-one' , 'id' => 'clip-btn-all' ,
-				'title' => 'Clip the whole page and save to your notebook' ) , 'html' => TRUE ) ); 		
+				$out .= l('Clip this Page' , 'node/add/clippings' , array( 'attributes' => array('class' => 'popups-form-reload pop-clip-one' , 'id' => 'clip-btn-all' ,
+				'title' => 'Clip the whole page and save to your notebook','on-popups-options' => '{width: "700px"}' ) , 'html' => TRUE ) ); 		
 				$out .= '<a class="pop-clip-two" href="#" title="Clip the selected text from this page" id="clip-btn-sel" >Clip the selected text</a>';
 				$out .= '<a class="pop-clip-three"  href="/user/clippings" title="Go to my notebook"  >My NoteBook</a>';
 				$out .= '</div></div>';
