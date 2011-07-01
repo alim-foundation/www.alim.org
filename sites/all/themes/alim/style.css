@@ -9831,3 +9831,11 @@ display:none;
 {
 display:none;
 }
+#bookmarks-edit-item #edit-bookmarks-parent
+{
+width: 230px;}
+
+#bookmarks-edit-item #edit-bookmarks-link-title
+{
+width: 450px;
+}
