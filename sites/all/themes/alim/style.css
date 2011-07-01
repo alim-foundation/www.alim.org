@@ -9826,5 +9826,8 @@ margin-top:-16px;
 .user-form-clippings fieldset,.admin
 {
 display:none;
-
+}
+.user-form-clippings .description
+{
+display:none;
 }
