@@ -118,9 +118,8 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 				
 				$form['admin']['#collapsed'] = FALSE;
 				// unset($form['preview']);
-			 if (in_array('Scholar', array_values($user->roles)) || in_array('Book Author', array_values($user->roles))){  }
-			 
-			 else {
+			 //if (in_array('Scholar', array_values($user->roles)) || in_array('Book Author', array_values($user->roles))){  }
+			 //else 
 			 if($_COOKIE['Comment_cookie'])
 				{}
 				else
@@ -129,7 +128,6 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 			      '#type' => 'captcha',
 			     '#captcha_type' => 'image_captcha/Image',);
 			    $out->my_captcha_element = drupal_render($form['my_captcha_element']);
-				}
 				}
 				break;
 				
@@ -759,14 +757,14 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 				
 				if(arg(2) != 'edit' )
 					$form['bookmarks']['link_title']['#default_value'] = '';
-				$form['bookmarks']['link_title']['#description'] = 'Name of the Bookmark page.';
+				$form['bookmarks']['link_title']['#description'] = '';
 				$form['bookmarks']['expanded']['#access'] = FALSE;
 				$form['bookmarks']['public']['#access'] = FALSE;
 				
 				foreach($form['bookmarks']['parent']['#options']  as $k => $v){
 					$str =  substr($k, -2, 2);  
 					if($str == ':0' ){
-					$form['bookmarks']['parent']['#options'][$k] = '<Select Sub-folder>'; //<My Bookmarks>;
+					$form['bookmarks']['parent']['#options'][$k] = '<Select>'; //<My Bookmarks>;
 					}
 					$menuid  = str_replace(  $mname.':' ,'' , $k);
 					if(!array_key_exists($menuid, $resultarray) && $str != ':0'    ){
@@ -778,7 +776,8 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 					$form['bookmarks']['link_title']['#description'] = 'Name of the Folder/Category.';
 				}
 				if(arg(0) == 'bookmarks' && arg(2) == 'edit'){//bookmarks/item/edit/1818
-					$form['bookmarks']['link_title']['#description'] = 'Name of the Bookmark page.';
+					$form['bookmarks']['link_title']['#description'] = '';
+					
 					$form['bookmarks']['link_path']['#description'] = 'The path this bookmark links to.';
 					$form['bookmarks']['link_path']['#value'] = $form['bookmarks']['link_path']['#default_value'];
 					$form['bookmarks']['link_path']['#disabled'] = TRUE;
