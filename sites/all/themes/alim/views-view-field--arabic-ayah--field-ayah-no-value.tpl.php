@@ -47,7 +47,7 @@ $ayahno = strip_tags($output);
 	$num2=$ayahno;
 	$full = $num1.$num2.".mp3";
 ?>
-<span id="ayahaudio_<?=$ayahno?>" class="right-audio"></span>
+<div  id="ayahaudio_<?=$ayahno?>" class="right-audio dummy-player">&nbsp;&nbsp;&nbsp;&nbsp;</div>
 </div>
 <div style="clear:both"></div>
 
