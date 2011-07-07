@@ -9846,3 +9846,11 @@ width: 230px;}
 {
 width: 450px;
 }
+.dummy-player
+{
+background:url(images/Play_Button_Green_Yellow.gif);
+height:17px;
+width:17px;
+cursor:pointer;
+
+}
