@@ -873,8 +873,7 @@ if(arg(3)=='compare') {
 					if($user->uid){?><?php print l("My Profile",'userprofile'); ?>&nbsp;&nbsp;
 					<?php print l("Logout","logout"); ?><? } else {?>
 					<?php print $rpx_login ; ?> <? }?>&nbsp;&nbsp;
-					<a href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-home.png"  border="0" align="absmiddle" title="Home" alt="Home" /></a>
-				</div>	  
+					<a href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-home.png" alt="Home" width="25" height="25"  border="0" align="absmiddle" title="Home" /></a>				</div>	  
 				<div id="top_menu_right"></div>
 			</div>
 
@@ -883,8 +882,7 @@ if(arg(3)=='compare') {
 			<div id="head_middle">
 				<div id="logo">
 					<div style="float:left;margin-right:40px;padding-top:2px;">
-					<a  href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo-top.png" border="0"  align="absmiddle"/></a>
-					</div>
+					<a  href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo-top.png" width="135" height="61" border="0"  align="absmiddle"/></a>					</div>
 					<div style="float:left;"><h1> <?php print print_masterhead(); ?>  </h1></div>		
 				</div>
 				<div id="search" align="left"><div id="search_content"><?php if ($search_box): ?><div ><?php print $search_box ?></div><?php endif; // search box  ?></div></div>
@@ -899,11 +897,9 @@ if(arg(3)=='compare') {
 		
 			<div class="inner_donate">
 			<a href="<?=$base_url?>/donate/pp/cancel">
-					<img alt="" border="0" src="<?=$base_url?>/<?=$theme_path?>/images/paypal.gif" >
-				</a>
-			</div>			
+					<img src="<?=$base_url?>/<?=$theme_path?>/images/paypal.gif" alt="" width="92" height="26" border="0" >				</a>			</div>			
 		
-		 </div>
+	  </div>
 		<div style="clear:both"></div>
 			<div id="con_div">
 			 <div id="con_div_top" align="left"> 
@@ -1042,7 +1038,8 @@ if(arg(3)=='compare') {
  	<div style="clear:both"></div>
 	<div id="footer_div" align="center" >
 	  <div id="footer_content" align="center">
-		  <div id="footer_head" align="center"><a  href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo1.png" border="0" /></a><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&copy; All Rights 2010 Alim.org</div>
+		  <div id="footer_head" align="center"><a  href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo1.png" width="262" height="61" border="0" /></a><br />
+	    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&copy; All Rights 2010 Alim.org</div>
 		  
 		  <div id="footer_menu"><?php print $footer; ?></div>
 	  </div>

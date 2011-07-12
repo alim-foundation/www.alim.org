@@ -2063,8 +2063,8 @@ function bookmark(){   //<span class="bookmarks" > print $bookmark; </span>
 	//if( ($user->uid == 1) || ( is_array($user->roles)  && in_array("Developer", $user->roles)  )    ){	
 	$themepath = base_path() . path_to_theme().'/images';
 	//$top = "<img src='$themepath/bkg_hook_top.png' alt='' title='' />";	
-	$bookmark = "<img src='$themepath/icon_bookmark.png' alt='Bookmark' title='Bookmark' valign='bottom' />";
-	$clipi = "<img src='$themepath/icon_clip_page.png' alt='Clip page' title='Clip page' valign='bottom' />";
+	$bookmark = "<img src='$themepath/icon_bookmark.png' alt='Bookmark' title='Bookmark' valign='bottom' width='24' height='23' />";
+	$clipi = "<img src='$themepath/icon_clip_page.png' alt='Clip page' title='Clip page' valign='bottom' width='22' height='19'  />";
 	$sep = "<div class='sep' ></div>";
 	if(!$user->uid){ 	
 		if( arg(0) == 'library' &&  (arg(1) == 'hadith' ||  arg(1) == 'quran' )  ){
