@@ -1122,13 +1122,6 @@ $(document).bind("popups_open_path_done", function() {
 });
 </script>
 <?php  }?>
-<script type="text/javascript">
-$(document).bind("popups_open_path_done", function() {						
-				$("#popups input[type='submit'].form-submit").click(function() { 				
-							Drupal.wysiwyg.editor.detach.nicedit($(this)  );																											
-				});							
-});
-
 
 <script type="text/javascript">
 $(document).bind("popups_open_path_done", function() {						
