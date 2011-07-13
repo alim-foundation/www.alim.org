@@ -138,6 +138,7 @@ $start_time = microtime(TRUE);
 
 	<?php print $styles ?>
    	<link rel="stylesheet" type="text/css" href="<?php print $base_url."/".$theme_path;?>/galleryview/galleryview.css"/>
+	<link type="text/css" rel="stylesheet" media="all" href="<?php print $base_url."/".$theme_path;?>/splash.css" />
 	    <!--[if lt IE 7]>
       <?php print phptemplate_get_ie_styles(); ?>
     <![endif]-->
@@ -150,7 +151,6 @@ $start_time = microtime(TRUE);
 <script language="javascript" type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/galleryview/jquery.galleryview-2.1.1.js"/></script>
 <script language="javascript" type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/galleryview/jquery.timers-1.2.js"/></script>
 <script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/hoverjq.js"></script>
-<link type="text/css" rel="stylesheet" media="all" href="<?php print $base_url."/".$theme_path;?>/splash.css" />
 <script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/crawler.js"></script>
 <script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
 
