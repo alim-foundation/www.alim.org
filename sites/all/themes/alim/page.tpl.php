@@ -5,7 +5,99 @@ global $theme_path;
 $_SESSION['qry']=1;
 $start_time = microtime(TRUE);
 
-//setcookie("rem_notebook","", 0, "/");
+/*** Set Cookie expired on browser close.*/
+					
+						 if(!($_COOKIE['remember']))
+						 {
+ 							 if(($_COOKIE['rem_uid'])!=$user->uid||$user->uid==0)
+							 {									  
+									  watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
+									  session_destroy();
+									  $null = NULL;
+									  user_module_invoke('logout', $null, $user);
+									  $user = drupal_anonymous_user();							
+									  $domain = $_SERVER['HTTP_HOST'];
+									  $path = $_SERVER['SCRIPT_NAME'];	
+									  $queryString = $_SERVER['QUERY_STRING'];
+									  $url = "http://" . $domain . $path . "?" . $queryString;
+									  $goodUrl = str_replace('index.php?q=','', $url);
+									  header('location:'.$goodUrl);
+									 
+							}
+							else
+							{
+									  setcookie("rem_uid",$user->uid, time()+1209600, "/");
+							}
+							 setcookie("remember","a", 0, "/");
+						 }
+						 
+		                 if(arg(8)=='eng_font')
+							{
+								setcookie("eng_font", arg(9),$expire, "/");
+							}
+							if(arg(8)=='arb_font')
+							{
+								setcookie("arb_font", arg(9), $expire, "/");	
+							}
+							if(arg(8)=='eng_font_size')
+							{
+		  						setcookie("eng_font_size", arg(9), $expire, "/");
+							}
+							if(arg(8)=='arb_font_size')
+							{
+								setcookie("arb_font_size",arg(9), $expire, "/");
+							}
+
+
+      if(!isset($_COOKIE['reciterval']) || $_COOKIE['reciterval']=="") { 
+	     $select_res =  $select_res1;
+		 setcookie("reciterval", $select_res1, $expire, "/");
+	  }
+	  else
+	  {
+	    $select_res = $_COOKIE['reciterval'];
+	  }
+  
+     if(!isset($_COOKIE['eng_font']) || $_COOKIE['eng_font']=="") { 
+	     $select_eng =  $select_eng1;
+		 setcookie("eng_font", $select_eng1, $expire, "/");
+		 
+	  }
+	  else
+	  {
+	    $select_eng = $_COOKIE['eng_font'];
+	  }
+	  if(!isset($_COOKIE['eng_font_size']) || $_COOKIE['eng_font_size']=="") { 
+	    
+		 $select_eng_size =  $select_eng_size1;
+		 setcookie("eng_font_size", $select_eng_size1, $expire, "/");
+	  }
+	  else
+	  {
+	    $select_eng_size = $_COOKIE['eng_font_size']; 
+	  }
+	  
+	 
+	  
+	  if(!isset($_COOKIE['arb_font']) || $_COOKIE['arb_font']=="") { 
+	  	$select_arb = $select_arb1;
+		setcookie("arb_font", $select_arb1, $expire, "/");
+	  }
+	  else
+	  {
+	    $select_arb = $_COOKIE['arb_font'];
+	  }
+	  
+	  if(!isset($_COOKIE['arb_font_size']) || $_COOKIE['arb_font_size']=="") { 
+	    
+		 $select_arb_size = $select_arb_size1; 
+		 setcookie("arb_font_size", $select_arb_size1, $expire, "/");
+
+	  }
+	  else
+	  {
+	    $select_arb_size = $_COOKIE['arb_font_size']; 
+	  }
 
 /**
  * Code used for setting the cookie variables for 
@@ -100,7 +192,198 @@ $start_time = microtime(TRUE);
 								
 								}
 							 
+
+					 if(!($_COOKIE['rem_prof']))
+					  {
+				         if($user->uid!=0)
+							{
+							    	
+								  if(!$user->user_relationships_ui_auto_approve)
+								   {
+									  $apv = array();
+									  $apv[1] = 1;
+									  $extra_data = array('user_relationships_ui_auto_approve' => $apv);
+									   user_save($user, $extra_data); 
+									}
+									
+									
+									$chk_ful    = db_query("SELECT count(*) as ful_cnt,value FROM profile_values WHERE fid=18 AND uid=".$user->uid);
+									$result_ful = db_fetch_object($chk_ful);
+									//print $result_ful->value;
+									// For setting full name as profile field
+									if(($result_ful->ful_cnt)==0)
+									{
+										$temp_user = user_load(array('name' => strip_tags($user->name)));
+										if($temp_user->rpx_data['profile']['name']['givenName']!="")
+										{
+										 $res_ful = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
+										}
+										else
+										{
+										 $res_ful = $user->name;
+										}
+										db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (18,".$user->uid.",'".$res_ful."')");
+									}
+									else
+									{
+										$temp_user = user_load(array('name' => strip_tags($user->name)));
+										if($temp_user->rpx_data['profile']['name']['givenName']!="")
+										{
+										 $res_ful = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
+										}
+										else
+										{
+										 $res_ful = $user->name;
+										}
+										if($result_ful->value!=$res_ful)
+										{
+										 db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$res_ful , $user->uid, 18);
+										}
+									}
+									
+									
+									// Relationship Privacy
+									$select_in_following  = 1;
+									$select_in_follower   = 1; 
+								
+								
+								
+								//Show me on " Following " List.
+								$chk_in_following  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 13, $user->uid));
+								if($chk_in_following==0)
+								{
+									db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 13, $user->uid, $select_in_following);
+								}
+																
+								
+								//Show me on " Follower " List.
+								$chk_in_follower  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 14, $user->uid));
+								if($chk_in_follower==0)
+								{
+									db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 14, $user->uid, $select_in_follower);
+								}
+								
+								
+							
+								setcookie("rem_prof","a", 0, "/");
+							}
+						 
+						}
+						
 					
+							/**
+						 	 * Code for giving priority to user preference,
+							 * if user is login in.
+							*/
+												 
+						   if(!($_COOKIE['rememberlogin']) && $cookie_enabled==2 && $user->uid!=0)
+						 {
+					 
+										$sel_res = db_query("SELECT value as res_sel FROM profile_values WHERE fid=5 AND uid=".$user->uid);
+										$fetch_res = db_fetch_object($sel_res);
+										($fetch_res->res_sel) ? $select_res1 = $fetch_res->res_sel : $select_res1 = "Alafasy_128kbps";
+										setcookie("reciterval", $select_res1, $expire, "/");
+										setcookie("select_res", $select_res1, $expire, "/");	
+
+										$sel_arb = db_query("SELECT value as arb_sel FROM profile_values WHERE fid=2 AND uid=".$user->uid);
+										$fetch_arb = db_fetch_object($sel_arb);
+										($fetch_arb->arb_sel) ? $select_arb1 = $fetch_arb->arb_sel : $select_arb1 = 1;
+										setcookie("arb_font", $select_arb1, $expire, "/");
+		
+										$sel_arb_size = db_query("SELECT value as arbsize_sel FROM profile_values WHERE fid=4 AND uid=".$user->uid);
+										$fetch_arb_size = db_fetch_object($sel_arb_size);
+										($fetch_arb_size->arbsize_sel) ? $select_arb_size1 = $fetch_arb_size->arbsize_sel : $select_arb_size1 = 20;
+										setcookie("arb_font_size", $select_arb_size1, $expire, "/");
+		
+										$sel_eng = db_query("SELECT value as eng_sel FROM profile_values WHERE fid=1 AND uid=".$user->uid);
+										$fetch_eng = db_fetch_object($sel_eng);
+										($fetch_eng->eng_sel) ? $select_eng1 = $fetch_eng->eng_sel : $select_eng1 = 1;
+										setcookie("eng_font", $select_eng1, $expire, "/");
+													
+										$sel_eng_size = db_query("SELECT value as engsize_sel FROM profile_values WHERE fid=3 AND uid=".$user->uid);
+										$fetch_eng_size = db_fetch_object($sel_eng_size);
+										($fetch_eng_size->engsize_sel) ? $select_eng_size1 = $fetch_eng_size->engsize_sel : $select_eng_size1 = 14;
+										setcookie("eng_font_size", $select_eng_size1, $expire, "/");
+									
+										$sel_asd = db_query("SELECT value as asd_sel,count(value) as asd_count FROM profile_values WHERE fid=7 AND uid=".$user->uid);
+										$fetch_asd = db_fetch_object($sel_asd);
+										($fetch_asd->asd_sel) ? $chek_asd = $fetch_asd->asd_sel : $chek_asd = 2;
+										if($fetch_asd->asd_count==0)
+										{
+										 $chek_asd = 1;
+										}
+										setcookie("chek_asd", $chek_asd, $expire, "/");
+									
+								
+														
+										$sel_mal = db_query("SELECT value as mal_sel,count(value) as mal_count FROM profile_values WHERE fid=8 AND uid=".$user->uid);
+										$fetch_mal = db_fetch_object($sel_mal);
+										($fetch_mal->mal_sel) ? $chek_mal = $fetch_mal->mal_sel : $chek_mal = 2;
+										if($fetch_mal->mal_count==0)
+										{
+										 $chek_mal = 1;
+										}
+										setcookie("chek_mal", $chek_mal, $expire, "/");
+									
+									
+														
+										$sel_pic = db_query("SELECT value as pic_sel,count(value) as pic_count FROM profile_values WHERE fid=9 AND uid=".$user->uid);
+										$fetch_pic = db_fetch_object($sel_pic);
+										($fetch_pic->pic_sel) ? $chek_pic = $fetch_pic->pic_sel : $chek_pic =2;
+										if($fetch_pic->pic_count==0)
+										{
+										 $chek_pic = 1;
+										}
+										setcookie("chek_pic", $chek_pic, $expire, "/");
+								
+														
+										$sel_yuf = db_query("SELECT value as yuf_sel,count(value) as yuf_count FROM profile_values WHERE fid=10 AND uid=".$user->uid);
+										$fetch_yuf = db_fetch_object($sel_yuf);
+										($fetch_yuf->yuf_sel) ? $chek_yuf = $fetch_yuf->yuf_sel : $chek_yuf = 2;
+										if($fetch_yuf->yuf_count==0)
+										{
+											$chek_yuf = 1;
+										}
+										setcookie("chek_yuf", $chek_yuf, $expire, "/");
+									
+									
+										$sel_ayatheme = db_query("SELECT value as theme_sel,count(value) as thm_cnt FROM profile_values WHERE fid=6 AND uid=".$user->uid);
+										$fetch_ayatheme = db_fetch_object($sel_ayatheme);
+										($fetch_ayatheme->theme_sel) ? $select_ayah = $fetch_ayatheme->theme_sel : $select_ayah = 0;
+										if($fetch_ayatheme->thm_cnt==0)
+										{
+											$select_ayah = 0;
+										}
+										 if($select_ayah==1)
+										   $chek = 2;
+										  else
+										   $chek = 1;
+										setcookie("chek", $chek , $expire, "/");
+									
+										setcookie("rememberlogin", "ok", 0, "/");
+										/*-----------------------------------------------------------*/
+								
+										$domain = $_SERVER['HTTP_HOST'];
+										#
+										  // find out the path to the current file:
+										#
+										  $path = $_SERVER['SCRIPT_NAME'];
+										#
+										  // find out the QueryString:
+										#
+										  $queryString = $_SERVER['QUERY_STRING'];
+										#
+										  // put it all together:
+										#
+										  $url = "http://" . $domain . $path . "?" . $queryString;
+										  //print  $url;
+											
+										/*-----------------------------------------------------------*/	
+											 //drupal_goto($url);
+										$goodUrl = str_replace('index.php?q=','', $url);
+									    header('location:'.$goodUrl);
+								
+							}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -153,88 +436,9 @@ $start_time = microtime(TRUE);
 									$expire = time()+200000;
 								  }
 							  }
-							/*  else
-							  {
-							    	// If user is logged in, their preference is taken
-									$chk_rem = db_query("SELECT count(*) as rem_cnt FROM profile_values WHERE fid=11 AND uid=".$user->uid);
-									$result_rem = db_fetch_object($chk_rem);
-									if(($result_rem->rem_cnt)==0)
-									{
-										db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (11,".$user->uid.",'n')");
-									}
-									else
-									{
-										db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",'n' , $user->uid, 11);	
-									}
-							  }*/
+							
 						 }
-							if(arg(8)=='eng_font')
-							{
-								setcookie("eng_font", arg(9),$expire, "/");
-							}
-							if(arg(8)=='arb_font')
-							{
-								setcookie("arb_font", arg(9), $expire, "/");	
-							}
-							if(arg(8)=='eng_font_size')
-							{
-		  						setcookie("eng_font_size", arg(9), $expire, "/");
-							}
-							if(arg(8)=='arb_font_size')
-							{
-								setcookie("arb_font_size",arg(9), $expire, "/");
-							}
-
-
-      if(!isset($_COOKIE['reciterval']) || $_COOKIE['reciterval']=="") { 
-	     $select_res =  $select_res1;
-		 setcookie("reciterval", $select_res1, $expire, "/");
-	  }
-	  else
-	  {
-	    $select_res = $_COOKIE['reciterval'];
-	  }
-  
-     if(!isset($_COOKIE['eng_font']) || $_COOKIE['eng_font']=="") { 
-	     $select_eng =  $select_eng1;
-		 setcookie("eng_font", $select_eng1, $expire, "/");
-		 
-	  }
-	  else
-	  {
-	    $select_eng = $_COOKIE['eng_font'];
-	  }
-	  if(!isset($_COOKIE['eng_font_size']) || $_COOKIE['eng_font_size']=="") { 
-	    
-		 $select_eng_size =  $select_eng_size1;
-		 setcookie("eng_font_size", $select_eng_size1, $expire, "/");
-	  }
-	  else
-	  {
-	    $select_eng_size = $_COOKIE['eng_font_size']; 
-	  }
-	  
-	 
-	  
-	  if(!isset($_COOKIE['arb_font']) || $_COOKIE['arb_font']=="") { 
-	  	$select_arb = $select_arb1;
-		setcookie("arb_font", $select_arb1, $expire, "/");
-	  }
-	  else
-	  {
-	    $select_arb = $_COOKIE['arb_font'];
-	  }
-	  
-	  if(!isset($_COOKIE['arb_font_size']) || $_COOKIE['arb_font_size']=="") { 
-	    
-		 $select_arb_size = $select_arb_size1; 
-		 setcookie("arb_font_size", $select_arb_size1, $expire, "/");
-
-	  }
-	  else
-	  {
-	    $select_arb_size = $_COOKIE['arb_font_size']; 
-	  }
+							
 
 /**
  * Change style according to
@@ -444,13 +648,10 @@ $start_time = microtime(TRUE);
 			}
 ?>
 
-	<!--<link rel="stylesheet" type="text/css" href="<?php print $base_url."/".$theme_path;?>/dhtml_menu/dhtml-menu.css" />-->
-		<!--[if lt IE 7]>
-	  <?php print phptemplate_get_ie_styles(); ?>
+    <!--[if lt IE 7]>
+	<?php print phptemplate_get_ie_styles(); ?>
 	<![endif]-->
     <script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/jquery.min.js"></script>
-	
-	<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>-->
 	<script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
 	<script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/dhtml_menu/dhtml-menu.js"></script>
 	<script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/dhtml_menu/animatedcollapse.js"></script>
@@ -534,61 +735,11 @@ $query1 = db_query("SELECT
 $result= db_fetch_object($query1);
 $count_aya = $result->ayah_no;
 
-?> 
-<script language="javascript">
-<?php /**
-      * Loading the right side player in Arabic page, only after the page load completed..[To improve performance..] ..
-      **/
-  ?>
-
-/*
-	var yid;
-	var ayahno;
-	var num1;
-	var num2;
-	var full;
-	var surno = '<?=arg(4)?>';
-	var html_pl;
-	var rec_pt="Alafasy_128kbps";
-	if(surno<10)
-	num1="00"+surno;
-   else if(surno>10 && surno<100)
-	num1="0"+surno;
-   else
-	num1=surno;
-
-$(window).load(function() 
-{	
-
-	for (i=1;i<=<?=$count_aya;?>;i=i+1)
-    {
-	    
-		   ayahno = i;
-		   if(ayahno<10)
-			num2="00"+ayahno;
-		   else if(ayahno>10 && ayahno<100)
-			num2="0"+ayahno;
-		   else
-			num2=ayahno;
-			full = num1+num2+".mp3";
-	 
-	         yid='ayahaudio_'+i;
-		    //document.getElementById(yid).innerHTML ="";
-	 var html_pl = "<object type='application/x-shockwave-flash' data='<?=$base_url?>/sites/all/themes/alim/button_player/button/musicplayer.swf?&song_url=http://www.everyayah.com/data/"+rec_pt+"/"+full+"&b_bgcolor=FEE8AF&b_fgcolor=006600' width='17' height='20' align='absmiddle'><param name='movie' value='<?=$base_url?>/sites/all/themes/alim/button_player/button/musicplayer.swf?&song_url=http://www.everyayah.com/data/"+rec_pt+"/"+full+"&b_bgcolor=FEE8AF&b_fgcolor=006600' align='absmiddle' width='17' height='20' /><param name='wmode' value='transparent' /></object>";
-	  document.getElementById(yid).innerHTML = html_pl;
-	  }
-	
-
-});
-*/
-</script>
-
-<?php
 }
 //audio end
 ?>
   </head>
-  <?php
+<?php
 // flush the buffer
 flush();
 ?>
@@ -596,7 +747,6 @@ flush();
 <div class="beta_tag" align="left"></div> 
    <div id="Layer1" style="background-color:#f9d350; font-family:Verdana, Arial, Helvetica, sans-serif; padding:5px ; margin:0px; border:1px solid #4b1d06; font-size:10px;position:relative;left:0;top:0;padding-left:50px;color:#a94c17;padding-right:50px;" align="left">This site is currently in active development and will, insha-Allah, be officially launched on <?=date('l dS \o\f F Y',strtotime("+1 week"))?>. <a href="<?=$base_url;?>/googlegroup" style="color:#115BBC;">Click here to register</a> for our newsletter mailing list to stay informed about our progress.While our site is being developed, please let us know what you think by clicking the <a href="#"  style="color:#115BBC;"  onClick='window.open("http://getsatisfaction.com/alim_foundation/feedback/topics/new?display=overlay&style=idea", "Feedback", "width=647,height=311,scrollbars=no")' >Feedback</a> button.</div>
 <?php
-
 // set english font cookie for quran structure page
 if(arg(0)=='str' && arg(1)=='eng_font'){
 	$_COOKIE['eng_font']=arg(2);
@@ -646,234 +796,14 @@ if(arg(3)=='compare') {
 				<div id="top_menu_left"></div>
 				<div id="top_menu_middle"><?php print $header; ?></div> 
 				<div id="top_menu_middle_second" style="color:#990000;font-weight:bold;" align="right"> 
-				     <?php
-					 
-					 if(!($_COOKIE['rem_prof']))
-					  {
-				         if($user->uid!=0)
-							{
-							    	
-								  if(!$user->user_relationships_ui_auto_approve)
-								   {
-									  $apv = array();
-									  $apv[1] = 1;
-									  $extra_data = array('user_relationships_ui_auto_approve' => $apv);
-									   user_save($user, $extra_data); 
-									}
-									
-									
-									$chk_ful    = db_query("SELECT count(*) as ful_cnt,value FROM profile_values WHERE fid=18 AND uid=".$user->uid);
-									$result_ful = db_fetch_object($chk_ful);
-									//print $result_ful->value;
-									// For setting full name as profile field
-									if(($result_ful->ful_cnt)==0)
-									{
-										$temp_user = user_load(array('name' => strip_tags($user->name)));
-										if($temp_user->rpx_data['profile']['name']['givenName']!="")
-										{
-										 $res_ful = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
-										}
-										else
-										{
-										 $res_ful = $user->name;
-										}
-										db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (18,".$user->uid.",'".$res_ful."')");
-									}
-									else
-									{
-										$temp_user = user_load(array('name' => strip_tags($user->name)));
-										if($temp_user->rpx_data['profile']['name']['givenName']!="")
-										{
-										 $res_ful = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
-										}
-										else
-										{
-										 $res_ful = $user->name;
-										}
-										if($result_ful->value!=$res_ful)
-										{
-										 db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$res_ful , $user->uid, 18);
-										}
-									}
-									
-									
-									// Relationship Privacy
-									$select_in_following  = 1;
-									$select_in_follower   = 1; 
-								
-								
-								
-								//Show me on " Following " List.
-								$chk_in_following  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 13, $user->uid));
-								if($chk_in_following==0)
-								{
-									db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 13, $user->uid, $select_in_following);
-								}
-																
-								
-								//Show me on " Follower " List.
-								$chk_in_follower  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 14, $user->uid));
-								if($chk_in_follower==0)
-								{
-									db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 14, $user->uid, $select_in_follower);
-								}
-								
-								
-							
-								setcookie("rem_prof","a", 0, "/");
-							}
-						 
-						}
-						
-					/**
-					  * Set Cookie expired on browser close.
-					*/
-
-					
-						 if(!($_COOKIE['remember']))
-						 {
- 							 if(($_COOKIE['rem_uid'])!=$user->uid||$user->uid==0)
-							 {									  
-									  watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
-									  session_destroy();
-									  $null = NULL;
-									  user_module_invoke('logout', $null, $user);
-									  $user = drupal_anonymous_user();							
-									  $domain = $_SERVER['HTTP_HOST'];
-									  $path = $_SERVER['SCRIPT_NAME'];	
-									  $queryString = $_SERVER['QUERY_STRING'];
-									  $url = "http://" . $domain . $path . "?" . $queryString;
-									  $goodUrl = str_replace('index.php?q=','', $url);
-									  header('location:'.$goodUrl);
-									 
-							}
-							else
-							{
-									  setcookie("rem_uid",$user->uid, time()+1209600, "/");
-							}
-							 setcookie("remember","a", 0, "/");
-						 }
-							/**
-						 	 * Code for giving priority to user preference,
-							 * if user is login in.
-							*/
-												 
-						   if(!($_COOKIE['rememberlogin']) && $cookie_enabled==2 && $user->uid!=0)
-						 {
-					 
-										$sel_res = db_query("SELECT value as res_sel FROM profile_values WHERE fid=5 AND uid=".$user->uid);
-										$fetch_res = db_fetch_object($sel_res);
-										($fetch_res->res_sel) ? $select_res1 = $fetch_res->res_sel : $select_res1 = "Alafasy_128kbps";
-										setcookie("reciterval", $select_res1, $expire, "/");
-										setcookie("select_res", $select_res1, $expire, "/");	
-
-										$sel_arb = db_query("SELECT value as arb_sel FROM profile_values WHERE fid=2 AND uid=".$user->uid);
-										$fetch_arb = db_fetch_object($sel_arb);
-										($fetch_arb->arb_sel) ? $select_arb1 = $fetch_arb->arb_sel : $select_arb1 = 1;
-										setcookie("arb_font", $select_arb1, $expire, "/");
-		
-										$sel_arb_size = db_query("SELECT value as arbsize_sel FROM profile_values WHERE fid=4 AND uid=".$user->uid);
-										$fetch_arb_size = db_fetch_object($sel_arb_size);
-										($fetch_arb_size->arbsize_sel) ? $select_arb_size1 = $fetch_arb_size->arbsize_sel : $select_arb_size1 = 20;
-										setcookie("arb_font_size", $select_arb_size1, $expire, "/");
-		
-										$sel_eng = db_query("SELECT value as eng_sel FROM profile_values WHERE fid=1 AND uid=".$user->uid);
-										$fetch_eng = db_fetch_object($sel_eng);
-										($fetch_eng->eng_sel) ? $select_eng1 = $fetch_eng->eng_sel : $select_eng1 = 1;
-										setcookie("eng_font", $select_eng1, $expire, "/");
-													
-										$sel_eng_size = db_query("SELECT value as engsize_sel FROM profile_values WHERE fid=3 AND uid=".$user->uid);
-										$fetch_eng_size = db_fetch_object($sel_eng_size);
-										($fetch_eng_size->engsize_sel) ? $select_eng_size1 = $fetch_eng_size->engsize_sel : $select_eng_size1 = 14;
-										setcookie("eng_font_size", $select_eng_size1, $expire, "/");
-									
-										$sel_asd = db_query("SELECT value as asd_sel,count(value) as asd_count FROM profile_values WHERE fid=7 AND uid=".$user->uid);
-										$fetch_asd = db_fetch_object($sel_asd);
-										($fetch_asd->asd_sel) ? $chek_asd = $fetch_asd->asd_sel : $chek_asd = 2;
-										if($fetch_asd->asd_count==0)
-										{
-										 $chek_asd = 1;
-										}
-										setcookie("chek_asd", $chek_asd, $expire, "/");
-									
-								
-														
-										$sel_mal = db_query("SELECT value as mal_sel,count(value) as mal_count FROM profile_values WHERE fid=8 AND uid=".$user->uid);
-										$fetch_mal = db_fetch_object($sel_mal);
-										($fetch_mal->mal_sel) ? $chek_mal = $fetch_mal->mal_sel : $chek_mal = 2;
-										if($fetch_mal->mal_count==0)
-										{
-										 $chek_mal = 1;
-										}
-										setcookie("chek_mal", $chek_mal, $expire, "/");
-									
-									
-														
-										$sel_pic = db_query("SELECT value as pic_sel,count(value) as pic_count FROM profile_values WHERE fid=9 AND uid=".$user->uid);
-										$fetch_pic = db_fetch_object($sel_pic);
-										($fetch_pic->pic_sel) ? $chek_pic = $fetch_pic->pic_sel : $chek_pic =2;
-										if($fetch_pic->pic_count==0)
-										{
-										 $chek_pic = 1;
-										}
-										setcookie("chek_pic", $chek_pic, $expire, "/");
-								
-														
-										$sel_yuf = db_query("SELECT value as yuf_sel,count(value) as yuf_count FROM profile_values WHERE fid=10 AND uid=".$user->uid);
-										$fetch_yuf = db_fetch_object($sel_yuf);
-										($fetch_yuf->yuf_sel) ? $chek_yuf = $fetch_yuf->yuf_sel : $chek_yuf = 2;
-										if($fetch_yuf->yuf_count==0)
-										{
-											$chek_yuf = 1;
-										}
-										setcookie("chek_yuf", $chek_yuf, $expire, "/");
-									
-									
-										$sel_ayatheme = db_query("SELECT value as theme_sel,count(value) as thm_cnt FROM profile_values WHERE fid=6 AND uid=".$user->uid);
-										$fetch_ayatheme = db_fetch_object($sel_ayatheme);
-										($fetch_ayatheme->theme_sel) ? $select_ayah = $fetch_ayatheme->theme_sel : $select_ayah = 0;
-										if($fetch_ayatheme->thm_cnt==0)
-										{
-											$select_ayah = 0;
-										}
-										 if($select_ayah==1)
-										   $chek = 2;
-										  else
-										   $chek = 1;
-										setcookie("chek", $chek , $expire, "/");
-									
-										setcookie("rememberlogin", "ok", 0, "/");
-										/*-----------------------------------------------------------*/
-								
-										$domain = $_SERVER['HTTP_HOST'];
-										#
-										  // find out the path to the current file:
-										#
-										  $path = $_SERVER['SCRIPT_NAME'];
-										#
-										  // find out the QueryString:
-										#
-										  $queryString = $_SERVER['QUERY_STRING'];
-										#
-										  // put it all together:
-										#
-										  $url = "http://" . $domain . $path . "?" . $queryString;
-										  //print  $url;
-											
-										/*-----------------------------------------------------------*/	
-											 //drupal_goto($url);
-										$goodUrl = str_replace('index.php?q=','', $url);
-									    header('location:'.$goodUrl);
-								
-							}
-					?>
-					
+				  
 					<?php 
 					// RPX Login. if getting user id shows 'My Profile' Link on top grey menu bar.
 					if($user->uid){?><?php print l("My Profile",'userprofile'); ?>&nbsp;&nbsp;
 					<?php print l("Logout","logout"); ?><? } else {?>
 					<?php print $rpx_login ; ?> <? }?>&nbsp;&nbsp;
-					<a href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-home.png" alt="Home" width="25" height="25"  border="0" align="absmiddle" title="Home" /></a>				</div>	  
+					<a href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-home.png"  border="0" align="absmiddle" title="Home" alt="Home" width="25" height="25" /></a>
+				</div>	  
 				<div id="top_menu_right"></div>
 			</div>
 
@@ -882,7 +812,8 @@ if(arg(3)=='compare') {
 			<div id="head_middle">
 				<div id="logo">
 					<div style="float:left;margin-right:40px;padding-top:2px;">
-					<a  href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo-top.png" width="135" height="61" border="0"  align="absmiddle"/></a>					</div>
+					<a  href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo-top.png" border="0"  align="absmiddle" width="135" height="61"/></a>
+					</div>
 					<div style="float:left;"><h1> <?php print print_masterhead(); ?>  </h1></div>		
 				</div>
 				<div id="search" align="left"><div id="search_content"><?php if ($search_box): ?><div ><?php print $search_box ?></div><?php endif; // search box  ?></div></div>
@@ -897,9 +828,11 @@ if(arg(3)=='compare') {
 		
 			<div class="inner_donate">
 			<a href="<?=$base_url?>/donate/pp/cancel">
-					<img src="<?=$base_url?>/<?=$theme_path?>/images/paypal.gif" alt="" width="92" height="26" border="0" >				</a>			</div>			
+					<img alt="" border="0" src="<?=$base_url?>/<?=$theme_path?>/images/paypal.gif" width="92" height="26" >
+				</a>
+			</div>			
 		
-	  </div>
+		 </div>
 		<div style="clear:both"></div>
 			<div id="con_div">
 			 <div id="con_div_top" align="left"> 
@@ -1038,8 +971,7 @@ if(arg(3)=='compare') {
  	<div style="clear:both"></div>
 	<div id="footer_div" align="center" >
 	  <div id="footer_content" align="center">
-		  <div id="footer_head" align="center"><a  href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo1.png" width="262" height="61" border="0" /></a><br />
-	    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&copy; All Rights 2010 Alim.org</div>
+		  <div id="footer_head" align="center"><a  href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo1.png" border="0"  width="262" height="61" /></a><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&copy; All Rights 2010 Alim.org</div>
 		  
 		  <div id="footer_menu"><?php print $footer; ?></div>
 	  </div>
@@ -1142,7 +1074,6 @@ $(document).bind("popups_open_path_done", function() {
 
 <?php if (arg(3)=="english" && arg(2)=="surah" ){?>
 <script type="text/javascript" charset="utf-8">
-//retval = pageTracker._trackEvent('Quran Surah','Quran Surah','Quran Surah','Quran Surah');
 var garet;
 var surah_num1=<?=arg(4)?>;
 var surah_auth="<?=arg(5)?>";
@@ -1198,9 +1129,15 @@ $(document).bind("popups_open_path_done", function() {
 				});							
 });
 
+
+<script type="text/javascript">
+$(document).bind("popups_open_path_done", function() {						
+				$("#popups input[type='submit'].form-submit").click(function() { 				
+							Drupal.wysiwyg.editor.detach.nicedit($(this)  );																											
+				});							
+});
+
 $('.dummy-player').click(function(event) {
-
-
 
 	var yid;
 	var ayahno;
@@ -1217,9 +1154,7 @@ $('.dummy-player').click(function(event) {
    else
 	num1=surno;
 
-
 	yid=$(this).attr("id");
-	
 	// alert(yid);
 	var ayas=yid.split("_",2);
 	var ayahno=ayas[1];
@@ -1230,16 +1165,12 @@ $('.dummy-player').click(function(event) {
 		   else
 			num2=ayahno;
 			full = num1+num2+".mp3";
-//$('#'+yid).css({'background': 'none'}); 	 
-	//alert(ayas[1]);
+
   var html_pl = "<object type='application/x-shockwave-flash' data='<?=$base_url?>/sites/all/themes/alim/button_player/button/musicplayer.swf?&song_url=http://www.everyayah.com/data/"+rec_pt+"/"+full+"&b_bgcolor=FEE8AF&b_fgcolor=006600&autoplay=true' width='17' height='20' align='absmiddle'><param name='movie' value='<?=$base_url?>/sites/all/themes/alim/button_player/button/musicplayer.swf?&song_url=http://www.everyayah.com/data/"+rec_pt+"/"+full+"&b_bgcolor=FEE8AF&b_fgcolor=006600&autoplay=true' align='absmiddle' width='17' height='20' /><param name='wmode' value='transparent' /></object>";
 	 
-/*	 var html_pl = "<object type='application/x-shockwave-flash' data='<?=$base_url?>/sites/all/themes/alim/button_player/button/musicplayer.swf?&song_url=http://www.everyayah.com/data/Abdul_Basit_Mujawwad_128kbps/001001.mp3&b_bgcolor=FEE8AF&b_fgcolor=006600&autoplay=true' width='17' height='20' align='absmiddle'><param name='movie' value='<?=$base_url?>/sites/all/themes/alim/button_player/button/musicplayer.swf?&song_url=http://www.everyayah.com/data/Abdul_Basit_Mujawwad_128kbps/001001.mp3&b_bgcolor=FEE8AF&b_fgcolor=006600&autoplay=true' align='absmiddle' width='17' height='20' /><param name='wmode' value='transparent' /></object>";
-*/	  document.getElementById(yid).innerHTML = html_pl;
+	  document.getElementById(yid).innerHTML = html_pl;
 
 });
-
-
 </script>
 </body>
 </html>
