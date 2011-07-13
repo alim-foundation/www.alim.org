@@ -148,7 +148,6 @@ $start_time = microtime(TRUE);
 	
 <script language="javascript" type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/galleryview/jquery.easing.1.3.js"/></script>
 <script language="javascript" type="text/javascript"  src="<?php print $base_url."/".$theme_path;?>/galleryview/jquery.galleryview-2.1.1.js"/></script>
-<script language="javascript" type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/galleryview/jquery.galleryview-2.1.1.js"/></script>
 <script language="javascript" type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/galleryview/jquery.timers-1.2.js"/></script>
 <script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/hoverjq.js"></script>
 <script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/crawler.js"></script>
