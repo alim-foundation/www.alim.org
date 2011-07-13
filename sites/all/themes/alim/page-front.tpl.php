@@ -149,8 +149,6 @@ $start_time = microtime(TRUE);
 <script language="javascript" type="text/javascript"  src="<?php print $base_url."/".$theme_path;?>/galleryview/jquery.galleryview-2.1.1.js"/></script>
 <script language="javascript" type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/galleryview/jquery.galleryview-2.1.1.js"/></script>
 <script language="javascript" type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/galleryview/jquery.timers-1.2.js"/></script>
-
-
 <script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/hoverjq.js"></script>
 <link type="text/css" rel="stylesheet" media="all" href="<?php print $base_url."/".$theme_path;?>/splash.css" />
 <script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/crawler.js"></script>
@@ -173,7 +171,8 @@ flush();
 <body onload="fixprogressbar()">
 <script type="text/javascript">
 $(document).ready(function(){
-   $('#gallery').show();
+  $('#gallery').show();
+   $('#gallery_ini').hide();
 	$('#gallery').galleryView({
 	 gallery_width: 920,
 	 gallery_height: 290,
