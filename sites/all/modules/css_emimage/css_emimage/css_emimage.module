@@ -1,0 +1,322 @@
+<?php
+
+/**
+ * @file
+ * CSS Embedded Images module.
+ */
+
+/**
+ * Internet Explorer limits data URIs to 32KB.
+ */
+define('CSS_EMIMAGE_IE_DATAURI_LIMIT', 32768);
+
+/**
+ * Limit the total data (in bytes) duplicate images can add to the CSS. If
+ * embedding a duplicate image exceeds this, it will not be embedded.
+ */
+define('CSS_EMIMAGE_DUPLICATE_EMBED_LIMIT', 10240);
+
+/**
+ * Limit the total size allowed for inline data URIs. Once this limit is
+ * exceeded, data URIs are placed in a separate CSS file.
+ */
+define('CSS_EMIMAGE_INLINE_DATAURI_LIMIT', 4096);
+
+/**
+ * Implementation of hook_help().
+ */
+function css_emimage_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#css_emimage':
+      $output = '<p>'. t('Replaces image URLs in aggregated CSS files with embedded images when <em>CSS optimization</em> has been enabled in the <a href="@performance">Performance settings</a>.', array('@performance' => url('admin/settings/performance'))) .'</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function css_emimage_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'system_performance_settings') {
+    $form['bandwidth_optimizations']['css_emimage'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('CSS Embedded Images'),
+      'css_emimage_force_inline' => array(
+        '#type' => 'checkbox',
+        '#title' => t('Always inline embedded images'),
+        '#description' => t('By default CSS Embedded Images places image data exceeding !limit in a CSS file separate from the rest of the site styles. This allows for parallel rendering of site styles while the relatively large image data is in transit, providing an improved user experience (especially for visitors with slow connections). Enabling this option will force images to always be embedded inline, similar to the 6.x-1.x behavior; however, this is not recommended.', array('!limit' => format_size(variable_get('css_emimage_inline_datauri_limit', CSS_EMIMAGE_INLINE_DATAURI_LIMIT)))),
+        '#default_value' => variable_get('css_emimage_force_inline', 0),
+      ),
+      'css_emimage_ielimit' => array(
+        '#type' => 'checkbox',
+        '#title' => t('Only embed images less than 32KB'),
+        '#description' => t('Internet Explorer does not support embedded images larger than 32KB. If you are not concerned about IE support you can ignore this limitation; otherwise, it is best to leave this checked.'),
+        '#default_value' => variable_get('css_emimage_ielimit', 1),
+      ),
+    );
+  }
+}
+
+/**
+ * Implementation of hook_theme_registry_alter().
+ *
+ * Make css_emimage's page preprocess function run after everything else.
+ * If the css_gzip module is installed, move it's preprocess function after ours.
+ */
+function css_emimage_theme_registry_alter(&$theme_registry) {
+  if (isset($theme_registry['page'])) {
+    // Move our preprocess function after everything else.
+    if (($key = array_search('css_emimage_preprocess_page', $theme_registry['page']['preprocess functions'])) !== FALSE) {
+      unset($theme_registry['page']['preprocess functions'][$key]);
+    }
+    $theme_registry['page']['preprocess functions'][] = 'css_emimage_preprocess_page';
+    // Move css_gzip's preprocess function after ours.
+    if (($key = array_search('css_gzip_preprocess_page', $theme_registry['page']['preprocess functions'])) !== FALSE) {
+      unset($theme_registry['page']['preprocess functions'][$key]);
+      $theme_registry['page']['preprocess functions'][] = 'css_gzip_preprocess_page';
+    }
+  }
+}
+
+/**
+ * Implementation of hook_preprocess_hook().
+ *
+ * Replace URLs with data URIs in aggregated CSS files if CSS optimization is turned on.
+ */
+function css_emimage_preprocess_page(&$variables) {
+  if (!empty($variables['styles']) && variable_get('preprocess_css', 0)) {
+    $variables['styles'] = _css_emimage_process($variables['styles']);
+  }
+}
+
+/**
+ * Helper function to replace URLs with data URIs.
+ */
+function _css_emimage_process($styles) {
+  global $base_url;
+  $path_to_files_directory = base_path() . file_directory_path();
+  $pattern = '/<link(.*?)href=".*?'. preg_quote($path_to_files_directory, '/') .'(.*?)(\?[^"]*)?"(.*?)\\/>/';
+  if (preg_match_all($pattern, $styles, $matches) > 0) {
+    foreach ($matches[2] as $i => $aggregated_file_name) {
+      $file_path = file_directory_path();
+      $aggregated_file_path = $file_path . $aggregated_file_name;
+      $emimage_file_name = str_replace('.css', '.emimage.css', $aggregated_file_name);
+      $emimage_file_path = $file_path . $emimage_file_name;
+      $orig_file_name = str_replace('.css', '.orig.css', $aggregated_file_name);
+      $orig_file_path = $file_path . $orig_file_name;
+
+      // Save the processed CSS file if it doesn't exist yet.
+      if (!file_exists($emimage_file_path) || filemtime($aggregated_file_path) > filemtime($emimage_file_path)) {
+        _css_emimage_collect_static(array(array(), array())); // Reset the processed declarations.
+        $contents = $orig_contents = file_get_contents($aggregated_file_path);
+        $datauri_css = '';
+
+        $pattern = '/([^{}]+){([^{}]*?(background(?:-image)?|list-style(?:-image)?):[^{};)]*?(?:none|url\([\'"]?.+?[\'"]?\))[^{}]*)}/i';
+        $contents = preg_replace_callback($pattern, '_css_emimage_replace', $contents);
+
+        if (!is_null($contents)) {
+          list($declarations, $file_stats) = _css_emimage_collect_static();
+
+          // Check for duplicate images and exclude those exceeding our duplication limit.
+          // Sum the amount of data being embedded.
+          $datauri_total_length = 0;
+          foreach ($file_stats as $fs) {
+            if (count($fs['indices']) > 1 && $fs['total_length'] > variable_get('css_emimage_duplicate_embed_limit', CSS_EMIMAGE_DUPLICATE_EMBED_LIMIT)) {
+              foreach ($fs['indices'] as $fsi) {
+                $declarations[$fsi]['base64'] = '';
+              }
+            }
+            else {
+              $datauri_total_length += $fs['total_length'];
+            }
+          }
+
+          list($ext_contents, $ext_data) = _css_emimage_build_external($contents, $declarations);
+
+          // If the amount of data being embedded is within the inline limit, inline the data URIs;
+          // otherwise, store the data URIs in a separate CSS file.
+          if (variable_get('css_emimage_force_inline', 0) || ($datauri_total_length && $datauri_total_length <= variable_get('css_emimage_inline_datauri_limit', CSS_EMIMAGE_INLINE_DATAURI_LIMIT))) {
+            $inline = _css_emimage_build_inline($contents, $declarations);
+            if (strlen($inline) < (strlen($ext_contents) + strlen($ext_data))) {
+              $datauri_css = $inline;
+            }
+            else {
+              $datauri_css = "$ext_contents\n$ext_data";
+            }
+            $contents = '';
+          }
+          else {
+            $contents = $ext_contents;
+            $datauri_css = $ext_data;
+          }
+
+          // Save the modified aggregated CSS file.
+          file_save_data($contents, $aggregated_file_path, FILE_EXISTS_REPLACE);
+          // Save a copy of the original aggregated CSS for IE < 8 fallback.
+          file_save_data($orig_contents, $orig_file_path, FILE_EXISTS_REPLACE);
+        }
+        else {
+          $error_code = preg_last_error();
+          $error_messages = array(PREG_NO_ERROR => 'NO_ERROR', PREG_INTERNAL_ERROR => 'INTERNAL_ERROR', PREG_BACKTRACK_LIMIT_ERROR => 'BACKTRACK_LIMIT_ERROR', PREG_RECURSION_LIMIT_ERROR => 'RECURSION_LIMIT_ERROR', PREG_BAD_UTF8_ERROR => 'BAD_UTF8_ERROR', PREG_BAD_UTF8_OFFSET_ERROR => 'BAD_UTF8_OFFSET_ERROR');
+          watchdog('css_emimage', 'Error while trying to embed images in your CSS, falling back to unmodified CSS. PCRE error was: !error.',
+            array('!error' => array_key_exists($error_code, $error_messages) ? $error_messages[$error_code] : $error_code), WATCHDOG_ERROR);
+        }
+
+        // Save the CSS file containing the embedded images.
+        // This may be empty, but we use the file as a flag to prevent
+        // processing the CSS on every uncached request.
+        file_save_data($datauri_css, $emimage_file_path, FILE_EXISTS_REPLACE);
+      }
+
+      // Replace the aggregated file with the processed CSS file.
+      if (file_exists($emimage_file_path) && filesize($emimage_file_path)) {
+        $styles = str_replace($matches[0][$i],
+          "<!--[if gte IE 8]><!-->\n". (filesize($aggregated_file_path) ? $matches[0][$i] ."\n" : '') . str_replace($aggregated_file_name, $emimage_file_name, $matches[0][$i]) ."\n<!--<![endif]-->\n"
+          . "<!--[if lt IE 8]>\n". str_replace($aggregated_file_name, $orig_file_name, $matches[0][$i]) ."\n<![endif]-->",
+          $styles);
+      }
+    }
+  }
+
+  return $styles;
+}
+
+/**
+ * preg_replace_callback() callback to replace URLs with data URIs.
+ */
+function _css_emimage_replace($matches) {
+  list($declaration, $selector, $properties) = $matches;
+  $pattern = '/(background(?:-image)?|list-style(?:-image)?):[^{};)]*?((?:none|url\([\'"]?(.+?)[\'"]?\)))([^{};]*)/i';
+  preg_match_all($pattern, $properties, $matches);
+  foreach ($matches[1] as $i => $property) {
+    $url = $matches[2][$i];
+    $file = $matches[3][$i];
+    $important = stripos($matches[4][$i], '!important') !== FALSE;
+    if ($file && (strpos($file, base_path()) === 0) && ($image = image_get_info($file = substr($file, strlen(base_path()))))) {
+      $ielimit = variable_get('css_emimage_ielimit', 1); // only embed data URIs less than 32KB, thanks IE
+      if ($ielimit && ($image['file_size']*1.3333) >= CSS_EMIMAGE_IE_DATAURI_LIMIT) {
+        $image = NULL;
+      }
+      $token = _css_emimage_collect(array($selector, $property, $url, $file, $important, $image));
+      $declaration = str_replace($url, $token, $declaration);
+    }
+    else {
+      _css_emimage_collect(array($selector, $property, $url, $file, $important, NULL));
+    }
+  }
+  return $declaration;
+}
+
+/**
+ * Helper function to collect CSS declarations to replace with data URIs.
+ *
+ * @return string a token used during the replacement process
+ */
+function _css_emimage_collect($info) {
+  list($declarations, $file_stats) = _css_emimage_collect_static();
+  if (!$declarations) $declarations = array();
+  if (!$file_stats) $file_stats = array();
+
+  if (is_array($info)) {
+    list($selector, $property, $url, $file, $important, $image) = $info;
+
+    $selector = trim($selector);
+
+    // Normalize the CSS property name - allows us to collapse declarations in
+    // some cases, and generated CSS is more consistent.
+    if ($property == 'background' || $property == 'list-style') {
+      $property .= '-image';
+    }
+
+    $current = array_pop($declarations);
+    switch (TRUE) {
+      case $current && ($current['property'] != $property || $current['file'] != $file || $current['important'] != $important):
+        array_push($declarations, $current);
+      case !$current:
+        $pos = count($declarations);
+        $current = array(
+          'pos' => $pos,
+          'token' => "[css_emimage:$pos]",
+          'selectors' => array($selector),
+          'property' => $property,
+          'url' => $url,
+          'file' => $file,
+          'important' => $important,
+          'base64' => $image ? base64_encode(file_get_contents($file)) : '',
+          'mime_type' => $image ? $image['mime_type'] : '',
+        );
+        if ($current['base64']) {
+          if (!isset($file_stats[$file])) {
+            $file_stats[$file] = array('indices' => array($pos), 'total_length' => strlen($current['base64']));
+          }
+          else {
+            $file_stats[$file]['indices'][] = $pos;
+            $file_stats[$file]['total_length'] += strlen($current['base64']);
+          }
+        }
+        break;
+      default:
+        $current['selectors'][] = $selector;
+        break;
+    }
+
+    array_push($declarations, $current);
+    _css_emimage_collect_static(array($declarations, $file_stats));
+    return $current['token'];
+  }
+
+  return FALSE;
+}
+
+/**
+ * Helper function to store collected CSS declarations.
+ */
+function _css_emimage_collect_static($data = NULL) {
+  static $store = array();
+  if (!is_null($data)) {
+    $store = $data;
+  }
+  return $store;
+}
+
+/**
+ * Generates CSS with data URIs inline with the declarations.
+ *
+ * @return string CSS with inline data URIs
+ */
+function _css_emimage_build_inline($css, $declarations) {
+  foreach ($declarations as $data) {
+    if ($data['base64']) {
+      $css = str_replace($data['token'], 'url(data:'. $data['mime_type'] .';base64,'. $data['base64'] .')', $css);
+    }
+    else {
+      $css = str_replace($data['token'], $data['url'], $css);
+    }
+  }
+  return $css;
+}
+
+/**
+ * Generates CSS with external data URIs.
+ *
+ * @return array a tuple where the first element is the updated CSS and the
+ *     second element is the CSS declarations containing only data URIs
+ */
+function _css_emimage_build_external($css, $declarations) {
+  $datauri_css = '';
+  foreach ($declarations as $data) {
+    if ($data['base64']) {
+      $css = str_replace($data['token'], 'none', $css);
+      $datauri_css .= implode(',', $data['selectors']) .'{'. $data['property'] .':url(data:'. $data['mime_type'] .';base64,'. $data['base64'] .')' . ($data['important'] ? ' !important' : '') .";}\n";
+    }
+    else if ($datauri_css) {
+      // Only add these if the CSS has at least one data URI.
+      $css = str_replace($data['token'], 'none', $css);
+      $datauri_css .= implode(',', $data['selectors']) .'{'. $data['property'] .':'. $data['url'] . ($data['important'] ? ' !important' : '') .";}\n";
+    }
+    else {
+      $css = str_replace($data['token'], $data['url'], $css);
+    }
+  }
+  return array($css, $datauri_css);
+}
