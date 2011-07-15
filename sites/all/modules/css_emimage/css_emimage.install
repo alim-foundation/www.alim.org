@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the css_emimage module.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function css_emimage_install() {
+  // Set the module's weight high so that it runs after other modules.
+  db_query("UPDATE {system} SET weight = 9999 WHERE name = 'css_emimage' AND type = 'module'");
+  cache_clear_all();
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function css_emimage_uninstall() {
+  variable_del('css_emimage_ielimit');
+  variable_del('css_emimage_force_inline');
+  variable_del('css_emimage_duplicate_embed_limit');
+  variable_del('css_emimage_inline_datauri_limit');
+}
