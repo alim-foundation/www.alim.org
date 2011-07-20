@@ -760,7 +760,7 @@ if(arg(2)=='AlQuran-tafsir')
 			
 		 	drupal_add_js(drupal_get_path('theme', 'alim') . '/crawler.js');
 			drupal_add_js(drupal_get_path('theme', 'alim') . '/galleryview/jquery.timers-1.2.js');
-			drupal_add_js(drupal_get_path('theme', 'alim') . '/galleryview/jquery.galleryview-2.1.1.js');
+		
 			drupal_add_js(drupal_get_path('theme', 'alim') . '/galleryview/jquery.easing.1.3.js');
 			drupal_add_js(drupal_get_path('theme', 'alim') . '/dhtml_menu/dhtml-menu.js');
 			drupal_add_js(drupal_get_path('theme', 'alim') . '/dhtml_menu/animatedcollapse.js');

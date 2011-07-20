@@ -145,8 +145,8 @@ $start_time = microtime(TRUE);
 	
 		     
     <?php print $scripts ?>
-<script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
-
+	<script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>	
+<script language="javascript" type="text/javascript"  src="<?php print $base_url."/".$theme_path;?>/galleryview/jquery.galleryview-2.1.1.js"/></script>
 	<script language="javascript">
 		function fixprogressbar()
 		{
