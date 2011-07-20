@@ -749,8 +749,8 @@ if(arg(2)=='AlQuran-tafsir')
 	alim_removetab('Twitter',  $vars);
 	alim_removetab('Bookmarks', $vars);	
 	alim_removetab('Preset Bookmarks', $vars);	
-			jquery_ui_add(array('ui.draggable', 'ui.dialog'));
-			jquery_ui_add(array('ui.draggable'));
+//			jquery_ui_add(array('ui.draggable', 'ui.dialog'));
+	//		jquery_ui_add(array('ui.draggable'));
 			drupal_add_js(drupal_get_path('module', 'alim_searchtags') .'/mybookmarkmenu.js');
 			$vars['scripts'] = drupal_get_js();			
 			
