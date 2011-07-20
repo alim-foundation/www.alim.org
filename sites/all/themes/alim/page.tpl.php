@@ -653,10 +653,6 @@ $start_time = microtime(TRUE);
 	<![endif]-->
     <script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/jquery.min.js"></script>
 	<script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
-	<script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/dhtml_menu/dhtml-menu.js"></script>
-	<script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/dhtml_menu/animatedcollapse.js"></script>
-	<script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/hoverjq.js"></script>
-
 	<script language="javascript">
 		function fixprogressbar()
 		{
@@ -705,39 +701,6 @@ if(arg(4)=='55' && arg(5)=='MAL')
 	});
 	</script>
 	<?php } ?>
-	<?php 
-
-/**
- * For adding scroll js files
- * only to Biography pages.
- * For avoid jquery conflict
-*/	
-
-	if(arg(1)=='biography') { ?> 	 	
-	<script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/scroll_menu/c_config.js"></script>
-	<script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/scroll_menu/c_smartmenus.js"></script>
-	<script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/scroll_menu/c_addon_scrolling.js"></script> 
-	<?php } ?>
-	
-<?php 
-//audio
-
-if(arg(5)=='ARB' )
-
-{
-$query1 = db_query("SELECT 
- count(node_data_field_ayah_no.field_ayah_no_value) as ayah_no
- FROM {node node}
- LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
- LEFT JOIN content_field_quran_bk_code node_data_field_quran_bk_code ON node.vid = node_data_field_quran_bk_code.vid
- LEFT JOIN content_field_ayah_no node_data_field_ayah_no ON node.vid = node_data_field_ayah_no.vid
- WHERE (node.type in ('quran_ayah')) AND (node_data_field_surah_no.field_surah_no_value = ".arg(4).") AND (node_data_field_quran_bk_code.field_quran_bk_code_value = 'ARB')  order by  node_data_field_ayah_no.field_ayah_no_value asc ");
-$result= db_fetch_object($query1);
-$count_aya = $result->ayah_no;
-
-}
-//audio end
-?>
   </head>
 <?php
 // flush the buffer

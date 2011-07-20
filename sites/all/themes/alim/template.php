@@ -752,6 +752,19 @@ if(arg(2)=='AlQuran-tafsir')
    		    jquery_ui_add(array('ui.draggable', 'ui.dialog'));
 			jquery_ui_add(array('ui.draggable'));
 			drupal_add_js(drupal_get_path('module', 'alim_searchtags') .'/mybookmarkmenu.js');
+			  if(arg(1)=='biography') {
+				drupal_add_js(drupal_get_path('theme', 'alim') . '/scroll_menu/c_config.js');
+				drupal_add_js(drupal_get_path('theme', 'alim') . '/scroll_menu/c_smartmenus.js');
+				drupal_add_js(drupal_get_path('theme', 'alim') . '/scroll_menu/c_addon_scrolling.js');
+			}
+			
+		 	drupal_add_js(drupal_get_path('theme', 'alim') . '/crawler.js');
+			drupal_add_js(drupal_get_path('theme', 'alim') . '/galleryview/jquery.timers-1.2.js');
+		
+			drupal_add_js(drupal_get_path('theme', 'alim') . '/galleryview/jquery.easing.1.3.js');
+			drupal_add_js(drupal_get_path('theme', 'alim') . '/dhtml_menu/dhtml-menu.js');
+			drupal_add_js(drupal_get_path('theme', 'alim') . '/dhtml_menu/animatedcollapse.js');
+			drupal_add_js(drupal_get_path('theme', 'alim') . '/hoverjq.js');
 			$vars['scripts'] = drupal_get_js();			
 			
 	alim_removetab('Voting details', $vars);
