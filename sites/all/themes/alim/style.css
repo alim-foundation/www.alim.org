@@ -9854,3 +9854,9 @@ width:17px;
 cursor:pointer;
 
 }
+.icon_arrow_green
+{
+background:url(images/icon_arrow_green.gif);
+width:24px;
+height:24px;
+}
