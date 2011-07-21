@@ -764,8 +764,8 @@ if(arg(2)=='AlQuran-tafsir')
 			drupal_add_js(drupal_get_path('theme', 'alim') . '/dhtml_menu/animatedcollapse.js');
 			drupal_add_js(drupal_get_path('theme', 'alim') . '/hoverjq.js');
 			$vars['scripts'] = drupal_get_js();	
-			drupal_add_css(drupal_get_path('theme', 'alim') . '/splash.css');
-			
+			drupal_add_css(drupal_get_path('theme', 'alim') . '/galleryview/galleryview.css');
+		
 			$vars['styles'] = drupal_get_css();			
 			
 	alim_removetab('Voting details', $vars);
