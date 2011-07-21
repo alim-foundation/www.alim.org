@@ -978,7 +978,7 @@ $time_taken = round($time_taken_sec,5);
    var search_key_value;
    $(window).load(function() 
    { 
-       var endTime = (new Date()).getTime(); 
+       var endTime = (new Date()).getTime();  
        var millisecondsLoading = endTime - startTime; 
        // Put millisecondsLoading in a hidden form field 
        // or AJAX it back to the server or whatever. 
