@@ -117,7 +117,7 @@ function alim_searchtags_block($op='list', $delta=0, $edit=array()) {
 		}
 		
 		$output .= "</table>";
-		 $output .=  '<div class="read_more" align="right" style="padding-top:3px;display:block;"><img src="'.$base_url.'/sites/all/themes/alim/images/hand.png"  />&nbsp;&nbsp;<a href="'.$base_url.'/tags/all-recent-tags" >Show all recent tags</a></div>';
+		 $output .=  '<div class="read_more" align="right" style="padding-top:3px;display:block;"><img src="'.$base_url.'/sites/all/themes/alim/images/hand.png" width="21" height="9"  />&nbsp;&nbsp;<a href="'.$base_url.'/tags/all-recent-tags" >Show all recent tags</a></div>';
 		$output .= '</div>';
 		$output .= '</div>';
 
