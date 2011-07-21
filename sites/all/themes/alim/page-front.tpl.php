@@ -137,8 +137,7 @@ $start_time = microtime(TRUE);
 	<meta HTTP-EQUIV="accept-encoding" CONTENT="gzip,deflate">
 
 	<?php print $styles ?>
-   	<link rel="stylesheet" type="text/css" href="<?php print $base_url."/".$theme_path;?>/galleryview/galleryview.css"/>
-	<link type="text/css" rel="stylesheet" media="all" href="<?php print $base_url."/".$theme_path;?>/splash.css" />
+
 	    <!--[if lt IE 7]>
       <?php print phptemplate_get_ie_styles(); ?>
     <![endif]-->

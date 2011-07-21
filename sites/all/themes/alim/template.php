@@ -763,7 +763,11 @@ if(arg(2)=='AlQuran-tafsir')
 			drupal_add_js(drupal_get_path('theme', 'alim') . '/galleryview/jquery.easing.1.3.js');
 			drupal_add_js(drupal_get_path('theme', 'alim') . '/dhtml_menu/animatedcollapse.js');
 			drupal_add_js(drupal_get_path('theme', 'alim') . '/hoverjq.js');
-			$vars['scripts'] = drupal_get_js();			
+			$vars['scripts'] = drupal_get_js();	
+			drupal_add_css(drupal_get_path('theme', 'alim') . '/galleryview/galleryview.css');	
+			drupal_add_css(drupal_get_path('theme', 'alim') . '/splash.css');
+			
+			$vars['styles'] = drupal_get_css();			
 			
 	alim_removetab('Voting details', $vars);
 	if (arg(0) == 'bookmarks') {
