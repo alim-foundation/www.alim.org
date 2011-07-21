@@ -65,7 +65,7 @@
 .view-splash-header .view-content{background:none;}
 .view-splash-partner .views_slideshow_singleframe_main{width:563px;text-align:center;}
 .view-splash-partner .views_slideshow_singleframe_slide{width:200px;height:80px;text-align:center;}
-#top_menu_middle2{height:50px;width:234px;text-align:center;height:35px;float:left;}
+#top_menu_middle2{height:50px;width:234px;text-align:center;height:35px;float:left;padding-top: 20px;}
 #top_menu_middle2 .read_more a{font-size:16px;}
 #top_menu2{color:#666666;font-weight:bold;text-align:center;height:45px;}
 .test_left{background:url(images/Qu1.png) top center no-repeat;width:37px;height:84px;}
