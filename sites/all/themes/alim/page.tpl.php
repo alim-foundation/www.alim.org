@@ -653,6 +653,7 @@ $start_time = microtime(TRUE);
 	<![endif]-->
     <script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/jquery.min.js"></script>
 	<script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
+	<script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/dhtml_menu/dhtml-menu.js"></script>
 	<script language="javascript">
 		function fixprogressbar()
 		{
