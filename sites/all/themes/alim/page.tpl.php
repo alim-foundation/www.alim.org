@@ -971,10 +971,12 @@ $end_time = microtime(TRUE);
 $time_taken_sec = $end_time - $start_time;
 $server_timemilli = $time_taken_sec*1000;
 $time_taken = round($time_taken_sec,5);
+
 ?>
 <script type="text/javascript"> 
   var server_time='';
   var browser_time=  '';
+  var search_key_value;
    $(window).load(function() 
    { 
        var endTime = (new Date()).getTime(); 

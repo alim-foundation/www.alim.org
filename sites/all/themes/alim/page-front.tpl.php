@@ -450,6 +450,7 @@ $time_taken = round($time_taken_sec,5);
 <script type="text/javascript"> 
   var server_time='';
   var browser_time=  '';
+  var search_key_value;
    $(window).load(function() 
    { 
        var endTime = (new Date()).getTime(); 
