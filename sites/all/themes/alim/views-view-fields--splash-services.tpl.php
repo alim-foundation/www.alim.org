@@ -34,7 +34,7 @@ if($id=="field_read_more_value")  $field_read_more_value = $field->content;
 
 <div class="heading_div"><h2><?=$title?></h2></div>
 					   <div class="spl_text">
-					 <?=$body?><div class="read_more" align="right"><img src="<?php print $base_url."/".$theme_path;?>/images/hand.png"  />&nbsp;&nbsp;<a href="<?=$base_url?>/<?=$field_read_more_value?>">Start using The Alim</a></div>
+					 <?=$body?><div class="read_more" align="right"><img src="<?php print $base_url."/".$theme_path;?>/images/hand.png" width="21" height="9" />&nbsp;&nbsp;<a href="<?=$base_url?>/<?=$field_read_more_value?>">Start using The Alim</a></div>
 					   </div>
 					   
 
