@@ -12,7 +12,7 @@ a {
 #outer_div
 {
   width:100%;
- background:#e8e1b7 url(images/alim.orgbg.jpg) top left repeat-x;
+ background:#e8e1b7 url(images/alimorgbg.jpg) top left repeat-x;
 /* padding-bottom:15px;*/
 }
 .view-Quran-Duas a
@@ -80,7 +80,7 @@ display:none;
 	height:125px;
 	clear:both;
 	/*text-align:center;*/
-	background:#e8e1b7 url(images/alim.orgbottomtile.jpg) top left repeat-x;
+	background:#e8e1b7 url(images/alimorgbottomtile.jpg) top left repeat-x;
 	width:100%;
 	background-color:#8A370B;
 
