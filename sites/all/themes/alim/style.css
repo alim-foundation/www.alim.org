@@ -9832,7 +9832,7 @@ margin-top:-16px;
 }
 .user-form-clippings fieldset,.user-form-clippings .admin
 {
-display:none;
+display:none; 
 }
 .user-form-clippings #edit-taxonomy-8-wrapper .description
 {

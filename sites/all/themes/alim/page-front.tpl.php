@@ -317,7 +317,7 @@ $(document).ready(function(){
 					   <?php print $splash_applications; ?>
 					</div>
 					
-					<div class="divder"></div>
+					<div class="divder"></div> 
 					
 					<div id="testimonials">
 					
