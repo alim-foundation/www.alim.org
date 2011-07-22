@@ -210,7 +210,7 @@ $(document).ready(function(){
 				
 				}?>&nbsp;&nbsp;
 				
-				<a  href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-home.png" alt="Home" width="25" height="25"  border="0" align="absmiddle" title="Home" /></a>
+				<a  href="<?=$base_path?>" title="Home"  class="alim-home-img"></a>
 				</div>
 						  
 			   <div id="top_menu_right"></div>
@@ -226,11 +226,11 @@ $(document).ready(function(){
 			   <div id="top_menu2" align="center">
                    
 			   
-				<div id="logo1" align="left"><a  href="<?=$base_path?>" title="Home" ><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo1.png" width="262" height="61" border="0" /></a></div>
-				<div id="top_menu_middle2"><a href="<?php print $base_url?>/library/quran/surah/arabic/1/ARB"  ><img src="<?php print $base_url."/".$theme_path;?>/images/startbut.png" width="234" height="62" border="0" /></a></div>
+				<div id="logo1" align="left"><a  href="<?=$base_path?>" title="Home"  class="alim-logo1-img"></a></div>
+				<div id="top_menu_middle2"><a href="<?php print $base_url?>/library/quran/surah/arabic/1/ARB"  class="startbut-img" ></a></div>
 				<div class="front_donate">
-			<a href="<?=$base_url?>/donate/pp/cancel">
-					<img src="<?=$base_url?>/<?=$theme_path?>/images/paypal.gif" alt="" width="92" height="26" border="0" >				</a>				</div>
+			<a href="<?=$base_url?>/donate/pp/cancel" class="paypal-img">
+					</a>				</div>
               </div><div style="clear:both"></div>
 			    
 	        </div>
