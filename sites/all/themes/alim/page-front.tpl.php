@@ -226,7 +226,7 @@ $(document).ready(function(){
 			   <div id="top_menu2" align="center">
                    
 			   
-				<div id="logo1" align="left"><a  href="<?=$base_path?>" title="Home" ><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo1.png" width="262" height="61" border="0" /></a></div>
+			 	<div id="logo1" align="left"><a  href="<?=$base_path?>" title="Home" ><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo1.png" width="262" height="61" border="0" /></a></div>
 				<div id="top_menu_middle2"><a href="<?php print $base_url?>/library/quran/surah/arabic/1/ARB"  ><img src="<?php print $base_url."/".$theme_path;?>/images/startbut.png" width="234" height="62" border="0" /></a></div>
 				<div class="front_donate">
 			<a href="<?=$base_url?>/donate/pp/cancel">
