@@ -9860,3 +9860,9 @@ background:url(images/icon_arrow_green.gif);
 width:24px;
 height:24px;
 } 
+.hand-icon
+{
+background:url(images/hand.gif);
+width:21px;
+height:9px;
+}
