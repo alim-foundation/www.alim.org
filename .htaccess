@@ -5,6 +5,7 @@
 # Protect files and directories from prying eyes.
 <FilesMatch "\.(engine|inc|info|install|module|profile|test|po|sh|.*sql|theme|tpl(\.php)?|xtmpl|svn-base)$|^(code-style\.pl|Entries.*|Repository|Root|Tag|Template|all-wcprops|entries|format)$">
   Order allow,deny
+Header set Expires "Thu, 15 Apr 2020 20:00:00 GMT"
 Header unset ETag
 FileETag None
 </FilesMatch>
@@ -136,6 +137,7 @@ mod_gzip_item_exclude mime ^image/.*
 # BEGIN Gzip
 <IfModule mod_deflate.c>
 AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript
+SetOutputFilter DEFLATE
 </IfModule>
 # END Gzip
 
