@@ -2,28 +2,61 @@
 # Apache/PHP/Drupal settings:
 #
 
+<ifModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/css text/javascript application/javascript application/x-javascript
+</ifModule>
+# BEGIN Expire headers
+<ifModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 5 seconds"
+  ExpiresByType image/x-icon "access plus 2592000 seconds"
+  ExpiresByType image/jpeg "access plus 2592000 seconds"
+  ExpiresByType image/png "access plus 2592000 seconds"
+  ExpiresByType image/gif "access plus 2592000 seconds"
+  ExpiresByType application/x-shockwave-flash "access plus 2592000 seconds"
+  ExpiresByType text/css "access plus 604800 seconds"
+  ExpiresByType text/javascript "access plus 216000 seconds"
+  ExpiresByType application/javascript "access plus 216000 seconds"
+  ExpiresByType application/x-javascript "access plus 216000 seconds"
+  ExpiresByType text/html "access plus 600 seconds"
+  ExpiresByType application/xhtml+xml "access plus 600 seconds"
+</ifModule>
+# END Expire headers
+# BEGIN Cache-Control Headers
+<ifModule mod_headers.c>
+  <filesMatch "\.(ico|jpe?g|png|gif|swf)$">
+    Header set Cache-Control "public"
+  </filesMatch>
+  <filesMatch "\.(css)$">
+    Header set Cache-Control "public"
+  </filesMatch>
+  <filesMatch "\.(js)$">
+    Header set Cache-Control "private"
+  </filesMatch>
+  <filesMatch "\.(x?html?|php)$">
+    Header set Cache-Control "private, must-revalidate"
+  </filesMatch>
+</ifModule>
+# END Cache-Control Headers
+# BEGIN Turn ETags Off
+FileETag None
+# END Turn ETags Off
 # Protect files and directories from prying eyes.
 <FilesMatch "\.(engine|inc|info|install|module|profile|test|po|sh|.*sql|theme|tpl(\.php)?|xtmpl|svn-base)$|^(code-style\.pl|Entries.*|Repository|Root|Tag|Template|all-wcprops|entries|format)$">
   Order allow,deny
-Header set Expires "Thu, 15 Apr 2020 20:00:00 GMT"
-Header unset ETag
-FileETag None
 </FilesMatch>
 
 # Don't show directory listings for URLs which map to a directory.
 Options -Indexes
 
 # Follow symbolic links in this directory.
-# For security reasons, Option followsymlinks cannot be overridden.
-#Options +FollowSymLinks
-Options +SymLinksIfOwnerMatch
+Options +FollowSymLinks
 
 # Make Drupal handle any 404 errors.
 ErrorDocument 404 /index.php
 
 # Force simple error message for requests for non-existent favicon.ico.
 <Files favicon.ico>
-  # There is no end quote below, for compatibility with Apache 1.3.
   ErrorDocument 404 "The requested file favicon.ico was not found.
 </Files>
 
@@ -67,10 +100,8 @@ DirectoryIndex index.php
 <IfModule mod_expires.c>
   # Enable expirations.
   ExpiresActive On
-
   # Cache all files for 2 weeks after access (A).
   ExpiresDefault A1209600
-
   # Do not cache dynamically generated pages.
   ExpiresByType text/html A1
 </IfModule>
@@ -105,46 +136,23 @@ DirectoryIndex index.php
   # uncomment the following line:
   # RewriteBase /
 
-  # Rewrite URLs of the form 'x' to the form 'index.php?q=x'.
+  # Rewrite old-style URLs of the form 'node.php?id=x'.
+  #RewriteCond %{REQUEST_FILENAME} !-f
+  #RewriteCond %{REQUEST_FILENAME} !-d
+  #RewriteCond %{QUERY_STRING} ^id=([^&]+)$
+  #RewriteRule node.php index.php?q=node/view/%1 [L]
+
+  # Rewrite old-style URLs of the form 'module.php?mod=x'.
+  #RewriteCond %{REQUEST_FILENAME} !-f
+  #RewriteCond %{REQUEST_FILENAME} !-d
+  #RewriteCond %{QUERY_STRING} ^mod=([^&]+)$
+  #RewriteRule module.php index.php?q=%1 [L]
+
+  # Rewrite current-style URLs of the form 'x' to the form 'index.php?q=x'.
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_URI} !=/favicon.ico
   RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
 </IfModule>
 
-<IfModule mod_gzip.c>
-mod_gzip_on Yes
-mod_gzip_dechunk Yes
-mod_gzip_item_include file \.html$
-mod_gzip_item_include file \.php$
-mod_gzip_item_include file \.pl$
-mod_gzip_item_include file \.rb$
-mod_gzip_item_include file \.py$
-mod_gzip_item_include file \.cgi$
-mod_gzip_item_include file \.css$
-mod_gzip_item_include file \.js$
-mod_gzip_item_include mime ^application/javascript$
-mod_gzip_item_include mime ^application/x-javascript$
-mod_gzip_item_include mime ^text/.*
-mod_gzip_item_include mime ^httpd/unix-directory$
-mod_gzip_item_include handler ^cgi-script$
-mod_gzip_item_include handler ^server-status$
-mod_gzip_item_include handler ^server-info$
-mod_gzip_item_include handler ^application/x-httpd-php
-mod_gzip_item_exclude mime ^image/.*
-</IfModule>
-# $Id: .htaccess,v 1.90.2.4 2009/12/07 12:00:40 goba Exp $
-# BEGIN Gzip
-<IfModule mod_deflate.c>
-AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript
-SetOutputFilter DEFLATE
-</IfModule>
-# END Gzip
-
-
-#Modified by sumesh
-#<Files style.css>
-  #SetHandler  application/x-httpd-php 
-#</Files>
-
-# $Id: .htaccess,v 1.90.2.3 2008/12/10 20:04:08 goba Exp $
+# $Id: .htaccess,v 1.81.2.6 2009/02/26 07:03:29 drumm Exp $
