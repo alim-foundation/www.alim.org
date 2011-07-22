@@ -326,7 +326,7 @@ $(document).ready(function(){
 								   		
 						
 					</div>
-					<div class="read_more" align="right" style="padding-right:40px;padding-top:8px;"><img src='<?php print $base_url."/".$theme_path;?>/images/hand.png' width="21" height="9"  />&nbsp;&nbsp;<a href='<?=$base_url?>/testimonials'>Read Testimonials</a></div>
+					<div class="read_more" align="right" style="padding-right:40px;padding-top:8px;"><a href='<?=$base_url?>/testimonials' class="hand-icon">Read Testimonials</a></div>
 			
 				 
 				 </div>
