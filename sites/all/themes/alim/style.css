@@ -9867,3 +9867,27 @@ width:21px;
 height:9px;
 padding-left:25px;
 }
+a.alim-home-img
+{
+background:url(images/alim-home.png) no-repeat; 
+width:25px;
+height:25px;
+}
+a.alim-logo1-img
+{
+background:url(images/alim-logo1.png) no-repeat; 
+width:262px;
+height:61px;
+}
+a.startbut-img
+{
+background:url(images/startbut.png) no-repeat; 
+width:234px;
+height:62px;
+}
+a.paypal-img
+{
+background:url(images/paypal.gif) no-repeat; 
+width:92px;
+height:26px;
+}
