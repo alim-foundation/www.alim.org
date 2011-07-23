@@ -7,7 +7,11 @@ AddType application/x-shockwave-flash .swf
 Addtype font/opentype .otf
 Addtype font/eot .eot
 Addtype font/truetype .ttf
+<<<<<<< HEAD
 AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/css text/javascript application/javascript application/x-javascript font/opentype font/truetype font/eot
+=======
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/css text/javascript application/javascript application/x-javascript font/opentype font/truetype font/eot
+>>>>>>> 451f24ae385f9beb70bd6e5156dcc5e6f3168bab
 </ifModule>
 <FilesMatch "\.(eot|woff|ttf|svg)$">
 Header set Expires "Thu, 19 Apr 2020 20:00:00 GMT"
