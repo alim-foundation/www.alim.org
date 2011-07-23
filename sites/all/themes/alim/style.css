@@ -80,7 +80,7 @@ display:none;
 	height:125px;
 	clear:both;
 	/*text-align:center;*/
-	background:#e8e1b7 url(images/alimorgbottomtile.jpg) top left repeat-x;
+	background:#e8e1b7 url(images/alimorgbottomtile.jpg) top left repeat-x; 
 	width:100%;
 	background-color:#8A370B;
 
@@ -9867,4 +9867,9 @@ width:21px;
 height:9px;
 padding-left:25px;
 }
-
+.testmonial-photo
+{
+background:url(images/testimonial-photo.gif);
+width:90px;
+height:98px;
+}
