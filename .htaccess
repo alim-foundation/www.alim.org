@@ -8,6 +8,7 @@ Addtype font/opentype .otf
 Addtype font/eot .eot
 Addtype font/truetype .ttf
 AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/css text/javascript application/javascript application/x-javascript font/opentype font/truetype font/eot
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/css text/javascript application/javascript application/x-javascript font/opentype font/truetype font/eot
 </ifModule>
 <FilesMatch "\.(eot|woff|ttf|svg)$">
 Header set Expires "Thu, 19 Apr 2020 20:00:00 GMT"
