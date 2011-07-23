@@ -1,7 +1,7 @@
 #
 # Apache/PHP/Drupal settings:
 #
-AddType video/x-flv .flv
+AddType video/x-flv .flv 
 AddType application/x-shockwave-flash .swf
 <ifModule mod_deflate.c>
 Addtype font/opentype .otf
