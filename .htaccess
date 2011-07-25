@@ -1,17 +1,16 @@
 #
 # Apache/PHP/Drupal settings:
 #
-AddType video/x-flv .flv 
+## MIME TYPES ###
+AddType video/x-flv .flv
 AddType application/x-shockwave-flash .swf
+AddType image/x-icon .ico
 <ifModule mod_deflate.c>
 Addtype font/opentype .otf
 Addtype font/eot .eot
 Addtype font/truetype .ttf
-AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/css text/javascript application/javascript application/x-javascript font/opentype font/truetype font/eot
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/css text/javascript application/javascript application/x-javascript font/opentype font/truetype font/eot
 </ifModule>
-<FilesMatch "\.(eot|woff|ttf|svg)$">
-Header set Expires "Thu, 19 Apr 2020 20:00:00 GMT"
-</FilesMatch>
 # BEGIN Expire headers
 <ifModule mod_expires.c>
   ExpiresActive On
@@ -112,6 +111,9 @@ DirectoryIndex index.php
   # Do not cache dynamically generated pages.
   ExpiresByType text/html A1
 </IfModule>
+<FilesMatch "\.(eot|woff|ttf|svg)$">
+Header set Expires "Thu, 19 Apr 2020 20:00:00 GMT"
+</FilesMatch>
 
 # Various rewrite rules.
 <IfModule mod_rewrite.c>
