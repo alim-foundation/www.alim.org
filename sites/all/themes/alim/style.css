@@ -6397,9 +6397,9 @@ display:none;
 display:none;
 }
 
-#popups-body .node{
+/*#popups-body .node{
 display:none; 
-}
+}*/
 #popups-body #node-163939 { display:block; }
 #popups-body #node-163940 { display:block; }
 
@@ -9676,10 +9676,10 @@ padding-left: 250px;
 	padding-bottom:16px;
 
 }
-#popups-body  .node
+/*#popups-body  .node
 {
 display:none;
-}
+}*/
 
 .view-blogs-list .views-field-teaser .field-content
 {

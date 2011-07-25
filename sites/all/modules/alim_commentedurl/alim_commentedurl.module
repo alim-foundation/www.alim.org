@@ -23,7 +23,11 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 	global $base_url;
 	
 	switch ($form_id) {
-	
+	    case "tellafriend_node_page_form":
+		//print '<pre>' . print_r($form, TRUE) . '</pre>';
+		$form['recipients']['recipients']['#resizable'] = FALSE;
+		$form['message']['message_content']['#resizable'] = FALSE;
+		break;
 		case "comment_form": // Comment form 
 		global $user; 
 	   // drupal_set_message('<pre>'.print_r($form, TRUE).'</pre>');
