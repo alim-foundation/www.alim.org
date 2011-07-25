@@ -2,15 +2,8 @@
 # Apache/PHP/Drupal settings:
 #
 
-## MIME TYPES ###
-AddType video/x-flv .flv
-AddType application/x-shockwave-flash .swf
-AddType image/x-icon .ico
 <ifModule mod_deflate.c>
-Addtype font/opentype .otf
-Addtype font/eot .eot
-Addtype font/truetype .ttf
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/css text/javascript application/javascript application/x-javascript font/opentype font/truetype font/eot
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/css text/javascript application/javascript application/x-javascript
 </ifModule>
 # BEGIN Expire headers
 <ifModule mod_expires.c>
@@ -28,10 +21,6 @@ Addtype font/truetype .ttf
   ExpiresByType text/html "access plus 600 seconds"
   ExpiresByType application/xhtml+xml "access plus 600 seconds"
 </ifModule>
-
-<FilesMatch "\.(eot|woff|ttf|svg)$">
-Header set Expires "Thu, 19 Apr 2020 20:00:00 GMT"
-</FilesMatch>
 # END Expire headers
 # BEGIN Cache-Control Headers
 <ifModule mod_headers.c>
@@ -43,8 +32,8 @@ Header set Expires "Thu, 19 Apr 2020 20:00:00 GMT"
   </filesMatch>
   <filesMatch "\.(js)$">
     Header set Cache-Control "private"
-  </filesMatch> 
-  <filesMatch "\.(x?html?|php)$"> 
+  </filesMatch>
+  <filesMatch "\.(x?html?|php)$">
     Header set Cache-Control "private, must-revalidate"
   </filesMatch>
 </ifModule>
@@ -61,7 +50,9 @@ FileETag None
 Options -Indexes
 
 # Follow symbolic links in this directory.
-Options +FollowSymLinks
+# For security reasons, Option followsymlinks cannot be overridden.
+#Options +FollowSymLinks
+Options +SymLinksIfOwnerMatch
 
 # Make Drupal handle any 404 errors.
 ErrorDocument 404 /index.php
