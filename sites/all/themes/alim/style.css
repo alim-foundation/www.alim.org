@@ -6393,11 +6393,11 @@ display:none;
 display:none;
 }
 
-#popups-body p a{
+/*#popups-body p a{
 display:none;
 }
 
-/*#popups-body .node{ 
+#popups-body .node{ 
 display:none; 
 }*/
 #popups-body #node-163939 { display:block; }
