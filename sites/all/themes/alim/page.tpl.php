@@ -1019,11 +1019,11 @@ var a = ayah_num;
 var b  = 'Surah-'+surah_num+'.Ayah-'+ayah_num;
 window.onload=function() {
 	fn = document.location.pathname;
-	retval = pageTracker._trackEvent('Quran Ayah View',b,fn,a);
+	retval = _gaq.push('_trackEvent','Quran Ayah View',b,fn,a);
 }
 
 $('.right-audio ').click(function() {
-	retval = pageTracker._trackEvent('Recitation', b ,fn );
+	retval = _gaq.push('_trackEvent','Recitation', b ,fn );
 });
 
 var key = "";var retval;fn = document.location.pathname;
@@ -1031,7 +1031,7 @@ $(document).bind("popups_open_path_done", function() {
 	$('#comment-form #edit-submit').click(function() {
 		key = $("#comment-form .form-textarea").val(); 
 		var key1 = key.substr(0,30);
-		retval = pageTracker._trackEvent('Quran Ayah Comments',b,key1 , fn );
+		retval = _gaq.push('_trackEvent','Quran Ayah Comments',b,key1 , fn  );
 	});
 });
 </script>
@@ -1051,14 +1051,14 @@ var b1  = 'Surah-'+surah_auth+'-'+surah_num1;
 <script type="text/javascript">
 window.onload=function() {
 	var fn = document.location.pathname;
-	retval = pageTracker._trackEvent('Quran Surah View',b1,fn );
+	retval = _gaq.push('_trackEvent','Quran Surah View',b1,fn );
 }
 var key = "";var retval;fn = document.location.pathname;
 $(document).bind("popups_open_path_done", function() {
 	$('#comment-form #edit-submit').click(function() {
 		key = $("#comment-form .form-textarea").val(); 
 		var key1 = key.substr(0,30);
-		retval = pageTracker._trackEvent('Quran Surah Comments',b1,key1 , fn );
+		retval = _gaq.push('_trackEvent','Quran Surah Comments',b1,key1,fn );
 	});
 });
 </script>
@@ -1070,7 +1070,7 @@ var su_num=<?=arg(4)?>;
 var b  = 'Surah-'+su_num;
 var fn = document.location.pathname;
 $('.right-audio ').click(function() {
-	retval = pageTracker._trackEvent('Recitation', b ,fn );
+	retval = _gaq.push('_trackEvent','Recitation', b ,fn);
 });
 </script>
 <?php  }?>
@@ -1082,7 +1082,7 @@ $(document).bind("popups_open_path_done", function() {
 	$('#comment-form #edit-submit').click(function() {
 	  key = $("#comment-form .form-textarea").val(); 
 	var key1 = key.substr(0,30);
-	   retval = pageTracker._trackEvent('Quran Hadith Comments',key1 , fn );
+	   retval = _gaq.push('_trackEvent','Quran Hadith Comments',key1 , fn);
 	});
 });
 </script>
