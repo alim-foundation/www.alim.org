@@ -6395,13 +6395,14 @@ display:none;
 
 /*#popups-body p a{
 display:none;
-}
+}*/
 
 #popups-body .node{ 
 display:none; 
-}*/
+}
 #popups-body #node-163939 { display:block; }
 #popups-body #node-163940 { display:block; }
+#popups-body #node-163673 { display:block; }
 
 #popups-body #node-163665{
 display:block; 
