@@ -6449,8 +6449,8 @@ margin:0px
 /*background-color:#F0F2CA;*/padding:10px;padding-bottom:20px;font-family:tahoma;font-size:12px;line-height:1.6;
 }
 #comment_reply_auth{
-padding-left:190px;font-size:12px;font-weight:bold;/* background-color:#E8ECAF;*/padding-top:10px;padding-bottom:10px;
-color:#788101;border-bottom:dotted 1px #788101;
+font-size:12px;font-weight:bold;/* background-color:#E8ECAF;*/padding-top:10px;padding-bottom:10px;
+color:#788101;border-bottom:dotted 1px #788101;text-align:right;padding-right:10px;
 }
 #comment_reply_auth a{
 color:#788101;
