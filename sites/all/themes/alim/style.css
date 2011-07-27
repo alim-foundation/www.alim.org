@@ -8488,10 +8488,8 @@ border:none;
 }
 .view-search-groups .views-field-title a
 {
- font-size:11px;
- color: #006600;
- font-weight:normal;
-
+ font-weight:bold;
+ color:#000000;
 }
 .view-search-groups .views-field-name a
 {
@@ -8501,7 +8499,6 @@ border:none;
 .view-search-groups .views-field-title
 {
   padding:10px;
-  font-weight:bold;
 }
 .view-search-groups .views-field-name, .view-search-groups .views-field-post-count
 {
