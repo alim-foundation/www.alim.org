@@ -465,7 +465,17 @@ $val = arg(2);
 	$breadcrumb[] =  l(t($user->name), 'user/clippings') ;
 	$breadcrumb[] =  l(t('Notebook'), 'user/clippings') ;
 	}
-
+    
+	$preAlias = $_SERVER['REQUEST_URI'];
+    $alias = explode("/",$preAlias);
+	
+	if($alias[1]=='blog')
+	{
+	 	unset($breadcrumb);
+		$breadcrumb[] =  l(t('Home'), '<front>') ;
+	    $breadcrumb[] =  l(t('Blogs'), 'blogs') ;
+	    $breadcrumb[] =  l(t(drupal_get_title()), 'blogs/'.$alias[2]) ;
+	}
 
 	
 	if(arg(0)=='recent-group-posts')
@@ -1774,7 +1784,6 @@ function print_masterhead(){
 	if(arg(0)=='alimsearch') { 	$masthead = "Search"; 	}
 	if(arg(1)=='158036' || arg(1)=='158915') { $masthead = "Qur'an & Hadith"; }
 	if(arg(0)=='news') 	{ 	$masthead = "News & Views"; 	}
-	if(arg(0)=='blogs') { 	$masthead = "Blogs"; 	}	
 	if(arg(0)=='testimonials') 	{ 	$masthead = "Testimonials"; 	}
 	if(arg(1)=='164550') 	{	$masthead = "Widgets";	}
 	if(arg(0)=='alimrecentcomments') 	{	$masthead = "Recent Comments";	}
@@ -1803,10 +1812,13 @@ function print_masterhead(){
 	if(arg(0)=='groupdetails') { $masthead = "Group"; }
 	if(arg(0)=='user' && arg(2)=='edit') { $masthead = 'Edit Profile'; }
 	if(arg(0)=='relationships') { $masthead = 'My Relationships'; }
-    if(arg(2)!='dictionary'){ $masthead = "Qur'an & Hadith";}
-
-
-	 
+    if(arg(2)=='dictionary'){ $masthead = "Qur'an & Hadith";}
+	
+	$preAlias = $_SERVER['REQUEST_URI'];
+    $alias = explode("/",$preAlias);
+	
+	if(arg(0)=='blogs' || $alias[1]=='blog'){ $masthead = "Blogs";}
+	
 	
 	
 	return $masthead;
