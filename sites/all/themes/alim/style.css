@@ -9875,3 +9875,7 @@ background:url(images/testimonial-photo.gif);
 width:90px;
 height:98px;
 }
+.user-form-our_advisers_and_scholars .collapsible
+{
+ display:none;
+}
