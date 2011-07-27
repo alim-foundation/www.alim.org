@@ -521,15 +521,30 @@ function phptemplate_preprocess_page(&$vars) {
   if (module_exists('color')) {
     _color_page_alter($vars);
   }
-  
+  $head_title = "";
    // Construct page title
   if (drupal_get_title()) {
-    $head_title = array(strip_tags(drupal_get_title()), variable_get('site_name', 'Drupal'));
+    $head_title_val = array(strip_tags(drupal_get_title()), variable_get('site_name', 'Drupal'));
+	foreach($head_title_val as $val)
+	{
+	  $head_title .=  $val;
+	}
   }
   else {
-    $head_title = array(variable_get('site_name', 'Drupal'));
+   // $head_title = array(variable_get('site_name', 'Drupal'));
+	$head_title_val2 = array(variable_get('site_name', 'Drupal'));
+	foreach($head_title_val2 as $val)
+	{
+	  $head_title .=  $val;
+	}
+	
     if (variable_get('site_slogan', '')) {
-      $head_title[] = variable_get('site_slogan', '');
+      //$head_title[] = variable_get('site_slogan', '');
+	   $head_title_val3 = variable_get('site_slogan', '');
+	  	foreach($head_title_val3 as $val)
+		{
+		  $head_title .=  $val;
+		}
     }
   }
    $crumb = drupal_get_breadcrumb();
@@ -656,7 +671,7 @@ function phptemplate_preprocess_page(&$vars) {
     if($c > 1 ){  	 unset($crumb[0]);	 }
 	 $crumblast = strip_tags($crumb[$c-1]);
 	 if($crumblast != '' ){
-		 if(substr_count($head_title ,$crumblast) > 0   ){
+		 if(substr_count($head_title,$crumblast) > 0   ){
 	 		unset($crumb[$c-1]);
 	 	}
 	}
