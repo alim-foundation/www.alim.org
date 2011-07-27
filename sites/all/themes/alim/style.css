@@ -71,6 +71,7 @@ display:none;
 #head_div
 {
 	height:90px;
+	*height:158px;
 }
 #footer_div
 {
