@@ -240,9 +240,9 @@ $query = db_query("SELECT node.nid AS nid, node_data_field_hd_narrator_name.fiel
 // lists the narrators
 while($result = db_fetch_object($query)) {
 $i++;
-$output .= "<div style='padding-bottom:8px;width:30px;float:left'>".$i." . </div>";
+$output .= "<div style='padding-bottom:8px;width:35px;float:left'>".$i." . </div>";
 
-$output .= "<div style='padding-bottom:8px;float:left'><a class='NarrtorName' href=\"".$base_url."/hadith/get/".$result->node_data_field_hd_narrator_name_field_hd_narrator_name_value."/$i\">".wordwrap($result->node_data_field_hd_narrator_name_field_hd_narrator_name_value,45,'<br />',true)."</a>";
+$output .= "<div style='padding-bottom:8px;float:left;width:200px;'><a class='NarrtorName' href=\"".$base_url."/hadith/get/".$result->node_data_field_hd_narrator_name_field_hd_narrator_name_value."/$i\">".wordwrap($result->node_data_field_hd_narrator_name_field_hd_narrator_name_value,45,'<br />',true)."</a>";
 
 $output .= "</div><div style='clear:both'></div>";
 
