@@ -1,6 +1,7 @@
 <?php
 // Purpose : show / hide each translator in compare translation page.
 //Set the the cookie value for each translator in compare translation page.
+
 global $base_url;
 global $theme_path;
 global $user;
