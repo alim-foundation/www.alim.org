@@ -1049,8 +1049,6 @@ text-align:right;
  background:none;
  border:none;
  border-collapse:separate;
-
-
 }
 .view-ayah-translation table tr
 {
@@ -1532,7 +1530,7 @@ text-align:right;
 }
 .view-arabic-page table
 {
- width:600px;
+/* width:600px;*/
  background:none;
  border:none;
  border-collapse:separate;
