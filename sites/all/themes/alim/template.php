@@ -484,6 +484,13 @@ $val = arg(2);
 		$breadcrumb[] =  l(t('Home'), '<front>') ;
 		$breadcrumb[] =  l(t('Recent Group Posts'), 'recent-group-posts') ;
 	}
+		if(arg(0) == 'bookmarks') {
+		
+		unset($breadcrumb);
+		$breadcrumb[] =  l(t('Home'), '<front>') ;
+	    $breadcrumb[] =  l(t('Bookmarks'), 'bookmarks/mine') ;
+		
+		}
 	
    	 if(arg(0)=='relationships')
 	{
@@ -715,6 +722,7 @@ function phptemplate_preprocess_page(&$vars) {
 	if(arg(0)=='recent-group-posts'){ $vars['head_title'] = 'Recent Group Posts | Alim.org'; } 
 	if(arg(1)=='all-recent-tags') { $vars['head_title'] = 'Recent Tags | Alim.org'; }
 	if(arg(1)=='clippings')	 {	 	 $vars['head_title'] = 'Home | My Notebook | Alim.org';	 }	
+	if(arg(0) == 'bookmarks') {  $vars['head_title'] = 'Home | Bookmarks | Alim.org';	 }	
   
    if(arg(0)=='relationships')	{	alim_removetab('All',  $vars);}	
 	 if(arg(0)=='user' && arg(2)=='edit')
@@ -1814,6 +1822,7 @@ function print_masterhead(){
 	if(arg(0)=='user' && arg(2)=='edit') { $masthead = 'Edit Profile'; }
 	if(arg(0)=='relationships') { $masthead = 'My Relationships'; }
     if(arg(2)=='dictionary'){ $masthead = "Qur'an & Hadith";}
+	if(arg(0) == 'bookmarks') { $masthead = "Bookmarks";}
 	
 	$preAlias = $_SERVER['REQUEST_URI'];
     $alias = explode("/",$preAlias);
