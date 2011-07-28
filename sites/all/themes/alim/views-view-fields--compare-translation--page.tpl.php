@@ -139,13 +139,51 @@ $expire=time()+(60*60*24*365*5); // 5 year
        $flag = 1;
   elseif($name == "Transliteration")
       $flag = 1;
-	   
+	  
+$class = "white";
+if($chek_asd==2)
+{
+   if($name == "Transliteration")
+    $class = "colored";
+   if($name == "Malik")
+    $class = "colored";
+}
+else if($chek_mal==2)
+{
+   if($name == "Transliteration")
+    $class = "colored";
+   if($name == "Asad")
+    $class = "colored";
+}
+else if($chek_pic==2)
+{
+   if($name == "Transliteration")
+    $class = "colored";
+   if($name == "Malik")
+    $class = "colored";
+}
+else if($chek_yuf==2)
+{
+   if($name == "Transliteration")
+    $class = "colored";
+   if($name == "Asad")
+    $class = "colored";
+}
+else
+{
+   if($name == "Transliteration")
+    $class = "colored";
+   if($name == "Asad")
+    $class = "colored";
+   if($name == "Yusuf Ali")
+    $class = "colored";
+}     
 if($flag==1)
 {
 ?>
 
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="<?=$class?>">
   <tr>
     <td width="100" valign="top"><a href="<?=$base_url?>/library/quran/surah/english/<?=$field_surah_no_value?>/<?=$field_quran_bk_code_value?>#<?=$field_ayah_no_value?>"><?=$name?></a></td>
 	<td width="15" valign="top">:</td>

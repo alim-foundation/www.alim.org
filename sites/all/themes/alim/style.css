@@ -1142,14 +1142,14 @@ text-align:right;
   color:#FF0000;*/
 }
 /*------------------------------- */
-.view-compare-translation .views-row
+.view-compare-translation .views-row table
 {
   border-bottom:1px solid #DEDEDC;
   padding-bottom:10px;
   padding-top:10px;
   padding-left:10px;
 }
-.view-compare-translation .views-row-odd
+.view-compare-translation .colored
 {
  background:#f3f1e2;
 }
