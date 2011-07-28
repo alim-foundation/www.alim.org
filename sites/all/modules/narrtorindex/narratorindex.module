@@ -225,11 +225,11 @@ if($total==0)
 if($select=='a' && $limit==0)
 		{
 
-$output .= "<div style='padding-bottom:8px;width:25px;float:left'>1 . </div>";
-$output .= "<div style='padding-bottom:8px;float:left'><a class='NarrtorName' href=\"".$base_url."/hadith/get/'Aisha\">'Aisha</a>";
+$output .= "<div style='padding-bottom:8px;width:35px;float:left'>1 . </div>";
+$output .= "<div style='padding-bottom:8px;float:left;width:200px;'><a class='NarrtorName' href=\"".$base_url."/hadith/get/'Aisha\">'Aisha</a>";
 $output .= "</div><div style='clear:both'></div>";
-$output .= "<div style='padding-bottom:8px;width:25px;float:left'>2 . </div>";
-$output .= "<div style='padding-bottom:8px;float:left'><a class='NarrtorName' href=\"".$base_url."/hadith/get/'Aisha and Abdullah bin Abbas\">'Aisha and Abdullah bin Abbas</a>";
+$output .= "<div style='padding-bottom:8px;width:35px;float:left;'>2 . </div>";
+$output .= "<div style='padding-bottom:8px;float:left;width:200px;'><a class='NarrtorName' href=\"".$base_url."/hadith/get/'Aisha and Abdullah bin Abbas\">'Aisha and Abdullah bin Abbas</a>";
 $output .= "</div><div style='clear:both'></div>";
            $count = 38;
 
