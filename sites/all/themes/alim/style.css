@@ -7480,7 +7480,7 @@ padding-right:20px;background:url(images/tag-arrow-right.png) #F3F1E2 right 3px 
 padding-right:20px;background:url(images/tag-arrow-down.png) #F3F1E2 right 3px  no-repeat;
 }
 #block-block-20 .add-tag , #block-block-23 .add-tag , #block-block-22 .add-tag{padding-right:50px;width:250px;float:right;}
-#block-block-20 .head , #block-block-23 .head , #block-block-22 .head{float:left;font-size:19px;font-weight:bold;color:#666666;}
+#block-block-20 .head , #block-block-23 .head , #block-block-22 .head{float:left;font-size:19px;font-weight:bold;color:#666666; width:80px;}
 .node-teaser .cloud a { background:#f3f1e2;color:#000000;padding:2px 5px ; font-size:1em;display:block;float:left;margin-right:5px;border-bottom:1px solid #daddae;border-right:1px solid #daddae;margin-bottom:5px;}
 .node-teaser .cloud a:hover{ background:#a14f06; color:#FFFFFF;border-bottom:1px solid #daddae;border-right:1px solid #daddae;}
 #community-tags-form .tagadelic.level1 , #community-tags-form .tagadelic.level2 ,#community-tags-form .tagadelic.level3,
