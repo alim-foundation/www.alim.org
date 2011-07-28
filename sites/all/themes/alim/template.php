@@ -2003,7 +2003,7 @@ global $theme_path;
 </div><div class='toolbottom1'></div>";
 		  $temp = '<div id="demo"><img src="'.$imghtnl.'" title="'.$val.'" />
 </div>';
-  	$output .= '<div><div class="head" >Tags&nbsp;'.$temp.'</div><div class="tag-login" >'. t(' <div class="a1"> <a  class="rpxnow" style="text-decoration:none;" onclick="return false;" href="https://alim.rpxnow.com/openid/v2/signin?token_url='.$base_url.'/rpx/end_point">Add Tags</a></div>') .' &nbsp; <div class="a2">'.l('Search Tags','tags/alltags').'</div></div></div>';
+  	$output .= '<div><div class="head" ><div style=\'float:left\'>Tags&nbsp;</div>'.$temp.'</div><div class="tag-login" >'. t(' <div class="a1"> <a  class="rpxnow" style="text-decoration:none;" onclick="return false;" href="https://alim.rpxnow.com/openid/v2/signin?token_url='.$base_url.'/rpx/end_point">Add Tags</a></div>') .' &nbsp; <div class="a2">'.l('Search Tags','tags/alltags').'</div></div></div>';
   }
   $output .= '<div class="pagecloud" >';
   
