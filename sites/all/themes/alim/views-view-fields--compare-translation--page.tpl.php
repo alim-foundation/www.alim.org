@@ -141,43 +141,7 @@ $expire=time()+(60*60*24*365*5); // 5 year
       $flag = 1;
 	  
 $class = "white";
-if($chek_asd==2)
-{
-   if($name == "Transliteration")
-    $class = "colored";
-   if($name == "Malik")
-    $class = "colored";
-}
-else if($chek_mal==2)
-{
-   if($name == "Transliteration")
-    $class = "colored";
-   if($name == "Asad")
-    $class = "colored";
-}
-else if($chek_pic==2)
-{
-   if($name == "Transliteration")
-    $class = "colored";
-   if($name == "Malik")
-    $class = "colored";
-}
-else if($chek_yuf==2)
-{
-   if($name == "Transliteration")
-    $class = "colored";
-   if($name == "Asad")
-    $class = "colored";
-}
-else
-{
-   if($name == "Transliteration")
-    $class = "colored";
-   if($name == "Asad")
-    $class = "colored";
-   if($name == "Yusuf Ali")
-    $class = "colored";
-}     
+ 
 if($flag==1)
 {
 ?>
