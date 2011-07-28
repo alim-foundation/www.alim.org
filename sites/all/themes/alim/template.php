@@ -718,17 +718,18 @@ function phptemplate_preprocess_page(&$vars) {
 	    unset($breadcrumb);
 		$vars['head_title'] = 'Delete Group | Profile | Alim.org'; 
 	 }	    
-     if(arg(0)=='searchusers')	 {	 	 $vars['head_title'] = 'Search Users | Profile | Alim.org';	 }	
-	  if(arg(0)=='searchgroups'){	 	 $vars['head_title'] = 'Search Groups | Profile | Alim.org';	 }	 
-	 if(arg(0)=='relationships'){	 	 $vars['head_title'] = 'My Relationships | Profile | Alim.org';	 }	 
-	 if(arg(1)=='create_admin')	 {	 	$vars['head_title'] = 'Confirm Admin | Group Members | Manage Groups | Profile | Alim.org';	 }   
+    if(arg(0)=='searchusers')	 {	 	 $vars['head_title'] = 'Search Users | Profile | Alim.org';	 }	
+	if(arg(0)=='searchgroups'){	 	 $vars['head_title'] = 'Search Groups | Profile | Alim.org';	 }	 
+	if(arg(0)=='relationships'){	 	 $vars['head_title'] = 'My Relationships | Profile | Alim.org';	 }	 
+	if(arg(1)=='create_admin')	 {	 	$vars['head_title'] = 'Confirm Admin | Group Members | Manage Groups | Profile | Alim.org';	 }   
     if(arg(1)=='subscribe')	 {	   $vars['head_title'] = 'Join Group | Profile | Alim.org';	 }	
 	if(arg(1)=='unsubscribe')	 {	 	$vars['head_title'] = 'Leave Group | Profile | Alim.org';	 }
-	 if(arg(1)=='delete_admin')	 {	  $vars['head_title'] = 'Remove Admin | Profile | Alim.org';	 }	 
-	 if(arg(1)=='scholarpage')	 {	  $vars['head_title'] = 'Advisers and Scholars Details | Our Advisers and Scholars | Alim.org';	 }   
+	if(arg(1)=='delete_admin')	 {	  $vars['head_title'] = 'Remove Admin | Profile | Alim.org';	 }	 
+	if(arg(1)=='scholarpage')	 {	  $vars['head_title'] = 'Advisers and Scholars Details | Our Advisers and Scholars | Alim.org';	 }   
     if(arg(2)=='dictionary')	{		$vars['head_title'] = 'Islamic Terms Dictionary | References | Qur\'an & Hadith | Alim.org';	} 
 	if(arg(0)=='recent-group-posts'){ $vars['head_title'] = 'Recent Group Posts | Alim.org'; } 
 	if(arg(1)=='all-recent-tags') { $vars['head_title'] = 'Recent Tags | Alim.org'; }
+	if(arg(1)=='clippings')	 {	 	 $vars['head_title'] = 'Home | My Notebook | Alim.org';	 }	
   
    if(arg(0)=='relationships')	{	alim_removetab('All',  $vars);}	
 	 if(arg(0)=='user' && arg(2)=='edit')
