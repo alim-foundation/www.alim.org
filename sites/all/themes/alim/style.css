@@ -8261,12 +8261,12 @@ border:none;
 .view-list-user-comments .views-row{
 	margin-bottom:10px;
 	padding-bottom:10px;
-	font-size:14px;
+
 }
-.follow_sub, .view-mytracker .views-field-body
+/*.follow_sub, .view-mytracker .views-field-body
 {
  font-size:14px;
-}
+}*/
 .view-mytracker h3
 {
  display:none;
