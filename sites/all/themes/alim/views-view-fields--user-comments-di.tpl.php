@@ -522,19 +522,8 @@ $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
 				 </td>
   </tr>
 </table>	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	
 	<? 
-
-
 
 $result1=db_query("SELECT * FROM {comments} where pid=%d  and cid=%d  ",0,$cid);
 while ($row = db_fetch_array($result1)) {
