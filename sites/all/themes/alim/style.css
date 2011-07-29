@@ -7623,7 +7623,7 @@ height:300px;
 width:620px;
 }*/
 html.js .resizable-textarea textarea {
- width:600px;
+ width:500px;
  /*height:300px;*/
 }
 #popups .body-field-wrapper .resizable-textarea textarea {
