@@ -524,7 +524,7 @@ $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
 <?php } ?>
 </div>
 
-
+<?php } ?> 
 		 
 	</span>
 				 </td>
@@ -540,7 +540,7 @@ $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
 	
 
 	
-	<? }
+	<? 
 
 
 
