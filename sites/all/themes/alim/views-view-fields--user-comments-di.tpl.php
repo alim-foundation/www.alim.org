@@ -254,7 +254,7 @@ $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
 
 
 &nbsp;|&nbsp;<span style="font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/ico_flag.gif" />&nbsp;<?php print  $report; ?></span>
-&nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/node/163673/<?php print $cid; ?>" class="popups-form-reload" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absbottom" src="<?php print $img_theme_path; ?>/ico_email.gif" />Email this</a></span>
+&nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/node/163673/<?php print $cid; ?>" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absbottom" src="<?php print $img_theme_path; ?>/ico_email.gif" />Email this</a></span>
 
 
 
@@ -385,7 +385,7 @@ $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
 
 
 &nbsp;|&nbsp;<span style="font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/ico_flag.gif" />&nbsp;<?php print  $report; ?></span>
-&nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/node/163673/<?php print $cid; ?>" class="popups-form-reload" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absbottom" src="<?php print $img_theme_path; ?>/ico_email.gif" />Email this</a></span>
+&nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/node/163673/<?php print $cid; ?>" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absbottom" src="<?php print $img_theme_path; ?>/ico_email.gif" />Email this</a></span>
 
 
 
@@ -495,7 +495,7 @@ $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
 
 
 &nbsp;|&nbsp;<span style="font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/ico_flag.gif" />&nbsp;<?php print  $report; ?></span>
-&nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/node/163673/<?php print $cid; ?>" class="popups-form-reload" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absbottom" src="<?php print $img_theme_path; ?>/ico_email.gif" />Email this</a></span>
+&nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/node/163673/<?php print $cid; ?>" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absbottom" src="<?php print $img_theme_path; ?>/ico_email.gif" />Email this</a></span>
 
 
 
@@ -514,8 +514,9 @@ $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
 
 <?php } ?>
 </div>
-
-
+<?php
+}
+?>
 		 
 	</span>
 				 </td>
@@ -531,9 +532,8 @@ $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
 	
 
 	
-	<? }
+	<? 
 
-}
 
 
 $result1=db_query("SELECT * FROM {comments} where pid=%d  and cid=%d  ",0,$cid);
@@ -639,5 +639,5 @@ print $cid;*/
 
 </td></tr></table><?
 }
-
+}
 /*} } */?>
