@@ -140,7 +140,6 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 				
 		case "clippings_node_form": // new node form for clippings 
 				//print_r($form);
-
 				global $user; 
 				$form['body_field']['teaser_include']['#access'] = FALSE;
 				$form['body_field']['teaser_js']['#access'] = FALSE;
@@ -161,7 +160,6 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 					});
 					;';
 				//drupal_add_js($scr1, 'inline', 'footer');
-				
 				$form['body_field']['body']['#attributes'] = array('class' => 'clip-editor');			  
 				$c = count($form['taxonomy' ][8]['#options']);//print $c;
 				if($c ==  1 ) // no terms exist add a term other category - set default category 
@@ -709,6 +707,9 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 				break;
 		
 			case "group_post_node_form":
+			   // print_r($form);
+			    $form['body_field']['format'] = filter_form(7);
+				$form['body_field']['format']['#access'] = TRUE;
 				if(($form['nid']['#value'])!='')
 				{
 				   $form['#node']->field_rev_count[0]['value'] = $form['#node']->field_rev_count[0]['value']+1;
