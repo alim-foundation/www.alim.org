@@ -4,7 +4,6 @@
 //field called "field_comment_url"
 //http://drupal.org/node/399410 && COmment_CCK module 
 
-
 //validate function for comment text
 function _alim_commentedurl_cmt_form_validate($form, &$form_state){
 	//drupal_set_message();
@@ -714,7 +713,8 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 				{
 				   $form['#node']->field_rev_count[0]['value'] = $form['#node']->field_rev_count[0]['value']+1;
 				}
-				
+				$form['#submit'][] = '_alim_commentedurl_grop_form_submit';
+				break;
 				
 			case "views_exposed_form":  //  
 		
@@ -824,7 +824,11 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 
 	
 }
+function _alim_commentedurl_grop_form_submit($form, &$form_state)
+{
 
+ $form_state['values']['body']=nl2br($form_state['values']['body']);
+}
 /**
 * Submit handler; For unbublising the private groups. Group security in search page.
 * 
