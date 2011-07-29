@@ -376,7 +376,7 @@ print alim_comment_view($com,$n, $links = array(), $visible = TRUE);
 		 ?></div>
 		<?php 
 $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
-<div id="comment_reply_scholar" style="margin-left:<?php print $padd.'px' ?>;padding-left:<?php print $padd1.'px' ?>;border-bottom:dotted 1px #cccccc;"  >
+<div id="comment_reply_scholar" style="margin-left:<?php print $padd.'px' ?>;padding-left:210px;border-bottom:dotted 1px #cccccc;"  >
 <?php	if ($user->uid){ ?>
 
 <span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/reply/<?php print $com_nodid; ?>/<?php print $cid; ?>" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle"  src="<?php print $img_theme_path; ?>/ico_reply.gif" />Reply</a></span>
