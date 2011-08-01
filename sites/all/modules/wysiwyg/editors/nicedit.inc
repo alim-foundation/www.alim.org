@@ -1,5 +1,4 @@
 <?php
-// $Id: nicedit.inc,v 1.6.2.1 2009/08/03 22:37:15 sun Exp $
 
 /**
  * @file
@@ -66,6 +65,7 @@ function wysiwyg_nicedit_settings($editor, $config, $theme) {
   );
 
   // Add configured buttons or all available.
+  $settings['buttonList'] = array();
   if (!empty($config['buttons'])) {
     $buttons = array();
     foreach ($config['buttons'] as $plugin) {
@@ -73,10 +73,7 @@ function wysiwyg_nicedit_settings($editor, $config, $theme) {
     }
     $settings['buttonList'] = array_keys($buttons);
   }
-  else {
-    $settings['fullPanel'] = TRUE;
-  }
-	$settings['maxHeight'] = '300';
+
   // Add editor content stylesheet.
   if (isset($config['css_setting'])) {
     if ($config['css_setting'] == 'theme') {
