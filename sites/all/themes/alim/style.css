@@ -8261,12 +8261,12 @@ border:none;
 .view-list-user-comments .views-row{
 	margin-bottom:10px;
 	padding-bottom:10px;
-	font-size:14px;
+
 }
-.follow_sub, .view-mytracker .views-field-body
+/*.follow_sub, .view-mytracker .views-field-body
 {
  font-size:14px;
-}
+}*/
 .view-mytracker h3
 {
  display:none;
@@ -9880,9 +9880,9 @@ padding-left:25px;
 {
 background:url(images/testimonial-photo.gif);
 width:90px;
-height:98px; 
+height:98px;
 }
-.user-form-our_advisers_and_scholars .collapsible 
+.user-form-our_advisers_and_scholars .collapsible
 {
- display:none; 
+ display:none;
 }
