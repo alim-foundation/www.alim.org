@@ -988,10 +988,10 @@ $time_taken = round($time_taken_sec,5);
   server_time=<?php print $server_timemilli; ?>; // for ajax insert
   browser_time=  millisecondsLoading; // for ajax insert
   
-  var disptime = <?php print $time_taken; ?>;
-  var totaltime_display =  seconds + disptime;
+  var display_server = <?php print $time_taken; ?>;
+  var totaltime_display_val =  seconds + disptime;
    
-  document.getElementById('load_timediv').innerHTML = 'Total elapsed time: '+totaltime_display.toFixed(4)+' sec. ==> Server: '+disptime+' sec. | User (e.g. : browser,network,internet): '+seconds.toFixed(4) +' sec.';
+  document.getElementById('load_timediv').innerHTML = 'Total elapsed time: '+totaltime_display_val.toFixed(4)+' sec. ==> Server: '+display_server+' sec. | User (e.g. : browser,network,internet): '+seconds.toFixed(4) +' sec.';
    });
 
 </script> 
