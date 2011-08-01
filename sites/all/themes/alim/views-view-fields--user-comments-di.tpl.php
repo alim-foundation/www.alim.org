@@ -154,7 +154,7 @@ if(is_array($arr)){
 	}
 }
 }
-?> <div id="<?php print"comment-".$cid; ?>">
+?> <span id="<?php print"comment-".$cid; ?>">
 <?php  
 
  if($value=="Community User"||($value!="Community User" && $value!="Scholar" && $value!="Book Author" )) {?> <table width="100%" border="0" style="border-color:#CCCCCC;margin-bottom:20px;border:solid #A0A0A0 1px;border-collapse:separate;"  ><tr><td>
@@ -630,3 +630,4 @@ print $cid;*/
 
 }
 /*} } */?>
+</span>
