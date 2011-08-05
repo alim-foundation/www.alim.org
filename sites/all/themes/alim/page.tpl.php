@@ -3,8 +3,8 @@
 global $base_url;
 global $theme_path;
 $_SESSION['qry']=1;
-$start_time = microtime(TRUE);
-
+//$start_time = microtime(TRUE);
+$start_time = $_SESSION['start_time'];
 /*** Set Cookie expired on browser close.*/
 					
 						 if(!($_COOKIE['remember']))

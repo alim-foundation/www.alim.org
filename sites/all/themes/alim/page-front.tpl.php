@@ -1,8 +1,8 @@
 <?php
 global $base_url;
 global $theme_path;
-$start_time = microtime(TRUE);
-
+//$start_time = microtime(TRUE);
+$start_time = $_SESSION['start_time'];
 		
                   //Cookie setting for login remeber for 14 days..   
 				 if(!($_COOKIE['remember']))
