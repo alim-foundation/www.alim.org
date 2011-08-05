@@ -21,11 +21,10 @@ session_start();
  *
  * @ingroup views_templates
  */
-  global $theme_path;
-  global $base_url; 
-  $img_theme_path = $base_url."/".$theme_path."/images"; 
-
- global $links;
+	global $theme_path;
+	global $base_url; 
+	$img_theme_path = $base_url."/".$theme_path."/images"; 	
+	global $links;
  
 ?>
 <?php foreach ($fields as $id => $field): ?>
@@ -135,29 +134,32 @@ if($key1==""){*/
  
 // print $user->rpx_data['profile']['photo'];
 if(is_array($arr)){
- 		foreach( $arr as $key => $value){
+	foreach( $arr as $key => $value){
 	//echo $value;
 	if($value=="Community User")
-{
+	{
 	$val="Community User";
 	
 	}
-		if($value=="Scholar")
-{
+	if($value=="Scholar")
+	{
 	$val="Scholar";
 	
 	}
-			if($value=="Book Author")
-{
+	if($value=="Book Author")
+	{
 	$val="Book Author";
 	
 	}
-}
+	}
 }
 ?> <span id="<?php print"comment-".$cid; ?>">
 <?php  
 
- if($value=="Community User"||($value!="Community User" && $value!="Scholar" && $value!="Book Author" )) {?> <table width="100%" border="0" style="border-color:#CCCCCC;margin-bottom:20px;border:solid #A0A0A0 1px;border-collapse:separate;"  ><tr><td>
+ if($value=="Community User"||($value!="Community User" && $value!="Scholar" && $value!="Book Author" )) {?> 
+ <table width="100%" border="0" style="border-color:#CCCCCC;margin-bottom:20px;border:solid #A0A0A0 1px;border-collapse:separate;"  >
+ <tr>
+ <td>
   <table width="100%" border="0" cellpadding="0" style="border-collapse:separate;" >
   <tr>
   
@@ -248,13 +250,13 @@ $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
 <div id="comment_reply_comm" style="border-bottom:dotted 1px #cccccc;"  >
 <?php	if ($user->uid&&$dis==1){ ?>
 
-<span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/reply/<?php print $com_nodid; ?>/<?php print $cid; ?>" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/ico_reply.gif" />&nbsp;Reply</a></span>
+<span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/reply/<?php print $com_nodid; ?>/<?php print $cid; ?>#comment-form" class="popups-form-reload" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/ico_reply.gif" />&nbsp;Reply</a></span>
 
-<?php if(($userid)==($user->uid)){ ?> &nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/edit/<?php print $cid; ?>/comid" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/icon_edit_comment.png" />&nbsp;Edit</a></span><?php } ?>
+<?php if(($userid)==($user->uid)){ ?> &nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/edit/<?php print $cid; ?>/comid#comment-form" class="popups-form-reload" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/icon_edit_comment.png" />&nbsp;Edit</a></span><?php } ?>
 
 
 &nbsp;|&nbsp;<span style="font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/ico_flag.gif" />&nbsp;<?php print  $report; ?></span>
-&nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/node/163673/<?php print $cid; ?>" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absbottom" src="<?php print $img_theme_path; ?>/ico_email.gif" />Email this</a></span>
+&nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/node/163673/<?php print $cid; ?>#comment-form" class="popups-form-reload" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absbottom" src="<?php print $img_theme_path; ?>/ico_email.gif" />Email this</a></span>
 
 
 
@@ -284,10 +286,10 @@ else{
 }
 
 
- ?>
+} ?>
 </div>
 
-<?php }  ?> 
+<?php  ?> 
 		 
 	</span>
 				 </td>
@@ -376,16 +378,16 @@ print alim_comment_view($com,$n, $links = array(), $visible = TRUE);
 		 ?></div>
 		<?php 
 $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
-<div id="comment_reply_scholar" style="margin-left:<?php print $padd.'px' ?>;padding-left:210px;border-bottom:dotted 1px #cccccc;"  >
+<div id="comment_reply_scholar" style="margin-left:<?php print $padd.'px' ?>;padding-left:<?php print $padd1.'px' ?>;border-bottom:dotted 1px #cccccc;"  >
 <?php	if ($user->uid){ ?>
 
-<span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/reply/<?php print $com_nodid; ?>/<?php print $cid; ?>" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle"  src="<?php print $img_theme_path; ?>/ico_reply.gif" />Reply</a></span>
+<span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/reply/<?php print $com_nodid; ?>/<?php print $cid; ?>#comment-form" class="popups-form-reload" on-popups-options="{reloadWhenDone: true}" style="text-decoration:none;font-size:11px;"><img align="absmiddle"  src="<?php print $img_theme_path; ?>/ico_reply.gif" />Reply</a></span>
 
-<?php if(($userid)==($user->uid)){ ?> &nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/edit/<?php print $cid; ?>/comid" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/icon_edit_comment.png" />&nbsp;Edit</a></span><?php } ?>
+<?php if(($userid)==($user->uid)){ ?> &nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/edit/<?php print $cid; ?>/comid#comment-form" class="popups-form-reload" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/icon_edit_comment.png" />&nbsp;Edit</a></span><?php } ?>
 
 
 &nbsp;|&nbsp;<span style="font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/ico_flag.gif" />&nbsp;<?php print  $report; ?></span>
-&nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/node/163673/<?php print $cid; ?>" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absbottom" src="<?php print $img_theme_path; ?>/ico_email.gif" />Email this</a></span>
+&nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/node/163673/<?php print $cid; ?>#comment-form" class="popups-form-reload" on-popups-options="{reloadWhenDone: true}" style="text-decoration:none;font-size:11px;"><img align="absbottom" src="<?php print $img_theme_path; ?>/ico_email.gif" />Email this</a></span>
 
 
 
@@ -489,13 +491,13 @@ $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
 <div id="comment_reply_auth" style="margin-left:<?php print $padd.'px' ?>;padding-left:<?php print $padd1.'px' ?>;border-bottom:dotted 1px #cccccc;"  >
 <?php	if ($user->uid){ ?>
 
-<span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/reply/<?php print $com_nodid; ?>/<?php print $cid; ?>" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/ico_reply.gif" />Reply</a></span>
+<span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/reply/<?php print $com_nodid; ?>/<?php print $cid; ?>#comment-form" class="popups-form-reload" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/ico_reply.gif" />Reply</a></span>
 
-<?php if(($userid)==($user->uid)){ ?> &nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/edit/<?php print $cid; ?>/comid" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/icon_edit_comment.png" />&nbsp;Edit</a></span><?php } ?>
+<?php if(($userid)==($user->uid)){ ?> &nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/edit/<?php print $cid; ?>/comid#comment-form" class="popups-form-reload" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/icon_edit_comment.png" />&nbsp;Edit</a></span><?php } ?>
 
 
 &nbsp;|&nbsp;<span style="font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/ico_flag.gif" />&nbsp;<?php print  $report; ?></span>
-&nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/node/163673/<?php print $cid; ?>" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absbottom" src="<?php print $img_theme_path; ?>/ico_email.gif" />Email this</a></span>
+&nbsp;|&nbsp;<span style="font-size:11px;"><a href="<?php print $base_url ?>/node/163673/<?php print $cid; ?>#comment-form" class="popups-form-reload" on-popups-options="{reloadWhenDone: true}" style="text-decoration:none;font-size:11px;"><img align="absbottom" src="<?php print $img_theme_path; ?>/ico_email.gif" />Email this</a></span>
 
 
 
@@ -514,16 +516,27 @@ $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
 
 <?php } ?>
 </div>
-<?php
-}
-?>
+
+
 		 
 	</span>
 				 </td>
   </tr>
 </table>	
+	
+	
+	
+	
+	
+	
+	
+	
 
+	
 	<? }
+
+}
+
 
 $result1=db_query("SELECT * FROM {comments} where pid=%d  and cid=%d  ",0,$cid);
 while ($row = db_fetch_array($result1)) {
@@ -627,7 +640,6 @@ print $cid;*/
 ?>
 
 </td></tr></table><?
-
 }
+
 /*} } */?>
-</span>
