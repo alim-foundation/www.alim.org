@@ -9886,3 +9886,7 @@ height:98px;
 {
  display:none;
 }
+#not_log .total-votes-plain
+{
+float:left;
+}
