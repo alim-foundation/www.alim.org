@@ -89,7 +89,9 @@
  *   $db_url = 'mysqli://username:password@localhost/databasename';
  *   $db_url = 'pgsql://username:password@localhost/databasename';
  */
-$db_url = 'mysql://blueserf_alim:76Ls.1Z73iSz@localhost/blueserf_alim';
+//$db_url = 'mysql://blueserf_alim:76Ls.1Z73iSz@localhost/blueserf_alim';
+//$db_url = 'mysql://root@localhost/alim_june2011';
+$db_url = 'mysql://alim:alim#@!@localhost/alim
 $db_prefix = '';
 
 /**
@@ -146,6 +148,7 @@ ini_set('session.use_cookies',      1);
 ini_set('session.use_only_cookies', 1);
 ini_set('session.use_trans_sid',    0);
 ini_set('url_rewriter.tags',        '');
+ini_set('date.timezone','Asia/Calcutta');
 //$conf['cache_inc'] = './sites/all/modules/authcache/authcache.inc';
 /**
  * If you encounter a situation where users post a large amount of text, and
