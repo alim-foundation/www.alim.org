@@ -396,7 +396,7 @@ function flag_note_flag_link_types() {
  * Implementation of hook_flag_link().
  *  Build the callback link for flags
  */
-function flag_note_flag_link(&$flag, $action, $content_id) {
+function flag_note_flag_link($flag, $action, $content_id) {
   $token = flag_get_token($content_id);
   return array(
     'href' => "flag/note/$action/$flag->name/$content_id",
