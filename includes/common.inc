@@ -1407,6 +1407,7 @@ function format_date($timestamp, $type = 'medium', $format = '', $timezone = NUL
  */
 function url($path = NULL, $options = array()) {
   // Merge in defaults.
+  if(is_array($options)){
   $options += array(
     'fragment' => '',
     'query' => '',
@@ -1414,6 +1415,7 @@ function url($path = NULL, $options = array()) {
     'alias' => FALSE,
     'prefix' => ''
   );
+  }
   if (!isset($options['external'])) {
     // Return an external link if $path contains an allowed absolute URL.
     // Only call the slow filter_xss_bad_protocol if $path contains a ':' before
