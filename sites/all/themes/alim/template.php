@@ -1494,7 +1494,7 @@ if ($pager_total[0] == 1) {
   return $res;
 }
 
-
+/*
 function printdata($node1){	
 	
 	$qry = "SELECT count(*) FROM {comments} where pid=$node1";
@@ -1586,30 +1586,8 @@ print views_embed_view($viewName , $display_id = 'default',$node22);
 		
 	}
  }
+*/ 
  
-  function par_aparna(){/*
- $cid=1061;
-  $result = db_query("SELECT * FROM {comments} where cid=%d",$cid);
- while($row = db_fetch_array($result)){
-		$pid=$row['pid']; 
-		
-}
-
-
-$cid1=1057;
-	$qry = "SELECT count(*) FROM {comments} where pid=$cid1";
-	$num = db_result(db_query(db_rewrite_sql($qry)));
-print $pid.'-------------------------------------------------**'.$num;
-
-
-$subitem = db_query("SELECT * FROM {comments} where pid=%d",$cid1);
-		while($row = db_fetch_array($subitem)){
-		
-		 $node11=$row['cid']; //printdata($node11);
-		print $node11."---ooooooooooooooooo---";
-		}
- 
- */}
  /**********************Tafsir***********************************************/
  
  
@@ -2322,3 +2300,112 @@ function time_since($original) {
     }
     return $print;
 }  
+
+
+
+ function printdata1($node1){	
+	
+	$qry = "SELECT count(*) FROM {comments} where pid=$node1";
+	$num = db_result(db_query(db_rewrite_sql($qry)));
+	//print $node1.'--'.$num.'--';
+	
+	
+	$result = db_query("SELECT * FROM {comments} where pid=%d",$node1);
+	while($row = db_fetch_array($result)){
+		$node=$row['cid']; $nodepid=$row['pid'];
+		
+		
+		 $result = db_query("SELECT * FROM {comments} where pid=%d",$node1);
+	while($row = db_fetch_array($result)){
+		$node22=$row['cid']; $nodepid=$row['pid'];
+		 $viewName = 'user_scholar_comments';
+		//print $node22.'**--';
+		$qry = "SELECT count(*) FROM {comments} where pid=$node22";
+	$num = db_result(db_query(db_rewrite_sql($qry)));
+//print '-------------------------------------------------**'.$num.'--------------->>';
+
+		
+		
+		 print views_embed_view($viewName , $display_id = 'default',$node22);
+		  
+		  
+		$subitem11 = db_query("SELECT * FROM {comments} where pid=%d",$node22);
+		while($row = db_fetch_array($subitem11)){
+		
+		 $node1122=$row['cid'];
+		 
+		 print views_embed_view($viewName , $display_id = 'default', $node1122);
+		  if($node1122!=" "){
+			printdata1($node1122);
+		}
+		  
+		  
+		  }
+		  }
+		//  print "-----------".$nodepid."-----------";
+		$subitem = db_query("SELECT * FROM {comments} where pid=%d",$node);
+		while($row = db_fetch_array($subitem)){
+		
+		 $node11=$row['cid']; //printdata($node11);
+	//print $node11."ooooooooooooooooo";
+		}
+		if($node11!=" "){
+		//	printdata_cmt($node);
+		}
+		
+	}
+ }
+ 
+ 
+  function printdata($node1){	
+	
+	$qry = "SELECT count(*) FROM {comments} where pid=$node1";
+	$num = db_result(db_query(db_rewrite_sql($qry)));
+	//print $node1.'--'.$num.'--';
+	
+	
+	$result = db_query("SELECT * FROM {comments} where pid=%d",$node1);
+	while($row = db_fetch_array($result)){
+		$node=$row['cid']; $nodepid=$row['pid'];
+		
+		
+		 $result = db_query("SELECT * FROM {comments} where pid=%d",$node1);
+	while($row = db_fetch_array($result)){
+		$node22=$row['cid']; $nodepid=$row['pid'];
+		 $viewName = 'user_scholar_comments';
+		//print $node22.'**--';
+		$qry = "SELECT count(*) FROM {comments} where pid=$node22";
+	$num = db_result(db_query(db_rewrite_sql($qry)));
+//print '-------------------------------------------------**'.$num.'--------------->>';
+
+		
+		
+		 print views_embed_view($viewName , $display_id = 'default',$node22);
+		  
+		  
+		$subitem11 = db_query("SELECT * FROM {comments} where pid=%d",$node22);
+		while($row = db_fetch_array($subitem11)){
+		
+		 $node1122=$row['cid'];
+		 
+		 print views_embed_view($viewName , $display_id = 'default', $node1122);
+		  if($node1122!=" "){
+			printdata($node1122);
+		}
+		  
+		  
+		  }
+		  }
+		//  print "-----------".$nodepid."-----------";
+		$subitem = db_query("SELECT * FROM {comments} where pid=%d",$node);
+		while($row = db_fetch_array($subitem)){
+		
+		 $node11=$row['cid']; //printdata($node11);
+	//print $node11."ooooooooooooooooo";
+		}
+		if($node11!=" "){
+		//	printdata_cmt($node);
+		}
+		
+	}
+ }
