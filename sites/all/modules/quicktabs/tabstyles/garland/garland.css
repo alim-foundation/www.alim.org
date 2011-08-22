@@ -44,7 +44,7 @@ ul.quicktabs_tabs.quicktabs-style-garland li a:visited {
 }
 
 ul.quicktabs_tabs.quicktabs-style-garland li.active a {
-  color: #027AC6 !important;
+  color: #027AC6;
   background: url('images/tab-right.gif') no-repeat right bottom;
 }
 ul.quicktabs_tabs.quicktabs-style-garland li.active {
@@ -52,7 +52,7 @@ ul.quicktabs_tabs.quicktabs-style-garland li.active {
 }
 
 .sidebar ul.quicktabs_tabs.quicktabs-style-garland li.active a {
-  color: #027AC6 !important;
+  color: #027AC6;
   background: url('images/tab-right-sidebar.gif') no-repeat right bottom;
 }
 .sidebar ul.quicktabs_tabs.quicktabs-style-garland li.active {
