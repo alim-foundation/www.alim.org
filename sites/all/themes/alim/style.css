@@ -7466,6 +7466,10 @@ span.roundbutton span a{ color: #444;font-weight:bold;font-size:11px; }
 #community-tags-form .pagecloud{ float:left;width:380px;} 
 #community-tags-form .pagecloud .form-item label{ display:none; }
 #community-tags-form .tag-login{float:right;width:300px;}
+#block-block-23
+{
+ margin-bottom:15px;
+}
 #community-tags-form .tag-login a , #block-block-20 .hideadd-tags ,#block-block-23 .hideadd-tags  ,#block-block-22 .hideadd-tags {
 display:block;padding:2px 10px;background:#F3F1E2;border:1px solid #DADDAE;color:#000000;font-weight:bold;}
 #block-block-20 .add-tag a ,#block-block-23 .add-tag a  ,#block-block-22 .add-tag a , #community-tags-form .tag-login a{
@@ -10000,24 +10004,24 @@ ul.quicktabs_tabs.quicktabs-style-garland li.active a
   background:none;
   color:#e28624;
 }
-#block-block-44 .group-filter
+#block-block-43 .group-filter
 {
  background:url(images/comments-bkg-repeat.gif) repeat-y top left;
  height:40px;
  width:643px
 }
-#block-block-44 .block ul
+#block-block-43 .block ul
 {
  margin:0px;
  padding:0px;
 }
-#block-block-44  .seperator
+#block-block-43  .seperator
 {
  background:url(images/grouppost-header-sep.png) no-repeat top left;
  height:10px;
  width:643px;
 }
-#block-block-44 .footer-comment
+#block-block-43 .footer-comment
 {
  background:url("images/comment_corner_bottom.gif") top left no-repeat;height:40px;
 }
