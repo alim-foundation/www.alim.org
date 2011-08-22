@@ -28,6 +28,45 @@ session_start();
  global $links;
  
 ?>
+
+<?php
+/*----------------- Comment Filtering -------------------*/
+global $user;
+$user_id = $user->uid;
+
+$role_book_author    = 1;
+$role_community_user = 1;
+$role_scholar    	 = 1;
+
+$role = 0;
+if($user_id)
+{
+
+//Select user preference values.
+$user_utype = db_query("SELECT value as utype_sel,count(value) as utype_count FROM profile_values WHERE fid=23 AND uid=".$user_id);
+$fetch_utype= db_fetch_object($user_utype);
+($fetch_utype->utype_sel) ? $role = $fetch_utype->utype_sel : $role = 0;
+if($fetch_utype->utype_count==0) 
+  $role = 0;
+
+
+$user_grp = db_query("SELECT value as grp_sel,count(value) as grp_count FROM profile_values WHERE fid=24 AND uid=".$user_id);
+$fetch_grp = db_fetch_object($user_grp);
+($fetch_grp->grp_sel) ? $sel_grpd = $fetch_grp->grp_sel : $sel_grpd = 0;
+if($fetch_grp->grp_count==0) 
+  $sel_grpd = 0;
+  
+}
+else
+{
+	$role 		= $_SESSION['comm_utype'];
+	$sel_grpd 	= $_SESSION['comm_grps'];
+}
+
+/*----------------- Comment Filtering end-------------------*/
+?>
+
+
 <?php foreach ($fields as $id => $field): ?>
  <?php //print $field->content;?> <?php //print $id;?>
  
@@ -74,6 +113,75 @@ session_start();
 
 
 <?php
+
+
+
+/*----------------- Comment Filtering -------------------*/
+// Group wise filtering
+$detuser = user_load(array('name' => strip_tags($name)));
+$arr_role=$detuser->roles;
+if(is_array($arr_role)){
+
+foreach($arr_role as $key => $ur){
+	//echo $value;
+	if($ur=="Community User")
+   {
+	$urole="Community User";
+	
+	}
+	if($ur=="Scholar")
+   {   
+	$urole="Scholar";
+	
+	}
+  if($ur=="Book Author")
+   {
+	$urole="Book Author";
+	}
+  }
+}
+$display = "null";
+if($role==4 && $urole=="Community User")
+{
+	$display = "Community User"; // Set if Book Author Selected.
+} 
+else if($role==3  && $urole=="Book Author")
+{
+	$display = "Book Author";  // Set if Community User Selected.
+
+} 
+else if($role==7 && $urole=="Scholar")
+{
+	$display = "Scholar";  // Set if Book Scholar Selected
+}
+else if($role==0 && $role!=3 && $role!=4 && $role!=7)
+{
+  $display = "All";  // Set if Book Scholar Selected
+}
+
+if($display==$urole || $display == "All")
+{
+
+$sel_grpd_exp = explode("_",$sel_grpd);
+
+$my_group = db_query("SELECT node.nid AS nid, node.title AS node_title, users.name AS users_name, users.uid AS users_uid, og_uid.uid AS og_uid_uid, og_uid.nid AS og_uid_nid FROM node node  LEFT JOIN og_uid og_uid ON node.nid = og_uid.nid INNER JOIN users users ON node.uid = users.uid WHERE (node.type IN ('creat_group')) AND (og_uid.uid = ".$detuser->uid.") AND (og_uid.is_active <> 0) ORDER BY node_title ASC");
+
+$grp_flag = 0;
+
+while($fetch_mygroups=db_fetch_object($my_group))
+{
+  if(in_array($fetch_mygroups->nid,$sel_grpd_exp))
+   $grp_flag = 1;
+}
+
+if($sel_grpd==0)
+ $grp_flag = 1;
+ 
+if($grp_flag==1) 
+{ 
+/*----------------- Comment Filtering end-------------------*/
+
+
 
 $commentarray = _comment_load($cid);
 $userid=$commentarray->uid;
@@ -798,3 +906,9 @@ $node2=$row['cid'];
 ?>
 
 </td><tr></table>
+<?php
+/*----------------- Comment Filtering -------------------*/
+}
+}
+/*----------------- Comment Filtering end-------------------*/
+?>
