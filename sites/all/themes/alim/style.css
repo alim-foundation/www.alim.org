@@ -6445,8 +6445,8 @@ margin:0px
 /*background-color:#FDEFD4;*/padding:10px;padding-bottom:20px;font-family:tahoma;font-size:12px;line-height:1.6;clear:both;
 }
 #comment_reply_scholar{
-padding-left:280px;font-size:12px;font-weight:bold;/*background-color:#FCE7BC;*/padding-top:10px;padding-bottom:10px;
-color:#B37F07;border-bottom:dotted 1px #B37F07;
+padding-right:10px;font-size:12px;font-weight:bold;padding-top:10px;padding-bottom:10px;
+color:#B37F07;border-bottom:dotted 1px #B37F07;text-align:right;
 }
 #comment_reply_scholar a{
 color:#B37F07;
