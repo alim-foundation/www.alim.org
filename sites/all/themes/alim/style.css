@@ -9890,3 +9890,403 @@ height:98px;
 {
 float:left;
 }
+/*comment-filtering*/
+.group-comments
+{
+ clear:both;
+ background:url(images/comments-bkg-repeat.gif) repeat-y top left;
+ width:643px;
+  padding:10px;
+}
+.group-comments .odd, .group-comments .even
+{
+ height:80px;
+ padding:10px;
+ border-bottom:1px solid #E9E1BA;
+ clear:both;
+}
+.group-comments .odd
+{
+ background:#FFFFE5;
+}
+.group-comments .even
+{
+  background:#F7F7F7;
+}
+.group-comments .comm_image
+{
+ float:left;
+ width:50px;
+ text-align:center;
+ height:70px;
+}
+.group-comments .comm_bottom
+{
+ clear:both;
+}
+.group-comments .comm_name
+{
+ font-weight:bold;
+ color:#660000;
+ float:left;
+ width:96px;
+ height:70px;
+ padding-left:2px;
+}
+.group-comments .spacer
+{
+ float:left;
+ width:2px;
+ text-align:center;
+ height:70px;
+}
+.group-comments .comm_body
+{
+ float:left;
+ width:435px;
+ padding-left:5px;
+}
+.group-comments .comm_time
+{
+  float:left;
+  font-size:11px;
+  color:#006600;
+  padding-left:160px;
+}
+.group-comments .comm_url
+{
+  float:right;
+  padding-right:20px;
+ 
+}
+.group-comments .comm_url a
+{
+ color:#006600;
+}
+#quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland
+{
+ background:url(images/comments-quicktab-bkg.png) no-repeat;
+ height:49px;
+ width:643px;
+ margin:0px;
+ padding:0px;
+}
+#quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li
+{
+  
+  color:#660000;
+  background:#999999;
+}
+#quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li.active
+{
+ background-image:none;
+ background:#FFFFFF;
+ color:#e28624;
+}
+#quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li a:link, #quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li a:visited 
+{
+ background:#FFFFFF;
+
+}
+#quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li.active a, #quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li.active a
+{
+ background-image:none;
+ background:none;
+ color:#e28624;
+}
+ul.quicktabs_tabs.quicktabs-style-garland li.active a
+{
+  background-image:none;
+  background:none;
+  color:#e28624;
+}
+#block-block-44 .group-filter
+{
+ background:url(images/comments-bkg-repeat.gif) repeat-y top left;
+ height:40px;
+ width:643px
+}
+#block-block-44 .block ul
+{
+ margin:0px;
+ padding:0px;
+}
+#block-block-44  .seperator
+{
+ background:url(images/grouppost-header-sep.png) no-repeat top left;
+ height:10px;
+ width:643px;
+}
+#block-block-44 .footer-comment
+{
+ background:url("images/comment_corner_bottom.gif") top left no-repeat;height:40px;
+}
+.group-comments .inner-comment
+{
+ border:1px solid #E9E1BA;
+ width:620px;
+}
+#quicktabs-22 .view-group-posts .view-content
+{
+  background:url(images/comments-bkg-repeat.gif) repeat-y top left;
+  width:643px;
+  padding:10px;
+}
+#quicktabs-22 .view-group-posts
+{
+ width:643px;
+ background:none;
+}
+#quicktabs_tabpage_22_1
+{
+ background:none;
+}
+#quicktabs-22 .view-group-posts .view-empty
+{
+ width:600px;
+  background:url(images/comments-bkg-repeat.gif) repeat-y top left;
+  padding:10px;
+}
+#quicktabs-22 .view-group-posts .view-empty p
+{
+ padding:0px;
+ margin:0px;
+ background:none
+}
+#quicktabs-22 .view-group-posts .views-row
+{
+ border-bottom:1px dotted #000000;
+ width:610px;
+ padding:5px;
+}
+#quicktabs-22 .view-group-posts .view-footer
+{ 
+  background:url("images/comment_corner_bottom.gif") top left no-repeat;height:40px;
+}
+.comment-filtering
+{
+  background:#f7f7f7;
+  padding:10px;
+  border:1px solid #CCCCCC;
+  height:90px;
+}
+.comment-filtering .filter1
+{
+ height:20px;
+ }
+.bottom-cnt .block-quicktabs
+{
+ margin-top:-35px;
+}
+.ui-widget
+{
+ font-family:tahoma, Verdana, Arial, Helvetica, sans-seri;
+ font-size:14px;
+}
+
+
+#quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li.active {
+    background: none repeat scroll 0 0 #EFEFEF;
+    color: #E28624;
+    margin: 7px 0 0 4px;
+}
+
+
+#quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li {
+    border-radius: 4px 4px 0 0;
+    color: #660000;
+}
+
+
+ul.quicktabs_tabs.quicktabs-style-garland li {
+    background: none repeat scroll 0 0 transparent;
+    border-radius: 4px 4px 0 0;
+    display: block;
+    float: left;
+    list-style-type: none;
+    margin: 7px 0 0 4px;
+    padding: 2px 0 1px !important;
+}
+
+
+#quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li a:link{
+    background:#F6F6F6;
+    border-radius: 4px 4px 0 0;
+    color: #006600;
+}
+#quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li a:visited
+{
+     background:#F6F6F6;
+    border-radius: 4px 4px 0 0;
+	
+}
+
+ul.quicktabs_tabs.quicktabs-style-garland li a:link, ul.quicktabs_tabs.quicktabs-style-garland li a:visited {
+    color: #FFFFFF;
+    font: bold 12px/20px Verdana;
+    margin: 0;
+
+}
+.filter_comm
+{
+ background:url(images/filter-comments-btn.gif) no-repeat top left;
+ height:23px;
+ width:140px;
+ text-indent:-99999px;
+ line-height:0px;
+ display:block;
+ cursor:pointer;
+ border:none;
+
+ 
+}
+
+
+
+/*------------ controller -------*/
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    border-bottom-right-radius: 0;
+}
+
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
+    border-bottom-left-radius: 0;
+}
+
+
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+    border-top-right-radius: 0;
+}
+
+
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
+    border-top-left-radius: 0;
+}
+
+
+.ui-widget-header {
+    background: url("images/ui-bg_gloss-wave_35_f6a828_500x100.png") repeat-x scroll 50% 50% #F6A828;
+    border: 1px solid #E78F08;
+    color: #FFFFFF;
+    /*display: none;*/
+    font-weight: bold;
+}
+
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    background: none;
+    border: 1px solid #7F9DB9;
+    color: #ffffff;
+    font-weight: normal;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #7F9DB9;
+    color: #000000;
+    font-family:tahoma, Verdana, Arial, Helvetica, sans-seri ;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #7F9DB9;
+    color: #000000;
+    font-family: Verdana,Arial;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    color: #000000;
+    font-family:tahoma, Verdana, Arial, Helvetica, sans-seri ;
+    font-size: 12px;
+    font-weight: normal;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #7F9DB9;
+
+}
+
+
+#frm_comm_filt .ui-multiselect-menu {
+    display: none;
+    padding: 0px;
+    position: absolute;
+    z-index: 10000;
+}
+
+#frm_comm_filt .ui-multiselect {
+    text-align: left;
+}
+
+#frm_comm_filt .ui-state-default .ui-icon {
+    background: none no-repeat scroll right top transparent;
+    margin-right: -3px;
+	margin-top:-2px;
+}
+
+#frm_comm_filt .ui-widget-content {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #7F9DB9;
+    color: #333333;
+}
+#frm_comm_filt .ui-multiselect {
+    text-align: left;
+	height:20px;
+	padding:0px;
+}
+#frm_comm_filt .ui-icon-triangle-2-n-s {
+    background-position:none;
+}
+
+#frm_comm_filt .ui-state-default .ui-icon {
+    background: url("images/multiselect-down-arrow.gif") 0 0 no-repeat;
+}
+
+
+#frm_comm_filt ul {
+    padding:0px;
+}
+#frm_comm_filt .ui-multiselect-checkboxes label
+{
+ padding:0px;
+ margin:0px;
+}
+#frm_comm_filt .ui-state-hover
+{
+background:#316ac5;
+color:#FFFFFF;
+}
+#frm_comm_filt .ui-widget-header
+{
+ background-image:none;
+ background-color:#C58C29;
+}
+#quicktabs-22 ul li.active a
+{
+ color:#E28624;
+}
+#quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li.active a
+{
+ color:#E28624;
+ background:#FFFFFF;
+}
+.ui-multiselect span
+{
+ padding-left:3px;
+}
+.ui-multiselect-menu span
+{
+ padding:0px;
+}
+span.ui-icon ui-icon-triangle-2-n-s
+{
+ padding:0px;
+}
+
+/*------------ controller -------*/
+/*comment-filtering*/

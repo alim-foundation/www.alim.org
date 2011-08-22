@@ -394,6 +394,9 @@ $start_time = $_SESSION['start_time'];
 	<meta http-equiv="X-UA-Compatible" content="IE=8" />
 	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 	<meta HTTP-EQUIV="accept-encoding" CONTENT="gzip,deflate">
+<link rel="stylesheet" type="text/css" href="<?=$base_url?>/<?=$theme_path?>/jqlist/jquery.multiselect.css" />
+<link rel="stylesheet" type="text/css" href="<?=$base_url?>/<?=$theme_path?>/jqlist/prettify.css" />
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
 	  <script type="text/javascript"> 
    var startTime = (new Date()).getTime(); 
 </script>
@@ -1128,6 +1131,34 @@ $('.dummy-player').click(function(event) {
 	 
 	  document.getElementById(yid).innerHTML = html_pl;
 
+});
+</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?=$base_url?>/<?=$theme_path?>/jqlist/prettify.js"></script>
+<script type="text/javascript" src="<?=$base_url?>/<?=$theme_path?>/jqlist/jquery.multiselect.js"></script>	
+<script type="text/javascript">
+jQuery(function(){
+	jQuery("#groups").multiselect({
+		selectedList: 4,
+		minWidth : 225,
+		selectedList:0
+	});
+});
+$("#quicktabs-12 li.first a").click(function() {
+$(".comment-filtering").show();
+$('#block-quicktabs-12').css('marginTop',-35);
+});
+$("#quicktabs-12 li.last a").click(function() {
+$(".comment-filtering").hide();
+$('#block-quicktabs-12').css('marginTop',0);
+});
+$("#quicktabs-3 li.first a").click(function() {
+$(".comment-filtering").show();
+$('#block-quicktabs-3').css('marginTop',-35);
+});
+$("#quicktabs-3 li.last a").click(function() {
+$(".comment-filtering").hide();
+$('#block-quicktabs-3').css('marginTop',0);
 });
 </script>
 </body>
