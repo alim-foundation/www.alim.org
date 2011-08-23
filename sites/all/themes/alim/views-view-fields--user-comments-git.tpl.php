@@ -39,14 +39,14 @@ if($user_id)
 {
 
 //Select user preference values.
-$user_utype = db_query("SELECT value as utype_sel,count(value) as utype_count FROM profile_values WHERE fid=24 AND uid=".$user_id);
+$user_utype = db_query("SELECT value as utype_sel,count(value) as utype_count FROM profile_values WHERE fid=23 AND uid=".$user_id);
 $fetch_utype= db_fetch_object($user_utype);
 ($fetch_utype->utype_sel) ? $role = $fetch_utype->utype_sel : $role = 0;
 if($fetch_utype->utype_count==0) 
   $role = 0;
 
 
-$user_grp = db_query("SELECT value as grp_sel,count(value) as grp_count FROM profile_values WHERE fid=25 AND uid=".$user_id);
+$user_grp = db_query("SELECT value as grp_sel,count(value) as grp_count FROM profile_values WHERE fid=24 AND uid=".$user_id);
 $fetch_grp = db_fetch_object($user_grp);
 ($fetch_grp->grp_sel) ? $sel_grpd = $fetch_grp->grp_sel : $sel_grpd = 0;
 if($fetch_grp->grp_count==0) 
