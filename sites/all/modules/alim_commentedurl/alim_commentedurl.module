@@ -1146,7 +1146,7 @@ function alimcommentedurl_insertprefer($form, $form_state){
 	$result_pic = db_fetch_object($chk_pic);
 	if(($result_pic->pic_cnt)==0)
 	{
-		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (9,".$user->uid.",'".$pic_sel."')");
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (9,".$user_id.",'".$pic_sel."')");
 	}
 	else
 	{
