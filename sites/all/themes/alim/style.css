@@ -9897,7 +9897,7 @@ float:left;
  clear:both;
  background:url(images/comments-bkg-repeat.gif) repeat-y top left;
  width:643px;
-  padding:10px;
+ padding:10px 0px 10px 10px;
 }
 .group-comments .odd, .group-comments .even
 {
@@ -9983,6 +9983,7 @@ float:left;
  background-image:none;
  background:#FFFFFF;
  color:#e28624;
+ padding-top:3px !important;
 }
 #quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li a:link, #quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li a:visited 
 {
@@ -10113,17 +10114,17 @@ ul.quicktabs_tabs.quicktabs-style-garland li {
 #quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li a:link{
     background:#F6F6F6;
     border-radius: 4px 4px 0 0;
-    color: #006600;
+    color: #C58C29;
 }
 #quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li a:visited
 {
      background:#F6F6F6;
     border-radius: 4px 4px 0 0;
+	color: #C58C29 !important;
 	
 }
 
 ul.quicktabs_tabs.quicktabs-style-garland li a:link, ul.quicktabs_tabs.quicktabs-style-garland li a:visited {
-    color: #FFFFFF;
     font: bold 12px/20px Verdana;
     margin: 0;
 
@@ -10267,14 +10268,12 @@ color:#FFFFFF;
  background-image:none;
  background-color:#C58C29;
 }
-#quicktabs-22 ul li.active a
-{
- color:#E28624;
-}
+
 #quicktabs-22 ul.quicktabs_tabs.quicktabs-style-garland li.active a
 {
- color:#E28624;
+ color:#660000 !important;
  background:#FFFFFF;
+ padding-top:9px !important;
 }
 .ui-multiselect span
 {
