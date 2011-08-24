@@ -1141,6 +1141,8 @@ jQuery(function(){
 	jQuery("#groups").multiselect({
 		selectedList: 4,
 		minWidth : 225,
+		checkAllText : '',
+		uncheckAllText : 'Remove Filters',
 		selectedList:0
 	});
 });

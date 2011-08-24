@@ -10287,6 +10287,9 @@ span.ui-icon ui-icon-triangle-2-n-s
 {
  padding:0px;
 }
-
+.ui-icon-check
+{
+ display:none;
+}
 /*------------ controller -------*/
 /*comment-filtering*/
