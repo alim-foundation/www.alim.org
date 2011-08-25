@@ -1143,7 +1143,10 @@ jQuery(function(){
 		minWidth : 225,
 		checkAllText : '',
 		uncheckAllText : 'Remove Filters',
-		selectedList:0
+		selectedList:0,
+		uncheckAll: function(){
+         document.frm_comm_filt.submit();
+      }
 	});
 });
 $("#quicktabs-12 li.first a").click(function() {
