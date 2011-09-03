@@ -333,6 +333,7 @@ function alimsearch_getbooknames($type){
 			'AY' => 'Ayah Themes',
 			'QCC' => 'Qur\'an Commentary',
 			'QS' => 'Qur\'an Subject Index',
+			'TLT' => 'Transliteration',
 		
 		),
 		'hadith' => array(
@@ -397,6 +398,7 @@ function alimsearch_getcombined_query($val , $opt = '' ){
 		'AY'  =>  array('add_query' => ' type:quran_ayah_theme' , 'text' => 'Ayah Themes' , 'cat' => 'quran' ) ,
 		'QCC' =>  array('add_query' => ' type:quran_ayah_elaboration' , 'text' => 'Qur\'an Commentary' , 'cat' => 'quran' ) ,
 		'QS'  =>  array('add_query' => ' type:quran_subject,hadith_subject' , 'text' => 'Qur\'an Subject Index' , 'cat' => 'quran' ) ,
+		'TLT' =>  array('add_query' => ' type:quran_ayah category:11' , 'text' => 'Transliteration' , 'cat' => 'quran' ) ,
 		
 		'AMH' =>  array('add_query' => ' type:hadith_content category:135' , 'text' => 'Al-Muwatta Hadith' , 'cat' => 'hadith' ) ,
 		'HDQ' =>  array('add_query' => ' type:hadith_content category:136' , 'text' => 'Al-Qudsi Hadith' , 'cat' => 'hadith' ) ,
@@ -591,7 +593,7 @@ function alimsearch_search($op = 'search', $keys = NULL ,$newkeys = array() ) {
 			
 			}
 			
-			if(in_array( 'islam' ,$catarr ))
+			if(in_array( 'islam' ,$catarr ))  
 			{
 				$v = 'islam';
 				$prop = alimsearch_getcombined_query($v);
