@@ -10302,3 +10302,30 @@ top:25px;
 width:350px;
 z-index:1000;
 }
+
+/*Notebook page*/
+.cont-top{ height:40px; float:left;}
+.imp-txt{font-size:14px; font-family:Arial, Helvetica, sans-serif; color:#9f420f; font-size:14px; font-weight:normal; margin:0 0 5px 0; line-height:18px;}
+.lst-style{ list-style-image:url(images/tick-ico.png); margin:0 5px; list-style-position:outside;}
+.img-sep-rpt{ background:url(images/sep-set.png) repeat-x center; height:40px;}
+.cont-top table, .cont-top td, .cont-top tr{ border-collapse:separate;}
+.cont-set table, .cont-set td, .cont-set tr{ border-collapse:separate;}
+.cont-set tbody{ background:none;}
+.note-book-div{
+ width:181px;
+ height:33px;
+ background:url(images/go-to-my-notebook.jpg) no-repeat;
+}
+.my-notebook-btn{
+ width:181px;
+ height:33px;
+ background:none;
+ cursor:pointer;
+ font-size:0;
+ line-height:0;
+ text-indent:-99999px;
+ outline:none;
+ border:none;
+ display:block;
+}
+/*Notebook page*/
