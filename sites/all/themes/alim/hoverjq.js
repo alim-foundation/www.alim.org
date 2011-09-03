@@ -319,7 +319,7 @@ $("div#search-home  div#site-search :input[type='text'].form-text:first , div#se
 						$("#search-form #edit-biographies").attr('checked', 'checked' );	
 						$("#search-form #edit-islam").attr('checked', 'checked' );
 						$("#search-form #edit-index").attr('checked', 'checked' );
-						
+						$("#search-form #edit-book-quran-TLT").attr('checked', 'checked' );
 						
 						$("#search-form #edit-book-quran-ASD").attr('checked', 'checked' );
 						$("#search-form #edit-book-quran-MAL").attr('checked', 'checked' );
@@ -344,7 +344,7 @@ $("div#search-home  div#site-search :input[type='text'].form-text:first , div#se
 						$("#search-form #edit-book-index-HS").attr('checked', 'checked' );
 						$("#search-form #edit-book-fiqh-FIQ").attr('checked', 'checked' );
 						$("#search-form #edit-book-islam-ART").attr('checked', 'checked' );
-						$("#search-form #edit-book-quran-TLT").attr('checked', 'checked' );
+						
 
 					}else{   
 						 //otherwise, hide it
