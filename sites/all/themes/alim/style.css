@@ -10328,4 +10328,8 @@ z-index:1000;
  border:none;
  display:block;
 }
+#notebook_form
+{
+ border-collapse:separate;
+}
 /*Notebook page*/
