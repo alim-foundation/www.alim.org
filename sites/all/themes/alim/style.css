@@ -9781,10 +9781,7 @@ height:24px;
 }
 .source_div2{
 background:url(images/bkg-taghelp-middle.png) repeat center;
-padding-top:15px;
-padding-bottom:15px;
-padding-left:25px;
-padding-right:25px;
+padding: 0 15px 10px;
 line-height:17px;
 font-weight:normal;
 }
