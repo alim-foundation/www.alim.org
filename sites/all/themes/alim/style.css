@@ -10070,7 +10070,8 @@ ul.quicktabs_tabs.quicktabs-style-garland li.active a
   background:#f7f7f7;
   padding:10px;
   border:1px solid #CCCCCC;
-  height:90px;
+  height:125px;
+  position:relative;
 }
 .comment-filtering .filter1
 {
