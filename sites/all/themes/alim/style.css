@@ -10293,3 +10293,14 @@ span.ui-icon ui-icon-triangle-2-n-s
 }
 /*------------ controller -------*/
 /*comment-filtering*/
+
+.text-show {
+font-size:12px;
+height:auto;
+left:130px;
+position:absolute;
+text-align:justify;
+top:25px;
+width:350px;
+z-index:1000;
+}
