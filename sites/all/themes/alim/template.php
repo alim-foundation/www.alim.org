@@ -1966,8 +1966,9 @@ global $theme_path;
             $x= 'jQuery.noConflict();';
   			$script = '$("#demo img[title]").tooltip({ 
 			offset: [35, 170],
+			delay:0,
 			events: {
-		    def:"click,blur"
+		    def:"mouseover,blur"
   	                }
         });';
  		 drupal_add_js($script, 'inline', 'header');
