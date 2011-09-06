@@ -36,10 +36,10 @@ else
 <?php
 
 
-		$urlexp1 = explode("/",arg(1));
-		if(strpos($urlexp1[1],'?'))
+		$urlexp1 = arg(1);
+		if(strpos($urlexp1,'?'))
 		{
-		  $urlexp1_exp = explode("?",$urlexp1[1]);
+		  $urlexp1_exp = explode("?",$urlexp1);
 		  $urlexp = $urlexp1_exp[0];
 		}
 		else
@@ -72,11 +72,7 @@ if(strip_tags($subscribe)=="Request membership")
 }
 $show_link=0;
 ?>
-<script>
-$(document).ready(function(){
-<?php $show_link=1; ?>
-}
-</script>
+
 <div class="GroupBlock">
 				<h2><?=$title?></h2>
 			    <div class="GroupBody">
@@ -93,8 +89,7 @@ if(strip_tags($subscribe)!="Closed" && $subscribe!="")
 <?php
 	  if($user->uid)
 	  {
-	   if($show_link==1)
-	   {
+	
 	  ?>
 <span>
 <span>
@@ -104,7 +99,7 @@ if(strip_tags($subscribe)!="Closed" && $subscribe!="")
 </span>
 </span>
 	  <?php
-        }
+ 
 	   
 	  }
 	  else
@@ -127,13 +122,12 @@ $block = module_invoke('rpx', 'block', 'view', 0);
  $t3 = stristr($tt,'AOL/AIM');
  $url = str_replace($t3," ",$tt);
   
-    if($show_link==1)
-	   {
+ 
    ?>
  <span><span><span>  <?php print '<a '.$url ;?>  Join </a></span></span></span>
 
 <?php
-       }
+  
 	  }
 
 }
@@ -164,8 +158,7 @@ else
 					<?php
 					if($flag==1)
 					{
-					    if($show_link==1)
-	  					 {
+					  
 					?>	    	
 					<div align="right">
                 <div  style="text-align:right;" >
@@ -173,15 +166,14 @@ else
 				</div>
 					</div>
 					<?php
-					    }
+					 
 					}
 					else
 					{
 						if($user->uid)
 						{
 						
-						    if($show_link==1)
-	   							{
+						  
 						?>
 						<div align="right">
                 <div  style="text-align:right;" >
@@ -189,7 +181,7 @@ else
 						</div>
 						</div>
 						<?php
-								}
+								
 						}
 						else
 						{
@@ -203,14 +195,13 @@ else
 					 $tt = stristr($r,'href=');
 					 $t3 = stristr($tt,'AOL/AIM');
 					 $url = str_replace($t3," ",$tt);
-					    if($show_link==1)
-	   						{
+					   
 					   ?>
 						<div align="right">
                 <div  style="text-align:right;" >  <?php print '<a '.$url ;?>  <img src="<?=$base_url?>/<?=$theme_path?>/images/btn_create-new-post.png"  align="absmiddle"   alt="New Post"/> </a></div></div>
 
 						<?php
-						  }
+						 
 						}
 					}
 					?>
