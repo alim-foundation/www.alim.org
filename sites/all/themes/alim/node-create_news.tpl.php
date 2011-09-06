@@ -10,7 +10,6 @@
 	 <h2> <div id="blogs_title"><a href="<?php print $node_url ?>" title="<?php print $title ?>"><?php print $title ?></a></div></h2>
 	<?php endif; ?>
 	   <div id="news_body"> 
-	  <p>testing testing testing </p>
 	   <?php print $content ?></div>
 	  
 	   
