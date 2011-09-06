@@ -1,0 +1,343 @@
+body {margin:0;padding:0;text-align:center;color:#2e2e2e;background:#e8e1b7;font-family:tahoma, Verdana, Arial, Helvetica, sans-seri;font-size:13px;}
+a{text-decoration:none;outline:0px;}
+img{border:0px;outline:0px;}
+#outer_div{width:100%;background:#e8e1b7 url(images/alimorgbg.jpg) top left repeat-x;}
+#main_div{width:1050px;margin:0px;padding:0px;}
+#top_menu{color:#666666;font-weight:bold;text-align:center;height:45px;}
+#top_menu_left{background:url(images/topmenuleft.png) top center no-repeat;height:45px;width:9px;float:left;}
+#top_menu_middle{background:url(images/topmenumiddletile.png) top center repeat-x;height:45px;width:824px;text-align:center;float:left;height:35px;padding-top:10px;}
+#top_menu_middle_second{background:url(images/topmenumiddletile.png) top center repeat-x;height:45px;width:193px;float:left;height:35px;padding-top:10px;padding-right:10px;}
+#top_menu_middle_second h2{display:none;}
+#top_menu_middle_second a{text-decoration:none;color:#990000;font-weight:bold;}
+#top_menu_right{background:url(images/topmenuright.png) top center no-repeat;height:45px;width:9px;float:left;}
+.beta_tag1{background:url(images/beta.png) top left no-repeat;height:61px;width:62px;position:fixed;left:0px;top:0px;z-index:10;}
+.views-admin-links{display:none;}
+
+/******** Nice Menus *********/
+.block-nice_menus {line-height: normal;z-index: 10;}
+ul.nice-menu,ul.nice-menu ul {z-index: 5;position: relative;}
+ul.nice-menu li {position: relative;}
+ul.nice-menu a {display: block;}
+ul.nice-menu ul{position:absolute;visibility: hidden;}
+ul.nice-menu li.over ul {visibility: visible;}
+ul.nice-menu ul li {display: block;}
+ul.nice-menu:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+/* Show submenus when over their parents. */
+ul.nice-menu li:hover ul,
+ul.nice-menu li.menuparent li:hover ul,
+ul.nice-menu li.menuparent li.menuparent li:hover ul,
+ul.nice-menu li.menuparent li.menuparent li.menuparent li:hover ul,
+ul.nice-menu li.over ul,
+ul.nice-menu li.menuparent li.over ul,
+ul.nice-menu li.menuparent li.menuparent li.over ul,
+ul.nice-menu li.menuparent li.menuparent li.menuparent li.over ul {
+  visibility: visible;
+}
+/* Hide sub-menus initially. */
+ul.nice-menu li:hover ul ul,
+ul.nice-menu li:hover ul ul ul,
+ul.nice-menu li:hover li:hover ul ul,
+ul.nice-menu li:hover li:hover ul ul ul,
+ul.nice-menu li:hover li:hover li:hover ul ul,
+ul.nice-menu li:hover li:hover li:hover ul ul ul,
+ul.nice-menu li.over ul ul,
+ul.nice-menu li.over ul ul ul,
+ul.nice-menu li.over li.over ul ul,
+ul.nice-menu li.over li.over ul ul ul,
+ul.nice-menu li.over li.over li.over ul ul,
+ul.nice-menu li.over li.over li.over ul ul ul,
+{
+  visibility: hidden;
+}
+
+/***************
+ IE 6 Fixes
+***************/
+/* Iframe to fix z-index bug when menu hovers over <select> fields. */
+ul.nice-menu li.menuparent ul {
+	overflow: visible !important;
+	/* overflow: hidden; */
+}
+
+ul.nice-menu li.menuparent ul iframe {
+	display: none;
+	display/**/: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	filter: mask();
+	width: 20px;
+	height: 20px;
+}
+ul.nice-menu,
+ul.nice-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul.nice-menu li {
+  float: left;
+  border-right:1px solid #999999;
+ /* background-color: #eee;*/
+  /* Additional overrides to deal with Garland theme. */
+  margin: 0;
+  padding-left: 0;
+  background-image: none;
+}
+ul.nice-menu a {
+  padding: 0.3em 5px 0.3em 5px;
+  color:#666666;
+}
+ul.nice-menu a:hover {
+  padding: 0.3em 5px 0.3em 5px;
+  color:#B14914;
+}
+ul.nice-menu ul,
+{
+  top: 1.8em;
+  left: -1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin-right: 0;
+  background:#FBFBFB;
+}
+ul.nice-menu ul li {
+  width: 12.5em;
+  border:none;
+  border-bottom:1px solid #CCCCCC;
+  background:#F4F4F4;
+  text-align:left;
+  padding-left:3px;
+}
+
+/******************************
+ VERTICAL (left/right) menus
+******************************/
+/* This is the default width of all vertical menus. */
+ul.nice-menu-right, ul.nice-menu-left,
+ul.nice-menu-right li, ul.nice-menu-left li {
+  width: 12.5em;
+}
+/* VERTICAL menus where submenus pop RIGHT (default). */
+ul.nice-menu-right ul {
+  width: 12.5em;
+  left: 12.5em;
+  top: -1px;
+}
+ul.nice-menu-right ul ul {
+  width: 12.5em;
+  left: 12.5em;
+  top: -1px;
+}
+/******************************
+ HORIZONTAL (down) menus
+******************************/
+ul.nice-menu-down {
+  float: left;
+  border: 0;
+}
+ul.nice-menu-down li li {
+  border-top: 0;
+}
+ul.nice-menu-down ul {
+  left: 0;
+}
+ul.nice-menu-down ul li {
+  clear: both;
+}
+ul.nice-menu-down li ul li ul {
+display:none;
+}
+#menu-1188{border:none;}
+/******** Nice Menus End*********/
+
+#head_div{height:90px;width:925px;text-align:left;}
+#logo1{float:left;height:50px;margin-left:10px;text-align:left;margin-right:120px;width:250px;}
+#top_menu_middle2{height:50px;width:234px;text-align:center;height:35px;float:left;}
+#top_menu_middle2 .read_more a{font-size:16px;}
+#top_menu2{color:#666666;font-weight:bold;text-align:center;height:45px;padding-top: 20px;}
+.front_donate{float:right;padding-top:13px;}
+#footer_div{margin:0px;padding:0px;margin-top:0px;height:125px;clear:both;background:#e8e1b7 url(images/alimorgbottomtile.jpg) top left repeat-x; width:100%;background-color:#8A370B;}
+#footer_content{height:50px;padding-top:10px;width:959px;}
+#footer_head{float:left;width:350px;height:50px;text-align:left;color:#FEF280;}
+#footer_head h1{font-size:30px;color:#7B2A0F;font-weight:bold;margin:0;padding:0;}
+#footer_menu{float:right;margin-right:10px;}
+#footer_menu li.leaf{list-style:none;display:inline;color:#7B2A0F;font-weight:bold;border-right:1px solid #7B2A0F;padding:0px 3px 0px 3px;}
+#footer_menu li.last{border-right:none;}
+#footer_menu li a{color:#7B2A0F;font-weight:bold;}
+#middle_content{background:url(images/middlebgtile.png) top left repeat-y;width:968px;height:1530px;}
+#top_content{background:url(images/topbgtile.png)  top left no-repeat;width:968px;height:22px;}
+#bottom_content{background:url(images/bottombgtile.png) top left no-repeat;width:968px;height:34px;}
+
+/******** Top Tab*********/
+#main {margin-left:auto; margin-right:auto; width:962px; }
+#main-head{margin:0px 20px 0 17px; height:110px;position:relative;}
+.head-nav{height:31px; float:left;}
+.head-nav-botm-bg{ width:925px; height:79px; float:right; background:url(images/hed-rgt-bg.png) top right no-repeat; color:#d9a74e; font-size:14px; margin:0;}
+.head-nav-botm{ width:896px; height:39px; float:left; padding:20px 10px 20px 10px; background:url(images/head-rpt.jpg) top repeat-x; color:#d9a74e; font-size:14px;}
+ul#nav {position: relative;width: 430px;margin: 0px;padding:0px;height: 31px;list-style-type: none;overflow: hidden;}
+div#searchalim{float:left;}
+div#top-icons{float:left;position:absolute;right:0px;top:-10px;}
+div#searchalim ul#nav  { background: transparent url(images/mnu-nav.png) no-repeat 0 0;  color:#893d00; }
+div#gotoquran ul#nav { background: transparent url(images/mnu-nav.png) no-repeat 0 -31px; }
+div#gotohadith ul#nav  { background: transparent url(images/mnu-nav.png) no-repeat 0 -62px; }
+ul#nav li{text-align:left;}
+ul#nav li a {position: absolute;top: 0;width: 155px;color:#FFF;font-size:16px;text-decoration: none;padding: 8px 0 0 0px;overflow: hidden;height: 31px !important; height /**/:31px; /* IE5/Win */background: transparent url(images/mnu-nav.png) no-repeat;padding-left:15px;}
+ul#nav li a:hover{color:#893d00;}
+ul#nav li.current a{color:#893d00;}
+div#searchalim li#sral a 			{ background-position: 0 0; width: 138px; left: 0; }
+div#searchalim li#sral a:hover		{ background-position: 0 0; }
+div#searchalim li#goqu a 			{ background-position: -138px -124px; left: 138px; }
+div#searchalim li#goqu a:hover		{ background-position: -138px 0; }
+div#searchalim li#goha a 			{ background-position: -276px -93px; left: 276px; }
+div#searchalim li#goha a:hover		{ background-position: -276px 0; }
+div#gotoquran li#sral a			{ background-position: 0 -93px; width: 138px; left: 0; }
+div#gotoquran li#sral a:hover		{ background-position: 0 -62px; }
+div#gotoquran li#goqu a			{ background-position: -138px -31px; left: 138px; }
+div#gotoquran li#goqu a:hover		{ background-position: -138px -31px; }
+div#gotoquran li#goha a			{ background-position: -138px -124px; left: 276px; }
+div#gotoquran li#goha a:hover		{ background-position: -276px -31px; }
+div#gotohadith li#sral a 			{ background-position: 0 -93px; width: 138px; left: 0px; }
+div#gotohadith li#sral a:hover		{ background-position: 0 -62px; }
+div#gotohadith li#goqu a 			{ background-position: -138px -93px; left: 138px; }
+div#gotohadith li#goqu a:hover		{ background-position: -138px -62px; }
+div#gotohadith li#goha a 			{ background-position: -276px -62px; left:276px; }
+div#gotohadith li#goha a:hover		{ background-position: -276px -62px; }
+.search-alim-txt{border:0;background:url(images/alim-search-bg.png) no-repeat top;width:879px;height:37px; padding:0px 0 0 2px;clear:both;}
+#edit-search-block-form-1-wrapper{float:left;width:725px;}
+.search-alim-txt #edit-search-block-form-1{border:0;background:none;width:725px;color:#CC6633;font-size:16px;float:left;padding-left:3px;outline:none;margin:0px;}
+.search-alim-txt .form-item{ margin:0px; padding-top:8px;}
+.search-alim-txt #edit-submit{border:0;background:none;width:139px;height:37px;color:#efd9aa;font-size:18px;padding-top:7px;float:left;cursor:pointer;text-indent:-99999px;line-height:0px;}
+.go-to-quran-txt{border:0;background:url(images/gotoquran-txtfld.png) no-repeat top;width:202px;height:37px; padding:0 0 0 2px;}
+.go-to-quran-txt input{border:0;background:none;width:198px;height:28px;color:#CC6633;font-size:16px;padding-top:7px;padding-left:5px;}
+.go-to-quran-txt-lstmnu{border:0;background:url(images/select-surah.png) no-repeat top;width:130px;height:37px; padding:0 0 0 2px;overflow: hidden;}
+.go-to-quran-txt-lstmnu select{border:none;background:none transparent;width:145px;height:25px;color:#CC6633;font-size:16px;text-indent:1000;margin-top:5px;margin-left:4px;padding-top:5px;
+-webkit-appearance:none;outline:none;}
+.go-to-quran-txt-lstmnu2{border:0;background:url(images/select-ayah-juz.png) no-repeat top;width:85px;height:37px; padding:0 0 0 2px;overflow: hidden;}
+.go-to-quran-txt-lstmnu2 select{border:none;background:none transparent;width:100px;height:25px;color:#CC6633;font-size:16px;text-indent:1000;margin-top:5px;margin-left:4px;padding-top:5px;
+-webkit-appearance:none;outline:none;}
+.go-to-hadith-lstmnu{border:0;background:url(images/goto-hadith-lstmnubg.png) no-repeat top;width:185px;height:37px; padding:0 0 0 2px;overflow: hidden;}
+.go-to-hadith-lstmnu select{border:0;background:none transparent;width:195px;height:25px;font-size:16px;text-indent:1000;padding-top:5px;padding-left:2px;margin-left:8px;margin-top:2px;color:#CC6633;font-family:Tahoma, Geneva, sans-serif;-webkit-appearance:none;outline:none;}
+.go-to-hadith-lstmnu select option{border:0;background:none transparent;margin:0;overflow:hidden;color:#CC6633;}
+.clear{clear:both;}
+#main-head table{border-collapse:separate;}
+.head-nav-botm .container-inline label{display:none;}
+
+/******** Top End*********/
+
+/* GALLERY LIST */
+.banner{ margin:0px 20px 0 20px; width:925px; height:auto;}
+.banner_left{width:435px; height:376px; float:left; margin-right:15px; background:url(images/alim-banner-left-rpt.png) repeat-x top; padding:10px 10px 2px 10px ; position:relative;}
+#gallery ul li { padding:0px; margin:0px; }
+.filmstrip .current {background-color:#F4B323;}
+#splash_body{color:#650a09;width:400px;}
+#splash_body h2{padding:4px 0px 4px 0px;margin:0px;font-size:16px;}
+#splash_body a{color:#AB392E;font-weight:bold;}
+#splash_body a:hover{color:#650a09;}
+.frame .caption{color:#491F06;float:left;font-size:11px;font-weight:bold;margin-left:3px;padding-top:8px;text-align:left;vertical-align:middle;width:50px;}
+.frame .img_wrap{float:left;width:38px;padding-top:3px;padding-left:5px;}
+.nav-prev{margin-left:-16px;padding-top:2px;-moz-padding-top:2px;}
+.nav-next{margin-right:-11px;padding-top:2px;-moz-padding-top:2px;}
+/* GALLERY END */
+.banner_right{width:435px; height:381px; float:left;  background:url(images/alim-banner-right-rpt.png) repeat-x top; padding:5px 10px 2px 10px; position:relative;}
+.banner-right-head{ width:435px; height:26px; text-align:left;}
+.banner-right-head h2{font-size:16px; color:#ffffff; margin:0;}
+.banner_right .menu{width:435px; height:30px;clear:both;}
+.banner_right .menu ul{list-style:none; margin:0px; padding:0px; }
+.banner_right .menu ul li{ list-style:none; float:left; margin:0px; padding:0px; margin-right:1px; }
+.banner_right .menu ul li a{  font-size:16px; color:#ab392e; display:block; text-decoration:none; font-weight:normal; margin:0px;  padding:6px 20px 6px 20px;}
+.banner_right .menu ul li a.selected{ font-size:16px; color:#ab392e; display:block; text-decoration:none; font-weight:normal; margin:0px; padding:6px 20px 6px 20px; background:url(images/menu-hov.gif) repeat-x;}
+.banner_right .menu ul li a:hover{font-size:16px; color:#ab392e; display:block; text-decoration:none; font-weight:normal; margin:0px; padding:6px 20px 6px 20px;  background:url(images/menu-hov.gif) repeat-x; }
+#recent-tab2,#recent-tab3,#recent-tab4{display:none;clear:both;}
+#block-views-recent_comments_new-block_1{padding-top:10px;}
+#block-views-recent_comments_new-block_1 .views-field-name-1{float:left;height:38px;text-align:left;}
+#block-views-recent_comments_new-block_1 .views-field-field-comment-url-value{float:left;height:38px;width:300px;text-align:left;}
+#user_image{float:left;padding-right:5px;text-align:left;}
+#user_image img{border:0px;outline0px;}
+#block-views-recent_comments_new-block_1 .views-row{clear:both;border-bottom:1px dotted #990000;height:38px;padding-top:5px;}
+#block-views-recent_comments_new-block_1 .views-field-name-1 a, .gotouser a{color:#650A09;}
+#block-views-recent_comments_new-block_1 .views-field-field-comment-url-value a, .hm_title{color:#4B1D06;}
+.read_more a{color:#AB392E;font-weight:600;}
+#block-views-recent_comments_new-block_1 .view-footer{padding-top:17px;}
+.search-tag .tag-search-form{padding:0px;margin: 15px 0 0;text-align:left;}
+table.tg_each, .tg_each tr, .tg_each td{border-collapse:separate;padding:0px;margin:0px;}
+.tg_each td{padding:2px;height:33px;}
+.search-tag .single-tag-rec a{background:#F5EED4;color:#660000;font-size:12px;border-bottom:1px solid #e4d0aa;border-right:1px solid #e4d0aa; font-weight:bold;padding:5px;}
+.search-tag .single-tag-rec a:hover{background:#a14f06; color:#FFFFFF;border-bottom:1px solid #daddae;border-right:1px solid #daddae;}
+.search-tag .single-tag-rec span{color:#a36624;font-size:12px;font-weight:bold;}
+#block-alim_searchtags-0 .read_more{position:absolute;bottom:15px;right:10px;}
+a.hand-icon{background:url(images/hand.gif) no-repeat; width:21px;height:9px;padding-left:25px;}
+#block-block-31, .view-recent-groups-home{clear:both;padding-top:10px;text-align:left;}
+#block-block-31 .read_more{padding-top:20px;}
+#block-block-30 .read_more{padding-top:30px;}
+.view-recent-groups-home .views-field-title a{color:#4B1D06;font-weight:normal}
+.view-recent-groups-home .views-field-title a span.hm_title{color:#650A09;font-weight:bold}
+.view-recent-groups-home .views-row{clear:both;border-bottom:1px dotted #990000;height:20px;padding-top:3px;}
+.view-recent-groups-home .read_more{padding-top:20px;}
+.cont-area{ width:935px; height:auto; float:left; margin:10px 15px 10px 15px;}
+.main-cont{width:905px; height:auto; float:left; background:url(images/main-cont-bg-rpt.png) repeat-y top; padding:0 15px 0 15px;}
+.cont-area-top{width:935px; height:30px; float:left; background:url(images/main-cont_top.png) no-repeat bottom;}
+.cont-area-btm{width:935px; height:30px; float:left; background:url(images/main-cont_btm.png) top no-repeat;}
+.main-cont-left{width:594px; height:auto; float:left; margin-right:15px; }
+.main-cont-left{width:594px; height:auto; float:left; margin-right:15px; }
+.main-cont-right{ width:294px; height:auto; float:left;}
+.main-cont-lft-box{width:594px; height:auto; float:left; margin-bottom:15px;}
+.main-cont-lft-box-top{width:584px; height:24px; float:left; background:url(images/main-cont-lft-box-top.png) no-repeat bottom ; padding:8px 0 0 10px; text-align:left;}
+.main-cont-lft-box-dts{width:574px; height:auto; float:left; background-color:#FFF; padding:0px 10px 0px 10px; text-align:left;}
+.main-cont-lft-box-btm{width:594px; height:12px; float:left; background:url(images/main-cont-lft-box-botm.png) no-repeat top ;}
+.txt-testimonial{color:#4b1d06; font-size:14px; font-weight:normal; text-align:center;}
+.main-cont-lft-upcomingbox-dts{width:594px; height:auto; float:left; background-color:#FFF;}
+.main-cont-lft-upcomingbox-btm{width:574px; height:28px; float:left; background:url(images/main-cont-lft-box-upcomingevents-botm.png) no-repeat top ; padding:6px 10px 6px 10px;}
+.events-mnu{float:left; width:574px; height:auto;}
+.events-mnu ul{list-style:none; margin:0px; padding:0px; }
+.events-mnu ul li a{ list-style:none; float:left; margin:0px; padding:0px; margin-right:2px;  padding:3px 10px 6px 10px; color:#ab392e; font-size:14px; text-decoration:none; font-weight:300; }
+.events-mnu ul li a:hover{ list-style:none; float:left; margin:0px; padding:0px; margin-right:2px;  padding:3px 10px 6px 10px; color:#ab392e; font-size:14px; text-decoration:none; font-weight:300; background:url(images/upcomingevents-mnubg.png) no-repeat;}
+.events-mnu .active{ list-style:none; float:left; margin:0px; padding:0px; margin-right:2px;  padding:3px 10px 6px 10px; color:#ab392e; font-size:14px; text-decoration:none; font-weight:300; background:url(images/upcomingevents-mnubg.png) no-repeat; height:26px;}
+.main-cont-rgt-box{width:294px; height:auto; float:left; margin-bottom:15px;}
+.main-cont-rgt-box-top{width:284px; height:24px; float:left; background:url(images/main-cont-rgt-box-top.png) no-repeat bottom ; padding:8px 0 0 10px; text-align:left;}
+.main-cont-rgt-box-dts{width:274px; height:auto; float:left; background-color:#FFF; padding:10px 10px 5px 10px; text-align:left;}
+.main-cont-rgt-box-dts-facebook{width:294px; height:auto; float:left; background-color:#FFF; text-align:left;}
+.main-cont-rgt-box-btm{width:294px; height:12px; float:left; background:url(images/main-cont-rgt-box-botm.png) no-repeat top ;}
+.main-cont-rgt-dot-rpt{margin:5px 0 5px 0; width:274px; height:5px; float:left; background:url(images/dot.png) repeat-x center;}
+.spl_text b{font-size:14px; color:#61532e;line-height:20px; margin:0; font-weight:normal;}
+.spl_text{font-size:14px; color:#b28920;line-height:20px; margin:0;padding-bottom:8px;}
+.about-us{font-size:14px; color:#5F5F5E;line-height:20px; margin:0;padding-bottom:8px;}
+.main-cont h2{font-size:16px; color:#ffffff;margin:0;}
+.main-cont h3{font-size:18px; color:#88691a;margin:0; font-weight:normal;}
+.views_slideshow_singleframe_no_display,
+.views_slideshow_singleframe_hidden,
+.views_slideshow_singleframe_controls,
+.views_slideshow_singleframe_image_count {
+  display: none;
+}
+#block-views-splash_testimonials-block_1{height:160px;padding-top:20px;}
+#views_slideshow_singleframe_teaser_section_2{top:32px;}
+.testmonial-photo{background:url(images/alim-testi-ico.jpg) no-repeat  center; width:94px; height:102px;}
+.view-splash-partner ul{ list-style:none; display:inline;padding:0px;margin:0px;}
+.view-splash-partner li{ float:left; display:inline; padding-right:10px;height:65px;}
+.view-splash-partner li a{ padding:0px;margin:0px;outline:0px;text-decoration:none;}
+.view-tweets .views-row {color:#4b1d06;margin:5px 0 5px 0;border-bottom: 1px dotted #AB392E;padding:5px 0 5px 0;}
+.more{text-align:right;padding:5px;}
+.more a{color:#AB392E;font-weight:600;}
+.view-splash-partner img{border:0px;outline:0px;}
+.view-splash-partner .views_slideshow_singleframe_main{width:563px;text-align:center;}
+.view-splash-partner .views_slideshow_singleframe_slide{width:200px;height:80px;text-align:center;}
+.test_left{background:url(images/testimonial-icolft.png) top center no-repeat;width:37px;height:84px;}
+.test_right{background:url(images/testimonial-icorgt.png) bottom center no-repeat;width:37px;height:84px;}
+.tell-friend{width:436px;height:auto;color:#650A09; position:absolute;right: 0;top: 25px;z-index: 1000; text-align:left;display:none; font-size:14px;}
+.tell-friend h2{padding:0px;margin:0px;padding-bottom:10px;font-size:18px;}
+.tell-friend .description,.tell-friend .req{ font-size:11px; color:#FF0000;}
+.tell-friend .label{width:90px;}
+.tell-friend textarea{height:100px;width:260px;margin-bottom:10px;}
+.tell-friend input{width:260px;}
+.tell-friend #edit-submit{border:0;background:url(images/send_button.png) top center no-repeat;width:57px;height:22px;cursor:pointer;text-indent:-99999px;line-height:0px;}
+#box-top{background:url(images/box-top.png) top center no-repeat; height:27px; width:436px;}
+#box-mid{background:url(images/box-mid.png) top center repeat-y;width:436px;}
+#box-bottom{background:url(images/box-bottom.png) top center no-repeat;height:13px; width:436px;}
+.views-field-field-event-image-fid{height:212px;}
+@-moz-document url-prefix() {
+    .nav-prev, .nav-next {
+        padding-top: 1px;
+    }
+}

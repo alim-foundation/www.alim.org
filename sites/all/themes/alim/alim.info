@@ -38,6 +38,10 @@ regions[goto] =  Go To
 regions[cat_count] =  category Count
 regions[menu_tab] =  Menu Tab
 regions[splash_recent_right] = Spalsh Recent Right
+regions[splash_recent_comments] = Spalsh Recent Comments
+regions[splash_recent_tags] = Spalsh Recent Tags
+regions[splash_recent_groupost] = Spalsh Recent Groupost
+regions[splash_recent_groups] = Spalsh Recent Groups
 
 ; Information added by drupal.org packaging script on 2009-12-16
 version = "6.15"
