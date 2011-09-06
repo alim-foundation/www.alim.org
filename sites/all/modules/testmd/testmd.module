@@ -165,10 +165,22 @@ function testmd_form_alters_commreply_form_alter_submit($form, &$form_state){
 	
 		 $urlcomm = $_SERVER['HTTP_REFERER']; // For getting parent page url in popup.
 		$newvalurl = str_replace($base_url.'/' , "" ,$urlcomm );
-		$urlexp = explode("/",$newvalurl);
+		/*** comment filtering ****/
+		$urlexp1 = explode("/",$newvalurl);
+		if(strpos($urlexp1[1],'?'))
+		{
+		  $urlexp1_exp = explode("?",$urlexp1[1]);
+		  $urlexp = $urlexp1_exp[0];
+		}
+		else
+		{
+		 $urlexp = $urlexp1[1];
+		}
+	
+		/*** comment filtering ****/
 		
 		   // Query the group details for mailing
-			 $grname = db_query("SELECT node.nid AS nid, node.title AS node_title FROM node node WHERE (node.status <> 0) AND (node.type IN ('creat_group')) AND (node.nid = ".$urlexp[1].")");
+			 $grname = db_query("SELECT node.nid AS nid, node.title AS node_title FROM node node WHERE (node.status <> 0) AND (node.type IN ('creat_group')) AND (node.nid = '".$urlexp."')");
 			 $grname_res = db_fetch_object($grname);
 			 $groupname = $grname_res->node_title;
 			 $groupname_val .= "<a href='".$base_url."/groupdetails/".$grname_res->nid."'>".$grname_res->node_title."</a>";
