@@ -10405,4 +10405,8 @@ border-top: 30px solid #F8F7E3 ;
     font-weight: bold;
     outline: medium none;
 }
+#popups #block-news-tag
+{
+display:none;
+}
 /* end news and views page*/
