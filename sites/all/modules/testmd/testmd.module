@@ -247,5 +247,15 @@ function testmd_form_alters_commreply_form_alter_submit($form, &$form_state){
 		}
 	}
 		 $type_name = $form_state['values']['comment_url_val']; // Hidden url field of comment posting page.
+		 $urlexp1 = $type_name;
+		if(strpos($urlexp1,'?'))
+		{
+		  $urlexp1_exp = explode("?",$urlexp1);
+		  $urlexp = $urlexp1_exp[0];
+		}
+		else
+		{
+		 $urlexp = $urlexp1;
+		}
 		 drupal_goto($type_name); // re-direct to current page
 }
