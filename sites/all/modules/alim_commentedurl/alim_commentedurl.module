@@ -1274,7 +1274,20 @@ function _alim_commentedurl_field_form_submit($form, &$form_state) {
 	}
 	$urlexp = explode("/",$type_name);
 	if($urlexp[0]!='groupdetails')
+	{
+	 $urlexp1 = $type_name;
+		if(strpos($urlexp1,'?'))
+		{
+		  $urlexp1_exp = explode("?",$urlexp1);
+		  $urlexp = $urlexp1_exp[0];
+		}
+		else
+		{
+		 $urlexp = $urlexp1;
+		}
+	 
 	 drupal_goto($type_name );	
+	}
 	return;
 }
 
