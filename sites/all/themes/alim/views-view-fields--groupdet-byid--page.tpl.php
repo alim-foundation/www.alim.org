@@ -44,7 +44,7 @@ else
 		}
 		else
 		{
-		 $urlexp = $urlexp1[1];
+		 $urlexp = $urlexp1;
 		}
 		
 // Query and check that current user is the member of the group. if true, set flag=1 for give permission to create new post to group.
