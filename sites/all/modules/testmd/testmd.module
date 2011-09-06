@@ -257,5 +257,5 @@ function testmd_form_alters_commreply_form_alter_submit($form, &$form_state){
 		{
 		 $urlexp = $urlexp1;
 		}
-		 drupal_goto($type_name); // re-direct to current page
+		drupal_goto($type_name); // re-direct to current page
 }
