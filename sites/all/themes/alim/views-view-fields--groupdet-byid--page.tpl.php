@@ -36,10 +36,10 @@ else
 <?php
 
 
-		$urlexp1 = explode("/",arg(1));
-		if(strpos($urlexp1[1],'?'))
+		$urlexp1 = arg(1);
+		if(strpos($urlexp1,'?'))
 		{
-		  $urlexp1_exp = explode("?",$urlexp1[1]);
+		  $urlexp1_exp = explode("?",$urlexp1);
 		  $urlexp = $urlexp1_exp[0];
 		}
 		else
