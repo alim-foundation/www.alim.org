@@ -10409,4 +10409,10 @@ border-top: 30px solid #F8F7E3 ;
 {
 display:none;
 }
+.view-news-list .views-field-body a
+{
+    color: #669933;
+    font-weight: bold;
+    outline: medium none;
+}
 /* end news and views page*/
