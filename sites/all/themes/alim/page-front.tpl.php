@@ -19,7 +19,7 @@ $start_time = $_SESSION['start_time'];
 							  $queryString = $_SERVER['QUERY_STRING'];
 							  $url = "http://" . $domain . $path . "?" . $queryString;
 							  $goodUrl = str_replace('index.php?','', $url);
-							  header('location:'.$goodUrl);
+							 // header('location:'.$goodUrl);
 							  
 					}
 					else
@@ -118,7 +118,7 @@ $start_time = $_SESSION['start_time'];
 								
 							
 								setcookie("rem_prof","a", 0, "/");
-								header("location:".$base_url."/userprofile");
+								//header("location:".$base_url."/userprofile");
 							}
 						}
 				
