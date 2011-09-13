@@ -29,7 +29,7 @@ class og_views_handler_field_og_managelink extends og_views_handler_field_og_uid
           $token = og_get_token($nid);
           $item = menu_get_item("og/approve/$nid/$uid/$token");
           if ($item['access']) {
-            return t('Request: <a href="@approve">approve</a> or <a href="@deny">deny</a>.', array('@approve' => url("og/approve/$nid/$uid/$token", array('query' => drupal_get_destination())), '@deny' => url("og/deny/$nid/$uid/$token", array('query' => drupal_get_destination()))));
+            return t('<a href="@approve">approve</a> or <a href="@deny">deny</a>.', array('@approve' => url("og/approve/$nid/$uid/$token", array('query' => drupal_get_destination())), '@deny' => url("og/deny/$nid/$uid/$token", array('query' => drupal_get_destination()))));
           }
         }
       }

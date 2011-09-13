@@ -21,7 +21,7 @@ $start_time = $_SESSION['start_time'];
 									  $queryString = $_SERVER['QUERY_STRING'];
 									  $url = "http://" . $domain . $path . "?" . $queryString;
 									  $goodUrl = str_replace('index.php?q=','', $url);
-									  header('location:'.$goodUrl);
+									 // header('location:'.$goodUrl);
 									 
 							}
 							else
@@ -381,7 +381,7 @@ $start_time = $_SESSION['start_time'];
 										/*-----------------------------------------------------------*/	
 											 //drupal_goto($url);
 										$goodUrl = str_replace('index.php?q=','', $url);
-									    header('location:'.$goodUrl);
+									  //  header('location:'.$goodUrl);
 								
 							}
 ?>
