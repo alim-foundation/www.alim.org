@@ -8329,12 +8329,13 @@ border:none;
 }
 .view-view-gr-req td
 {
- padding:5px;
+ padding:2px;
 
 }
-.view-view-gr-req table
+div.ContentBox .views-field-managelink .grp-det a
 {
- margin-left:10px;
+ color:#990000;
+ text-decoration:none;
 }
 
 .user-form-creat_group #edit-og-description, .user-form-creat_group #edit-title, .user-form-group_post #edit-og-description, .user-form-group_post #edit-title
