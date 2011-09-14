@@ -325,6 +325,9 @@ function og_confirm_subscribe($form_state, $gid, $node, $account) {
       '#value' => '',
    );
  }
+   if ($node->og_selective == OG_MODERATED) {
+   drupal_set_message("<span style='color:#000000;font-weight:normal'>A request to join the group will be sent to the group manager.  You will be granted access when your membership is approved.</span>");
+   }
  return confirm_form($form, 
                 t('Are you sure you want to join the group %title?', array('%title' => $node->title)),
                 'node/'. $node->nid, ' ',
