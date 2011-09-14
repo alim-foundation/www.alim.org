@@ -18,7 +18,6 @@
 <?php if($id=="title") : $title = $field->content; endif; ?>  
 
 <?php endforeach; ?>
-
 <?php
 
 // Group Manger Details from rpx data.
@@ -170,7 +169,6 @@ else
 					<?php
 					if($flag==1)
 					{
-					  
 					?>	    	
 					<div align="right">
                 <div  style="text-align:right;" >
@@ -178,7 +176,6 @@ else
 				</div>
 					</div>
 					<?php
-					 
 					}
 					else
 					{
