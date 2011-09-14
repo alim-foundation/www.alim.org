@@ -152,8 +152,20 @@ else
                         <td><strong>Posts:</strong> <?=$post_count?> </td>
                         <td><strong>Members:</strong> <?=$member_count?> </td>
                       </tr>
-                    
-                    </table><br />
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td>		
+						<?php
+					if($name==$user->name)
+					{
+					?>
+					<div><a href="../groups/manage">Manage Group</a></div>
+					<?php
+					}
+					?></td>
+                      </tr>
+                    </table>
+					<br />
 					<?=$body?>	<br /><br />
 					<?php
 					if($flag==1)
@@ -205,6 +217,6 @@ else
 						}
 					}
 					?>
-					
-						    	</div>
+			
+  </div>
 			</div>
