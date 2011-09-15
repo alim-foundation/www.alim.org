@@ -20,7 +20,7 @@ $picture = $temp_user->picture;
  else if($temp_user->rpx_data['profile']['photo']=="" && $picture=="") {?><img src='http://alim.org/sites/all/themes/alim/images/photobg.png' height="32"  width="32" align="absmiddle" />
 <?php } ?>
 </div>
-<div  style="float:left;padding-top:7px;padding-bottom:7px;width:80px;" > 
+<div  style="float:left;width:80px;text-align:left;" > 
 <strong>
 <?php
 if($temp_user->rpx_data['profile']['name']['givenName']!="")
@@ -49,7 +49,7 @@ else
 ?>
 </strong>
 </div>
-<div  style="float:left;padding-top:7px;padding-bottom:7px;" > 
+<div  style="float:left;" > 
 <?php
 print "&nbsp;:&nbsp;";
 ?>
