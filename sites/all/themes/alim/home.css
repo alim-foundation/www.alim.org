@@ -343,6 +343,10 @@ a.hand-icon{background:url(images/hand.gif) no-repeat; width:21px;height:9px;pad
 #box-mid{background:url(images/box-mid.png) top center repeat-y;width:436px;}
 #box-bottom{background:url(images/box-bottom.png) top center no-repeat;height:13px; width:436px;}
 .views-field-field-event-image-fid{height:212px;}
+#block-views-recent_groups_home-block_1 .view-content
+{
+ height:280px;
+}
 @-moz-document url-prefix() {
     .nav-prev, .nav-next {
         padding-top: 1px;
