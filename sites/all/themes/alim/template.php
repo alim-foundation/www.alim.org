@@ -674,7 +674,7 @@ function phptemplate_preprocess_page(&$vars) {
  	//unset($crumb[$c-1]);
  	$newhead_tit = strip_tags(implode(' | ', $crumb ));
 	if(count($head_title)>1)	{
- 	$vars['head_title']        = $head_title[0].' | '.$newhead_tit.' | '.$head_title[1];
+ 	$vars['head_title']        = $head_title[0].' | '.$head_title[1];
 	}	else	{
 	 $vars['head_title']        = $newhead_tit.' | '.$head_title[0];
 	}
