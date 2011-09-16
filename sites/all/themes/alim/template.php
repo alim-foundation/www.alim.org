@@ -1806,7 +1806,7 @@ function print_masterhead(){
     $alias = explode("/",$preAlias);
 	
 	if(arg(0)=='blogs' || $alias[1]=='blog'){ $masthead = "Blogs";}
-	
+	if(arg(0)=='news' || $alias[1]=='news'){ $masthead = "News & Views";}
 	
 	
 	return $masthead;
