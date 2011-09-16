@@ -324,6 +324,7 @@ $start_time = $_SESSION['start_time'];
 <div style="background:#F9D350;color:#A94C17" id="load_timediv"></div>
 </div>
 <script type="text/javascript" src="/misc/jquery.js?D"></script>
+<script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
 <script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.galleryview-2.1.1.js"/></script>
 <script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.timers-1.2.js"/></script>
 <script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.easing.1.3.js"/></script>	
@@ -480,6 +481,51 @@ $time_taken = round($time_taken_sec,5);
    
   document.getElementById('load_timediv').innerHTML = 'Total elapsed time: '+totaltime_display.toFixed(4)+' sec. ==> Server: '+disptime+' sec. | User (e.g. : browser,network,internet): '+seconds.toFixed(4) +' sec.';
    });
+
+</script>
+<script type="text/javascript" charset="utf-8">
+  var feedback_widget_options = {};
+
+  feedback_widget_options.display = "overlay";  
+  feedback_widget_options.company = "alim_foundation";
+  feedback_widget_options.placement = "left";
+  feedback_widget_options.color = "#222";
+  feedback_widget_options.style = "idea";
+
+ var feedback_widget = new GSFN.feedback_widget(feedback_widget_options); 
+</script>
+<script type="text/javascript"> 
+var _gaq = _gaq || [];_gaq.push(["_setAccount", "UA-15658414-1"]);_gaq.push(["_trackPageview"]);var plstart = new Date();
+window.onload=function() {
+
+	var plend = new Date();
+	var plload = plend.getTime() - plstart.getTime();
+	// determine the thresholds
+	if(plload<2000)
+	lc = "Very Fast";
+	else if (plload<5000)
+	lc = "Fast";
+	else if (plload<10000)
+	lc = "Medium";
+	else if (plload<30000)
+	lc = "Sluggish";
+	else if (plload<45000)
+	lc = "Slow";
+	else
+	lc="Very Slow";
+	
+	var fn = document.location.pathname;
+	if( document.location.search)
+	fn += document.location.search;
+	try
+	{
+	_gaq.push("_trackEvent","Page Load",lc +" Loading Pages", fn,Math.round(plload/1000));
+	}
+	catch(err)
+	{
+	}
+
+}
 
 </script>
 </body>
