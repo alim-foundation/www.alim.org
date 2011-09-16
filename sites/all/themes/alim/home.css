@@ -181,7 +181,7 @@ div#searchalim{float:left;}
 div#top-icons{float:left;position:absolute;right:0px;top:-10px;}
 div#searchalim ul#nav  { background: transparent url(images/mnu-nav.png) no-repeat 0 0;  color:#893d00; }
 div#gotoquran ul#nav { background: transparent url(images/mnu-nav.png) no-repeat 0 -31px; }
-div#gotohadith ul#nav  { background: transparent url(images/mnu-nav.png) no-repeat 0 -62px; }
+div#gotohadith ul#nav { background: transparent url(images/mnu-nav.png) no-repeat 0 -62px; }
 ul#nav li{text-align:left;}
 ul#nav li a {position: absolute;top: 0;width: 155px;color:#FFF;font-size:16px;text-decoration: none;padding: 8px 0 0 0px;overflow: hidden;height: 31px !important; height /**/:31px; /* IE5/Win */background: transparent url(images/mnu-nav.png) no-repeat;padding-left:15px;}
 ul#nav li a:hover{color:#893d00;}
@@ -235,7 +235,7 @@ div#gotohadith li#goha a:hover		{ background-position: -276px -62px; }
 #splash_body h2{padding:4px 0px 4px 0px;margin:0px;font-size:16px;}
 #splash_body a{color:#AB392E;font-weight:bold;}
 #splash_body a:hover{color:#650a09;}
-.frame .caption{color:#491F06;float:left;font-size:11px;font-weight:bold;margin-left:3px;padding-top:8px;text-align:left;vertical-align:middle;width:50px;}
+.frame .caption{color:#491F06;float:left;font-size:11px;font-weight:bold;margin-left:3px;padding-top:6px;text-align:left;vertical-align:middle;width:50px;}
 .frame .img_wrap{float:left;width:38px;padding-top:3px;padding-left:5px;}
 .nav-prev{margin-left:-16px;padding-top:2px;-moz-padding-top:2px;}
 .nav-next{margin-right:-11px;padding-top:2px;-moz-padding-top:2px;}
@@ -283,19 +283,26 @@ a.hand-icon{background:url(images/hand.gif) no-repeat; width:21px;height:9px;pad
 .main-cont-left{width:594px; height:auto; float:left; margin-right:15px; }
 .main-cont-right{ width:294px; height:auto; float:left;}
 .main-cont-lft-box{width:594px; height:auto; float:left; margin-bottom:15px;}
-.main-cont-lft-box-top{width:584px; height:24px; float:left; background:url(images/main-cont-lft-box-top.png) no-repeat bottom ; padding:8px 0 0 10px; text-align:left;}
+.event-div{height:255px;}
+.event-div-new{height:211px;}
+.main-cont-lft-box-top{width:584px; height:28px; float:left; background:url(images/main-cont-lft-box-top.png) no-repeat bottom ; padding:3px 0 0 10px; text-align:left;}
 .main-cont-lft-box-dts{width:574px; height:auto; float:left; background-color:#FFF; padding:0px 10px 0px 10px; text-align:left;}
 .main-cont-lft-box-btm{width:594px; height:12px; float:left; background:url(images/main-cont-lft-box-botm.png) no-repeat top ;}
 .txt-testimonial{color:#4b1d06; font-size:14px; font-weight:normal; text-align:center;}
 .main-cont-lft-upcomingbox-dts{width:594px; height:auto; float:left; background-color:#FFF;}
-.main-cont-lft-upcomingbox-btm{width:574px; height:28px; float:left; background:url(images/main-cont-lft-box-upcomingevents-botm.png) no-repeat top ; padding:6px 10px 6px 10px;}
-.events-mnu{float:left; width:574px; height:auto;}
+.main-cont-lft-upcomingbox-btm{position:absolute;width:574px; height:28px; float:left; background:url(images/main-cont-lft-box-upcomingevents-botm.png) no-repeat top ; padding:6px 10px 6px 10px;z-index:9999}
+.events-mnu{float:left; width:574px; height:auto;z-index:99999}
 .events-mnu ul{list-style:none; margin:0px; padding:0px; }
 .events-mnu ul li a{ list-style:none; float:left; margin:0px; padding:0px; margin-right:2px;  padding:3px 10px 6px 10px; color:#ab392e; font-size:14px; text-decoration:none; font-weight:300; }
 .events-mnu ul li a:hover{ list-style:none; float:left; margin:0px; padding:0px; margin-right:2px;  padding:3px 10px 6px 10px; color:#ab392e; font-size:14px; text-decoration:none; font-weight:300; background:url(images/upcomingevents-mnubg.png) no-repeat;}
 .events-mnu .active{ list-style:none; float:left; margin:0px; padding:0px; margin-right:2px;  padding:3px 10px 6px 10px; color:#ab392e; font-size:14px; text-decoration:none; font-weight:300; background:url(images/upcomingevents-mnubg.png) no-repeat; height:26px;}
+
+.events-mnu a{ float:left; margin:0px; margin-right:2px;  padding:3px 10px 6px 10px; color:#ab392e; font-size:14px; text-decoration:none; font-weight:300; z-index:99999}
+.events-mnu a:hover{ float:left; margin:0px; margin-right:2px;  padding:3px 10px 6px 10px; color:#ab392e; font-size:14px; text-decoration:none; font-weight:300; background:url(images/upcomingevents-mnubg.png) no-repeat;z-index:99999}
+.events-mnu a.activeSlide{  float:left; margin:0px; padding:0px; margin-right:2px;  padding:3px 10px 6px 10px; color:#ab392e; font-size:14px; text-decoration:none; font-weight:300; background:url(images/upcomingevents-mnubg.png) no-repeat; height:26px;z-index:99999}
+
 .main-cont-rgt-box{width:294px; height:auto; float:left; margin-bottom:15px;}
-.main-cont-rgt-box-top{width:284px; height:24px; float:left; background:url(images/main-cont-rgt-box-top.png) no-repeat bottom ; padding:8px 0 0 10px; text-align:left;}
+.main-cont-rgt-box-top{width:284px; height:28px; float:left; background:url(images/main-cont-rgt-box-top.png) no-repeat bottom ; padding:3px 0 0 10px; text-align:left;}
 .main-cont-rgt-box-dts{width:274px; height:auto; float:left; background-color:#FFF; padding:10px 10px 5px 10px; text-align:left;}
 .main-cont-rgt-box-dts-facebook{width:294px; height:auto; float:left; background-color:#FFF; text-align:left;}
 .main-cont-rgt-box-btm{width:294px; height:12px; float:left; background:url(images/main-cont-rgt-box-botm.png) no-repeat top ;}
@@ -312,7 +319,7 @@ a.hand-icon{background:url(images/hand.gif) no-repeat; width:21px;height:9px;pad
   display: none;
 }
 #block-views-splash_testimonials-block_1{height:160px;padding-top:20px;}
-#views_slideshow_singleframe_teaser_section_2{top:32px;}
+#views_slideshow_singleframe_teaser_section_2{top:31px;}
 .testmonial-photo{background:url(images/alim-testi-ico.jpg) no-repeat  center; width:94px; height:102px;}
 .view-splash-partner ul{ list-style:none; display:inline;padding:0px;margin:0px;}
 .view-splash-partner li{ float:left; display:inline; padding-right:10px;height:65px;}
@@ -336,6 +343,10 @@ a.hand-icon{background:url(images/hand.gif) no-repeat; width:21px;height:9px;pad
 #box-mid{background:url(images/box-mid.png) top center repeat-y;width:436px;}
 #box-bottom{background:url(images/box-bottom.png) top center no-repeat;height:13px; width:436px;}
 .views-field-field-event-image-fid{height:212px;}
+#block-views-recent_groups_home-block_1 .view-content
+{
+ height:280px;
+}
 @-moz-document url-prefix() {
     .nav-prev, .nav-next {
         padding-top: 1px;

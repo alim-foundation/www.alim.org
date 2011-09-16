@@ -30,8 +30,8 @@ if($id=="field_read_more_value")  $field_read_more_value = $field->content; //re
  
 <?php endforeach; ?>
  <div class="heading_div"><h2><?=$title?></h2></div>
-					   <div class="spl_text">
-					  <?=$body?><div class="read_more" align="right"><a href="<?=$base_url?>/<?=$field_read_more_value?>" class="hand-icon">Read More</a></div>
+					   <div class="about-us">
+					  <?=$body?>
 					   </div>
 					   
   	

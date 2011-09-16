@@ -1,10 +1,14 @@
 <?php
+/**
+Note : We didn't include $style & $script variables in this page because it affecting the page load. 
+You need to include each js files and css files of modules, themes etc in this page.
+**/
+
 global $base_url;
 global $theme_path;
-//$start_time = microtime(TRUE);
 $start_time = $_SESSION['start_time'];
-		
-                  //Cookie setting for login remeber for 14 days..   
+
+          //Cookie setting for login remeber for 14 days..   
 				 if(!($_COOKIE['remember']))
 				 {
 					 if(($_COOKIE['rem_uid'])!=$user->uid||$user->uid==0)
@@ -118,329 +122,338 @@ $start_time = $_SESSION['start_time'];
 								
 							
 								setcookie("rem_prof","a", 0, "/");
-								//header("location:".$base_url."/userprofile");
+							    //header("location:".$base_url."/userprofile");
 							}
 						}
-				
-				?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language ?>" lang="<?php print $language->language ?>" dir="<?php print $language->dir ?>">
-  <head>
-    <script type="text/javascript"> 
-   var startTime = (new Date()).getTime(); 
-</script>
-    <?php print $head ?>
-	
-    <title>Alim - The World's Most Useful Islamic Software</title>
-	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-	<meta HTTP-EQUIV="accept-encoding" CONTENT="gzip,deflate">
 
-	<?php print $styles ?>
-	    <!--[if lt IE 7]>
-      <?php print phptemplate_get_ie_styles(); ?>
-    <![endif]-->
-	
-		     
-    <?php print $scripts ?>
-	<script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>	
-<script language="javascript" type="text/javascript"  src="<?php print $base_url."/".$theme_path;?>/galleryview/jquery.galleryview-2.1.1.js"/></script>
-	<script language="javascript">
-		function fixprogressbar()
-		{
-		top.garbageframe.document.write("");
-		top.garbageframe.close();
-		return
-		}	
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $language->language ?>" lang="<?php echo $language->language ?>" dir="<?php echo $language->dir ?>">
+<head>
+<?php echo $head; ?>
+	<title>Alim - The World's Most Useful Islamic Software</title>
+	<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/alim/home.css" />
+	<!--[if gte IE 9]>
+	<style>
+	.nav-prev {padding-top:1px;}
+	.nav-next {padding-top:1px;}
+	</style>
+	<![endif]-->
+	<script type="text/javascript"> 
+  	 var startTime = (new Date()).getTime(); 
 	</script>
 
 </head>
-<?php
-// flush the buffer
-flush();
-?>
-<body onload="fixprogressbar()">
+<body>
+<div class="beta_tag1"></div>
+<div id="outer_div" align="center">
+	<div id="main_div">
+	
+		<div id="top_menu" align="center">
+		   	<div id="top_menu_left"></div>
+			<div id="top_menu_middle">
+			  <?php echo $header; ?> 
+			</div> 
+			<div id="top_menu_middle_second" style="color:#990000;font-weight:bold;" align="right">
+				<?php 
+					// RPX Login. if getting user id shows 'My Profile' Link on top grey menu bar.
+					if($user->uid){
+					?>
+					<?php echo l("My Profile",'userprofile'); ?>&nbsp;&nbsp;
+					<?php echo l("Logout","logout"); ?>
+					<? } else {?>
+					<?php echo $rpx_login ; ?> <?
+					}?>&nbsp;&nbsp;
+					<a  href="<?=$base_path?>" title="Home"><img src="<?php echo $base_url."/".$theme_path;?>/images/alim-home.png" alt="Home" width="25" height="25"  border="0" align="absmiddle" title="Home" /></a>
+			</div>
+			<div id="top_menu_right"></div>
+	     </div>
+		<div style="clear:both"></div>
+		
+		<div id="head_div">
+				<div id="top_menu2" align="center">
+			 		<div id="logo1" align="left">
+						<a  href="<?=$base_path?>" title="Home" >
+							<img src="<?php echo $base_url."/".$theme_path;?>/images/alim-logo1.png" width="262" height="61" border="0" />
+						</a>
+					</div>
+					<div id="top_menu_middle2">
+						<a href="<?php echo $base_url?>/library/quran/surah/arabic/1/ARB"  >
+							<img src="<?php echo $base_url."/".$theme_path;?>/images/startbut.png" width="234" height="62" border="0" />
+						</a>
+					</div>
+					<div class="front_donate">
+						<a href="<?=$base_url?>/donate/pp/cancel">
+							<img src="<?=$base_url?>/<?=$theme_path?>/images/paypal.gif" alt="" width="92" height="26" border="0" >
+						</a>	
+				 	</div>
+               </div>
+	   </div>
+	  <div style="clear:both"></div>
+	  <div id="top_content"></div>
+	  <div id="middle_content">
+			<div style="clear:both"></div>
+			<?php echo $splash_top; ?>
+			
+			<div style="clear:both;"></div>
+	  		<div class="banner">
+        		<div class="banner_left">
+					 <?php echo $splash_header; ?>
+				</div>
+				<div class="banner_right">
+					<div class="banner-right-head"> <h2> Recent Activity </h2> </div>
+					<div class="menu">
+						<ul>
+							<li id="re-tab1"> <a href="javascript:void(0)" class="selected">Comments </a></li>
+							<li id="re-tab2"><a href="javascript:void(0)">Tags</a> </li>
+							<li id="re-tab3"><a href="javascript:void(0)">Group Posts </a> </li>
+							<li id="re-tab4"><a href="javascript:void(0)">Groups </a> </li>
+						</ul>
+                    </div>
+					<div class="banner-right-cont" id="recent-tab1"><?php echo $splash_recent_comments;?></div>
+					<div class="banner-right-cont" id="recent-tab2"><?php echo $splash_recent_tags;?></div>
+					<div class="banner-right-cont" id="recent-tab3"><?php echo $splash_recent_groupost;?></div>
+					<div class="banner-right-cont" id="recent-tab4"><?php echo $splash_recent_groups;?></div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+			
+			        <div class="clear"></div>
+      <div class="cont-area">
+          <div class="cont-area-top"></div>
+          <div class="main-cont">
+		  	<div class="main-cont-left">
+                <div class="main-cont-lft-box event-div">
+         	    <div class="main-cont-lft-box-top"> <h3> Noteworthy Events </h3> </div>
+ 				  <div class="event-div-new" id="event-div-new">
+                   	 <?php
+					 print $splash_recent;
+					 ?>
+					 </div>
+					<div class="main-cont-lft-upcomingbox-btm">
+                  		<div class="events-mnu" id="nav2"></div>
+                    </div>
+                   </div>
+
+					<div class="main-cont-lft-box">
+                   	  <div class="main-cont-lft-box-top"> <h3> Testimonials </h3> </div>
+                        <div class="main-cont-lft-box-dts">
+                          <?php print $splash_testimonialst; ?>
+						  <div class="read_more" align="right" style="padding-right:40px;padding-top:8px;clear:both"><a href='<?=$base_url?>/testimonials'><img src="<?=$base_url?>/<?=$theme_path?>/images/hand.png" alt="hand-icon" border="0" align="absmiddle" />&nbsp;&nbsp;Read Testimonials</a></div>
+               		  </div>
+           			<div class="main-cont-lft-box-btm"></div>
+                    </div>
+					
+					<div class="main-cont-lft-box">
+                   	  <div class="main-cont-lft-box-top"> <h3> About Us</h3> </div>
+                        <div class="main-cont-lft-box-dts">
+                          <?php print $splash_about; ?>
+						  <div class="read_more" align="right" style="padding-right:40px;padding-top:8px;clear:both"><a href='<?=$base_url?>/aboutus'><img src="<?=$base_url?>/<?=$theme_path?>/images/hand.png" alt="hand-icon" border="0" align="absmiddle" />&nbsp;&nbsp;Read More</a></div>
+               		  </div>
+           			<div class="main-cont-lft-box-btm"></div>
+                    </div>
+					
+					<div class="main-cont-lft-box">
+                   	  <div class="main-cont-lft-box-top"> <h3>Related Islamic Resources </h3> </div>
+                        <div class="main-cont-lft-box-dts">
+							<div class="marquee" id="mycrawler2">
+                          		<?php print $splash_partners; ?>
+							</div>
+						 </div>
+           			<div class="main-cont-lft-box-btm"></div>
+                    </div>
+					
+				 </div>
+				
+				     <div class="main-cont-right">
+					 
+                	<div class="main-cont-rgt-box">
+                    	<div class="main-cont-rgt-box-top"><h3> News &amp; Views </h3></div>
+                        <div class="main-cont-rgt-box-dts">
+                        	<?php print $splash_news; ?>
+                        </div>
+                        <div class="main-cont-rgt-box-btm"></div>
+                    </div>
+					
+					<div class="main-cont-rgt-box">
+                    	<div class="main-cont-rgt-box-top"><h3> Top Blogs  </h3></div>
+                        <div class="main-cont-rgt-box-dts">
+                        	<?php print $splash_topblogs; ?>
+                        </div>
+                        <div class="main-cont-rgt-box-btm"></div>
+                    </div>
+					
+					<div class="main-cont-rgt-box">
+                    	<div class="main-cont-rgt-box-top"><h3> Find us on Facebook </h3></div>
+                        <div class="main-cont-rgt-box-dts-facebook">
+                        	<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FAlimorg%2F297595908861&amp;width=292&amp;colorscheme=light&amp;show_faces=true&amp;border_color=%23ffffff&amp;stream=false&amp;header=false&amp;height=258" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:258px;" allowTransparency="true"></iframe>
+                        </div>
+                        <div class="main-cont-rgt-box-btm"></div>
+                    </div>
+					
+					 <div class="main-cont-rgt-box">
+                    	<div class="main-cont-rgt-box-top"><h3> Twitter Stream  </h3></div>
+                        <div class="main-cont-rgt-box-dts">
+                        	<?php print $splash_twitter; ?>
+                        </div>
+                        <div class="main-cont-rgt-box-btm"></div>
+                    </div>
+					
+					
+				   </div>
+				
+		  </div>
+		  <div class="cont-area-btm"></div>
+	  </div>
+		
+	  </div>
+	  <div id="bottom_content"></div>
+	</div>
+	<div style="clear:both"></div>	
+	
+	<div id="footer_div" align="center" >
+	  <div id="footer_content" align="center">
+		  <div id="footer_head" align="center"><br /><br />&nbsp;&nbsp;&nbsp; &copy; All Rights 2010 Alim.org</div>
+		  <div id="footer_menu">
+		   <?php echo $footer; ?>
+		  </div>
+	  </div>
+	   <div style="clear:both"></div>
+	</div>
+
+<div style="background:#F9D350;color:#A94C17" id="load_timediv"></div>
+</div>
+<script type="text/javascript" src="/misc/jquery.js?D"></script>
+<script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
+<script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.galleryview-2.1.1.js"/></script>
+<script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.timers-1.2.js"/></script>
+<script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.easing.1.3.js"/></script>	
+<script type="text/javascript" src="/sites/all/themes/alim/jquery.cycle.all.js"></script>
+<script type="text/javascript" src="/sites/all/themes/alim/crawler.js?k"></script>
 <script type="text/javascript">
+marqueeInit({
+			   uniqueid: 'mycrawler2',
+							style: {
+								'padding': '2px',
+								'width': '556px',
+								'height': '65px',
+								'padding-bottom': '5px'
+							},
+							inc: 1, //speed - pixel increment for each iteration of this marquee's movement
+							mouse: 'pause', //mouseover behavior ('pause' 'cursor driven' or false)
+							moveatleast: 2,
+							neutral: 150,
+							savedirection: true
+						});
+
+$(document).ready(function() {
+    $('#views_slideshow_singleframe_teaser_section_1').cycle({
+		fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+	});
+	
+});
+
+$(document).ready(function() {
+    $('#views_slideshow_singleframe_teaser_section_2').cycle({
+		fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+		pager:  '#nav2',
+	});
+	
+});
+
+   
 $(document).ready(function(){
   $('#gallery').show();
    $('#gallery_ini').hide();
 	$('#gallery').galleryView({
-	 gallery_width: 920,
-	 gallery_height: 290,
-     panel_width: 920,
-	 panel_height: 237,
-	 frame_width: 135,
-	 frame_height: 34,
+	 gallery_width: 440,
+	 gallery_height: 370,
+     panel_width: 440,
+	 panel_height: 323,
+	 frame_width: 110,
+	 frame_height: 16,
 	 frame_scale: 'nocrop',
 	 frame_opacity: 1.0,
 	 frame_gap: 10,
 	 frame_caption_size:5,
 	 pointer_size:8,
 	 filmstrip_margin:3,
-	 show_captions:true});
+	 show_captions:true,
+	 transition_speed: 1200,  //INT - duration of panel/frame transition (in milliseconds)
+     transition_interval: 4000
+	 
+	 });
 	
  });
-
-</script>
-<div class="beta_tag1"></div>
-<div id="outer_div" align="center"><!--- outer_div --->
-
-	<div id="main_div"><!--- main_div --->
-	
-	   <div id="top_menu" align="center">
-		   		    	
-			   <div id="top_menu_left"></div>
-			   <div id="top_menu_middle">
-			   
-			 
-			    <?php print $header; ?> </div> <div id="top_menu_middle_second" style="color:#990000;font-weight:bold;" align="right">
-					
-			    
-				<?php 
-				// RPX Login. if getting user id shows 'My Profile' Link on top grey menu bar.
-				if($user->uid){
-				?>
-				<?php print l("My Profile",'userprofile'); ?>
-&nbsp;&nbsp;
-				<?php print l("Logout","logout"); ?>
-				<? } else {?>
-				
-				
-				<?php print $rpx_login ; ?> <?
-				
-				}?>&nbsp;&nbsp;
-				
-				<a  href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-home.png" alt="Home" width="25" height="25"  border="0" align="absmiddle" title="Home" /></a>
-				</div>
-						  
-			   <div id="top_menu_right"></div>
-		
-	  </div>
-			<div style="clear:both"></div>
-			
-						
-		    <div id="head_div">
-			
-		
-			
-			   <div id="top_menu2" align="center">
-                   
-			   
-			 	<div id="logo1" align="left"><a  href="<?=$base_path?>" title="Home" ><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo1.png" width="262" height="61" border="0" /></a></div>
-				<div id="top_menu_middle2"><a href="<?php print $base_url?>/library/quran/surah/arabic/1/ARB"  ><img src="<?php print $base_url."/".$theme_path;?>/images/startbut.png" width="234" height="62" border="0" /></a></div>
-				<div class="front_donate">
-			<a href="<?=$base_url?>/donate/pp/cancel">
-					<img src="<?=$base_url?>/<?=$theme_path?>/images/paypal.gif" alt="" width="92" height="26" border="0" >				</a>				</div>
-              </div><div style="clear:both"></div>
-			    
-	        </div>
-			<div style="clear:both"></div>
-	<div class="test_top">
-			<!--<div class="test_topinner" >
-				<div id="splash_search">
-			<div  class="splash_searchinner" align="center" >
-			  <div class="splash_search_box"><?php if ($search_box): ?><div id="search-home" ><?php print $search_box ?></div><?php endif; ?></div>
-			  </div>
-			 </div>
-			 </div>-->
-		</div>
-
-	<div class="test_middle" align="center">
-				<div style="clear:both"></div>
-			<?php print $splash_top; ?>
-			<div style="clear:both;"></div>
-			<div id="head_content">
-			      
-				   <div id="top_heading">
-				   <?php print $splash_header; ?>
-					</div>
-
-			</div>
-			
-			
-			
-			<div class="divder"></div>
-			
-			<div class="recent_activity">
-
-		 			<div class="heading_div"><h2>Recent Activity</h2></div>
-                     <div style="float:left;width:453px;">
-					 <?php
-					 print $splash_recent;
-					 ?>
-					 </div>
-					 <div style="float:left;width:453px;">
-					 <?php
-                     print $splash_recent_right;
-					 ?>
-					 </div>
-					 <div style="clear:both"></div>
-
-					  <?php
-
-				  print $splash_rss;
-
-				  ?>
-
-				
-
-			 </div>
-
-           <div class="divder"></div>
-		   
-				<div id="div_about_us">
-				
-				   <div id="about1">
-				   <?php print $splash_about; ?>
-				   	  
-					</div>
-					
-					<div id="non_profit">
-					<?php print $splash_nonprofit; ?>
-				   	   
-					</div>
-					
-				</div>
-				
-			<div class="divder"></div>
-            <div id="div_middle_second">
-			   <div id="second_left">
-			     <div id="testimony">
-			
-				 	<div id="library">
-					
-					<?php print $splash_library; ?>
-					  
-					</div>
-					
-					 <div id="application">
-					   <?php print $splash_applications; ?>
-					</div>
-					
-					<div class="divder"></div> 
-					
-					<div id="testimonials">
-					
-						   <div class="heading_div"><h2>Testimonials</h2></div>
-								   <?php print $splash_testimonialst; ?>
-								   		
-						
-					</div>
-					<div class="read_more" align="right" style="padding-right:40px;padding-top:8px;"><a href='<?=$base_url?>/testimonials' class="hand-icon">Read Testimonials</a></div>
-			
-				 
-				 </div>
-				 <div id="partners">
-				    
-						<div id="partner_list">
-						   <div class="heading_div"><h2>Related Islamic Resources</h2></div>
-							   <div class="marquee" id="mycrawler2">
-					
-							  <?php print $splash_partners; ?>
-					
-
-                                </div>
-
-
-
-
-<script type="text/javascript">
-marqueeInit({
-	uniqueid: 'mycrawler2',
-	style: {
-		'padding': '2px',
-		'width': '556px',
-		'height': '65px',
-		'padding-bottom': '4px'
-	},
-	inc: 1, //speed - pixel increment for each iteration of this marquee's movement
-	mouse: 'pause', //mouseover behavior ('pause' 'cursor driven' or false)
-	moveatleast: 2,
-	neutral: 150,
-	savedirection: true
+ 
+ 
+$("#div-close").click(function() {
+$("#tell-friend").hide();
 });
+
+$("#email-show").click(function() {
+$("#tell-friend").show();
+});
+
+ 
+$("#re-tab1").click(function() {
+$("#recent-tab1").show();
+$("#re-tab2 a").removeClass("selected");
+$("#re-tab3 a").removeClass("selected");
+$("#re-tab4 a").removeClass("selected");
+$("#re-tab1 a").addClass("selected");
+$("#recent-tab2").hide();
+$("#recent-tab3").hide();
+$("#recent-tab4").hide();
+});
+
+$("#re-tab2").click(function() {
+$("#recent-tab2").show();
+$("#re-tab1 a").removeClass("selected");
+$("#re-tab3 a").removeClass("selected");
+$("#re-tab4 a").removeClass("selected");
+$("#re-tab2 a").addClass("selected");
+$("#recent-tab1").hide();
+$("#recent-tab3").hide();
+$("#recent-tab4").hide();
+});
+
+$("#re-tab3").click(function() {
+$("#recent-tab3").show();
+$("#re-tab1 a").removeClass("selected");
+$("#re-tab2 a").removeClass("selected");
+$("#re-tab4 a").removeClass("selected");
+$("#re-tab3 a").addClass("selected");
+$("#recent-tab1").hide();
+$("#recent-tab2").hide();
+$("#recent-tab4").hide();
+});
+
+$("#re-tab4").click(function() {
+$("#recent-tab4").show();
+$("#re-tab1 a").removeClass("selected");
+$("#re-tab2 a").removeClass("selected");
+$("#re-tab3 a").removeClass("selected");
+$("#re-tab4 a").addClass("selected");
+$("#recent-tab1").hide();
+$("#recent-tab2").hide();
+$("#recent-tab3").hide();
+});
+
+
 </script>
-					
-						</div>
-					
-				 
-				 </div>
-			   </div>
-			   <div id="second_right">
-			      <div class="newsblog">
-				      
-					 <div id="news">
-					 
-					   <div class="heading_div"><h2>News</h2></div>
-					   <?php print $splash_news; ?>
-					
-					</div>
-				  
-				  </div>
-				  <div class="newsblog">
-				  
-				     <div id="blogs">
-					   <div class="heading_div"><h2>Top Blogs</h2></div>
-					   <?php print $splash_topblogs; ?>
-					
-					 
-					</div>
-					
-				  
-				  </div>
-				  <div class="newsblog">
-				  
-				    <div id="twitter">
-					   <div class="heading_div"><h2>Twitter </h2></div>
-					   <div class="spl_text">
-					   	<?php print $splash_twitter; ?>					   
-					   </span>
-					   </div>
-					</div>
-				  
-				  
-				  </div>
-				  
-				  
-			   </div>
-			   
-			   <div style="clear:both"></div>
-			   
-			   
-			</div>	
-	
-	<div style="clear:both"></div>
-	
-
-	 
-
-		
-	</div>
-	
-
-	
-<div class="test_bottom"></div>
-					
-	
-	
-	</div><!--- main_div --->
-</div><!--- outer_div --->
-<!---------------- Footer Start -------------------->
-
-<div style="clear:both"></div>
-	<!---------------- Footer Start -------------------->
-	<div id="footer_div" align="center" >
-	  <div id="footer_content" align="center">
-		  <div id="footer_head" align="center"><br /><br />&nbsp;&nbsp;&nbsp; &copy; All Rights 2010 Alim.org</div>
-		  <div id="footer_menu">
-		   <?php print $footer; ?>
-		     
-		  </div>
-	  </div>
-	   <div style="clear:both"></div>
-	</div>
-	<!---------------- Footer End -------------------->
-<div style="background:#F9D350;color:#A94C17" id="load_timediv"></div>
+<script type="text/javascript" src="/sites/all/modules/nice_menus/nice_menus.js?D"></script>
+    <script type="text/javascript" src="https://rpxnow.com/openid/v2/widget"></script>
+    <script type="text/javascript">
+      <!-- Begin RPX Sign In from JanRain. Visit http://www.rpxnow.com/ -->
+      RPXNOW.token_url = "http://alim.org/rpx/end_point?destination=node%2F163643";
+      RPXNOW.realm = "alim-foundation.rpxnow.com";
+      RPXNOW.overlay = true;
+      RPXNOW.language_preference = "en";
+      RPXNOW.flags = "delay_domain_check";
+      RPXNOW.ssl = true;
+      <!-- End RPX Sign In -->
+  </script>
 <?php
 $end_time = microtime(TRUE);
 $time_taken_sec = $end_time - $start_time;
@@ -460,18 +473,16 @@ $time_taken = round($time_taken_sec,5);
 	   var seconds = (millisecondsLoading/1000);
 	   var htmlStr = 'Total load time in seconds : '+seconds+' :: in ms :' + millisecondsLoading;
 		
-  server_time=<?php print $server_timemilli; ?>; // for ajax insert
+  server_time=<?php echo $server_timemilli; ?>; // for ajax insert
   browser_time=  millisecondsLoading; // for ajax insert
   
-  var disptime = <?php print $time_taken; ?>;
+  var disptime = <?php echo $time_taken; ?>;
   var totaltime_display =  seconds + disptime;
    
   document.getElementById('load_timediv').innerHTML = 'Total elapsed time: '+totaltime_display.toFixed(4)+' sec. ==> Server: '+disptime+' sec. | User (e.g. : browser,network,internet): '+seconds.toFixed(4) +' sec.';
    });
 
-</script> 
-	 <?php print $closure ?>
-<iframe name="garbageframe" id="garbageframe" style="display:none;" ></iframe>
+</script>
 <script type="text/javascript" charset="utf-8">
   var feedback_widget_options = {};
 
@@ -483,5 +494,40 @@ $time_taken = round($time_taken_sec,5);
 
  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options); 
 </script>
+<script type="text/javascript"> 
+var _gaq = _gaq || [];_gaq.push(["_setAccount", "UA-15658414-1"]);_gaq.push(["_trackPageview"]);var plstart = new Date();
+window.onload=function() {
+
+	var plend = new Date();
+	var plload = plend.getTime() - plstart.getTime();
+	// determine the thresholds
+	if(plload<2000)
+	lc = "Very Fast";
+	else if (plload<5000)
+	lc = "Fast";
+	else if (plload<10000)
+	lc = "Medium";
+	else if (plload<30000)
+	lc = "Sluggish";
+	else if (plload<45000)
+	lc = "Slow";
+	else
+	lc="Very Slow";
+	
+	var fn = document.location.pathname;
+	if( document.location.search)
+	fn += document.location.search;
+	try
+	{
+	_gaq.push("_trackEvent","Page Load",lc +" Loading Pages", fn,Math.round(plload/1000));
+	}
+	catch(err)
+	{
+	}
+
+}
+
+</script>
 </body>
 </html>
+ 
