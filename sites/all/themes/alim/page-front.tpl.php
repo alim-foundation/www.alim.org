@@ -495,7 +495,10 @@ $time_taken = round($time_taken_sec,5);
  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options); 
 </script>
 <script type="text/javascript"> 
-var _gaq = _gaq || [];_gaq.push(["_setAccount", "UA-15658414-1"]);_gaq.push(["_trackPageview"]);var plstart = new Date();
+var _gaq = _gaq || [];
+_gaq.push(["_setAccount", "UA-15658414-1"]);
+_gaq.push(["_trackPageview"]);
+var plstart = new Date();
 window.onload=function() {
 
 	var plend = new Date();
@@ -519,7 +522,8 @@ window.onload=function() {
 	fn += document.location.search;
 	try
 	{
-	_gaq.push("_trackEvent","Page Load",lc +" Loading Pages", fn,Math.round(plload/1000));
+	 _gaq.push(['_setAccount', 'UA-15658414-1']);
+	 _gaq.push("_trackEvent","Page Load",lc +" Loading Pages", fn,Math.round(plload/1000));
 	}
 	catch(err)
 	{
