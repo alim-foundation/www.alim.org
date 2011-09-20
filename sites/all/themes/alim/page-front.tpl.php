@@ -531,6 +531,27 @@ window.onload=function() {
 
 }
 
+
+ $(document).ready(function() {
+
+  $(window).load(function() 
+   { 
+
+        var cururl = "http://alim.org/";
+		$.ajax({
+   			type: "GET",
+			url: "http://alim.org/ajaxtracking/list",
+   			data: "cururl=" + encodeURI(cururl) + "&gtime=" + encodeURI(server_time) + "&rtime="+ encodeURI(browser_time),
+   			success: function(msg){
+				//eval(msg);
+   			}
+ 		});
+		
+
+	
+  });
+
+});
 </script>
 </body>
 </html>
