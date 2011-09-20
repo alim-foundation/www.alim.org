@@ -259,7 +259,16 @@ div#gotohadith li#goha a:hover		{ background-position: -276px -62px; }
 #block-views-recent_comments_new-block_1 .views-field-name-1 a, .gotouser a{color:#650A09;}
 #block-views-recent_comments_new-block_1 .views-field-field-comment-url-value a, .hm_title{color:#4B1D06;}
 .read_more a{color:#AB392E;font-weight:600;}
+.read_more a:hover{color:#650A09;}
+.more a:hover{color:#650A09;}
 .spl_text .read_more a{color:#AB392E;font-weight:600;}
+#block-views-recent_comments_new-block_1 .views-field-name-1 a:hover{color:#AB392E;}
+#block-block-31 a:hover{color:#AB392E;}
+#block-block-31 a:hover b{color:#AB392E;}
+.spl_text .read_more a:hover{color:#650A09;}
+.view-recent-groups-home .views-field-title a:hover{color:#AB392E;}
+.view-recent-groups-home .views-field-title a:hover span.hm_title{color:#AB392E;}
+#block-views-recent_comments_new-block_1 .views-field-field-comment-url-value a:hover{color:#AB392E;}
 #block-views-recent_comments_new-block_1 .view-footer{padding-top:17px;}
 .search-tag .tag-search-form{padding:0px;margin: 15px 0 0;text-align:left;}
 table.tg_each, .tg_each tr, .tg_each td{border-collapse:separate;padding:0px;margin:0px;}
