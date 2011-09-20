@@ -259,6 +259,7 @@ div#gotohadith li#goha a:hover		{ background-position: -276px -62px; }
 #block-views-recent_comments_new-block_1 .views-field-name-1 a, .gotouser a{color:#650A09;}
 #block-views-recent_comments_new-block_1 .views-field-field-comment-url-value a, .hm_title{color:#4B1D06;}
 .read_more a{color:#AB392E;font-weight:600;}
+.spl_text .read_more a{color:#AB392E;font-weight:600;}
 #block-views-recent_comments_new-block_1 .view-footer{padding-top:17px;}
 .search-tag .tag-search-form{padding:0px;margin: 15px 0 0;text-align:left;}
 table.tg_each, .tg_each tr, .tg_each td{border-collapse:separate;padding:0px;margin:0px;}
@@ -307,8 +308,8 @@ a.hand-icon{background:url(images/hand.gif) no-repeat; width:21px;height:9px;pad
 .main-cont-rgt-box-dts-facebook{width:294px; height:auto; float:left; background-color:#FFF; text-align:left;}
 .main-cont-rgt-box-btm{width:294px; height:12px; float:left; background:url(images/main-cont-rgt-box-botm.png) no-repeat top ;}
 .main-cont-rgt-dot-rpt{margin:5px 0 5px 0; width:274px; height:5px; float:left; background:url(images/dot.png) repeat-x center;}
-.spl_text b{font-size:14px; color:#61532e;line-height:20px; margin:0; font-weight:normal;}
-.spl_text{font-size:14px; color:#b28920;line-height:20px; margin:0;padding-bottom:8px;}
+.spl_text a{font-size:14px; color:#61532e;line-height:20px; margin:0; font-weight:normal;}
+.spl_text a b{font-size:14px; color:#b28920;line-height:20px; margin:0;padding-bottom:8px;}
 .about-us{font-size:14px; color:#5F5F5E;line-height:20px; margin:0;padding-bottom:8px;}
 .main-cont h2{font-size:16px; color:#ffffff;margin:0;}
 .main-cont h3{font-size:18px; color:#88691a;margin:0; font-weight:normal;}

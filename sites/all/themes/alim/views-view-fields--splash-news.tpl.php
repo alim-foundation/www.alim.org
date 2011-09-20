@@ -30,15 +30,17 @@ if($id=="title")  $title = $field->content;
 if($id=="body")  $body = strip_tags($field->content);
 if($id=="nid")  $nid = strip_tags($field->content);
 if($id=="view_node") $view_node = $field->content;
-
 ?>
- 
 <?php endforeach; ?>
 
-					   <div class="spl_text">
-					   <b><?=$title?></b> :
-					 <?=substr($body,0,50)?>&nbsp;<span class="read_more"><?=$view_node?></span>
-					   </div>
+<div class="spl_text">
+<a href="node/<?=$nid?>"> 
+ <b><?=$title?></b> :
+ <?=substr($body,0,50)?>
+ </a>...
+ &nbsp;
+ <span class="read_more"><?=$view_node?></span>
+</div>
 					   
 					
 					   
