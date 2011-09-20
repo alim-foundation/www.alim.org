@@ -36,7 +36,7 @@ if($id=="view_node") $view_node = $field->content;
 
 					   <div class="spl_text">
 					   <a href="<?=$base_url?>/blogs/<?=$nid?>">
-					   <b><?=substr($title,0,30)?></b> :
+					   <span class="inner-title"><?=substr($title,0,30)?></span> :
 					   <?=substr($body,0,28)?>...
 					   </a>
 					    &nbsp;<span class="read_more"><?=$view_node?></span>

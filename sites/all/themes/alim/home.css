@@ -319,11 +319,14 @@ a.hand-icon{background:url(images/hand.gif) no-repeat; width:21px;height:9px;pad
 .main-cont-rgt-box-dts-facebook{width:294px; height:auto; float:left; background-color:#FFF; text-align:left;}
 .main-cont-rgt-box-btm{width:294px; height:12px; float:left; background:url(images/main-cont-rgt-box-botm.png) no-repeat top ;}
 .main-cont-rgt-dot-rpt{margin:5px 0 5px 0; width:274px; height:5px; float:left; background:url(images/dot.png) repeat-x center;}
+.spl_text{padding-bottom:10px;}
 .spl_text a{font-size:14px; color:#61532e;line-height:20px; margin:0; font-weight:normal;}
-.spl_text a b{font-size:14px; color:#b28920;line-height:20px; margin:0;padding-bottom:8px;}
+.spl_text a .inner-title{font-size:14px; color:#b28920;line-height:20px; margin:0;padding-bottom:8px;}
+.spl_text a:hover,.spl_text a:hover .inner-title{color:#AB392E}
 .about-us{font-size:14px; color:#5F5F5E;line-height:20px; margin:0;padding-bottom:8px;}
 .main-cont h2{font-size:16px; color:#ffffff;margin:0;}
 .main-cont h3{font-size:18px; color:#88691a;margin:0; font-weight:normal;}
+.main-cont h3 a{font-size:18px; color:#88691a;margin:0; font-weight:normal;}
 .views_slideshow_singleframe_no_display,
 .views_slideshow_singleframe_hidden,
 .views_slideshow_singleframe_controls,

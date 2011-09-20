@@ -236,7 +236,7 @@ $start_time = $_SESSION['start_time'];
                    </div>
 
 					<div class="main-cont-lft-box">
-                   	  <div class="main-cont-lft-box-top"> <h3> Testimonials </h3> </div>
+                   	  <div class="main-cont-lft-box-top"> <h3> <a href='<?=$base_url?>/testimonials'>Testimonials</a> </h3> </div>
                         <div class="main-cont-lft-box-dts">
                           <?php print $splash_testimonialst; ?>
 						  <div class="read_more" align="right" style="padding-right:40px;padding-top:8px;clear:both"><a href='<?=$base_url?>/testimonials'><img src="<?=$base_url?>/<?=$theme_path?>/images/hand.png" alt="hand-icon" border="0" align="absmiddle" />&nbsp;&nbsp;Read Testimonials</a></div>
@@ -245,7 +245,7 @@ $start_time = $_SESSION['start_time'];
                     </div>
 					
 					<div class="main-cont-lft-box">
-                   	  <div class="main-cont-lft-box-top"> <h3> About Us</h3> </div>
+                   	  <div class="main-cont-lft-box-top"> <h3> <a href='<?=$base_url?>/aboutus'>About Us</a></h3> </div>
                         <div class="main-cont-lft-box-dts">
                           <?php print $splash_about; ?>
 						  <div class="read_more" align="right" style="padding-right:40px;padding-top:8px;clear:both"><a href='<?=$base_url?>/aboutus'><img src="<?=$base_url?>/<?=$theme_path?>/images/hand.png" alt="hand-icon" border="0" align="absmiddle" />&nbsp;&nbsp;Read More</a></div>
@@ -268,7 +268,7 @@ $start_time = $_SESSION['start_time'];
 				     <div class="main-cont-right">
 					 
                 	<div class="main-cont-rgt-box">
-                    	<div class="main-cont-rgt-box-top"><h3> News &amp; Views </h3></div>
+                    	<div class="main-cont-rgt-box-top"><h3> <a href='<?=$base_url?>/news'>News &amp; Views</a> </h3></div>
                         <div class="main-cont-rgt-box-dts">
                         	<?php print $splash_news; ?>
                         </div>
@@ -276,7 +276,7 @@ $start_time = $_SESSION['start_time'];
                     </div>
 					
 					<div class="main-cont-rgt-box">
-                    	<div class="main-cont-rgt-box-top"><h3> Top Blogs  </h3></div>
+                    	<div class="main-cont-rgt-box-top"><h3> <a href='<?=$base_url?>/blogs'>Top Blogs</a>  </h3></div>
                         <div class="main-cont-rgt-box-dts">
                         	<?php print $splash_topblogs; ?>
                         </div>
@@ -284,7 +284,7 @@ $start_time = $_SESSION['start_time'];
                     </div>
 					
 					<div class="main-cont-rgt-box">
-                    	<div class="main-cont-rgt-box-top"><h3> Find us on Facebook </h3></div>
+                    	<div class="main-cont-rgt-box-top"><h3>  <a href="http://www.facebook.com/pages/Alimorg/297595908861" target="_blank">Find us on Facebook</a> </h3></div>
                         <div class="main-cont-rgt-box-dts-facebook">
                         	<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FAlimorg%2F297595908861&amp;width=292&amp;colorscheme=light&amp;show_faces=true&amp;border_color=%23ffffff&amp;stream=false&amp;header=false&amp;height=258" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:258px;" allowTransparency="true"></iframe>
                         </div>
@@ -292,7 +292,7 @@ $start_time = $_SESSION['start_time'];
                     </div>
 					
 					 <div class="main-cont-rgt-box">
-                    	<div class="main-cont-rgt-box-top"><h3> Twitter Stream  </h3></div>
+                    	<div class="main-cont-rgt-box-top"><h3> <a href="http://twitter.com/#!/alimfoundation" target="_blank">Twitter Stream</a>  </h3></div>
                         <div class="main-cont-rgt-box-dts">
                         	<?php print $splash_twitter; ?>
                         </div>

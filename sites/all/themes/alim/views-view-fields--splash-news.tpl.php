@@ -35,7 +35,7 @@ if($id=="view_node") $view_node = $field->content;
 
 <div class="spl_text">
 <a href="node/<?=$nid?>"> 
- <b><?=$title?></b> :
+ <span class="inner-title"><?=$title?></span> :
  <?=substr($body,0,50)?>
  </a>...
  &nbsp;
