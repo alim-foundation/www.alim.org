@@ -279,7 +279,7 @@ table.tg_each, .tg_each tr, .tg_each td{border-collapse:separate;padding:0px;mar
 .search-tag .single-tag-rec a:hover{background:#a14f06; color:#FFFFFF;border-bottom:1px solid #daddae;border-right:1px solid #daddae;}
 .search-tag .single-tag-rec span{color:#a36624;font-size:12px;font-weight:bold;}
 #block-alim_searchtags-0 .read_more{position:absolute;bottom:15px;right:10px;}
-a.hand-icon{background:url(images/hand.gif) no-repeat; width:21px;height:9px;padding-left:25px;}
+a.hand-icon {background: url("images/hand.gif") no-repeat scroll 0 4px transparent;height:9px;padding-left:28px;width:21px;}
 #block-block-31, .view-recent-groups-home{clear:both;padding-top:10px;text-align:left;}
 #block-block-31 .read_more{padding-top:20px;}
 #block-block-30 .read_more{padding-top:30px;}
