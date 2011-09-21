@@ -27,7 +27,7 @@ $query = db_query("SELECT node.nid AS nid, comments.name AS comments_name, comme
 $result = db_fetch_object($query);
 $link_val = $result->node_data_field_comment_url_field_comment_url_value."#comment-".$result->comments_cid; // fetch the comment page url.
 
-
+ 
  /*  $view2 = views_get_view("recent_comments_embed");
    $view2->set_display('default');
    $view2->set_arguments(array($check));
