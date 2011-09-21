@@ -11,7 +11,11 @@
  
 global $base_url;
 
-$check = addslashes(strip_tags($title)); // assign comment title to the variable
+//$check = addslashes(strip_tags($title)); // assign comment title to the variable
+
+//$check = strip_tags($title); // assign comment title to the variable
+
+$check = $title;
 
 // Query the comment details using title.
 
