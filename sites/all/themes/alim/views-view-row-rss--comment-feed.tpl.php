@@ -42,7 +42,7 @@ $link_val = $result->node_data_field_comment_url_field_comment_url_value; // fet
 // Re-write the XML fields.
 ?>
   <item title_url="<?=$base_url."/".$link_val?>">
-     <title title_url="<?=$base_url."/".$link_val?>"><?php print $title.$arrexp2[0]; ?></title>
+     <title title_url="<?=$base_url."/".$link_val?>"><?php print $title.$arrexp2[0].$result->node_type.$result->node_vid; ?></title>
 	 <link><?=$base_url."/".$link_val?></link>
     <description><?php print $description; print $item_elements->guid; ?></description>
     <?php print $item_elements; ?>
