@@ -17,9 +17,12 @@ global $base_url;
 
 $check = $title;
 
+$arr_exp = explode('comment',$item_elements);
+$arrexp2 = explode(' at',$arr_exp[1]);
+
 // Query the comment details using title.
 
-$query = db_query("SELECT node.nid AS nid, comments.name AS comments_name, comments.uid AS comments_uid, comments.homepage AS comments_homepage, comments.comment AS comments_comment, comments.format AS comments_format, node_data_field_comment_url.field_comment_url_value AS node_data_field_comment_url_field_comment_url_value, node.type AS node_type, node.vid AS node_vid, comments.cid AS comments_cid, comments.timestamp AS comments_timestamp FROM node node  LEFT JOIN comments comments ON node.nid = comments.nid LEFT JOIN content_field_comment_url node_data_field_comment_url ON node.vid = node_data_field_comment_url.vid WHERE comments.subject = '".$check."' ORDER BY comments_timestamp DESC");
+$query = db_query("SELECT node.nid AS nid, comments.name AS comments_name, comments.uid AS comments_uid, comments.homepage AS comments_homepage, comments.comment AS comments_comment, comments.format AS comments_format, node_data_field_comment_url.field_comment_url_value AS node_data_field_comment_url_field_comment_url_value, node.type AS node_type, node.vid AS node_vid, comments.cid AS comments_cid, comments.timestamp AS comments_timestamp FROM node node  LEFT JOIN comments comments ON node.nid = comments.nid LEFT JOIN content_field_comment_url node_data_field_comment_url ON node.vid = node_data_field_comment_url.vid WHERE comments.cid = '".$arrexp2[0]."' ORDER BY comments_timestamp DESC");
 
 $result = db_fetch_object($query);
 $link_val = $result->node_data_field_comment_url_field_comment_url_value; // fetch the comment page url.
