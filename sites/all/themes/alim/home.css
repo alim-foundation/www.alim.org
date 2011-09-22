@@ -228,7 +228,7 @@ div#gotohadith li#goha a:hover		{ background-position: -276px -62px; }
 
 /* GALLERY LIST */
 .banner{ margin:0px 20px 0 20px; width:925px; height:auto;}
-.banner_left{width:435px; height:376px; float:left; margin-right:15px; background:url(images/alim-banner-left-rpt.png) repeat-x top; padding:10px 10px 2px 10px ; position:relative;}
+.banner_left{width:435px; height:376px; float:left; margin-right:15px; background:url(images/alim-banner-left-rpt.png) repeat-x top; padding:10px 10px 2px 10px ; position:relative;overflow:hidden;}
 #gallery ul li { padding:0px; margin:0px; }
 .filmstrip .current {background-color:#F4B323;}
 #splash_body{color:#650a09;width:400px;}
