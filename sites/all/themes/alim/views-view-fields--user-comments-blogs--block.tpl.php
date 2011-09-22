@@ -1,3 +1,8 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+		$('#comments a').removeAttr('id');
+	});
+</script>
 <?php
 session_start();
 /*$_SESSION['msg'] ='';*/
