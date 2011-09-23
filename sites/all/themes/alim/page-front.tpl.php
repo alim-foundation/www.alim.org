@@ -139,6 +139,10 @@ $start_time = $_SESSION['start_time'];
 	.nav-next {padding-top:1px;}
 	</style>
 	<![endif]-->
+	
+<script type="text/javascript">
+var plstart = new Date();
+</script>
 	<script type="text/javascript"> 
   	 var startTime = (new Date()).getTime(); 
 	</script>
@@ -330,6 +334,7 @@ $start_time = $_SESSION['start_time'];
 <script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.easing.1.3.js"/></script>	
 <script type="text/javascript" src="/sites/all/themes/alim/jquery.cycle.all.js"></script>
 <script type="text/javascript" src="/sites/all/themes/alim/crawler.js?k"></script>
+<script type="text/javascript" src="/sites/all/modules/google_analytics/googleanalytics.js?l"></script>
 <script type="text/javascript">
 marqueeInit({
 			   uniqueid: 'mycrawler2',
@@ -495,43 +500,6 @@ $time_taken = round($time_taken_sec,5);
  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options); 
 </script>
 <script type="text/javascript"> 
-var _gaq = _gaq || [];
-_gaq.push(["_setAccount", "UA-15658414-1"]);
-_gaq.push(["_trackPageview"]);
-var plstart = new Date();
-window.onload=function() {
-
-	var plend = new Date();
-	var plload = plend.getTime() - plstart.getTime();
-	// determine the thresholds
-	if(plload<2000)
-	lc = "Very Fast";
-	else if (plload<5000)
-	lc = "Fast";
-	else if (plload<10000)
-	lc = "Medium";
-	else if (plload<30000)
-	lc = "Sluggish";
-	else if (plload<45000)
-	lc = "Slow";
-	else
-	lc="Very Slow";
-	
-	var fn = document.location.pathname;
-	if( document.location.search)
-	fn += document.location.search;
-	try
-	{
-	 _gaq.push(['_setAccount', 'UA-15658414-1']);
-	 _gaq.push("_trackEvent","Page Load",lc +" Loading Pages", fn,Math.round(plload/1000));
-	}
-	catch(err)
-	{
-	}
-
-}
-
-
  $(document).ready(function() {
 
   $(window).load(function() 
@@ -552,6 +520,46 @@ window.onload=function() {
   });
 
 });
+</script>
+
+<script type="text/javascript">
+window.onload=function() {
+var plend = new Date();
+var plload = plend.getTime() - plstart.getTime();
+if(plload<1000)
+lc = "Very Fast";
+else if (plload<2000)
+lc = "Fast";
+else if (plload<3000)
+lc = "Medium";
+else if (plload<5000)
+lc = "Sluggish";
+else if (plload<10000)
+lc = "Slow";
+else
+lc="Very Slow";
+var fn = document.location.pathname;
+if( document.location.search)
+fn += document.location.search;
+try {
+_gaq.push(['loadTracker._setAccount', 'UA-15658414-1']);
+_gaq.push(['loadTracker._trackEvent','Page Load (ms)',lc + ' Loading Pages',fn,plload]);
+_gaq.push(['loadTracker._trackPageview']);
+} catch(err){}
+}
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['pageTracker._setAccount', 'UA-15658414-1']);
+  _gaq.push(['pageTracker._trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type =
+'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' :
+'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(ga, s);
+  })();
 </script>
 </body>
 </html>
