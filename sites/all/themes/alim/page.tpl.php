@@ -398,7 +398,8 @@ $start_time = $_SESSION['start_time'];
 <link rel="stylesheet" type="text/css" href="<?=$base_url?>/<?=$theme_path?>/jqlist/prettify.css" />
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
 	  <script type="text/javascript"> 
-   var startTime = (new Date()).getTime(); 
+   var startTime = (new Date()).getTime();
+   var plstart = new Date(); 
 </script>
 	<style type="text/css">
 		.accordion-content{ display:none; }
