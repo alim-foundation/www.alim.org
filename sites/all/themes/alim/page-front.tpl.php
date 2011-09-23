@@ -3,7 +3,6 @@
 Note : We didn't include $style & $script variables in this page because it affecting the page load. 
 You need to include each js files and css files of modules, themes etc in this page.
 **/
-
 global $base_url;
 global $theme_path;
 $start_time = $_SESSION['start_time'];
