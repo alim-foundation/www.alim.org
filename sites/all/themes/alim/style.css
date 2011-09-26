@@ -9541,6 +9541,7 @@ background: url(images/alihed_bg.jpg) no-repeat top  left;
 #block-block-34 .new_block{
 background:url(images/content_corners_rightborder.gif) repeat-y scroll right top transparent;
 padding: 0 0px 0px 22px;
+width: 230px;
 }
 #block-block-34 .item
 {
@@ -10044,7 +10045,7 @@ ul.quicktabs_tabs.quicktabs-style-garland li.active a
 }
 #quicktabs-22 .view-group-posts .view-empty
 {
- width:600px;
+ width:700px;
   background:url(images/comments-bkg-repeat.gif) repeat-y top left;
   padding:10px;
 }
