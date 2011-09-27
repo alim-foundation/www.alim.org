@@ -1300,7 +1300,8 @@ function _nodewords_detect_type_and_ids() {
     $path = $page->path;
 
     if (drupal_match_path($_GET['q'], $path)) {
-      return array(NODEWORDS_TYPE_PAGE, $path);
+     // return array(NODEWORDS_TYPE_PAGE, $path);
+	 return array(NODEWORDS_TYPE_PAGE, $page->pid);
     }
 
     $bool = (
@@ -1345,8 +1346,8 @@ function _nodewords_get_pages_data($id = NULL) {
     $result = db_query("SELECT * FROM {nodewords_custom} ORDER BY weight ASC");
 
     while ($page = db_fetch_object($result)) {
-      $page->tags = nodewords_load_tags(NODEWORDS_TYPE_PAGE, $page->path);
-
+     // $page->tags = nodewords_load_tags(NODEWORDS_TYPE_PAGE, $page->path);
+		$page->tags = nodewords_load_tags(NODEWORDS_TYPE_PAGE, $page->pid);
       $pages[$page->pid] = $page;
     }
   }
