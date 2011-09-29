@@ -1134,6 +1134,28 @@ $('.dummy-player').click(function(event) {
 
 });
 </script>
+<?php
+$ck_sh=0;
+if(arg(1)=='quran' &&  (arg(2)=='ayah' || arg(2)=='surah' || arg(2)=='AlQuran-tafsir' || arg(2)=='duas') )
+{
+	$ck_sh =1;
+}
+else if(arg(1)=='hadith' &&  (arg(2)=='SAD' || arg(2)=='AMH' || arg(2)=='HDQ' || arg(2)=='fiq' || arg(2)=='SHM' || arg(2)=='TIR' || arg(2)=='prophet') )
+{
+  $ck_sh =1;
+}
+else if(arg(1)=='biography' &&  (arg(2)=='khalifa' || arg(2)=='stories' || arg(2)=='companion')  && arg(3)=='content')
+{
+	$ck_sh =1;
+}
+else if(arg(1)=='islam' &&  (arg(2)=='article' || arg(2)=='world' || arg(2)=='islamposters') )
+{
+	$ck_sh =1;
+}
+
+if($ck_sh==1)
+{
+?>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<?=$base_url?>/<?=$theme_path?>/jqlist/prettify.js"></script>
 <script type="text/javascript" src="<?=$base_url?>/<?=$theme_path?>/jqlist/jquery.multiselect.js"></script>	
@@ -1153,7 +1175,11 @@ if(document.getElementById("groups"))
 			});
 	});
 }
-
+</script>
+<?php
+}
+?>
+<script type="text/javascript">
 $("#quicktabs-12 li.first a").click(function() {
 $(".comment-filtering").show();
 $('#block-quicktabs-12').css('marginTop',-35);
