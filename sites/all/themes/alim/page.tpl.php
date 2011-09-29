@@ -1152,7 +1152,6 @@ else if(arg(1)=='islam' &&  (arg(2)=='article' || arg(2)=='world' || arg(2)=='is
 {
 	$ck_sh =1;
 }
-
 if($ck_sh==1)
 {
 ?>
