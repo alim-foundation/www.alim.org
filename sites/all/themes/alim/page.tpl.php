@@ -1148,11 +1148,10 @@ else if(arg(1)=='biography' &&  (arg(2)=='khalifa' || arg(2)=='stories' || arg(2
 {
 	$ck_sh =1;
 }
-else if(arg(1)=='islam' &&  (arg(2)=='article' || arg(2)=='world' || arg(2)=='islamposters') )
+else if(arg(1)=='islam' &&  (arg(2)=='article' || (arg(2)=='world' && arg(3)=='content') || (arg(2)=='islamposters' && arg(3)=='content')) )
 {
 	$ck_sh =1;
 }
-
 if($ck_sh==1)
 {
 ?>
