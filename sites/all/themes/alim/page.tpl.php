@@ -1138,18 +1138,22 @@ $('.dummy-player').click(function(event) {
 <script type="text/javascript" src="<?=$base_url?>/<?=$theme_path?>/jqlist/prettify.js"></script>
 <script type="text/javascript" src="<?=$base_url?>/<?=$theme_path?>/jqlist/jquery.multiselect.js"></script>	
 <script type="text/javascript">
-jQuery(function(){
-	jQuery("#groups").multiselect({
-		selectedList: 4,
-		minWidth : 225,
-		checkAllText : '',
-		uncheckAllText : 'Remove Filters',
-		selectedList:0,
-		uncheckAll: function(){
-         document.frm_comm_filt.submit();
-      }
+if(document.getElementById("groups"))
+{
+	jQuery(function(){
+			jQuery("#groups").multiselect({
+				selectedList: 4,
+				minWidth : 225,
+				checkAllText : '',
+				uncheckAllText : 'Remove Filters',
+				selectedList:0,
+				uncheckAll: function(){
+				 document.frm_comm_filt.submit();
+			  }
+			});
 	});
-});
+}
+
 $("#quicktabs-12 li.first a").click(function() {
 $(".comment-filtering").show();
 $('#block-quicktabs-12').css('marginTop',-35);

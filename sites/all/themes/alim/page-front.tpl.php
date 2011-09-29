@@ -327,6 +327,7 @@ var plstart = new Date();
 <div style="background:#F9D350;color:#A94C17" id="load_timediv"></div>
 </div>
 <script type="text/javascript" src="/misc/jquery.js?D"></script>
+<script type="text/javascript" src="/misc/drupal.js?T"></script>
 <script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
 <script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.galleryview-2.1.1.js"/></script>
 <script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.timers-1.2.js"/></script>
