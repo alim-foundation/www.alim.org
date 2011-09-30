@@ -25,10 +25,12 @@ $temp_user = user_load(array('name' => $name));
 if($temp_user->rpx_data['profile']['name']['givenName']!="")
 {
   $manager = "<a href='".$base_url."/userprofile/".$name."'>".$temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName']."</a>";
+  $email_name = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
 }
 else
 {
   $manager =  "<a href='".$base_url."/userprofile/".$name."'>".$name."</a>";
+  $email_name = $name;
 }
 ?>
 <?php
