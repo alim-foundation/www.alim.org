@@ -171,7 +171,6 @@ if(strip_tags($subscribe)=="Request membership")
 }
 $show_link=0;
 ?>
-
 <div class="GroupBlock">
 				<h2><?=$title?></h2>
 			    <div class="GroupBody">
