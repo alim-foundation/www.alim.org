@@ -32,7 +32,7 @@ else
 }
 ?>
 <?php
-  $custom_message = "I'd like you to join my group $title.";
+   $custom_message = "$email_name would like you to join the group $title on Alim.org";
    $em_flag = "";
    $group_id = "";
    $btn_flag = 0;
@@ -57,7 +57,7 @@ else
 		   db_query("DELETE FROM og_uid WHERE uid='$user->uid' AND nid='".arg(1)."'");
 		   db_query("INSERT INTO og_uid (nid,is_active,is_admin,uid,created,changed) VALUES ('$group_id',1,0,'$user->uid','".time()."','".time()."')");
 		   db_query("DELETE FROM invite_to_group WHERE email='".$em_flag."'");
-		   drupal_set_message('We welcome you to our '.$title.'. Now you have become the member of this group');
+		   drupal_set_message('You have successfully joined '.$title);
 		   $btn_flag = 1;
 	   }
 	   else
@@ -79,7 +79,7 @@ else
 			$message = nl2br($_POST['message']);
 			$message .= "<br />Login Id : ".$val."<br /><br /><a href='".$base_url."/groupdetails/".arg(1)."'>Click here</a> to join the group<br /><br /> - $email_name";
 			
-			$from  	 = $temp_user->mail;
+			$from  	 = 'GroupsAdmin@alim.org';
 					
 		    $headers["MIME-Version"] = '1.0';
 		    $headers["Content-Type"] = "text/html; charset=iso-8859-1";
@@ -103,13 +103,13 @@ else
 			$subject = trim($_POST['subject']);
 			$message = trim(nl2br($_POST['message']));
 			$message .= "<br />Login Id : ".$val."<br /><br /><a href='".$base_url."/groupdetails/".arg(1)."'>Click here</a> to join the group<br /><br /> - $email_name";
-			$from  	 = $temp_user->mail;
+			$from  	 = 'GroupsAdmin@alim.org';
 			
 			db_query("INSERT INTO invite_to_group (email,group_id) VALUES ('".$val."','".arg(1)."')");
 					
 		    $headers["MIME-Version"] = '1.0';
 		    $headers["Content-Type"] = "text/html; charset=iso-8859-1";
-		    $headers["From"] = "$email_name <$from>";
+		    $headers["From"] = "Alim.org <$from>";
 			
 			
 			// Mail it
@@ -171,7 +171,6 @@ if(strip_tags($subscribe)=="Request membership")
 }
 $show_link=0;
 ?>
-
 <div class="GroupBlock">
 				<h2><?=$title?></h2>
 			    <div class="GroupBody">
