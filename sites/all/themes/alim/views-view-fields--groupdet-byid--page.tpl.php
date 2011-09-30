@@ -83,7 +83,7 @@ else
 					
 		    $headers["MIME-Version"] = '1.0';
 		    $headers["Content-Type"] = "text/html; charset=iso-8859-1";
-		    $headers["From"] = "$email_name <$from>";
+		    $headers["From"] = "Alim.org <$from>";
 			
 			// Mail it
 
@@ -110,7 +110,8 @@ else
 		    $headers["MIME-Version"] = '1.0';
 		    $headers["Content-Type"] = "text/html; charset=iso-8859-1";
 		    $headers["From"] = "Alim.org <$from>";
-						
+			
+			
 			// Mail it
 			/*if ($email_sent == 'false') {
 			  mail($val, $subject, $message, $headers);
