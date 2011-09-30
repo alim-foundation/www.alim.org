@@ -132,7 +132,7 @@ else
 
   }
   
-<?php
+
 
 
 		$urlexp1 = arg(1);
