@@ -10417,4 +10417,29 @@ display:none;
     font-weight: bold;
     outline: medium none;
 }
+
+.tell-friend fieldset{border:0px}
+.tell-friend {
+    color: #650A09;
+    display: none;
+    font-size: 14px;
+    height: auto;
+    padding-left: 460px;
+    position: absolute;
+    text-align: left;
+    top: 316px;
+    width: 436px;
+    z-index: 99999;
+}
+div.GroupBody .tell-friend table{ background:none; border:0px;}
+div.GroupBlock .tell-friend h2{padding:0px;margin:0px;padding-bottom:10px;font-size:18px;}
+.tell-friend .description,.tell-friend .req{ font-size:11px; color:#FF0000;margin-bottom:10px;}
+.tell-friend .label{width:90px;}
+.tell-friend textarea{height:100px;width:280px;}
+.tell-friend input{width:280px;}
+.tell-friend #edit-submit{border:0;background:url(images/send_button.png) top center no-repeat;width:57px;height:22px;cursor:pointer;text-indent:-99999px;line-height:0px;}
+.inside_invite{margin-left:20px;}
+#box-top{background:url(images/invite-box-top.png) top center no-repeat; height:27px; width:436px;}
+#box-mid{background:url(images/box-mid.png) top center repeat-y;width:436px;}
+#box-bottom{background:url(images/box-bottom.png) top center no-repeat;height:13px; width:436px;}
 /* end news and views page*/
