@@ -31,7 +31,107 @@ else
   $manager =  "<a href='".$base_url."/userprofile/".$name."'>".$name."</a>";
 }
 ?>
+<?php
+  $custom_message = "I'd like you to join my group $title.";
+   $em_flag = "";
+   $group_id = "";
+   $btn_flag = 0;
+ 
+   $qry_invt = db_query("SELECT * FROM invite_to_group");
+   while($res_invit = db_fetch_object($qry_invt))
+   {
+	 if($res_invit->email==$user->mail)
+	 {
+		$em_flag = $res_invit->email;
+		$group_id = $res_invit->group_id;
+		//print $res_invit->email;
+	 }
+   }
+   if($em_flag!="" && $group_id!="")
+   {
+	   $check_meb_ext = db_query("SELECT count(*) as row_cnt FROM og_uid WHERE uid='$user->uid' AND nid='".arg(1)."'");
+	   $res_chk = db_fetch_object($check_meb_ext);
+	   
+	   if($res_chk->row_cnt==0)
+	   {
+		   db_query("DELETE FROM og_uid WHERE uid='$user->uid' AND nid='".arg(1)."'");
+		   db_query("INSERT INTO og_uid (nid,is_active,is_admin,uid,created,changed) VALUES ('$group_id',1,0,'$user->uid','".time()."','".time()."')");
+		   db_query("DELETE FROM invite_to_group WHERE email='".$em_flag."'");
+		   drupal_set_message('We welcome you to our '.$title.'. Now you have become the member of this group');
+		   $btn_flag = 1;
+	   }
+	   else
+	   {
+	      db_query("DELETE FROM invite_to_group WHERE email='".$em_flag."'");
+	   }
+   }
 
+  if(isset($_POST['Send']))
+  {
+	 $to = explode(",",trim($_POST['recipients']));
+	 if(strpos(trim($_POST['recipients']),","))
+	 {
+		 foreach($to as $val)
+		 {
+			
+			db_query("INSERT INTO invite_to_group (email,group_id) VALUES ('".$val."','".arg(1)."')");
+			$subject = $_POST['subject'];
+			$message = nl2br($_POST['message']);
+			$message .= "<br />Login Id : ".$val."<br /><br /><a href='".$base_url."/groupdetails/".arg(1)."'>Click here</a> to join the group<br /><br /> - $email_name";
+			
+			$from  	 = $temp_user->mail;
+					
+		    $headers["MIME-Version"] = '1.0';
+		    $headers["Content-Type"] = "text/html; charset=iso-8859-1";
+		    $headers["From"] = "$email_name <$from>";
+			
+			// Mail it
+
+			$body = array(
+			'to' => $val,
+			'subject' => t($subject),
+			'body' => t($message),
+			'headers' => $headers
+			);
+			drupal_mail_send($body); // calling drupal mail function
+			
+		 }
+	}
+	else
+	{
+	    	$val     = trim($_POST['recipients']);
+			$subject = trim($_POST['subject']);
+			$message = trim(nl2br($_POST['message']));
+			$message .= "<br />Login Id : ".$val."<br /><br /><a href='".$base_url."/groupdetails/".arg(1)."'>Click here</a> to join the group<br /><br /> - $email_name";
+			$from  	 = $temp_user->mail;
+			
+			db_query("INSERT INTO invite_to_group (email,group_id) VALUES ('".$val."','".arg(1)."')");
+					
+		    $headers["MIME-Version"] = '1.0';
+		    $headers["Content-Type"] = "text/html; charset=iso-8859-1";
+		    $headers["From"] = "$email_name <$from>";
+			
+			
+			// Mail it
+			/*if ($email_sent == 'false') {
+			  mail($val, $subject, $message, $headers);
+			  $email_sent = 'true';
+			}*/
+			
+			$body = array(
+			'to' => $val,
+			'subject' => t($subject),
+			'body' => t($message),
+			'headers' => $headers
+			);
+		 
+			 drupal_mail_send($body); // calling drupal mail function
+		
+	}
+	drupal_set_message('Invitation sent successfully.');
+
+  }
+  
 <?php
 
 
@@ -75,7 +175,60 @@ $show_link=0;
 <div class="GroupBlock">
 				<h2><?=$title?></h2>
 			    <div class="GroupBody">
-<div align="right"><?php //if($user->uid) { ?> 
+<div align="right">
+<div align="right">
+<?php
+if($name==$user->name)
+{
+?>
+<a href="javascript:void(0);" id="invite">
+<img src="<?=$base_url?>/<?=$theme_path?>/images/btn_send_invitation.png" width="184" height="30" />
+</a>
+ <div class="tell-friend" id="tell-friend">
+							<div id="box-top"></div>
+								<div id="box-mid">
+									<div class="inside_invite">
+									<div align="right" style="margin-right:10px;"><a href="javascript:void(0);" id="div-close"><img src="<?=$base_url?>/sites/all/themes/alim/images/Close-button.png" alt="close" width="29" height="29" /></a></div>
+									<h2>Invite to this Group</h2> 
+									<form action="" method="post" id="frm_send" name="frm_send">
+										<table width="406" border="0" cellspacing="0" cellpadding="0">
+											  <tr>
+											<td width="93"  align="left" valign="top">Recipients</td>
+											<td width="262" align="left" valign="top"><textarea name="recipients"></textarea><br /><div class="description">Enter email addresses separated by comma.</div></td>
+										  </tr>
+										  <tr>
+											<td align="left" valign="top">Subject</td>
+											<td align="left" valign="top"><input type="text" name="subject" value="Alim.org : Invite to join the group <?=$title?>"></td>
+										  </tr>
+										  <tr>
+											<td align="left" valign="top">Message</td>
+											<td align="left" valign="top"><textarea name="message"><?=$custom_message?></textarea></td>
+										  </tr>
+										  <tr>
+											<td align="left" valign="top">&nbsp;</td>
+											<td height="40" align="left" valign="top"><input name="Send" type="submit" value="Send" id="edit-submit"></td>
+										  </tr>
+									  </table>
+									</form>
+								</div>
+								</div>
+							<div id="box-bottom"></div>
+						</div>
+						<script language="javascript">
+						$("#div-close").click(function() {
+						$("#tell-friend").hide();
+						});
+						
+						$("#invite").click(function() {
+						$("#tell-friend").show();
+						});
+
+						</script>
+<?php
+}
+?>
+</div>
+
 <div id="join_group" style="width:<?=$width?>px;" align="center">
 <?php
 if(strip_tags($subscribe)!="Closed" && $subscribe!="")
