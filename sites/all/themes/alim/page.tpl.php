@@ -1195,12 +1195,12 @@ $("#quicktabs-3 li.last a").click(function() {
 $(".comment-filtering").hide();
 $('#block-quicktabs-3').css('marginTop',0);
 });
-$("#quicktabs-tab-22-0").click(function() {
+/*$("#quicktabs-tab-22-0").click(function() {
 window.location = '?quicktabs_22=0#quicktabs-22';
 });
 $("#quicktabs-tab-22-1").click(function() {
 window.location= '?quicktabs_22=1#quicktabs-22';
-});
+});*/
 </script>
 </body>
 </html>
