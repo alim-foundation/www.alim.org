@@ -79,7 +79,7 @@ else
 			db_query("INSERT INTO invite_to_group (email,group_id) VALUES ('".$val."','".arg(1)."')");
 			$subject = $_POST['subject'];
 			$message = nl2br($_POST['message']);
-			$message .= "<br />Login Id : ".$val."<br /><br /><a href='".$base_url."/groupdetails/".arg(1)."'>Click here</a> to join the group<br /><br /> - $email_name";
+			$message .= "<br />Login Id : ".$val."<br /><br /><a href='".$base_url."/groupdetails/".arg(1)."/mg'>Click here</a> to join the group<br /><br /> - $email_name";
 			
 			$from  	 = 'GroupsAdmin@alim.org';
 					
@@ -104,7 +104,7 @@ else
 	    	$val     = trim($_POST['recipients']);
 			$subject = trim($_POST['subject']);
 			$message = trim(nl2br($_POST['message']));
-			$message .= "<br />Login Id : ".$val."<br /><br /><a href='".$base_url."/groupdetails/".arg(1)."'>Click here</a> to join the group<br /><br /> - $email_name";
+			$message .= "<br />Login Id : ".$val."<br /><br /><a href='".$base_url."/groupdetails/".arg(1)."/mg'>Click here</a> to join the group<br /><br /> - $email_name";
 			$from  	 = 'GroupsAdmin@alim.org';
 			
 			db_query("INSERT INTO invite_to_group (email,group_id) VALUES ('".$val."','".arg(1)."')");
@@ -171,6 +171,12 @@ if(strip_tags($subscribe)=="Request membership")
   $width = 180;
 }
 $show_link=0;
+
+if(arg(2)=='mg')
+{
+ $btn_flag = 1;
+}
+
 ?>
 <div class="GroupBlock">
 				<h2><?=$title?></h2>
@@ -239,7 +245,7 @@ if(strip_tags($subscribe)!="Closed" && $subscribe!="")
 
 <!-- <a href="<?=$base_url?>/og-join-confirm" class="popups-form-reload" >Join</a>-->
 <?php
-	  if($user->uid)
+	  if($user->uid && $btn_flag==0)
 	  {
 	
 	  ?>
@@ -255,6 +261,8 @@ if(strip_tags($subscribe)!="Closed" && $subscribe!="")
 	   
 	  }
 	  else
+	  {
+	   if($btn_flag==0)
 	  {
 	  ?>
 	  <!--  <span>
@@ -279,14 +287,16 @@ $block = module_invoke('rpx', 'block', 'view', 0);
  <span><span><span>  <?php print '<a '.$url ;?>  Join </a></span></span></span>
 
 <?php
-  
+        }
 	  }
 
 }
 else
-{
-    
+{    
+     if($btn_flag==0)
+	  { 
 	    print $subscribe;
+	   }
 	
 }
 ?>
@@ -370,3 +380,17 @@ else
 			
   </div>
 			</div>
+<?php
+if(arg(2)=='mg')
+{
+?>
+<script>
+$(window).load( function() {
+	$(document).one('mousemove',function(e){
+	$('#head_div a.rpxnow').trigger('click'); 	
+});
+});
+</script>
+<?php
+}
+?>
