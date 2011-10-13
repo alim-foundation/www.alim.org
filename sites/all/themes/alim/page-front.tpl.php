@@ -523,9 +523,10 @@ $time_taken = round($time_taken_sec,5);
 </script>
 
 <script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['pageTracker._setAccount', 'UA-15658414-1']);
+  var _gaq = _gaq || [];_gaq.push(["_setAccount", "UA-15658414-1"]);_gaq.push(["_trackPageview"]);_gaq.push(["_trackPageLoadTime"]);
+/*  _gaq.push(['pageTracker._setAccount', 'UA-15658414-1']);
   _gaq.push(['pageTracker._trackPageview']);
+  _gaq.push(["_trackPageLoadTime"]);*/
 window.onload=function() {
 var plend = new Date();
 var plload = plend.getTime() - plstart.getTime();
