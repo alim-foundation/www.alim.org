@@ -503,10 +503,10 @@ $time_taken = round($time_taken_sec,5);
   $(window).load(function() 
    { 
 
-        var cururl = "http://alim.org/";
+        var cururl = <?=$base_url?>;
 		$.ajax({
    			type: "GET",
-			url: "http://alim.org/ajaxtracking/list",
+			url: "<?=$base_url?>/ajaxtracking/list",
    			data: "cururl=" + encodeURI(cururl) + "&gtime=" + encodeURI(server_time) + "&rtime="+ encodeURI(browser_time),
    			success: function(msg){
 				//eval(msg);
