@@ -503,7 +503,7 @@ $time_taken = round($time_taken_sec,5);
   $(window).load(function() 
    { 
 
-        var cururl = <?=$base_url?>;
+        var cururl = "<?=$base_url?>";
 		$.ajax({
    			type: "GET",
 			url: "<?=$base_url?>/ajaxtracking/list",
