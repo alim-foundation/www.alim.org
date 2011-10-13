@@ -334,7 +334,7 @@ var plstart = new Date();
 <script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.easing.1.3.js"/></script>	
 <script type="text/javascript" src="/sites/all/themes/alim/jquery.cycle.all.js"></script>
 <script type="text/javascript" src="/sites/all/themes/alim/crawler.js?k"></script>
-<script type="text/javascript" src="/sites/all/modules/google_analytics/googleanalytics.js?l"></script>
+<!--<script type="text/javascript" src="/sites/all/modules/google_analytics/googleanalytics.js?l"></script>-->
 <script type="text/javascript">
 marqueeInit({
 			   uniqueid: 'mycrawler2',
