@@ -550,14 +550,7 @@ _gaq.push(['loadTracker._setAccount', 'UA-15658414-1']);
 _gaq.push(['loadTracker._trackEvent','Page Load (ms)',lc + ' Loading Pages',fn,plload]);
 _gaq.push(['loadTracker._trackPageview']);
 } catch(err){}
-}(function() {
-    var ga = document.createElement('script'); ga.type =
-'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' :
-'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-s.parentNode.insertBefore(ga, s);
-  })();
+}(function() {var ga = document.createElement("script");ga.type = "text/javascript";ga.async = true;ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ga, s);})();
 </script>
 </body>
 </html>
