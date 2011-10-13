@@ -334,19 +334,6 @@ var plstart = new Date();
 <script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.easing.1.3.js"/></script>	
 <script type="text/javascript" src="/sites/all/themes/alim/jquery.cycle.all.js"></script>
 <script type="text/javascript" src="/sites/all/themes/alim/crawler.js?k"></script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['pageTracker._setAccount', 'UA-15658414-1']);
-  _gaq.push(['pageTracker._trackPageview']);
-  (function() {
-    var ga = document.createElement('script'); ga.type =
-'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' :
-'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-s.parentNode.insertBefore(ga, s);
-  })();
-</script>
 <script type="text/javascript" src="/sites/all/modules/google_analytics/googleanalytics.js?l"></script>
 <script type="text/javascript">
 marqueeInit({
@@ -534,7 +521,11 @@ $time_taken = round($time_taken_sec,5);
 
 });
 </script>
+
 <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['pageTracker._setAccount', 'UA-15658414-1']);
+  _gaq.push(['pageTracker._trackPageview']);
 window.onload=function() {
 var plend = new Date();
 var plload = plend.getTime() - plstart.getTime();
@@ -558,7 +549,14 @@ _gaq.push(['loadTracker._setAccount', 'UA-15658414-1']);
 _gaq.push(['loadTracker._trackEvent','Page Load (ms)',lc + ' Loading Pages',fn,plload]);
 _gaq.push(['loadTracker._trackPageview']);
 } catch(err){}
-}
+}(function() {
+    var ga = document.createElement('script'); ga.type =
+'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' :
+'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(ga, s);
+  })();
 </script>
 </body>
 </html>
