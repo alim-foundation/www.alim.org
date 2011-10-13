@@ -444,8 +444,6 @@ $("#recent-tab1").hide();
 $("#recent-tab2").hide();
 $("#recent-tab3").hide();
 });
-
-
 </script>
 <script type="text/javascript" src="/sites/all/modules/nice_menus/nice_menus.js?D"></script>
     <script type="text/javascript" src="https://rpxnow.com/openid/v2/widget"></script>
@@ -523,10 +521,20 @@ $time_taken = round($time_taken_sec,5);
 </script>
 
 <script type="text/javascript">
-  var _gaq = _gaq || [];_gaq.push(["_setAccount", "UA-15658414-1"]);_gaq.push(["_trackPageview"]);_gaq.push(["_trackPageLoadTime"]);
-/*  _gaq.push(['pageTracker._setAccount', 'UA-15658414-1']);
+  var _gaq = _gaq || [];
+  _gaq.push(['pageTracker._setAccount', 'UA-15658414-1']);
   _gaq.push(['pageTracker._trackPageview']);
-  _gaq.push(["_trackPageLoadTime"]);*/
+  _gaq.push(["_trackPageLoadTime"]);
+ (function() {
+    var ga = document.createElement('script'); ga.type =
+'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' :
+'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript">
 window.onload=function() {
 var plend = new Date();
 var plload = plend.getTime() - plstart.getTime();
@@ -550,7 +558,7 @@ _gaq.push(['loadTracker._setAccount', 'UA-15658414-1']);
 _gaq.push(['loadTracker._trackEvent','Page Load (ms)',lc + ' Loading Pages',fn,plload]);
 _gaq.push(['loadTracker._trackPageview']);
 } catch(err){}
-}(function() {var ga = document.createElement("script");ga.type = "text/javascript";ga.async = true;ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ga, s);})();
+}
 </script>
 </body>
 </html>
