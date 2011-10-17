@@ -10447,9 +10447,5 @@ div.GroupBlock .tell-friend h2{padding:0px;margin:0px;padding-bottom:10px;font-s
 .follow_me_profile_help ,.follower_of_profile_help , .newroup_profile_help, .profile_help{
 z-index:999999;
 display:none;
-position:absolute;
-font-size:12px;
-width:350px;
-color:#00000;
 margin-top:-30px;
 }
