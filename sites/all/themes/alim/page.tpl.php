@@ -935,6 +935,74 @@ if(arg(3)=='compare') {
 	
 	   </div>
 </div>
+<script>	 
+$(document).ready(function() {
+
+
+
+   $('#block-views-follow_me-block_1 .view-header h2').mouseover(function() {
+	$('.follow_me_profile_help').css('display','block');
+	$('.follow_me_profile_help').css('position','absolute');
+	$('.follow_me_profile_help').css(' font-size','24px');
+	$('.follow_me_profile_help').css('width','350px');
+	$('.follow_me_profile_help').css('color','#00000');
+	
+	
+	});
+	$('#block-views-follow_me-block_1 .view-header h2').mouseout(function() {
+	$('.follow_me_profile_help').css('display','none');
+	$('.follow_me_profile_help').css('position','relative');
+	});
+	
+	
+	$('#block-views-follower_of-block_1 .view-header h2').mouseover(function() {
+	$('.follower_of_profile_help').css('display','block');
+	$('.follower_of_profile_help').css('position','absolute');
+	$('.follower_of_profile_help').css(' font-size','24px');
+	$('.follower_of_profile_help').css('width','350px');
+	$('.follower_of_profile_help').css('color','#00000');
+	});
+	$('#block-views-follower_of-block_1 .view-header h2').mouseout(function() {
+	$('.follower_of_profile_help').css('display','none');
+	$('.follow_me_profile_help').css('position','relative');
+	});
+	
+	$('.view-id-my_groups h2').mouseover(function() {
+	$('.profile_help').css('display','block');
+	$('.profile_help').css('position','absolute');
+	$('.profile_help').css(' font-size','24px');
+	$('.profile_help').css('width','350px');
+	$('.profile_help').css('color','#00000');
+	});	
+	$('.view-id-my_groups h2').mouseout(function() {
+	$('.profile_help').css('display','none');
+	$('.follow_me_profile_help').css('position','relative');
+	});
+	
+	
+	$('#block-block-34 h2').mouseover(function() {
+	$('.newroup_profile_help').css('display','block');
+	$('.newroup_profile_help').css('position','absolute');
+	$('.newroup_profile_help').css(' font-size','24px');
+	$('.newroup_profile_help').css('width','350px');
+	$('.newroup_profile_help').css('color','#00000');
+	});	
+	$('#block-block-34 h2').mouseout(function() {
+	$('.newroup_profile_help').css('display','none');
+	$('.follow_me_profile_help').css('position','relative');
+	});
+	
+	
+	
+
+});
+
+
+
+
+			
+</script>	
+
 
  	<div style="clear:both"></div>
 	<div id="footer_div" align="center" >
