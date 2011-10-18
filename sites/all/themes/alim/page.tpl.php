@@ -949,7 +949,7 @@ $(document).ready(function() {
 	
 	
 	});
-	$('#block-views-follow_me-block_1 .view-header h2').mouseout(function() {
+	$('#block-views-follow_me-block_1 .view-header').mouseout(function() {
 	$('.follow_me_profile_help').css('display','none');
 	$('.follow_me_profile_help').css('position','relative');
 	});
@@ -962,7 +962,7 @@ $(document).ready(function() {
 	$('.follower_of_profile_help').css('width','350px');
 	$('.follower_of_profile_help').css('color','#00000');
 	});
-	$('#block-views-follower_of-block_1 .view-header h2').mouseout(function() {
+	$('#block-views-follower_of-block_1 .view-header ').mouseout(function() {
 	$('.follower_of_profile_help').css('display','none');
 	$('.follow_me_profile_help').css('position','relative');
 	});
@@ -974,7 +974,7 @@ $(document).ready(function() {
 	$('.profile_help').css('width','350px');
 	$('.profile_help').css('color','#00000');
 	});	
-	$('.view-id-my_groups h2').mouseout(function() {
+	$('.view-id-my_groups').mouseout(function() {
 	$('.profile_help').css('display','none');
 	$('.follow_me_profile_help').css('position','relative');
 	});
@@ -984,10 +984,10 @@ $(document).ready(function() {
 	$('.newroup_profile_help').css('display','block');
 	$('.newroup_profile_help').css('position','absolute');
 	$('.newroup_profile_help').css(' font-size','24px');
-	$('.newroup_profile_help').css('width','300px');
+	$('.newroup_profile_help').css('width','350px');
 	$('.newroup_profile_help').css('color','#00000');
 	});	
-	$('#block-block-34 h2').mouseout(function() {
+	$('#block-block-34').mouseout(function() {
 	$('.newroup_profile_help').css('display','none');
 	$('.follow_me_profile_help').css('position','relative');
 	});
