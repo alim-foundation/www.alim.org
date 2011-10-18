@@ -2,7 +2,7 @@
 // Diplaying values in user profile page
 global $base_url;
 global $theme_path;
-
+global $user;
 // taking user data using username.
 
 $temp_user = user_load(array('name' => strip_tags($output)));
@@ -268,20 +268,31 @@ print "<div style='background:#F6F6F6;padding:10px;'>$biography</div>";
                           <?php endif; ?></td>
 					  </tr>
 					  <tr>
-					    <td><strong>Roles : </strong> <?=$role?>
+					    <td>
+							<?php
+						if (in_array('Scholar', array_values($user->roles)) || in_array('Book Author', array_values($user->roles))){
+									
+						?>				
+						<strong>Roles : </strong> <?=$role?>
 						<?php
 						// shows all user roles.
 						$stop = count($arr_role);
 						$i=0;
 						foreach($arr_role as $val)
 						{
-						   $i++;
-						   print $val;
-						   if($i!=$stop)
+						   
+						   if(($val=="Book Author")||($val=="Scholar"))
+						   {
+						   $i++; 
+						   if($i>1)
 						      print ", ";
+						   print $val;
+						  
+							}
 						
-						}
-						?>						 </td>
+						}}
+						?>					 
+						</td>
 				        <td>&nbsp;</td>
 					  </tr>
 					  <tr>
