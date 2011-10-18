@@ -270,7 +270,7 @@ print "<div style='background:#F6F6F6;padding:10px;'>$biography</div>";
 					  <tr>
 					    <td>
 							<?php
-						if (in_array('Scholar', array_values($user->roles)) || in_array('Book Author', array_values($user->roles))){
+						if (in_array('Scholar', array_values($arr_role)) || in_array('Book Author', array_values($arr_role))){
 									
 						?>				
 						<strong>Roles : </strong> <?=$role?>
