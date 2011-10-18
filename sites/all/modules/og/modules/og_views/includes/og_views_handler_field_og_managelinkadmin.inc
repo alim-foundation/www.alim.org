@@ -22,13 +22,13 @@ class og_views_handler_field_og_managelinkadmin extends og_views_handler_field_o
         if ($is_admin) {
           $item = menu_get_item("og/delete_admin/$nid/$uid");
           if ($item['access']) {
-            return l(t('Admin: Remove'), "og/delete_admin/$nid/$uid", array('query' => drupal_get_destination()));
+            return l(t('Remove Admin'), "og/delete_admin/$nid/$uid", array('query' => drupal_get_destination()));
           }
         }
         else {
           $item = menu_get_item("og/create_admin/$nid/$uid");
           if ($item['access']) {
-            return l(t('Admin: Create'), "og/create_admin/$nid/$uid", array('query' => drupal_get_destination()));
+            return l(t('Make Admin'), "og/create_admin/$nid/$uid", array('query' => drupal_get_destination()));
           }
         }
       }
