@@ -10454,3 +10454,115 @@ z-index:999999;
 display:none;
 margin-top:-15px;
 }
+.view-group-posts-new
+{ 
+ width:680px;
+}
+.view-group-posts-new .view-content
+{
+  width:680px;
+  background:url(images/comments-bkg-repeat.gif) repeat-y top left;
+  padding:0px 10px 10px 10px;
+}
+.view-group-posts-new .view-empty
+{
+  width:680px;
+  background:url(images/comments-bkg-repeat.gif) repeat-y top left;
+  padding:0px 10px 10px 10px;
+}
+.view-group-posts-new .view-footer
+{
+ background:url("images/comment_corner_bottom.gif") top left no-repeat;
+ height:40px;
+}
+.view-group-posts-new table
+{ 
+  width:620px;
+  border-spacing:0px;
+}
+.view-group-posts-new table, .view-group-posts-new tr, .view-group-posts-new table thead th, .view-group-posts-new table tbody th, .view-group-posts-new table th
+{ 
+ border-collapse:separate;
+ padding:0px;
+ margin:0px;
+ border:0px;
+}
+.view-group-posts-new table tr.odd
+{ 
+  background:#fcf7ec;
+}
+.view-group-posts-new table tr.even
+{ 
+  background:#FFFFFF;
+}
+.view-group-posts-new table tbody tr
+{
+ height:30px;
+}
+.view-group-posts-new table td
+{
+ height:30px;
+ border:1px solid #ebd9b5;
+}
+.group-posts
+{
+ position:relative;
+}
+.gp-title, .rep-count
+{
+ float:left;
+}
+.gp-title
+{
+ width:542px;
+ padding-left:8px;
+}
+.view-group-posts-new .views-field-phpcode .gp-title a
+{
+ color:#990000;
+ font-weight:bold;
+}
+.view-group-posts-new .views-field-phpcode .gp-desc a
+{
+  color:#000000;
+  font-weight:normal;
+}
+.view-group-posts-new .views-field-phpcode .rep-count
+{
+  color:#000000;
+  font-weight:bold;
+}
+.view-group-posts-page-new .views-field-body
+{
+  background:none repeat scroll 0 0 #FCF7EC;
+  border:1px dotted #DDDDC3;
+  padding:10px;
+}
+.view-group-posts-page-new .views-field-name
+{
+ padding:10px 0px 10px 0px;
+ text-align:right;
+}
+.view-group-posts-page-new .views-field-name a
+{
+ color:#660000;
+}
+.view-group-posts-page-new a:hover
+{
+ text-decoration:underline;
+}
+#edit-replies-wrapper
+{
+ display:none;
+}
+#comment-delete-form .container-inline a
+{ 
+ display:none;
+}
+.grp_reply
+{
+ font-weight:bold;
+ font-size:16px;
+ display:block;
+ padding-bottom:10px;
+}
