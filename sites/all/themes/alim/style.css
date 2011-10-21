@@ -10566,3 +10566,32 @@ margin-top:-15px;
  display:block;
  padding-bottom:10px;
 }
+.grp-tool {
+font-size:12px;
+height:auto;
+left:230px;
+position:absolute;
+text-align:justify;
+width:474px;
+z-index:1000;
+}
+
+.grp_div1{
+background:url(images/top-bg.png) no-repeat center;
+height:26px;
+width:474px;
+}
+.grp_div2{
+background:url(images/mid-bg.png) repeat center;
+padding:10px;
+line-height:17px;
+font-weight:normal;
+width:454px;
+}
+.grp_div3
+{
+background:url(images/bottom-bg.png) no-repeat bottom left;
+height:11px;
+height:16px;
+width:474px;
+}
