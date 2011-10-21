@@ -9267,6 +9267,10 @@ padding-left:3px;
 {
  text-align:right;
 }
+.gr_comm_auth a
+{
+ color:#660000;
+}
 #block-views-group_posts_private-block_1 a, #block-views-group_posts-block_1 a
 {
  color:#660000;
