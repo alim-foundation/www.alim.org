@@ -1016,7 +1016,7 @@ $(document).ready(function() {
 	$('.newroup_profile_help').css('color','#00000');
 	});	
 	$('#block-block-34').mouseout(function() {
-		$(".follow_me_profile_help").removeClass("hasFocus");
+		$(".newroup_profile_help").removeClass("hasFocus");
 
 	$('.newroup_profile_help').css('display','none');
 	$('.follow_me_profile_help').css('position','relative');
