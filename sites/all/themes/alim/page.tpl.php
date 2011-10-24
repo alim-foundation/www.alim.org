@@ -1003,7 +1003,7 @@ $(document).ready(function() {
 	
 	$('#block-block-34 h2').mouseover(function() {
 		 $(".newroup_profile_help").addClass("hasFocus");
-	    setTimeout(function(){ 
+	 setTimeout(function(){ 
         if ($(".newroup_profile_help").hasClass("hasFocus")) {
             $(".newroup_profile_help").slideDown('fast');
         }
@@ -1012,14 +1012,13 @@ $(document).ready(function() {
 	$('.newroup_profile_help').css(' font-size','24px');
 	$('.newroup_profile_help').css('width','350px');
 	$('.newroup_profile_help').css('color','#00000');
-	});	
-	$('#block-block-34').mouseout(function() {
-		$(".newroup_profile_help").removeClass("hasFocus");
+	});		
+    $('#block-block-34 ').mouseout(function() {
+	$(".newroup_profile_help").removeClass("hasFocus");
 
 	$('.newroup_profile_help').css('display','none');
 	$('.follow_me_profile_help').css('position','relative');
 	});
-	
 	
 	
 
