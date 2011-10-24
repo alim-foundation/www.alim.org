@@ -887,7 +887,7 @@ $body    = $body_val."<br /><br /><a href='".$base_url."/groupdetails/".$groupid
 
 $headers["MIME-Version"] = '1.0';
 $headers["Content-Type"] = "text/html; charset=iso-8859-1";
-$headers["From"] = "Alim Foundation <do-not-reply@alim.org>";
+$headers["From"] = "Alim.org <do-not-reply@alim.org>";
 
 $message = array(
   'to' => $groups,
@@ -1217,7 +1217,7 @@ $message = array(
   'to' => 'content-admin@alim.org',
   'subject' => t($subject),
   'body' => t($body),
-  'headers' => array('From' => 'Alim Foundation <do-not-reply@alim.org>'),
+  'headers' => array('From' => 'Alim.org <do-not-reply@alim.org>'),
 );
 
 drupal_mail_send($message);
