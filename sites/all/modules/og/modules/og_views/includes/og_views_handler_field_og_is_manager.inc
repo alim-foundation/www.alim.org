@@ -16,7 +16,7 @@ class og_views_handler_field_og_is_manager extends og_views_handler_field_og_uid
       $manager = $node->uid;
       $member = $values->{$this->field_alias};
       if ($member == $manager) {
-        return '<em>'. t('Manager'). '</em>'; 
+       return '<em><i><b>'. t('(Manager)'). '</b></i></em>'; 
       }
     }
   }

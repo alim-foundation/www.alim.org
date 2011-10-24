@@ -10,7 +10,7 @@ class og_views_handler_field_og_is_admin extends og_views_handler_field_og_uid {
       $is_admin = $values->{$this->field_alias};
       // don't use og_is_group_admin() here since we don't want mark on 'admin nodes' people.
       if ($is_admin) {
-        return t('admin'); 
+        return t('<i>(admin)</i>'); 
       }
     }
   }
