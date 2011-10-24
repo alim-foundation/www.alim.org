@@ -10454,11 +10454,13 @@ div.GroupBlock .tell-friend h2{padding:0px;margin:0px;padding-bottom:10px;font-s
 z-index:999999;
 display:none;
 margin-top:-30px;
+cursor:pointer;
 }
 .newroup_profile_help{
 z-index:999999;
 display:none;
 margin-top:-15px;
+cursor:pointer;
 }
 .view-group-posts-new
 { 
