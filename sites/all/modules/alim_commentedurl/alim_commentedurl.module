@@ -135,7 +135,7 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 				}
 			  } 
 		
-	$type_name = $form_state['values']['comment_url_val'];	
+/*	$type_name = $form_state['values']['comment_url_val'];	
 	$urlexpl = explode("/",$type_name);
 	if($urlexpl[0]!='group-post')
 	{	  
@@ -244,7 +244,7 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 		
 		 drupal_goto($urlexp); // re-direct to current page
 		 
-		 }
+		 }*/
 				break;
 				
 				
