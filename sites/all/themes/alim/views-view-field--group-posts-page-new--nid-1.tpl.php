@@ -124,7 +124,7 @@ if($flag==1)
 ?>
 <div  align="right" style="float:right;" >
 <div style="text-align:left;" >
-<a href="<?=$base_url?>/comment/reply/<?=$output?>" class="popups-form-reload" style="text-decoration: none; font-size: 13px; color:#000000; padding-left:5px;" ><img src="<?=$base_url?>/<?=$theme_path?>/images/btn_reply.png" alt="reply" align="absmiddle" /></a>
+<a href="<?=$base_url?>/comment/reply/<?=$output?>" class="popups-form-reload" style="text-decoration: none; font-size: 13px; color:#000000; padding-left:5px;" id="reply_link" ><img src="<?=$base_url?>/<?=$theme_path?>/images/btn_reply.png" alt="reply" align="absmiddle" /></a>
 </div>
 </div>
 <?php
@@ -136,7 +136,7 @@ if($user->uid)
 ?>
 <div  align="right" style="float:right;" >
 <div style="text-align:left;" >
-<a href="<?=$base_url?>/og/subscribe/<?=arg(1)?>" class="popups-form-reload" style="text-decoration: none; font-size: 13px; color:#000000; padding-left:5px;" ><img src="<?=$base_url?>/<?=$theme_path?>/images/btn_reply.png" alt="reply" align="absmiddle" /></a>
+<a href="<?=$base_url?>/og/subscribe/<?=arg(1)?>" class="popups-form-reload" style="text-decoration: none; font-size: 13px; color:#000000; padding-left:5px;" id="reply_link" ><img src="<?=$base_url?>/<?=$theme_path?>/images/btn_reply.png" alt="reply" align="absmiddle" /></a>
 </div>
 </div>
 <?php
@@ -232,3 +232,37 @@ $breadcrumb[] =  l(t($grop_title), 'groupdetails/'.arg(1)) ;
 $breadcrumb[] =  l(t($post_title), 'group-post/'.arg(1).'/'.arg(2)) ;
 drupal_set_breadcrumb($breadcrumb);
 ?>
+
+<?php 
+$args=$_GET['reply'];
+if($args =="reply")
+{
+
+if($user->uid)
+{
+
+?>
+
+<script type="text/javascript">
+ $(window).load( function() {
+	//$(document).one('mousemove',function(e){
+	$('#reply_link').trigger('click');	
+//});
+});
+</script>
+<?php
+}
+else
+{
+?>
+<script type="text/javascript">
+ $(window).load( function() {
+	$(document).one('mousemove',function(e){
+	$('.rpxnow').trigger('click'); 
+});
+});
+</script>
+<?php
+}
+?>
+<?php } ?>
