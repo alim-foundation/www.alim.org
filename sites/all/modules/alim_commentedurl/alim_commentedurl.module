@@ -138,8 +138,8 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
     global $user;
 	global $base_url;
     $type_name = $form_state['values']['comment_url_val'];	
-	$urlexpl = explode("/",$type_name);
-	if($urlexpl[0]=='group-post')
+	$urlexp_ccc = explode("/",$type_name);
+	if($urlexp_ccc[0]=='group-post')
 	{	  
 	    // $result =  array();
 		$urlcomm = $_SERVER['HTTP_REFERER']; // For getting parent page url in popup.
