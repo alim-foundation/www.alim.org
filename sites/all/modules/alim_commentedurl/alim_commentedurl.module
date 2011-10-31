@@ -1274,7 +1274,7 @@ function _alim_commentedurl_field_form_submit($form, &$form_state) {
 		node_save($node);
 	}
 	$urlexp = explode("/",$type_name);
-	if($urlexp[0]!='groupdetails')
+	if($urlexp[0]!='group-post')
 	{
 	 $urlexp1 = $type_name;
 		if(strpos($urlexp1,'?'))
