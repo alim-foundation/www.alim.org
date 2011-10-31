@@ -248,7 +248,9 @@ function testmd_form_alters_commreply_form_alter_submit($form, &$form_state){
 			 drupal_mail_send($message); // calling drupal mail function
 		}
 	}
-		 $type_name = $form_state['values']['comment_url_val']; // Hidden url field of comment posting page.
+		// $type_name = $form_state['values']['comment_url_val']; // Hidden url field of comment posting page.
+		 
+		 $type_name = $base_url."/group-post/".$grname_res->nid."/".$form_state['values']['nid']; // Hidden url field of comment posting page.
 		 
 		$urlexp1 = $type_name;
 		if(strpos($urlexp1,'?'))
