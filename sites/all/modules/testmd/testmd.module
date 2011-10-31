@@ -32,7 +32,7 @@ function testmd_form_alter(&$form, &$form_state, $form_id) {
 		  }
 		break;
 		// Alter the group post reply form submission. Call hook_form_alter_submit().
-		case "comment_form":
+		/*case "comment_form":
 	    $urlcomm = $_SERVER['HTTP_REFERER']; // // For getting parent page url in popup. Alter the comment form layout of group pages by checking the url.
 		$newvalurl = str_replace($base_url.'/' , "" ,$urlcomm );
 		$urlexp = explode("/",$newvalurl);
@@ -40,13 +40,13 @@ function testmd_form_alter(&$form, &$form_state, $form_id) {
 		{
 		 $form['#submit'][] = 'testmd_form_alters_commreply_form_alter_submit'; // call the function for implementing email functionality
 		}
-		break;
+		break;*/
 		// Alter the group post 'reply delete form' layout. Remove 'replies' option from group comment delete page.
 		case "comment_delete_form":
 		$urlcomm = $_SERVER['HTTP_REFERER']; // For getting parent page url in popup.
 		$newvalurl = str_replace($base_url.'/' , "" ,$urlcomm );
 		$urlexp = explode("/",$newvalurl);
-		if($urlexp[0]=='groupdetails')
+		if($urlexp[0]=='group-post')
 		{
 		  $form['actions']['cancel']['#value'] = '';
 		  $form['replies']['#access']  = FALSE; //Remove 'replies' option from group comment delete page.
