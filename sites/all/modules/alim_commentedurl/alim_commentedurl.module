@@ -1341,7 +1341,7 @@ function _alim_commentedurl_field_form_submit($form, &$form_state) {
 		
 		$body     = $owner." has just posted a reply in ".$groupname.":<br /><br />";
 		$body    .= $body_val."<br /><br />";
-		$body    .= "<a href='".$base_url."/group-post/".$grname_res->nid."/".$form_state['values']['nid']."'>Click To View Group</a><br /><br />";
+		$body    .= "<a href='".$base_url."/group-post/".$grname_res->nid."/".$form_state['values']['nid']."'>Click To View Group Post</a><br /><br />";
 		$body    .= "<a href='".$base_url."/group-post/".$grname_res->nid."/".$form_state['values']['nid']."?reply=reply'>Click To Reply<br /><br />";
 		$body    .= "<a href='".$base_url."/emailsetting'>Click To Stop Receiving Group Emails</a> <br /><br />";
 		 
