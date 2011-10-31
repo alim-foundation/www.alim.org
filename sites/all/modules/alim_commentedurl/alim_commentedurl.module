@@ -1287,7 +1287,7 @@ function _alim_commentedurl_field_form_submit($form, &$form_state) {
 		 $urlexp = $urlexp1;
 		}
 	 
-	 drupal_goto($type_name );	
+	 drupal_goto($type_name);	
 	}
 	else
 	{
@@ -1381,20 +1381,8 @@ function _alim_commentedurl_field_form_submit($form, &$form_state) {
 	}
 		// $type_name = $form_state['values']['comment_url_val']; // Hidden url field of comment posting page.
 		 
-		 $type_name = $base_url."/group-post/".$grname_res->nid."/".$form_state['values']['nid']; // Hidden url field of comment posting page.
-		 
-		$urlexp1 = $type_name;
-		if(strpos($urlexp1,'?'))
-		{
-		  $urlexp1_exp = explode("?",$urlexp1);
-		  $urlexp = $urlexp1_exp[0];
-		}
-		else
-		{
-		 $urlexp = $urlexp1;
-		}
-		
-		 drupal_goto($urlexp); // re-direct to current page
+		  $type_name = $base_url."/group-post/".$grname_res->nid."/".$form_state['values']['nid']; // Hidden url field of comment posting page.
+		  drupal_goto($type_name); // re-direct to current page
 		 
 		 }
 	return;
