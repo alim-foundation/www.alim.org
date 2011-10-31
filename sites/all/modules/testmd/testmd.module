@@ -90,7 +90,7 @@ function testmd_form_alters_audience_form_alter_submit($form, &$form_state){
 		$form_state['values']['status'] = 0;
 	  }
 	 
-	 // Query the group details for mailing
+	/* // Query the group details for mailing
 	   		 $grname = db_query("SELECT node.nid AS nid, node.title AS node_title FROM node node WHERE (node.status <> 0) AND (node.type IN ('creat_group')) AND (node.nid = ".arg(3).")");
 		 $grname_res = db_fetch_object($grname);
 		 $groupname = $grname_res->node_title;
@@ -152,7 +152,7 @@ function testmd_form_alters_audience_form_alter_submit($form, &$form_state){
 					 
 			 drupal_mail_send($message); // calling drupal mail function
 		}
-	}
+	}*/
 }
 
 /*
@@ -210,8 +210,8 @@ function testmd_form_alters_commreply_form_alter_submit($form, &$form_state){
 		
 		$body     = $owner." has just posted a reply in ".$groupname.":<br /><br />";
 		$body    .= $body_val."<br /><br />";
-		$body    .= "<a href='".$base_url."/groupdetails/".$grname_res->nid."#post_".$form_state['values']['nid']."'>Click To View Group</a><br /><br />";
-		$body    .= "<a href='".$base_url."/groupdetails/".$grname_res->nid."#post_".$form_state['values']['nid']."'>Click To Reply<br /><br />";
+		$body    .= "<a href='".$base_url."/group-post/".$grname_res->nid."/".$form_state['values']['nid']."'>Click To View Group</a><br /><br />";
+		$body    .= "<a href='".$base_url."/group-post/".$grname_res->nid."/".$form_state['values']['nid']."?reply=reply'>Click To Reply<br /><br />";
 		$body    .= "<a href='".$base_url."/emailsetting'>Click To Stop Receiving Group Emails</a> <br /><br />";
 		 
 		$headers["MIME-Version"] = '1.0';
@@ -262,4 +262,81 @@ function testmd_form_alters_commreply_form_alter_submit($form, &$form_state){
 		}
 		
 		 drupal_goto($urlexp); // re-direct to current page
+}
+
+function testmd_nodeapi(&$node, $op, $teaser, $page) {
+  global $user;
+  global $base_url;
+  if ($node->type == "group_post") {
+    switch ($op) {
+      case 'insert':
+	    //drupal_set_message('<pre>'.print_r($node, TRUE).'</pre>');
+		
+		// Query the group details for mailing
+	   	 $grname = db_query("SELECT node.nid AS nid, node.title AS node_title FROM node node WHERE (node.status <> 0) AND (node.type IN ('creat_group')) AND (node.nid = ".arg(3).")");
+		 $grname_res = db_fetch_object($grname);
+		 $groupname = $grname_res->node_title;
+		 $groupname_val .= "<a href='".$base_url."/groupdetails/".$grname_res->nid."'>".$grname_res->node_title."</a>";
+		 
+    // Set up the mail parameters for mailing
+	$title = "[Alim.Org] ".$groupname." Post: ".$node->title;
+	$body_val  = $node->body;
+	$subject = $title;
+	
+	$temp_user = user_load(array('name' => strip_tags($user->name))); // taking owner's Full name from username.
+	if($temp_user->rpx_data['profile']['name']['givenName']!="")
+	{
+	  $owner = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
+	}
+	else
+	{
+	  $owner = strip_tags($output);
+	}
+
+	$body     = $owner." has just posted a message to ".$groupname_val.":<br /><br />";
+	$body    .= $body_val."<br /><br />";
+	$body    .= "<a href='".$base_url."/group-post/".$grname_res->nid."/".$node->nid."'>Click To View Group Post</a><br /><br />";
+	$body    .= "<a href='".$base_url."/group-post/".$grname_res->nid."/".$node->nid."?reply=reply'>Click To Reply<br /><br />";
+	$body    .= "<a href='".$base_url."/emailsetting'>Click To Stop Receiving Group Emails</a><br /><br />";
+	 
+	$headers["MIME-Version"] = '1.0';
+	$headers["Content-Type"] = "text/html; charset=iso-8859-1";
+	$headers["From"] = 'Alim.org <do-not-reply@alim.org>';
+	
+	// Query the group members
+
+	$mygroupmeb = db_query("SELECT DISTINCT(users.uid) AS uid, users.name AS users_name, users.mail AS users_mail, og_uid.is_admin AS og_uid_is_admin FROM users users  LEFT JOIN og_uid og_uid ON users.uid = og_uid.uid WHERE (users.status <> 0) AND (og_uid.is_active <> 0) AND (og_uid.nid =".$grname_res->nid." )ORDER BY og_uid_is_admin DESC, users_name ASC");
+	
+	$em_count = count($mygroups_res);
+	$j=0;
+	while($mygroups_res = db_fetch_object($mygroupmeb))
+	{
+	    
+		// Cheking that member enabled 'group post email' functionality in the preference setting.
+		$sel_poemail = db_query("SELECT value as poemail_sel,count(value) as poemail_count FROM profile_values WHERE fid=17 AND uid=".$mygroups_res->uid);
+		$fetch_poemail = db_fetch_object($sel_poemail);
+		($fetch_poemail->poemail_sel) ? $select_pemail = $fetch_poemail->poemail_sel : $select_pemail = 0;
+		
+		if($fetch_poemail->poemail_count==0) 
+		  $select_pemail = 1;
+		  
+		if($select_pemail==1) // if 'group post email' functionality enabled, sending an email to the user's mail id.
+		{
+		 
+			$j++;
+			$groups = $mygroups_res->users_name."<".$mygroups_res->users_mail.">";
+			$message = array(
+			'to' => $groups,
+			'subject' => t($subject),
+			'body' => t($body),
+			'headers' => $headers
+			);
+					 
+			 drupal_mail_send($message); // calling drupal mail function
+		}
+	}
+	
+        break;
+    }
+  }
 }
