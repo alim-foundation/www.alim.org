@@ -1386,10 +1386,10 @@ function _alim_commentedurl_field_form_submit($form, &$form_state) {
 		 $urlexp = $urlexp1;
 		}
 		
-		 //drupal_goto($urlexp); // re-direct to current page
+		 drupal_goto($urlexp); // re-direct to current page
 		 
 	}
-	header("location:http://alim.org/");
+	
 	return;
 }
 
