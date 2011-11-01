@@ -1387,8 +1387,9 @@ function _alim_commentedurl_field_form_submit($form, &$form_state) {
 		}
 		
 		 //drupal_goto($urlexp); // re-direct to current page
-		 header("location:http://alim.org/");
+		 
 	}
+	header("location:http://alim.org/");
 	return;
 }
 
