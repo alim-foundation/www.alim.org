@@ -10605,3 +10605,24 @@ height:11px;
 height:16px;
 width:474px;
 }
+#quicktabs_container_1 .views-table th a
+{
+background: #F0E6A8;
+color: #810C05;
+height: 30px;
+margin: 0px;
+text-align: left;
+border: 0px;
+}
+#quicktabs-1 #quicktabs_container_1 #quicktabs_tabpage_1_0
+{
+border: 1px solid #DE9F42;
+width: 540px;
+font-size: 15px;
+}
+#quicktabs-1 #quicktabs_container_1  #quicktabs_tabpage_1_2 , #quicktabs-1 #quicktabs_container_1  #quicktabs_tabpage_1_1
+{
+border: 1px solid #DE9F42;
+width: 390px;
+font-size: 15px;
+}
