@@ -1242,14 +1242,6 @@ function _alim_commentedurl_field_form_submit($form, &$form_state) {
 	$type_name = $form_state['values']['comment_url_val'];
 	$node = node_load($form_state['values']['nid']);
 	if(  isset($node->field_comment_url[0]) &&  $node->field_comment_url[0]['value'] !=''   ){ 
-	// drupal_set_message('In  cck already set', $type = 'status', $repeat = TRUE);
-/*		$pos = strpos($type_name , 'comment/edit' );
-		if($pos  ===  false ){	drupal_set_message('POS FALSE', $type = 'status', $repeat = TRUE);
-			//$node->field_comment_url[0]['value'] = $type_name;		 
-			//node_save($node);		
-		}else{
-			drupal_set_message('POS TRUE', $type = 'status', $repeat = TRUE);
-		}*/
 		
 		$pos = strpos($node->field_comment_url[0]['value'] , 'comment/edit' );
 		if($pos  !==  false ){	
@@ -1394,7 +1386,8 @@ function _alim_commentedurl_field_form_submit($form, &$form_state) {
 		 $urlexp = $urlexp1;
 		}
 		
-		 drupal_goto($urlexp); // re-direct to current page
+		 //drupal_goto($urlexp); // re-direct to current page
+		 header("location:http://alim.org/");
 	}
 	return;
 }
