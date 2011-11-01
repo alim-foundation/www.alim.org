@@ -124,7 +124,7 @@ if($flag==1)
 ?>
 <div  align="right" style="float:right;" >
 <div style="text-align:left;" >
-<a href="<?=$base_url?>/comment/reply/<?=$output?>" class="popups" style="text-decoration: none; font-size: 13px; color:#000000; padding-left:5px;" id="reply_link" ><img src="<?=$base_url?>/<?=$theme_path?>/images/btn_reply.png" alt="reply" align="absmiddle" /></a>
+<a href="<?=$base_url?>/comment/reply/<?=$output?>" class="popups-form" style="text-decoration: none; font-size: 13px; color:#000000; padding-left:5px;" id="reply_link" ><img src="<?=$base_url?>/<?=$theme_path?>/images/btn_reply.png" alt="reply" align="absmiddle" /></a>
 </div>
 </div>
 <?php
@@ -136,7 +136,7 @@ if($user->uid)
 ?>
 <div  align="right" style="float:right;" >
 <div style="text-align:left;" >
-<a href="<?=$base_url?>/og/subscribe/<?=arg(1)?>" class="popups" style="text-decoration: none; font-size: 13px; color:#000000; padding-left:5px;" id="reply_link" ><img src="<?=$base_url?>/<?=$theme_path?>/images/btn_reply.png" alt="reply" align="absmiddle" /></a>
+<a href="<?=$base_url?>/og/subscribe/<?=arg(1)?>" class="popups-form" style="text-decoration: none; font-size: 13px; color:#000000; padding-left:5px;" id="reply_link" ><img src="<?=$base_url?>/<?=$theme_path?>/images/btn_reply.png" alt="reply" align="absmiddle" /></a>
 </div>
 </div>
 <?php
