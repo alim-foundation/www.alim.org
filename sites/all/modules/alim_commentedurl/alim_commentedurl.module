@@ -1286,12 +1286,12 @@ function _alim_commentedurl_field_form_submit($form, &$form_state) {
 		 $urlexp = $urlexp1;
 		}
 	 
-	 drupal_goto($type_name);	
+	 drupal_goto($urlexp);	
 	}
 	else
 	{
-	 global $user;
-	global $base_url;
+	   global $user;
+	   global $base_url;
 	  
 	    // $result =  array();
 		$urlcomm = $_SERVER['HTTP_REFERER']; // For getting parent page url in popup.
@@ -1395,7 +1395,6 @@ function _alim_commentedurl_field_form_submit($form, &$form_state) {
 		}
 		
 		 drupal_goto($urlexp); // re-direct to current page
-		 
 	}
 	return;
 }
