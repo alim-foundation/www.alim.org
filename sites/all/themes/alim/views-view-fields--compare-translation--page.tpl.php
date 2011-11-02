@@ -141,8 +141,7 @@ $expire=time()+(60*60*24*365*5); // 5 year
   elseif($name == "Transliteration")
       $flag = 1;
 	  
-$class = "white";
- 
+$class = $_SESSION['class']; 
 if($flag==1)
 {
 ?>
@@ -157,5 +156,9 @@ if($flag==1)
  </table>
  
  <?php
+ if($class=='white')
+ $_SESSION['class']='black';
+ else
+ $_SESSION['class']='white';
  }
  ?>
