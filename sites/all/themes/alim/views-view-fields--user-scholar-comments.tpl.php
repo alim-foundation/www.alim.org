@@ -197,7 +197,7 @@ print vud_widget_proxy($cid, 'comment', 'vote', 'plain', $readonly=NULL);
 
  }?>
 	</td>
-    <td  valign="top"  ><div style="height:40px;padding-top:7px;padding-left:10px;font-size:12px;margin-left:<?php print $padd.'px' ?>;border-top:dotted 1px #cccccc;background-color:#F7F7F7;">
+    <td  valign="top"  ><div style="height:40px;padding-top:7px;padding-left:10px;font-size:12px;margin-left:15px;border-top:dotted 1px #cccccc;background-color:#F7F7F7;">
 	<div style="width:390px;float:left;padding-bottom:-2px;" ><span style="display:block;float:left;">
 	
 	<a href="<?=$base_url?>/userprofile/<?=strip_tags($name)?>" class="gotouser">
@@ -241,7 +241,7 @@ print alim_comment_view($com,$n, $links = array(), $visible = TRUE);
 */
 ?></div></div>
 				 <span ><?php //print $body; ?>
-			<div id="comment_body_scholar" style="margin-left:<?php print $padd.'px' ?>;padding-left:45px; background-color:#F7F7F7;" >	
+			<div id="comment_body_scholar" style="margin-left:15px;padding-left:45px; background-color:#F7F7F7;" >	
 				 <?php  // print_r($n); 
 		
 			if($val_show_hide=="hide"){
@@ -257,7 +257,7 @@ print alim_comment_view($com,$n, $links = array(), $visible = TRUE);
 		 ?></div>
 		<?php 
 $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
-<div id="comment_reply_comm" style="margin-left:<?php print $padd.'px' ?>;padding-left:<?php print $padd1.'px' ?>;background-color:#F7F7F7;border-bottom:dotted 1px #cccccc;"  >
+<div id="comment_reply_comm" style="margin-left:15px;margin-left:15px;background-color:#F7F7F7;border-bottom:dotted 1px #cccccc;"  >
 <?php	if ($user->uid&&$dis==1){ ?>
 
 <span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/reply/<?php print $com_nodid; ?>/<?php print $cid; ?>" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/ico_reply.gif" />&nbsp;Reply</a></span>
@@ -335,7 +335,7 @@ print vud_widget_proxy($cid, 'comment', 'vote', 'plain', $readonly=NULL);
 </span>
 <?php }?>
 	</td>
-    <td  valign="top"  ><div style="height:40px;padding-top:7px;padding-left:10px;font-size:12px;margin-left:<?php print $padd.'px' ?>;border-top:dotted 1px #cccccc;background-color:#fcf7ec;">
+    <td  valign="top"  ><div style="height:40px;padding-top:7px;padding-left:10px;font-size:12px;margin-left:15px;border-top:dotted 1px #cccccc;background-color:#fcf7ec;">
 	<div style="width:390px;float:left;padding-bottom:-2px;" ><span style="display:block;float:left;">
 	
 	<a href="<?=$base_url?>/userprofile/<?=strip_tags($name)?>" class="gotouser">
@@ -379,7 +379,7 @@ print alim_comment_view($com,$n, $links = array(), $visible = TRUE);
 */
 ?></div></div>
 				 <span ><?php //print $body; ?>
-			<div id="comment_body_scholar" style="margin-left:<?php print $padd.'px' ?>;background-color:#fcf7ec;padding-left:45px;" >	
+			<div id="comment_body_scholar" style="margin-left:15px;background-color:#fcf7ec;padding-left:45px;" >	
 				 <?php  // print_r($n); 
 		 
 			if($val_show_hide=="hide"){
@@ -395,7 +395,7 @@ print alim_comment_view($com,$n, $links = array(), $visible = TRUE);
 		 ?></div>
 		<?php 
 $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
-<div id="comment_reply_scholar" style="margin-left:<?php print $padd.'px' ?>;padding-left:<?php print $padd1.'px' ?>;background-color:#fcf7ec;border-bottom:dotted 1px #cccccc;"  >
+<div id="comment_reply_scholar" style="margin-left:15px;margin-left:15px;background-color:#fcf7ec;border-bottom:dotted 1px #cccccc;"  >
 <?php	if ($user->uid){ ?>
 
 <span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/reply/<?php print $com_nodid; ?>/<?php print $cid; ?>" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/ico_reply.gif" />&nbsp;Reply</a></span>
@@ -456,7 +456,7 @@ print vud_widget_proxy($cid, 'comment', 'vote', 'plain', $readonly=NULL);
 </span>
 <?php }?>
 	</td>
-    <td  valign="top"  ><div style="height:40px;padding-top:7px;padding-left:10px;font-size:12px;margin-left:<?php print $padd.'px' ?>;border-top:dotted 1px #cccccc;background-color:#F8F7E3;">
+    <td  valign="top"  ><div style="height:40px;padding-top:7px;padding-left:10px;font-size:12px;margin-left:15px;border-top:dotted 1px #cccccc;background-color:#F8F7E3;">
 	<div style="width:390px;float:left;padding-bottom:-2px;" ><span style="display:block;float:left;">
 	
 	<a href="<?=$base_url?>/userprofile/<?=strip_tags($name)?>" class="gotouser">
@@ -502,7 +502,7 @@ print alim_comment_view($com,$n, $links = array(), $visible = TRUE);
 */
 ?></div></div>
 				 <span ><?php //print $body; ?>
-			<div id="comment_body_auth" style="margin-left:<?php print $padd.'px' ?>;background-color:#F8F7E3;padding-left:45px;" >	
+			<div id="comment_body_auth" style="margin-left:15px;background-color:#F8F7E3;padding-left:45px;" >	
 				 <?php  // print_r($n); 
 		
 			if($val_show_hide=="hide"){
@@ -517,7 +517,7 @@ print alim_comment_view($com,$n, $links = array(), $visible = TRUE);
 		 ?></div>
 		<?php 
 $rrtt="ctdef1".$cid;  $idval = 'ctdef1-'.$cid;?>
-<div id="comment_reply_auth" style="margin-left:<?php print $padd.'px' ?>;padding-left:<?php print $padd1.'px' ?>;background-color:#F8F7E3;border-bottom:dotted 1px #cccccc;"  >
+<div id="comment_reply_auth" style="margin-left:15px;margin-left:15px;background-color:#F8F7E3;border-bottom:dotted 1px #cccccc;"  >
 <?php	if ($user->uid){ ?>
 
 <span style="font-size:11px;"><a href="<?php print $base_url ?>/comment/reply/<?php print $com_nodid; ?>/<?php print $cid; ?>" class="popups" on-popups-options="{reloadWhenDone: true}"  style="text-decoration:none;font-size:11px;"><img align="absmiddle" src="<?php print $img_theme_path; ?>/ico_reply.gif" />&nbsp;Reply</a></span>
