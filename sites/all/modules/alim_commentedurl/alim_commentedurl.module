@@ -315,6 +315,16 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 					 
 					 $sel_gender  =  db_query("SELECT value as profile_gender, count(*) as gender_count FROM {profile_values} WHERE fid=%d AND uid=%d", 21, $user_id);
 				     $fetch_gender  = db_fetch_object($sel_gender);
+					 
+					  $sel_birthday    =  db_query("SELECT value as profile_birthday, count(*) as birthday_count FROM {profile_values} WHERE fid=%d AND uid=%d", 28, $user_id);
+				     $fetch_birthday  = db_fetch_object($sel_birthday);
+					 
+					 $sel_phone    =  db_query("SELECT value as profile_phone, count(*) as phone_count FROM {profile_values} WHERE fid=%d AND uid=%d", 29, $user_id);
+				     $fetch_phone  = db_fetch_object($sel_phone);
+					 
+					 $sel_add  =  db_query("SELECT value as profile_add, count(*) as add_count FROM {profile_values} WHERE fid=%d AND uid=%d", 30, $user_id);
+				     $fetch_add  = db_fetch_object($sel_add);
+	
 	
 					
 					($fetch_res->res_sel) ? $select_res = $fetch_res->res_sel : $select_res = "Alafasy_128kbps";
@@ -336,6 +346,12 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 					($fetch_biography->profile_biography) ? $select_biography = $fetch_biography->profile_biography : $select_biography = '';
 					($fetch_gender->profile_gender) ? $select_gender = $fetch_gender->profile_gender : $select_gender = '';
 					($fetch_grppriv->grppriv_sel) ? $select_group_privacy = $fetch_grppriv->grppriv_sel : $select_group_privacy = 0;
+					
+					 $default_birthday = date_convert("",DATE_OBJECT,DATE_ARRAY);
+					 
+					($fetch_birthday->profile_birthday) ? $user_birthday = date_convert($fetch_birthday->profile_birthday,DATE_DATETIME,DATE_ARRAY) : $user_birthday = $default_birthday; 
+					($fetch_phone->profile_phone) ? $user_phone = $fetch_phone->profile_phone : $user_phone = '';
+					($fetch_add->profile_add) ? $user_address = $fetch_add->profile_add : $user_address = '';
 					
 					
 												
@@ -376,6 +392,13 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 				     $select_follower = 1;
 				   if($fetch_grppriv->grppriv_count==0) 
 				     $select_group_privacy = 1; 
+				   
+				   if($fetch_birthday->birthday_count==0) 
+				     $user_birthday =  $default_birthday; 
+				   if($fetch_phone->phone_count==0) 
+				     $user_phone = ''; 
+				   if($fetch_add->add_count==0) 
+				     $user_address = ''; 
 		
 				 
 						 
@@ -393,6 +416,32 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 				  '#type' => 'textarea',
 				  '#title' => t('Biography'),
 				  '#default_value' => $select_biography,
+				  '#required' => FALSE
+				);
+			
+			 $form['per_info']['Birthday'] = array(
+				  '#type' => 'date_select',
+				  '#date_format' => 'm-d-Y',
+				  '#date_year_range' => '-50:0:+1',
+				  '#date_label_position' => 'within',
+				  '#title' => t('Birthday'),
+				  '#default_value' => $user_birthday,
+				  '#required' => FALSE
+				);
+				
+				$form['per_info']['Phone'] = array(
+				  '#type' => 'textfield',
+				  '#title' => t('Phone'),
+				  '#default_value' => $user_phone,
+				  '#required' => FALSE
+				);
+				
+			    $form['per_info']['Address'] = array(
+				  '#type' => 'textarea',
+				  '#title' => t('Address'),
+				  '#rows' => 3,
+				  '#cols' => 20,
+				  '#default_value' => $user_address,
 				  '#required' => FALSE
 				);
 				
@@ -938,6 +987,42 @@ function alimcommentedurl_insertprefer($form, $form_state){
 	$select_following     = $form_state['values']['show_following']; 
 	$select_follower      = $form_state['values']['show_follower']; 
 	$select_grprv         = $form_state['values']['group_privacy'];
+	$select_birthday      = $form_state['values']['Birthday'];
+	$select_phone         = $form_state['values']['Phone'];
+	$select_address       = $form_state['values']['Address'];
+	
+	//Birthday
+	$birthday  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 28, $user_id));
+	if($birthday==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 28, $user_id, $select_birthday);
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_birthday , $user_id, 28);	
+	}
+	
+	//Phone
+	$phone  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 29, $user_id));
+	if($phone==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 29, $user_id, $select_phone);
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_phone , $user_id, 29);	
+	}
+	
+	//Address
+	$address  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 30, $user_id));
+	if($address==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 30, $user_id, $select_address);
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_address , $user_id, 30);	
+	}
 	
 	//Show me on " Group Privacy " List.
 	$chk_in_grpprv  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 22, $user_id));
