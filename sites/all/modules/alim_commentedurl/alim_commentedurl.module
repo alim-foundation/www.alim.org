@@ -438,7 +438,7 @@ function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 				
 			    $form['per_info']['Address'] = array(
 				  '#type' => 'textarea',
-				  '#title' => t('Address'),
+				  '#title' => t('Location'),
 				  '#rows' => 3,
 				  '#cols' => 20,
 				  '#default_value' => $user_address,
