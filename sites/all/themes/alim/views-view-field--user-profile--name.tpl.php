@@ -273,7 +273,7 @@ print "<div style='background:#F6F6F6;padding:10px;'>$biography</div>";
 				      </tr>
 					  <tr>
 					    <td>
-							<strong>Address</strong> : <?php if($address) { ?> <?=$address?><?php }else { ?>Nil <?php } ?>					 
+							<strong>Location</strong> : <?php if($address) { ?> <?=$address?><?php }else { ?>Nil <?php } ?>					 
 						</td>
 				        <td><?php
 						if (in_array('Scholar', array_values($arr_role)) || in_array('Book Author', array_values($arr_role))){
