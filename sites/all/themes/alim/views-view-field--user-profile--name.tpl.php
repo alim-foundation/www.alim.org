@@ -15,6 +15,9 @@ $gender =  $temp_user->gender;
 $biography =  $temp_user->Biography;
 $arr_role =  $temp_user->roles;
 $picture = $temp_user->picture; 
+$birthday =  $temp_user->Birthday;
+$phone =  $temp_user->Phone;
+$address =  $temp_user->Address;
 ?>
 
 <table width="100%" border="0" cellpadding="2" cellspacing="2">
@@ -262,14 +265,17 @@ print "<div style='background:#F6F6F6;padding:10px;'>$biography</div>";
 					  <tr>
 						<td width="43%"><strong><!--Email: </strong><?=$mail?>--><strong>Profile Created : </strong>
 					    <?=date("d M Y",$created)?></td>
-						<td width="57%"><?php if($gender) : ?>
-                          <strong>Gender:</strong>
-                          <?=$gender?>
-                          <?php endif; ?></td>
+					<td width="57%"><strong>Gender</strong> : <?php if($gender) { ?> <?=$gender?><?php }else { ?>Nil <?php } ?></td>
 					  </tr>
 					  <tr>
+					    <td><strong>Birthday</strong> : <?php if($birthday) { ?> <?=date("d M Y",strtotime($birthday))?><?php }else { ?>Nil <?php } ?></td>
+					    <td><strong>Phone</strong> : <?php if($phone) { ?> <?=$phone?><?php }else { ?>Nil <?php } ?></td>
+				      </tr>
+					  <tr>
 					    <td>
-							<?php
+							<strong>Address</strong> : <?php if($address) { ?> <?=$address?><?php }else { ?>Nil <?php } ?>					 
+						</td>
+				        <td><?php
 						if (in_array('Scholar', array_values($arr_role)) || in_array('Book Author', array_values($arr_role))){
 									
 						?>				
@@ -291,9 +297,7 @@ print "<div style='background:#F6F6F6;padding:10px;'>$biography</div>";
 							}
 						
 						}}
-						?>					 
-						</td>
-				        <td>&nbsp;</td>
+						?>	</td>
 					  </tr>
 					  <tr>
 					    <td colspan="2"><?php
