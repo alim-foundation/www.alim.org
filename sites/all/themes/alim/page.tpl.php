@@ -5,7 +5,36 @@ global $theme_path;
 $_SESSION['qry']=1;
 //$start_time = microtime(TRUE);
 $start_time = $_SESSION['start_time'];
+
+/**
+ * Code used for setting the cookie variables for 
+ * Arabic fonts, English fonts, Ayah Themes, Translators options 
+ * in left menu block.
+*/
+
+
+	   if(eregi("chrome", $_SERVER['HTTP_USER_AGENT'])) // Checking the browser is chrome.
+		   {
+		       $select_arb1 = 6;
+		   }
+		  else
+		  {
+  			$select_arb1 = 1;
+			
+		  }
+  $select_arb_size1 = 20;
+  $select_eng1 = 1;
+  $select_eng_size1 = 14;
+  $select_res = "Alafasy_128kbps";
+  $expire=time()+(60*60*24*365*5); // 5 year
+  $cookie_enabled = 2;
+  
+        $cookie_sent = setcookie("tc","ok",0, "/");
+        if($cookie_sent == false){ $cookie_enabled = 1; }
+		
+		
 /*** Set Cookie expired on browser close.*/
+
 					
 						 if(!($_COOKIE['remember']))
 						 {
@@ -99,31 +128,7 @@ $start_time = $_SESSION['start_time'];
 	    $select_arb_size = $_COOKIE['arb_font_size']; 
 	  }
 
-/**
- * Code used for setting the cookie variables for 
- * Arabic fonts, English fonts, Ayah Themes, Translators options 
- * in left menu block.
-*/
 
-
-	   if(eregi("chrome", $_SERVER['HTTP_USER_AGENT'])) // Checking the browser is chrome.
-		   {
-		       $select_arb1 = 6;
-		   }
-		  else
-		  {
-  			$select_arb1 = 1;
-			
-		  }
-  $select_arb_size1 = 20;
-  $select_eng1 = 1;
-  $select_eng_size1 = 14;
-  $select_res = "Alafasy_128kbps";
-  $expire=time()+(60*60*24*365*5); // 5 year
-  $cookie_enabled = 2;
-  
-        $cookie_sent = setcookie("tc","ok",0, "/");
-        if($cookie_sent == false){ $cookie_enabled = 1; }
 		
 		
 /**
