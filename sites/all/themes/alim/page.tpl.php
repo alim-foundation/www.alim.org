@@ -105,7 +105,16 @@ $start_time = $_SESSION['start_time'];
  * in left menu block.
 */
 
-  $select_arb1 = 1;
+
+	   if(eregi("chrome", $_SERVER['HTTP_USER_AGENT'])) // Checking the browser is chrome.
+		   {
+		       $select_arb1 = 6;
+		   }
+		  else
+		  {
+  			$select_arb1 = 1;
+			
+		  }
   $select_arb_size1 = 20;
   $select_eng1 = 1;
   $select_eng_size1 = 14;
