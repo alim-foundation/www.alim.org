@@ -81,7 +81,7 @@ else
 			$message = nl2br($_POST['message']);
 			$message .= "<br />Login Id : ".$val."<br /><br /><a href='".$base_url."/groupdetails/".arg(1)."/mg'>Click here</a> to join the group<br /><br /> - $email_name";
 			
-			$from  	 = 'Groupsadmin@alim.org';
+			$from  	 = 'groupsadmin@alim.org';
 			//$from  	 = 'sumesh@citrusinformatics.com';
 					
 		    $headers["MIME-Version"] = '1.0';
@@ -106,7 +106,7 @@ else
 			$subject = trim($_POST['subject']);
 			$message = trim(nl2br($_POST['message']));
 			$message .= "<br />Login Id : ".$val."<br /><br /><a href='".$base_url."/groupdetails/".arg(1)."/mg'>Click here</a> to join the group<br /><br /> - $email_name";
-			$from  	 = 'Groupsadmin@alim.org';
+			$from  	 = 'groupsadmin@alim.org';
 			//$from  	 = 'sumesh@citrusinformatics.com';
 			
 			db_query("INSERT INTO invite_to_group (email,group_id) VALUES ('".$val."','".arg(1)."')");
