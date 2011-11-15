@@ -81,7 +81,7 @@ else
 			$message = nl2br($_POST['message']);
 			$message .= "<br />Login Id : ".$val."<br /><br /><a href='".$base_url."/groupdetails/".arg(1)."/mg'>Click here</a> to join the group<br /><br /> - $email_name";
 			
-			$from  	 = 'groupsadmin@alim.org';
+			$from  	 = 'GroupsAdmin@alim.org';
 			//$from  	 = 'sumesh@citrusinformatics.com';
 					
 		    $headers["MIME-Version"] = '1.0';
@@ -90,14 +90,23 @@ else
 			
 			// Mail it
 
-			$body = array(
+/*			$body = array(
 			'to' => $val,
 			'subject' => t($subject),
 			'body' => t($message),
 			'headers' => $headers
 			);
+			*/
+			
+			$body = array(
+			'to' => $val,
+			'subject' => t($subject),
+			'message' => t($message),
+			'headers' => $headers
+			);
+			
 			//drupal_mail_send($body); // calling drupal mail function
-			  $message = drupal_mail('tellafriend_node', 'taf', $val, user_preferred_language($account), $body,  $from, $send = TRUE);
+			  $message = drupal_mail('tellafriend_node', 'taf', $val, language_default(), $body,  $from, $send = TRUE);
 			
 		 }
 	}
@@ -107,7 +116,7 @@ else
 			$subject = trim($_POST['subject']);
 			$message = trim(nl2br($_POST['message']));
 			$message .= "<br />Login Id : ".$val."<br /><br /><a href='".$base_url."/groupdetails/".arg(1)."/mg'>Click here</a> to join the group<br /><br /> - $email_name";
-			$from  	 = 'groupsadmin@alim.org';
+			$from  	 = 'GroupsAdmin@alim.org';
 			//$from  	 = 'sumesh@citrusinformatics.com';
 			
 			db_query("INSERT INTO invite_to_group (email,group_id) VALUES ('".$val."','".arg(1)."')");
@@ -122,15 +131,22 @@ else
 			  $email_sent = 'true';
 			}*/
 			
-			$body = array(
+	/*		$body = array(
 			'to' => $val,
 			'subject' => t($subject),
 			'body' => t($message),
 			'headers' => $headers
+			);*/
+			
+			$body = array(
+			'to' => $val,
+			'subject' => t($subject),
+			'message' => t($message),
+			'headers' => $headers
 			);
 		 
 			 //drupal_mail_send($body); // calling drupal mail function
-			   $message = drupal_mail('tellafriend_node', 'taf', $val, user_preferred_language($account), $body,  $from, $send = TRUE);
+			   $message = drupal_mail('tellafriend_node', 'taf', $val, language_default(), $body,  $from, $send = TRUE);
 		
 	}
 	drupal_set_message('Invitation sent successfully.');
