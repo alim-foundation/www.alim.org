@@ -96,7 +96,8 @@ else
 			'body' => t($message),
 			'headers' => $headers
 			);
-			drupal_mail_send($body); // calling drupal mail function
+			//drupal_mail_send($body); // calling drupal mail function
+			  $message = drupal_mail('tellafriend_node', 'taf', $val, user_preferred_language($account), $body,  $from, $send = TRUE);
 			
 		 }
 	}
@@ -128,7 +129,8 @@ else
 			'headers' => $headers
 			);
 		 
-			 drupal_mail_send($body); // calling drupal mail function
+			 //drupal_mail_send($body); // calling drupal mail function
+			   $message = drupal_mail('tellafriend_node', 'taf', $val, user_preferred_language($account), $body,  $from, $send = TRUE);
 		
 	}
 	drupal_set_message('Invitation sent successfully.');
