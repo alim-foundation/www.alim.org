@@ -80,8 +80,9 @@ else
 			$subject = $_POST['subject'];
 			$message = nl2br($_POST['message']);
 			$message .= "<br />Login Id : ".$val."<br /><br /><a href='".$base_url."/groupdetails/".arg(1)."/mg'>Click here</a> to join the group<br /><br /> - $email_name";
+			$from  	 = 'do-not-reply@alim.org';
 			
-			$from  	 = 'GroupsAdmin@alim.org';
+			//$from  	 = 'GroupsAdmin@alim.org';
 					
 		    $headers["MIME-Version"] = '1.0';
 		    $headers["Content-Type"] = "text/html; charset=iso-8859-1";
@@ -105,7 +106,8 @@ else
 			$subject = trim($_POST['subject']);
 			$message = trim(nl2br($_POST['message']));
 			$message .= "<br />Login Id : ".$val."<br /><br /><a href='".$base_url."/groupdetails/".arg(1)."/mg'>Click here</a> to join the group<br /><br /> - $email_name";
-			$from  	 = 'GroupsAdmin@alim.org';
+			//$from  	 = 'GroupsAdmin@alim.org';
+			$from  	 = 'do-not-reply@alim.org';
 			
 			db_query("INSERT INTO invite_to_group (email,group_id) VALUES ('".$val."','".arg(1)."')");
 					
