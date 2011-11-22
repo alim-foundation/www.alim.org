@@ -1249,7 +1249,7 @@ if(arg(1)=='quran' &&  (arg(2)=='ayah' || arg(2)=='surah' || arg(2)=='AlQuran-ta
 {
 	$ck_sh =1;
 }
-else if(arg(1)=='hadith' &&  (arg(2)=='SAD' || arg(2)=='AMH' || arg(2)=='HDQ' || arg(2)=='fiq' || arg(2)=='SHM' || arg(2)=='TIR' || arg(2)=='prophet') )
+else if(arg(1)=='hadith' &&  (arg(2)=='SAD' || arg(2)=='AMH' || arg(2)=='HDQ' || arg(2)=='fiq' || arg(2)=='SHM' || arg(2)=='TIR' || arg(2)=='prophet' || arg(2)=='SHB'))
 {
   $ck_sh =1;
 }
