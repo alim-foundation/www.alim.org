@@ -667,7 +667,7 @@ $start_time = $_SESSION['start_time'];
 ?>
 
     <!--[if lt IE 7]>
-	<?php //print phptemplate_get_ie_styles(); ?>
+	<?php print phptemplate_get_ie_styles(); ?>
 	<![endif]-->
     <script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/jquery.min.js"></script>
 	<script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
