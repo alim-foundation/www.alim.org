@@ -67,21 +67,6 @@ $name_auth="Yusuf Ali";
 				
  	 ?></b>&nbsp;&nbsp;&nbsp;</div>
 	 <div style="width:175px;float:left;">
-	  <style>
-	 #quicktabs_tabpage_12_1 #vud_ap_vote , #quicktabs_tabpage_12_1 #votes_text
-	 {
-	  display:none;
-	 }
-	 #quicktabs_tabpage_12_1 .vud-widget-plain
-	 {
-	   color:#FFFFFF;
-	 }
-	 #quicktabs_tabpage_12_1 .total-votes-plain
-	 {
-	  margin-right:3px;
-	 }
-	
-	 </style>
 	 <?php	if ($user->uid){ ?>
 	 <div style="clear:both;">
 	   <div style="">

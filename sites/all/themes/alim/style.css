@@ -10636,3 +10636,15 @@ background:#f7f7f7;
 {
 cursor:pointer;
 }
+#quicktabs_tabpage_12_1 #vud_ap_vote , #quicktabs_tabpage_12_1 #votes_text
+{
+display:none;
+}
+#quicktabs_tabpage_12_1 .vud-widget-plain
+{
+ color:#FFFFFF;
+}
+#quicktabs_tabpage_12_1 .total-votes-plain
+{
+ margin-right:3px;
+}
