@@ -43,7 +43,7 @@
 	
 		   if(eregi("chrome", $_SERVER['HTTP_USER_AGENT'])) // Checking the browser is chrome.
 		   {
-		   		print wordwrap(strip_tags($exp[1]), 20, "\n", true); // wrap the text
+		   		print strip_tags($exp[1]); // wrap the text
 				//print "first";
 		   }
 		   else
@@ -61,7 +61,7 @@
 		//print wordwrap(strip_tags($output), 20, "\n", true);
 		   if(eregi("chrome", $_SERVER['HTTP_USER_AGENT']))   // Checking the browser is chrome.
 		   {
-		   		print wordwrap(strip_tags($output), 20, "\n", true);
+		   		print strip_tags($output);
 		   }
 		   else
 		   {
@@ -77,7 +77,7 @@
 	
 	      if(eregi("chrome", $_SERVER['HTTP_USER_AGENT']))  // Checking the browser is chrome.
 		   {
-		   		print wordwrap(strip_tags($output), 20, "\n", true);
+		   		print strip_tags($output);
 		   }
 		   else
 		   {
