@@ -40,14 +40,14 @@
 	 
 		   // echo str_replace(" ۖ ",$var,$exp[1]);<br />
 		   // print wordwrap(strip_tags($exp[1]), 20, "\n", true);
-		   		print strip_tags($exp[1]); // wrap the text
+		   		print strip_tags($exp[1]).'t'; // wrap the text
 				//print "first";
 
 	 }
 	 else
 	 {
 	    
-		   		print strip_tags($output);
+		   		print strip_tags($output).'t';
 
       }
    }
@@ -55,7 +55,7 @@
    {
        //echo str_replace(" ۖ ","$output");
 	   //print wordwrap(strip_tags($output), 20, "\n", true);
-		     	print strip_tags($output).'t';
+		     	print strip_tags($output);
    }
 
  // print  $output
