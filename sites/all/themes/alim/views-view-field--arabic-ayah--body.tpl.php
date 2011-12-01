@@ -40,22 +40,50 @@
 	 
 		   // echo str_replace(" ۖ ",$var,$exp[1]);<br />
 		   // print wordwrap(strip_tags($exp[1]), 20, "\n", true);
-		   		print strip_tags($exp[1]); // wrap the text
+	
+		   if(eregi("chrome", $_SERVER['HTTP_USER_AGENT'])) // Checking the browser is chrome.
+		   {
+		   		print wordwrap(strip_tags($exp[1]), 20, "\n", true); // wrap the text
 				//print "first";
-
+		   }
+		   else
+		   {
+		     	print strip_tags($exp[1]);
+				//print "second";
+		   }
+	  
 	 }
 	 else
 	 {
 	    
-		   		print strip_tags($output);
+	    //echo str_replace(" ۖ ","$output");
+	
+		//print wordwrap(strip_tags($output), 20, "\n", true);
+		   if(eregi("chrome", $_SERVER['HTTP_USER_AGENT']))   // Checking the browser is chrome.
+		   {
+		   		print wordwrap(strip_tags($output), 20, "\n", true);
+		   }
+		   else
+		   {
+		     	print strip_tags($output);
+			}
+	 }
 
-   }
    }
    else
    {
        //echo str_replace(" ۖ ","$output");
 	   //print wordwrap(strip_tags($output), 20, "\n", true);
+	
+	      if(eregi("chrome", $_SERVER['HTTP_USER_AGENT']))  // Checking the browser is chrome.
+		   {
+		   		print wordwrap(strip_tags($output), 20, "\n", true);
+		   }
+		   else
+		   {
 		     	print strip_tags($output);
+		   }
+	 
    }
 
  // print  $output
