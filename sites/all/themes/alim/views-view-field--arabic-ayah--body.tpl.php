@@ -63,14 +63,15 @@
 	 
 		   // echo str_replace(" ۖ ",$var,$exp[1]);<br />
 		   // print wordwrap(strip_tags($exp[1]), 20, "\n", true);
+		
 		   		print $exp[1]; // wrap the text
 				//print "first";
 
 	 }
 	 else
 	 {
-	    
-		   		print $output;
+	     print str_replace (" ", "", $output);
+		   		//print $output;
 
    }
    }
