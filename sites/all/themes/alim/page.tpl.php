@@ -889,7 +889,7 @@ if(arg(3)=='compare') {
 							
 							<div id="content_data">	
 							
-							<?php if(arg(3)=='english' || arg(3)=='compare' || arg(2)=='AlQuran-tafsir') { ?> <div class="font_ayah" id="font_ayah">  <?php  } ?>
+							<?php if(arg(3)=='english' || arg(3)=='compare' || arg(2)=='AlQuran-tafsir' || arg(2)=='duas') { ?> <div class="font_ayah" id="font_ayah">  <?php  } ?>
 							
 							<?php if(arg(0)=='userprofile' || arg(0)=='groupdetails') { ?>
 								<div>
