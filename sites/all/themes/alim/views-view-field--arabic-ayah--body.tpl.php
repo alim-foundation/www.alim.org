@@ -35,16 +35,16 @@
    $exp = explode($result_11[0]->node_revisions_body,$output);
 	 if($exp[1]!="")
 	 {
-		   		print strip_tags($exp[1]); // wrap the text
+		   		print $exp[1]; // wrap the text
 	 }
 	 else
 	 {
-	    	    print strip_tags($output);
+	    	    print $output;
      }
    }
    else
    {
-		     	print strip_tags($output);
+		     	print $output;
    }
 ?>
 
