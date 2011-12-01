@@ -35,53 +35,56 @@
    $exp = explode($result_11[0]->node_revisions_body,$output);
 	/// print $exp[1];
 	//print $_SERVER['HTTP_USER_AGENT'];
-/*	 if($exp[1]!="")
-	 {
-	 
-		   // echo str_replace(" ۖ ",$var,$exp[1]);<br />
-		   print wordwrap(strip_tags($exp[1]), 20, "\n", true);
-		   		//print strip_tags($exp[1]); // wrap the text
-				//print "first";
-
-	 }
-	 else
-	 {
-	     print wordwrap(strip_tags($output), 20, "\n", true);
-		   		//print strip_tags($output);
-
-      }
-   }
-   else
-   {
-       //echo str_replace(" ۖ ","$output");
-	   print wordwrap(strip_tags($output), 20, "\n", true);
-		     //	print strip_tags($output);
-   }*/
-   
-   	 if($exp[1]!="")
+	 if($exp[1]!="")
 	 {
 	 
 		   // echo str_replace(" ۖ ",$var,$exp[1]);<br />
 		   // print wordwrap(strip_tags($exp[1]), 20, "\n", true);
-		
-		   		print $exp[1]; // wrap the text
+	
+		   if(eregi("chrome", $_SERVER['HTTP_USER_AGENT'])) // Checking the browser is chrome.
+		   {
+		   		print wordwrap(strip_tags($exp[1]), 20, "\n", true); // wrap the text
 				//print "first";
-
+		   }
+		   else
+		   {
+		     	print strip_tags($exp[1]);
+				//print "second";
+		   }
+	  
 	 }
 	 else
 	 {
-	     print str_replace (" ", "", $output);
-		   		//print $output;
+	    
+	    //echo str_replace(" ۖ ","$output");
+	
+		//print wordwrap(strip_tags($output), 20, "\n", true);
+		   if(eregi("chrome", $_SERVER['HTTP_USER_AGENT']))   // Checking the browser is chrome.
+		   {
+		   		print wordwrap(strip_tags($output), 20, "\n", true);
+		   }
+		   else
+		   {
+		     	print strip_tags($output);
+			}
+	 }
 
-   }
    }
    else
    {
        //echo str_replace(" ۖ ","$output");
 	   //print wordwrap(strip_tags($output), 20, "\n", true);
-		     	print $output;
+	
+	      if(eregi("chrome", $_SERVER['HTTP_USER_AGENT']))  // Checking the browser is chrome.
+		   {
+		   		print wordwrap(strip_tags($output), 20, "\n", true);
+		   }
+		   else
+		   {
+		     	print strip_tags($output);
+		   }
+	 
    }
-
 
  // print  $output
 ?>
