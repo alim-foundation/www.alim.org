@@ -70,7 +70,7 @@
 	 else
 	 {
 	    
-		   		print strip_tags($output);
+		   		print htmlentities($output);
 
    }
    }
@@ -78,7 +78,7 @@
    {
        //echo str_replace(" ۖ ","$output");
 	   //print wordwrap(strip_tags($output), 20, "\n", true);
-		     	print $output;
+		     	print htmlentities($output);
    }
 
 
