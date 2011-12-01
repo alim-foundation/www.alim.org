@@ -9045,6 +9045,7 @@ h5.faq-header a
 .tooltop1{
 background:url(images/bkg-taghelp-top.png) no-repeat center;
 height:24px;
+display:block;
 }
 .toolmiddle1{
 background:url(images/bkg-taghelp-middle.png) repeat center;

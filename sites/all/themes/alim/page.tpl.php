@@ -952,7 +952,12 @@ if(arg(3)=='compare') {
 <script>	 
 $(document).ready(function() {
 
-
+$('#demo').mouseover(function() {
+  $('.tooltip').css('display','block');
+});
+$('#demo').mouseout(function() {
+  $('.tooltip').css('display','none');
+});
 
    $('#block-views-follow_me-block_1 .view-header h2').mouseover(function() {
    
