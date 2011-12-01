@@ -55,6 +55,7 @@
 	 }
 	 else
 	 {
+<<<<<<< HEAD
 	    
 	    //echo str_replace(" ۖ ","$output");
 	
@@ -68,6 +69,10 @@
 		     	print strip_tags($output);
 			}
 	 }
+=======
+	     print str_replace (" ", "", $output);
+		   		//print $output;
+>>>>>>> 46027fd4343056b730e61e07235cb6bc4da592df
 
    }
    else
