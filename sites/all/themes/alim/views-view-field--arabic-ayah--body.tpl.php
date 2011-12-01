@@ -25,7 +25,7 @@
    $var="<span class='sign1'>&nbsp;</span>";
    if(arg(4)!=1 && arg(4)!=9 && !($_SESSION['arabicqry']))
    {
-     $_SESSION['arabicqry']=0;
+     $_SESSION['arabicqry']=0; 
 	 $viewName = 'arabic_text';	  
    $view_11 = views_get_view($viewName);
    $view_11->set_display('default');
@@ -40,22 +40,14 @@
 	 
 		   // echo str_replace(" ۖ ",$var,$exp[1]);<br />
 		   // print wordwrap(strip_tags($exp[1]), 20, "\n", true);
-<<<<<<< HEAD
-		   		print $exp[1]; // wrap the text
-=======
-		   		print strip_tags($exp[1]).'t'; // wrap the text
->>>>>>> 121a798f6feb3c4aaaae7a5803a0952452808f16
+		   		print strip_tags($exp[1]); // wrap the text
 				//print "first";
 
 	 }
 	 else
 	 {
 	    
-<<<<<<< HEAD
-		   		print $output;
-=======
-		   		print strip_tags($output).'t';
->>>>>>> 121a798f6feb3c4aaaae7a5803a0952452808f16
+		   		print strip_tags($output);
 
       }
    }
@@ -63,11 +55,7 @@
    {
        //echo str_replace(" ۖ ","$output");
 	   //print wordwrap(strip_tags($output), 20, "\n", true);
-<<<<<<< HEAD
-		     	print $output;
-=======
 		     	print strip_tags($output);
->>>>>>> 121a798f6feb3c4aaaae7a5803a0952452808f16
    }
 
  // print  $output
