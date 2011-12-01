@@ -49,13 +49,13 @@
 	    
 		   		print strip_tags($output);
 
-   }
+      }
    }
    else
    {
        //echo str_replace(" ۖ ","$output");
 	   //print wordwrap(strip_tags($output), 20, "\n", true);
-		     	print strip_tags($output);
+		     	print strip_tags($output).'t';
    }
 
  // print  $output
