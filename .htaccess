@@ -37,16 +37,16 @@ AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml appl
     ExpiresDefault "access plus 1 year"
 </FilesMatch>
   <filesMatch "\.(ico|jpe?g|png|gif|swf)$">
-    Header set Cache-Control "public"
+    Header set Cache-Control "max-age=2592000, public"
   </filesMatch>
   <filesMatch "\.(css)$">
-    Header set Cache-Control "public"
+    Header set Cache-Control "max-age=2592000, public"
   </filesMatch>
   <filesMatch "\.(js)$">
-    Header set Cache-Control "private"
+    Header set Cache-Control "max-age=2592000, private"
   </filesMatch>
   <filesMatch "\.(x?html?|php)$">
-    Header set Cache-Control "private, must-revalidate"
+    Header set Cache-Control "max-age=2592000, private, must-revalidate"
   </filesMatch>
 </ifModule>
 # END Cache-Control Headers
