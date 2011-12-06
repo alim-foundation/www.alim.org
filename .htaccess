@@ -32,6 +32,10 @@ AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml appl
 # END Expire headers
 # BEGIN Cache-Control Headers
 <ifModule mod_headers.c>
+<FilesMatch "\.(ico|pdf|flv|jpe?g|png|gif|js|css|swf)$">
+    ExpiresActive On
+    ExpiresDefault "access plus 1 year"
+</FilesMatch>
   <filesMatch "\.(ico|jpe?g|png|gif|swf)$">
     Header set Cache-Control "public"
   </filesMatch>
