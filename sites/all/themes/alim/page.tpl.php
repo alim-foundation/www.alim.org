@@ -405,6 +405,7 @@ $start_time = $_SESSION['start_time'];
   <head>
     <?php print $head ?>
 	<title><?php print $head_title ?></title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
 	<meta http-equiv="X-UA-Compatible" content="IE=8" />
 	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 	<meta HTTP-EQUIV="accept-encoding" CONTENT="gzip,deflate">
@@ -669,8 +670,6 @@ $start_time = $_SESSION['start_time'];
     <!--[if lt IE 7]>
 	<?php print phptemplate_get_ie_styles(); ?>
 	<![endif]-->
-    <script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/jquery.min.js"></script>
-	<script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
 	<script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/dhtml_menu/dhtml-menu.js"></script>
 	<script language="javascript">
 		function fixprogressbar()
@@ -1114,6 +1113,7 @@ $time_taken = round($time_taken_sec,5);
 
 </script> 
 <?php print $closure ?>
+<script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
 <iframe name="garbageframe" id="garbageframe" style="display:none;" ></iframe>
 <script type="text/javascript" charset="utf-8">
   var feedback_widget_options = {};
