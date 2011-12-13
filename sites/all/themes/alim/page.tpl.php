@@ -15,11 +15,11 @@ $start_time = $_SESSION['start_time'];
 
 	   if(eregi("chrome", $_SERVER['HTTP_USER_AGENT'])) // Checking the browser is chrome.
 		   {
-		       $select_arb1 = 6;
+		       $select_arb1 = 2;
 		   }
 		  else
 		  {
-  			$select_arb1 = 1;
+  			$select_arb1 = 2;
 			
 		  }
   $select_arb_size1 = 20;
@@ -301,7 +301,7 @@ $start_time = $_SESSION['start_time'];
 
 										$sel_arb = db_query("SELECT value as arb_sel FROM profile_values WHERE fid=2 AND uid=".$user->uid);
 										$fetch_arb = db_fetch_object($sel_arb);
-										($fetch_arb->arb_sel) ? $select_arb1 = $fetch_arb->arb_sel : $select_arb1 = 1;
+										($fetch_arb->arb_sel) ? $select_arb1 = $fetch_arb->arb_sel : $select_arb1 = 2;
 										setcookie("arb_font", $select_arb1, $expire, "/");
 		
 										$sel_arb_size = db_query("SELECT value as arbsize_sel FROM profile_values WHERE fid=4 AND uid=".$user->uid);
