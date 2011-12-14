@@ -411,6 +411,8 @@ $start_time = $_SESSION['start_time'];
 <link rel="stylesheet" type="text/css" href="<?=$base_url?>/<?=$theme_path?>/jqlist/jquery.multiselect.css" />
 <link rel="stylesheet" type="text/css" href="<?=$base_url?>/<?=$theme_path?>/jqlist/prettify.css" />
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
+
 	  <script type="text/javascript"> 
    var startTime = (new Date()).getTime();
    var plstart = new Date(); 
@@ -669,7 +671,16 @@ $start_time = $_SESSION['start_time'];
     <!--[if lt IE 7]>
 	<?php print phptemplate_get_ie_styles(); ?>
 	<![endif]-->
-    <script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/jquery.min.js"></script>
+		<script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/dhtml_menu/dhtml-menu.js"></script>
+
+		<script language="javascript">
+		function fixprogressbar()
+		{
+		top.garbageframe.document.write("");
+		top.garbageframe.close();
+		return
+		}	
+	</script>
 
 	<?php
 	
@@ -1106,15 +1117,7 @@ $time_taken = round($time_taken_sec,5);
 </script> 
 <?php print $closure ?>	
 <script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
-	<script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/dhtml_menu/dhtml-menu.js"></script>
-	<script language="javascript">
-		function fixprogressbar()
-		{
-		top.garbageframe.document.write("");
-		top.garbageframe.close();
-		return
-		}	
-	</script>
+
 <iframe name="garbageframe" id="garbageframe" style="display:none;" ></iframe>
 
 <script type="text/javascript" charset="utf-8">
