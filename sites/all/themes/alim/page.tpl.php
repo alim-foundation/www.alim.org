@@ -670,16 +670,7 @@ $start_time = $_SESSION['start_time'];
 	<?php print phptemplate_get_ie_styles(); ?>
 	<![endif]-->
     <script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/jquery.min.js"></script>
-	<script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
-	<script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/dhtml_menu/dhtml-menu.js"></script>
-	<script language="javascript">
-		function fixprogressbar()
-		{
-		top.garbageframe.document.write("");
-		top.garbageframe.close();
-		return
-		}	
-	</script>
+
 	<?php
 	
 /**
@@ -1113,8 +1104,19 @@ $time_taken = round($time_taken_sec,5);
    });
 
 </script> 
-<?php print $closure ?>
+<?php print $closure ?>	
+<script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
+	<script type="text/javascript" src="<?php print $base_url."/".$theme_path;?>/dhtml_menu/dhtml-menu.js"></script>
+	<script language="javascript">
+		function fixprogressbar()
+		{
+		top.garbageframe.document.write("");
+		top.garbageframe.close();
+		return
+		}	
+	</script>
 <iframe name="garbageframe" id="garbageframe" style="display:none;" ></iframe>
+
 <script type="text/javascript" charset="utf-8">
   var feedback_widget_options = {};
 
