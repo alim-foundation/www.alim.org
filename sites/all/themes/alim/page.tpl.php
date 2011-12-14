@@ -403,14 +403,14 @@ $start_time = $_SESSION['start_time'];
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language ?>" lang="<?php print $language->language ?>" dir="<?php print $language->dir ?>">
   <head>
-    <?php print $head ?>
+ <?php print $head ?>
 	<title><?php print $head_title ?></title>
 	<meta http-equiv="X-UA-Compatible" content="IE=8" />
 	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 	<meta HTTP-EQUIV="accept-encoding" CONTENT="gzip,deflate">
   <?php
 							
-  $file_path = $base_url."/".$theme_path."/alimplayer/mediaplayer1/";
+  $file_path = $base_url."/".$theme_path."/alimplayer/mediaplayer/";
   $file_store = $base_url."/".$theme_path."/alimplayer/";
   ?>
 	<script type='text/javascript' src='<?=$file_path?>swfobject.js'></script>
