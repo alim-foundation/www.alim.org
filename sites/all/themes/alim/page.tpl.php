@@ -1271,6 +1271,10 @@ else if(arg(1)=='islam' &&  (arg(2)=='article' || (arg(2)=='world' && arg(3)=='c
 {
 	$ck_sh =1;
 }
+else if(arg(0)=='news')
+{
+    $ck_sh =1;
+}
 if($ck_sh==1)
 {
 ?>
