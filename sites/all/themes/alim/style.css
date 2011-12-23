@@ -9538,7 +9538,6 @@ line-height: 13px;
 #block-block-34 h2
 {
 padding: 6px 0 30px 25px;
-font-weight:normal;
 color:#FFFFFF;
 }
 #block-block-34 {
@@ -10463,6 +10462,7 @@ margin-top:-15px;
 #block-block-34 h2, #block-views-my_groups-block_1 h2 , #block-views-follow_me-block_1 h2, #block-views-follower_of-block_1 h2
 {
 cursor:pointer;
+font-size:16px;
 }
 .view-group-posts-new
 { 
