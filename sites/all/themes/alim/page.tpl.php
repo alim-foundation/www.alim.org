@@ -984,6 +984,7 @@ $('#demo').mouseout(function() {
 	
 	
 	$('#block-views-follower_of-block_1 .view-header h2').mouseover(function() {
+	alert("tes");
 	 $(".follower_of_profile_help").addClass("hasFocus");
 	 setTimeout(function(){ 
         if ($(".follower_of_profile_help").hasClass("hasFocus")) {
