@@ -19,7 +19,7 @@ $birthday =  $temp_user->Birthday;
 $phone =  $temp_user->Phone;
 $address =  $temp_user->Address;
 ?>
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 <table width="100%" border="0" cellpadding="2" cellspacing="2">
 			  <tr>
 				<td  valign="top" width="60">
