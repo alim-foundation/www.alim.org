@@ -1004,7 +1004,7 @@ $('.tooltip').mouseover(function() {
         if ($(".follow_me_profile_help").hasClass("hasFocus")) {
             $(".follow_me_profile_help").slideDown('fast');
         }
-      }, 1000 );
+      }, 500 );
 	$('.follow_me_profile_help').css('position','absolute');
 	$('.follow_me_profile_help').css(' font-size','24px');
 	$('.follow_me_profile_help').css('width','350px');
@@ -1025,7 +1025,7 @@ $('.tooltip').mouseover(function() {
         if ($(".follower_of_profile_help").hasClass("hasFocus")) {
             $(".follower_of_profile_help").slideDown('fast');
         }
-      }, 1000 );
+      }, 500 );
 	$('.follower_of_profile_help').css('position','absolute');
 	$('.follower_of_profile_help').css(' font-size','24px');
 	$('.follower_of_profile_help').css('width','350px');
@@ -1043,7 +1043,7 @@ $('.tooltip').mouseover(function() {
         if ($(".profile_help").hasClass("hasFocus")) {
             $(".profile_help").slideDown('fast');
         }
-      }, 1000 );
+      }, 500 );
 
 	$('.profile_help').css('position','absolute');
 	$('.profile_help').css(' font-size','24px');
@@ -1064,7 +1064,7 @@ $('.tooltip').mouseover(function() {
         if ($(".newroup_profile_help").hasClass("hasFocus")) {
             $(".newroup_profile_help").slideDown('fast');
         }
-      }, 1000 );
+      }, 500 );
 	$('.newroup_profile_help').css('position','absolute');
 	$('.newroup_profile_help').css(' font-size','24px');
 	$('.newroup_profile_help').css('width','350px');
