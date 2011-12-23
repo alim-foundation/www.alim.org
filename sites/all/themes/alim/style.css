@@ -10629,8 +10629,6 @@ font-size: 15px;
 .view-compare-translation table.white
 {
 background:#f7f7f7;
-
-
 }
 #demo
 {
@@ -10647,9 +10645,4 @@ display:none;
 #quicktabs_tabpage_12_1 .total-votes-plain
 {
  margin-right:3px;
-}
-.view-header
-{
-font-size:14px;
-font-family:Tahoma;
 }
