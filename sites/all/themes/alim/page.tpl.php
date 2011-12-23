@@ -951,6 +951,39 @@ if(arg(3)=='compare') {
 	
 	   </div>
 </div>
+ 	<div style="clear:both"></div>
+	<div id="footer_div" align="center" >
+	  <div id="footer_content" align="center">
+		  <div id="footer_head" align="center"><a  href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo1.png" border="0"  width="262" height="61" /></a><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&copy; All Rights 2010 Alim.org</div>
+		  
+		  <div id="footer_menu"><?php print $footer; ?></div>
+	  </div>
+	   <div style="clear:both"></div>
+	</div>
+	
+<?php print $bookmark; // bookmark right side fixed menu  ?>
+<?php print $scripts ?>
+<?php
+/**
+ * Hide
+ * 56 th surah of Malik translation
+ *
+*/	
+
+if(arg(4)=='55' && arg(5)=='MAL')
+{
+?>
+<script language="javascript">
+document.getElementById('clip-all-content').style.display='block';
+document.getElementById('clip-all-content').innerHTML='Content is not available.';
+document.getElementById('block-block-23').style.display='none';
+document.getElementById('block-block-18').style.display='none';
+document.getElementById('block-quicktabs-12').style.display='none';
+</script>
+<?php
+
+}
+?>
 <script>	 
 $(document).ready(function() {
 
@@ -1048,46 +1081,7 @@ $('.tooltip').mouseover(function() {
 
 });
 
-
-
-
-			
 </script>	
-
-
- 	<div style="clear:both"></div>
-	<div id="footer_div" align="center" >
-	  <div id="footer_content" align="center">
-		  <div id="footer_head" align="center"><a  href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo1.png" border="0"  width="262" height="61" /></a><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&copy; All Rights 2010 Alim.org</div>
-		  
-		  <div id="footer_menu"><?php print $footer; ?></div>
-	  </div>
-	   <div style="clear:both"></div>
-	</div>
-	
-<?php print $bookmark; // bookmark right side fixed menu  ?>
-<?php print $scripts ?>
-<?php
-/**
- * Hide
- * 56 th surah of Malik translation
- *
-*/	
-
-if(arg(4)=='55' && arg(5)=='MAL')
-{
-?>
-<script language="javascript">
-document.getElementById('clip-all-content').style.display='block';
-document.getElementById('clip-all-content').innerHTML='Content is not available.';
-document.getElementById('block-block-23').style.display='none';
-document.getElementById('block-block-18').style.display='none';
-document.getElementById('block-quicktabs-12').style.display='none';
-</script>
-<?php
-
-}
-?>
 <div style="background:#F9D350;color:#A94C17" id="load_timediv"></div>
 <?php
 $end_time = microtime(TRUE);
