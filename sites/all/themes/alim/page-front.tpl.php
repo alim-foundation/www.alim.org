@@ -5,6 +5,7 @@ You need to include each js files and css files of modules, themes etc in this p
 **/
 global $base_url;
 global $theme_path;
+global $user;
 $start_time = $_SESSION['start_time'];
 
           //Cookie setting for login remeber for 14 days..   
