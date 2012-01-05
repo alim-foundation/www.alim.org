@@ -128,11 +128,11 @@ $start_time = $_SESSION['start_time'];
 global $user;
 $set_ok = 0;
 $arr_roles = $user->roles;
-print_r($arr_roles);
+//print_r($arr_roles);
 foreach($arr_roles as $key => $ur){
 if($ur=="Developer")
 $set_ok = 1;
-if($ur=="Content Administrator")
+if($key==9)
 $set_ok = 1;
 }
 ?>
