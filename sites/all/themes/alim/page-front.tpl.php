@@ -130,7 +130,7 @@ $arr_roles = $user->roles;
 foreach($arr_role as $key => $ur){
 if($ur=="Developer")
 $set_ok = 1;
-if($ur=="Contributed Author")
+if($ur=="Content Administrator")
 $set_ok = 1;
 }
 ?>
