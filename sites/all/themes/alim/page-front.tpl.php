@@ -328,6 +328,8 @@ var plstart = new Date();
 </div>
 <script type="text/javascript" src="/misc/jquery.js?D"></script>
 <script type="text/javascript" src="/misc/drupal.js?T"></script>
+<script type="text/javascript" src="/sites/all/libraries/boomerang/boomerang.js?g"></script>
+<script type="text/javascript" src="/sites/all/modules/boomerang/boomerang.drupal.js?g"></script>
 <script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
 <script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.galleryview-2.1.1.js"/></script>
 <script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.timers-1.2.js"/></script>
@@ -560,6 +562,16 @@ _gaq.push(['loadTracker._trackPageview']);
 } catch(err){}
 }
 </script>
+ <script type="text/javascript">
+<!--//--><![CDATA[//><!--
+BOOMR.init({"user_ip":"59.162.126.17","site_domain":".<?=$base_url?>","BW":{"base_url":"http:\/\/<?=$base_url?>\/sites\/all\/libraries\/boomerang\/images\/"},"beacon_url":"http:\/\/<?=$base_url?>\/beacon","RT":{"cookie":"BOOMR-RT","cookie_exp":120}});
+    BOOMR.addVar('page_id', '<?=ip_address()?>');
+    BOOMR.addVar('uid', '<?=$user->uid?>');
+    BOOMR.addVar('uname', '<?=$user->name?>');
+    
+//--><!]]>
+</script>
+<div id="boomerang-results"></div>
 </body>
 </html>
  
