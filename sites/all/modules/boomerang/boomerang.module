@@ -33,6 +33,18 @@ function boomerang_perm() {
  */
 function boomerang_init() {
   global $user;
+  global $user;
+	$set_ok = 0;
+	$arr_roles = $user->roles;
+	//print_r($arr_roles);
+	foreach($arr_roles as $key => $ur){
+	if($ur=="Developer")
+	$set_ok = 1;
+	if($key==9)
+	$set_ok = 1;
+	}
+	if($set_ok==1)
+	{
   
   if (!variable_get('boomerang_tracking_enabled', TRUE)) {
     return;
@@ -69,6 +81,9 @@ function boomerang_init() {
     BOOMR.addVar('uid', '{$user->uid}');
     BOOMR.addVar('uname', '{$user->name}');
     ", 'inline');
+	
+	
+ }
 }
 
 
