@@ -562,6 +562,19 @@ _gaq.push(['loadTracker._trackPageview']);
 } catch(err){}
 }
 </script>
+<?php
+$set_ok = 0;
+$arr_roles = $user->roles;
+foreach($arr_role as $key => $ur){
+if($ur=="Developer")
+$set_ok = 1;
+if($ur=="Contributed Author")
+$set_ok = 1;
+}
+
+if($set_ok==1)
+{
+?>
  <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 BOOMR.init({"user_ip":"59.162.126.17","site_domain":".<?=$base_url?>","BW":{"base_url":"http:\/\/<?=$base_url?>\/sites\/all\/libraries\/boomerang\/images\/"},"beacon_url":"http:\/\/<?=$base_url?>\/beacon","RT":{"cookie":"BOOMR-RT","cookie_exp":120}});
@@ -572,6 +585,9 @@ BOOMR.init({"user_ip":"59.162.126.17","site_domain":".<?=$base_url?>","BW":{"bas
 //--><!]]>
 </script>
 <div id="boomerang-results"></div>
+<?php
+}
+?>
 </body>
 </html>
  
