@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implementation of hook_menu()
+ */
+function boomerang_beacon_menu() {
+
+  $items = array();
+
+  $items['beacon'] = array(
+    'title' => 'beacon',
+    'description' => 'Callback beacon for Boomerang.',
+    'access callback' => 'boomerang_beacon_access_menu',
+    'page callback' => 'boomerang_beacon_extract_data',
+    'page arguments' => array(1, 2),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+
+}
+
+
+/**
+ * Implementation of hook_perm()
+ */
+function boomerang_beacon_perm() {
+  return array('access beacon data');
+}
+
+
+/**
+ * Access callback that always returns TRUE.
+ */
+function boomerang_beacon_access_menu() {
+  return TRUE;
+}
+
+
+function boomerang_beacon_extract_data($a1 = NULL, $a2 = NULL) {
+  $record = new stdClass();
+  foreach ($_GET as $key => $value) {
+    switch ($key) {
+    case 'v':
+    case 'bw':
+    case 'lat':
+    case 'bw_err':
+    case 'lat_err':
+    case 'bw_time':
+    case 't_done':
+    case 't_other':
+    case 't_page':
+	case 't_resp':
+    case 'page_id':
+      $record->$key = check_plain($_GET[$key]);
+    break;
+    case 'u':
+    case 'r':
+      $record->$key = check_url($_GET[$key]);
+    break;
+    }
+  }
+  drupal_write_record('boomerang_beacon', $record);
+  exit;
+}
+
+
+/**
+ * Implementation of hook_views_api().
+ */
+function boomerang_beacon_views_api() {
+  return array('api' => 2.0);
+}
+
+
+/**
+ * Implementation of hook_help()
+ */
+function boomerang_beacon_help($path, $arg) {
+
+}

@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * Implementation of hook_install().
+ */
+function boomerang_install() {
+  db_query("UPDATE {system} SET weight = 10000 WHERE name = 'boomerang'");
+}
+
+/**
+ * Set module's weight to 10000, we want it absolutely last
+ */
+function boomerang_update_6001() {
+  db_query("UPDATE {system} SET weight = 10000 WHERE name = 'boomerang'");
+}
+
+/**
+ * Implementation of hook_requirements().
+ * Based on code from "3 Tips For Using External Libraries With Drupal":
+ * http://engineeredweb.com/blog/10/5/3-tips-using-external-libraries-drupal
+ */
+function boomerang_requirements($phase) {
+  $requirements = array();
+  // Ensure translations do not break at install time
+  $t = get_t();
+
+  $requirements['boomerang'] = array(
+    'title' => $t('Boomerang Library'),
+  );
+
+  if ($phase == 'install') {
+    if (!module_exists('libraries')) {
+      $requirements['boomerang']['severity'] = REQUIREMENT_ERROR;
+      $requirements['boomerang']['description'] = $t('Please download and enable libraries module before enabling this module.');
+    }
+
+    return $requirements;
+  }
+
+  $libraries = libraries_get_libraries();
+  if (isset($libraries['boomerang'])) {
+    $requirements['boomerang']['value'] = $t('Installed');
+    $requirements['boomerang']['severity'] = REQUIREMENT_OK;
+  }
+  else {
+    if ($phase=='runtime') {
+      $requirements['boomerang']['value'] = $t('Not Installed');
+    }
+    $requirements['boomerang']['severity'] = REQUIREMENT_ERROR;
+    $requirements['boomerang']['description'] = $t('The Boomerang module was not installed. Please download the Boomerang library (%url) before installing the Boomerang module or use the \'drush boomerang-plugin\' command. See the README.txt file for more information.', array('%url' => 'http://github.com/yahoo/boomerang/'));
+  }
+
+  return $requirements;
+}

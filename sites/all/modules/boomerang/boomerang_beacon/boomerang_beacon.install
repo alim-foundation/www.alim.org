@@ -1,0 +1,125 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function boomerang_beacon_uninstall() {
+
+  drupal_uninstall_schema('boomerang_beacon');
+
+  // Get global variable array
+  global $conf;
+  foreach (array_keys($conf) as $key) {
+    // Find variables that have the module prefix
+    if (strpos($key, 'boomerang_beacon_') === 0) {
+      variable_del($key);
+    }
+  }
+
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function boomerang_beacon_schema() {
+  $schema['boomerang_beacon'] = array(
+    'description' => t('Stores statistics returned from the Boomerang library.'),
+    'fields' => array(
+      'bid' => array(
+        'description' => t('Boomerang ID'),
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'v' => array(
+        'description' => t('Version number of the boomerang library in use'),
+        'type' => 'numeric',
+        'not null' => TRUE,
+        'precision' => '5',
+        'scale' => '2',
+      ),
+      't_done' => array(
+        'description' => t('Round trip time of the page'),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+	  't_resp' => array(
+        'description' => t('Time taken from the user initiating the request to the first byte of the response.'),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      't_other' => array(
+        'description' => t('Comma separated list of additional timers set by page developer. Each timer is in the format name|value'),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      't_page' => array(
+        'description' => t('Time taken from the head of the page to page_ready. Requires development effort'),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'u' => array(
+        'description' => t('URL of page that sends the beacon'),
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'r' => array(
+        'description' => t('URL of the page that set the start time of the beacon'),
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'r2' => array(
+        'description' => t('URL of the referrer of current page. Only set if different from r and strict_referrer has been explicitly turned off.'),
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'bw' => array(
+        'description' => t('User\'s measured bandwidth in bytes per second'),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'bw_err' => array(
+        'description' => t('95% confidence interval margin of error in measuring user\'s bandwidth'),
+        'type' => 'numeric',
+        'not null' => TRUE,
+        'precision' => '11',
+        'scale' => '2',
+      ),
+      'lat' => array(
+        'description' => t('User\'s measured HTTP latency in milliseconds'),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'lat_err' => array(
+        'description' => t('95% confidence interval margin of error in measuring user\'s latency'),
+        'type' => 'numeric',
+        'not null' => TRUE,
+        'precision' => '11',
+        'scale' => '2',
+      ),
+      'bw_time' => array(
+        'description' => t('Timestamp (seconds since the epoch) on the user\'s browser when the bandwidth and latency was measured'),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'page_id' => array(
+        'description' => t('Drupal internal URL for the page where script was called from'),
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('bid'),
+  );
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function boomerang_beacon_install() {
+  drupal_install_schema('boomerang_beacon');
+  drupal_set_message(t('The Boomerang Beacon module is now enabled.'));
+}

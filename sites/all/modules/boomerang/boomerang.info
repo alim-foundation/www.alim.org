@@ -1,0 +1,12 @@
+name = "Boomerang"
+description = "Loads Yahoo's Boomerang tool for measuring performance."
+package = Boomerang
+core = 6.x
+dependencies[] = libraries
+
+; Information added by drupal.org packaging script on 2011-04-08
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "boomerang"
+datestamp = "1302221055"
+
