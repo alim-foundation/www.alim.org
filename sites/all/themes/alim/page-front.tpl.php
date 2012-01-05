@@ -124,7 +124,14 @@ $start_time = $_SESSION['start_time'];
 							    //header("location:".$base_url."/userprofile");
 							}
 						}
-
+$set_ok = 0;
+$arr_roles = $user->roles;
+foreach($arr_role as $key => $ur){
+if($ur=="Developer")
+$set_ok = 1;
+if($ur=="Contributed Author")
+$set_ok = 1;
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $language->language ?>" lang="<?php echo $language->language ?>" dir="<?php echo $language->dir ?>">
@@ -328,8 +335,15 @@ var plstart = new Date();
 </div>
 <script type="text/javascript" src="/misc/jquery.js?D"></script>
 <script type="text/javascript" src="/misc/drupal.js?T"></script>
+<?php
+if($set_ok==1)
+{
+?>
 <script type="text/javascript" src="/sites/all/libraries/boomerang/boomerang.js?g"></script>
 <script type="text/javascript" src="/sites/all/modules/boomerang/boomerang.drupal.js?g"></script>
+<?php
+}
+?>
 <script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
 <script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.galleryview-2.1.1.js"/></script>
 <script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/galleryview/jquery.timers-1.2.js"/></script>
@@ -563,15 +577,6 @@ _gaq.push(['loadTracker._trackPageview']);
 }
 </script>
 <?php
-$set_ok = 0;
-$arr_roles = $user->roles;
-foreach($arr_role as $key => $ur){
-if($ur=="Developer")
-$set_ok = 1;
-if($ur=="Contributed Author")
-$set_ok = 1;
-}
-
 if($set_ok==1)
 {
 ?>
