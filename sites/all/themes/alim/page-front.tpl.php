@@ -5,7 +5,7 @@ You need to include each js files and css files of modules, themes etc in this p
 **/
 global $base_url;
 global $theme_path;
-global $user;
+
 $start_time = $_SESSION['start_time'];
 
           //Cookie setting for login remeber for 14 days..   
@@ -125,9 +125,10 @@ $start_time = $_SESSION['start_time'];
 							    //header("location:".$base_url."/userprofile");
 							}
 						}
+global $user;
 $set_ok = 0;
 $arr_roles = $user->roles;
-foreach($arr_role as $key => $ur){
+foreach($arr_roles as $key => $ur){
 if($ur=="Developer")
 $set_ok = 1;
 if($ur=="Content Administrator")
