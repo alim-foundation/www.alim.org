@@ -367,3 +367,8 @@ a.hand-icon {background: url("images/hand.gif") no-repeat scroll 0 4px transpare
         padding-top: 1px;
     }
 }
+#boomerang-results
+{
+ color:#CC0000;
+ background:#FFFFCC;
+}
