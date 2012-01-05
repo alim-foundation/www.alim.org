@@ -32,7 +32,7 @@ function boomerang_perm() {
  * Implementation of hook_init().
  */
 function boomerang_init() {
-  global $user;
+
   global $user;
 	$set_ok = 0;
 	$arr_roles = $user->roles;
