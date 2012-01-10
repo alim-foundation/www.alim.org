@@ -3,8 +3,9 @@ BOOMR.subscribe('before_beacon', function(o) {
   if (element) {
     var html = "";
     var t_other;
-
+    
     if(o.page_id) { html += "Page ID: " + o.page_id + "<br>"; }
+	if(o.ipaddress) { html += "IP Address: " + o.ipaddress + "<br>"; }
     if(o.uid) { html += "User ID: " + o.uid + "<br>"; }
     if(o.uname) { html += "Username: " + o.uname + "<br>"; }
 

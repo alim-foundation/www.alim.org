@@ -59,6 +59,7 @@ function boomerang_init() {
   $page_match = boomerang_match($path);
 
   $init['user_ip'] = ip_address();
+   $ip_add =  ip_address();
   if (isset($_SERVER['HTTP_HOST'])) {
     $init['site_domain'] = '.'. preg_replace('`^www.`', '', $_SERVER['HTTP_HOST']);
   }
@@ -80,6 +81,7 @@ function boomerang_init() {
     BOOMR.addVar('page_id', '$page_id');
     BOOMR.addVar('uid', '{$user->uid}');
     BOOMR.addVar('uname', '{$user->name}');
+	BOOMR.addVar('ipaddress', '{$ip_add}');
     ", 'inline');
 	
 	
