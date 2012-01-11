@@ -60,6 +60,8 @@ function boomerang_init() {
 
   $init['user_ip'] = ip_address();
    $ip_add =  ip_address();
+   $init['ipaddress'] = $ip_add;
+   
   if (isset($_SERVER['HTTP_HOST'])) {
     $init['site_domain'] = '.'. preg_replace('`^www.`', '', $_SERVER['HTTP_HOST']);
   }
@@ -83,8 +85,7 @@ function boomerang_init() {
     BOOMR.addVar('uname', '{$user->name}');
 	BOOMR.addVar('ipaddress', '{$ip_add}');
     ", 'inline');
-	
-	
+
  }
 }
 
