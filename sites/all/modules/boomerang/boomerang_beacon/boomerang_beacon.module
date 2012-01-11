@@ -62,6 +62,9 @@ function boomerang_beacon_extract_data($a1 = NULL, $a2 = NULL) {
     case 'r':
       $record->$key = check_url($_GET[$key]);
     break;
+	case 'ipaddress':
+	   $record->$key = check_url($_GET[$key]);
+	break;
     }
   }
   drupal_write_record('boomerang_beacon', $record);

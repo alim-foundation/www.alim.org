@@ -117,6 +117,14 @@ function boomerang_beacon_views_default_views() {
       'exclude' => 0,
       'relationship' => 'none',
     ),
+	'ipaddress' => array(
+      'id' => 'ipaddress',
+      'table' => 'boomerang_beacon',
+      'field' => 'ipaddress',
+      'label' => 'ipaddress',
+      'exclude' => 0,
+      'relationship' => 'none',
+    ),
     'bw' => array(
       'label' => 'bw',
       'alter' => array(

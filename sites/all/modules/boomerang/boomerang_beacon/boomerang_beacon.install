@@ -110,6 +110,11 @@ function boomerang_beacon_schema() {
         'type' => 'text',
         'not null' => TRUE,
       ),
+	  'ipaddress' => array(
+        'description' => t('User IP'),
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
     ),
     'primary key' => array('bid'),
   );
