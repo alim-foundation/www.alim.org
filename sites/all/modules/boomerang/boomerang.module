@@ -38,7 +38,7 @@ function boomerang_init() {
 	$arr_roles = $user->roles;
 	//print_r($arr_roles);
 	foreach($arr_roles as $key => $ur){
-	if($ur=="Developer")
+//	if($ur=="Developer")
 	$set_ok = 1;
 	if($key==9)
 	$set_ok = 1;
@@ -141,7 +141,7 @@ function boomerang_preprocess_page(&$variables) {
 	$arr_roles = $user->roles;
 	//print_r($arr_roles);
 	foreach($arr_roles as $key => $ur){
-	if($ur=="Developer")
+//	if($ur=="Developer")
 	$set_ok = 1;
 	if($key==9)
 	$set_ok = 1;
