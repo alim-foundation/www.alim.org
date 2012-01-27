@@ -125,6 +125,14 @@ function boomerang_beacon_views_default_views() {
       'exclude' => 0,
       'relationship' => 'none',
     ),
+	'country' => array(
+      'id' => 'country',
+      'table' => 'boomerang_beacon',
+      'field' => 'country',
+      'label' => 'country',
+      'exclude' => 0,
+      'relationship' => 'none',
+    ),
     'bw' => array(
       'label' => 'bw',
       'alter' => array(

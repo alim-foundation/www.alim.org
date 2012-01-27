@@ -192,6 +192,24 @@ function boomerang_beacon_views_data() {
         'handler' => 'views_handler_sort',
       ),
     ),
+	'country' => array(
+      'title' => t('country'),
+      'help' => t('Country.'),
+      'field' => array(
+        'handler' => 'views_handler_field',
+        'click sortable' => TRUE,
+      ),
+      'filter' => array(
+        'handler' => 'views_handler_filter_string',
+        'allow empty' => TRUE,
+      ),
+      'argument' => array(
+        'handler' => 'views_handler_argument_string',
+      ),
+      'sort' => array(
+        'handler' => 'views_handler_sort',
+      ),
+    ),
     'bw' => array(
       'title' => t('bw'),
       'help' => t('User\'s measured bandwidth in bytes per second'),
