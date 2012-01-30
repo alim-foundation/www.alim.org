@@ -1038,7 +1038,7 @@ else if($value['title']=='References')
 	  	  $class .= ' active';
 	  }
 	  
-	   if($value['title']=='References' && arg(1)=='references')
+	   if(($value['title']=='References' && arg(1)=='references') || ($value['title']=='References' && arg(1)=='163997'))
 	  {
 	  	  $class .= ' active';
 	  }
