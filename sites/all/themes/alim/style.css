@@ -8542,6 +8542,7 @@ div.ContentBox .views-field-managelink .grp-det a
 {
   background-color:#FFFFCC; 
   border:1px solid #f5e082;
+  vertical-align:top;
 }
 .view-serach-user table td
 {
