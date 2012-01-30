@@ -1,5 +1,5 @@
 <?php
-include("geoiploc.php");
+//include("geoiploc.php");
 /**
  * Implementation of hook_menu().
  */
@@ -62,7 +62,7 @@ function boomerang_init() {
   $ip_add =  ip_address();
   $init['ipaddress'] = $ip_add;
   $init['country']   = getCountryFromIP($ip_add);
-  $country    = getCountryFromIP($ip_add);
+ // $country    = getCountryFromIP($ip_add);
    
   if (isset($_SERVER['HTTP_HOST'])) {
     $init['site_domain'] = '.'. preg_replace('`^www.`', '', $_SERVER['HTTP_HOST']);
@@ -86,7 +86,7 @@ function boomerang_init() {
     BOOMR.addVar('uid', '{$user->uid}');
     BOOMR.addVar('uname', '{$user->name}');
 	BOOMR.addVar('ipaddress', '{$ip_add}');
-	BOOMR.addVar('country', '{$country}');
+	/*BOOMR.addVar('country', '{$country}');*/
     ", 'inline');
 
  }
