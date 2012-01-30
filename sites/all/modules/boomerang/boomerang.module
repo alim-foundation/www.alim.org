@@ -168,6 +168,6 @@ function boomerang_preprocess_page(&$variables) {
 
   $footer_js[] = 'BOOMR.plugins.RT.startTimer("t_page", t_firstbyte);';
 
-  $variables['footer'] =  $variables['footer'] . '<script type="text/javascript">' . implode('', $footer_js) .  '</script>';
+  $variables['closure'] =  $variables['closure'] . '<script type="text/javascript">' . implode('', $footer_js) .  '</script>';
   }
 }
