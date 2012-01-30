@@ -507,7 +507,7 @@ $val = arg(2);
 			if($i == 0)
 				$b.="<li class='first' >".html_entity_decode($single)."</li>";
 			else
-				$b.="<li>".$imageurl.html_entity_decode($single)."</li>"
+				$b.="<li>".$imageurl.html_entity_decode($single)."</li>";
 			$i++;
 		}
 		$b.='</ul></div>';
