@@ -505,9 +505,9 @@ $val = arg(2);
 		$b = '<div class="breadcrumb"><ul>';
 		foreach($breadcrumb as $single){
 			if($i == 0)
-				$b.="<li class='first' >$single</li>";
+				$b.="<li class='first' >".html_entity_decode($single)."</li>";
 			else
-				$b.="<li>$imageurl$single</li>";
+				$b.="<li>".$imageurl.html_entity_decode($single)."</li>"
 			$i++;
 		}
 		$b.='</ul></div>';
