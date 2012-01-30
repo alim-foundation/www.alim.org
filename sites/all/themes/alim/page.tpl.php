@@ -1112,7 +1112,6 @@ $time_taken = round($time_taken_sec,5);
    });
 
 </script> 
-<?php print $closure ?>	
 <script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script>
 
 <iframe name="garbageframe" id="garbageframe" style="display:none;" ></iframe>
@@ -1322,5 +1321,6 @@ $("#quicktabs-tab-22-1").click(function() {
 window.location= '?quicktabs_22=1#quicktabs-22';
 });
 </script>
+<?php print $closure ?>	
 </body>
 </html>
