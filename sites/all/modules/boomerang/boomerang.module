@@ -140,17 +140,6 @@ function boomerang_footer($main = 0) {
  */
 function boomerang_preprocess_page(&$variables) {
   global $user;
-	$set_ok = 0;
-	$arr_roles = $user->roles;
-	//print_r($arr_roles);
-	foreach($arr_roles as $key => $ur){
-//	if($ur=="Developer")
-	$set_ok = 1;
-	if($key==9)
-	$set_ok = 1;
-	}
-	if($set_ok==1)
-	{
 
   $head = '';
   $footer = '';
@@ -169,5 +158,5 @@ function boomerang_preprocess_page(&$variables) {
   $footer_js[] = 'BOOMR.plugins.RT.startTimer("t_page", t_firstbyte);';
 
   $variables['closure'] =  $variables['closure'] . '<script type="text/javascript">' . implode('', $footer_js) .  '</script>';
-  }
+
 }
