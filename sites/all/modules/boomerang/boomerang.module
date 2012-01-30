@@ -140,8 +140,11 @@ function boomerang_preprocess_page(&$variables) {
   $page_variables = array('scripts', 'styles');
 
   foreach ($page_variables as $page_variable) {
-    $variables[$page_variable] = '<script type="text/javascript">var t_' . $page_variable . 'Start=new Date().getTime();</script>' . $variables[$page_variable] . '<script type="text/javascript">var t_' . $page_variable . 'End=new Date().getTime();</script>';
-    $footer_js[] = 'BOOMR.plugins.RT.setTimer("h_' . $page_variable . '", t_' . $page_variable . 'End - t_' . $page_variable . 'Start);';
+	  if($variables[$page_variable])
+	  {
+		$variables[$page_variable] = '<script type="text/javascript">var t_' . $page_variable . 'Start=new Date().getTime();</script>' . $variables[$page_variable] . '<script type="text/javascript">var t_' . $page_variable . 'End=new Date().getTime();</script>';
+		$footer_js[] = 'BOOMR.plugins.RT.setTimer("h_' . $page_variable . '", t_' . $page_variable . 'End - t_' . $page_variable . 'Start);';
+	  }
   }
 
   $footer_js[] = 'BOOMR.plugins.RT.startTimer("t_page", t_firstbyte);';
