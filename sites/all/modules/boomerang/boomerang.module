@@ -61,7 +61,7 @@ function boomerang_init() {
   $init['user_ip'] = ip_address();
   $ip_add =  ip_address();
   $init['ipaddress'] = $ip_add;
-  $init['country']   = getCountryFromIP($ip_add);
+  //$init['country']   = getCountryFromIP($ip_add);
  // $country    = getCountryFromIP($ip_add);
    
   if (isset($_SERVER['HTTP_HOST'])) {
