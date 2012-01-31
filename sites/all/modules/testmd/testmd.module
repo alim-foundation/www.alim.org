@@ -84,7 +84,7 @@ function testmd_form_alter(&$form, &$form_state, $form_id) {
 */
 
 function testmd_form_alters_audience_form_alter_submit($form, &$form_state){
-      global $user;
+       global $user;
       global $base_url;
 	  
 
@@ -94,12 +94,22 @@ function testmd_form_alters_audience_form_alter_submit($form, &$form_state){
 	  $result[0] = arg(3);
 	  $form_state['values']['og_groups'] =  $result;
 	 // $last_id = db_last_insert_id('node','nid');
-	 
+	 //print_r($form_state);exit;
+
 	 // Change the publish option for private posts
 	   if($form_state['values']['og_public']==0)
 	  {
 		unset($form_state['options']);
 		$form_state['values']['status'] = 0;
+	  }
+	  else
+	  {
+		$form_state['values']['status'] = 1;
+	  }
+	  
+	  if($form_state['values']['og_directory']==1 && $form_state['values']['og_private']==0)
+	  {
+	    $form_state['values']['status'] = 1;
 	  }
 	 
 	/* // Query the group details for mailing
