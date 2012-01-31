@@ -19,6 +19,18 @@ function testmd_form_alter(&$form, &$form_state, $form_id) {
 	//drupal_set_message('<pre>' . print_r($form, TRUE) .'</pre>' ,$type = 'status', $repeat = TRUE );
 	global $base_url;
 	switch ($form_id) {
+	// Alter the group post form layout by checking the form id. Code removes the input format and audience checkbox fields.
+		case "creat_group_node_form" : 
+		$form['body_field']['teaser_include']['#access'] = FALSE;
+				$form['body_field']['teaser_js']['#access'] = FALSE;
+				$form['body_field']['format']['#access'] = FALSE; // removes the input filtering option.
+				$form['comment_settings']['#access'] = FALSE;
+		 if (!empty($form['og_nodeapi']['visible']['og_groups'])) {
+			$form['og_nodeapi']['visible']['og_groups']['#multiple'] = FALSE;  // removes the audience from the form.
+			$form['og_nodeapi']['visible']['og_groups'] = FALSE;
+		  }
+		  $form['#submit'][] = 'testmd_form_alters_audience_form_alter_submit'; // call the function for submission using single group and implementing email functionality
+		  break;
 	    // Alter the group post form layout by checking the form id. Code removes the input format and audience checkbox fields.
 		case "group_post_node_form" : 
 			   $form['body_field']['teaser_include']['#access'] = FALSE;
