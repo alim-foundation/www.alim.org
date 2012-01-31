@@ -28,8 +28,8 @@ function testmd_form_alter(&$form, &$form_state, $form_id) {
 		 if (!empty($form['og_nodeapi']['visible']['og_groups'])) {
 			$form['og_nodeapi']['visible']['og_groups']['#multiple'] = FALSE;  // removes the audience from the form.
 			$form['og_nodeapi']['visible']['og_groups'] = FALSE;
+			}
 			$form['#submit'][] = 'testmd_form_alters_audience_form_alter_submit'; // call the function for submission using single group and implementing email functionality
-		  }
 		break;
 		// Alter the group post reply form submission. Call hook_form_alter_submit().
 		/*case "comment_form":
