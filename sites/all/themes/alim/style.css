@@ -9605,19 +9605,17 @@ border-bottom: 0px solid ;
 .tafsir_text
 {
   font-weight:normal;
-   line-height: 18px;
-
+  line-height: 18px;
 }
 .alim_userreport table
 {
  border-collapse:separate;
-
 }
 #quicktabs-21 #quicktabs_container_1
 {
-background-color: white;
-border: solid 1px #CCC;
-padding: 10px 10px 20px 10px; }
+ background-color: white;
+ border: solid 1px #CCC;
+ padding: 10px 10px 20px 10px; }
 #quicktabs-21 ul
 {
   height:30px;
@@ -9626,13 +9624,10 @@ padding: 10px 10px 20px 10px; }
 }
 #quicktabs-21 ul li 
 {
-
  background-color:none;
  border:none;
-  height:30px;
-    
+ height:30px;
 }
-
 #quicktabs-21 ul li span 
 {
  background:url("images/2tableft.jpg") no-repeat ;
@@ -9646,8 +9641,7 @@ padding: 10px 10px 20px 10px; }
  background:url("images/2tabtile.jpg") repeat-x;
  height:30px;
  display:block;
-  padding-left:0px;padding-right:0px;
-
+ padding-left:0px;padding-right:0px;
 }
 
 #quicktabs-21 ul li span span span
@@ -10653,3 +10647,6 @@ display:none;
  background:#FFFFCC;
 }
 #quicktabs-22 { width:655px; margin-left:5px; }
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+     .views-field-field-event-image-fid { top:-31px; }
+ }
