@@ -498,7 +498,7 @@ print vud_widget_proxy($cid, 'comment', 'vote', 'plain', $readonly=NULL);
 	 
 	  <?php $result = db_fetch_object(db_query("SELECT * FROM {alim_commentedurl} WHERE  cid = %d", $cid)); ?>
 	   <?php $count = db_affected_rows($result); ?>
-<?php if(($result->cid)!='') { ?><span style="color:#339933;"><br />&nbsp&nbsp;;Edited<?php print " (".$count.")"; ?></span>&nbsp;&nbsp;<?php print  time_since($uptime)." ago "; ?><?php } else { ?>
+<?php if(($result->cid)!='') { ?><span style="color:#339933;"><br />&nbsp&nbsp;Edited<?php print " (".$count.")"; ?></span>&nbsp;&nbsp;<?php print  time_since($uptime)." ago "; ?><?php } else { ?>
 
 	 
 	 &nbsp;<br />&nbsp;&nbsp;<?php print  $created." ago "; } ?> <span style="display:block;float:left;padding-top:10px;"></span></div>
