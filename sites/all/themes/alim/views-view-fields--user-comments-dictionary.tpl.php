@@ -412,9 +412,13 @@ print vud_widget_proxy($cid, 'comment', 'vote', 'plain', $readonly=NULL);
 	</span><b>
 	
 	<a href="<?=$base_url?>/userprofile/<?=strip_tags($name)?>" class="gotouser">
-	<?php print "&nbsp;&nbsp;".$temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName']."&nbsp;&nbsp;";
-				
- 	 ?>
+<?php	if($temp_user->rpx_data['profile']['name']['givenName']==""){
+	print "&nbsp;&nbsp;".$name;
+	}
+	else {
+	
+	print "&nbsp;&nbsp;".$temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName']."&nbsp;&nbsp;";
+		}?>
 	 </a></b>
 	 
 	  <?php $result = db_fetch_object(db_query("SELECT * FROM {alim_commentedurl} WHERE  cid = %d", $cid)); ?>
@@ -517,9 +521,13 @@ print vud_widget_proxy($cid, 'comment', 'vote', 'plain', $readonly=NULL);
 	</span><b>
 	
 	<a href="<?=$base_url?>/userprofile/<?=strip_tags($name)?>" class="gotouser">
-	<?php print "&nbsp;&nbsp;".$temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName']."&nbsp;&nbsp;";
-				
- 	 ?>
+<?php	if($temp_user->rpx_data['profile']['name']['givenName']==""){
+	print "&nbsp;&nbsp;".$name;
+	}
+	else {
+	
+	print "&nbsp;&nbsp;".$temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName']."&nbsp;&nbsp;";
+		}?>
 	 </a></b>
 	 
 	  <?php $result = db_fetch_object(db_query("SELECT * FROM {alim_commentedurl} WHERE  cid = %d", $cid)); ?>
