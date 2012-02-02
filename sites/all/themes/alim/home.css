@@ -372,3 +372,8 @@ a.hand-icon {background: url("images/hand.gif") no-repeat scroll 0 4px transpare
  color:#CC0000;
  background:#FFFFCC;
 }
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+/* .views-field-field-event-image-fid { top:-31px; }*/
+   
+#views_slideshow_singleframe_teaser_section_2 { top:31px; }
+ }
