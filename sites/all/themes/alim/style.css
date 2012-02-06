@@ -10646,7 +10646,4 @@ display:none;
  color:#CC0000;
  background:#FFFFCC;
 }
-#quicktabs-22 { width:655px; margin-left:5px; }
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
-     .views-field-field-event-image-fid { top:-31px; }
- }
+@media screen and (-webkit-min-device-pixel-ratio:0) { .view-biography-stories-content td.views-field-field-art-subsec-head-value{ width:88px; } }
