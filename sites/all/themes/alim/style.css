@@ -6432,7 +6432,7 @@ margin:0px
 /*background-color:#F7F7F7;*/clear:both;padding:10px;padding-bottom:20px;font-family:tahoma;font-size:12px;line-height:1.6;
 }
 #comment_reply_comm{
-padding-left:200px;font-size:12px;font-weight:bold;/*background-color:#ECECEC;*/padding-top:10px;padding-bottom:10px;
+padding-left:200px;font-weight:bold;/*background-color:#ECECEC;*/padding-top:10px;padding-bottom:10px;
 color:#333333;border-bottom:dotted 1px #333333;
 }
 #comment_reply_comm a{
