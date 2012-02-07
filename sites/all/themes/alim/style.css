@@ -568,6 +568,10 @@ padding:10px 0 10px 0;
   padding-top:0px;
   float:left;
 }
+.alim-cntright .right-audio
+{
+display:none;
+}
 #left_menu
 {
   width:210px;
