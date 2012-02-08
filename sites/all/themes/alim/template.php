@@ -2126,8 +2126,10 @@ function bookmark(){   //<span class="bookmarks" > print $bookmark; </span>
 		$out .=  l( t('Set Last'), 'bookmarks/lastpage/'.base64_encode($path) ,array('attributes' => array(  'class' => 'bm-last' , 'id' => 'bm-lastpage' , 
 		'title' => 'Set this page as the last page you were reading so that you can return to it easily on your next visit to alim.org' ) )  );
 		//$out .= '<em style="font-size:8px;"> </em>';
-		if(  isset($user->profile_last_read ) && $user->profile_last_read != ''  ) 
-		$out .=  '<span id="mark-lastpage" >'.l( t('Go to Last'), $user->profile_last_read ,array('attributes' => array(  'class' => 'bm-golast' ,
+		//if(  isset($user->profile_last_read ) && $user->profile_last_read != ''  ) 
+		$menuid1 = db_result(db_query("SELECT value as lpage FROM {profile_values} WHERE fid='%d' AND uid= '%d'", 12 , $user->uid ));
+		if(  isset($menuid1) && $menuid1 != ''  ) 
+		$out .=  '<span id="mark-lastpage" >'.l( t('Go to Last'), $menuid1 ,array('attributes' => array(  'class' => 'bm-golast' ,
 		'title' => 'Go to the last place you were reading.'  ) )  ).'</span>';
 		else
 		$out .=  '<span id="mark-lastpage" >'.l( t('Al-Qur\'an'), 'library/quran/surah/arabic/1/ARB' ,array('attributes' => array(  'class' => 'bm-golast' , 
