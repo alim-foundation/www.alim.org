@@ -589,7 +589,8 @@ $start_time = $_SESSION['start_time'];
 						  @font-face {
 							  font-family: \"me_quran\";
 							  src: url('".$base_url."/fonts/me_quran.eot');
-							  src:local('me_quran'), url('".$base_url."/fonts/me_quran.ttf') format('truetype');
+							  src: url('".$base_url."/fonts/me_quran.eot') format('embedded-opentype'),
+							  url('".$base_url."/fonts/me_quran.ttf') format('truetype');
 							}
 						 </style>";
 			    break;
