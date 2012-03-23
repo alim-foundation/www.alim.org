@@ -186,7 +186,7 @@ ul#nav li{text-align:left;}
 ul#nav li a {position: absolute;top: 0;width: 155px;color:#FFF;font-size:16px;text-decoration: none;padding: 8px 0 0 0px;overflow: hidden;height: 31px !important; height /**/:31px; /* IE5/Win */background: transparent url(images/mnu-nav.png) no-repeat;padding-left:15px;}
 ul#nav li a:hover{color:#893d00;}
 ul#nav li.current a{color:#893d00;}
-div#searchalim li#sral a 			{ background-position: 0 0; width: 138px; left: 0; }
+/*div#searchalim li#sral a 			{ background-position: 0 0; width: 138px; left: 0; }
 div#searchalim li#sral a:hover		{ background-position: 0 0; }
 div#searchalim li#goqu a 			{ background-position: -138px -124px; left: 138px; }
 div#searchalim li#goqu a:hover		{ background-position: -138px 0; }
@@ -204,6 +204,40 @@ div#gotohadith li#goqu a 			{ background-position: -138px -93px; left: 138px; }
 div#gotohadith li#goqu a:hover		{ background-position: -138px -62px; }
 div#gotohadith li#goha a 			{ background-position: -276px -62px; left:276px; }
 div#gotohadith li#goha a:hover		{ background-position: -276px -62px; }
+*/
+div#searchalim li#sral a 			{ background-position: 0 0; width: 118px;  left: 276px;  }
+div#searchalim li#sral a:hover		{ background-position: 0 0; }
+div#searchalim li#goqu a 			{ background-position: -276px -93px; left: 0; }
+div#searchalim li#goqu a:hover		{background-position: -138px -31px; }
+div#searchalim li#goha a 			{ background-position: -276px -93px;left: 138px; }
+div#searchalim li#goha a:hover		{ background-position: -276px 0; }
+div#gotoquran li#sral a			{background-position: -276px -93px; width: 138px; left: 276px;  }
+div#gotoquran li#sral a:hover		{ background-position: -276px 0px; }
+div#gotoquran li#goqu a			{ background-position: -138px -31px; left: 0;}
+div#gotoquran li#goqu a:hover		{ background-position: -138px -31px; }
+div#gotoquran li#goha a			{ background-position: -138px -124px;left: 138px;  }
+div#gotoquran li#goha a:hover		{ background-position: -276px -31px; }
+
+div#gotohadith li#goqu a {
+    background-position: -138px -93px;
+    left: 0;
+}
+
+div#gotohadith li#goha a {
+    background-position: -276px -62px;
+    left: 138px;
+}
+
+div#gotohadith li#sral a {
+    background-position: -138px -124px;
+    left: 276px;
+}
+div#gotohadith li#goqu a:hover		{background-position: -138px -31px; }
+
+div#gotohadith li#sral a:hover {
+   background-position: -276px 0px;
+    left: 276px;
+}
 .search-alim-txt{border:0;background:url(images/alim-search-bg.png) no-repeat top;width:879px;height:37px; padding:0px 0 0 2px;clear:both;}
 #edit-search-block-form-1-wrapper{float:left;width:725px;}
 .search-alim-txt #edit-search-block-form-1{border:0;background:none;width:725px;color:#CC6633;font-size:16px;float:left;padding-left:3px;outline:none;margin:0px;}
