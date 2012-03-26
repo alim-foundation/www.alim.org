@@ -591,6 +591,9 @@ BOOMR.init({"user_ip":"59.162.126.17","site_domain":".<?=$base_url?>","BW":{"bas
     BOOMR.addVar('uname', '<?=$user->name?>');
     
 //--><!]]>
+$(document).ready(function() {
+   $('#goqu a').trigger('click');// Handler for .ready() called.
+});
 </script>
 <div id="boomerang-results"></div>
 <?php
