@@ -179,9 +179,14 @@ display:none;
 ul#nav {position: relative;width: 430px;margin: 0px;padding:0px;height: 31px;list-style-type: none;overflow: hidden;}
 div#searchalim{float:left;}
 div#top-icons{float:left;position:absolute;right:0px;top:-10px;}
-div#searchalim ul#nav  { background: transparent url(images/mnu-nav.png) no-repeat 0 0;  color:#893d00; }
+/*div#searchalim ul#nav  { background: transparent url(images/mnu-nav.png) no-repeat 0 0;  color:#893d00; }
 div#gotoquran ul#nav { background: transparent url(images/mnu-nav.png) no-repeat 0 -31px; }
 div#gotohadith ul#nav { background: transparent url(images/mnu-nav.png) no-repeat 0 -62px; }
+*/
+div#searchalim ul#nav  { background: transparent url(images/mnu-nav.png) no-repeat 0 -62px;  color:#893d00; }
+div#gotoquran ul#nav { background: transparent url(images/mnu-nav.png) no-repeat 0 0; }
+div#gotohadith ul#nav { background: transparent url(images/mnu-nav.png) no-repeat 0 -31px; }
+
 ul#nav li{text-align:left;}
 ul#nav li a {position: absolute;top: 0;width: 155px;color:#FFF;font-size:16px;text-decoration: none;padding: 8px 0 0 0px;overflow: hidden;height: 31px !important; height /**/:31px; /* IE5/Win */background: transparent url(images/mnu-nav.png) no-repeat;padding-left:15px;}
 ul#nav li a:hover{color:#893d00;}
