@@ -185,8 +185,8 @@ div#gotohadith ul#nav { background: transparent url(images/mnu-nav.png) no-repea
 ul#nav li{text-align:left;}
 ul#nav li a {position: absolute;top: 0;width: 155px;color:#FFF;font-size:16px;text-decoration: none;padding: 8px 0 0 0px;overflow: hidden;height: 31px !important; height /**/:31px; /* IE5/Win */background: transparent url(images/mnu-nav.png) no-repeat;padding-left:15px;}
 ul#nav li a:hover{color:#893d00;}
-/*ul#nav li.current a{color:#893d00;}
-*//*div#searchalim li#sral a 			{ background-position: 0 0; width: 138px; left: 0; }
+ul#nav li.current a{color:#893d00;}
+/*div#searchalim li#sral a 			{ background-position: 0 0; width: 138px; left: 0; }
 div#searchalim li#sral a:hover		{ background-position: 0 0; }
 div#searchalim li#goqu a 			{ background-position: -138px -124px; left: 138px; }
 div#searchalim li#goqu a:hover		{ background-position: -138px 0; }
