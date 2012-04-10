@@ -6,12 +6,14 @@ $(document).ready(function() {
 		for( var i = 0, n = one1.length;  i < n ;  ++i ) {
 			var element = one1[i];
 			var j= i+1;
-			var newid = 'hoverid-'+j;
-			var newurl = 'ayanote-'+j;
-			var pp = '<a href="#'+newurl+'" id="'+newid+'" class="note-a"  >&nbsp;<sup>';			
 			var spancnt = one1[i].innerHTML ;
+			var newid = 'hoverid-'+spancnt;
+			var newurl = 'ayanote-'+spancnt;
+			var pp = '<a href="#'+newurl+'" id="'+newid+'" class="note-a"  >&nbsp;<sup>';			
 			var newnt = pp+spancnt+'</sup>&nbsp;</a>';
+			//alert(spancnt);
 			$(one1[i]).html(newnt);	
+
 		
 		}
     });
@@ -24,12 +26,14 @@ $(document).ready(function() {
 		for( var i = 0, n = one1.length;  i < n ;  ++i ) {
 			var element = one1[i];			
 			var j= i+1;
-			var newid = 'hoverid-'+j;			
-			var newurl = 'ayanote-'+j;
-			var pp = '<a href="#'+newurl+'" id="'+newid+'" class="note-a"  >&nbsp;<sup>';			
 			var spancnt = one1[i].innerHTML ;
+			var newid = 'hoverid-'+spancnt;
+			var newurl = 'ayanote-'+spancnt;
+			var pp = '<a href="#'+newurl+'" id="'+newid+'" class="note-a"  >&nbsp;<sup>';			
 			var newnt = pp+spancnt+'</sup>&nbsp;</a>';
-			$(one1[i]).html(newnt);		
+			//alert(spancnt);
+			$(one1[i]).html(newnt);	
+	
 		}
     });	
 	
