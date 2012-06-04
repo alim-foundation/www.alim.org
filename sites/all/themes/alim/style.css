@@ -9891,7 +9891,7 @@ height:98px;
 }
 .user-form-our_advisers_and_scholars .collapsible
 {
- display:none;
+    /* display:none;*/
 }
 #not_log .total-votes-plain
 {
