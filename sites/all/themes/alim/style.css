@@ -2595,6 +2595,7 @@ color:#666666;
 }
 .arabic_text_style
 {
+margin-left: 80px;
   color:#006600;
   font-family: Traditional Arabic ;
   font-size: 24pt ;
@@ -10705,7 +10706,7 @@ padding-bottom:20px;
 {
 paddding-top:10px;
 }
-.view-AlQuran-tafsir .arabic_text_style 
+.view-AlQuran-tafsir-Multiple .arabic_text_style 
 {
 margin-left: 80px;
 }
