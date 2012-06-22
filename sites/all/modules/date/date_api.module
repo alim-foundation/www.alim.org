@@ -2031,6 +2031,8 @@ function date_format_save($date_format) {
   if (!empty($date_format['locales'])) {
     foreach ($date_format['locales'] as $langcode) {
       // Only proceed if language is enabled.
+	  if($languages)
+	  {
       if (in_array($langcode, $languages)) {
         $is_existing = db_result(db_query("SELECT COUNT(*) FROM {date_format_locale} WHERE type = '%s' AND language = '%s'", $date_format['type'], $langcode));
         if (!$is_existing) {
@@ -2038,6 +2040,7 @@ function date_format_save($date_format) {
           drupal_write_record('date_format_locale', $locale_format);
         }
       }
+	  }
     }
   }
 }
