@@ -10710,3 +10710,82 @@ paddding-top:10px;
 {
 margin-left: 80px;
 }
+
+
+#quicktabs-23 #quicktabs_container_1
+{
+ background-color: white;
+ border: solid 1px #CCC;
+ padding: 10px 10px 20px 10px; }
+#quicktabs-23 ul
+{
+  height:30px;
+  border:none;
+  padding-left:470px;
+}
+#quicktabs-23 ul li 
+{
+ background-color:none;
+ border:none;
+ height:30px;
+}
+#quicktabs-23 ul li span 
+{
+ background:url("images/2tableft.jpg") no-repeat ;
+ background-position:left;
+ padding-left:9px;
+ height:30px;
+ display:block;float:left;
+}
+#quicktabs-23 ul li span span
+{
+ background:url("images/2tabtile.jpg") repeat-x;
+ height:30px;
+ display:block;
+ padding-left:0px;padding-right:0px;
+}
+
+#quicktabs-23 ul li span span span
+{
+ background:url("images/2tabright.jpg") no-repeat;
+ background-position:right;
+ padding-left:0px;
+ height:30px;display:block;
+
+
+}
+
+#quicktabs-23 ul li span span span a{
+ display:block;
+ padding:7px 15px 0 15px;
+ color:#555555;
+ height:23px;
+ 
+ }
+#quicktabs-23 ul.quicktabs_tabs.quicktabs-style-basic li  {
+border:none;
+margin:0 5px 0 0;
+padding:0px 0px;
+position:relative;
+float:left;
+}
+#quicktabs-23 ul.quicktabs_tabs li {
+
+display:inline;
+
+}
+
+#block-quicktabs-23 h2
+{
+display:none;
+}
+
+#block-quicktabs-23 #comment_reply_scholar {
+padding-left: 250px;
+}
+
+#block-quicktabs-23 .quicktabs_main.quicktabs-style-basic {
+    border: 1px solid #AAAAAA;
+	padding-bottom:16px;
+
+}
