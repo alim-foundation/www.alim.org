@@ -5,6 +5,47 @@
 //http://drupal.org/node/399410 && COmment_CCK module 
 
 //validate function for comment text
+function alim_commentedurl_menu() {
+
+   $items = array();
+	$items['alim/go/ayah'] = array(
+    'title' => 'Go',
+    'page callback' => 'alim_go_ayah',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+ 
+   	return $items;
+}
+function alim_go_ayah(){
+$a=$_GET["go"] ;
+$b=$_GET["sura"] ;
+$query_tik =  db_query("SELECT * FROM `content_type_tafsir_multiple_ayah`WHERE `field_tafsir_ayah_from_value` ='". $a."' OR `field_tafsir_ayah_to_value` ='".$a."'AND field_tafsir_surah_number_value ='".$b."' ");
+
+while ($result = db_fetch_object($query_tik)) {
+if($result->field_tafsir_surah_number_value == arg(4))
+{
+$start1=$result->field_tafsir_ayah_from_value;
+$end1=$result->field_tafsir_ayah_to_value;
+}
+}
+
+if(!$start1)
+{
+$query_tiks =  db_query("SELECT * FROM content_type_tafsir_multiple_ayah WHERE field_tafsir_ayah_from_value <= ". $a." AND field_tafsir_surah_number_value ='".$b."' ORDER BY CAST(field_tafsir_ayah_from_value AS SIGNED ) DESC LIMIT 1");
+while ($result = db_fetch_object($query_tiks)) {
+//if($result->field_tafsir_surah_number_value == arg(4))
+//{
+$start=$result->field_tafsir_ayah_from_value;
+$start1=$start;
+}
+
+//}
+}
+return drupal_json(array( 'status' => true , 'data' => $start1, 'rash' => $start));exit;
+
+}
 function _alim_commentedurl_cmt_form_validate($form, &$form_state){
 	//drupal_set_message();
 	if($form_state['values']['comment'] == "" || $form_state['values']['comment'] == "<br />" || $form_state['values']['comment'] == "<BR />"  
