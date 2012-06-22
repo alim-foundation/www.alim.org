@@ -2596,7 +2596,7 @@ color:#666666;
 .arabic_text_style
 {
   color:#006600;
- font-family: Traditional Arabic ;
+  font-family: Traditional Arabic ;
   font-size: 24pt ;
   font-style: normal; line-height: normal; font-weight: normal; font-variant: normal;  text-decoration: none;
   width:570px;
@@ -10683,10 +10683,7 @@ margin-left: 80px;
 text-align: right;
 width: 590px;
 }
-.view-AlQuran-tafsir .arabic_text_style 
-{
-margin-left: 80px;
-}
+
 .view-AlQuran-tafsir-Multiple .views-field-field-tafsir-ayah-text-value .arabic_text_style
 {
 display:none;
@@ -10707,4 +10704,8 @@ padding-bottom:20px;
 .view-AlQuran-tafsir-Multiple .views-field-body
 {
 paddding-top:10px;
+}
+.view-AlQuran-tafsir .arabic_text_style 
+{
+margin-left: 80px;
 }
