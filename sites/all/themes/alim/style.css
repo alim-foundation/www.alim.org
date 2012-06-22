@@ -10653,3 +10653,58 @@ display:none;
  background:#FFFFCC;
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) { .view-biography-stories-content td.views-field-field-art-subsec-head-value{ width:88px; } }
+.tafsir
+{
+ line-height: 18px;
+ font-size:14px;
+ font-weight:bold;
+}
+.tafsir_text
+{
+  font-weight:normal;
+   line-height: 18px;
+ font-size:14px;
+ margin-top:10px;
+}
+.view-AlQuran-tafsir-Multiple .field-content .title
+{
+font-weight:bold;
+text-align:left;
+text-decoration:underline;
+padding-top: 20px;
+}
+.tafsir_text .arabic_text_style
+{
+width: 650px;
+}
+.view-AlQuran-tafsir-Multiple .other_ayah
+{
+margin-left: 80px;
+text-align: right;
+width: 590px;
+}
+.view-AlQuran-tafsir .arabic_text_style 
+{
+margin-left: 80px;
+}
+.view-AlQuran-tafsir-Multiple .views-field-field-tafsir-ayah-text-value .arabic_text_style
+{
+display:none;
+}
+.view-AlQuran-tafsir-Multiple .views-field-field-tafsir-ayah-text-value 
+{
+margin-top:5px;
+border-bottom:1px solid #cccccc;
+padding-bottom:10px;
+
+}
+.view-AlQuran-tafsir .tafsir
+{
+margin-top:5px;
+border-bottom:1px solid #cccccc;
+padding-bottom:20px;
+} 
+.view-AlQuran-tafsir-Multiple .views-field-body
+{
+paddding-top:10px;
+}
