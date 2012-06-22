@@ -33,7 +33,7 @@ $end1=$result->field_tafsir_ayah_to_value;
 
 if(!$start1)
 {
-$query_tiks = db_query("SELECT * FROM content_type_tafsir_multiple_ayah WHERE field_tafsir_ayah_from_value <= ". $a." AND field_tafsir_surah_number_value ='".$b."' ORDER BY (field_tafsir_ayah_from_value AS SIGNED ) DESC LIMIT 1");
+$query_tiks = db_query("SELECT * FROM content_type_tafsir_multiple_ayah WHERE field_tafsir_ayah_from_value <= ". $a." AND field_tafsir_surah_number_value ='".$b."' ORDER BY (field_tafsir_ayah_from_value) DESC LIMIT 1");
 while ($result = db_fetch_object($query_tiks)) {
 //if($result->field_tafsir_surah_number_value == arg(4))
 //{
