@@ -1835,18 +1835,18 @@ table._struct_table td
  text-align:center;
 }
 /*-------------- Quick tab 1 -------------*/
-#quicktabs-1 #quicktabs_container_1,#quicktabs-23 #quicktabs_container_1
+#quicktabs-1 #quicktabs_container_1
 {
  border:1px solid #DE9F42;
  width:0px;
  font-size:15px;
  }
-#quicktabs-1 ul,#quicktabs-23 ul
+#quicktabs-1 ul
 {
   height:30px;
   border:none;
 }
-#quicktabs-1 ul li ,#quicktabs-23 ul li 
+#quicktabs-1 ul li 
 {
 
  background:none;
@@ -1855,7 +1855,7 @@ table._struct_table td
     
 }
 
-#quicktabs-1 ul li span ,#quicktabs-23 ul li span 
+#quicktabs-1 ul li span 
 {
  background:url("images/2tableft.jpg") no-repeat ;
  background-position:left;
@@ -1863,7 +1863,7 @@ table._struct_table td
  height:30px;
  display:block;float:left;
 }
-#quicktabs-1 ul li span span,#quicktabs-23 ul li span span
+#quicktabs-1 ul li span span
 {
  background:url("images/2tabtile.jpg") repeat-x;
  height:30px;
@@ -1872,7 +1872,7 @@ table._struct_table td
 
 }
 
-#quicktabs-1 ul li span span span,#quicktabs-23 ul li span span span
+#quicktabs-1 ul li span span span
 {
  background:url("images/2tabright.jpg") no-repeat;
  background-position:right;
@@ -1881,7 +1881,7 @@ table._struct_table td
 
 
 }
-#quicktabs-1 ul li.active span,#quicktabs-23 ul li.active span{
+#quicktabs-1 ul li.active span{
 background:url(images/1tableft.jpg) no-repeat ;
 background-position:left;
  padding-left:8px;
@@ -1889,30 +1889,30 @@ background-position:left;
  display:block;float:left;
 
 }
-#quicktabs-1 ul li.active span span,#quicktabs-23 ul li.active span span{
+#quicktabs-1 ul li.active span span{
  background:url(images/1tabtile.jpg) repeat-x;
   height:30px;
  display:block;
   padding-left:0px;padding-right:0px;
 
 }
-#quicktabs-1 .quicktabs_main.quicktabs-style-basic,#quicktabs-23 .quicktabs_main.quicktabs-style-basic {
+#quicktabs-1 .quicktabs_main.quicktabs-style-basic {
 padding:0;
 }
-#quicktabs-1 ul li.active span span span,#quicktabs-23 ul li.active span span span{
+#quicktabs-1 ul li.active span span span{
  background:url(images/1tabright.jpg) no-repeat;
   background-position:right;
  padding-left:0px;
  height:30px;display:block;
  }
-#quicktabs-1 ul li span span span a,#quicktabs-23 ul li span span span a{
+#quicktabs-1 ul li span span span a{
  display:block;
  padding:7px 15px 0 15px;
  color:#555555;
  height:23px;
  
  }
- #quicktabs-1 ul li.active span span span a, #quicktabs-23 ul li.active span span span a{
+ #quicktabs-1 ul li.active span span span a{
 
  color:#810C05;
  
@@ -1920,22 +1920,22 @@ padding:0;
   background-position:50px 25px;*/
  
  }
-#quicktabs-1 ul.quicktabs_tabs.quicktabs-style-basic li ,#quicktabs-23 ul.quicktabs_tabs.quicktabs-style-basic li {
+#quicktabs-1 ul.quicktabs_tabs.quicktabs-style-basic li  {
 border:none;
 margin:0 5px 0 0;
 padding:0px 0px;
 position:relative;
 float:left;
 }
-#quicktabs-1 quicktabs_container_1,#quicktabs-23 quicktabs_container_1{
+#quicktabs-1 quicktabs_container_1{
 clear:both;
 }
-#quicktabs-1 ul.quicktabs_tabs li, #quicktabs-23 ul.quicktabs_tabs li{
+#quicktabs-1 ul.quicktabs_tabs li {
 
 display:inline;
 
 }
-#quicktabs-1 table,#quicktabs-23 table
+#quicktabs-1 table
 {
  border-collapse:collapse;
  background:#FFFFFF;
@@ -1945,11 +1945,11 @@ display:inline;
  width:100%;
 
  }
-#quicktabs-1 table thead tr,#quicktabs-23 table thead tr
+#quicktabs-1 table thead tr
 {
    background:#F0E6A8;
 }
- #quicktabs-1 table th, #quicktabs-23 table th
+ #quicktabs-1 table th
 {
  background:#F0E6A8;
  color:#810C05;
@@ -1960,7 +1960,7 @@ display:inline;
   border:0px;
  }
 
-#quicktabs-1 table td,#quicktabs-23 table td
+#quicktabs-1 table td
 {
  background:#FFFFFF;
  color:#666666;
@@ -1969,7 +1969,7 @@ display:inline;
  border-bottom:1px solid #F4F2F3;
  text-align:left;
  }
-#quicktabs-1 table td a,#quicktabs-23 table td a
+#quicktabs-1 table td a
 {
   color:#0000FF;
 }
@@ -9618,24 +9618,24 @@ border-bottom: 0px solid ;
 {
  border-collapse:separate;
 }
-#quicktabs-21 #quicktabs_container_1
+#quicktabs-21 #quicktabs_container_1,#quicktabs-23 #quicktabs_container_1
 {
  background-color: white;
  border: solid 1px #CCC;
  padding: 10px 10px 20px 10px; }
-#quicktabs-21 ul
+#quicktabs-21 ul,#quicktabs-23 ul
 {
   height:30px;
   border:none;
   padding-left:470px;
 }
-#quicktabs-21 ul li 
+#quicktabs-21 ul li, #quicktabs-23 ul li
 {
  background-color:none;
  border:none;
  height:30px;
 }
-#quicktabs-21 ul li span 
+#quicktabs-21 ul li span ,#quicktabs-23 ul li span 
 {
  background:url("images/2tableft.jpg") no-repeat ;
  background-position:left;
@@ -9643,7 +9643,7 @@ border-bottom: 0px solid ;
  height:30px;
  display:block;float:left;
 }
-#quicktabs-21 ul li span span
+#quicktabs-21 ul li span span,#quicktabs-23 ul li span span
 {
  background:url("images/2tabtile.jpg") repeat-x;
  height:30px;
@@ -9651,7 +9651,7 @@ border-bottom: 0px solid ;
  padding-left:0px;padding-right:0px;
 }
 
-#quicktabs-21 ul li span span span
+#quicktabs-21 ul li span span span,#quicktabs-23 ul li span span span
 {
  background:url("images/2tabright.jpg") no-repeat;
  background-position:right;
@@ -9661,36 +9661,36 @@ border-bottom: 0px solid ;
 
 }
 
-#quicktabs-21 ul li span span span a{
+#quicktabs-21 ul li span span span a,#quicktabs-23 ul li span span span a{
  display:block;
  padding:7px 15px 0 15px;
  color:#555555;
  height:23px;
  
  }
-#quicktabs-21 ul.quicktabs_tabs.quicktabs-style-basic li  {
+#quicktabs-21 ul.quicktabs_tabs.quicktabs-style-basic li ,#quicktabs-23 ul.quicktabs_tabs.quicktabs-style-basic li {
 border:none;
 margin:0 5px 0 0;
 padding:0px 0px;
 position:relative;
 float:left;
 }
-#quicktabs-21 ul.quicktabs_tabs li {
+#quicktabs-21 ul.quicktabs_tabs li ,#quicktabs-23 ul.quicktabs_tabs li{
 
 display:inline;
 
 }
 
-#block-quicktabs-21 h2
+#block-quicktabs-21 h2,#block-quicktabs-23 h2
 {
 display:none;
 }
 
-#block-quicktabs-21 #comment_reply_scholar {
+#block-quicktabs-21 #comment_reply_scholar,#block-quicktabs-23 #comment_reply_scholar {
 padding-left: 250px;
 }
 
-#block-quicktabs-21 .quicktabs_main.quicktabs-style-basic {
+#block-quicktabs-21 .quicktabs_main.quicktabs-style-basic ,#block-quicktabs-23 .quicktabs_main.quicktabs-style-basic{
     border: 1px solid #AAAAAA;
 	padding-bottom:16px;
 
@@ -10710,6 +10710,8 @@ paddding-top:10px;
 {
 margin-left: 80px;
 }
+
+
 .arr_num {
 border: 1px solid 
 #963;
