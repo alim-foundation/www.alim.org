@@ -1302,7 +1302,6 @@ if(document.getElementById("groups"))
 if(arg(3)=='TIK')
 {
 ?>
-<a href="#" onclick="$('#block-block-42').css('display','block');">Enable Comment filtering</a>
 <script type="text/javascript">
 $('#block-block-42').css('display','none');
 </script>
