@@ -51,9 +51,9 @@
 
 <dt class="title">
 
-<?php  print_r($node_result);
+<?php  
 // create url and title of search result
-$urlto = 'library/quran/AlQuran-tafsir/TIK/'.$node_result->field_tafsir_surah_number[0]['value'].'/'.$node_result->field_tafsir_ayah_from[0]['value'] ;
+$urlto = 'library/quran/AlQuran-tafsir/ASB/'.$node_result->field_surah_no[0]['value'].'/'.$node_result->field_ayah_no[0]['value'] ;
 $titletxt =$node_result->title; 
 print l($titletxt,$urlto,array('attributes' => array('target' => '_blank' )));
 //prints search snippet
