@@ -166,7 +166,7 @@ display:none;
 #footer_menu li.leaf{list-style:none;display:inline;color:#7B2A0F;font-weight:bold;border-right:1px solid #7B2A0F;padding:0px 3px 0px 3px;}
 #footer_menu li.last{border-right:none;}
 #footer_menu li a{color:#7B2A0F;font-weight:bold;}
-#middle_content{background:url(images/middlebgtile.png) top left repeat-y;width:968px;height:1630px;}
+#middle_content{background:url(images/middlebgtile.png) top left repeat-y;width:968px;height:1736px;}
 #top_content{background:url(images/topbgtile.png)  top left no-repeat;width:968px;height:22px;}
 #bottom_content{background:url(images/bottombgtile.png) top left no-repeat;width:968px;height:34px;}
 
