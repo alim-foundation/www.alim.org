@@ -249,7 +249,7 @@ div#gotohadith li#sral a:hover {
 .search-alim-txt .form-item{ margin:0px; padding-top:8px;}
 .search-alim-txt #edit-submit{border:0;background:none;width:139px;height:37px;color:#efd9aa;font-size:18px;padding-top:7px;float:left;cursor:pointer;text-indent:-99999px;line-height:0px;}
 .go-to-quran-txt{border:0;background:url(images/gotoquran-txtfld.png) no-repeat top;width:202px;height:37px; padding:0 0 0 2px;}
-.go-to-quran-txt input{border:0;background:none;width:198px;height:28px;color:#CC6633;font-size:16px;padding-top:7px;padding-left:5px;}
+.go-to-quran-txt input{border:0;background:none;width:175px;height:28px;color:#CC6633;font-size:16px;padding-top:4px;padding-left:4px;}
 .go-to-quran-txt-lstmnu{border:0;background:url(images/select-surah.png) no-repeat top;width:130px;height:37px; padding:0 0 0 2px;overflow: hidden;}
 .go-to-quran-txt-lstmnu select{border:none;background:none transparent;width:145px;height:25px;color:#CC6633;font-size:16px;text-indent:1000;margin-top:5px;margin-left:4px;padding-top:5px;
 -webkit-appearance:none;outline:none;}
