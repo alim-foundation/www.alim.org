@@ -6,7 +6,7 @@ $('.tab-msg ul li').each(function() {
 						if ($(".tab-msg ul li a").attr("href").toLowerCase().indexOf("search") >= 0)
 						{
 							$('.tab-msg ul li').before('<li><a href="/search/alimsearch/allah"><span class="tab"> Advanced Search</span></a></li>')
-							  // your parent element
+							   // your parent element
 							//ul.children().each(function(i,li){ul.prepend(li)})
 						}
      				});
