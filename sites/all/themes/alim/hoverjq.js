@@ -5,8 +5,8 @@ $('.tab-msg ul li').each(function() {
 						//alert( 'hhhh'+ $(this).val());
 						if ($(".tab-msg ul li a").attr("href").toLowerCase().indexOf("search") >= 0)
 						{
-						alert($(".tab-msg ul li a").attr("href"));
-						this.prepend(li);
+							ul = $('ul'); // your parent element
+							ul.children().each(function(i,li){ul.prepend(li)})
 						}
      				});
 
