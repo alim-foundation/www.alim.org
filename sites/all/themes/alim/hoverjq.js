@@ -1,14 +1,12 @@
 //Search tab order 
-/*ul = $('.tab-msg ul li'); // your parent element
 $('.tab-msg ul li').each(function() {
-      					// allVals.push($(this).val());
-						//alert( 'hhhh'+ $(this).val());
 						if ($(".tab-msg ul li a").attr("href").toLowerCase().indexOf("alimsearch") >= 0)
 						{
-							$('.tab-msg ul li').before('<li class="active"><a href="/search/node/allah" class="active"><span class="tab">Search</span></a></li>')
-							   // your parent element
+							$(".tab-msg ul li:eq(1)").css('margin-left','-210px');
+							$(".tab-msg ul li:eq(0)").css('margin-left','70px');
+							$(".tab-msg ul li:eq(0)").css('padding-left','3px');
 						}
-     				});*/
+     				});
 
 
 // to add mouseover popup for ayah notes 
