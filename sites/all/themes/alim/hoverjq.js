@@ -6,7 +6,7 @@ $('.tab-msg ul li').each(function() {
 						if ($(".tab-msg ul li a").attr("href").toLowerCase().indexOf("search") >= 0)
 						{
 							ul = $('ul'); // your parent element
-							ul.children().each(function(i,li){ul.prepend(li)})
+							//ul.children().each(function(i,li){ul.prepend(li)})
 						}
      				});
 
