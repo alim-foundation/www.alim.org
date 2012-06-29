@@ -3,11 +3,10 @@ ul = $('.tab-msg ul li'); // your parent element
 $('.tab-msg ul li').each(function() {
       					// allVals.push($(this).val());
 						//alert( 'hhhh'+ $(this).val());
-						if ($(".tab-msg ul li a").attr("href").toLowerCase().indexOf("search") >= 0)
+						if ($(".tab-msg ul li a").attr("href").toLowerCase().indexOf("search/alimsearch") >= 0)
 						{
-							//$('.tab-msg ul li').before('<li><a href="/search/alimsearch/allah"><span class="tab"> Advanced Search</span></a></li>')
+							$('.tab-msg ul li').before('<li class="active"><a href="/search/node/allah" class="active"><span class="tab">Search</span></a></li>')
 							   // your parent element
-							//ul.children().each(function(i,li){ul.prepend(li)})
 						}
      				});
 
