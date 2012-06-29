@@ -1,6 +1,6 @@
 //Search tab order 
 ul = $('.tabs ul'); // your parent element
-alert($("ul li a").attr("title"));
+alert($("ul li a").attr("href"));
 //ul.children().each(function(i,li){ul.prepend(li)})
 
 // to add mouseover popup for ayah notes 
