@@ -1,9 +1,9 @@
 //Search tab order 
 ul = $('.tabs ul'); // your parent element
-$('.tabs li').each(function() {
+$('.tab-msg ul li').each(function() {
       					// allVals.push($(this).val());
 						//alert( 'hhhh'+ $(this).val());
-						alert($("ul li a").attr("href"));
+						alert($(".tab-msg ul li a").attr("href"));
      				});
 
 //ul.children().each(function(i,li){ul.prepend(li)})
