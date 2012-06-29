@@ -1,13 +1,17 @@
 //Search tab order 
-ul = $('.tabs ul'); // your parent element
+/*ul = $('.tabs ul'); // your parent element
 $('.tab-msg ul li').each(function() {
       					// allVals.push($(this).val());
 						//alert( 'hhhh'+ $(this).val());
 						if ($(".tab-msg ul li a").attr("href").toLowerCase().indexOf("search") >= 0)
 						alert($(".tab-msg ul li a").attr("href"));
-     				});
+						ul.prepend(li)
+     				});*/
 
-//ul.children().each(function(i,li){ul.prepend(li)})
+ul = $('.tabs ul'); // your parent element
+ul.children().each(function(i,li){if ($(".tab-msg ul li a").attr("href").toLowerCase().indexOf("search") >= 0) ul.prepend(li)})
+
+//ul.children().each(function(i,li){})
 
 // to add mouseover popup for ayah notes 
 $(document).ready(function() {
