@@ -334,7 +334,7 @@ function alimsearch_getbooknames($type){
 			'QCC' => 'Qur\'an Commentary',
 			'QS' => 'Qur\'an Subject Index',
 			'TLT' => 'Transliteration',
-			'Tafsir' => 'Tafsir',
+			'Qur\'anTafsir' => 'Tafsir',
 		
 		),
 		'hadith' => array(
