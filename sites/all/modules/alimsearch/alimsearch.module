@@ -334,7 +334,7 @@ function alimsearch_getbooknames($type){
 			'QCC' => 'Qur\'an Commentary',
 			'QS' => 'Qur\'an Subject Index',
 			'TLT' => 'Transliteration',
-			'Tafsir' => 'Qur\'anTafsir',
+			'Tafsir' => 'Qur\'an Tafsir',
 		
 		),
 		'hadith' => array(
@@ -400,7 +400,7 @@ function alimsearch_getcombined_query($val , $opt = '' ){
 		'QCC' =>  array('add_query' => ' type:quran_ayah_elaboration' , 'text' => 'Qur\'an Commentary' , 'cat' => 'quran' ) ,
 		'QS'  =>  array('add_query' => ' type:quran_subject,hadith_subject' , 'text' => 'Qur\'an Subject Index' , 'cat' => 'quran' ) ,
 		'TLT' =>  array('add_query' => ' type:quran_ayah category:11' , 'text' => 'Transliteration' , 'cat' => 'quran' ) ,
-		'Tafsir' =>  array('add_query' => ' type:tafsir_multiple_ayah,quran_tafsir category:388' , 'text' => 'Qur\'anTafsir' , 'cat' => 'quran' ) ,
+		'Tafsir' =>  array('add_query' => ' type:tafsir_multiple_ayah,quran_tafsir category:388' , 'text' => 'Qur\'an Tafsir' , 'cat' => 'quran' ) ,
 		'AMH' =>  array('add_query' => ' type:hadith_content category:135' , 'text' => 'Al-Muwatta Hadith' , 'cat' => 'hadith' ) ,
 		'HDQ' =>  array('add_query' => ' type:hadith_content category:136' , 'text' => 'Al-Qudsi Hadith' , 'cat' => 'hadith' ) ,
 		'TIR' =>  array('add_query' => ' type:hadith_content category:137' , 'text' => 'Al-Tirmidhi Hadith' , 'cat' => 'hadith' ) ,
