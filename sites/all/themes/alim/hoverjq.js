@@ -576,7 +576,7 @@ $("div#search-home  div#site-search :input[type='text'].form-text:first , div#se
 				
 				$("#search-form #edit-book-quran-ASD,#search-form #edit-book-quran-TLT,#edit-book-quran-Tafsir-Ibn-Kathir,#edit-book-quran-Tafsir-As-Saranbi,#search-form #edit-book-quran-MAL,#search-form #edit-book-quran-PIK,#search-form #edit-book-quran-YAT,#search-form #edit-book-quran-QSI,#search-form #edit-book-quran-AY,#search-form #edit-book-quran-QCC,#search-form #edit-book-quran-QS").click(function(){
 						
-					if ($("#search-form #edit-book-quran-ASD,#search-form #edit-book-quran-TLT,#edit-book-quran-Tafsir-As-Saranbi,#edit-book-quran-Tafsir-Ibn-Kathir,#search-form #edit-book-quran-MAL,#search-form #edit-book-quran-PIK,#search-form #edit-book-quran-YAT,#search-form #edit-book-quran-QSI,#search-form #edit-book-quran-AY,#search-form #edit-book-quran-QCC,#search-form #edit-book-quran-QS").is(":checked")){
+					if ($("#search-form #edit-book-quran-ASD,#search-form #edit-book-quran-TLT,#edit-book-quran-Tafsir-As-Saranbi,#edit-book-quran-Tafsir-Ibn-Kathir,#search-form #edit-book-quran-MAL,#search-form #edit-book-quran-PIK,#search-form #edit-book-quran-YAT,#search-form #edit-book-quran-QSI,#search-form #edit-book-quran-AY,#search-form #edit-book-quran-QCC,#search-form #edit-book-quran-QS").is(":checked")){ 
 						$("#search-form #edit-quran").attr('checked', 'checked' );
 					}else{
 						$("#search-form #edit-quran").attr('checked', false );
