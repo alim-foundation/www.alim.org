@@ -16,10 +16,10 @@ global $theme_path;
   
    $r= strip_tags($block->content, '<a>');
  $tt= stristr($r,'href=');
- $t3= stristr($tt,'AOL/AIM');
+ $t3= stristr($tt,'Google');
 $url= str_replace($t3," ",$tt);
   
    
   
-   ?><span >  <?php print '<a style="display:block;"'.$url ;?>  Login <span id="login_home_rpx" style="padding-top:10px;"></span></a></span>
+   ?><span >  <?php print '<a '.$url ;?>  Login <span id="login_home_rpx" style="padding-top:10px;"></span></a></span>
 <!--</div>-->
