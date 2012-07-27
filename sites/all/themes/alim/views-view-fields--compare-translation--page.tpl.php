@@ -148,11 +148,16 @@ if($flag==1)
 
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="<?=$class?>">
+<?php 
+if($field_surah_no_value!='55' && $field_quran_bk_code_value!='MAL')
+{
+?>
   <tr>
     <td width="100" valign="top"><a href="<?=$base_url?>/library/quran/surah/english/<?=$field_surah_no_value?>/<?=$field_quran_bk_code_value?>#<?=$field_ayah_no_value?>"><?=$name?></a></td>
 	<td width="15" valign="top">:</td>
     <td valign="top"><?=$body?></td>
   </tr>
+  <?php }?>
  </table>
  
  <?php
