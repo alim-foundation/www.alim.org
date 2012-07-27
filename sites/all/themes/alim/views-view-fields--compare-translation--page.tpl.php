@@ -145,10 +145,7 @@ $class = $_SESSION['class'];
 if($flag==1)
 {
 ?>
-<?php 
-if($field_surah_no_value!='55' && $field_quran_bk_code_value!='MAL')
-{
-?>
+
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="<?=$class?>">
 
@@ -158,8 +155,7 @@ if($field_surah_no_value!='55' && $field_quran_bk_code_value!='MAL')
     <td valign="top"><?=$body?></td>
   </tr>
  </table>
- <?php } ?>
- 
+
  <?php
  if($class=='white')
  $_SESSION['class']='black';
