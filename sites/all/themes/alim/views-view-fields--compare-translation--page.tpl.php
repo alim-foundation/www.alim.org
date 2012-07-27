@@ -145,17 +145,20 @@ $class = $_SESSION['class'];
 if($flag==1)
 {
 ?>
-
+<?php 
+if($field_surah_no_value=='55' && $field_quran_bk_code_value=='MAL')
+{}
+else{
+?>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="<?=$class?>">
-
-  <tr>
+<tr>
     <td width="100" valign="top"><a href="<?=$base_url?>/library/quran/surah/english/<?=$field_surah_no_value?>/<?=$field_quran_bk_code_value?>#<?=$field_ayah_no_value?>"><?=$name?></a></td>
 	<td width="15" valign="top">:</td>
     <td valign="top"><?=$body?></td>
   </tr>
  </table>
-
+<?php } ?>
  <?php
  if($class=='white')
  $_SESSION['class']='black';
