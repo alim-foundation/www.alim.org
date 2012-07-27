@@ -975,14 +975,6 @@ if(arg(4)=='55' && arg(5)=='MAL')
 {
 ?>
 <script language="javascript">
-$(document).ready(function() {
-$(".view-compare-translation .views-row").each(function () 
-{
-var b=$("td a:contains('english/55/MAL')").parent().parent().parent().parent().attr('class');
-alert('test');
-alert(b);		
-});
-});
 document.getElementById('clip-all-content').style.display='block';
 document.getElementById('clip-all-content').innerHTML='Content is not available.';
 document.getElementById('block-block-23').style.display='none';
