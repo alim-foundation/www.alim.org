@@ -19,4 +19,4 @@ if($field_surah_no_value!='55' && $field_quran_bk_code_value!='MAL')
     <?php print $row; ?>
   </div>
  <?php } ?>
-<?php endforeach; ?>
+<?php endforeach; ?>  
