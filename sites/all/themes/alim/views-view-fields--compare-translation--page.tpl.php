@@ -158,11 +158,14 @@ else{
     <td valign="top"><?=$body?></td>
   </tr>
  </table>
-<?php } ?>
- <?php
+<?php 
+
  if($class=='white')
  $_SESSION['class']='black';
  else
  $_SESSION['class']='white';
  }
- ?>
+
+
+} ?>
+
