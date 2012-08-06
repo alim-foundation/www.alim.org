@@ -196,23 +196,23 @@ $tot=$Curr_ayah +10;
 
 if($term_array)
 {
-	drupal_set_message('<pre>'._r($term_array, TRUE).'</pre>');
+	drupal_set_message('<pre>'.($term_array, TRUE).'</pre>');
 	foreach($term_array as $key => $val )
 	{
 $nodeobj = node_load($term_arraydupe[$key]);
  '<pre>';
-_r($nodeobj);
+($nodeobj);
  '<pre>';
 $tagtext =  $val  ;
 if($tagtext != '' ){
 	$curr_term = taxonomy_get_term_by_name($tagtext );
-	 'Loaded exiting tag <pre>';_r($curr_term); '</pre>';
+	 'Loaded exiting tag <pre>';($curr_term); '</pre>';
 	if( count($curr_term[0]) > 0  ){//term exist
 		foreach($curr_term as $k => $v ){
 			if($v->vid == 9 ){
 				$to_insert_tag_id  =  $v->tid;
 				$to_insert_tag = $v;
-				 'To insert='.$to_insert_tag_id .' , <pre>'._r($v , TRUE).'</pre>';
+				 'To insert='.$to_insert_tag_id .' , <pre>'.($v , TRUE).'</pre>';
 			}
 		}
 	}else{ // not exist
@@ -222,10 +222,10 @@ if($tagtext != '' ){
 		);
 		taxonomy_save_term( $newterm); 
 		$nterm = taxonomy_get_term_by_name($tagtext);
-		 'new tag<pre>';_r('$nterm'); '</pre>';
+		 'new tag<pre>';('$nterm'); '</pre>';
 		$to_insert_tag_id  =  $nterm[0]->tid;
 		$to_insert_tag = $nterm[0];
-		 'To insert='.$to_insert_tag_id .' , <pre>'._r($to_insert_tag , TRUE).'</pre>';
+		 'To insert='.$to_insert_tag_id .' , <pre>'.($to_insert_tag , TRUE).'</pre>';
 	}
 	
 	
@@ -249,7 +249,7 @@ if($tagtext != '' ){
 }
 
  '<pre>';
-_r($nodeobj);
+($nodeobj);
  '</pre>';
 		
 	}
@@ -259,7 +259,7 @@ _r($nodeobj);
 		// '..'.$tagtext;
 		if($tagtext != '' ){
 		$curr_term = taxonomy_get_term_by_name($tagtext );
-		//_r($curr_term);
+		//($curr_term);
 		if( count($curr_term[0]) > 0  )
 		{
 		//drupal_set_message('term exists');
@@ -268,6 +268,7 @@ _r($nodeobj);
 			{
 				if($v->vid == 9 )
 				{
+
 					$to_insert_tag_id  =  $v->tid;
 						$to_insert_tag = $v;
 				}
@@ -282,7 +283,7 @@ _r($nodeobj);
 					'name' => $tagtext // Term Name
 					);
 			taxonomy_save_term( $newterm); 
-			//_r($newterm);
+			//($newterm);
 		
 			$nterm = taxonomy_get_term_by_name($tagtext);
 		      $to_insert_tag_id  =  $nterm[0]->tid;
@@ -292,7 +293,7 @@ _r($nodeobj);
 		
 		}
 		// 'tid -- new '. $to_insert_tag_id.'<hr />';
-		// '<pre>'._r($to_insert_tag , TRUE).'</pre>';
+		// '<pre>'.($to_insert_tag , TRUE).'</pre>';
 		
 		// '<hr /> b4 taxonomy<br /> ';
 		$nodeobj = node_load( $term_arraydupe[$key]);
@@ -311,13 +312,13 @@ _r($nodeobj);
 
 		}
 		
-		// '<pre>'._r(taxonomy_get_term($to_insert_tag), TRUE).'</pre>';
+		// '<pre>'.(taxonomy_get_term($to_insert_tag), TRUE).'</pre>';
 		if($flag)
 		{
 			//$nodeobj->taxonomy[$to_insert_tag_id]=  $to_insert_tag;// taxonomy_get_term($mainterm_id) ;
 			//db_query('UPDATE {term_node} SET tid = %d WHERE nid = %d AND vid= %d' ,9,$term_arraydupe[$key],$to_insert_tag_id);
-			//drupal_set_message('<pre>'._r($nodeobj ->taxonomy , TRUE).'</pre>');
-			// '<pre>'._r($nodeobj ->taxonomy , TRUE).'</pre>';
+			//drupal_set_message('<pre>'.($nodeobj ->taxonomy , TRUE).'</pre>');
+			// '<pre>'.($nodeobj ->taxonomy , TRUE).'</pre>';
 			db_query('INSERT INTO {term_node} (nid, tid, vid) VALUES (%d, %d, %d)',  $term_arraydupe[$key], $to_insert_tag_id,9);
 			
 			db_query("INSERT INTO community_tags (`tid`, `nid`, `uid`, `date`) VALUES ('$to_insert_tag_id', ' $term_arraydupe[$key]', '1','".strtotime("now")."')" );
