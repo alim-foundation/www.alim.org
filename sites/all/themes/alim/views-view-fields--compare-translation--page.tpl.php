@@ -146,7 +146,7 @@ if($flag==1)
 {
 ?>
 <?php 
-if($field_surah_no_value=='55' && $field_quran_bk_code_value=='MAL')
+if(($field_surah_no_value=='55' && $field_quran_bk_code_value=='MAL') || $field_quran_bk_code_value=='TLT')
 {}
 else{
 ?>
