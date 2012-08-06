@@ -1,0 +1,4 @@
+name = Tag seeding
+description = "Module to Import tags."
+package = "Alim"
+core = 6.x

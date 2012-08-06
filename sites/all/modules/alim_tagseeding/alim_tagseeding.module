@@ -1,0 +1,351 @@
+<?php
+$to_insert_tag_id=0;
+ $to_insert_tag =0;
+/**
+ * @file
+ * This is an example outlining how a module can be used to display a
+ * custom page at a given URL.
+ */
+
+/**
+ * @defgroup page_example Example: Page
+ * @ingroup examples
+ * @{
+ * Create a page in a module. (drupal 6)
+ *
+ * This example demonstrates how a module can be used to display a
+ * custom page at a given URL.
+ *
+ * This example is part of the Examples for Developers Project which you can download
+ * and experiment with here: http://drupal.org/project/examples
+ */
+
+/**
+ * Implementation of hook_perm().
+ *
+ * Implementation of hook_menu(). 
+ * 
+
+ */
+ 
+function alim_tagseeding_menu() { 
+  // This is the minimum information you can provide for a menu item. This menu
+  // item will be created in the default menu (Navigation).
+  $items['tagseeding/status'] = array(
+    'title' => 'tagseeding  status',
+    'page callback' => 'alim_tagseeding_seeding_status',
+    'access callback' => TRUE,
+    'expanded' => TRUE,
+  );
+
+
+
+  return $items;
+}
+
+
+function alim_tagseeding_seeding_status() {
+$default1 =1;
+$default2 =1;
+/*variable_set('alim_tagseeding_suranum1', 11);
+variable_set('alim_tagseeding_ayahnum1', 1);*/
+$surah = 'alim_tagseeding_suranum1';
+$ayah = 'alim_tagseeding_ayahnum1';
+$Curr_surah = variable_get($surah, $default1 );
+
+$Curr_ayah = variable_get($ayah, $default2  );
+$tmp =  'Surah = .'.$Curr_surah.' Ayah--:'.$Curr_ayah.'\n';
+
+
+  return '<p>' . t('Variable values.') . '</p>'.$tmp;
+}
+
+
+function alim_tagseeding_cron() {
+$default1 =1;
+$default2 =1;
+
+$surah = 'alim_tagseeding_suranum1';
+$ayah = 'alim_tagseeding_ayahnum1';
+alim_tagseeding_cron_Tagseeding();
+return '';
+}
+
+
+
+function alim_tagseeding_cron_Tagseeding()
+{
+
+$h=1;
+$default1 =1;
+$default2 =1;
+$surah = 'alim_tagseeding_suranum1';
+$ayah = 'alim_tagseeding_ayahnum1';
+/*
+Tagseeding ................
+*/
+
+//$Curr_surah =variable_get($surah, $default1 );
+
+//$Curr_ayah =variable_get($ayah, $default2  );
+
+$Curr_surah =variable_get($surah,$default1  );
+
+$Curr_ayah =variable_get($ayah, $default2  );
+//print "Surah".$Curr_surah."----Ayah".$Curr_ayah;
+$tot=$Curr_ayah +10;
+//print '$tot'.$tot;
+
+
+	if($Curr_surah  <= 114 )
+	{
+
+	
+	$query_pub1 =  db_query("SELECT node.nid AS nid,
+	node_data_field_ayah_count.field_ayah_count_value AS node_data_field_ayah_count_field_ayah_count_value,
+	node.type AS node_type,
+	node.vid AS node_vid
+	FROM node node 
+	LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+	LEFT JOIN content_type_quran_surah_overview node_data_field_ayah_count ON node.vid = node_data_field_ayah_count.vid
+	WHERE (node.type in ('quran_surah_overview')) AND (node_data_field_surah_no.field_surah_no_value = ".$Curr_surah.")" );
+	$result = db_fetch_object($query_pub1);
+	$Ayah_Count= $result->node_data_field_ayah_count_field_ayah_count_value;
+	
+	if($tot>$Ayah_Count)
+	{
+		$tot=$Ayah_Count;
+	}
+	//print 'ssss'.$Curr_surah;
+	for($i=$Curr_ayah;$i<=$tot; $i++){
+		
+		$query_pub1 =  db_query(" SELECT node.nid AS nid,
+		node_data_field_sub_number.field_sub_number_value AS node_data_field_sub_number_field_sub_number_value,
+		node.type AS node_type,
+		node.vid AS node_vid
+		FROM node node 
+		LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+		LEFT JOIN content_field_ayah_no node_data_field_ayah_no ON node.vid = node_data_field_ayah_no.vid
+		LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+		WHERE (node.type in ('quran_subject_location')) AND (node_data_field_surah_no.field_surah_no_value = ".$Curr_surah.") AND (node_data_field_ayah_no.field_ayah_no_value = ".$i.")" );
+		$j=1;
+		while($result = db_fetch_object($query_pub1))
+		{
+			$locations[$j]=$result->node_data_field_sub_number_field_sub_number_value;
+			$tagarray[$j]['subnum'] = $result->node_data_field_sub_number_field_sub_number_value;
+			$j++;
+		}
+		if($i==2)
+			$code="TLT";
+		else
+			$code="ARB";
+		$query_pub1 =  db_query(" SELECT node.nid AS nid,
+		node_revisions.body AS node_revisions_body,
+		node_revisions.format AS node_revisions_format
+		FROM node node 
+		LEFT JOIN content_field_ayah_no node_data_field_ayah_no ON node.vid = node_data_field_ayah_no.vid
+		LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid
+		LEFT JOIN content_field_quran_bk_code node_data_field_quran_bk_code ON node.vid = node_data_field_quran_bk_code.vid
+		LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+		WHERE (node.type in ('quran_ayah')) AND (node_data_field_ayah_no.field_ayah_no_value ='".$i."') AND (node_data_field_surah_no.field_surah_no_value = '".$Curr_surah."') AND (node_data_field_quran_bk_code.field_quran_bk_code_value = '".$code."')" );
+		
+		$result = db_fetch_object($query_pub1);
+		$node_id[$surah."_".$i]=$result->nid;
+		
+		
+		
+		for($m=1;$m<$j;$m++)
+		{
+		
+	
+
+			$query_pub1 =  db_query(" 	SELECT node.nid AS nid,
+   node.title AS node_title
+ FROM node node 
+ LEFT JOIN content_type_quran_subject node_data_field_sub_parent ON node.vid = node_data_field_sub_parent.vid
+ LEFT JOIN content_field_sub_number node_data_field_sub_number ON node.vid = node_data_field_sub_number.vid
+ WHERE (node.type in ('quran_subject')) AND (node_data_field_sub_parent.field_sub_parent_value IS NULL) AND (node_data_field_sub_number.field_sub_number_value = ".$locations[$m].")" );
+			$result = db_fetch_object($query_pub1);
+			
+			$term_array[$h]=$result->node_title; 
+			$term_arraydupe[$h]=$node_id[$surah."_".$i];
+			$tagarray[$m]['subtitle'] = $result->node_title;
+			$tagarray[$m]['tonode'] =$node_id[$surah."_".$i];
+			$h++;
+		
+		}
+	
+		
+		
+	}
+	
+	if($tot==$Ayah_Count)
+	{
+		$Curr_surah =variable_set($surah, $Curr_surah+1 );
+
+		$Curr_ayah =variable_set($ayah, 1 );
+	}
+	else
+	{
+ 
+	    $total=$tot+1;
+		//print 'total'.$total;
+		$Curr_ayah = variable_set($ayah,$total );
+	}
+}
+
+if($term_array)
+{
+	drupal_set_message('<pre>'.print_r($term_array, TRUE).'</pre>');
+	foreach($term_array as $key => $val )
+	{
+$nodeobj = node_load($term_arraydupe[$key]);
+print '<pre>';
+print_r($nodeobj);
+print '<pre>';
+$tagtext =  $val  ;
+if($tagtext != '' ){
+	$curr_term = taxonomy_get_term_by_name($tagtext );
+	print 'Loaded exiting tag <pre>';print_r($curr_term);print '</pre>';
+	if( count($curr_term[0]) > 0  ){//term exist
+		foreach($curr_term as $k => $v ){
+			if($v->vid == 9 ){
+				$to_insert_tag_id  =  $v->tid;
+				$to_insert_tag = $v;
+				print 'To insert='.$to_insert_tag_id .' , <pre>'.print_r($v , TRUE).'</pre>';
+			}
+		}
+	}else{ // not exist
+		$newterm = array(
+			'vid' =>9, 
+			'name' => $tagtext 
+		);
+		taxonomy_save_term( $newterm); 
+		$nterm = taxonomy_get_term_by_name($tagtext);
+		print 'new tag<pre>';print_r('$nterm');print '</pre>';
+		$to_insert_tag_id  =  $nterm[0]->tid;
+		$to_insert_tag = $nterm[0];
+		print 'To insert='.$to_insert_tag_id .' , <pre>'.print_r($to_insert_tag , TRUE).'</pre>';
+	}
+	
+	
+	$flag = TRUE;	
+	foreach($nodeobj ->taxonomy as $k => $v ){
+		if($v->vid == 9 ){
+			if($v->tid == $to_insert_tag_id){
+				$flag = FALSE; // tag already exist in term 
+			}
+		}	
+	}
+	
+	if($flag){ // update node with term 
+		$nodeobj->taxonomy[$to_insert_tag_id] = $to_insert_tag;
+		node_save($nodeobj);
+		db_query("INSERT INTO community_tags (`tid`, `nid`, `uid`, `date`) VALUES ('$to_insert_tag_id', ' $term_arraydupe[$key]', '6','".strtotime("now")."')" );
+		print 'in flag true';
+	}else{ // do nothing
+		print 'in flag false';
+	}
+}
+
+print '<pre>';
+print_r($nodeobj);
+print '</pre>';
+		
+	}
+}
+}
+/*		$tagtext =  $val ;//'we are one';
+		//print '..'.$tagtext;
+		if($tagtext != '' ){
+		$curr_term = taxonomy_get_term_by_name($tagtext );
+		//print_r($curr_term);
+		if( count($curr_term[0]) > 0  )
+		{
+		//drupal_set_message('term exists');
+			   // print "<br />&nbsp;&nbsp;&nbsp;&nbsp;Exist Term:". $curr_term[0]->tid;
+			foreach($curr_term as $k => $v )
+			{
+				if($v->vid == 9 )
+				{
+					$to_insert_tag_id  =  $v->tid;
+						$to_insert_tag = $v;
+				}
+			}
+				
+		}
+		else
+		{
+			//print 'not exist -----------------'; drupal_set_message('term not exists');
+			$newterm = array(
+					'vid' =>9, // Voacabulary ID - robot_clubs
+					'name' => $tagtext // Term Name
+					);
+			taxonomy_save_term( $newterm); 
+			//print_r($newterm);
+		
+			$nterm = taxonomy_get_term_by_name($tagtext);
+		      $to_insert_tag_id  =  $nterm[0]->tid;
+			   $to_insert_tag = $nterm[0];
+			 // $to_insert_tag_id  =  $newterm->tid;
+			  // $to_insert_tag = $newterm;
+		
+		}
+		//print 'tid -- new '. $to_insert_tag_id.'<hr />';
+		//print '<pre>'.print_r($to_insert_tag , TRUE).'</pre>';
+		
+		//print '<hr /> b4 taxonomy<br /> ';
+		$nodeobj = node_load( $term_arraydupe[$key]);
+	
+		//print '<hr />after taxonomy <br />';
+		$flag = TRUE;
+		
+		foreach($nodeobj ->taxonomy as $k => $v )
+		{
+			if($v->vid == 9 ){
+				if($v->tid == $to_insert_tag_id)
+				{
+					$flag = FALSE; // tag already exist in term 
+				}
+			}
+
+		}
+		
+		//print '<pre>'.print_r(taxonomy_get_term($to_insert_tag), TRUE).'</pre>';
+		if($flag)
+		{
+			//$nodeobj->taxonomy[$to_insert_tag_id]=  $to_insert_tag;// taxonomy_get_term($mainterm_id) ;
+			//db_query('UPDATE {term_node} SET tid = %d WHERE nid = %d AND vid= %d' ,9,$term_arraydupe[$key],$to_insert_tag_id);
+			//drupal_set_message('<pre>'.print_r($nodeobj ->taxonomy , TRUE).'</pre>');
+			//print '<pre>'.print_r($nodeobj ->taxonomy , TRUE).'</pre>';
+			db_query('INSERT INTO {term_node} (nid, tid, vid) VALUES (%d, %d, %d)',  $term_arraydupe[$key], $to_insert_tag_id,9);
+			
+			db_query("INSERT INTO community_tags (`tid`, `nid`, `uid`, `date`) VALUES ('$to_insert_tag_id', ' $term_arraydupe[$key]', '1','".strtotime("now")."')" );
+			//db_query('UPDATE {community_tags} SET tid = %d , nid = %d , uid= %d, date = %d ',$to_insert_tag_id,  $term_arraydupe[$key], 6 ,strtotime("now")) );
+			node_save($nodeobj);
+		
+			node_load(FALSE, NULL, TRUE);
+			//drupal_set_message('term added' );
+		}
+		else
+		{
+			//drupal_set_message('term  not added ..');
+		}
+		
+
+		///print '<hr />';
+		  //$to_insert_tag  ;
+	} 
+	
+	}
+	
+	
+	
+*/	
+
+//$aya_set =  variable_set($ayah, $new_ayah );
+//$surah_set =  variable_set($surah,$new_surah  );
+
+/**
+ * @} End of "defgroup page_example".
+ */
