@@ -1,0 +1,3 @@
+<?php
+db_query("UPDATE {system} SET weight = 100 WHERE name = 'alim_tagseeding'");
+?>
