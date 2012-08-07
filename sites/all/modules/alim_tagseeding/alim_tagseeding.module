@@ -242,7 +242,7 @@ if($term_array)
 		//print '<pre>'.print_r($to_insert_tag , TRUE).'</pre>';
 		
 		//print '<hr /> b4 taxonomy<br /> ';
-		print $nodeobj = node_load( $term_arraydupe[$key]);
+		 $nodeobj = node_load( $term_arraydupe[$key]);
 		//print '<pre>'.print_r($nodeobj ->taxonomy , TRUE).'</pre>';
 		//print '<hr />after taxonomy <br />';
 		$flag = TRUE;
