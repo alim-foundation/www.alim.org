@@ -25,8 +25,8 @@ $to_insert_tag_id=0;
  *
  * Implementation of hook_menu(). 
  * 
-
- */ 
+ 
+ */  
  
 function alim_tagseeding_menu() { 
   // This is the minimum information you can provide for a menu item. This menu
@@ -54,8 +54,7 @@ $ayah = 'alim_tagseeding_ayahnum5';
 $Curr_surah = variable_get($surah, $default1 );
 
 $Curr_ayah = variable_get($ayah, $default2  );
-$tmp =  'Surah = .'.$Curr_surah.' Ayah--:'.$Curr_ayah.'\n';
-
+$tmp =  'Surah :'.$Curr_surah.' Ayah:'.$Curr_ayah.'\n';
 
   return '<p>' . t('Variable values.') . '</p>'.$tmp;
 }
@@ -89,9 +88,9 @@ Tagseeding ................
 
 //$Curr_ayah =variable_get($ayah, $default2  );
 
-print 'Surah'.$Curr_surah =variable_get($surah,$default1  );
+$Curr_surah =variable_get($surah,$default1  );
 
-print 'Ayah'.$Curr_ayah =variable_get($ayah, $default2  );
+$Curr_ayah =variable_get($ayah, $default2  );
 //print "Surah".$Curr_surah."----Ayah".$Curr_ayah;
 $tot=$Curr_ayah +10;
 //print '$tot'.$tot;
