@@ -49,8 +49,8 @@ $default1 =1;
 $default2 =1;
 /*variable_set('alim_tagseeding_suranum1', 11);
 variable_set('alim_tagseeding_ayahnum1', 1);*/
-$surah = 'alim_tagseeding_suranum5';
-$ayah = 'alim_tagseeding_ayahnum5';
+$surah = 'alim_tagseeding_suranum6';
+$ayah = 'alim_tagseeding_ayahnum6';
 $Curr_surah = variable_get($surah, $default1 );
 
 $Curr_ayah = variable_get($ayah, $default2  );
@@ -64,8 +64,8 @@ function alim_tagseeding_cron() {
 $default1 =1;
 $default2 =1;
 
-$surah = 'alim_tagseeding_suranum5';
-$ayah = 'alim_tagseeding_ayahnum5';
+$surah = 'alim_tagseeding_suranum6';
+$ayah = 'alim_tagseeding_ayahnum6';
 alim_tagseeding_cron_Tagseeding();
 return '';
 }
@@ -78,8 +78,8 @@ function alim_tagseeding_cron_Tagseeding()
 $h=1;
 $default1 =1;
 $default2 =1;
-$surah = 'alim_tagseeding_suranum5';
-$ayah = 'alim_tagseeding_ayahnum5';
+$surah = 'alim_tagseeding_suranum6';
+$ayah = 'alim_tagseeding_ayahnum6';
 /*
 Tagseeding ................
 */
@@ -235,19 +235,19 @@ if($tagtext != '' ){
 				$flag = FALSE; // tag already exist in term 
 			}
 		}
-		if($flag){ // update node with term 
+			
+	}
+	
+	if($flag){ // update node with term 
 	
 		$nodeobj->taxonomy[$to_insert_tag_id] = $to_insert_tag;
 		node_save($nodeobj);
-		drupal_set_message('1------'.$to_insert_tag.'-------------'.'............'.$term_arraydupe[$key]);
+		//drupal_set_message('1------'.$to_insert_tag.'-------------'.'............'.$term_arraydupe[$key]);
 		db_query("INSERT INTO community_tags (`tid`, `nid`, `uid`, `date`) VALUES ('$to_insert_tag_id', ' $term_arraydupe[$key]', '6','".strtotime("now")."')" );
 		//print 'in flag true';
 	}else{ // do nothing
 		//print 'in flag false';
-	}	
 	}
-	
-	
 }
 
 //print '<pre>';
