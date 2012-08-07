@@ -93,7 +93,7 @@ $Curr_surah =variable_get($surah,$default1  );
 
 $Curr_ayah =variable_get($ayah, $default2  );
 print "Surah".$Curr_surah."----Ayah".$Curr_ayah;
-$tot=$Curr_ayah +10;
+$tot=$Curr_ayah +6;
 print '$tot'.$tot;
 
 
