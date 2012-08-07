@@ -26,7 +26,7 @@ $to_insert_tag_id=0;
  * Implementation of hook_menu(). 
  * 
 
- */
+ */ 
  
 function alim_tagseeding_menu() { 
   // This is the minimum information you can provide for a menu item. This menu
@@ -89,9 +89,9 @@ Tagseeding ................
 
 //$Curr_ayah =variable_get($ayah, $default2  );
 
-$Curr_surah =variable_get($surah,$default1  );
+print 'Surah'.$Curr_surah =variable_get($surah,$default1  );
 
-$Curr_ayah =variable_get($ayah, $default2  );
+print 'Ayah'.$Curr_ayah =variable_get($ayah, $default2  );
 //print "Surah".$Curr_surah."----Ayah".$Curr_ayah;
 $tot=$Curr_ayah +10;
 //print '$tot'.$tot;
@@ -196,23 +196,23 @@ $tot=$Curr_ayah +10;
 
 if($term_array)
 {
-	drupal_set_message('<pre>'.print_r($term_array, TRUE).'</pre>');
+	//drupal_set_message('<pre>'.print_r($term_array, TRUE).'</pre>');
 	foreach($term_array as $key => $val )
 	{
 $nodeobj = node_load($term_arraydupe[$key]);
-print '<pre>';
-print_r($nodeobj);
-print '<pre>';
+//print '<pre>';
+//print_r($nodeobj);
+//print '<pre>';
 $tagtext =  $val  ;
 if($tagtext != '' ){
 	$curr_term = taxonomy_get_term_by_name($tagtext );
-	print 'Loaded exiting tag <pre>';print_r($curr_term);print '</pre>';
+	//print 'Loaded exiting tag <pre>';print_r($curr_term);print '</pre>';
 	if( count($curr_term[0]) > 0  ){//term exist
 		foreach($curr_term as $k => $v ){
 			if($v->vid == 9 ){
 				$to_insert_tag_id  =  $v->tid;
 				$to_insert_tag = $v;
-				print 'To insert='.$to_insert_tag_id .' , <pre>'.print_r($v , TRUE).'</pre>';
+			//	print 'To insert='.$to_insert_tag_id .' , <pre>'.print_r($v , TRUE).'</pre>';
 			}
 		}
 	}else{ // not exist
@@ -222,10 +222,10 @@ if($tagtext != '' ){
 		);
 		taxonomy_save_term( $newterm); 
 		$nterm = taxonomy_get_term_by_name($tagtext);
-		print 'new tag<pre>';print_r('$nterm');print '</pre>';
+		//print 'new tag<pre>';print_r('$nterm');print '</pre>';
 		$to_insert_tag_id  =  $nterm[0]->tid;
 		$to_insert_tag = $nterm[0];
-		print 'To insert='.$to_insert_tag_id .' , <pre>'.print_r($to_insert_tag , TRUE).'</pre>';
+		//print 'To insert='.$to_insert_tag_id .' , <pre>'.print_r($to_insert_tag , TRUE).'</pre>';
 	}
 	
 	
@@ -239,18 +239,20 @@ if($tagtext != '' ){
 	}
 	
 	if($flag){ // update node with term 
+	
 		$nodeobj->taxonomy[$to_insert_tag_id] = $to_insert_tag;
 		node_save($nodeobj);
+		print '1------'.$to_insert_tag.'-------------'.'............'.$term_arraydupe[$key];
 		db_query("INSERT INTO community_tags (`tid`, `nid`, `uid`, `date`) VALUES ('$to_insert_tag_id', ' $term_arraydupe[$key]', '6','".strtotime("now")."')" );
-		print 'in flag true';
+		//print 'in flag true';
 	}else{ // do nothing
-		print 'in flag false';
+		//print 'in flag false';
 	}
 }
 
-print '<pre>';
-print_r($nodeobj);
-print '</pre>';
+//print '<pre>';
+//print_r($nodeobj);
+//print '</pre>';
 		
 	}
 }
