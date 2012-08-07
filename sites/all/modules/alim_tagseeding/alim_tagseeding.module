@@ -242,7 +242,7 @@ if($tagtext != '' ){
 	
 		$nodeobj->taxonomy[$to_insert_tag_id] = $to_insert_tag;
 		node_save($nodeobj);
-		print '1------'.$to_insert_tag.'-------------'.'............'.$term_arraydupe[$key];
+		drupal_set_message('1------'.$to_insert_tag.'-------------'.'............'.$term_arraydupe[$key]);
 		db_query("INSERT INTO community_tags (`tid`, `nid`, `uid`, `date`) VALUES ('$to_insert_tag_id', ' $term_arraydupe[$key]', '6','".strtotime("now")."')" );
 		//print 'in flag true';
 	}else{ // do nothing
