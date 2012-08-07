@@ -234,10 +234,8 @@ if($tagtext != '' ){
 			if($v->tid == $to_insert_tag_id){
 				$flag = FALSE; // tag already exist in term 
 			}
-		}	
-	}
-	
-	if($flag){ // update node with term 
+		}
+		if($flag){ // update node with term 
 	
 		$nodeobj->taxonomy[$to_insert_tag_id] = $to_insert_tag;
 		node_save($nodeobj);
@@ -246,7 +244,10 @@ if($tagtext != '' ){
 		//print 'in flag true';
 	}else{ // do nothing
 		//print 'in flag false';
+	}	
 	}
+	
+	
 }
 
 //print '<pre>';
