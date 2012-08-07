@@ -6,7 +6,7 @@ $to_insert_tag_id=0;
  * This is an example outlining how a module can be used to display a
  * custom page at a given URL.
  */
-
+ 
 /**
  * @defgroup page_example Example: Page
  * @ingroup examples
@@ -49,8 +49,8 @@ $default1 =1;
 $default2 =1;
 /*variable_set('alim_tagseeding_suranum1', 11);
 variable_set('alim_tagseeding_ayahnum1', 1);*/
-$surah = 'alim_tagseeding_suranums';
-$ayah = 'alim_tagseeding_ayahnums';
+$surah = 'alim_tagseeding_suranum';
+$ayah = 'alim_tagseeding_ayahnum';
 $Curr_surah = variable_get($surah, $default1 );
 
 $Curr_ayah = variable_get($ayah, $default2  );
@@ -65,8 +65,8 @@ function alim_tagseeding_cron() {
 $default1 =1;
 $default2 =1;
 
-$surah = 'alim_tagseeding_suranums';
-$ayah = 'alim_tagseeding_ayahnums';
+$surah = 'alim_tagseeding_suranum';
+$ayah = 'alim_tagseeding_ayahnum';
 alim_tagseeding_cron_Tagseeding();
 return '';
 }
@@ -79,8 +79,8 @@ function alim_tagseeding_cron_Tagseeding()
 $h=1;
 $default1 =1;
 $default2 =1;
-$surah = 'alim_tagseeding_suranums';
-$ayah = 'alim_tagseeding_ayahnums';
+$surah = 'alim_tagseeding_suranum';
+$ayah = 'alim_tagseeding_ayahnum';
 /*
 Tagseeding ................
 */
