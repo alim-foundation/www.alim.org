@@ -49,8 +49,8 @@ $default1 =1;
 $default2 =1;
 /*variable_set('alim_tagseeding_suranum1', 11);
 variable_set('alim_tagseeding_ayahnum1', 1);*/
-$surah = 'alim_tagseeding_suranum4';
-$ayah = 'alim_tagseeding_ayahnum4';
+$surah = 'alim_tagseeding_suranum5';
+$ayah = 'alim_tagseeding_ayahnum5';
 $Curr_surah = variable_get($surah, $default1 );
 
 $Curr_ayah = variable_get($ayah, $default2  );
@@ -65,8 +65,8 @@ function alim_tagseeding_cron() {
 $default1 =1;
 $default2 =1;
 
-$surah = 'alim_tagseeding_suranum4';
-$ayah = 'alim_tagseeding_ayahnum4';
+$surah = 'alim_tagseeding_suranum5';
+$ayah = 'alim_tagseeding_ayahnum5';
 alim_tagseeding_cron_Tagseeding();
 return '';
 }
@@ -79,8 +79,8 @@ function alim_tagseeding_cron_Tagseeding()
 $h=1;
 $default1 =1;
 $default2 =1;
-$surah = 'alim_tagseeding_suranum4';
-$ayah = 'alim_tagseeding_ayahnum4';
+$surah = 'alim_tagseeding_suranum5';
+$ayah = 'alim_tagseeding_ayahnum5';
 /*
 Tagseeding ................
 */
