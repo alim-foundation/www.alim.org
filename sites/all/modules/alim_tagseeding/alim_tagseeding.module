@@ -47,13 +47,18 @@ function alim_tagseeding_menu() {
 function alim_tagseeding_seeding_status() {
 $default1 =1;
 $default2 =1;
-/*variable_set('alim_tagseeding_suranum1', 11);
-variable_set('alim_tagseeding_ayahnum1', 1);*/
+
 $surah = 'alim_tagseeding_suranumm';
 $ayah = 'alim_tagseeding_ayahnumm';
 $Curr_surah = variable_get($surah, $default1 );
 
 $Curr_ayah = variable_get($ayah, $default2  );
+if($Curr_surah>114)
+{
+variable_set('alim_tagseeding_suranumm', 1);
+variable_set('alim_tagseeding_ayahnumm', 1);
+}
+
 $tmp =  'Surah :'.$Curr_surah.' Ayah:'.$Curr_ayah.'\n';
 
   return '<p>' . t('Variable values.') . '</p>'.$tmp;
