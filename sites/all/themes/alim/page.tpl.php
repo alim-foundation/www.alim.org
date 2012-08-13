@@ -1300,9 +1300,6 @@ if(document.getElementById("groups"))
 }
 ?> 
 <script type="text/javascript">
-$('#block-block-42').css('display','none');
-</script>
-<script type="text/javascript">
 $("#quicktabs-12 li.first a").click(function() {
 $(".comment-filtering").show();
 $('#block-quicktabs-12').css('marginTop',-35);
