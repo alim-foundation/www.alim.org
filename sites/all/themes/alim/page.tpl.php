@@ -1298,7 +1298,7 @@ if(document.getElementById("groups"))
 </script>
 <?php
 }
-?>
+?> 
 <script type="text/javascript">
 $('#block-block-42').css('display','none');
 </script>
