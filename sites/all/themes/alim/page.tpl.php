@@ -1299,16 +1299,9 @@ if(document.getElementById("groups"))
 <?php
 }
 ?>
-<?php 
-if(arg(3)=='TIK')
-{
-?>
 <script type="text/javascript">
 $('#block-block-42').css('display','none');
 </script>
-<?php 
-}
-?>
 <script type="text/javascript">
 $("#quicktabs-12 li.first a").click(function() {
 $(".comment-filtering").show();
