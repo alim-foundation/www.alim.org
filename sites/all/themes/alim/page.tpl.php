@@ -1363,7 +1363,7 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 	   if($floatingbox.length > 0){
  
 	      if ( scrollY > bodyY && !isfixed  ) {
-		  $('#audioblock').addClass('span3');
+		  /*$('#audioblock').addClass('span3');*/
 			$floatingbox.stop().css({
 			  position: 'fixed',
 			  left: '50%',
