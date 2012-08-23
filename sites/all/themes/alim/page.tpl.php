@@ -1397,7 +1397,7 @@ window.location= '?quicktabs_22=1#quicktabs-22';
        });
      }
   });
-</script>
+</script> 
 <?php print $closure ?>	
 </body>
 </html>
