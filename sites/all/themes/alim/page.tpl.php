@@ -1336,7 +1336,68 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 	  
       <!-- End RPX Sign In -->
   </script>
-
+<script type="text/javascript">
+ 
+    //avoid conflict with other script
+    $j=jQuery.noConflict();
+ 
+    $j(document).ready(function($) {
+ 
+	//this is the floating content
+	var $floatingbox = $('#audioblock');
+ 
+	if($('#audioblock').length > 0){
+ 
+	  var bodyY = parseInt($('#audioblock').offset().top) - 20;
+	  var originalX = $floatingbox.css('margin-left');
+ 
+	  $(window).scroll(function () { 
+ 
+	   var scrollY = $(window).scrollTop();
+	   var isfixed = $floatingbox.css('position') == 'fixed';
+	   var result = $("#clip-all-content").height();
+ 	   /*  $('#curraya').html("srollY : " + scrollY + ", bodyY : " 
+                                     + bodyY + ", isfixed : " + isfixed+'height'+result);*/
+		var leftht=	$("#left_menu").height();				 
+ 
+	   if($floatingbox.length > 0){
+ 
+	      if ( scrollY > bodyY && !isfixed  ) {
+		  $('#audioblock').addClass('span3');
+			$floatingbox.stop().css({
+			  position: 'fixed',
+			  left: '50%',
+			  top: 0,
+			  marginLeft: -463,
+			  /*background-color:'#445C8F',*/
+			  /*border-radius:'4px'*/
+			});
+		}  
+		if ( scrollY < bodyY && isfixed  || (result < leftht) ) {
+		//$('#audioblock').removeClass('span3');
+		 	  $floatingbox.css({
+			  position: 'relative',
+			  left: 0,
+			  top: 0,
+			  marginLeft: originalX
+		});
+	     }
+		  if((scrollY >= (result+50)) &&(result > leftht))	
+		 {
+		 //$('#audioblock').removeClass('span3');
+		  $floatingbox.css({
+			  position: 'relative',
+			  left: 0,
+			  top: 300,
+			  marginLeft: originalX
+		});
+		 }	
+	   }
+	   
+       });
+     }
+  });
+</script>
 <?php print $closure ?>	
 </body>
 </html>
