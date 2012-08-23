@@ -7669,7 +7669,7 @@ display:none;
 /*-------- Audio Block  ---------*/
 
 #audioblock { width: 173px; color:#ffffff; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px; font-weight:normal; }
-div.audioblocktop { background:url(images/bg_audio_top.png) top left no-repeat; /*height:5px;*/ }
+div.audioblocktop { background:url(images/bg_audio_top.png) top left no-repeat; height:5px; }
 div.audioblockbody { background-color:#c58c29;  padding:5px; }
 div.audioblockbottom { background:url(images/bg_audio_bottom.png) top left no-repeat; height:5px; }
 #audioblock .hline { background:url(images/hline_audio.gif) top left repeat-x; height:2px; margin:3px 0;}
