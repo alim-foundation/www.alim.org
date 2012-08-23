@@ -1336,6 +1336,8 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 	  
       <!-- End RPX Sign In -->
   </script>
+  <?php if(arg(2)=="surah"){
+  ?>
 <script type="text/javascript">
  
     //avoid conflict with other script
@@ -1398,6 +1400,8 @@ window.location= '?quicktabs_22=1#quicktabs-22';
      }
   });
 </script> 
+  <?php }
+  ?>
 <?php print $closure ?>	
 </body>
 </html>
