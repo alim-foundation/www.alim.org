@@ -411,3 +411,59 @@ a.hand-icon {background: url("images/hand.gif") no-repeat scroll 0 4px transpare
  color:#CC0000;
  background:#FFFFCC;
 }
+.copy_range{width: 300px;
+height: 100px;
+color: #650A09;
+position: absolute;
+right: 155px;
+top: 73px;
+z-index: 1000;
+text-align: left;
+font-size: 14px;
+}
+.copy_range .from_text,.copy_range .to_text{
+background: url(images/copy-ayah-txtbox.png) top center no-repeat;
+color: #C63;
+height: 30px;
+width: 62px;
+padding-top:1px;
+}
+.copy_range .from_text input,.copy_range .to_text input
+{    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    font-size: 16px;
+    height: 30px;
+/*    padding-left: 4px;
+*/    text-align: center;
+    width: 62px;
+}
+.copy_range .copy_range_top{background:url(images/box-top.png) top center no-repeat; height:27px; width:436px;}
+.copy_range .copy_range_mid{background:url(images/box-mid.png) top center repeat-y;width:436px;}
+.copy_range .copy_range_bottom{background:url(images/box-bottom.png) top center no-repeat;height:13px; width:436px;}
+.loading {display: none; position: absolute;
+margin-top: 51px;
+margin-left: 896px;
+z-index: 999;}
+.copied_plus{background:url(images/add-more.png) top center no-repeat;width:24px; height:24px;float: right;margin-right: 210px;margin-top: -2px;}
+.copied{ height:25px;}
+
+	.field_set_copy {
+border: 1px solid #DEC47D;
+margin-left: 40px;
+margin-top: 5px;
+width: 337px;
+}
+	
+	.update-copy
+	{
+	position:absolute;
+	width: 80px;
+	height: 37px;
+	right: -135px;
+	top: 121px; 
+	display:block;
+	}
+	.zclip
+	{
+	opacity: 0.5;
+	}
