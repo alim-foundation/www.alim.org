@@ -340,7 +340,7 @@ $('.range_copied').show();
  </div>
 
 			<div style="clear:both"></div>
-			<?php echo $splash_top; ?>
+
 			
 			<div style="clear:both;"></div>
 	  		<div class="banner">
