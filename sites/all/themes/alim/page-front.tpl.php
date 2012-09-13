@@ -717,7 +717,7 @@ _gaq.push(['loadTracker._trackPageview']);
 }
 </script>
 <?php
-drupal_set_message('test');
+
 if($set_ok==1)
 {
 ?>
