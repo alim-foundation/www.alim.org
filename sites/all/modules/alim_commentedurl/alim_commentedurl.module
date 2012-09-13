@@ -7,7 +7,7 @@
 //validate function for comment text
 function alim_commentedurl_menu() {
 	$items['clipboard/copys'] = array(
-        'title' => 'Copy',
+         'title' => 'Copy',
 		'page callback' => 'alim_commentedurl_clipboard',
 		'access arguments' => array('access clipboard'),
 		'type' => MENU_CALLBACK
