@@ -10,7 +10,7 @@ $items = array();
 	$items['clipboard/copys'] = array(
          'title' => 'Copy',
 		'page callback' => 'alim_commentedurl_clipboard',
-		'access arguments' => array('access clipboard'),
+		 'access callback' => TRUE,
 		'type' => MENU_CALLBACK
   	);
 
