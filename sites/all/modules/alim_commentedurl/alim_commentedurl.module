@@ -6,6 +6,7 @@
 
 //validate function for comment text
 function alim_commentedurl_menu() {
+$items = array();
 	$items['clipboard/copys'] = array(
          'title' => 'Copy',
 		'page callback' => 'alim_commentedurl_clipboard',
@@ -13,7 +14,7 @@ function alim_commentedurl_menu() {
 		'type' => MENU_CALLBACK
   	);
 
-   $items = array();
+   
 	$items['alim/go/ayah'] = array(
     'title' => 'Go',
     'page callback' => 'alim_go_ayah',
