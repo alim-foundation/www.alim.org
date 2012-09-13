@@ -717,6 +717,7 @@ _gaq.push(['loadTracker._trackPageview']);
 }
 </script>
 <?php
+drupal_set_message('test');
 if($set_ok==1)
 {
 ?>
@@ -731,7 +732,7 @@ BOOMR.init({"user_ip":"59.162.126.17","site_domain":".<?=$base_url?>","BW":{"bas
 </script>
 <div id="boomerang-results"></div>
 <?php
-drupal_set_message('test');
+
 }
 ?>
 </body>
