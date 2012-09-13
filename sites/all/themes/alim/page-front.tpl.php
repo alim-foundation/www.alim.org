@@ -148,7 +148,9 @@ $set_ok = 1;
 	.nav-next {padding-top:1px;}
 	</style>
 	<![endif]-->
-	<script type="text/javascript" src="/sites/all/themes/alim/jquery.zclip.js"></script>
+	
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/sites/all/themes/alim/jquery.zclip.js"></script>
 <script language="javascript" type="text/javascript"  src="/sites/all/themes/alim/clipboard-hand.js"></script>
 <script type="text/javascript">
 var plstart = new Date();
