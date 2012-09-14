@@ -393,9 +393,9 @@ a.hand-icon {background: url("images/hand.gif") no-repeat scroll 0 4px transpare
 .tell-friend textarea{height:100px;width:260px;margin-bottom:10px;}
 .tell-friend input{width:260px;}
 .tell-friend #edit-submit{border:0;background:url(images/send_button.png) top center no-repeat;width:57px;height:22px;cursor:pointer;text-indent:-99999px;line-height:0px;}
-#box-top{background:url(images/box-top.png) top center no-repeat; height:27px; width:436px;}
-#box-mid{background:url(images/box-mid.png) top center repeat-y;width:436px;}
-#box-bottom{background:url(images/box-bottom.png) top center no-repeat;height:13px; width:436px;}
+#box-top{background:url(images/box-topmail.png) top center no-repeat; height:27px; width:436px;}
+#box-mid{background:url(images/box-midmail.png) top center repeat-y;width:436px;}
+#box-bottom{background:url(images/box-bottommail.png) top center no-repeat;height:13px; width:436px;}
 .views-field-field-event-image-fid{height:212px;}
 #block-views-recent_groups_home-block_1 .view-content
 {
