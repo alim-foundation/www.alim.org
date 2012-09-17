@@ -247,7 +247,7 @@ margin-left: 23px;">
    </td></tr>
     <tr>
   	<td  height="28" align="left" valign="top" class="label"> Select format </td>
-    <td  height="28" align="left" valign="top" class="label"  colspan="3"><input type="radio"  name="format" value="1" class="format"   />Text&nbsp;&nbsp; &nbsp;<input type="radio" checked="checked" name="format"  class="format" value="2" />HTML</td>
+    <td  height="28" align="left" valign="top" class="label"  colspan="3"><input type="radio"  checked="checked" name="format" value="1" class="format"   />Text&nbsp;&nbsp; &nbsp;<input type="radio"  name="format"  class="format" value="2" />HTML</td>
   </tr>
 
 </table>  
