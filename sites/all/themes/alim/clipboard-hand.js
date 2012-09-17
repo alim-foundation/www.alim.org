@@ -137,8 +137,7 @@ else if (e) keycode = e.which;
 	  setTimeout(function(){
 						  var ayahend=$('.copy-to').val();
 						  //alert(ayahend);
-						  if(parseInt(ayahstart) > parseInt(ayahend)){
-						  $('.copy-to').val(ayahstart);}}, 2000);
+						 }, 2000);
 	 }
 	
 		// alert('test');
@@ -150,7 +149,8 @@ else if (e) keycode = e.which;
 	
 	var ayahend=$('.copy-to').val();
     var ayahstart=$('.copy-from').val();
-	
+	if(parseInt(ayahstart) >parseInt(ayahend))
+	 ayahend=ayahstart;
 	Surahstart=strs;
 	if((keycode!=46 && keycode!=8 ) && IsNumeric(ayahstart)==true || IsNumeric(ayahend)==true)
 	{	
