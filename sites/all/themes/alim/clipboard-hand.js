@@ -133,7 +133,10 @@ else if (e) keycode = e.which;
 	$('.copy-from').val(ayahstart);
 	$('.copy-to').val(ayahend);
      if(parseInt(ayahstart) >parseInt(ayahend))
+	 {
+		 alert('test');
 	  setTimeout(function(){$('.copy-to').val(ayahstart);}, 2000);
+	 }
 	// $('.copy-to').val(ayahstart);
 	
 	 ayahend=ayahstart;
