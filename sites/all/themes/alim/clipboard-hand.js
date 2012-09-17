@@ -137,7 +137,7 @@ else if (e) keycode = e.which;
 	  setTimeout(function(){
 						  var ayahend=$('.copy-to').val();
 						  //alert(ayahend);
-						 }, 1000);
+						 }, 2000);
 	 }
 	
 		// alert('test');
