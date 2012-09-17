@@ -136,7 +136,7 @@ else if (e) keycode = e.which;
 	 {
 	  setTimeout(function(){
 						  var ayahend=$('.copy-to').val();
-						  alert(ayahend);
+						  //alert(ayahend);
 						  if(parseInt(ayahstart) > parseInt(ayahend)){
 						  $('.copy-to').val(ayahstart);}}, 2000);
 	 }
