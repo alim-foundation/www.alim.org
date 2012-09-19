@@ -466,4 +466,5 @@ width: 337px;
 	.zclip
 	{
 	opacity: 0.5;
+	z-index: 1028 !important;
 	}
