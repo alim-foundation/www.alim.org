@@ -63,7 +63,7 @@
 
    ?>
      <div id="comm-author" ><table class="blog_entry"><tr><td style="width:50px;"><b>Author</b></td><td><b>:</b>&nbsp;&nbsp;<?=$author_link?></td></tr></table></div>
-     <div id="comm-url"><table class="blog_entry" ><tr><td style="width:50px;"><b>From</b></td><td><b>:</b>&nbsp;&nbsp;<?=$node->field_comment_url[0]['value']?></td></tr></table></div>
+     <div id="comm-url"><table class="blog_entry" ><tr><td style="width:50px;"><b>From</b></td><td><b>:</b>&nbsp;&nbsp;<?=$node->field_remote_url[0]['value']?></td></tr></table></div>
   <?php
   }
   ?>
