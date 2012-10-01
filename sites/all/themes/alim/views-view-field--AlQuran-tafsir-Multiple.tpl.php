@@ -37,5 +37,6 @@
 			$Surah_Name=$result->term_data_name; 
 ?>
 <div class="prev_intro" style=" float:right;"><a href="<? $base_url.'/AlQuran-tafsir/TIK/'.arg(4).'/0' ?>"> Introduction to Surah <?php echo $Surah_Name?></a></div>
+<br />
 <?php }?>
 <?php print $output; ?>
