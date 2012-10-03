@@ -23,7 +23,7 @@
 ?>
 <?php if(arg(5)>0)
 {
-	$query_pub1 =  db_query("SELECT node.nid AS nid,
+/*	$query_pub1 =  db_query("SELECT node.nid AS nid,
    term_data.name AS term_data_name,
    term_data.vid AS term_data_vid,
    term_data.tid AS term_data_tid
@@ -34,10 +34,10 @@
  WHERE (node.type in ('quran_surah_overview')) AND (node_data_field_surah_no.field_surah_no_value = '".arg(4)."')");
  			$result = db_fetch_object($query_pub1);
 			
-			$Surah_Name=$result->term_data_name; 
+			$Surah_Name=$result->term_data_name; */
 ?>
 <br />
-<div class="prev_intro" style=" float:right;color: #060;"><a href="<?=$base_url.'/library/quran/AlQuran-tafsir/TIK/'.arg(4).'/0'?>"> Introduction to Surah <?php echo $Surah_Name?></a></div>
+<div class="prev_intro" style=" float:right;color: #060;"><a href="<?=$base_url.'/library/quran/AlQuran-tafsir/TIK/'.arg(4).'/0'?>"><b>View Introduction</b></a></div>
 <br />
 <?php }?>
 <?php print $output; ?>
