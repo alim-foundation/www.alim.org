@@ -21,7 +21,7 @@
   */
  global $base_url;
 ?>
-<?php if(arg(5)>0)
+<?php if(arg(5)==1)
 {
 	$query_pub1 =  db_query("SELECT node.nid AS nid,
    term_data.name AS term_data_name,
