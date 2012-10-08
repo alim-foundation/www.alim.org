@@ -1,4 +1,12 @@
 //Search tab order 
+$(document).ready(function() {
+			$("fn a").click(function(){
+							alert('click')	;				
+				})
+	
+	
+	
+    });
 $('.tab-msg ul li').each(function() {
 						if ($(".tab-msg ul li a").attr("href").toLowerCase().indexOf("alimsearch") >= 0)
 						{
