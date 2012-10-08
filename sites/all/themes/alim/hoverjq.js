@@ -2,10 +2,14 @@
 $(document).ready(function() {
 						   
 			$(".fn").click(function(){
+				$('a#quicktabs-tab-3-1').trigger('click');						
 							alert('click');				
 				})
 	
-	
+	$('a#quicktabs-tab-3-1').click(function(ev) {
+			alert('done')	;			  
+
+			});
 	
     });
 $('.tab-msg ul li').each(function() {
