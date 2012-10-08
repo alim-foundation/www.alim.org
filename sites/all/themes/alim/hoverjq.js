@@ -1,14 +1,21 @@
 //Search tab order 
 $(document).ready(function() {
 						   
-				$(".views-row-3 .fn").click(function(){
+				$(".view-compare-translation .views-row-3 .fn").click(function(){
 				$('a#quicktabs-tab-3-1').trigger('click');	
 				$('a#quicktabs-tab-2-0').trigger('click');
  				})
-			$(".views-row-5 .fn").click(function(){
+				$(".view-compare-translation .views-row-5 .fn").click(function(){
 				$('a#quicktabs-tab-3-1').trigger('click');	
 				$('a#quicktabs-tab-2-3').trigger('click');
  				})
+			
+				$(".view-ayah-translation .views-field-body .fn").click(function(){
+				$('a#quicktabs-tab-12-1').trigger('click');	
+ 				})
+
+			
+			
 	
     });
 $('.tab-msg ul li').each(function() {
