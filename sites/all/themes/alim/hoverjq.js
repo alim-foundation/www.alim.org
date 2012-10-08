@@ -3,7 +3,7 @@ $(document).ready(function() {
 						   
 			$(".fn").click(function(){
 				$('a#quicktabs-tab-3-1').trigger('click');						
-				})
+ 				})
 	
 	$('a#quicktabs-tab-3-1').click(function(ev) {
 
