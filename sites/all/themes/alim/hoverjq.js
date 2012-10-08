@@ -1,14 +1,16 @@
 //Search tab order 
 $(document).ready(function() {
 						   
-			$(".fn").click(function(){
-				$('a#quicktabs-tab-3-1').trigger('click');						
+			$(". views-row-3 .fn").click(function(){
+				$('a#quicktabs-tab-3-1').trigger('click');	
+				$('a#quicktabs-tab-2-0').trigger('click');
+ 				})
+				$(". views-row-5 .fn").click(function(){
+				$('a#quicktabs-tab-3-1').trigger('click');	
+				$('a#quicktabs-tab-2-3').trigger('click');
  				})
 	
-	$('a#quicktabs-tab-3-1').click(function(ev) {
-
-			});
-	
+	 
     });
 $('.tab-msg ul li').each(function() {
 						if ($(".tab-msg ul li a").attr("href").toLowerCase().indexOf("alimsearch") >= 0)
