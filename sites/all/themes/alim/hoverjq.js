@@ -1,7 +1,7 @@
 //Search tab order 
 $(document).ready(function() {
 						   
-			$(".note-a sup").click(function(){
+			$(".fn").click(function(){
 							alert('click');				
 				})
 	
