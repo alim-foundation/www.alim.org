@@ -36,7 +36,8 @@ $(document).ready(function() {
 			var element = one1[i];
 			var j= i+1;
 			var spancnt = one1[i].innerHTML ;
-			var newid = 'hoverid-'+spancnt;
+			//var newid = 'hoverid-'+spancnt;
+			var newid = 'hoverid-'+j;
 			var newurl = 'ayanote-'+spancnt;
 			var pp = '<a href="#'+newurl+'" id="'+newid+'" class="note-a hovertip_target"  >&nbsp;<sup>';			
 			var newnt = pp+spancnt+'</sup>&nbsp;</a>';
