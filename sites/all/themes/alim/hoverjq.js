@@ -38,7 +38,7 @@ $(document).ready(function() {
 			var spancnt = one1[i].innerHTML ;
 			var newid = 'hoverid-'+spancnt;
 			var newurl = 'ayanote-'+spancnt;
-			var pp = '<a href="#'+newurl+'" id="'+newid+'" class="note-a"  >&nbsp;<sup>';			
+			var pp = '<a href="#'+newurl+'" id="'+newid+'" class="note-a hovertip_target"  >&nbsp;<sup>';			
 			var newnt = pp+spancnt+'</sup>&nbsp;</a>';
 			//alert(spancnt);
 			$(one1[i]).html(newnt);	
@@ -58,7 +58,7 @@ $(document).ready(function() {
 			var spancnt = one1[i].innerHTML ;
 			var newid = 'hoverid-'+spancnt;
 			var newurl = 'ayanote-'+spancnt;
-			var pp = '<a href="#'+newurl+'" id="'+newid+'" class="note-a"  >&nbsp;<sup>';			
+			var pp = '<a href="#'+newurl+'" id="'+newid+'" class="note-a hovertip_target"  >&nbsp;<sup>';			
 			var newnt = pp+spancnt+'</sup>&nbsp;</a>';
 			//alert(spancnt);
 			$(one1[i]).html(newnt);	
