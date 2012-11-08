@@ -297,15 +297,15 @@ if(strip_tags($subscribe)!="Closed" && $subscribe!="")
 $block = module_invoke('rpx', 'block', 'view', 0);
 //print $block['content'];
 
- $r  = strip_tags($block['content'], '<a>');
+/* $r  = strip_tags($block['content'], '<a>');
  $tt = stristr($r,'href=');
  $t3 = stristr($tt,'AOL/AIM');
- $url = str_replace($t3," ",$tt);
+ $url = str_replace($t3," ",$tt);*/
   
-/*$r= strip_tags($block->content, '<a>');
+$r= strip_tags($block['content'], '<a>');
 $tt= stristr($r,'href=');
 $t3= stristr($tt,'Google');
-$url= str_replace($t3," ",$tt);*/
+$url= str_replace($t3," ",$tt);
 
  
    ?>
