@@ -482,7 +482,7 @@ function tellafriend_node_page_form_validate($form, &$form_state) {
     $form_state['storage']['invalid_recipients'] = array_unique($form_state['storage']['invalid_recipients']);
 
     if (count($form_state['storage']['valid_recipients']) == 0) {
-      form_set_err('recipients', t('None of the recipient email addresses are valid.'));
+      form_set_error('recipients', t('None of the recipient email addresses are valid.'));
     }
   }
 }
