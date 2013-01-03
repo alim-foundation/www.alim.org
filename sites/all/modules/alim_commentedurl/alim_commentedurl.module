@@ -25,31 +25,61 @@ $items = array();
  
    	return $items;
 }
-function alim_go_ayah(){
-$a=$_GET["go"] ;
-$b=$_GET["sura"] ;
-$query_tik =  db_query("SELECT * FROM `content_type_tafsir_multiple_ayah`WHERE `field_tafsir_ayah_from_value` ='". $a."' OR `field_tafsir_ayah_to_value` ='".$a."'AND field_tafsir_surah_number_value ='".$b."' ");
-
-while ($result = db_fetch_object($query_tik)) {
-if($result->field_tafsir_surah_number_value == arg(4))
-{
-$start1=$result->field_tafsir_ayah_from_value;
-$end1=$result->field_tafsir_ayah_to_value;
-}
-}
-
-if(!$start1)
-{
-$query_tiks =  db_query("SELECT * FROM content_type_tafsir_multiple_ayah WHERE field_tafsir_ayah_from_value <= ". $a." AND field_tafsir_surah_number_value ='".$b."' ORDER BY CAST(field_tafsir_ayah_from_value AS SIGNED ) DESC LIMIT 1");
-while ($result = db_fetch_object($query_tiks)) {
+//function alim_go_ayah(){
+//$a=$_GET["go"] ;
+//$b=$_GET["sura"] ;
+//$c=$_GET["code"] ;
+//$query_tik =  db_query("SELECT * FROM `content_type_tafsir_multiple_ayah`WHERE (`field_tafsir_ayah_from_value` ='". $a."' OR `field_tafsir_ayah_to_value` ='".$a."' ) AND field_tafsir_surah_number_value ='".$b."'  AND `field_book_code_multiple_value`='".$c."' LIMIT 1" );
+//
+//while ($result = db_fetch_object($query_tik)) {
 //if($result->field_tafsir_surah_number_value == arg(4))
 //{
-$start=$result->field_tafsir_ayah_from_value;
-$start1=$start;
-}
-
+//$start1=$result->field_tafsir_ayah_from_value;
+//$end1=$result->field_tafsir_ayah_to_value;
 //}
-}
+//}
+//
+//if(!$start1)
+//{
+//$query_tiks =  db_query("SELECT * FROM content_type_tafsir_multiple_ayah WHERE field_tafsir_ayah_from_value <= ". $a." AND  field_tafsir_ayah_to_value >= ". $a." AND field_tafsir_surah_number_value ='".$b."' AND `field_book_code_multiple_value`= '".$c."' LIMIT 1 ");
+//while ($result = db_fetch_object($query_tiks)) {
+////if($result->field_tafsir_surah_number_value == arg(4))
+////{
+//$start=$result->field_tafsir_ayah_from_value;
+//$start1=$start;
+//}
+//
+////}
+//}
+//return drupal_json(array( 'status' => true , 'data' => $start1, 'rash' => $start));exit;
+//
+//}
+
+//function alim_go_ayah(){
+//$a=$_GET["go"] ;
+//$b=$_GET["sura"] ;
+//$query_tik =  db_query("SELECT * FROM `content_type_tafsir_multiple_ayah`WHERE `field_tafsir_ayah_from_value` ='". $a."' OR `field_tafsir_ayah_to_value` ='".$a."'AND field_tafsir_surah_number_value ='".$b."' ");
+//
+//while ($result = db_fetch_object($query_tik)) {
+//if($result->field_tafsir_surah_number_value == arg(4))
+//{
+//$start1=$result->field_tafsir_ayah_from_value;
+//$end1=$result->field_tafsir_ayah_to_value;
+//}
+//}
+//
+//if(!$start1)
+//{
+//$query_tiks =  db_query("SELECT * FROM content_type_tafsir_multiple_ayah WHERE field_tafsir_ayah_from_value <= ". $a." AND field_tafsir_surah_number_value ='".$b."' ORDER BY CAST(field_tafsir_ayah_from_value AS SIGNED ) DESC LIMIT 1");
+//while ($result = db_fetch_object($query_tiks)) {
+////if($result->field_tafsir_surah_number_value == arg(4))
+////{
+//$start=$result->field_tafsir_ayah_from_value;
+//$start1=$start;
+//}
+//
+////}
+//}
 return drupal_json(array( 'status' => true , 'data' => $start1, 'rash' => $start));exit;
 
 }
