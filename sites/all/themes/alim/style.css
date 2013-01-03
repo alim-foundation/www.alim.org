@@ -10735,3 +10735,6 @@ margin-bottom:10px;
 .views-field-field-tafsir-ayah-text-value .prev_intro{display:none;}
 .prev_intro a:hover{color: #060;}
 #webform-client-form-163664 fieldset{width: 70%;}
+.view-AlQuran-tafsir-Multiple .field-content h2,.view-AlQuran-tafsir-Multiple .field-content i,.view-AlQuran-tafsir-Multiple .field-content h1{font-size: 14px!important; text-align:left; color:#333; font-weight:bold;}
+.sdfootnote-western a{ font-weight:bold; margin-right:2px;}
+.view-AlQuran-tafsir-Multiple h1{margin: 5px 0 5px!important;}
