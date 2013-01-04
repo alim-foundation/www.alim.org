@@ -69,7 +69,7 @@ else
 	   }
 	   else if($temp_user->rpx_data['profile']['photo']=="" && $picture=="") 
 	   {
-	      $name .= "<div class='req_photo'><img  src=\"http://www.virtualliveworks.com/Alim.org/sites/all/themes/alim/images/user32_d.png\" align=\"top\"  border=\"0\"  /></div>";
+	      $name .= "<div class='req_photo'><img  src=\"http://www.alim.org/sites/all/themes/alim/images/user32_d.png\" align=\"top\"  border=\"0\"  /></div>";
 	   }
 if($temp_user->rpx_data['profile']['name']['givenName']!="")
 {
