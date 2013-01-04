@@ -9,8 +9,8 @@
 
 
 c_scrolling=[
-'[http://www.virtualliveworks.com/Alim.org/sites/all/themes/alim/scroll_menu/scroll_top.gif]',	// TopScrollingImageSource ('[image_source]')
-'[http://www.virtualliveworks.com/Alim.org/sites/all/themes/alim/scroll_menu/scroll_bottom.gif]',	// BottomScrollingImageSource
+'[http://www.alim.org/sites/all/themes/alim/scroll_menu/scroll_top.gif]',	// TopScrollingImageSource ('[image_source]')
+'[http://www.alim.org/sites/all/themes/alim/scroll_menu/scroll_bottom.gif]',	// BottomScrollingImageSource
 'Scroll up',		// TopScrollingImageAlt
 'Scroll down',		// BottomScrollingImageAlt
 28,			// ScrollingImagesWidth

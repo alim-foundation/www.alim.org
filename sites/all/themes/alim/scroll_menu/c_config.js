@@ -65,8 +65,8 @@ c_styles['MM']=[ // MainMenu (the shorter the class name the better)
 '#CBCBEF',	// ItemsSeparatorColor ('color','transparent')
 0,		// ItemsSeparatorSpacing
 true,			// UseSubMenuImage (true,false)
-'[http://www.virtualliveworks.com/Alim.org/sites/all/themes/alim/scroll_menu/h_arrow.gif]',	// SubMenuImageSource ('[image_source]')
-'[http://www.virtualliveworks.com/Alim.org/sites/all/themes/alim/scroll_menu/h_arrow_over.gif]',	// OverSubMenuImageSource
+'[http://www.alim.org/sites/all/themes/alim/scroll_menu/h_arrow.gif]',	// SubMenuImageSource ('[image_source]')
+'[http://www.alim.org/sites/all/themes/alim/scroll_menu/h_arrow_over.gif]',	// OverSubMenuImageSource
 7,			// SubMenuImageWidth
 4,			// SubMenuImageHeight
 '10',			// SubMenuImageVAlign ('pixels from item top','middle')
