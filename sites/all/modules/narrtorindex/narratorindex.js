@@ -3,7 +3,7 @@ Drupal.behaviors.narratorindex = function (context) {
   $('a.NarrtorName:not(.Hadith-index)', context).click(function () {
      window.location="#anch";
 
-	$("#divNarrtors").empty().html('<div align=\'center\' style=\'padding-top:40px;\'><img src="http://www.virtualliveworks.com/Alim.org/sites/all/themes/alim/images/ajax-loader.gif" /></div>');
+	$("#divNarrtors").empty().html('<div align=\'center\' style=\'padding-top:40px;\'><img src="http://www.alim.org/sites/all/themes/alim/images/ajax-loader.gif" /></div>');
     // This function will get exceuted after the ajax request is completed successfully
     var updateHadiths = function(data) {
       // The data parameter is a JSON object. The “products” property is the list of products items that was returned from the server response to the ajax request.
