@@ -60,7 +60,7 @@ $items = array();
 //
 //}
 function alim_commented_users() {
-echo '
+/*echo '
  User names listed in order of who commented most...<br/>
 <a href=" http://next.alim.citrusdev.com/node/171001">Export as CSV</a>
 <table>
@@ -89,7 +89,7 @@ echo '</tr>';
 }
 
 echo '</table>';
- }
+*/ }
 function alim_commentedurl_perm() {
   return array('commented access');
 }
