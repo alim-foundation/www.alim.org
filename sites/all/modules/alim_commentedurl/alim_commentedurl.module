@@ -4,13 +4,19 @@
 //field called "field_comment_url"
 //http://drupal.org/node/399410 && COmment_CCK module 
 
-//validate function for comment text
+//validate function for comment text 
 function alim_commentedurl_menu() {
 $items = array();
 	$items['clipboard/copys'] = array(
          'title' => 'Copy',
 		'page callback' => 'alim_commentedurl_clipboard',
 		 'access callback' => TRUE,
+		'type' => MENU_CALLBACK
+  	);
+	$items['commented-users'] = array(
+         'title' => 'Copy',
+		'page callback' => 'alim_commented_users',
+		 'access callback' => 'commented_access',
 		'type' => MENU_CALLBACK
   	);
 
@@ -53,6 +59,10 @@ $items = array();
 //return drupal_json(array( 'status' => true , 'data' => $start1, 'rash' => $start));exit;
 //
 //}
+function alim_commentedurl_perm() {
+  return array('commented_access');
+}
+
 function alim_go_ayah(){
 $a=$_GET["go"] ;
 $b=$_GET["sura"] ;
