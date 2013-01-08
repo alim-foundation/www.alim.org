@@ -15,6 +15,7 @@ $items = array();
   	);
 	$items['commented-users'] = array(
          'title' => 'Copy',
+		'page callback' => 'alim_commented_users',
 		 'access callback' => 'commented_access',
 		'type' => MENU_CALLBACK
   	);
@@ -58,6 +59,37 @@ $items = array();
 //return drupal_json(array( 'status' => true , 'data' => $start1, 'rash' => $start));exit;
 //
 //}
+function alim_commented_users() {
+echo '
+ User names listed in order of who commented most...<br/>
+<a href=" http://next.alim.citrusdev.com/node/171001">Export as CSV</a>
+<table>
+<tr>
+<th>SI no</th><th>Full Name</th><th>Number of Comments</th><th>Email</th></tr>';
+$i=1;
+$result = db_query("SELECT DIstinct(comments.name) AS comments_name , comments.uid as user_id ,
+ (select count(*) from comments cm where cm.name = comments.name) as total
+
+ FROM comments ORDER BY total DESC
+");
+while ($record = db_fetch_object($result)) {
+  // Perform operations on $record->title, etc. here.
+  //$record = db_fetch_object($result);
+  $results = db_query("SELECT value from  profile_values where fid=18 AND uid=%d",$record->user_id);
+  $records = db_fetch_object($results);
+  $resultss = db_query("SELECT mail as user_mail from  users where uid=%d",$record->user_id);
+  $recordss = db_fetch_object($resultss);
+
+echo '<tr>';
+
+echo "<td>".$i ." </td><td>" .$records->value. "</td><td>".$record->total."</td><td>".$recordss->user_mail."</td>";
+
+echo '</tr>';
+  $i++;
+}
+
+echo '</table>';
+ }
 function alim_commentedurl_perm() {
   return array('commented_access');
 }
