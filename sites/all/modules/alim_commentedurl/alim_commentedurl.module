@@ -16,7 +16,7 @@ $items = array();
 	$items['users/commented'] = array(
          'title' => 'Copy',
 		'page callback' => 'alim_commented_users',
-		 'access callback' => 'commented access',
+		'access arguments' => array('commented access'),		 
 		'type' => MENU_CALLBACK
   	);
 
