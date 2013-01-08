@@ -60,7 +60,7 @@ $items = array();
 //
 //}
 function alim_commented_users() {
-echo '
+$vob = '
  User names listed in order of who commented most...<br/>
 <a href=" http://next.alim.citrusdev.com/node/171001">Export as CSV</a>
 <table>
@@ -80,15 +80,16 @@ while ($record = db_fetch_object($result)) {
   $resultss = db_query("SELECT mail as user_mail from  users where uid=%d",$record->user_id);
   $recordss = db_fetch_object($resultss);
 
-echo '<tr>';
+$vob.= '<tr>';
 
-echo "<td>".$i ." </td><td>" .$records->value. "</td><td>".$record->total."</td><td>".$recordss->user_mail."</td>";
+$vob.= "<td>".$i ." </td><td>" .$records->value. "</td><td>".$record->total."</td><td>".$recordss->user_mail."</td>";
 
-echo '</tr>';
+$vob.= '</tr>';
   $i++;
 }
 
-echo '</table>';
+$vob.= '</table>';
+return $vob;
  }
 function alim_commentedurl_perm() {
   return array('commented access');
