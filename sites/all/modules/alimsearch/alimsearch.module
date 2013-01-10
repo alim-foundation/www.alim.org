@@ -335,7 +335,7 @@ function alimsearch_getbooknames($type){
 			'QS' => 'Qur\'an Subject Index',
 			/*'TLT' => 'Transliteration',*/
 			'ASB' => 'As-Saranbi Qur\'an Tafsir',
-			//'MDD' => 'Maududi Qur\'an Tafsir',
+			'MDD' => 'Maududi Qur\'an Tafsir',
 			'TIK' => 'Ibn Kathir Qur\'an Tafsir',
 			
 		
@@ -404,8 +404,8 @@ function alimsearch_getcombined_query($val , $opt = '' ){
 		'QS'  =>  array('add_query' => ' type:quran_subject,hadith_subject' , 'text' => 'Qur\'an Subject Index' , 'cat' => 'quran' ) ,
 		/*'TLT' =>  array('add_query' => ' type:quran_ayah category:11' , 'text' => 'Transilitration' , 'cat' => 'quran' ) ,*/
 	 	'ASB' =>  array('add_query' => ' type:quran_tafsir' , 'text' => 'As-Saranbi Qur\'an Tafsir' , 'cat' => 'quran' ) ,		
-		//'MDD' =>  array('add_query' => ' type:tafsir_multiple_ayah' , 'text' => 'Maududi Qur\'an Tafsir' , 'cat' => 'quran' ) ,
-		'TIK' =>  array('add_query' => ' type:tafsir_multiple_ayah' , 'text' => 'Ibn Kathir Qur\'an Tafsir' , 'cat' => 'quran' ) ,
+		'MDD' =>  array('add_query' => ' type:tafsir_multiple_ayah MDD' , 'text' => 'Maududi Qur\'an Tafsir' , 'cat' => 'quran' ) ,
+		'TIK' =>  array('add_query' => ' type:tafsir_multiple_ayah TIK' , 'text' => 'Ibn Kathir Qur\'an Tafsir' , 'cat' => 'quran' ) ,
 		'AMH' =>  array('add_query' => ' type:hadith_content category:135' , 'text' => 'Al-Muwatta Hadith' , 'cat' => 'hadith' ) ,
 		'HDQ' =>  array('add_query' => ' type:hadith_content category:136' , 'text' => 'Al-Qudsi Hadith' , 'cat' => 'hadith' ) ,
 		'TIR' =>  array('add_query' => ' type:hadith_content category:137' , 'text' => 'Al-Tirmidhi Hadith' , 'cat' => 'hadith' ) ,
