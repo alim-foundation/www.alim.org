@@ -245,7 +245,7 @@ div#gotohadith li#sral a:hover {
 }
 .search-alim-txt{border:0;background:url(images/alim-search-bg.png) no-repeat top;width:900px;height:37px; padding:0px 0 0 2px;clear:both;}
 #edit-search-block-form-1-wrapper{float:left;width:725px;}
-.search-alim-txt #edit-search-block-form-1{border:0;background:none;width:725px;color:#CC6633;font-size:16px;float:left;padding-left:3px;outline:none;margin:0px;}
+.search-alim-txt #edit-search-block-form-1{border:0;background:none;width:538px;color:#CC6633;font-size:16px;float:left;padding-left:3px;outline:none;margin:0px;}
 .search-alim-txt .form-item{ margin:0px; padding-top:8px;}
 .search-alim-txt #edit-submit{border:0;background:none;width:139px;height:37px;color:#efd9aa;font-size:18px;padding-top:7px;float:left;cursor:pointer;text-indent:-99999px;line-height:0px;}
 .go-to-quran-txt{border:0;background:url(images/gotoquran-txtfld.png) no-repeat top;width:150px;height:37px; padding:0 0 0 2px;}
