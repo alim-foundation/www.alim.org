@@ -65,7 +65,7 @@ print l($titletxt,$urlto,array('attributes' => array('target' => '_blank' )));
 ?>
 </dt>
 <dd>
-  <?php if ($snippet) : ?><p class="search-snippet"><?php print $snippet; ?></p>
+  <?php if ($snippet) : ?><p class="search-snippet"><?php print $node_result->content['body']['#value'] ?></p>
   <?php endif;
    print alim_search_tags_ctags($node_result->taxonomy); ?>
 </dd>
