@@ -52,6 +52,7 @@
 <dt class="title">
 
 <?php 
+print_r($node_result);
 // create url and title of search result
 $urlto = 'library/quran/AlQuran-tafsir/TIK/'.$node_result->field_tafsir_surah_number[0]['value'].'/'.$node_result->field_tafsir_ayah_from[0]['value'] ;
 $titletxt =$node_result->title; 
