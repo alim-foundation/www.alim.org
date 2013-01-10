@@ -52,7 +52,7 @@
 <dt class="title">
 
 <?php 
-print_r($type);
+//print_r($node_result);
 // create url and title of search result
 $urlto = 'library/quran/AlQuran-tafsir/'.$node_result->field_book_code_multiple[0]['value'].'/'.$node_result->field_tafsir_surah_number[0]['value'].'/'.$node_result->field_tafsir_ayah_from[0]['value'] ;
 if($node_result->field_book_code_multiple[0]['value']=="MDD")
