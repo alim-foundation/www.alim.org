@@ -56,7 +56,7 @@
 // create url and title of search result
 $urlto = 'library/quran/AlQuran-tafsir/ASB/'.$node_result->field_surah_no[0]['value'].'/'.$node_result->field_ayah_no[0]['value'] ;
 if($node_result->field_book_code1[0]['value']=="ASB")
-$code="As-Saranbi";
+$code="As-Saranbi - ";
 $titletxt =$code." ".$node_result->title; 
 
 $titletxt =$code." ".$node_result->title; 
