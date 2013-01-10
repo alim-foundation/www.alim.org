@@ -335,8 +335,9 @@ function alimsearch_getbooknames($type){
 			'QS' => 'Qur\'an Subject Index',
 			/*'TLT' => 'Transliteration',*/
 			'ASB' => 'As-Saranbi Qur\'an Tafsir',
-			'TIK' => 'Ibn Kathir Qur\'an Tafsir',
 			'MDD' => 'Maududi Qur\'an Tafsir',
+			'TIK' => 'Ibn Kathir Qur\'an Tafsir',
+			
 		
 		),
 		'hadith' => array(
