@@ -115,7 +115,7 @@ function alimsearch_form_alter(&$form, &$form_state, $form_id) {
 							$res = $k;
 						$form['categories'][$k] = array(
 							'#type' => 'checkbox',
-							'#title' => $v."test",
+							'#title' => $v,
 							'#default_value' => $res
 						);
 						$form['categories'][$two] = array(
