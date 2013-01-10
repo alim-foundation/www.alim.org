@@ -52,10 +52,14 @@
 <dt class="title">
 
 <?php 
-print_r($node_result->field_book_code_multiple[0]['value']);
+//print_r($node_result->field_book_code_multiple[0]['value']);
 // create url and title of search result
-$urlto = 'library/quran/AlQuran-tafsir/TIK/'.$node_result->field_tafsir_surah_number[0]['value'].'/'.$node_result->field_tafsir_ayah_from[0]['value'] ;
-$titletxt =$node_result->title; 
+$urlto = 'library/quran/AlQuran-tafsir/'.$node_result->field_book_code_multiple[0]['value'].'/'.$node_result->field_tafsir_surah_number[0]['value'].'/'.$node_result->field_tafsir_ayah_from[0]['value'] ;
+if($node_result->field_book_code_multiple[0]['value']=="MDD")
+$code="Maududi";
+else
+$code="Ibn Kathir";
+$titletxt =$code." ".$node_result->title; 
 print l($titletxt,$urlto,array('attributes' => array('target' => '_blank' )));
 //prints search snippet
 ?>

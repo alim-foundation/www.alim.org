@@ -54,6 +54,10 @@
 <?php  
 // create url and title of search result
 $urlto = 'library/quran/AlQuran-tafsir/ASB/'.$node_result->field_surah_no[0]['value'].'/'.$node_result->field_ayah_no[0]['value'] ;
+if($node_result->field_book_code_multiple[0]['value']=="ASB")
+$code="As-Saranbi";
+$titletxt =$code." ".$node_result->title; 
+
 $titletxt =$node_result->title; 
 print l($titletxt,$urlto,array('attributes' => array('target' => '_blank' )));
 //prints search snippet
