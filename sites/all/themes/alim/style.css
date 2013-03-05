@@ -2180,7 +2180,7 @@ border-right:none;
  /*	width:600px;*/
  }
  
-  #quicktabs-4 #quicktabs_container_4{
+  #quicktabs-4 #quicktabs_container_4 , #quicktabs-24 #quicktabs_container_24,#quicktabs-24 #quicktabs_container_24{
  	background-color:#FFFFFF;
 	border:solid 1px #CCCCCC;
 	padding:10px 10px 20px 10px;
@@ -3706,57 +3706,57 @@ display:none;
 	font-size:11px;padding-left:3px;color:#666666;
 }
 
- #quicktabs-4 #quicktabs_container_3{
+ #quicktabs-4 #quicktabs_container_3 ,#quicktabs-24 #quicktabs_container_3{
  	background-color:#FFFFFF;
 	border:solid 1px #CCCCCC;
 	padding:10px 10px 20px 10px;
  }
 
-#quicktabs-4 .authorname
+#quicktabs-4 .authorname , #quicktabs-24 .authorname
 {
  color:#810C05;
  font-weight:bold;
 }
 
-#quicktabs-4  .bar {
+#quicktabs-4  .bar , #quicktabs-24  .bar{
   background-image:none;
   border: none;
   height: 1.5em;
   margin: 0 0.2em;
   display:none;
 }
- #quicktabs-4  .message{
+ #quicktabs-4  .message, #quicktabs-24  .message{
  	padding:30px;
  }
- #quicktabs-4 ul.quicktabs_tabs li a{
+ #quicktabs-4 ul.quicktabs_tabs li a , #quicktabs-24 ul.quicktabs_tabs li a{
  	color:#555555;
  }
 
- #quicktabs-4 #quicktabs_container_3{
+ #quicktabs-4 #quicktabs_container_3 , #quicktabs-24 #quicktabs_container_3{
  	background-color:#FFFFFF;
 	border:solid 1px #CCCCCC;
 	padding:10px 10px 20px 10px;
  }
- #quicktabs-4 .quicktabs_main.quicktabs-style-basic  {
+ #quicktabs-4 .quicktabs_main.quicktabs-style-basic   ,#quicktabs-24 .quicktabs_main.quicktabs-style-basic{
 border-bottom:none;
 border-left:none;
 border-right:none;
 }
 
  
- #quicktabs-4 #quicktabs_container_1
+ #quicktabs-4 #quicktabs_container_1 , #quicktabs-24 #quicktabs_container_1
 {
  border:1px solid #DE9F42;
  width:380px;
  font-size:15px;
  }
-#quicktabs-4 ul
+#quicktabs-4 ul , #quicktabs-24 ul
 {
   height:30px;
   border:none;
   padding-right:40px;
 }
-#quicktabs-4 ul li 
+#quicktabs-4 ul li ,#quicktabs-24 ul li
 {
 
  background:none;
@@ -3765,7 +3765,7 @@ border-right:none;
     
 }
 
-#quicktabs-4 ul li span 
+#quicktabs-4 ul li span , #quicktabs-24 ul li span
 {
  background:none;
  
@@ -3773,7 +3773,7 @@ border-right:none;
  height:30px;
  display:block;float:left;
 }
-#quicktabs-4 ul li span span
+#quicktabs-4 ul li span span , #quicktabs-24 ul li span span
 {
  background:none;
  height:30px;
@@ -3782,7 +3782,7 @@ border-right:none;
 
 }
 
-#quicktabs-4 ul li span span span
+#quicktabs-4 ul li span span span , #quicktabs-24 ul li span span span
 {
  background:none;
  padding-left:0px;
@@ -3790,50 +3790,50 @@ border-right:none;
 
 
 }
-#quicktabs-4 ul li.active span{
+#quicktabs-4 ul li.active span , #quicktabs-24 ul li.active span{
 background:url("images/2tableft.jpg") no-repeat  ;
  padding-left:9px;
  height:30px;
  display:block;float:left;
 
 }
-#quicktabs-4 ul li.active span span{
+#quicktabs-4 ul li.active span span , #quicktabs-24 ul li.active span span{
  background:url("images/2tabtile.jpg") repeat-x;
   height:30px;
  display:block;
   padding-left:0px;padding-right:0px;
 
 }
-#quicktabs-4 .quicktabs_main.quicktabs-style-basic {
+#quicktabs-4 .quicktabs_main.quicktabs-style-basic ,#quicktabs-24 .quicktabs_main.quicktabs-style-basic{
 padding:0;
 }
-#quicktabs-4 ul li.active span span span{
+#quicktabs-4 ul li.active span span span , #quicktabs-24 ul li.active span span span{
  background:url("images/2tabright.jpg") no-repeat;
  background-position:right;
    padding-left:0px;
  height:30px;display:block;
  }
-#quicktabs-4 ul li span span span a{
+#quicktabs-4 ul li span span span a ,#quicktabs-24 ul li span span span a{
  display:block;
  padding:7px 15px 0 15px;
  color:#555555;
  height:23px;
  
  }
- #quicktabs-4 ul li.active span span span a{
+ #quicktabs-4 ul li.active span span span a , #quicktabs-24 ul li.active span span span a{
  color:#555555;
   }
-#quicktabs-4 ul.quicktabs_tabs.quicktabs-style-basic li  {
+#quicktabs-4 ul.quicktabs_tabs.quicktabs-style-basic li , #quicktabs-24 ul.quicktabs_tabs.quicktabs-style-basic li{
 border:none;
 margin:0 5px 0 0;
 padding:0px 0px;
 position:relative;
 float:right;
 }
-#quicktabs-4 quicktabs_container_1{
+#quicktabs-4 quicktabs_container_1 , #quicktabs-24 quicktabs_container_1{
 clear:both;
 }
-#quicktabs-4 ul.quicktabs_tabs li {
+#quicktabs-4 ul.quicktabs_tabs li ,#quicktabs-24 ul.quicktabs_tabs li{
 
 display:inline;
 
@@ -3861,7 +3861,7 @@ margin:0px;
 .view-user-comments-hadith .vud-widget-plain .up-active, .vud-widget-plain .up-inactive:hover {
 /*float:right;*/
 }
-#block-quicktabs-4 h2{
+#block-quicktabs-4 h2 ,#block-quicktabs-24 h2{
 display:none;
 }
 
