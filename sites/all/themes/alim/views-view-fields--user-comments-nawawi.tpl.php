@@ -192,11 +192,11 @@ print views_embed_view($viewName1 , $display_id = 'default', arg(4), arg(5), 'AR
 if($_SESSION['qryhadith']==1)
 {
 $_SESSION['qryhadith']=0;
-$viewName = 'Hadith_Content_view';
+$viewName = 'nawawi_comment_nodeid';
 
    $view_12 = views_get_view($viewName);
    $view_12->set_display('default');
-   $view_12->set_arguments(array(arg(2), arg(3)));
+   $view_12->set_arguments(array(arg(2), arg(3) , arg(4)));
    $view_12->execute();
    $result_12 = $view_12->result;
    $output1 = $result_12[0]->node_revisions_body;
