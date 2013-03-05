@@ -70,7 +70,7 @@ $expire=time()+(60*60*24*365*5); // 5 year
 	<?php
 	}?>
 	 <td width="2">&nbsp;</td>
-	 <td  align="left">
+	 <td  align="left" width="70%">
  <?php
  
    // First ayah arabic text spliting
