@@ -8,11 +8,11 @@ http://sourceforge.net/donate/index.php?group_id=128076
 ------------------------------------------------------------
 
 Name: TCPDF
-Version: 5.9.203
-Release date: 2013-01-22
+Version: 5.9.157
+Release date: 2012-04-16
 Author:	Nicola Asuni
 
-Copyright (c) 2002-2013:
+Copyright (c) 2002-2012:
 	Nicola Asuni
 	Tecnick.com LTD
 	Manor Coach House, Church Hill
@@ -47,7 +47,7 @@ Main Features:
     * no-write page regions;
     * bookmarks, named destinations and table of content;
     * text hyphenation;
-    * text stretching and spacing (tracking);
+    * text stretching and spacing (tracking/kerning);
     * automatic page break, line break and text alignments including justification;
     * automatic page numbering and page groups;
     * move and delete pages;
@@ -68,7 +68,7 @@ Additional Documentation:
 	http://www.tcpdf.org
 
 License
-	Copyright (C) 2002-2013  Nicola Asuni - Tecnick.com LTD
+	Copyright (C) 2002-2012  Nicola Asuni - Tecnick.com LTD
 
 	TCPDF is free software: you can redistribute it and/or modify it
 	under the terms of the GNU Lesser General Public License as

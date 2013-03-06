@@ -1,9 +1,9 @@
 <?php
 //============================================================+
 // File name   : 2dbarcodes.php
-// Version     : 1.0.014
+// Version     : 1.0.013
 // Begin       : 2009-04-07
-// Last Update : 2012-04-30
+// Last Update : 2012-01-12
 // Author      : Nicola Asuni - Tecnick.com LTD - Manor Coach House, Church Hill, Aldershot, Hants, GU12 4RQ, UK - www.tecnick.com - info@tecnick.com
 // License     : GNU-LGPL v3 (http://www.gnu.org/copyleft/lesser.html)
 // -------------------------------------------------------------------
@@ -37,14 +37,14 @@
  * PHP class to creates array representations for 2D barcodes to be used with TCPDF.
  * @package com.tecnick.tcpdf
  * @author Nicola Asuni
- * @version 1.0.014
+ * @version 1.0.013
  */
 
 /**
  * @class TCPDF2DBarcode
  * PHP class to creates array representations for 2D barcodes to be used with TCPDF (http://www.tcpdf.org).
  * @package com.tecnick.tcpdf
- * @version 1.0.014
+ * @version 1.0.013
  * @author Nicola Asuni
  */
 class TCPDF2DBarcode {
@@ -202,9 +202,9 @@ class TCPDF2DBarcode {
 				if ($this->barcode_array['bcode'][$r][$c] == 1) {
 					// draw a single barcode cell
 					if ($imagick) {
-						$bar->rectangle($x, $y, ($x + $w - 1), ($y + $h - 1));
+						$bar->rectangle($x, $y, ($x + $w), ($y + $h));
 					} else {
-						imagefilledrectangle($png, $x, $y, ($x + $w - 1), ($y + $h - 1), $fgcol);
+						imagefilledrectangle($png, $x, $y, ($x + $w), ($y + $h), $fgcol);
 					}
 				}
 				$x += $w;
