@@ -27,10 +27,34 @@ $items = array();
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+    $items['chache/clear/status'] = array(
+    'title' => 'tagseeding  status',
+    'page callback' => 'alim_cache_clear_status',
+    'access callback' => TRUE,
+    'expanded' => TRUE,
+  );
 
  
    	return $items;
 }
+function alim_tagseeding_seeding_status() {
+	variable_set('alim_cache_clear', 1);
+}
+function alim_commentedurl_cron_cacheclear()
+{
+	$default1 =1;
+	$count=variable_get(alim_cache_clear, $default1);
+	$count++;
+	variable_set('alim_cache_clear', $count);
+		if($count>2)
+		{
+			include_once './includes/bootstrap.inc';
+			drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+			drupal_flush_all_caches();
+		}
+}
+
+
 //function alim_go_ayah(){
 //$a=$_GET["go"] ;
 //$b=$_GET["sura"] ;
