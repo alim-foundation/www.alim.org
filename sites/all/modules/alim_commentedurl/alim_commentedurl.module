@@ -50,6 +50,7 @@ function alim_commentedurl_cron()
 	variable_set('alim_cache_clear', $count);
 */		//if($count>2)
 		//{
+		echo "test";
 			include_once './includes/bootstrap.inc';
 			drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 			drupal_flush_all_caches();
