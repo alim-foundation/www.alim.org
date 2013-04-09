@@ -39,6 +39,8 @@ $items = array();
 }
 function alim_tagseeding_seeding_status() {
 	variable_set('alim_cache_clear', 1);
+	$default1 =1;
+	echo variable_get(alim_cache_clear, $default1);
 }
 function alim_commentedurl_cron_cacheclear()
 {
