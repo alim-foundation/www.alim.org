@@ -1,0 +1,1992 @@
+<?php 
+// Module to save the commented url or page to a node for managing comments.
+//This module altered the comment form add a new hodden field to the comment form and on submitting this commentt form the value will save the cc
+//field called "field_comment_url"
+//http://drupal.org/node/399410 && COmment_CCK module 
+
+//validate function for comment text 
+function alim_commentedurl_menu() {
+$items = array();
+	$items['clipboard/copys'] = array(
+         'title' => 'Copy',
+		'page callback' => 'alim_commentedurl_clipboard',
+		 'access callback' => TRUE,
+		'type' => MENU_CALLBACK
+  	);
+	$items['users/commented'] = array(
+         'title' => 'Copy',
+		'page callback' => 'alim_commented_users',
+		'access arguments' => array('commented access'),		 
+		'type' => MENU_CALLBACK
+  	);
+
+   
+	$items['alim/go/ayah'] = array(
+    'title' => 'Go',
+    'page callback' => 'alim_go_ayah',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+ 
+   	return $items;
+}
+//function alim_go_ayah(){
+//$a=$_GET["go"] ;
+//$b=$_GET["sura"] ;
+//$query_tik =  db_query("SELECT * FROM `content_type_tafsir_multiple_ayah`WHERE `field_tafsir_ayah_from_value` ='". $a."' OR `field_tafsir_ayah_to_value` ='".$a."'AND field_tafsir_surah_number_value ='".$b."' ");
+//
+//while ($result = db_fetch_object($query_tik)) {
+//if($result->field_tafsir_surah_number_value == arg(4))
+//{
+//$start1=$result->field_tafsir_ayah_from_value;
+//$end1=$result->field_tafsir_ayah_to_value;
+//}
+//}
+//
+//if(!$start1)
+//{
+//$query_tiks =  db_query("SELECT * FROM content_type_tafsir_multiple_ayah WHERE field_tafsir_ayah_from_value <= ". $a." AND field_tafsir_surah_number_value ='".$b."' ORDER BY CAST(field_tafsir_ayah_from_value AS SIGNED ) DESC LIMIT 1");
+//while ($result = db_fetch_object($query_tiks)) {
+////if($result->field_tafsir_surah_number_value == arg(4))
+////{
+//$start=$result->field_tafsir_ayah_from_value;
+//$start1=$start;
+//}
+//
+////}
+//}
+//return drupal_json(array( 'status' => true , 'data' => $start1, 'rash' => $start));exit;
+//
+//}
+function alim_commented_users() {
+$vob = '
+ User names listed in order of who commented most...<br/>
+<a href=" http://next.alim.citrusdev.com/node/171001">Export as CSV</a>
+<table>
+<tr>
+<th>SI no</th><th>Full Name</th><th>Number of Comments</th><th>Email</th></tr>';
+$i=1;
+$result = db_query("SELECT DIstinct(comments.name) AS comments_name , comments.uid as user_id ,
+ (select count(*) from comments cm where cm.name = comments.name) as total
+
+ FROM comments ORDER BY total DESC
+");
+while ($record = db_fetch_object($result)) {
+  // Perform operations on $record->title, etc. here.
+  //$record = db_fetch_object($result);
+  $results = db_query("SELECT value from  profile_values where fid=18 AND uid=%d",$record->user_id);
+  $records = db_fetch_object($results);
+  $resultss = db_query("SELECT mail as user_mail from  users where uid=%d",$record->user_id);
+  $recordss = db_fetch_object($resultss);
+
+$vob.= '<tr>';
+
+$vob.= "<td>".$i ." </td><td>" .$records->value. "</td><td>".$record->total."</td><td>".$recordss->user_mail."</td>";
+
+$vob.= '</tr>';
+  $i++;
+}
+
+$vob.= '</table>';
+return $vob;
+ }
+function alim_commentedurl_perm() {
+  return array('commented access');
+}
+
+function alim_go_ayah(){
+$a=$_GET["go"] ;
+$b=$_GET["sura"] ;
+$c=$_GET["code"] ;
+$query_tik =  db_query("SELECT * FROM `content_type_tafsir_multiple_ayah`WHERE (`field_tafsir_ayah_from_value` ='". $a."' OR `field_tafsir_ayah_to_value` ='".$a."' ) AND field_tafsir_surah_number_value ='".$b."'  AND `field_book_code_multiple_value`='".$c."' LIMIT 1" );
+
+while ($result = db_fetch_object($query_tik)) {
+if($result->field_tafsir_surah_number_value == arg(4))
+{
+$start1=$result->field_tafsir_ayah_from_value;
+$end1=$result->field_tafsir_ayah_to_value;
+}
+}
+
+if(!$start1)
+{
+$query_tiks =  db_query("SELECT * FROM content_type_tafsir_multiple_ayah WHERE field_tafsir_ayah_from_value <= ". $a." AND  field_tafsir_ayah_to_value >= ". $a." AND field_tafsir_surah_number_value ='".$b."' AND `field_book_code_multiple_value`= '".$c."' LIMIT 1 ");
+while ($result = db_fetch_object($query_tiks)) {
+//if($result->field_tafsir_surah_number_value == arg(4))
+//{
+$start=$result->field_tafsir_ayah_from_value;
+$start1=$start;
+}
+
+//}
+}
+return drupal_json(array( 'status' => true , 'data' => $start1, 'rash' => $start));exit;
+
+}
+function _alim_commentedurl_cmt_form_validate($form, &$form_state){
+	//drupal_set_message();
+	if($form_state['values']['comment'] == "" || $form_state['values']['comment'] == "<br />" || $form_state['values']['comment'] == "<BR />"  
+	|| $form_state['values']['comment'] == '<br>'  || 	 $form_state['values']['comment'] == '<BR>' )
+	{
+		form_set_error('comment', t('Comment field is required.'));
+	}
+}
+/****** modified hook_form_alter function 
+used to alter comment , bookmark node and other forms 
+******/ 
+function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
+
+//print_r($form_id);
+	global $base_url;
+	
+	switch ($form_id) {
+	    case "tellafriend_node_page_form":
+		//print '<pre>' . print_r($form, TRUE) . '</pre>';
+		$form['recipients']['recipients']['#resizable'] = FALSE;
+		$form['message']['message_content']['#resizable'] = FALSE;
+		break;
+		case "comment_form": // Comment form 
+		global $user; 
+	   // drupal_set_message('<pre>'.print_r($form, TRUE).'</pre>');
+         // drupal_set_message('<pre>'.print arg(1).'</pre>');
+			if(arg(3)=="comid")
+			{
+				 //unset($form['admin']);	
+				 
+				 $scr1 = 'jQuery(document).ready(function() {   
+					jQuery("#comment-form .collapsible").hide();
+					});
+					;';
+				drupal_add_js($scr1, 'inline', 'footer');  
+			}
+			else
+			{
+				 $scr1 = 'jQuery(document).ready(function() {     	
+					jQuery("body").find("#comment-form .collapsible").show();
+					});
+					;';
+				drupal_add_js($scr1, 'inline', 'footer');  
+			}
+		
+	
+				//add a new hidden field to comment form to get the view page where comment is posted
+				// default value of this field is url of the view page 		
+		        // Changing User name to Full name in comment form
+				$form['#validate'] = array('_alim_commentedurl_cmt_form_validate');
+
+				$temp_user = user_load(array('name' => strip_tags($form['_author']['#value'])));
+			
+				if($temp_user->rpx_data['profile']['name']['givenName']!="")
+				{
+					$author = $temp_user->rpx_data['profile']['name']['givenName'].' '.$temp_user->rpx_data['profile']['name']['familyName'];
+			    }
+				else
+				{
+					$author = strip_tags($form['_author']['#value']);
+				}
+				//$form['admin']['author']['#value'] = $form['_author']['#value'];
+				$form['_author']['#value'] = '';
+				$form['_author']['#value'] = $author;
+				$form['admin']['date']['#value']='';
+				$form['admin']['date']['#type'] = 'hidden';
+			    $form['admin']['date']['#value']=date("Y-m-d H:i:s");
+				
+				$node = node_load($form['nid']['#value']);
+				$val = $_SERVER['HTTP_REFERER'];
+				
+				
+				if( !isset($form_state['post']['comment_url_val']) ){ // add a utl
+					$newval = str_replace($base_url.'/' , "" ,$val );
+				}else{ // Got the commented url value [which page comment belogs quran/hadith/etc ]
+					$newval = $form_state['post']['comment_url_val'];
+				}
+				
+				$form['alimcommentedurl']['comment_url_val'] = array(
+				'#type' => 'hidden',
+				'#value' => $newval ,  
+				);
+				
+				/*foreach ($form['comment_filter']['format'] as $i => $filter) 
+				{
+				if (is_int($i) && !$filter['#type']) 
+				{
+				$form['comment_filter']['format'][$i]['#value'] = "";
+				$form['comment_filter']['format'] = "";
+				}
+				}*/
+				
+				$form['comment_filter']['format'] = filter_form(7);
+				unset($form['comment_filter']['format'][8]);
+				unset($form['comment_filter']['format'][5]);
+				//drupal_set_message('<pre>'.print_r($form['comment_filter'] , TRUE).'</pre>');
+				
+				//unset($form['comment_filter']['format'] );//= filter_form(7);
+				$form['comment_filter']['format']['#access'] = TRUE;
+							
+				$form['comment_filter']['format']['#attributes'] = array('class' => 'clip-format');
+				//print '<pre>' . print_r($form['comment_filter'], TRUE) . '</pre>';
+				/*$form['identification']['new_field_name'] = array (
+				'#type' => 'textfield',
+				'#title' => t('New Field'),
+				'#default_value' => $newval ,  
+				'#size' => 80,
+				'#description' => t('Describe me u wierdo!'),
+				);*/
+				
+				// add additional submit function 
+				
+				// $form['submit']['#value'] = 'save ... ';	
+				
+				$form['admin']['#collapsed'] = FALSE;
+				// unset($form['preview']);
+			 if (in_array('Scholar', array_values($user->roles)) || in_array('Book Author', array_values($user->roles))){  }
+			 else 
+			 {
+			 if($_COOKIE['Comment_cookie'])
+				{}
+				else
+				{
+				$form['my_captcha_element'] = array(
+			      '#type' => 'captcha',
+			     '#captcha_type' => 'image_captcha/Image',);
+			    $out->my_captcha_element = drupal_render($form['my_captcha_element']);
+				}
+			  } 
+		       $form['#submit'][] = '_alim_commentedurl_field_form_submit';
+              break;
+				
+				
+		case "clippings_node_form": // new node form for clippings 
+				//print_r($form);
+				global $user; 
+				$form['body_field']['teaser_include']['#access'] = FALSE;
+				$form['body_field']['teaser_js']['#access'] = FALSE;
+				//if(isset($form['nid']['#value']))
+				//	$form['#redirect'] = 'user/clippings';
+				 $form['#submit'][] = '_alim_commentedurl_clip_form_submit';
+							  //print_r($form['body_field']['format']);
+				$form['body_field']['format'] = filter_form(5);
+				$form['body_field']['format']['#attributes'] = array('class' => 'clip-format');
+				//$form['body_field']['format']['#access'] = FALSE;
+				  $scr1 = 'jQuery(document).ready(function() {     	
+					jQuery("body").find("#node-form .clip-format").hide();
+					});
+					;';
+				//drupal_add_js($scr1, 'inline', 'footer');
+				$scr1 = 'jQuery(document).bind("popups_open_path_done", function() {  	
+					jQuery("#popups").find("#node-form .clip-format").hide();
+					});
+					;';
+				//drupal_add_js($scr1, 'inline', 'footer');
+				$form['body_field']['body']['#attributes'] = array('class' => 'clip-editor');			  
+				$c = count($form['taxonomy' ][8]['#options']);//print $c;
+				if($c ==  1 ) // no terms exist add a term other category - set default category 
+				{
+					
+					 $term = array('vid' => 8, 'name' => 'Others', 'tid' => 0, 'description' => '', 'weight' => 10);
+					 taxonomy_save_term($term);
+					 $newtid = $term['tid'];//print $newtid;
+					 //$form['taxonomy' ][8]['#options'][$newtid] ;
+					 $choice = new stdClass();
+					 $choice->option = array($term['tid'] => str_repeat('-', $term['depth']) . $term['name']);
+					 $form['taxonomy' ][8]['#options'][] = $choice ;
+					 unset($form['taxonomy' ][8]['#options']['']);
+				}
+				else{
+					unset($form['taxonomy' ][8]['#options']['']);
+				}
+				//print_r($form['taxonomy' ]);
+				if (in_array('Scholar', array_values($user->roles)) || in_array('Book Author', array_values($user->roles))){  }
+			    else 
+				{
+				if($_COOKIE['Clipping_cookie1']) // add captcha 
+				{}
+				else
+				{
+				$form['my_captcha_element'] = array(
+			    '#type' => 'captcha',
+			    '#captcha_type' => 'image_captcha/Image',);
+			    $out->my_captcha_element = drupal_render($form['my_captcha_element']);
+				}
+				}					
+			    
+				break;
+			case "user_profile_form": // user profile form 
+			
+				 //print_r($form);
+			     global $user;
+				 
+				 $user_id = arg(1);
+				 
+				 $temp_user = user_load(array('name' => $user->name));
+						 
+				if($temp_user->rpx_data['profile']['name']['givenName']!="")
+				{
+				  $profile_name = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
+				}
+				else
+				{
+				  $profile_name = $row['comments_name'];
+				}
+
+				 
+					drupal_set_title($profile_name);  
+					  
+				  // Option Listing
+				  
+				  // Arabic font				  
+				  $query_arb_font =  db_query("SELECT node.nid AS nid, node.title AS node_title, node_data_field_arb_font_val.field_arb_font_val_value AS node_data_field_arb_font_val_field_arb_font_val_value, node.type AS node_type, node.vid AS node_vid FROM node node  LEFT JOIN content_type_arabic_font node_data_field_arb_font_val ON node.vid = node_data_field_arb_font_val.vid WHERE node.type in ('arabic_font') ORDER BY node_title ASC");
+				  
+			     $options_arb = array();
+				 while($result_arb_font = db_fetch_object($query_arb_font))
+					{
+						$options_arb[$result_arb_font->node_data_field_arb_font_val_field_arb_font_val_value] = $result_arb_font->node_title;
+					}
+					
+				// Arabic font size
+				  $options_arb_size = array();
+				  for($i=15;$i<=30;$i++)
+				  {
+				  	$options_arb_size[$i] = $i;
+				  }
+				
+				// English font
+				 $query_eng_font =  db_query("SELECT node.nid AS nid, node.title AS node_title, node_data_field_eng_font_val.field_eng_font_val_value AS node_data_field_eng_font_val_field_eng_font_val_value, node.type AS node_type, node.vid AS node_vid FROM node node  LEFT JOIN content_type_eng_font node_data_field_eng_font_val ON node.vid = node_data_field_eng_font_val.vid WHERE node.type in ('eng_font') ORDER BY node_title ASC");
+				 
+				 $options_eng = array();
+				 while($result_eng_font = db_fetch_object($query_eng_font))
+					{
+					   $options_eng[$result_eng_font->node_data_field_eng_font_val_field_eng_font_val_value] = $result_eng_font->node_title;
+					}
+				
+				// Arabic font size
+				  $options_eng_size = array();
+				  for($i=9;$i<=18;$i++)
+				  {
+				  	$options_eng_size[$i] = $i;
+				  }
+				 
+				 // Reciter
+				 $query_res = db_query("SELECT node.nid AS nid, node.title AS node_title, node_data_field_reciter_file.field_reciter_file_value AS node_data_field_reciter_file_field_reciter_file_value, node.type AS node_type, node.vid AS node_vid FROM node node  LEFT JOIN content_type_reciter node_data_field_reciter_file ON node.vid = node_data_field_reciter_file.vid WHERE node.type in ('reciter') ORDER BY node_title ASC");
+				 
+				  $options_res = array();
+				 while($result_res = db_fetch_object($query_res))
+					{
+					   $options_res[$result_res->node_data_field_reciter_file_field_reciter_file_value] = $result_res->node_title;
+					}
+					
+				// Selected Values
+					$sel_res = db_query("SELECT value as res_sel FROM profile_values WHERE fid=5 AND uid=".$user_id);
+					$fetch_res = db_fetch_object($sel_res);
+					
+					$sel_arb = db_query("SELECT value as arb_sel FROM profile_values WHERE fid=2 AND uid=".$user_id);
+					$fetch_arb = db_fetch_object($sel_arb);
+					
+					$sel_arb_size = db_query("SELECT value as arbsize_sel FROM profile_values WHERE fid=4 AND uid=".$user_id);
+					$fetch_arb_size = db_fetch_object($sel_arb_size);
+					
+					$sel_eng = db_query("SELECT value as eng_sel FROM profile_values WHERE fid=1 AND uid=".$user_id);
+					$fetch_eng = db_fetch_object($sel_eng);
+					
+					$sel_eng_size = db_query("SELECT value as engsize_sel FROM profile_values WHERE fid=3 AND uid=".$user_id);
+					$fetch_eng_size = db_fetch_object($sel_eng_size);
+					
+				   $sel_ayatheme = db_query("SELECT value as theme_sel,count(value) as theme_count FROM profile_values WHERE fid=6 AND uid=".$user_id);
+					$fetch_ayatheme = db_fetch_object($sel_ayatheme);
+					
+					$sel_asd = db_query("SELECT value as asd_sel,count(value) as asd_count FROM profile_values WHERE fid=7 AND uid=".$user_id);
+					$fetch_asd = db_fetch_object($sel_asd);
+					
+					$sel_mal = db_query("SELECT value as mal_sel,count(value) as mal_count FROM profile_values WHERE fid=8 AND uid=".$user_id);
+					$fetch_mal = db_fetch_object($sel_mal);
+					
+					$sel_pic = db_query("SELECT value as pic_sel,count(value) as pic_count FROM profile_values WHERE fid=9 AND uid=".$user_id);
+					$fetch_pic = db_fetch_object($sel_pic);
+					
+					$sel_yuf = db_query("SELECT value as yuf_sel,count(value) as yuf_count FROM profile_values WHERE fid=10 AND uid=".$user_id);
+					$fetch_yuf = db_fetch_object($sel_yuf);
+					
+			/*		$sel_rem = db_query("SELECT value as rem_sel,count(value) as rem_count FROM profile_values WHERE fid=11 AND uid=".$user->uid);
+					$fetch_rem = db_fetch_object($sel_rem);
+					*/
+					$sel_poemail = db_query("SELECT value as poemail_sel,count(value) as poemail_count FROM profile_values WHERE fid=17 AND uid=".$user_id);
+					$fetch_poemail = db_fetch_object($sel_poemail);
+					
+					$sel_in_following  =  db_query("SELECT value as in_following_sel, count(*) as in_following_count FROM {profile_values} WHERE fid=%d AND uid=%d", 13, $user_id);
+				   $fetch_in_following = db_fetch_object($sel_in_following);
+				   
+				   $sel_in_follower  =  db_query("SELECT value as in_follower_sel, count(*) as in_follower_count FROM {profile_values} WHERE fid=%d AND uid=%d", 14, $user_id);
+				   $fetch_in_follower = db_fetch_object($sel_in_follower);
+				   
+				   $sel_following  =  db_query("SELECT value as following_sel, count(*) as following_count FROM {profile_values} WHERE fid=%d AND uid=%d", 15, $user_id);
+				   $fetch_following = db_fetch_object($sel_following);
+				   
+				     $sel_follower  =  db_query("SELECT value as follower_sel, count(*) as follower_count FROM {profile_values} WHERE fid=%d AND uid=%d", 16, $user_id);
+				     $fetch_follower = db_fetch_object($sel_follower);
+					 
+					 $sel_grppriv    =  db_query("SELECT value as grppriv_sel, count(*) as grppriv_count FROM {profile_values} WHERE fid=%d AND uid=%d", 22, $user_id);
+				     $fetch_grppriv = db_fetch_object($sel_grppriv);
+					 
+					 $sel_biography  =  db_query("SELECT value as profile_biography, count(*) as biography_count FROM {profile_values} WHERE fid=%d AND uid=%d", 20, $user_id);
+				     $fetch_biography  = db_fetch_object($sel_biography);
+					// print_r($fetch_biography);
+					 
+					 $sel_gender  =  db_query("SELECT value as profile_gender, count(*) as gender_count FROM {profile_values} WHERE fid=%d AND uid=%d", 21, $user_id);
+				     $fetch_gender  = db_fetch_object($sel_gender);
+					 
+					  $sel_birthday    =  db_query("SELECT value as profile_birthday, count(*) as birthday_count FROM {profile_values} WHERE fid=%d AND uid=%d", 28, $user_id);
+				     $fetch_birthday  = db_fetch_object($sel_birthday);
+					 
+					 $sel_phone    =  db_query("SELECT value as profile_phone, count(*) as phone_count FROM {profile_values} WHERE fid=%d AND uid=%d", 29, $user_id);
+				     $fetch_phone  = db_fetch_object($sel_phone);
+					 
+					 $sel_add  =  db_query("SELECT value as profile_add, count(*) as add_count FROM {profile_values} WHERE fid=%d AND uid=%d", 30, $user_id);
+				     $fetch_add  = db_fetch_object($sel_add);
+	
+	
+					
+					($fetch_res->res_sel) ? $select_res = $fetch_res->res_sel : $select_res = "Alafasy_128kbps";
+					($fetch_arb->arb_sel) ? $select_arb = $fetch_arb->arb_sel : $select_arb = 1;
+					($fetch_arb_size->arbsize_sel) ? $select_arb_size = $fetch_arb_size->arbsize_sel : $select_arb_size = 20;
+					($fetch_eng->eng_sel) ? $select_eng = $fetch_eng->eng_sel : $select_eng = 1;
+					($fetch_eng_size->engsize_sel) ? $select_eng_size = $fetch_eng_size->engsize_sel : $select_eng_size = 14;
+					($fetch_ayatheme->theme_sel) ? $select_ayah = $fetch_ayatheme->theme_sel : $select_ayah = 0;
+					($fetch_asd->asd_sel) ? $select_asad = $fetch_asd->asd_sel : $select_asad = 0;
+					($fetch_mal->mal_sel) ? $select_malik = $fetch_mal->mal_sel : $select_malik = 0;
+					($fetch_pic->pic_sel) ? $select_pickthall = $fetch_pic->pic_sel : $select_pickthall = 0;
+					($fetch_yuf->yuf_sel) ? $select_yusufali = $fetch_yuf->yuf_sel : $select_yusufali = 0;
+					//($fetch_rem->rem_sel) ? $select_rem = $fetch_rem->rem_sel : $select_rem = 0;
+					($fetch_poemail->poemail_sel) ? $select_pemail = $fetch_poemail->poemail_sel : $select_pemail = 0;
+					($fetch_in_following->in_following_sel) ? $select_in_following = $fetch_in_following->in_following_sel : $select_in_following = 0;
+					($fetch_in_follower->in_follower_sel) ? $select_in_follower = $fetch_in_follower->in_follower_sel : $select_in_follower = 0;
+					($fetch_following->following_sel) ? $select_following = $fetch_following->following_sel : $select_following = 0;
+					($fetch_follower->follower_sel) ? $select_follower = $fetch_follower->follower_sel : $select_follower = 0;
+					($fetch_biography->profile_biography) ? $select_biography = $fetch_biography->profile_biography : $select_biography = '';
+					($fetch_gender->profile_gender) ? $select_gender = $fetch_gender->profile_gender : $select_gender = '';
+					($fetch_grppriv->grppriv_sel) ? $select_group_privacy = $fetch_grppriv->grppriv_sel : $select_group_privacy = 0;
+					
+					 $default_birthday = date_convert("",DATE_OBJECT,DATE_ARRAY);
+					 
+					($fetch_birthday->profile_birthday) ? $user_birthday = date_convert($fetch_birthday->profile_birthday,DATE_DATETIME,DATE_ARRAY) : $user_birthday = $default_birthday; 
+					($fetch_phone->profile_phone) ? $user_phone = $fetch_phone->profile_phone : $user_phone = '';
+					($fetch_add->profile_add) ? $user_address = $fetch_add->profile_add : $user_address = '';
+					
+					
+												
+					 if(isset($_COOKIE['rem_uid']))
+					 {
+						 if($_COOKIE['rem_uid']==$user->uid)
+						 {
+				    		 $select_rem = 1;
+						 }
+						 else
+						 {
+						    $select_rem = 0;
+						 }
+					  }
+				    else
+				     $select_rem = 0;
+					 
+								
+					if($fetch_ayatheme->theme_count==0) 
+					 $select_ayah = 1;
+					if($fetch_asd->asd_count==0)
+					 $select_asad = 1;
+					if($fetch_mal->mal_count==0)
+					  $select_malik = 1;
+					if($fetch_pic->pic_count==0) 
+					 $select_pickthall = 1;
+					if($fetch_yuf->yuf_count==0)
+					 $select_yusufali = 1;
+				    if($fetch_poemail->poemail_count==0) 
+				     $select_pemail = 1;
+				   if($fetch_in_following->in_following_count==0) 
+				     $select_in_following = 1;
+				   if($fetch_in_follower->in_follower_count==0) 
+				     $select_in_follower = 1;
+				   if($fetch_following->following_count==0) 
+				     $select_following = 1;
+				   if($fetch_follower->follower_count==0) 
+				     $select_follower = 1;
+				   if($fetch_grppriv->grppriv_count==0) 
+				     $select_group_privacy = 1; 
+				   
+				   if($fetch_birthday->birthday_count==0) 
+				     $user_birthday =  $default_birthday; 
+				   if($fetch_phone->phone_count==0) 
+				     $user_phone = ''; 
+				   if($fetch_add->add_count==0) 
+				     $user_address = ''; 
+		
+				 
+						 
+				  //Display Fields
+				  
+			 $form['per_info'] = array(
+					'#type'         => 'fieldset',
+					'#title'        => 'Personal Informations',
+					'#collapsible'  => TRUE,
+					'#collapsed'    => FALSE,
+					'#weight' => 1
+				  );
+				 
+			  $form['per_info']['Biography'] = array(
+				  '#type' => 'textarea',
+				  '#title' => t('Biography'),
+				  '#default_value' => $select_biography,
+				  '#required' => FALSE
+				);
+			
+			 $form['per_info']['Birthday'] = array(
+				  '#type' => 'date_select',
+				  '#date_format' => 'm-d-Y',
+				  '#date_year_range' => '-50:0:+1',
+				  '#date_label_position' => 'within',
+				  '#title' => t('Birthday'),
+				  '#default_value' => $user_birthday,
+				  '#required' => FALSE
+				);
+				
+				$form['per_info']['Phone'] = array(
+				  '#type' => 'textfield',
+				  '#title' => t('Phone'),
+				  '#default_value' => $user_phone,
+				  '#required' => FALSE
+				);
+				
+			    $form['per_info']['Address'] = array(
+				  '#type' => 'textarea',
+				  '#title' => t('Location'),
+				  '#rows' => 3,
+				  '#cols' => 20,
+				  '#default_value' => $user_address,
+				  '#required' => FALSE
+				);
+				
+				$form['per_info']['gender'] = array(
+				  '#type' => 'radios',
+				  '#title' => t('Gender'),
+				  '#default_value' => $select_gender,
+				  '#options' => array('Male'=>t('Male'), 'Female'=>t('Female')),
+				);
+				
+				 $form['user_relationships_ui_settings']['rel_privacy'] = array(
+					'#type'         => 'fieldset',
+					'#title'        => 'Relationship Privacy Settings',
+					'#collapsible'  => TRUE,
+					'#collapsed'    => FALSE,
+					'#weight' => 6
+				  );
+				  
+				  $form['user_relationships_ui_settings']['rel_privacy']['show_following'] = array(
+					'#type' => 'checkbox',
+					'#title' => t('Show who I am following on my profile page.'),
+					'#default_value' => $select_following
+				  );
+				  
+				   $form['user_relationships_ui_settings']['rel_privacy']['show_follower'] = array(
+					'#type' => 'checkbox',
+					'#title' => t('Show my followers on my profile page.'),
+					'#default_value' => $select_follower
+				  );
+				 
+				  $form['user_relationships_ui_settings']['rel_privacy']['me_following'] = array(
+					'#type' => 'checkbox',
+					'#title' => t('Show me as a follower on profile pages of users who I follow.'),
+					'#default_value' => $select_in_following
+				  );
+				 
+				  $form['user_relationships_ui_settings']['rel_privacy']['me_follower'] = array(
+					'#type' => 'checkbox',
+					'#title' => t('Show me as being followed on profile pages of users who follow me.'),
+					'#default_value' => $select_in_follower
+				  );
+				  
+				 $form['user_relationships_ui_settings']['rel_privacy']['group_privacy'] = array(
+					'#type' => 'checkbox',
+					'#title' => t('Allow other users to see which groups I am a part of.'),
+					'#default_value' => $select_group_privacy
+				  );
+				  
+				  $form['group_post'] = array(
+					'#type'         => 'fieldset',
+					'#title'        => 'Group Posts',
+					'#collapsible'  => TRUE,
+					'#collapsed'    => FALSE,
+					'#weight' => 5
+				  );
+				  
+				  $form['group_post']['noemail'] = array(
+					'#type' => 'checkbox',
+					'#title' => t('Receive emails for group postings'),
+					'#default_value' => $select_pemail,
+					'#description' => t('Check this box to receive emails for group postings.')
+				  );
+				 
+				 
+		        $form['rem_me'] = array(
+					'#type'         => 'fieldset',
+					'#title'        => 'Remember Me',
+					'#collapsible'  => TRUE,
+					'#collapsed'    => FALSE,
+					'#weight' => 9
+				  );
+				 
+				 	$form['rem_me']['remember'] = array(
+					'#type' => 'checkbox',
+					'#title' => t('Remember Me for 14 days'),
+					'#default_value' => $select_rem,
+					'#description' => t('Check this box to remember my login for 14 days.')
+				  );
+				 
+				 $form['transoptions'] = array(
+					'#type'         => 'fieldset',
+					'#title'        => 'Qur\'an/Translation Preferences',
+					'#collapsible'  => TRUE,
+					'#collapsed'    => FALSE,
+					'#weight' => 10
+				  );
+				 
+				 	$form['transoptions']['fontoption'] = array(
+					'#type'         => 'fieldset',
+					'#title'        => 'Font Preferences',
+					'#collapsible'  => TRUE,
+					'#collapsed'    => FALSE,
+					'#weight' => 10
+				  );
+				 
+				  $form['transoptions']['fontoption']['arb_font'] = array(
+					'#type' => 'select',
+					'#title' => t('Arabic Font'),
+					'#default_value' => $select_arb,
+					'#options' => $options_arb,
+					'#description' => t('Please choose an option.')
+				  );
+				   
+				   $form['transoptions']['fontoption']['arb_font_size'] = array(
+					'#type' => 'select',
+					'#title' => t('Arabic Font Size'),
+					'#default_value' => $select_arb_size,
+					'#options' => $options_arb_size,
+					'#description' => t('Please choose an option.')
+				  );
+				  
+				  $form['transoptions']['fontoption']['eng_font'] = array(
+					'#type' => 'select',
+					'#title' => t('English Font'),
+					'#default_value' => $select_eng,
+					'#options' => $options_eng,
+					'#description' => t('Please choose an option.')
+				  );
+				  
+				  $form['transoptions']['fontoption']['eng_font_size'] = array(
+					'#type' => 'select',
+					'#title' => t('English Font Size'),
+					'#default_value' => $select_eng_size,
+					'#options' => $options_eng_size,
+					'#description' => t('Please choose an option.')
+				  );
+				  
+				   $form['transoptions']['reciter'] = array(
+					'#type'         => 'fieldset',
+					'#title'        => 'Preferred Reciter',
+					'#collapsible'  => TRUE,
+					'#collapsed'    => FALSE,
+					'#weight' => 11
+				  );
+				  
+				    $form['transoptions']['reciter']['reciter_sel'] = array(
+					'#type' => 'select',
+					'#title' => t('Default Reciter'),
+					'#default_value' => $select_res,
+					'#options' => $options_res,
+					'#description' => t('Please choose an option.')
+				  );
+				  
+				  $form['transoptions']['hideayah'] = array(
+					'#type'         => 'fieldset',
+					'#title'        => 'Theme Options',
+					'#collapsible'  => TRUE,
+					'#collapsed'    => FALSE,
+					'#weight' => 12
+				  );
+				    
+					$form['transoptions']['hideayah']['hidetheme'] = array(
+					'#type' => 'checkbox',
+					'#title' => t('Show Ayah Theme'),
+					'#default_value' => $select_ayah,
+					'#description' => t('Check this box to show ayah theme.')
+				  );
+				  
+				  $form['transoptions']['hidetrans'] = array(
+					'#type'         => 'fieldset',
+					'#title'        => 'Show Options in Compare Translation Page',
+					'#collapsible'  => TRUE,
+					'#collapsed'    => FALSE,
+					'#weight' => 13
+				  );
+				  
+				  	$form['transoptions']['hidetrans']['asad'] = array(
+					'#type' => 'checkbox',
+					'#title' => t('Show Asad Translation'),
+					'#default_value' => $select_asad,
+					'#description' => t('Check this box to show Asad Translation in Compare Translation Page.')
+				  );
+				  
+				  	$form['transoptions']['hidetrans']['malik'] = array(
+					'#type' => 'checkbox',
+					'#title' => t('Show Malik Translation'),
+					'#default_value' => $select_malik,
+					'#description' => t('Check this box to show Malik Translation in Compare Translation Page.')
+				  );
+				  
+				   $form['transoptions']['hidetrans']['pickthall'] = array(
+					'#type' => 'checkbox',
+					'#title' => t('Show Pickthall Translation'),
+					'#default_value' => $select_pickthall,
+					'#description' => t('Check this box to show Pickthall Translation in Compare Translation Page.')
+				  );
+				  
+				  $form['transoptions']['hidetrans']['yusufali'] = array(
+					'#type' => 'checkbox',
+					'#title' => t('Show Yusuf Ali Translation'),
+					'#default_value' => $select_yusufali,
+					'#description' => t('Check this box to show Yusuf Ali Translation in Compare Translation Page.')
+				  );
+				  
+				    /*drupal_get_messages(NULL,TRUE);
+					$msg ="";
+				   $chk_query = db_query("SELECT fid,title from profile_fields");
+				  	while($chk_res = db_fetch_object($chk_query))
+					{
+					  $msg .= $chk_res->fid.", "; 
+					  $msg .=  $chk_res->title."<br />";
+					}
+					 $msg .=  "----------------<br /><br />";
+					$chk_query2 = db_query("SELECT fid,uid,value from profile_values");
+				  	while($chk_res2 = db_fetch_object($chk_query2))
+					{
+					   $msg .=  $chk_res2->fid.", ";
+					   $msg .=  $chk_res2->uid.", "; 
+					   $msg .=  $chk_res2->value."<br />";
+					}
+				drupal_set_message($msg);*/
+
+				 $arr_role =  $user->roles;
+				
+				 if(in_array("Developer", $arr_role)==FALSE && in_array("System Administrator", $arr_role)==FALSE)
+				 {
+			     $form['account']['pass']['#access'] = FALSE; 
+				 }
+				  $form['messaging']['#type']['#access'] = FALSE; 
+				 
+				 $scr1='$(document).ready(function() {
+						$("#edit-pass-pass1").val("");
+			
+			});
+			
+			';
+			drupal_add_js($scr1, 'inline', 'footer');
+			
+			$form['#submit'][] = 'alimcommentedurl_insertprefer';
+			//$form['#redirect'] = 'user/32/edit';
+		         // print_r($form);
+				//print_r($form['_account']);
+	
+				break;
+			
+		case "taxonomy_form_term": // taxonomy add form 
+				//print_r($form);
+				if($form['#vocabulary']['vid'] ==  8 ){ // unset the synonyms , relation etc from clip category vocabulary 
+					//print_r($form['advanced']);
+					if(isset($form['#term']['tid'])){
+						$count = taxonomy_term_count_nodes($form['#term']['tid']);
+						if($count > 0) unset($form['delete']);
+					}
+					//print 'mmmm='.$count;
+					unset($form['nodewords']);
+					unset($form['advanced']['relations']);
+					unset($form['advanced']['synonyms']);
+					//unset($form['advanced']);
+					unset($form['xmlsitemap']); 
+					$form['identification']['description']['#description'] ="";
+					$form['identification']['#title'] ="Clip Categories/Directories";
+					$form['identification']['name']['#title'] ="Name of Clip Category/Directory";
+					$form['identification']['name']['#description'] ="";
+				}
+				break;
+			
+		case "taxonomy_overview_terms": // taxonomy overview form list of clip categories if a user 
+				//print_r($form);
+				if($form['#vocabulary']['vid'] ==  8 ){
+				//unset($form['reset_alphabetical']);
+				
+				}
+				break;	
+		case "community_tags_form":  //  TAGGING FEATURE community_tags_form	
+				if(isset($form['login'])){
+					unset($form['login']);
+				}
+				break;
+	  case "our_advisers_and_scholars_node_form": 
+				//print_r($form);
+		       if($form['nid']['#value']=="")
+			   {
+				$form['#submit'][] = 'alimcommentedurl_drupalmailbiodta';
+				
+			   }
+			
+			   $form['#redirect'] = 'alim/scholars';
+				break;			
+		case "taxonomy_manager_form":  // manage taxonomy admin form 
+		// unset the elements 
+				//print_r($form);
+				//print_r($form['term_data']['tid']['#value']);
+				$voc = $form['vid']['#value'];
+				if($voc == '' )
+					$voc = $form['term_data']['vid']['#value'];
+				if($voc != 9  ) // Didn't allow other taxonomy to edit threoug this interface , only Communitytags are required
+					drupal_goto('admin/content/taxonomy_manager/voc/9');
+				$v = taxonomy_vocabulary_load($voc);
+				if($v->tags == 1){ 
+					$form['double_tree']['#access'] = FALSE;
+					$form['move']['#access'] = FALSE;
+					$form['delete']['options']['#access'] = FALSE;
+					$form['merge']['options']['#access'] = FALSE;
+					
+					$form['toolbar']['double_tree_show']['#access'] = FALSE;
+					$form['term_data']['parents']['#access'] = FALSE;
+					$form['term_data']['relations']['#access'] = FALSE;					
+				}				
+				$form['merge']['submit']['#submit'][]  = 'alimcommentedurl_mergeterm';
+				$form['#submit'][] = 'alimcommentedurl_delettag';
+				break;	
+				
+			case "creat_group_node_form":  // Alter Group Submit  
+				//print_r($form);
+				//$form['#submit'][] = '_alim_group_form_submit';
+				//unset($form['creat_group']);
+				$form['body_field']['teaser_include']['#access'] = FALSE;
+				$form['body_field']['format']['#access'] = FALSE;
+				$form['body_field']['teaser_js']['#access'] = FALSE;
+				$form['#submit'][] = 'alim_commenturl_form_alters_public_form_alter_submit';
+				$form['#redirect'] = 'userprofile';
+				break;
+		
+			case "group_post_node_form":
+			   // print_r($form);
+			    $form['body_field']['format'] = filter_form(7);
+				$form['body_field']['format']['#access'] = TRUE;
+				if(($form['nid']['#value'])!='')
+				{
+				   $form['#node']->field_rev_count[0]['value'] = $form['#node']->field_rev_count[0]['value']+1;
+				}
+				$form['#submit'][] = '_alim_commentedurl_grop_form_submit';
+				break;
+				
+			case "views_exposed_form":  //  
+		
+				$exposed_views = array('serach_user','search_groups');
+				if (in_array($form_state['view']->name, $exposed_views)) {
+					$current_display = $form_state['view']->current_display;
+					$form['submit'] = array(
+					'#name' => '', // prevent from showing up in $_GET.
+					'#type' => 'submit',
+					'#value' => t('Search'),
+					);
+					
+					$form['reset'] = array(
+						'#type' => 'markup',
+						'#value' => '<input class="form-button" type="reset" value="Reset" onClick="javascript:window.location=\''.$base_url.'/'. $form_state['view']->display[$current_display]->display_options['path'] .'\';" />',
+					);
+				}
+  
+				break;
+
+				
+			case "bookmarks_edit_item":  //  bookmarks edit add form from bookmarks module 
+				global $user;
+				$sql = "SELECT menu_name FROM {menu_bookmarks} WHERE menu_name = '%s'";
+      			$result = db_query($sql, 'bookmarks-' . $user->uid);
+     			if (!$my_menu = db_fetch_array($result)) {
+				 db_query("INSERT INTO {menu_bookmarks} (menu_name, title, description) VALUES ('%s', '%s', '%s')", 'bookmarks-' . $user->uid, 'bookmarks-' . $user->uid, '');
+				}
+				drupal_set_title($title = 'Add Bookmarks');
+				$mname = 'bookmarks-'.$user->uid;
+				$sql = "SELECT * FROM `menu_links` WHERE `menu_name` = '$mname' AND `link_path` = 'folder'";
+				$result = db_query($sql);
+				$resultarray= array();
+				//$term = db_fetch_object($result);
+				//print_r($term);
+				while ($term = db_fetch_object($result)) {
+					$resultarray[$term->mlid] = $term->link_title;
+				}
+				$form['bookmarks']['expanded']['#default_value'] = 1;
+				$form['bookmarks']['parent']['#description'] = '';
+				$form['bookmarks']['parent']['#title'] = 'Place in Sub-Folder';
+				$form['bookmarks']['link_title']['#title'] = 'Bookmark Name';
+				
+				$form['bookmarks']['public']['#type'] = 'hidden';
+				$form['bookmarks']['enabled']['#type'] = 'hidden';
+				$form['bookmarks']['description']['#type'] = 'hidden';
+				$form['bookmarks']['weight']['#access'] = FALSE;
+				
+				if(arg(2) != 'edit' )
+					$form['bookmarks']['link_title']['#default_value'] = '';
+				$form['bookmarks']['link_title']['#description'] = '';
+				$form['bookmarks']['expanded']['#access'] = FALSE;
+				$form['bookmarks']['public']['#access'] = FALSE;
+				
+				foreach($form['bookmarks']['parent']['#options']  as $k => $v){
+					$str =  substr($k, -2, 2);  
+					if($str == ':0' ){
+					$form['bookmarks']['parent']['#options'][$k] = '<Select>'; //<My Bookmarks>;
+					}
+					$menuid  = str_replace(  $mname.':' ,'' , $k);
+					if(!array_key_exists($menuid, $resultarray) && $str != ':0'    ){
+						unset($form['bookmarks']['parent']['#options'][$k]);
+					}
+				}  
+				if( $form['bookmarks']['link_path']['#default_value'] == 'folder' ){
+					$form['bookmarks']['link_path']['#access'] = FALSE;
+					$form['bookmarks']['link_title']['#description'] = 'Name of the Folder/Category.';
+				}
+				if(arg(0) == 'bookmarks' && arg(2) == 'edit'){//bookmarks/item/edit/1818
+					$form['bookmarks']['link_title']['#description'] = '';
+					
+					$form['bookmarks']['link_path']['#description'] = 'The path this bookmark links to.';
+					$form['bookmarks']['link_path']['#value'] = $form['bookmarks']['link_path']['#default_value'];
+					$form['bookmarks']['link_path']['#disabled'] = TRUE;
+				}
+				if(arg(0) == 'bookmarks' && arg(1) == 'mine' && arg(2) == 'add' ){
+					$form['bookmarks']['#title'] = "Add as folder to bookmarks ";
+					$form['bookmarks']['link_path']['#value'] = '<folder>';
+					$form['bookmarks']['link_path']['#access'] = false;
+					$form['bookmarks']['link_title']['#description'] = 'Name of the Folder/Category.';
+				}
+				else{
+					$form['bookmarks']['#title'] = "";
+				}
+				
+				$form['bookmarks']['#attributes'] = array('class' => 'fieldset-hide'); 
+				$form['bookmarks']['link_title']['#element_validate'] = array('alim_commentedurl_url_bookmark_validate'); 
+				break;	
+				
+		case "bookmarks_overview_form":  // Bookmark manage Form 
+				foreach($form as $k => $val){
+					$str =  substr($k, 0, 4);  
+					if($str == 'mlid' ){
+						if($form[$k]['expanded']){
+								$form[$k]['expanded']['#type']['#access']  = FALSE;
+								$form[$k]['public']['#type']['#access']  = FALSE;
+								$form[$k]['hidden']['#type']  = 'hidden';
+						}
+					}				
+				}
+				break;	
+				
+		case "bookmarks_item_delete_form":  //  
+				break;	
+
+	}
+
+	
+}
+function _alim_commentedurl_grop_form_submit($form, &$form_state)
+{
+
+ $form_state['values']['body']=nl2br($form_state['values']['body']);
+}
+/**
+* Submit handler; For unbublising the private groups. Group security in search page.
+* 
+*/
+function alim_commenturl_form_alters_public_form_alter_submit($form, &$form_state){
+
+// drupal_set_message($form_state['values']['og_private'],$form_state['values']['og_directory']);
+ 
+ //drupal_set_message('<pre>' . print_r($form_state['values']['og_directory'], TRUE) .'</pre>' ,$type = 'status', $repeat = TRUE );
+ 
+  if($form_state['values']['og_private']==1 || $form_state['values']['og_directory']==0)
+  {
+	unset($form_state['options']);
+	$form_state['values']['status'] = 0;
+  }
+
+}
+// This function for group post mail to group members
+function alimcommentedurl_emailgroup($form, $form_state){
+  
+  global $user;
+  global $base_url;
+  
+  $groups = "";
+  $nids  = 0;
+  $count = count($_POST['og_groups']);
+  $i=0;
+
+	 foreach($_POST['og_groups'] as $val)
+	 {
+	   
+		 $i++;
+		 if($i==1)
+		  $groupid = $val;
+		 $nids .=  $val;
+		 if($count!=$i)
+		 $nids .= ",";
+	 }
+	 
+	 $mygroupmeb = db_query("SELECT DISTINCT(users.uid) AS uid, users.name AS users_name, users.mail AS users_mail, og_uid.is_admin AS og_uid_is_admin FROM users users  LEFT JOIN og_uid og_uid ON users.uid = og_uid.uid WHERE (users.status <> 0) AND (og_uid.is_active <> 0) AND (og_uid.nid IN (".$nids.") )ORDER BY og_uid_is_admin DESC, users_name ASC");
+	 
+		 $em_count = count($mygroups_res);
+		 $j=0;
+		 while($mygroups_res = db_fetch_object($mygroupmeb))
+		 {
+			$j++;
+			$groups .= $mygroups_res->users_name."<".$mygroups_res->users_mail.">";
+			if($em_count!=$j)
+			 $groups .= ",";
+		 }
+$title = $form_state['values']['title'];
+$body_val  = $form_state['values']['body'];
+	 
+$subject = "[Alim.org] Group Post : ".$title;
+$body    = $body_val."<br /><br /><a href='".$base_url."/groupdetails/".$groupid."'>Click to view group</a>";
+
+$headers["MIME-Version"] = '1.0';
+$headers["Content-Type"] = "text/html; charset=iso-8859-1";
+$headers["From"] = "Alim.org <do-not-reply@alim.org>";
+
+$message = array(
+  'to' => $groups,
+  'subject' => t($subject),
+  'body' => t($body),
+  'headers' => $headers
+);
+drupal_mail_send($message);		 
+//drupal_set_message("Members :".$groups);
+}
+
+function alimcommentedurl_insertprefer($form, $form_state){
+
+	//db_query("DELETE FROM {profile_values}");
+	global $user;
+	
+	$user_id = arg(1);
+		
+	$arb_font 	 = $form_state['values']['arb_font'];
+	$arb_font_size 	 = $form_state['values']['arb_font_size'];
+	$eng_font    = $form_state['values']['eng_font'];
+	$eng_font_size    = $form_state['values']['eng_font_size'];
+	$reciter_sel = $form_state['values']['reciter_sel'];
+	$theme_sel = $form_state['values']['hidetheme'];
+	$asd_sel = $form_state['values']['asad'];
+	$mal_sel = $form_state['values']['malik'];
+	$pic_sel = $form_state['values']['pickthall'];
+	$yuf_sel = $form_state['values']['yusufali'];
+	$rem_sel = $form_state['values']['remember'];
+	$pemail_sel = $form_state['values']['noemail'];
+	if($rem_sel==1)
+	{
+	  $ins_rem = 'y';
+	}
+	else
+	{
+	  $ins_rem = 'n';
+	}
+	
+	$biography = $form_state['values']['Biography'];
+	$gender = $form_state['values']['gender'];
+
+	
+	// Relationship Privacy
+	$select_in_following  = $form_state['values']['me_following'];
+	$select_in_follower   = $form_state['values']['me_follower']; 
+	$select_following     = $form_state['values']['show_following']; 
+	$select_follower      = $form_state['values']['show_follower']; 
+	$select_grprv         = $form_state['values']['group_privacy'];
+	$select_birthday      = $form_state['values']['Birthday'];
+	$select_phone         = $form_state['values']['Phone'];
+	$select_address       = $form_state['values']['Address'];
+	
+	//Birthday
+	$birthday  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 28, $user_id));
+	if($birthday==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 28, $user_id, $select_birthday);
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_birthday , $user_id, 28);	
+	}
+	
+	//Phone
+	$phone  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 29, $user_id));
+	if($phone==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 29, $user_id, $select_phone);
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_phone , $user_id, 29);	
+	}
+	
+	//Address
+	$address  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 30, $user_id));
+	if($address==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 30, $user_id, $select_address);
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_address , $user_id, 30);	
+	}
+	
+	//Show me on " Group Privacy " List.
+	$chk_in_grpprv  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 22, $user_id));
+	if($chk_in_grpprv==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 22, $user_id, $select_grprv);
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_grprv , $user_id, 22);	
+	}
+	
+	//Boigraphy.
+	$chk_bio  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 20, $user_id));
+	if($chk_bio==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 20, $user_id, $biography);
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $biography , $user_id, 20);	
+	}
+	
+	//Gender.
+	$chk_gen  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 21, $user_id));
+	if($chk_gen==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 21, $user_id, $gender);
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $gender , $user_id, 21);	
+	}
+	
+	
+	//Show me on " Following " List.
+	$chk_in_following  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 13, $user_id));
+	if($chk_in_following==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 13, $user_id, $select_in_following);
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_in_following , $user_id, 13);	
+	}
+	
+	
+	//Show me on " Follower " List.
+	$chk_in_follower  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 14, $user_id));
+	if($chk_in_follower==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 14, $user_id, $select_in_follower);
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_in_follower , $user_id, 14);	
+	}
+	
+	//Show " Following List " in my profile page.
+	$chk_following  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 15, $user_id));
+	if($chk_following==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 15, $user_id, $select_following);
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_following , $user_id, 15);	
+	}
+	
+	//Show " Follower List " in my profile page.
+	$chk_follower  = db_result(db_query("SELECT count(*) FROM {profile_values} WHERE fid=%d AND uid=%d", 16, $user_id));
+	if($chk_follower==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (%d,%d,'%s')", 16, $user_id, $select_follower);
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d", $select_follower , $user_id, 16);	
+	}
+	
+	
+	// remember post email
+	$chk_pemail = db_query("SELECT count(*) as pemail_cnt FROM profile_values WHERE fid=17 AND uid=".$user_id);
+	$result_pemail = db_fetch_object($chk_pemail);
+	if(($result_pemail->pemail_cnt)==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (17,".$user_id.",'".$pemail_sel."')");
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$pemail_sel , $user_id, 17);	
+	}
+	
+	//remember me prefer
+/*	$chk_rem = db_query("SELECT count(*) as rem_cnt FROM profile_values WHERE fid=11 AND uid=".$user->uid);
+	$result_rem = db_fetch_object($chk_rem);
+	if(($result_rem->rem_cnt)==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (11,".$user->uid.",'".$ins_rem."')");
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$ins_rem , $user->uid, 11);	
+	}*/
+	
+
+
+	// arabic prefer
+	$chk_arbic = db_query("SELECT count(*) as arb_cnt FROM profile_values WHERE fid=2 AND uid=".$user_id);
+	$result_arb = db_fetch_object($chk_arbic);
+	if(($result_arb->arb_cnt)==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (2,".$user_id.",'".$arb_font."')");
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%d' WHERE uid = %d AND fid = %d",$arb_font , $user_id, 2 );	
+	}
+	
+	// arabic size
+	$chk_arbic_size = db_query("SELECT count(*) as arbsize_cnt FROM profile_values WHERE fid=4 AND uid=".$user_id);
+	$result_arb_size = db_fetch_object($chk_arbic_size);
+	if(($result_arb_size->arbsize_cnt)==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (4,".$user_id.",'".$arb_font."')");
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%d' WHERE uid = %d AND fid = %d",$arb_font_size , $user_id, 4 );	
+	}
+	
+	
+	//eng prefer
+	$chk_eng = db_query("SELECT count(*) as eng_cnt FROM profile_values WHERE fid=1 AND uid=".$user_id);
+	$result_eng = db_fetch_object($chk_eng);
+	if(($result_eng->eng_cnt)==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (1,".$user_id.",'".$eng_font."')");
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%d' WHERE uid = %d AND fid = %d",$eng_font , $user_id, 1 );	
+	}
+	
+	//eng size
+	$chk_eng_size = db_query("SELECT count(*) as eng_cnt_size FROM profile_values WHERE fid=3 AND uid=".$user_id);
+	$result_eng_size = db_fetch_object($chk_eng_size);
+	if(($result_eng_size->eng_cnt_size)==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (3,".$user_id.",'".$eng_font_size."')");
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%d' WHERE uid = %d AND fid = %d",$eng_font_size , $user_id, 3);	
+	}
+	
+	//reciter prefer
+	$chk_res = db_query("SELECT count(*) as res_cnt FROM profile_values WHERE fid=5 AND uid=".$user_id);
+	$result_res = db_fetch_object($chk_res);
+	if(($result_res->res_cnt)==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (5,".$user_id.",'".$reciter_sel."')");
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$reciter_sel , $user_id, 5 );	
+	}
+	
+    //ayahtheme prefer
+	$chk_theme = db_query("SELECT count(*) as theme_cnt FROM profile_values WHERE fid=6 AND uid=".$user_id);
+	$result_theme = db_fetch_object($chk_theme);
+	if(($result_theme->theme_cnt)==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (6,".$user_id.",'".$theme_sel."')");
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$theme_sel , $user_id, 6 );	
+	}
+	
+	//asd prefer
+	$chk_asd = db_query("SELECT count(*) as asd_cnt FROM profile_values WHERE fid=7 AND uid=".$user_id);
+	$result_asd = db_fetch_object($chk_asd);
+	if(($result_asd->asd_cnt)==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (7,".$user_id.",'".$asd_sel."')");
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$asd_sel ,$user_id, 7 );	
+	}
+	
+	//mal prefer
+	$chk_mal = db_query("SELECT count(*) as mal_cnt FROM profile_values WHERE fid=8 AND uid=".$user_id);
+	$result_mal = db_fetch_object($chk_mal);
+	if(($result_mal->mal_cnt)==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (8,".$user_id.",'".$mal_sel."')");
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$mal_sel , $user_id, 8 );	
+	}
+	
+	//pic prefer
+	$chk_pic = db_query("SELECT count(*) as pic_cnt FROM profile_values WHERE fid=9 AND uid=".$user_id);
+	$result_pic = db_fetch_object($chk_pic);
+	if(($result_pic->pic_cnt)==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (9,".$user_id.",'".$pic_sel."')");
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$pic_sel , $user_id, 9 );	
+	}
+	
+	//yuf prefer
+	$chk_yuf = db_query("SELECT count(*) as yuf_cnt FROM profile_values WHERE fid=10 AND uid=".$user_id);
+	$result_yuf = db_fetch_object($chk_yuf);
+	if(($result_yuf->yuf_cnt)==0)
+	{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (10,".$user_id.",'".$yuf_sel."')");
+	}
+	else
+	{
+		db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$yuf_sel , $user_id, 10 );	
+	}
+	if($theme_sel==1)
+	 $theme_sel = 0 ;
+	else
+	$theme_sel = 1;
+	
+   $expire =0;
+	
+	setcookie ("eng_font", "", time() + 3600, "/");
+	setcookie ("eng_font_size", "", time() + 3600, "/");
+	setcookie ("arb_font", "", time() + 3600, "/");
+	setcookie ("arb_font_size", "", time() + 3600, "/");
+	setcookie ("chek", "", time() + 3600, "/");
+	setcookie ("chek_asd", "", time() + 3600, "/");
+	setcookie ("chek_mal", "", time() + 3600, "/");
+	setcookie ("chek_pic", "", time() + 3600, "/");
+	setcookie ("chek_yuf", "", time() + 3600, "/");
+	setcookie ("select_res", "", time() + 3600, "/");
+	
+	setcookie ("reciterval", $reciter_sel, time() + 3600, "/");
+	setcookie ("recitercookie", "", time() - 3600, "/");
+	
+	setcookie ("eng_font", $eng_font , $expire , "/");
+	setcookie ("eng_font_size", $eng_font_size, $expire , "/");
+	setcookie ("arb_font", $arb_font , $expire , "/");
+	setcookie ("arb_font_size", $arb_font_size, $expire , "/");
+
+	if($ins_rem=='y')
+	{
+	  setcookie("rem_uid",$user->uid, time()+1209600, "/");
+	}
+	if($ins_rem=='n')
+	{
+	  setcookie("rem_uid","", time() -1209600, "/");
+	}
+
+	
+	//drupal_set_message("Test :".$arb_font);
+
+}
+
+// This function executes only for submitting advisers and scholars
+function alim_commentedurl_clipboard()
+{
+global $base_url;
+global $user; 
+$arg1=$_GET['surahstrt'] ;
+$arg2=$_GET['ayahstart'];
+$arg3=$_GET['ayahend'];
+$format=$_GET['format'];
+$formatsett=$_GET['frmat'];
+
+/*$arg1=1 ;
+$arg2=1;
+$arg3=4;*/
+
+$surah=$_GET['ayah'];
+$ayah=$_GET['surah'];
+
+if($surah && $ayah)
+{
+$arg1=$surah ;
+$arg2=$ayah;
+$arg3=$ayah;
+}
+if($arg3!=$arg2)
+$ayah_tit=" Ayaat ".$arg2."-".$arg3;
+else
+$ayah_tit=" Ayah ".$arg2;
+
+if($_GET['js'] == 1 ){
+$viewName = 'surah_name';	  
+$view_s = views_get_view($viewName);
+$view_s->set_display('default');
+$view_s->set_arguments(array($arg1));
+$view_s->execute();
+$result_s = $view_s->result;
+$titl = $result_s[0]->term_data_name;
+if($user->uid && $formatsett==1)
+{
+		$chk_ful    = db_query("SELECT count(*) as ful_cnt,value FROM profile_values WHERE fid=27 AND uid=".$user->uid);
+		$result_ful = db_fetch_object($chk_ful);
+		if(($result_ful->ful_cnt)==0)
+		{
+		db_query("INSERT INTO {profile_values} (fid,uid,value) VALUES (27,".$user->uid.",'".$format."')");
+		}
+		else if(($result_ful->ful_cnt))
+		{
+		$sel_res = db_query("SELECT value as res_sel FROM profile_values WHERE fid=27 AND uid=".$user->uid);
+		$fetch_res = db_fetch_object($sel_res);	
+		$formats=$fetch_res->res_sel;
+		if($formats!=$format)
+		{
+	 
+		 db_query("UPDATE {profile_values} SET value = '%s' WHERE uid = %d AND fid = %d",$format , $user->uid, 27);
+		 //$format=$formats;
+		}
+		//else	
+		
+		}
+		
+  
+}
+else if($format)
+$format=$format;
+else
+$format=1;
+
+//else if($formatsett==1 && !$user->uid && (!$_COOKIE["anonymformat"] || $_COOKIE["anonymformat"]!=$format))
+//{
+//setcookie ("anonymformat", $format, time() + 3600, "/");
+//}
+
+  $arbic = db_query("SELECT node.nid AS nid, node_revisions.body AS node_revisions_body, node_revisions.format AS node_revisions_format FROM node node  LEFT JOIN content_field_ayah_no node_data_field_ayah_no ON node.vid = node_data_field_ayah_no.vid LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid LEFT JOIN content_field_quran_bk_code node_data_field_quran_bk_code ON node.vid = node_data_field_quran_bk_code.vid LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid WHERE (node.type in ('quran_ayah')) AND (node_data_field_ayah_no.field_ayah_no_value >= ".$arg2.") AND (node_data_field_ayah_no.field_ayah_no_value <= ".$arg3.") AND (node_data_field_surah_no.field_surah_no_value = ".$arg1.") AND (node_data_field_quran_bk_code.field_quran_bk_code_value = 'ARB')
+");
+$surah=1;
+
+$ayah=1;
+while($chk_res = db_fetch_object($arbic))
+{
+$copy_arbtex[$surah][$ayah]=$chk_res->node_revisions_body;
+$ayah++;
+}
+
+$trans = db_query("SELECT node.nid AS nid, node_data_field_quran_bk_code.field_quran_bk_code_value AS node_data_field_quran_bk_code_field_quran_bk_code_value, node.type AS node_type, node.vid AS node_vid, node_data_field_surah_no.field_surah_no_value AS node_data_field_surah_no_field_surah_no_value, node_data_field_ayah_no.field_ayah_no_value AS node_data_field_ayah_no_field_ayah_no_value, term_data.name AS term_data_name, term_data.vid AS term_data_vid, term_data.tid AS term_data_tid, node_revisions.body AS node_revisions_body, node_revisions.format AS node_revisions_format FROM node node  LEFT JOIN content_field_quran_bk_code node_data_field_quran_bk_code ON node.vid = node_data_field_quran_bk_code.vid LEFT JOIN term_node term_node ON node.vid = term_node.vid LEFT JOIN term_data term_data ON term_node.tid = term_data.tid LEFT JOIN content_field_ayah_no node_data_field_ayah_no ON node.vid = node_data_field_ayah_no.vid LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid WHERE (node.type in ('quran_ayah')) AND ((node_data_field_quran_bk_code.field_quran_bk_code_value) = ('MAL')) AND (term_data.vid in ('1')) AND (node_data_field_ayah_no.field_ayah_no_value >= '".$arg2."') AND (node_data_field_ayah_no.field_ayah_no_value <= '".$arg3."') AND (node_data_field_surah_no.field_surah_no_value = '".$arg1."')
+");
+//$fetch_res = db_fetch_object($sel_res);
+
+
+ //"<pre>".print_r($fetch_res). "<pre>";
+
+
+$surah=1;
+
+$ayah=1;
+while($chk_res = db_fetch_object($trans))
+{
+$copy_trantex[$surah][$ayah]=$chk_res->node_revisions_body;
+$ayah++;
+}
+if($format==2)
+{
+$copied="Surah&nbsp; ".$titl."&nbsp;,";
+$copied.='<a href="'.$base_url.'/library/quran/ayah/compare/'.$arg1.'/'.$arg2.'">'.$ayah_tit.'</a>';
+
+}
+else
+$copied="Surah ".$titl."  ".$ayah_tit;
+$copied.="\n";
+for($i=1; $i<=$arg3; $i++)
+{
+if($format==2)
+{
+if($copy_arbtex[1][$i])
+$copied.='<p align="right" style="font-size:22px;">'.$copy_arbtex[1][$i]."</p>";
+if($copy_trantex[1][$i])
+$copied.='<p><#'.(($arg2+$i)-1).'>:&nbsp;'.$copy_trantex[1][$i]."</p>";
+}
+else if($format==1)
+{
+if($copy_arbtex[1][$i])
+$copied.=$copy_arbtex[1][$i]."\n";
+if($copy_trantex[1][$i])
+$copied.=$copy_trantex[1][$i]."\n";
+}
+}
+if(!$copy_arbtex || !$copy_trantex)
+$copied="No Ayah Loaded.Please try again.";
+  // drupal_set_title($titl.', Ayah '.arg(5));
+//print views_embed_view('compare_translation','block_1',$arg1,$arg2);
+//drupal_add_js($scr1, 'inline', 'footer'); 
+return drupal_json(array( 'status' => true , 
+'data' =>preg_replace('/\s\s+/', ' ',$copied),
+'surah_name' =>"<span style='color: #C63;'>".$arg1." . &nbsp;".$titl."</span>",
+));
+exit;
+
+//views_embed_view('compare_translation','default',$view_args)
+}
+
+}
+
+function alimcommentedurl_drupalmailbiodta($form, $form_state){
+
+$title = $form_state['values']['title'];
+
+$subject = "[Alim.org] Content Admin - ".$title." Submitted the Bio-data";
+$body    = $title." had submitted the Bio-data. Enabling the publish option on 'Manage Scholar' Page ";
+
+$message = array(
+  'to' => 'content-admin@alim.org',
+  'subject' => t($subject),
+  'body' => t($body),
+  'headers' => array('From' => 'Alim.org <do-not-reply@alim.org>'),
+);
+
+drupal_mail_send($message);
+drupal_set_message("Your Bio-data Submitted Successfully");
+
+
+}
+// Additional Submit handler for Comment form
+// Saves the URl where comment is posted  to node
+
+function _alim_commentedurl_field_form_submit($form, &$form_state) {
+
+	if($form['cid']['#value']!='')
+	{
+		db_query("INSERT INTO {alim_commentedurl} (cid, nid) VALUES(%d, %d)", $form['cid']['#value'], $form['nid']['#value']);
+	}	
+
+	if(!($_COOKIE['Comment_cookie']))
+		setcookie("Comment_cookie","a", 0,"/");
+
+	$type_name = $form_state['values']['comment_url_val'];
+	$node = node_load($form_state['values']['nid']);
+	if(  isset($node->field_comment_url[0]) &&  $node->field_comment_url[0]['value'] !=''   ){ 
+		
+		$pos = strpos($node->field_comment_url[0]['value'] , 'comment/edit' );
+		if($pos  !==  false ){	
+		//drupal_set_message('POS TRUE', $type = 'status', $repeat = TRUE);
+						$node->field_comment_url[0]['value'] = $type_name;		 
+						node_save($node);	
+		}
+		$pos1 = strpos($node->field_comment_url[0]['value'] , 'comment/reply' );
+		if($pos1  !==  false ){	
+		//drupal_set_message('POS1 TRUE', $type = 'status', $repeat = TRUE);
+						$node->field_comment_url[0]['value'] = $type_name;		 
+						node_save($node);	
+		}
+		
+		
+	}else{  
+		//drupal_set_message('In  cck not  set', $type = 'status', $repeat = TRUE);
+		$original_node = $node ;	
+		$comment_url  = array( 'field_comment_url' => array( '0' => array ( 'value' => $type_name ) ) );
+		$node = (object) array_merge((array) $original_node, $comment_url);
+		node_save($node);
+	}
+	$urlexp = explode("/",$type_name);
+	if($urlexp[0]!='group-post')
+	{
+	 $urlexp1 = $type_name;
+		if(strpos($urlexp1,'?'))
+		{
+		  $urlexp1_exp = explode("?",$urlexp1);
+		  $urlexp = $urlexp1_exp[0];
+		}
+		else
+		{
+		 $urlexp = $urlexp1;
+		}
+	 
+	 drupal_goto($urlexp);	
+	}
+	else
+	{
+	   global $user;
+	   global $base_url;
+	  
+	    // $result =  array();
+		$urlcomm = $_SERVER['HTTP_REFERER']; // For getting parent page url in popup.
+		$newvalurl = str_replace($base_url.'/' , "" ,$urlcomm );
+		/*** comment filtering ****/
+		$urlexp1 = explode("/",$newvalurl);
+		if(strpos($urlexp1[1],'?'))
+		{
+		  $urlexp1_exp = explode("?",$urlexp1[1]);
+		  $urlexp = $urlexp1_exp[0];
+		}
+		else
+		{
+		 $urlexp = $urlexp1[1];
+		}
+
+	 
+		/*** comment filtering ****/
+		
+		   // Query the group details for mailing
+			 $grname = db_query("SELECT node.nid AS nid, node.title AS node_title FROM node node WHERE (node.status <> 0) AND (node.type IN ('creat_group')) AND (node.nid = '".$urlexp."')");
+			 $grname_res = db_fetch_object($grname);
+			 $groupname = $grname_res->node_title;
+			 $groupname_val .= "<a href='".$base_url."/groupdetails/".$grname_res->nid."'>".$grname_res->node_title."</a>";
+			 
+			 $comm = substr($form_state['values']['comment'],0,25);
+			 
+			$pquery = db_query("SELECT node.nid AS nid, node.title AS node_title FROM node node WHERE (node.status <> 0) AND (node.type IN ('group_post')) AND (node.nid = ".$form_state['values']['nid'].")");
+			$pquery_res = db_fetch_object($pquery);
+	
+	     // Set up the mail parameters for mailing
+		$title = "[Alim.Org] ".$groupname." Reply: ".$pquery_res->node_title;
+		$body_val  = $form_state['values']['comment'];
+			
+		$subject = $title;
+		
+		$temp_user = user_load(array('name' => strip_tags($user->name)));
+		if($temp_user->rpx_data['profile']['name']['givenName']!="")
+		{
+		  $owner = $temp_user->rpx_data['profile']['name']['givenName']." ".$temp_user->rpx_data['profile']['name']['familyName'];
+		}
+		else
+		{
+		  $owner = strip_tags($output);
+		}
+		
+		$body     = $owner." has just posted a reply in ".$groupname.":<br /><br />";
+		$body    .= $body_val."<br /><br />";
+		$body    .= "<a href='".$base_url."/group-post/".$grname_res->nid."/".$form_state['values']['nid']."'>Click To View Group Post</a><br /><br />";
+		$body    .= "<a href='".$base_url."/group-post/".$grname_res->nid."/".$form_state['values']['nid']."?reply=reply'>Click To Reply<br /><br />";
+		$body    .= "<a href='".$base_url."/emailsetting'>Click To Stop Receiving Group Emails</a> <br /><br />";
+		 
+		$headers["MIME-Version"] = '1.0';
+		$headers["Content-Type"] = "text/html; charset=iso-8859-1";
+		$headers["From"] = 'Alim.org <do-not-reply@alim.org>';
+	
+		// Query the group members
+		$mygroupmeb = db_query("SELECT DISTINCT(users.uid) AS uid, users.name AS users_name, users.mail AS users_mail, og_uid.is_admin AS og_uid_is_admin FROM users users  LEFT JOIN og_uid og_uid ON users.uid = og_uid.uid WHERE (users.status <> 0) AND (og_uid.is_active <> 0) AND (og_uid.nid =".$grname_res->nid." )ORDER BY og_uid_is_admin DESC, users_name ASC");
+		
+		$em_count = count($mygroups_res);
+		$j=0;
+		while($mygroups_res = db_fetch_object($mygroupmeb))
+		{
+			
+		// Cheking that member enabled 'group post email' functionality in the preference setting.
+		$sel_poemail = db_query("SELECT value as poemail_sel,count(value) as poemail_count FROM profile_values WHERE fid=17 AND uid=".$mygroups_res->uid);
+		$fetch_poemail = db_fetch_object($sel_poemail);
+		($fetch_poemail->poemail_sel) ? $select_pemail = $fetch_poemail->poemail_sel : $select_pemail = 0;
+		if($fetch_poemail->poemail_count==0) 
+		  $select_pemail = 1;
+		  
+		if($select_pemail==1) // if 'group post email' functionality enabled, sending an email to the user's mail id.
+		{
+			$j++;
+			$groups = $mygroups_res->users_name."<".$mygroups_res->users_mail.">";
+		
+			$message = array(
+			'to' => $groups,
+			'subject' => t($subject),
+			'body' => t($body),
+			'headers' => $headers
+			);
+		 
+			 drupal_mail_send($message); // calling drupal mail function
+		}
+ 	  }
+		// $type_name = $form_state['values']['comment_url_val']; // Hidden url field of comment posting page.
+		 
+		  
+		$type_name = $base_url."/group-post/".$grname_res->nid."/".$form_state['values']['nid']; // Hidden url field of comment posting page.
+		 
+		$urlexp1 = $type_name;
+		if(strpos($urlexp1,'?'))
+		{
+		  $urlexp1_exp = explode("?",$urlexp1);
+		  $urlexp = $urlexp1_exp[0];
+		}
+		else
+		{
+		 $urlexp = $urlexp1;
+		}
+		
+		 drupal_goto($urlexp); // re-direct to current page
+		 
+	}
+	
+	return;
+}
+
+
+
+
+
+/**
+ * Implementation of hook_block()
+ * provide a block to show the dialog boxes for clip feature this is hideen dialog box 
+ * create clip full page , clip selected text from etc 
+ * adds required javascript for this clip feature 
+ */
+function alim_commentedurl_block($op='list', $delta=0, $edit=array()) {
+	switch ($op) {
+		case 'list':
+			$blocks[0]['info'] = t('Block for Clippings Dialog');
+			return $blocks;
+			
+		case 'view':		
+			//jquery_ui_add(array('ui.draggable', 'ui.droppable', 'ui.dialog'));
+			//drupal_add_css(drupal_get_path('module', 'jquery_ui') .'/jquery.ui/themes/default/ui.all.css', 'module');
+			jquery_ui_add(array('ui.draggable'));
+			jquery_ui_add(array('ui.droppable'));
+			jquery_ui_add(array('ui.dialog'));
+			
+			$scr1='jQuery(document).ready(function() {
+			
+					jQuery("#dialog").dialog({ 
+						autoOpen: false , 
+						disabled: true , 
+						position: [50,400] ,
+						zIndex: 2,
+						width: 325,
+						height: 220
+					});
+			
+					jQuery("a#clip-btn-sel").click(function() { //alert("Hello ... ");
+						 jQuery("#dialog").dialog("open") ;
+						  var clips = jQuery("div#clip-sel-content").html(); //alert(sel);
+						  jQuery("div#clip-sel-content").html(clips+"<p>"+userselected+"</p>");
+						 
+						 return false;
+					});
+			
+					jQuery("#btn-clip-clear").click(function() {
+						jQuery("div#clip-sel-content").html("") ;
+						jQuery("div#ori-clips").html("") ;
+						return false;
+					});
+					jQuery("a#clip-btn-all img").click(function() {
+						 var t11 = jQuery("div#clip-all-content").html(); 
+						jQuery("div#ori-clips").html(t11);
+						//return false;
+					});
+					jQuery("#dialog a#btn-clip-save").click(function() {
+						var temp = jQuery("div#clip-sel-content").html(); 
+						 jQuery("div#ori-clips").html(temp);
+					});					
+					
+					var sel = "";
+					var userselected = "";
+					jQuery("#con_div_middle").mouseup(function(e) {
+						sel = getSelectedText();	
+						userselected = sel;
+						if(sel != " "  ){
+							//alert("..."+sel+"..."); 
+							if(!jQuery("#dialog").dialog( "isOpen" ) ){
+								//jQuery("#dialog").dialog("open") ;
+							}else{
+							var position = jQuery( "#dialog" ).dialog( "option", "position" );
+							//alert("alresdy open"+position);
+							//jQuery( "#dialog" ).dialog( "option", "position", [50,450] );
+							}
+							
+						}
+					});
+			
+					jQuery("#dialog #btn-clip-add-sel").click(function(evt) {
+						 var clips = jQuery("div#clip-sel-content").html(); //alert(sel);
+						 jQuery("div#clip-sel-content").html(clips+"<p>"+sel+"</p>");
+						 evt.preventDefault(); 
+					});			
+			
+			
+					window.onbeforeunload = goodbye;			
+			
+			});
+			
+			';
+			//drupal_add_js($scr1, 'inline', 'footer');
+			
+			// Get user selection text on page script
+			$scr2 = "function getSelectedText() { //alert('in fun ');
+						if (window.getSelection) { 
+							return window.getSelection()+' '; 
+						} 
+						else if (document.selection) { 
+							return document.selection.createRange().text+' '; 
+						} 
+						return ' '; 
+					}";
+			
+			//drupal_add_js($scr2, 'inline', 'header');
+			
+			
+			
+			$scr3 =
+			'$(document).bind("popups_open_path_done", function() {
+				var clips = jQuery("div#ori-clips").html();
+				var tit = jQuery("div#clip-tit").html();
+				jQuery("#popups #node-form #edit-title").val(tit);
+				//jQuery("#popups #node-form #edit-field-clip-notes-0-value").val(clips);
+				if(clips != "" )
+					jQuery("#popups #node-form .nicEdit-main").html("<br />"+clips+"<br />");				
+				
+				if(jQuery("#dialog").dialog( "isOpen" ) ){
+					jQuery( "#dialog" ).dialog( "close");
+				}				
+				jQuery("#popups #node-form .user-form-clippings #edit-submit").click(function(evt) { 
+					//jQuery("div#clip-sel-content").html("");
+					//jQuery("div#ori-clips").html("");
+				});			
+			
+			});';
+			drupal_add_js($scr3, 'inline', 'footer');
+
+			$scr4 = 'function goodbye(e) {
+			if(!e) e = window.event;
+			//e.cancelBubble is supported by IE - this will kill the bubbling process.
+			
+			var c = jQuery("div#clip-sel-content").html();
+			if(c != "" ){
+				e.cancelBubble = true;
+				e.returnValue = "You have added some clips from this page .\n if you leave this page your clips will lose.\n Click on cancel and save the clips to notebook. "; 
+				//This is displayed on the dialog
+			
+			
+				//e.stopPropagation works in Firefox.
+				if (e.stopPropagation) {
+					e.stopPropagation();
+					e.preventDefault();
+					
+					if(!jQuery("#dialog").dialog( "isOpen" ) ){ //alert("Now open .. .. .. .. .. .. .. .. .. .. ");
+						jQuery("#dialog").dialog("open") ;
+					}else{
+						var position = jQuery( "#dialog" ).dialog( "option", "position" );
+						//alert("alresdy open"+position);
+						jQuery( "#dialog" ).dialog( "option", "position", [50,400] );
+					}	
+				}
+			}			
+			}';
+			
+			//drupal_add_js($scr4, 'inline', 'header');
+			
+			
+			
+			drupal_add_js(drupal_get_path('module', 'alim_commentedurl') . '/clips.js');
+			drupal_add_js(drupal_get_path('module', 'taxonomy_other') . '/taxonomy_other.js');
+			
+			
+			$path = drupal_urlencode(drupal_get_normal_path(drupal_get_path_alias($_GET['q'])));
+	$query_variables = $_GET;
+	unset($query_variables['q']);
+	$query_string = '';
+	foreach ($query_variables as $key => $value) {
+		$query_string .= '&' . $key . '=' . $value;
+	}
+	
+	if (!empty($path)) {
+		if (!empty($query_string)) {
+			$path .= '?' . $query_string;
+		}
+			
+			
+		}	
+			
+			
+			
+			
+			$out = '<div style="display:none;" ><div id="dialog" title="Selected Clippings">';
+			$out .= '<div class="cnt" >';
+			$out .= '<a href="#" id="btn-clip-add-sel" >Add to clip</a>&nbsp;<a href="#" id="btn-clip-clear" >Clear all</a>&nbsp;';
+			$out .= l("Save clip" , "node/add/clippings" , array("attributes" => array("class" => "popups" , "id" => "btn-clip-save" )  ) ) ;  
+			
+   		    $out .= '<div id="clip-sel-content"  ></div>';
+			$out .= '<div class="help" >Use the mouse to select text from page and click on \'Add to clip\' . The text clipped is saved temporarily. To save the clipped text to Your Notebook click on the \'Save Clip\' button.</div>';
+			//Use the mouse to select text from page and click on 'Add to clip' . The text clipped is saved  temporarily. To save the clipped text to Your Notebook click on the 'Save Clip' button.
+			$tit = drupal_get_title();
+			$out .= '</div></div></div>
+			<div style="display:none;" id="ori-clips" ></div>
+			<div id="clip-tit" style="display:none;" >'.$tit.'</div>
+			';
+			
+			$blocks['subject'] = t('Clippings Dialog');
+			$blocks['content'] = $out;
+			return $blocks;
+		}
+}
+
+
+
+// This function executes only for the Vocabulary id = 9 , on deleting tags
+// manage tag vacabulary delete tagged user on deleting a tag 
+
+function alimcommentedurl_delettag($form, $form_state){
+		$m = 'user tags deleted';
+	  if ($form_state['values']['delete'] === TRUE) {	
+	 // $vid = $form_state['values']['vid'];		  
+		if($form_state['values']['vid'] == 9 ){ 
+			if (module_exists('community_tags')) {
+			
+				$sel = $form_state['values']['selected_terms'];
+				
+				if (!is_array($sel)) array($sel);
+				foreach($sel as $s){
+					db_query("DELETE FROM {community_tags} WHERE tid = %d ", $s);
+					//$m .= '---'.$s;
+				}
+				drupal_set_message($m);
+			
+			}
+		}
+		
+	}
+}
+
+// This function executes only for the Vocabulary id = 9 update the tag in community uerss
+// on merging two tags update corresponding user entries in community tags module 
+function alimcommentedurl_mergeterm($form, $form_state){
+		if($form_state['values']['vid'] == 9 ){ 
+			if (module_exists('community_tags')) {
+				$selected_tids = array();
+				$selected_tids = $form_state['values']['taxonomy']['manager']['tree']['selected_terms'];
+				$main_terms = taxonomy_manager_autocomplete_tags_get_tids($form_state['values']['merge']['main_term'], $form_state['values']['vid'], TRUE, $form_state['values']['taxonomy']['manager']['top']['language']);
+				$main_term = array_shift($main_terms);
+				
+				$new_inserted = FALSE;
+				if ($main_term['new']) {
+					$new_inserted = TRUE;
+					//$m.= ' --- new id ---';
+				}
+				$main_term_tid = $main_term['tid'];$m.= 'main tid = '.$main_term_tid;
+				
+				foreach($selected_tids as $singletid){
+					 db_query("UPDATE {community_tags} SET tid = '%d' WHERE tid = %d",$main_term_tid , $singletid );				
+				}
+			}
+		}
+		drupal_set_message('User tags updated.');
+}
+function _alim_commentedurl_clip_form_submit(){
+	if(!($_COOKIE['Clipping_cookie1']))
+	setcookie("Clipping_cookie1","a", 0,"/");
+} 
+    
