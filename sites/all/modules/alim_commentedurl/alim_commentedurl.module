@@ -42,7 +42,7 @@ function alim_tagseeding_seeding_status() {
 	$default1 =1;
 	echo variable_get(alim_cache_clear, $default1);
 }
-function alim_commentedurl_cron_cacheclear()
+function alim_commentedurl_cron()
 {
 /*	$default1 =1;
 	$count=variable_get(alim_cache_clear, $default1);
