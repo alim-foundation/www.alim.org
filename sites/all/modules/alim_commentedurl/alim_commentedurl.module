@@ -28,7 +28,7 @@ $items = array();
     'type' => MENU_CALLBACK,
   );
     $items['chache/clear/status'] = array(
-    'title' => 'tagseeding  status',
+    'title' => 'alim cache status',
     'page callback' => 'alim_cache_clear_status',
     'access callback' => TRUE,
     'expanded' => TRUE,
