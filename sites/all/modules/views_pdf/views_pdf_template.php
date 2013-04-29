@@ -517,12 +517,12 @@ class PdfTemplate extends FPDI
     
     // Set the definitiv width of a column
     foreach ($columns as $id => $columnName) {
-      if (isset($options['info'][$id]['position']['width']) && !empty($options['info'][$id]['position']['width'])){
+    /*  if (isset($options['info'][$id]['position']['width']) && !empty($options['info'][$id]['position']['width'])){
         $sumWidth += $options['info'][$id]['position']['width'];
       }
       else {
         $numberOfColumnsWithoutWidth++;
-      }
+      }*/
     }
     if ($numberOfColumnsWithoutWidth > 0) {
       $defaultColumnWidth = ($width - $sumWidth) / $numberOfColumnsWithoutWidth;
