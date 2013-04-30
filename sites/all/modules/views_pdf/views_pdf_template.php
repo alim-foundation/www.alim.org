@@ -359,7 +359,7 @@ class PdfTemplate extends FPDI
     elseif(is_string($row)) {
 	$titl="";
 	if(arg(5)=="ASD" || arg(5)=="MAL"|| arg(5)=="PIK" || arg(5)=="YAT" || (arg(5)=="TLT" && arg(6)=="pdf") || (arg(3)=="compare" && arg(4)=="pdf")){
-	if(arg(3)=="compare" && arg(4)=="pdf"))
+	if(arg(3)=="compare" && arg(4)=="pdf")
 	$argg= arg(5);
 	else
 	$argg= arg(4);
