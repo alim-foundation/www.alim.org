@@ -392,7 +392,7 @@ class PdfTemplate extends FPDI
  $result44 = db_fetch_object($query);
  $sec_head =  $result44->node_data_field_art_subsec_head_field_art_sec_head_value;
 
-$titl= "\n\r<h3>".arg(4)." - ".$sec_head."</h3><br/>";
+$titl= "<h3>".arg(4)." - ".$sec_head."</h3>";
 	 }
       $content = $titl.$row;
     }
