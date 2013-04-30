@@ -358,14 +358,19 @@ class PdfTemplate extends FPDI
     }
     elseif(is_string($row)) {
 	$titl="";
-	if(arg(5)=="ASD" || arg(5)=="MAL"|| arg(5)=="PIK" || arg(5)=="YAT" || ( arg(5)=="TLT" && arg(5)=="pdf")){
+	if(arg(5)=="ASD" || arg(5)=="MAL"|| arg(5)=="PIK" || arg(5)=="YAT" || (arg(5)=="TLT" && arg(6)=="pdf") || (arg(3)=="compare" && arg(4)=="pdf")){
+	if(arg(3)=="compare" && arg(4)=="pdf"))
+	$argg= arg(5);
+	else
+	$argg= arg(4);
+	
    $viewName = 'surah_name';	  
    $view_s = views_get_view($viewName);
    $view_s->set_display('default');
-   $view_s->set_arguments(array(arg(4)));
+   $view_s->set_arguments(array($argg));
    $view_s->execute();
    $result_s = $view_s->result;
-    $titl =  '<br/><h3>Surah '.arg(4).'. '.$result_s[0]->term_data_name.'</h3><br/>';
+    $titl =  '<br/><h3>Surah '.$argg.'. '.$result_s[0]->term_data_name.'</h3><br/>';
      }
 	 if(arg(1)=="SOP")
 	 {
