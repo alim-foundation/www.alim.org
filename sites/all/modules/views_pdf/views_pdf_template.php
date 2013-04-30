@@ -526,7 +526,7 @@ $titl= "<br/><h3>".arg(4)." - ".$sec_head."</h3>";
     
     // Set draw point to the indicated position:
     if (empty($options['position']['x'])) {
-      $options['position']['x'] = 0;
+      $options['position']['x'] = 10;
     }
         
     if (empty($options['position']['y'])) {
