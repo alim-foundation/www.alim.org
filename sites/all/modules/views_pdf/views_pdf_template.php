@@ -10,7 +10,7 @@
  */
 
 
-/**
+/** 
  * Get the depending classes.
  */
 require_once views_pdf_get_library('tcpdf') . '/tcpdf.php';
@@ -146,7 +146,7 @@ class PdfTemplate extends FPDI
    * output is printed to the header.
    */
   function Header() {
-  
+
   }
   
   /**
@@ -249,7 +249,7 @@ class PdfTemplate extends FPDI
       switch ($options['position']['corner']) {
         default:
         case 'top_left':
-          $x = $options['position']['x']+$this->lMargin;
+          $x = $options['position']['x']+40;
           $y = $options['position']['y']+$this->tMargin;
           break;
         
@@ -357,7 +357,39 @@ class PdfTemplate extends FPDI
       $content = $view->field[$key]->theme($row);
     }
     elseif(is_string($row)) {
-      $content = $row;
+	$titl="";
+	if(arg(2)=="ASD" || arg(2)=="MAL"|| arg(2)=="PIK" || arg(2)=="YAT" || ( arg(5)=="TLT" && arg(6)=="pdf")){
+   $viewName = 'surah_name';	  
+   $view_s = views_get_view($viewName);
+   $view_s->set_display('default');
+   $view_s->set_arguments(array(arg(1)));
+   $view_s->execute();
+   $result_s = $view_s->result;
+    $titl =  '<br/><h3>Surah '.arg(1).'. '.$result_s[0]->term_data_name.'</h3><br/>';
+     }
+	 if(arg(1)=="SOP")
+	 {
+	 $query = db_query("SELECT node.nid AS nid,
+   node_data_field_art_subsec_head.field_art_subsec_head_value AS node_data_field_art_subsec_head_field_art_subsec_head_value,
+   node.type AS node_type,
+   node.vid AS node_vid,
+   node_revisions.body AS node_revisions_body,
+   node_revisions.format AS node_revisions_format,
+  node_data_field_art_subsec_head.field_art_sec_head_value AS node_data_field_art_subsec_head_field_art_sec_head_value
+ FROM node node 
+ LEFT JOIN content_field_art_bk_code node_data_field_art_bk_code ON node.vid = node_data_field_art_bk_code.vid
+ LEFT JOIN content_field_art_sec_no node_data_field_art_sec_no ON node.vid = node_data_field_art_sec_no.vid
+ LEFT JOIN content_field_art_no node_data_field_art_no ON node.vid = node_data_field_art_no.vid
+ LEFT JOIN content_type_article_content node_data_field_art_subsec_head ON node.vid = node_data_field_art_subsec_head.vid
+ LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+ WHERE (node.type in ('article_content')) AND (node_data_field_art_bk_code.field_art_bk_code_value = '".arg(1)."') AND (node_data_field_art_sec_no.field_art_sec_no_value = ".arg(2).") AND (node_data_field_art_no.field_art_no_value = ".arg(3).") limit 1");
+ 
+ $result44 = db_fetch_object($query);
+ $sec_head =  $result44->node_data_field_art_subsec_head_field_art_sec_head_value;
+
+$titl= "<h3>".arg(4)." - ".$sec_head."</h3><br/>";
+	 }
+      $content = $titl.$row;
     }
     else {
       // We got bad data. So return.
@@ -516,14 +548,15 @@ class PdfTemplate extends FPDI
     $numberOfColumnsWithoutWidth = 0;
     
     // Set the definitiv width of a column
-    foreach ($columns as $id => $columnName) {
-    /*  if (isset($options['info'][$id]['position']['width']) && !empty($options['info'][$id]['position']['width'])){
+    foreach ($columns as $id => $columnName) {/*
+	print $columnName;
+      if (isset($options['info'][$id]['position']['width']) && !empty($options['info'][$id]['position']['width'])){
         $sumWidth += $options['info'][$id]['position']['width'];
       }
       else {
         $numberOfColumnsWithoutWidth++;
-      }*/
-    }
+      }
+    */}
     if ($numberOfColumnsWithoutWidth > 0) {
       $defaultColumnWidth = ($width - $sumWidth) / $numberOfColumnsWithoutWidth;
     }
