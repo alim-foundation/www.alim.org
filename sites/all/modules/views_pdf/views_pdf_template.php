@@ -396,7 +396,7 @@ $titl= "<br/><h3>".arg(4)." - ".$sec_head."</h3>";
 	 }
 	 if(arg(2)=="timeline" && arg(3)=="pdf")
 	 {
-	 $titl= "<br/><h3>Timeline</h3>";
+	 $titl= "<br/><h3>Timeline</h3><br/>";
 	 }
       $content = $titl.$row;
     }
