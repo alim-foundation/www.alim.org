@@ -1,6 +1,8 @@
 //Search tab order 
 $(document).ready(function() {
 						   
+						   
+				$("a.pdf-icon").attr("target","_blank")	;	   
 				$(".view-compare-translation .views-row-3 .fn").click(function(){
 				$('a#quicktabs-tab-3-1').trigger('click');	
 				$('a#quicktabs-tab-2-0').trigger('click');
