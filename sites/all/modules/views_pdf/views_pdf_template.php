@@ -441,13 +441,13 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 if($row=="Alim.org")
 	 {
 	 $titl="";
-	 //$logo="";
-	 $row= $book;
+	 $logo="";
+	 $row= "Source : Alim.org-".$book;
 	 }
 	  
      $content = $logo.$titl.$row;
 
-      $content = $titl.$row;
+     // $content = $titl.$row;
     }
     else {
       // We got bad data. So return.
