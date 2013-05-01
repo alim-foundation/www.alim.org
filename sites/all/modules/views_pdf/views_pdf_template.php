@@ -395,7 +395,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 {
 	 $titl= "<br/><h3>Timeline</h3><br/>";
 	 }
-	 	  	 $logo='<br/><br/><img src="http://alim.org/sites/all/themes/alim/images/alim-logo1.png" border="0" width="262" height="61"><br/>';
+	 $logo='<br/><br/><img src="http://alim.org/sites/all/themes/alim/images/alim-logo1.png" border="0" width="262" height="61"><br/>';
 	  if(arg(3)=="compare")
 	  $book="<br/><br/><br/><br/><br/><br/>Surah ".arg(4)."-Ayah ".arg(5)."-Compare Translation";
 	   if(arg(5)=="ASD")
