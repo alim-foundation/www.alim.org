@@ -112,21 +112,21 @@ class views_pdf_plugin_display extends views_plugin_display_page {
 	  $book="Pickthall Translation";
 	   if(arg(5)=="TLT")
 	  $book="Qura'n Transliteration";
-	   if(arg(2)=="SAD")
+	   if(arg(3)=="SAD")
 	  $book="Abu-Dawood Hadith";
-	  if(arg(2)=="AMH")
+	  if(arg(3)=="AMH")
 	  $book="Al-Muwatta Hadith";
-	  if(arg(2)=="NWH")
+	  if(arg(3)=="NWH")
 	  $book="Al-Nawawi Hadith";
-	  if(arg(2)=="HDQ")
+	  if(arg(3)=="HDQ")
 	  $book="Al-Qudsi Hadith";
-	  if(arg(2)=="TIR")
+	  if(arg(3)=="TIR")
 	  $book="Al-Tirmidhi Hadith";
 	  if(arg(3)=="FQS")
 	  $book="Fiqh-us-Sunnah Hadith";
-	  if(arg(2)=="SHB")
+	  if(arg(3)=="SHB")
 	  $book="Sahih Al-Bukhari Hadith";
-	    if(arg(2)=="SHM")
+	    if(arg(3)=="SHM")
 	  $book="Sahih Muslim Hadith";
 	    if(arg(2)=="timeline")
 	  $book="Timeline History";
