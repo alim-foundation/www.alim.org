@@ -384,12 +384,12 @@ class PdfTemplate extends FPDI
  LEFT JOIN content_field_art_no node_data_field_art_no ON node.vid = node_data_field_art_no.vid
  LEFT JOIN content_type_article_content node_data_field_art_subsec_head ON node.vid = node_data_field_art_subsec_head.vid
  LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
- WHERE (node.type in ('article_content')) AND (node_data_field_art_bk_code.field_art_bk_code_value = '".arg(1)."') AND (node_data_field_art_sec_no.field_art_sec_no_value = ".arg(2).") AND (node_data_field_art_no.field_art_no_value = ".arg(3).") limit 1");
+ WHERE (node.type in ('article_content')) AND (node_data_field_art_bk_code.field_art_bk_code_value = '".arg(4)."') AND (node_data_field_art_sec_no.field_art_sec_no_value = ".arg(5).") AND (node_data_field_art_no.field_art_no_value = ".arg(7).") limit 1");
  
  $result44 = db_fetch_object($query);
  $sec_head =  $result44->node_data_field_art_subsec_head_field_art_sec_head_value;
 
-$titl= "<br/><h3>".arg(4)." - ".$sec_head."</h3>";
+$titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 }
 	 if(arg(2)=="timeline" && arg(3)=="pdf")
 	 {
