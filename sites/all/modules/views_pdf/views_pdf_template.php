@@ -358,7 +358,7 @@ class PdfTemplate extends FPDI
     }
     elseif(is_string($row)) {
 	$titl="";
-	$argg= arg(4);
+ 	$argg= arg(4);
 	
    $viewName = 'surah_name';	  
    $view_s = views_get_view($viewName);
