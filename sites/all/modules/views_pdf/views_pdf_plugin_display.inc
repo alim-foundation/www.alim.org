@@ -99,19 +99,19 @@ class views_pdf_plugin_display extends views_plugin_display_page {
     
     if (empty($path_to_store_pdf)) {
 		  if(arg(3)=="compare")
-	  $book="Compare Translation";
+	  $book="Surah ".arg(4)."Ayah ".arg(5)."Compare Translation";
 	   if(arg(5)=="ASD")
-	  $book="Asad Translation";
+	  $book="Surah ".arg(4)."Asad Translation";
 	   if(arg(5)=="MAL")
-	  $book="Malik Translation";
+	  $book="Surah ".arg(4)."Malik Translation";
 	  if(arg(5)=="YAT")
-	  $book="YusufAli Translation";
+	  $book="Surah ".arg(4)."YusufAli Translation";
 	  if(arg(5)=="PIK")
-	  $book="Pickthall Translation";
+	  $book="Surah ".arg(4)."Pickthall Translation";
 	   if(arg(5)=="PIK")
-	  $book="Pickthall Translation";
+	  $book="Surah ".arg(4)."Pickthall Translation";
 	   if(arg(5)=="TLT")
-	  $book="Qura'n Transliteration";
+	  $book="Surah ".arg(4)."Qura'n Transliteration";
 	   if(arg(3)=="SAD")
 	  $book="Abu-Dawood Hadith";
 	  if(arg(3)=="AMH")
