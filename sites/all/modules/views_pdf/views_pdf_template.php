@@ -395,6 +395,61 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 {
 	 $titl= "<br/><h3>Timeline</h3><br/>";
 	 }
+	 	  	 $logo='<br/><br/><img src="http://alim.org/sites/all/themes/alim/images/alim-logo1.png" border="0" width="262" height="61"><br/>';
+	  if(arg(3)=="compare")
+	  $book="<br/><br/><br/><br/><br/><br/>Surah ".arg(4)."-Ayah ".arg(5)."-Compare Translation";
+	   if(arg(5)=="ASD")
+	  $book="<br/><br/><br/><br/><br/><br/>Surah ".arg(4)."-Asad Translation";
+	   if(arg(5)=="MAL")
+	  $book="<br/><br/><br/><br/><br/><br/>Surah ".arg(4)."-Malik Translation";
+	  if(arg(5)=="YAT")
+	  $book="<br/><br/><br/><br/><br/><br/>Surah ".arg(4)."-YusufAli Translation";
+	  if(arg(5)=="PIK")
+	  $book="<br/><br/><br/><br/><br/><br/>Surah ".arg(4)."-Pickthall Translation";
+	   if(arg(5)=="PIK")
+	  $book="<br/><br/><br/><br/><br/><br/>Surah ".arg(4)."-Pickthall Translation";
+	   if(arg(5)=="TLT")
+	  $book="<br/><br/><br/><br/><br/><br/>Surah ".arg(4)."-Qura'n Transliteration";
+	   if(arg(3)=="SAD")
+	  $book="<br/><br/><br/><br/><br/><br/>Abu-Dawood Hadith";
+	  if(arg(3)=="AMH")
+	  $book="<br/><br/><br/><br/><br/><br/>Al-Muwatta Hadith";
+	  if(arg(3)=="NWH")
+	  $book="<br/><br/><br/><br/><br/><br/>Al-Nawawi Hadith";
+	  if(arg(3)=="HDQ")
+	  $book="<br/><br/><br/><br/><br/><br/>Al-Qudsi Hadith";
+	  if(arg(3)=="TIR")
+	  $book="<br/><br/><br/><br/><br/><br/>Al-Tirmidhi Hadith";
+	  if(arg(3)=="FQS")
+	  $book="<br/><br/><br/><br/><br/><br/>Fiqh-us-Sunnah Hadith";
+	  if(arg(3)=="SHB")
+	  $book="<br/><br/><br/><br/><br/><br/>Sahih Al-Bukhari Hadith";
+	    if(arg(3)=="SHM")
+	  $book="<br/><br/><br/><br/><br/><br/>Sahih Muslim Hadith";
+	    if(arg(2)=="timeline")
+	  $book="<br/><br/><br/><br/><br/><br/>Timeline History";
+	    if(arg(4)=="KAB")
+	  $book="<br/><br/><br/><br/><br/><br/>Khalifa Abu Bakr Hsiatory";
+	   if(arg(4)=="KUM")
+	  $book="<br/><br/><br/><br/><br/><br/>Umar bin al-Khattab Hsiatory";
+	   if(arg(4)=="KUT")
+	  $book="<br/><br/><br/><br/><br/><br/>Uthman Hsiatory";
+	   if(arg(4)=="KAL")
+	  $book="<br/><br/><br/><br/><br/><br/>Ali bin Abu Talib Hsiatory";
+	  if(arg(2)=="stories")
+	  $book= "<br/><br/><br/><br/><br/><br/>".arg(8)." Stories"; 
+
+
+
+	 if($row=="Alim.org")
+	 {
+	 $titl="";
+	 $logo="";
+	 $row= $book;
+	 }
+	  
+     $content = $logo.$titl.$row;
+
       $content = $titl.$row;
     }
     else {
