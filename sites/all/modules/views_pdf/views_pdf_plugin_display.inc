@@ -98,7 +98,50 @@ class views_pdf_plugin_display extends views_plugin_display_page {
     }
     
     if (empty($path_to_store_pdf)) {
-      $path_to_store_pdf = $this->view->name;
+		  if(arg(3)=="compare")
+	  $book="Compare Translation";
+	   if(arg(5)=="ASD")
+	  $book="Asad Translation";
+	   if(arg(5)=="MAL")
+	  $book="Malik Translation";
+	  if(arg(5)=="YAT")
+	  $book="YusufAli Translation";
+	  if(arg(5)=="PIK")
+	  $book="Pickthall Translation";
+	   if(arg(5)=="PIK")
+	  $book="Pickthall Translation";
+	   if(arg(5)=="TLT")
+	  $book="Qura'n Transliteration";
+	   if(arg(2)=="SAD")
+	  $book="Abu-Dawood Hadith";
+	  if(arg(2)=="AMH")
+	  $book="Al-Muwatta Hadith";
+	  if(arg(2)=="NWH")
+	  $book="Al-Nawawi Hadith";
+	  if(arg(2)=="HDQ")
+	  $book="Al-Qudsi Hadith";
+	  if(arg(2)=="TIR")
+	  $book="Al-Tirmidhi Hadith";
+	  if(arg(3)=="FQS")
+	  $book="Fiqh-us-Sunnah Hadith";
+	  if(arg(2)=="SHB")
+	  $book="Sahih Al-Bukhari Hadith";
+	    if(arg(2)=="SHM")
+	  $book="Sahih Muslim Hadith";
+	    if(arg(2)=="timeline")
+	  $book="Timeline History";
+	    if(arg(4)=="KAB")
+	  $book="Khalifa Abu Bakr Hsiatory";
+	   if(arg(4)=="KUM")
+	  $book="Umar bin al-Khattab Hsiatory";
+	   if(arg(4)=="KUT")
+	  $book="Uthman Hsiatory";
+	   if(arg(4)=="KAL")
+	  $book="Ali bin Abu Talib Hsiatory";
+	  if(arg(2)=="stories")
+	  $book= arg(7)." Stories";
+      $path_to_store_pdf = "Alim.org-".$book.".pdf";
+      //$path_to_store_pdf = $this->view->name;
     }
     
     if ($destination == 'I') {
