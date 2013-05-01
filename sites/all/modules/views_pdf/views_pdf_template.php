@@ -438,13 +438,10 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	  $book="<br/><br/><br/><br/><br/><br/>Ali bin Abu Talib Hsiatory";
 	  if(arg(2)=="stories")
 	  $book= "<br/><br/><br/><br/><br/><br/>".arg(8)." Stories"; 
-
-
-
 	 if($row=="Alim.org")
 	 {
 	 $titl="";
-	 $logo="";
+	 //$logo="";
 	 $row= $book;
 	 }
 	  
