@@ -369,7 +369,7 @@ class PdfTemplate extends FPDI
    $result_s = $view_s->result;
     $titl =  '<br/><h3>Surah '.$argg.'. '.$result_s[0]->term_data_name.'</h3><br/>';
      }
-	 if(arg(1)=="SOP")
+	 if(arg(4)=="SOP")
 	 {
 	 $query = db_query("SELECT node.nid AS nid,
    node_data_field_art_subsec_head.field_art_subsec_head_value AS node_data_field_art_subsec_head_field_art_subsec_head_value,
