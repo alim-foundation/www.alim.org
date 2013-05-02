@@ -438,13 +438,11 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	  $book="Ali bin Abu Talib Hsiatory";
 	  if(arg(2)=="stories")
 	  $book= "".arg(8)." Stories"; 
-	   if(arg(2)=="prophet")
-	  $book="Prophet Muhammad's (SAW)"; 
 	 if($row=="Alim.org")
 	 {
-	 $titl="";  
+	 $titl="";
 	 $logo="";
-	 $row= "<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
+	 $row= "<b><i><br/><br/><br/><br/><br/><br/>Source : Alim.org-".$book."</i></b>";
 	 }
 	  
      $content = $logo.$titl.$row;
@@ -723,7 +721,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
     }
     
     $this->SetY($rowY + $options['position']['row_height']);
-     $this->renderRow($x, $y, "Alim.org",$rowY + $options['position']['row_height']); 
+     $this->renderRow($x, $rowY, "Alim.org",$rowY + $options['position']['row_height']); 
     
   }
   
