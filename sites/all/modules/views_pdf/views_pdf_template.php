@@ -550,7 +550,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 			 $y+=30;
 		}
     // Write the content of a field to the pdf file:
-    $this->MultiCell($w, $h, $content.$ln.'d'.$maxh, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
+    $this->MultiCell($w, $h, $content.$h, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
     
     // Reset font to default
     $this->SetFont($this->defaultFontFamily, implode('', $this->defaultFontStyle), $this->defaultFontSize);
@@ -724,7 +724,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
     }
     
     $this->SetY($rowY + $options['position']['row_height']);
-     $this->renderRow($x, $y, "Alim.org",$headerOptions); 
+     $this->renderRow($x, $y, "Alim.org",$bodyOptions, $view, $id); 
     
   }
   
