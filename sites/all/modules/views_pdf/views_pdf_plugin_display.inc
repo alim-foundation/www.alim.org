@@ -140,6 +140,8 @@ class views_pdf_plugin_display extends views_plugin_display_page {
 	  $book="Ali bin Abu Talib Hsiatory";
 	  if(arg(2)=="stories")
 	  $book= arg(8)." Stories"; 
+	  if(arg(2)=="prophet")
+	  $book= "Prophet Muhammad's (SAW) ";
       $path_to_store_pdf = "Alim.org-".$book.".pdf";
       //$path_to_store_pdf = $this->view->name;
     }

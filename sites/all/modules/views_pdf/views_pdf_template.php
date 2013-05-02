@@ -438,12 +438,21 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	  $book="Ali bin Abu Talib Hsiatory";
 	  if(arg(2)=="stories")
 	  $book= "".arg(8)." Stories"; 
+	  if(arg(2)=="prophet")
+	  $book= "Prophet Muhammad's (SAW) ";
 	 if($row=="Alim.org")
 	 {
 	 $titl="";
-	 
+	 if(arg(3)=="compare"){
+	 $arg1=arg(4);
+	 $arg2=arg(5);
+	 $arg3=arg(3);}
+	 else{ $arg1=arg(4);
+	 $arg2=arg(5);$arg3='';}
+	 $coment= views_embed_view('ayahelaboration_bottom', 'block_2', array( $arg1, $arg2, $arg3));
 	 $logo="";
-	 $row= "<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
+	 $coment= views_embed_view('ayahelaboration_bottom', 'block_1', array(23,44,100));
+	 $row= "<br/><br/>".$coment. "<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
 	 }
 	  
      $content = $logo.$titl.$row;
