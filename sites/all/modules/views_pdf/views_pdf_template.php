@@ -440,8 +440,6 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	  $book= "".arg(8)." Stories"; 
 	 if($row=="Alim.org")
 	 {
-	 $y=$y+40;
-	 $options['position']['height']+=20;
 	 $titl="";
 	 
 	 $logo="";
@@ -719,11 +717,11 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
  
       }
       
-      $rowY += $options['position']['row_height'];
+    //  $rowY += $options['position']['row_height'];
       
     }
     
-    $this->SetY($rowY + $options['position']['row_height']);
+    //$this->SetY($rowY + $options['position']['row_height']);
      $this->renderRow($x, $y, "Alim.org",$headerOptions); 
     
   }
