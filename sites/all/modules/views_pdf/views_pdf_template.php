@@ -443,7 +443,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 $titl="";
 	 
 	 $logo="";
-	 $row= "<b><i><br/><br/><br/><br/><br/><br/>Source : Alim.org-".$book."</i></b>";
+	 $row= "<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
 	 }
 	  
      $content = $logo.$titl.$row;
@@ -545,7 +545,11 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
       $content = strip_tags($content);
     }
     
-    
+    if($row=="Alim.org")
+	 {
+	  $x =60;
+	  $y =60;
+	 }
                 
     // Write the content of a field to the pdf file:
     $this->MultiCell($w, $h, $content, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
