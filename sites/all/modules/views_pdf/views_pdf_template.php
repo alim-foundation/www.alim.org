@@ -721,7 +721,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
     }
     
     $this->SetY($rowY + $options['position']['row_height']);
-    $this->renderRow($x, $rowY, "Alim.org",$rowY + $options['position']['row_height']); 
+    $this->renderRow($x, $rowY, "Alim.org",$rowY + $options['position']['row_height']);
     
   }
   
