@@ -414,7 +414,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	  $book="Abu-Dawood Hadith";
 	  if(arg(3)=="AMH")
 	  $book="Al-Muwatta Hadith";
-	  if(arg(2)=="NWH")
+	  if(arg(3)=="NWH")
 	  $book="Al-Nawawi Hadith";
 	  if(arg(3)=="HDQ")
 	  $book="Al-Qudsi Hadith";
@@ -438,23 +438,11 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	  $book="Ali bin Abu Talib Hsiatory";
 	  if(arg(2)=="stories")
 	  $book= "".arg(8)." Stories"; 
-	  if(arg(2)=="prophet")
-	  $book= "Prophet Muhammad's (SAW) ";
 	 if($row=="Alim.org")
 	 {
-	 $titl="";$logo="";
-		 if(arg(3)=="compare"){
-		 $arg1=arg(4);
-		 $arg2=arg(5);
-		 $arg3=arg(3);
-		 }
-		 else if(arg(5)=="YAT" || arg(5)=="PIK" || arg(5)=="MAL" || arg(5)=="ASD"){
-		 $arg1=arg(4);
-		 $arg2=arg(5);
-		 $arg3='';
-		 }
-	 $coment= views_embed_view('ayahelaboration_bottom', 'block_2', array($arg1, $arg2,$arg3));
-	 $row= "<br/><br/>".$coment. "<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
+	 $titl="";
+	 $logo="";
+	 $row= "<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
 	 }
 	  
      $content = $logo.$titl.$row;
@@ -556,11 +544,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
       $content = strip_tags($content);
     }
     
-    if($row=="Alim.org")
-	 {
-	  $x =60;
-	  $y =60;
-	 }
+    
                 
     // Write the content of a field to the pdf file:
     $this->MultiCell($w, $h, $content, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
@@ -737,7 +721,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
     }
     
     $this->SetY($rowY + $options['position']['row_height']);
-     $this->renderRow($x, $rowY, "Alim.org",$headerOptions); 
+     $this->renderRow($x, $y, "Alim.org",$headerOptions); 
     
   }
   
