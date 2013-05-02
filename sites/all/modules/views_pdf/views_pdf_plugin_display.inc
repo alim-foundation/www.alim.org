@@ -116,7 +116,7 @@ class views_pdf_plugin_display extends views_plugin_display_page {
 	  $book="Abu-Dawood Hadith";
 	  if(arg(3)=="AMH")
 	  $book="Al-Muwatta Hadith";
-	  if(arg(3)=="NWH")
+	  if(arg(2)=="NWH")
 	  $book="Al-Nawawi Hadith";
 	  if(arg(3)=="HDQ")
 	  $book="Al-Qudsi Hadith";
