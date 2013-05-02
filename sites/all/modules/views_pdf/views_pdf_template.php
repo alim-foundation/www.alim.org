@@ -440,8 +440,10 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	  $book= "".arg(8)." Stories"; 
 	 if($row=="Alim.org")
 	 {
+	 $y=$y+40;
 	 $options['position']['height']+=20;
 	 $titl="";
+	 
 	 $logo="";
 	 $row= "<b><i><br/><br/><br/><br/><br/><br/>Source : Alim.org-".$book."</i></b>";
 	 }
