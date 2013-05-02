@@ -414,7 +414,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	  $book="Abu-Dawood Hadith";
 	  if(arg(3)=="AMH")
 	  $book="Al-Muwatta Hadith";
-	  if(arg(3)=="NWH")
+	  if(arg(2)=="NWH")
 	  $book="Al-Nawawi Hadith";
 	  if(arg(3)=="HDQ")
 	  $book="Al-Qudsi Hadith";
