@@ -396,53 +396,11 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 $titl= "<br/><h3>Timeline</h3><br/>";
 	 }
 	 $logo='<br/><br/><img src="http://alim.org/sites/all/themes/alim/images/alim-logo1.png" border="0" width="262" height="61"><br/>';
-	  if(arg(3)=="compare")
-	  $book="Surah ".arg(4)."-Ayah ".arg(5)."-Compare Translation";
-	   if(arg(5)=="ASD")
-	  $book="Surah ".arg(4)."-Asad Translation";
-	   if(arg(5)=="MAL")
-	  $book="Surah ".arg(4)."-Malik Translation";
-	  if(arg(5)=="YAT")
-	  $book="Surah ".arg(4)."-YusufAli Translation";
-	  if(arg(5)=="PIK")
-	  $book="Surah ".arg(4)."-Pickthall Translation";
-	   if(arg(5)=="PIK")
-	  $book="Surah ".arg(4)."-Pickthall Translation";
-	   if(arg(5)=="TLT")
-	  $book="Surah ".arg(4)."-Qura'n Transliteration";
-	   if(arg(3)=="SAD")
-	  $book="Abu-Dawood Hadith";
-	  if(arg(3)=="AMH")
-	  $book="Al-Muwatta Hadith";
-	  if(arg(3)=="NWH")
-	  $book="Al-Nawawi Hadith";
-	  if(arg(3)=="HDQ")
-	  $book="Al-Qudsi Hadith";
-	  if(arg(3)=="TIR")
-	  $book="Al-Tirmidhi Hadith";
-	  if(arg(3)=="FQS")
-	  $book="Fiqh-us-Sunnah Hadith";
-	  if(arg(3)=="SHB")
-	  $book="Sahih Al-Bukhari Hadith";
-	    if(arg(3)=="SHM")
-	  $book="Sahih Muslim Hadith";
-	    if(arg(2)=="timeline")
-	  $book="Timeline History";
-	    if(arg(4)=="KAB")
-	  $book="Khalifa Abu Bakr Hsiatory";
-	   if(arg(4)=="KUM")
-	  $book="Umar bin al-Khattab Hsiatory";
-	   if(arg(4)=="KUT")
-	  $book="Uthman Hsiatory";
-	   if(arg(4)=="KAL")
-	  $book="Ali bin Abu Talib Hsiatory";
-	  if(arg(2)=="stories")
-	  $book= "".arg(8)." Stories"; 
 	 if($row=="Alim.org")
 	 {
 	 $titl="";
 	 $logo="";
-	 $row= "<b><i><br/><br/><br/><br/><br/><br/>Source : Alim.org-".$book."</i></b>";
+	 $row= "";
 	 }
 	  
      $content = $logo.$titl.$row;
@@ -706,7 +664,52 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
         $this->SetX($x);
         
         $bodyOptions['position']['height'] = 0;
-                
+        if(end($rows)==current($rows))
+		{
+		  if(arg(3)=="compare")
+		  $book="Surah ".arg(4)."-Ayah ".arg(5)."-Compare Translation";
+		   if(arg(5)=="ASD")
+		  $book="Surah ".arg(4)."-Asad Translation";
+		   if(arg(5)=="MAL")
+		  $book="Surah ".arg(4)."-Malik Translation";
+		  if(arg(5)=="YAT")
+		  $book="Surah ".arg(4)."-YusufAli Translation";
+		  if(arg(5)=="PIK")
+		  $book="Surah ".arg(4)."-Pickthall Translation";
+		   if(arg(5)=="PIK")
+		  $book="Surah ".arg(4)."-Pickthall Translation";
+		   if(arg(5)=="TLT")
+		  $book="Surah ".arg(4)."-Qura'n Transliteration";
+		   if(arg(3)=="SAD")
+		  $book="Abu-Dawood Hadith";
+		  if(arg(3)=="AMH")
+		  $book="Al-Muwatta Hadith";
+		  if(arg(3)=="NWH")
+		  $book="Al-Nawawi Hadith";
+		  if(arg(3)=="HDQ")
+		  $book="Al-Qudsi Hadith";
+		  if(arg(3)=="TIR")
+		  $book="Al-Tirmidhi Hadith";
+		  if(arg(3)=="FQS")
+		  $book="Fiqh-us-Sunnah Hadith";
+		  if(arg(3)=="SHB")
+		  $book="Sahih Al-Bukhari Hadith";
+			if(arg(3)=="SHM")
+		  $book="Sahih Muslim Hadith";
+			if(arg(2)=="timeline")
+		  $book="Timeline History";
+			if(arg(4)=="KAB")
+		  $book="Khalifa Abu Bakr Hsiatory";
+		   if(arg(4)=="KUM")
+		  $book="Umar bin al-Khattab Hsiatory";
+		   if(arg(4)=="KUT")
+		  $book="Uthman Hsiatory";
+		   if(arg(4)=="KAL")
+		  $book="Ali bin Abu Talib Hsiatory";
+		  if(arg(2)=="stories")
+		  $book= "".arg(8)." Stories"; 
+		$row=$row."<br/><br/>Alim.org:".$book;
+		}        
         $this->renderRow($x, $y, $row, $bodyOptions, $view, $id);
         
         $x += $bodyOptions['position']['width'];
