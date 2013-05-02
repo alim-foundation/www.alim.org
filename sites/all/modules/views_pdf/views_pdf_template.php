@@ -447,7 +447,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 $arg1=arg(4);
 	 $arg2=arg(5);
 	 $arg3=arg(3);}
-	 else{ $arg1=arg(4);
+	 else if(arg(5)=="YAT" || arg(5)=="PIK" || arg(5)=="MAL" || arg(5)=="ASD"){ $arg1=arg(4);
 	 $arg2=arg(5);$arg3='';}
 	 $coment= views_embed_view('ayahelaboration_bottom', 'block_2', array( $arg1, $arg2, $arg3));
 	 $logo="";
