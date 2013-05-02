@@ -440,9 +440,10 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	  $book= "".arg(8)." Stories"; 
 	 if($row=="Alim.org")
 	 {
+	 $coment= views_embed_view('ayahelaboration_bottom', 'block_2', array(arg(4),arg(5)));
 	 $titl="";
 	 $logo="";
-	 $row= "<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
+	 $row= "<br/><br/>".$coment."<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
 	 }
 	  
      $content = $logo.$titl.$row;
