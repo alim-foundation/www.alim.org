@@ -395,7 +395,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 {
 	 $titl= "<br/><h3>Timeline</h3><br/>";
 	 }
-	 //$logo='<br/><br/><img src="http://alim.org/sites/all/themes/alim/images/alim-logo1.png" border="0" width="262" height="61"><br/>';
+	// $logo='<br/><br/><img src="http://alim.org/sites/all/themes/alim/images/alim-logo1.png" border="0" width="262" height="61"><br/>';
 	  if(arg(3)=="compare")
 	  $book="Surah ".arg(4)."-Ayah ".arg(5)."-Compare Translation";
 	   if(arg(5)=="ASD")
@@ -429,18 +429,23 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	    if(arg(2)=="timeline")
 	  $book="Timeline History";
 	    if(arg(4)=="KAB")
-	  $book="Khalifa Abu Bakr Hsiatory";
+	  $book="Khalifa Abu Bakr History";
 	   if(arg(4)=="KUM")
-	  $book="Umar bin al-Khattab Hsiatory";
+	  $book="Umar bin al-Khattab History";
 	   if(arg(4)=="KUT")
-	  $book="Uthman Hsiatory";
+	  $book="Uthman History";
 	   if(arg(4)=="KAL")
-	  $book="Ali bin Abu Talib Hsiatory";
+	  $book="Ali bin Abu Talib History";
 	  if(arg(2)=="stories")
-	  $book= "".arg(8)." Stories"; 
+	  $book= "".arg(8)." Stories";
+	   if(arg(2)=="prophet")
+	  $book= "Prophet Muhammad's (SAW)";
+	   
 	 if($row=="Alim.org")
 	 {
+	 if(arg(5)=="PIK" || arg(5)=="ASD" || arg(5)=="YAT" || arg(5)=="MAL"){
 	 $coment= views_embed_view('ayahelaboration_bottom', 'block_2', array(arg(4),arg(5)));
+	 }
 	 $titl="";
 	 $logo="";
 	 $row= "<br/><br/>".$coment."<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";

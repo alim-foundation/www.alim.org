@@ -131,13 +131,13 @@ class views_pdf_plugin_display extends views_plugin_display_page {
 	    if(arg(2)=="timeline")
 	  $book="Timeline History";
 	    if(arg(4)=="KAB")
-	  $book="Khalifa Abu Bakr Hsiatory";
+	  $book="Khalifa Abu Bakr History";
 	   if(arg(4)=="KUM")
-	  $book="Umar bin al-Khattab Hsiatory";
+	  $book="Umar bin al-Khattab History";
 	   if(arg(4)=="KUT")
-	  $book="Uthman Hsiatory";
+	  $book="Uthman History";
 	   if(arg(4)=="KAL")
-	  $book="Ali bin Abu Talib Hsiatory";
+	  $book="Ali bin Abu Talib History";
 	  if(arg(2)=="stories")
 	  $book= arg(8)." Stories"; 
 	  if(arg(2)=="prophet")
