@@ -445,7 +445,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 $row= "<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
 	 }
 	  
-     $content = $logo.$titl.$row;
+     $content = $titl.$row;
 
      // $content = $titl.$row;
     }
