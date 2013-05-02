@@ -544,13 +544,13 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
       $content = strip_tags($content);
     }
 	//footer
-	if (strpos($content,'Alim.org') !== false) {
+/*	if (strpos($content,'Alim.org') !== false) {
     		 $h+=50;
 			 $x+=30;
 			 $y+=30;
-		}
+		}*/
     // Write the content of a field to the pdf file:
-    $this->MultiCell($w, $h, $content.$h, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
+    $this->MultiCell($w, $h, $content, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
     
     // Reset font to default
     $this->SetFont($this->defaultFontFamily, implode('', $this->defaultFontStyle), $this->defaultFontSize);
