@@ -445,11 +445,12 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 {
 	 if(arg(5)=="PIK" || arg(5)=="ASD" || arg(5)=="YAT" || arg(5)=="MAL" || arg(3)=="compare"){
 	 $argnull="";
-	 $coment= views_embed_view('ayahelaboration_bottom', 'block_2', array(arg(4),arg(5),$argnull));
+	 //$coment= views_embed_view('ayahelaboration_bottom', 'block_2', array(arg(4),arg(5),$argnull));
+	  $coment =views_embed_view("ayahelaboration_bottom", "block_2", arg(4),arg(5),$argnull);
 	 }
 	 $titl="";
 	 $logo="";
-	 $row= "<br/><br/>".$coment."<b><i><br/><br/>Source : Alim.org-".$book."</i></b>".arg(4).arg(5);
+	 $row= "<br/><br/>".$coment."<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
 	 }
 	  
      $content = $logo.$titl.$row;
