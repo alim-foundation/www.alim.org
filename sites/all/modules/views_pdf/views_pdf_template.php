@@ -449,7 +449,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 $viewName = 'ayahelaboration_bottom';
 	$display_id = 'block_2';
 	$myArgs = array(arg(4),arg(5),$argnull);
-	$coment views_embed_view($viewName, $display_id, $myArgs);
+	$coment = views_embed_view($viewName, $display_id, $myArgs);
 
 	 }
 	 $titl="";
