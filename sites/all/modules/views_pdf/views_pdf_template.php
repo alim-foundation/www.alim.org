@@ -445,7 +445,11 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 {
 	 if(arg(5)=="PIK" || arg(5)=="ASD" || arg(5)=="YAT" || arg(5)=="MAL" || arg(3)=="compare"){
 	 $argnull="";
-	 $coment= views_embed_view('ayahelaboration_bottom', 'block_2', array(arg(4),arg(5),$argnull));
+	// $coment= views_embed_view('ayahelaboration_bottom', 'block_2', array(arg(4),arg(5),$argnull));
+	 $viewName = 'ayahelaboration_bottom';
+	$display_id = 'block_2';
+	$myArgs = array(arg(4),arg(5),$argnull);
+	$coment views_embed_view($viewName, $display_id, $myArgs);
 
 	 }
 	 $titl="";
