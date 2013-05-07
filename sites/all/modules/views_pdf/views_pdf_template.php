@@ -553,6 +553,9 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
     
                 
     // Write the content of a field to the pdf file:
+	$searchhtmlsup = array("<span class='fn'>", "</span>");
+	$replaceoriginalsup = array('<sup style="color:red">', '</sup>');
+	$content = str_replace($searchhtmlsup, $replaceoriginalsup, $content);
     $this->MultiCell($w, $h, $content, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
     
     // Reset font to default
