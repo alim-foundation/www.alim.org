@@ -444,7 +444,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 if($row=="Alim.org")
 	 {
 	 if(arg(5)=="PIK" || arg(5)=="ASD" || arg(5)=="YAT" || arg(5)=="MAL" || arg(3)=="compare"){
-	 $coment= views_embed_view('ayahelaboration_bottom', 'block_2', array(arg(4),arg(5)));
+	 $coment= views_embed_view('ayahelaboration_bottom', 'defaults', array(arg(4),arg(5)));
 	 }
 	 $titl="";
 	 $logo="";
