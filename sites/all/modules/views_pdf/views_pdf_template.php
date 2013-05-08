@@ -447,7 +447,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 $argnull="";
 	// $coment= views_embed_view('ayahelaboration_bottom', 'block_2', array(arg(4),arg(5),$argnull));
 		$sel = db_query("SELECT node.nid AS nid, node_data_field_note_id.field_note_id_value AS node_data_field_note_id_field_note_id_value, node.type AS node_type, node.vid AS node_vid, node_revisions.body AS node_revisions_body, node_revisions.format AS node_revisions_format FROM node node  LEFT JOIN content_field_surah_no node_data_field_surah_no ON node.vid = node_data_field_surah_no.vid LEFT JOIN content_field_quran_bk_code node_data_field_quran_bk_code ON node.vid = node_data_field_quran_bk_code.vid LEFT JOIN content_type_quran_ayah_elaboration node_data_field_note_id ON node.vid = node_data_field_note_id.vid LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid WHERE (node.type in ('quran_ayah_elaboration')) AND (node_data_field_surah_no.field_surah_no_value = 1) AND (node_data_field_quran_bk_code.field_quran_bk_code_value = YAT) ORDER BY node_data_field_note_id_field_note_id_value ASC");
-
+$coment="";
 while($res = db_fetch_object($sel))
 {
 $coment.= $res->node_data_field_note_id_field_note_id_value  . "-" .  $res->node_revisions_body."</br>";
