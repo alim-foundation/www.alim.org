@@ -397,19 +397,19 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 }
 	 $logo='<br/><br/><img src="/sites/all/themes/alim/images/alim-logo1.png" border="0" width="262" height="61"><br/>';
 	  if(arg(3)=="compare")
-	  $book="Surah ".arg(4)."-Ayah ".arg(5)."-Compare Translation";
+	  $book="Compare Translation"."-Surah ".arg(4)."-Ayah ".arg(5);
 	   if(arg(5)=="ASD")
-	  $book="Surah ".arg(4)."-Asad Translation";
+	  $book="Asad Translation"."-Surah ".arg(4);
 	   if(arg(5)=="MAL")
-	  $book="Surah ".arg(4)."-Malik Translation";
+	  $book="Malik Translation"."-Surah ".arg(4);
 	  if(arg(5)=="YAT")
-	  $book="Surah ".arg(4)."-YusufAli Translation";
+	  $book="YusufAli Translation"."-Surah ".arg(4);
 	  if(arg(5)=="PIK")
-	  $book="Surah ".arg(4)."-Pickthall Translation";
+	  $book="Pickthall Translation"."-Surah ".arg(4);
 	   if(arg(5)=="PIK")
-	  $book="Surah ".arg(4)."-Pickthall Translation";
+	  $book="Pickthall Translation"."-Surah ".arg(4);
 	   if(arg(5)=="TLT")
-	  $book="Surah ".arg(4)."-Qura'n Transliteration";
+	  $book="Qura'n Transliteration"."-Surah ".arg(4);
 	   if(arg(3)=="SAD")
 	  $book="Abu-Dawood Hadith";
 	  if(arg(3)=="AMH")
@@ -461,7 +461,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 
 	 $titl="";
 	 $logo="";
-	 $row= "<br/><br/><h4 style=color:'red'>Author Comments</h4>".$coment."<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
+	 $row= "<br/><br/><h4 style=color:'red'>Author Comments</h4>".$coment."<span style='color:#58595B;'><i><br/><br/>Source : Alim.org-".$book."</i></span>";
 	 }
 	  
      $content = $logo.$titl.$row;

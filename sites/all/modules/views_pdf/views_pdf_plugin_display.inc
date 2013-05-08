@@ -98,20 +98,20 @@ class views_pdf_plugin_display extends views_plugin_display_page {
     }
     
     if (empty($path_to_store_pdf)) {
-		  if(arg(3)=="compare")
-	  $book="Surah ".arg(4)."-Ayah ".arg(5)."-Compare Translation";
+	  if(arg(3)=="compare")
+	  $book="Compare Translation"."-Surah ".arg(4)."-Ayah ".arg(5);
 	   if(arg(5)=="ASD")
-	  $book="Surah ".arg(4)."-Asad Translation";
+	  $book="Asad Translation"."-Surah ".arg(4);
 	   if(arg(5)=="MAL")
-	  $book="Surah ".arg(4)."-Malik Translation";
+	  $book="Malik Translation"."-Surah ".arg(4);
 	  if(arg(5)=="YAT")
-	  $book="Surah ".arg(4)."-YusufAli Translation";
+	  $book="YusufAli Translation"."-Surah ".arg(4);
 	  if(arg(5)=="PIK")
-	  $book="Surah ".arg(4)."-Pickthall Translation";
+	  $book="Pickthall Translation"."-Surah ".arg(4);
 	   if(arg(5)=="PIK")
-	  $book="Surah ".arg(4)."-Pickthall Translation";
+	  $book="Pickthall Translation"."-Surah ".arg(4);
 	   if(arg(5)=="TLT")
-	  $book="Surah ".arg(4)."-Qura'n Transliteration";
+	  $book="Qura'n Transliteration"."-Surah ".arg(4);
 	   if(arg(3)=="SAD")
 	  $book="Abu-Dawood Hadith";
 	  if(arg(3)=="AMH")
