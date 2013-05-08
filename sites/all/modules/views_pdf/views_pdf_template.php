@@ -445,8 +445,9 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 {
 	 if(arg(5)=="ASD" || arg(5)=="YAT"){
 	 $argnull="";
+	 $coment= views_embed_view('ayahelaboration_bottom', 'block_2', array(arg(4),arg(5),$argnull));
 	 $view = views_get_view('ayahelaboration_bottom');
-	 $coment = $view->execute_display('block_2', array(arg(4),arg(5),$argnull));
+	 $coment = $view->execute_display('block_2', array(arg(4),arg(5)));
 	 $coment=$coment['content'];
 	 }
 	 if(arg(3)=="compare") 
@@ -456,6 +457,8 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 $coment=$coment['content'];
 
 	 }
+
+
 	 $titl="";
 	 $logo="";
 	 $row= "<br/><br/><h4 style=color:'red'>Author Comments</h4><br/>".$coment."<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
@@ -476,9 +479,9 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
     }
     
     // Apply the hyphenation patterns to the content:
-   // if (!isset($options['text']['hyphenate']) && is_object($view) && is_object($view->display_handler)) {
-    //  $options['text']['hyphenate'] = $view->display_handler->get_option('default_text_hyphenate');
-   // }
+    if (!isset($options['text']['hyphenate']) && is_object($view) && is_object($view->display_handler)) {
+      $options['text']['hyphenate'] = $view->display_handler->get_option('default_text_hyphenate');
+    }
     
     
     
