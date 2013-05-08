@@ -443,12 +443,19 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	   
 	 if($row=="Alim.org")
 	 {
-	 if(arg(5)=="ASD" || arg(5)=="YAT" || arg(3)=="compare"){
+	 if(arg(5)=="ASD" || arg(5)=="YAT"){
 	 $argnull="";
-	 $coment= views_embed_view('ayahelaboration_bottom', 'block_2', array(arg(4),arg(5),$argnull));
 	 $view = views_get_view('ayahelaboration_bottom');
-	 $coment = $view->execute_display('block_2', array(arg(4),arg(5)));
+	 $coment = $view->execute_display('block_2', array(arg(4),arg(5),$argnull));
 	 $coment=$coment['content'];
+	 }
+	 if(arg(3)=="compare")
+	 {
+	 $argnull="";
+	 $view = views_get_view('ayah_elaboration_author');
+	 $coment = $view->execute_display('page_1', array(arg(4),arg(5),$argnull));
+	 $coment=$coment['content'];
+
 	 }
 	 $titl="";
 	 $logo="";
