@@ -476,9 +476,9 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
     }
     
     // Apply the hyphenation patterns to the content:
-    if (!isset($options['text']['hyphenate']) && is_object($view) && is_object($view->display_handler)) {
-      $options['text']['hyphenate'] = $view->display_handler->get_option('default_text_hyphenate');
-    }
+   // if (!isset($options['text']['hyphenate']) && is_object($view) && is_object($view->display_handler)) {
+    //  $options['text']['hyphenate'] = $view->display_handler->get_option('default_text_hyphenate');
+   // }
     
     
     
