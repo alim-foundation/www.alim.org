@@ -452,7 +452,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 }
 	 $titl="";
 	 $logo="";
-	 $row= "<br/><br/>".$coment."<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
+	 $row= "<br/><br/><h4 style=color:'red'>Author Comments</h4><br/>".$coment."<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
 	 }
 	  
      $content = $logo.$titl.$row;
