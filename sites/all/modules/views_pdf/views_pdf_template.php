@@ -461,7 +461,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 
 	 $titl="";
 	 $logo="";
-	 $row= "<br/><br/><h4 style=color:'red'>Author Comments</h4><br/>".$coment."<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
+	 $row= "<br/><br/><h4 style=color:'red'>Author Comments</h4>".$coment."<b><i><br/><br/>Source : Alim.org-".$book."</i></b>";
 	 }
 	  
      $content = $logo.$titl.$row;
@@ -479,10 +479,10 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
     }
     
     // Apply the hyphenation patterns to the content:
-    if (!isset($options['text']['hyphenate']) && is_object($view) && is_object($view->display_handler)) {
+/*    if (!isset($options['text']['hyphenate']) && is_object($view) && is_object($view->display_handler)) {
       $options['text']['hyphenate'] = $view->display_handler->get_option('default_text_hyphenate');
     }
-    
+*/    
     
     
     if (isset($options['text']['hyphenate']) && $options['text']['hyphenate'] != 'none') {
