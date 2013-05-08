@@ -453,7 +453,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 {
 	 $argnull="";
 	 $view = views_get_view('ayah_elaboration_author');
-	 $coment = $view->execute_display('page_1', array(arg(4),arg(5),$argnull));
+	 $coment = $view->execute_display('default', array(arg(4),arg(5),$argnull));
 	 $coment=$coment['content'];
 
 	 }
