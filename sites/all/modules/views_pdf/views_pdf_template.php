@@ -516,9 +516,11 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 {
 	 $view = views_get_view('ayah_elaboration_author');
 	 $coment = $view->execute_display('block_1', array(arg(4),arg(5)));
-	 $coment="<h4 style=color:'red'>Author Comments</h4>".$coment['content'];
+	 $coment=$coment['content'];
 
 	 }
+	 if($coment)
+	 $coment = "<h4 style=color:'red'>Author Comments</h4>".$coment;
 
 
 	 $titl="";
