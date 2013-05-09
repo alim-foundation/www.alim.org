@@ -524,7 +524,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 $titl="";
 	 $logo="";
 	 //$link-page="<a href='".$link."'>Link to Page</a>";
-	 $row= "<br/><br/>".$coment."<span style='color:#58595B;'><i><br/><br/>Source : Alim.org-".$book."</i></span><br/>".$link-page;
+	 $row= "<br/><br/>".$coment."<span style='color:#58595B;'><i><br/><br/>Source : Alim.org-".$book."</i></span><br/>";
 	 }
 	  
      $content = $logo.$titl.$row;
