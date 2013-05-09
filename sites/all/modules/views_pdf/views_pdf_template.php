@@ -397,49 +397,111 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 }
 	 $logo='<br/><br/><img src="/sites/all/themes/alim/images/alim-logo1.png" border="0" width="262" height="61"><br/>';
 	  if(arg(3)=="compare")
+	  {
 	  $book="Compare Translation"."-Surah ".arg(4)."-Ayah ".arg(5);
+	  $link="http://alim.org/library/quran/ayah/compare/".arg(4)."/".arg(5);
+	  }
 	   if(arg(5)=="ASD")
+	   {
 	  $book="Asad Translation"."-Surah ".arg(4);
+	  $link="http://alim.org/library/quran/surah/english/".arg(4)."/ASD";
+	  }
 	   if(arg(5)=="MAL")
+	   {
 	  $book="Malik Translation"."-Surah ".arg(4);
+	  $link="http://alim.org/library/quran/surah/english/".arg(4)."/MAL";
+	  }
 	  if(arg(5)=="YAT")
+	  {
 	  $book="YusufAli Translation"."-Surah ".arg(4);
+	  $link="http://alim.org/library/quran/surah/english/".arg(4)."/YAT";
+	  }
 	  if(arg(5)=="PIK")
+	  {
 	  $book="Pickthall Translation"."-Surah ".arg(4);
-	   if(arg(5)=="PIK")
-	  $book="Pickthall Translation"."-Surah ".arg(4);
+	  $link="http://alim.org/library/quran/surah/english/".arg(4)."/PIK";
+	  }
 	   if(arg(5)=="TLT")
+	   {
 	  $book="Qura'n Transliteration"."-Surah ".arg(4);
+	  $link="http://alim.org/library/quran/surah/english/".arg(4)."/TLT";
+	  }
 	   if(arg(3)=="SAD")
-	  $book="Abu-Dawood Hadith";
+	   {
+	  $book="Abu-Dawood Hadith-".arg(4);
+	  $link="http://alim.org/library/hadith/SAD/".arg(4);
+	  }
 	  if(arg(3)=="AMH")
-	  $book="Al-Muwatta Hadith";
+	  {
+	  $book="Al-Muwatta Hadith-".arg(4).".".arg(5);
+	   $link="http://alim.org/library/hadith/AMH/".arg(4)."/".arg(5);
+	  }
 	  if(arg(2)=="NWH")
-	  $book="Al-Nawawi Hadith";
+	  {
+	  $book="Al-Nawawi Hadith-".arg(3).".".arg(4);
+	  $link="http://alim.org/library/hadith/NWH/".arg(3)."/".arg(4);
+	  }
 	  if(arg(3)=="HDQ")
-	  $book="Al-Qudsi Hadith";
+	  {
+	  $book="Al-Qudsi Hadith-".arg(4);
+	  $link="http://alim.org/library/hadith/HDQ/".arg(4);
+	  }
 	  if(arg(3)=="TIR")
-	  $book="Al-Tirmidhi Hadith";
+	  {
+	  $book="Al-Tirmidhi Hadith-".arg(4);
+	   $link="http://alim.org/library/hadith/TIR/".arg(4);
+	  }
 	  if(arg(3)=="FQS")
-	  $book="Fiqh-us-Sunnah Hadith";
+	  {
+	  $book="Fiqh-us-Sunnah Hadith-".arg(4).".".arg(5);
+	  $link="http://alim.org/library/hadith/fiq/FQS/".arg(4)."/".arg(5);
+	  }
 	  if(arg(3)=="SHB")
-	  $book="Sahih Al-Bukhari Hadith";
+	  {
+	  $book="Sahih Al-Bukhari Hadith-".arg(4).".".arg(5);
+	  $link="http://alim.org/library/hadith/SHB/".arg(4)."/".arg(5);
+	  }
 	    if(arg(3)=="SHM")
-	  $book="Sahih Muslim Hadith";
+		{
+	  $book="Sahih Muslim Hadith-".arg(4);
+	  $link="http://alim.org/library/hadith/SHM/".arg(4);
+	 
+	  }
 	    if(arg(2)=="timeline")
-	  $book="Timeline History";
+		{
+	  $book="Timeline History-".arg(4);
+	   $link="http://alim.org/library/history/timeline/".arg(4);
+	  }
 	    if(arg(4)=="KAB")
+		{
 	  $book="Khalifa Abu Bakr History";
+	   $link="http://alim.org/library/biography/khalifa/content/KAB/".arg(5)."/".arg(7);
+	  }
 	   if(arg(4)=="KUM")
+	   {
 	  $book="Umar bin al-Khattab History";
+	  $link="http://alim.org/library/biography/khalifa/content/KUM/".arg(5)."/".arg(7);
+	  }
 	   if(arg(4)=="KUT")
+	   {
 	  $book="Uthman History";
+	    $link="http://alim.org/library/biography/khalifa/content/KUT/".arg(5)."/".arg(7);
+	  }
 	   if(arg(4)=="KAL")
+	   {
 	  $book="Ali bin Abu Talib History";
+	   $link="http://alim.org/library/biography/khalifa/content/KAL/".arg(5)."/".arg(7);
+	  }
 	  if(arg(2)=="stories")
+	  {
 	  $book= "".arg(8)." Stories";
+	   $link="http://alim.org/library/biography/stories/content/SOP/".arg(5)."/".arg(7);
+	  }
 	   if(arg(2)=="prophet")
+	   {
 	  $book= "Prophet Muhammad's (SAW)";
+	    $link="http://alim.org/library/hadith/prophet";
+	  }
 	   
 	 if($row=="Alim.org")
 	 {
@@ -454,14 +516,15 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 {
 	 $view = views_get_view('ayah_elaboration_author');
 	 $coment = $view->execute_display('block_1', array(arg(4),arg(5)));
-	 $coment=$coment['content'];
+	 $coment="<h4 style=color:'red'>Author Comments</h4>".$coment['content'];
 
 	 }
 
 
 	 $titl="";
 	 $logo="";
-	 $row= "<br/><br/><h4 style=color:'red'>Author Comments</h4>".$coment."<span style='color:#58595B;'><i><br/><br/>Source : Alim.org-".$book."</i></span>";
+	 //$link-page="<a href='".$link."'>Link to Page</a>";
+	 $row= "<br/><br/>".$coment."<span style='color:#58595B;'><i><br/><br/>Source : Alim.org-".$book."</i></span><br/>".$link-page;
 	 }
 	  
      $content = $logo.$titl.$row;
