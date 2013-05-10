@@ -29,7 +29,7 @@
 	 $viewName = 'arabic_text';	  
    $view_11 = views_get_view($viewName);
    $view_11->set_display('default');
-   $view_11->set_arguments(array(1,1,'ARB'));
+   $view_11->set_arguments(array(1,1,arg(5))); 
    $view_11->execute();
    $result_11 = $view_11->result;
    $exp = explode($result_11[0]->node_revisions_body,$output);
