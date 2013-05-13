@@ -106,9 +106,9 @@ $('.views-field-field-ayah-no-value-2').html('');
 
 
 
-<p><a href="javascript:if($('.subclipping_content').html())
+<p><a class="clips_printer" href="javascript:if($('.subclipping_content').html())
 
-{ClickHereToPrint();}" >Print</a></p>
+{ClickHereToPrint();}" >&nbsp;</a></p>
 
 
 
