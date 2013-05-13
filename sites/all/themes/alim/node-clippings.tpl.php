@@ -98,7 +98,7 @@ function ClickHereToPrint() {
 	//}
 
 }
-$('.selectaudio').html('');
+//$('.selectaudio').html('');
 
 
 
