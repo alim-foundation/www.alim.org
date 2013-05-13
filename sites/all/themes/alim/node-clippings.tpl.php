@@ -98,6 +98,7 @@ function ClickHereToPrint() {
 	//}
 
 }
+$('.selectaudio').html('');
 
 
 
