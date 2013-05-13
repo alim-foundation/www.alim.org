@@ -98,7 +98,7 @@ function ClickHereToPrint() {
 	//}
 
 }
-//$('.selectaudio').html('');
+$('.views-field-field-ayah-no-value-2').html('');
 
 
 
