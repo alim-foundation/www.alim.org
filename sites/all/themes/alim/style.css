@@ -7687,7 +7687,8 @@ div.compare-audioblockbottom { background:url(images/bg_audio_bottom.png) top le
 }
 .selectaudio
 {
-  padding:0px;
+  padding: 10px;
+background-color: rgb(255, 255, 255);
   margin:0px;
   height:auto;
 
