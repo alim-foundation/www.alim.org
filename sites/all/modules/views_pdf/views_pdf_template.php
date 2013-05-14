@@ -525,8 +525,9 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 
 	 $titl="";
 	 $logo="";
-	 //$link-page="<a href='".$link."'>Link to Page</a>";
-	 $row= "<br/><br/>".$coment."<span style='color:#58595B;'><i><br/><br/>Source : Alim.org-".$book."</i></span><br/>";
+	 if($link)
+	 $link_page = '<br/><a href = "'.$link.'">Link to Page</a> ';
+	 $row= $link_page."<br/><br/>".$coment."<span style='color:#58595B;'><i><br/><br/>Source : Alim.org-".$book."</i></span><br/>";
 	 }
 	  
      $content = $logo.$titl.$row;
@@ -634,7 +635,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	$searchhtmlsup = array("<span class='fn'>", "</span>");
 	$replaceoriginalsup = array('<sup style="color:red"><b>', '</b></sup>');
 	$content = str_replace($searchhtmlsup, $replaceoriginalsup, $content);
-	if($link)
+/*	if($link)
 	{
 	$content =$content."Link to Page";
 	$searchhtmlsup = array("Link to Page");
@@ -642,7 +643,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	$content = str_replace($searchhtmlsup, $replaceoriginalsup, $content);
 
 	}
-    $this->MultiCell($w, $h, $content, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
+*/    $this->MultiCell($w, $h, $content, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
     
     // Reset font to default
     $this->SetFont($this->defaultFontFamily, implode('', $this->defaultFontStyle), $this->defaultFontSize);
