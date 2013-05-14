@@ -399,32 +399,32 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	  if(arg(3)=="compare")
 	  {
 	  $book="Compare Translation"."-Surah ".arg(4)."-Ayah ".arg(5);
-	  //$link="http://alim.org/library/quran/ayah/compare/".arg(4)."/".arg(5);
+	  $link="http://alim.org/library/quran/ayah/compare/".arg(4)."/".arg(5);
 	  }
 	   if(arg(5)=="ASD")
 	   {
 	  $book="Asad Translation"."-Surah ".arg(4);
-	  //$link="http://alim.org/library/quran/surah/english/".arg(4)."/ASD";
+	  $link="http://alim.org/library/quran/surah/english/".arg(4)."/ASD";
 	  }
 	   if(arg(5)=="MAL")
 	   {
 	  $book="Malik Translation"."-Surah ".arg(4);
-	 // $link="http://alim.org/library/quran/surah/english/".arg(4)."/MAL";
+	  $link="http://alim.org/library/quran/surah/english/".arg(4)."/MAL";
 	  }
 	  if(arg(5)=="YAT")
 	  {
 	  $book="YusufAli Translation"."-Surah ".arg(4);
-	  //$link="http://alim.org/library/quran/surah/english/".arg(4)."/YAT";
+	  $link="http://alim.org/library/quran/surah/english/".arg(4)."/YAT";
 	  }
 	  if(arg(5)=="PIK")
 	  {
 	  $book="Pickthall Translation"."-Surah ".arg(4);
-	  //$link="http://alim.org/library/quran/surah/english/".arg(4)."/PIK";
+	  $link="http://alim.org/library/quran/surah/english/".arg(4)."/PIK";
 	  }
 	   if(arg(5)=="TLT")
 	   {
 	  $book="Qura'n Transliteration"."-Surah ".arg(4);
-	  //$link="http://alim.org/library/quran/surah/english/".arg(4)."/TLT";
+	  $link="http://alim.org/library/quran/surah/english/".arg(4)."/TLT";
 	  }
 	   if(arg(3)=="SAD")
 	   {
@@ -454,7 +454,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	  if(arg(3)=="FQS")
 	  {
 	  $book="Fiqh-us-Sunnah Hadith-".arg(4).".".arg(5);
-	  //$link="http://alim.org/library/hadith/fiq/FQS/".arg(4)."/".arg(5);
+	  $link="http://alim.org/library/hadith/fiq/FQS/".arg(4)."/".arg(5);
 	  }
 	  if(arg(3)=="SHB")
 	  {
@@ -470,7 +470,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	    if(arg(2)=="timeline")
 		{
 	  $book="Timeline History-".arg(4);
-	  // $link="http://alim.org/library/history/timeline/".arg(4);
+	   $link="http://alim.org/library/history/timeline/".arg(4);
 	  }
 	    if(arg(4)=="KAB")
 		{
@@ -495,7 +495,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	  if(arg(2)=="stories")
 	  {
 	  $book= "".arg(8)." Stories";
-	 //  $link="http://alim.org/library/biography/stories/content/SOP/".arg(5)."/".arg(7);
+	   $link="http://alim.org/library/biography/stories/content/SOP/".arg(5)."/".arg(7);
 	  }
 	   if(arg(2)=="prophet")
 	   {
@@ -634,7 +634,9 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	$searchhtmlsup = array("<span class='fn'>", "</span>");
 	$replaceoriginalsup = array('<sup style="color:red"><b>', '</b></sup>');
 	$content = str_replace($searchhtmlsup, $replaceoriginalsup, $content);
-    $this->MultiCell($w, $h, $content, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
+	if($link)
+	$link-page="<br/><a href='".$link."'>Link to Page</a>";
+    $this->MultiCell($w, $h, $content.$link-page, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
     
     // Reset font to default
     $this->SetFont($this->defaultFontFamily, implode('', $this->defaultFontStyle), $this->defaultFontSize);
