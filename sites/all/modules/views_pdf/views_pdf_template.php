@@ -639,7 +639,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	$link-page=;
 	$content =$content."Link to Page";
 	$searchhtmlsup = array("Link to Page");
-	$replaceoriginalsup = array('<br/><a href='".$link."'>Link to Page</a>');
+	$replaceoriginalsup = array('<br/><a href = "'.$link.'">Link to Page</a> ');
 	$content = str_replace($searchhtmlsup, $replaceoriginalsup, $content);
 
 	}
