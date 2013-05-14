@@ -635,8 +635,15 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	$replaceoriginalsup = array('<sup style="color:red"><b>', '</b></sup>');
 	$content = str_replace($searchhtmlsup, $replaceoriginalsup, $content);
 	if($link)
-	$link-page="<br/><a href='".$link."'>Link to Page</a>";
-    $this->MultiCell($w, $h, $content.$link-page, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
+	{
+	$link-page=;
+	$content =$content."Link to Page";
+	$searchhtmlsup = array("Link to Page");
+	$replaceoriginalsup = array('<br/><a href='".$link."'>Link to Page</a>');
+	$content = str_replace($searchhtmlsup, $replaceoriginalsup, $content);
+
+	}
+    $this->MultiCell($w, $h, $content, $border, $align, $fill, $ln, $x, $y, $reseth, $stretch, $ishtml, $autopadding, $maxh, $valign, $fitcell);
     
     // Reset font to default
     $this->SetFont($this->defaultFontFamily, implode('', $this->defaultFontStyle), $this->defaultFontSize);
