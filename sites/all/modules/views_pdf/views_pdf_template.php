@@ -526,8 +526,8 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
 	 $titl="";
 	 $logo="";
 	 if($link)
-	 $link_page = '<br/><a href = "'.$link.'">Link to Page</a> ';
-	 $row= $link_page."<br/><br/>".$coment."<span style='color:#58595B;'><i><br/><br/>Source : Alim.org-".$book."</i></span><br/>";
+	 $link_page = '<br/><br/><a href = "'.$link.'">View Page</a> ';
+	 $row= "<br/><br/>".$coment."<span style='color:#58595B;'>".$link_page."<i><br/><br/>Source : Alim.org-".$book."</i></span><br/>";
 	 }
 	  
      $content = $logo.$titl.$row;
