@@ -1408,14 +1408,13 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 <script src="/sites/all/themes/alim/jquery.cookie.js"></script>
 	<script language="javascript">
 
-	jQuery(function(){ 
-	var canvas = document.getElementById("close-popup")
-	canvas.addEventListener("mousedown", popup_close, false);
+	jQuery(function(){
+	
 
 			//var cook = jQuery.cookie('donate_pop'); 
 			//console.info("cook"+cook );
 			//jQuery(".popup-close").live('click', function() { 
-			function popup_close() {
+			jQuery('#close-popup').click(function() {	
 			if(jQuery('#reminder').attr('checked')) 
 			{
 				/*var date1 = new Date();
@@ -1436,7 +1435,7 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 
 		});
 
-	}; 
+	}); 
 
 	</script> 
   <?php }
