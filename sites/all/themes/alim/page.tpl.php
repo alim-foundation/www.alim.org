@@ -1409,15 +1409,12 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 	<script language="javascript">
 
 	jQuery(function(){
-function myHandler(event) {
-  alert(event.data.foo);
-}
-$("#close-popup").on("click", {foo: "test"}, myHandler)
+document.addEventListener('click', '#close-popup', true);
 
 			//var cook = jQuery.cookie('donate_pop'); 
 			//console.info("cook"+cook );
 			//jQuery(".popup-close").live('click', function() { 
-			jQuery('#close-popup').click(function() {	
+			jQuery('#close-popup').bind('click', function() {
 			if(jQuery('#reminder').attr('checked')) 
 			{
 				/*var date1 = new Date();
