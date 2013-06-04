@@ -1412,7 +1412,7 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 			//console.info("cook"+cook );
 			//jQuery(".popup-close").live('click', function() { 
 			jQuery('.popup-close').click(function() {	
-			if(jQuery('#reminder').attr('checked'))
+			if(jQuery('#reminder').attr('checked')) 
 			{
 				/*var date1 = new Date();
 				var minutes = 1;
