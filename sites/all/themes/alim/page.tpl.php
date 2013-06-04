@@ -1409,7 +1409,7 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 	<script language="javascript">
 
 	jQuery(function(){ 
-	var canvas = document.getElementById("drawSurface")
+	var canvas = document.getElementById("close-popup")
 	canvas.addEventListener("mousedown", popup_close, false);
 
 			//var cook = jQuery.cookie('donate_pop'); 
