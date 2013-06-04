@@ -199,7 +199,7 @@ var plstart = new Date();
 						</a>
 					</div>
 					<div class="front_donate">
-									<div> <a href="https://donatenow.networkforgood.org/alim?code=alim.org" target="_blank" ><div style="margin-bottom:20px; display:block;" ><img  src="/sites/all/themes/alim/images/donate-button.png" /></div></a></div>	
+									<div> <a href="https://donatenow.networkforgood.org/alim?code=alim.org" target="_blank" ><div style="margin-top: -14px; display:block;" ><img  src="/sites/all/themes/alim/images/donate-button.png"  width="300" /></div></a></div>	
 				 	</div>
                </div>
 	   </div>
