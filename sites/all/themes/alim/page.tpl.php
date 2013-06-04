@@ -1407,7 +1407,7 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 </script>
   <?php }
   ?>
-<script src="/sites/all/themes/alim/jquery.cookie.js" type="text/javascript"></script>	
+
 <script language="javascript">
 
 	jQuery(function(){
