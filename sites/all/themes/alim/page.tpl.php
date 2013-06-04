@@ -1410,29 +1410,29 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 
 <script language="javascript">
 
-	jQuery(function(){
-	
-        jQuery.noConflict();
+$j=jQuery.noConflict();
+ 
+    $j(document).ready(function($)
 			//var cook = jQuery.cookie('donate_pop'); 
 			//console.info("cook"+cook );
 			//jQuery(".popup-close").live('click', function() { 
-			jQuery('#close-popup').click(function() {	
-			if(jQuery('#reminder').attr('checked')) 
+			$('#close-popup').click(function() {	
+			if($('#reminder').attr('checked')) 
 			{
 				/*var date1 = new Date();
 				var minutes = 1;
 				date1.setTime(date1.getTime() + (minutes * 60 * 1000));
  				jQuery.cookie('donate_pop',1, { expires: date1 });*/
-				jQuery.cookie('donate_pop',1,{ expires:30, path: '/'});	
+				$.cookie('donate_pop',1,{ expires:30, path: '/'});	
 				//console.info("expiresSSSS" );
-					jQuery('#donate').hide(); 
+					$('#donate').hide(); 
 			}
 			else
 			{
-				jQuery.cookie('donate_pop',1,{ expires:1, path: '/'});
+				$.cookie('donate_pop',1,{ expires:1, path: '/'});
 				//console.info('1day');
 				//console.info("expires1" );
-				jQuery('#donate').hide(); 
+				$('#donate').hide(); 
 			}
 
 		});
