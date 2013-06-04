@@ -10772,7 +10772,7 @@ a.pdf-icon{margin-left: 80%;}
 }
 
 #block-block-53 #donate form{margin-top:20px;}
-#block-block-53 #donate a#close-popup{z-index:9999; width:20px; height:20px;}
+#block-block-53 #donate a#close-popup{z-index:9999;}
 #block-block-53 #donate a.donate-btn{position:absolute;bottom:20px; right:20px;} 
 
 
@@ -10792,5 +10792,7 @@ a.pdf-icon{margin-left: 80%;}
 }
 #close-popup {
 background: url("images/clo_icons_03.png") no-repeat;
+height: 33px;
+width: 33px;
 }
 
