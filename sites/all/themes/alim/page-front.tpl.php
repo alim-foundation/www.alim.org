@@ -199,9 +199,7 @@ var plstart = new Date();
 						</a>
 					</div>
 					<div class="front_donate">
-						<a href="<?=$base_url?>/donate/pp/cancel">
-							<img src="<?=$base_url?>/<?=$theme_path?>/images/paypal.gif" alt="" width="92" height="26" border="0" >
-						</a>	
+									<div> <a href="https://donatenow.networkforgood.org/alim?code=alim.org" target="_blank" ><div style="margin-bottom:20px; display:block;" ><img  src="/sites/all/themes/alim/images/donate-button.png" /></div></a></div>	
 				 	</div>
                </div>
 	   </div>

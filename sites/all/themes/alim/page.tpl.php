@@ -812,9 +812,7 @@ if(arg(3)=='compare') {
 			</div>
 		
 			<div class="inner_donate">
-			<a href="<?=$base_url?>/donate/pp/cancel">
-					<img alt="" border="0" src="<?=$base_url?>/<?=$theme_path?>/images/paypal.gif" width="92" height="26" >
-				</a>
+						<div> <a href="https://donatenow.networkforgood.org/alim?code=alim.org" target="_blank" ><div style="margin-bottom:20px; display:block;" ><img  src="/sites/all/themes/alim/images/donate-button.png" /></div></a></div>
 			</div>			
 		
 		 </div>
@@ -833,7 +831,8 @@ if(arg(3)=='compare') {
 					    <div class="share"  >	
 				<script type="text/javascript" src="http://w.sharethis.com/button/sharethis.js#publisher=f854b6ba-49af-4ac7-b234-2d0d04bc447c&amp;type=website&amp;style=horizontal&amp;post_services=email%2Cfacebook%2Ctwitter%2Cgbuzz%2Cmyspace%2Cdigg%2Csms%2Cwindows_live%2Cdelicious%2Cstumbleupon%2Creddit%2Cgoogle_bmarks%2Clinkedin%2Cbebo%2Cybuzz%2Cblogger%2Cyahoo_bmarks%2Cmixx%2Ctechnorati%2Cfriendfeed%2Cpropeller%2Cwordpress%2Cnewsvine"></script>					 					
 						 </div><?php } ?>	 
-					 </div>		
+					 </div>	
+					 	
 				</div>
 
 				 <div style="clear:both"></div>
