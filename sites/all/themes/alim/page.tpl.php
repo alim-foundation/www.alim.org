@@ -1284,6 +1284,7 @@ if($ck_sh==1)
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<?=$base_url?>/<?=$theme_path?>/jqlist/prettify.js"></script>
 <script type="text/javascript" src="<?=$base_url?>/<?=$theme_path?>/jqlist/jquery.multiselect.js"></script>	
+<script src="/sites/all/themes/alim/jquery.cookie.js"></script> 
 <script type="text/javascript">
 if(document.getElementById("groups"))
 {
@@ -1405,41 +1406,6 @@ window.location= '?quicktabs_22=1#quicktabs-22';
      }
   });
 </script>
-<script src="/sites/all/themes/alim/jquery.cookie.js"></script>
-	<script language="javascript">
-
-	jQuery(function(){
-	
-$('a#close-popup').click(function() {
-jQuery('#donate').hide(); 
-}); 
-			//var cook = jQuery.cookie('donate_pop'); 
-			//console.info("cook"+cook );
-			//jQuery(".popup-close").live('click', function() { 
-			jQuery('#close-popup').click(function() {	
-			if(jQuery('#reminder').attr('checked')) 
-			{
-				/*var date1 = new Date();
-				var minutes = 1;
-				date1.setTime(date1.getTime() + (minutes * 60 * 1000));
- 				jQuery.cookie('donate_pop',1, { expires: date1 });*/
-				jQuery.cookie('donate_pop',1,{ expires:30, path: '/'});	
-				//console.info("expiresSSSS" );
-					jQuery('#donate').hide(); 
-			}
-			else
-			{
-				jQuery.cookie('donate_pop',1,{ expires:1, path: '/'});
-				//console.info('1day');
-				//console.info("expires1" );
-				jQuery('#donate').hide(); 
-			}
-
-		});
-
-	}); 
-
-	</script> 
   <?php }
   ?>
 <?php print $closure ?>	
