@@ -1408,8 +1408,7 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 <script src="/sites/all/themes/alim/jquery.cookie.js"></script>
 	<script language="javascript">
 
-	jQuery(function(){
-document.addEventListener('click', '#close-popup', true);
+	jQuery(function(){ 
 
 			//var cook = jQuery.cookie('donate_pop'); 
 			//console.info("cook"+cook );
