@@ -692,9 +692,9 @@ $start_time = $_SESSION['start_time'];
 */	
 if(!$_COOKIE["donate_pop"]){	
 	//setcookie("donate_pop",true, time()+3600,'/');
-	print "<style> #block-block-78 #donate { display:block; } </style>";		
+	print "<style> #block-block-53 #donate { display:block; } </style>";		
 }else{
-	print "<style> #block-block-78 #donate { display:none;} </style>";		
+	print "<style> #block-block-53 #donate { display:none;} </style>";		
 }
 if(arg(4)=='55' && arg(5)=='MAL')
 {
