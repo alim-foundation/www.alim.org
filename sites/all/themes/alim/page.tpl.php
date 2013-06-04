@@ -412,7 +412,7 @@ $start_time = $_SESSION['start_time'];
 <link rel="stylesheet" type="text/css" href="<?=$base_url?>/<?=$theme_path?>/jqlist/prettify.css" />
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
-		<script src="/sites/all/themes/alim/jquery.cookie.js"></script>
+		
 
 	  <script type="text/javascript"> 
    var startTime = (new Date()).getTime();
@@ -1405,14 +1405,14 @@ window.location= '?quicktabs_22=1#quicktabs-22';
      }
   });
 </script>
-
+<script src="/sites/all/themes/alim/jquery.cookie.js"></script>
 	<script language="javascript">
 
 	jQuery(function(){
 			//var cook = jQuery.cookie('donate_pop'); 
 			//console.info("cook"+cook );
 			//jQuery(".popup-close").live('click', function() { 
-			jQuery('a#close-popup').click(function() {	
+			jQuery('#close-popup').click(function() {	
 			if(jQuery('#reminder').attr('checked')) 
 			{
 				/*var date1 = new Date();
