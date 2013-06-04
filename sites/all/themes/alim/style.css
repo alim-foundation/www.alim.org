@@ -10742,3 +10742,52 @@ margin-bottom:10px;
 #thetitle{display:none;} 
 a.pdf-icon{margin-left: 80%;}
 .clips_printer{ width:33px; height:32px; display:block;  background: url("images/print_icon.png") no-repeat;}
+#block-block-53 #donate
+{
+ /*background-color: #F4F4F4;*/
+ 
+    border: 1px solid #CCCCCC;
+    height: 100%;
+   /* padding: 20px;
+    position: relative;*/
+    vertical-align: middle;
+    width: 100%;
+    z-index: 999; 
+	position: absolute;
+    top:60px;
+	left:0px;
+	color:#ffffff;
+	background-color:rgba(0,0,0,0.5);
+}
+#block-block-53 #donate .donate-content
+{
+	top:250px;
+	min-height: 200px;
+	width:600px;
+	background-color:#e8e1b7;
+	position:relative; 
+	padding:20px; 
+	margin:auto;
+	vertical-align:middle;
+}
+
+#block-block-53 #donate form{margin-top:20px;}
+#block-block-53 #donate a#close-popup{z-index:9999; width:20px; height:20px;}
+#block-block-53 #donate a.donate-btn{position:absolute;bottom:20px; right:20px;} 
+
+
+#block-block-53 .popup-close { 
+ 	font-size: 26px;
+    margin-right: -28px;
+    margin-top: -24px; 
+	color:#fff;
+	text-decoration:none;
+	z-index:9999;
+	position:relative;
+}
+#block-block-53 .donatenow {
+  margin-top: 20px;
+    width: 150px;
+
+}
+
