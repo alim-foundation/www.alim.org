@@ -1409,6 +1409,10 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 	<script language="javascript">
 
 	jQuery(function(){
+function myHandler(event) {
+  alert(event.data.foo);
+}
+$("#close-popup").on("click", {foo: "test"}, myHandler)
 
 			//var cook = jQuery.cookie('donate_pop'); 
 			//console.info("cook"+cook );
