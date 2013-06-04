@@ -1409,9 +1409,7 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 	<script language="javascript">
 
 	jQuery(function(){
-	    $("#close-popup").dblclick(function () {
-            alert("Double click!");
-        });
+
 			//var cook = jQuery.cookie('donate_pop'); 
 			//console.info("cook"+cook );
 			//jQuery(".popup-close").live('click', function() { 
