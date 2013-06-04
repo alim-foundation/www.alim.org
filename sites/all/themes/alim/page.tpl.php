@@ -1409,7 +1409,8 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 	<script language="javascript">
 
 	jQuery(function(){ 
-	jQuery('#close-popup').addEventListener("click", popup_close, false);
+	var canvas = document.getElementById("drawSurface")
+	canvas.addEventListener("mousedown", popup_close, false);
 
 			//var cook = jQuery.cookie('donate_pop'); 
 			//console.info("cook"+cook );
@@ -1435,7 +1436,7 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 
 		});
 
-	}); 
+	}; 
 
 	</script> 
   <?php }
