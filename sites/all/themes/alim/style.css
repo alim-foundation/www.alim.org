@@ -10790,4 +10790,7 @@ a.pdf-icon{margin-left: 80%;}
     width: 150px;
 
 }
+#close-popup {
+background: url("images/print_icon.png") no-repeat;
+}
 
