@@ -812,7 +812,7 @@ if(arg(3)=='compare') {
 			</div>
 		
 			<div class="inner_donate">
-						<div> <a href="https://donatenow.networkforgood.org/alim?code=alim.org" target="_blank" ><div style="margin-top:-18px;float: right;width: 200px;"> <img  src="/sites/all/themes/alim/images/donate-button.png" /></div></a></div>
+						<div> <a href="https://donatenow.networkforgood.org/alim?code=alim.org" target="_blank" ><div style="margin-top:-18px;float: right;width: 200px; "> <img  src="/sites/all/themes/alim/images/donate-button.png" /></div></a></div>
 			</div>			
 		
 		 </div>
