@@ -1412,7 +1412,7 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 
 $j=jQuery.noConflict();
  
-    $j(document).ready(function($)
+    $j(document).ready(function($){
 			//var cook = jQuery.cookie('donate_pop'); 
 			//console.info("cook"+cook );
 			//jQuery(".popup-close").live('click', function() { 
