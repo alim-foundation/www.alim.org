@@ -1,4 +1,26 @@
 //Search tab order 
+$(document).ready(function(){
+
+//on window scroll fire it will call a function.
+  set = $(document).scrollTop()+"px";
+
+//this is the jQuery animate function to fixed the div position after scrolling.
+
+  $('#block-block-78 #donate .donate-content').animate({top:set},{duration:1000,queue:false});
+
+	$(window).scroll(function () {
+
+//after window scroll fire it will add define pixel added to that element.
+
+		set = $(document).scrollTop()+"px";
+
+//this is the jQuery animate function to fixed the div position after scrolling.
+
+		$('#block-block-78 #donate .donate-content').animate({top:set},{duration:1000,queue:false});
+
+	});
+
+});
 $(document).ready(function() {
 						   
 						   

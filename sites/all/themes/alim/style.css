@@ -10761,7 +10761,7 @@ a.pdf-icon{margin-left: 80%;}
 }
 #block-block-53 #donate .donate-content
 {
-	top:50%;
+	top:250px;
 	min-height: 200px;
 	width:600px;
 	background-color:#e8e1b7;
@@ -10795,4 +10795,9 @@ background: url("images/clo_icons_03.png") no-repeat;
 height: 33px;
 width: 33px;
 }
-
+#block-block-78 #donate .donate-content {
+        position:absolute;
+        left:50%;
+        margin-top:200px;
+        margin-left:-200px;
+}
