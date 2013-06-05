@@ -1407,40 +1407,32 @@ window.location= '?quicktabs_22=1#quicktabs-22';
 </script>
   <?php }
   ?>
-
+<script src="/sites/all/themes/alim/jquery.cookie.js"></script>
 <script language="javascript">
+	jQuery(function(){
+			jQuery('.popup-close').click(function() {	
 
-$j=jQuery.noConflict();
- 
-    $j(document).ready(function($){
-			//var cook = jQuery.cookie('donate_pop'); 
-			//console.info("cook"+cook );
-			//jQuery(".popup-close").live('click', function() { 
-			$('#close-popup').click(function() {	
-			if($('#reminder').attr('checked')) 
+			if(jQuery('#reminder').attr('checked'))
+
 			{
-				/*var date1 = new Date();
-				var minutes = 1;
-				date1.setTime(date1.getTime() + (minutes * 60 * 1000));
- 				jQuery.cookie('donate_pop',1, { expires: date1 });*/
-				$.cookie('donate_pop',1,{ expires:30, path: '/'});	
-				//console.info("expiresSSSS" );
-					$('#donate').hide(); 
+
+				jQuery.cookie('donate_pop',1,{ expires:30, path: '/'});	
+					jQuery('#donate').hide(); 
+
 			}
+
 			else
-			{
-				$.cookie('donate_pop',1,{ expires:1, path: '/'});
-				//console.info('1day');
-				//console.info("expires1" );
-				$('#donate').hide(); 
-			}
 
+			{
+				jQuery.cookie('donate_pop',1,{ expires:1, path: '/'});
+				jQuery('#donate').hide(); 
+
+			}
 		});
 
 	}); 
 
-	</script> 
-
+</script>
 <?php print $closure ?>	
 </body>
 </html>
