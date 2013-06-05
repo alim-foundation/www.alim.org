@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 //this is the jQuery animate function to fixed the div position after scrolling.
 
-  $('#block-block-78 #donate .donate-content').animate({top:set},{duration:1000,queue:false});
+  $('#block-block-53 #donate .donate-content').animate({top:set},{duration:1000,queue:false});
 
 	$(window).scroll(function () {
 
@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 //this is the jQuery animate function to fixed the div position after scrolling.
 
-		$('#block-block-78 #donate .donate-content').animate({top:set},{duration:1000,queue:false});
+		$('#block-block-53 #donate .donate-content').animate({top:set},{duration:1000,queue:false});
 
 	});
 
