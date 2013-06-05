@@ -10772,7 +10772,8 @@ a.pdf-icon{margin-left: 80%;}
 }
 
 #block-block-53 #donate form{margin-top:20px;}
-#block-block-53 #donate a#close-popup{z-index:9999;}
+#block-block-53 #donate a#close-popup{z-index:9999;margin-right: -38px;
+    margin-top: -33px;}
 #block-block-53 #donate a.donate-btn{position:absolute;bottom:20px; right:20px;} 
 
 
