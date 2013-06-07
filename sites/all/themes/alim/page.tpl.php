@@ -415,10 +415,10 @@ $start_time = $_SESSION['start_time'];
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
   <script>
- $(document).ready(function() {
+ 
     $( "#datepicker1" ).datepicker();
 	$( "#datepicker2" ).datepicker();
-  });
+
   </script>
 
 	  <script type="text/javascript"> 
