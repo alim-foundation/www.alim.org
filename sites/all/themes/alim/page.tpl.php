@@ -405,8 +405,7 @@ $start_time = $_SESSION['start_time'];
   <head>
     <?php print $head ?>
 	<title><?php print $head_title ?></title>
-	<meta http-equiv="X-UA-Compatible" content="IE=8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
 	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 	<meta HTTP-EQUIV="accept-encoding" CONTENT="gzip,deflate">
 <link rel="stylesheet" type="text/css" href="<?=$base_url?>/<?=$theme_path?>/jqlist/jquery.multiselect.css" />
