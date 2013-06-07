@@ -10,14 +10,14 @@ header("Expires: 0");
 header('Content-Transfer-Encoding: none');
 header('Content-Type: application/vnd.ms-excel;');
 header("Content-type: application/x-msexcel");
-header('Content-Disposition: attachment; filename=Noorvitamins Orders.xls');
+header('Content-Disposition: attachment; filename=Alim Users.xls');
 $a=$_GET['a'];
 $b=$_GET['b'];
 $a = date("Y-m-d", strtotime($a));
 $b = date("Y-m-d", strtotime($b));
 
 if($a=="1969-12-31" && $b=="1969-12-31")
-$qry_string="FROM_UNIXTIME(created) >=DATE_SUB(CURDATE(), INTERVAL 1 MONTH)";
+$qry_string="FROM_UNIXTIME(created) >=DATE_SUB(CURDATE(), INTERVAL 4 MONTH)";
 else
 $qry_string="DATE(FROM_UNIXTIME(created)) BETWEEN CONCAT('".$a ."',' ','00:00:00') AND CONCAT('".$b ."',' ','23:59:59')  ";
 
