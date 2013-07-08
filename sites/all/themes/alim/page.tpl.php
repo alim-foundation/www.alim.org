@@ -809,7 +809,7 @@ if(arg(3)=='compare') {
 					<div style="float:left;"><h1> <?php print print_masterhead(); ?>  </h1></div>		
 				</div>
 							<div class="inner_donate">  
-						<div> <a href="https://donatenow.networkforgood.org/alim?code=alim.org" target="_blank" ><div style="margin-top: -3px;margin-left: -5px;float: right;width: 200px; "> <img  src="/sites/all/themes/alim/images/donate-button.png"  width="230" /></div></a></div>
+						<div> <a href="https://donatenow.networkforgood.org/alim?code=alim.org" target="_blank" ><div style="margin-top: 15px;margin-left: -5px;float: right;width: 200px; "> <img  src="/sites/all/themes/alim/images/donate-button.png"  width="230" /></div></a></div>
 			</div>			
 
 				
@@ -965,7 +965,7 @@ if(arg(3)=='compare') {
 	  <div id="footer_content" align="center">
 		  <div id="footer_head" align="center"><a  href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-logo1.png" border="0"  width="262" height="61" /></a><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&copy; All Rights 2010 Alim.org</div>
 		  							<div class="inner_donate">  
-						<div> <a href="https://donatenow.networkforgood.org/alim?code=alim.org" target="_blank" ><div style="margin-top: -3px;margin-left: -5px;float: right;width: 200px; "> <img  src="/sites/all/themes/alim/images/donate-button.png"  width="230" /></div></a></div>
+						<div> <a href="https://donatenow.networkforgood.org/alim?code=alim.org" target="_blank" ><div style="margin-top: 10px;margin-left: -5px;float: right;width: 200px; "> <img  src="/sites/all/themes/alim/images/donate-button.png"  width="230" /></div></a></div>
 			</div>			
 
 		  
