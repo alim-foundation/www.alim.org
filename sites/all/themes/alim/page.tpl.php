@@ -797,7 +797,7 @@ if(arg(3)=='compare') {
 					<?php print $rpx_login ; ?> <? }?>&nbsp;&nbsp;
 					<a href="<?=$base_path?>" title="Home"><img src="<?php print $base_url."/".$theme_path;?>/images/alim-home.png"  border="0" align="absmiddle" title="Home" alt="Home" width="25" height="25" /></a>
 				</div>	  
-				<div id="top_menu_right"></div>
+				<div id="top_menu_right"></div> 
 			</div>
 
 			<div style="clear:both"></div>
