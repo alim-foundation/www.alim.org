@@ -813,7 +813,7 @@ if(arg(3)=='compare') {
 						<div> <a href="https://donatenow.networkforgood.org/alim?code=alim.org" target="_blank" ><div style="margin-top: 15px;margin-left: -50px;float: right;width: 200px; "> <img  src="/sites/all/themes/alim/images/donate-button.png"  width="230" /></div></a></div>
 			</div>			
 
-				<div id="search" align="left"><div id="search_content"><?php if ($search_box): ?><div ><?php print $search_box ?></div><?php endif; // search box  ?></div></div>
+				<div id="search" align="right"><div id="search_content"><?php if ($search_box): ?><div ><?php print $search_box ?></div><?php endif; // search box  ?></div></div>
 			</div>
 			<div style="clear:both"></div>
 			
