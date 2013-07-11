@@ -1787,7 +1787,7 @@ function print_masterhead(){
 	if(arg(0)=='recent-group-posts'){ $masthead = 'Recent Group Posts'; }
 	if(arg(1)=='all-recent-tags') { $masthead = 'Recent Tags'; }
 	if(arg(1)=='biography' || arg(1)=='history') { $masthead = 'History'; }
-	if(arg(1)=='references' ) { $masthead = 'References'; }
+	if(arg(1)=='references' ||  arg(1)==163997) { $masthead = 'References'; }
 	if(arg(2)=='article' ) { $masthead = 'About Islam'; }  
 	# User Profile
 	
