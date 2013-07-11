@@ -159,7 +159,7 @@ var plstart = new Date();
 	<script type="text/javascript"> 
   	 var startTime = (new Date()).getTime(); 
 	</script>
-<script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=ct5r6ssvaad4y"></script> 
+<!--<script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=ct5r6ssvaad4y"></script> -->
 </head>
 <body>
 <div class="beta_tag1"></div>

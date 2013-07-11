@@ -731,7 +731,7 @@ if(arg(4)=='55' && arg(5)=='MAL')
 	});
 	</script>
 	<?php } ?>
-	<script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=ct5r6ssvaad4y"></script> 
+	<!--<script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=ct5r6ssvaad4y"></script> -->
   </head>
 <?php
 // flush the buffer
