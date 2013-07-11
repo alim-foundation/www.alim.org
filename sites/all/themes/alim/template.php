@@ -1801,7 +1801,6 @@ function print_masterhead(){
 	if(arg(0)=='groupdetails') { $masthead = "Group"; }
 	if(arg(0)=='user' && arg(2)=='edit') { $masthead = 'Edit Profile'; }
 	if(arg(0)=='relationships') { $masthead = 'My Relationships'; }
-    if(arg(2)=='dictionary'){ $masthead = "Qur'an & Hadith";}
 	if(arg(0) == 'bookmarks') { $masthead = "Bookmarks";}
 	
 	$preAlias = $_SERVER['REQUEST_URI'];
