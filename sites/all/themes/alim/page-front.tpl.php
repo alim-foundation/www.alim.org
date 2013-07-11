@@ -139,6 +139,7 @@ $set_ok = 1;
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $language->language ?>" lang="<?php echo $language->language ?>" dir="<?php echo $language->dir ?>">
 <head>
+<script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=ct5r6ssvaad4y"></script>
 <?php echo $head; ?>
 	<title>Alim - The World's Most Useful Islamic Software</title>
 	<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/alim/home.css" />
