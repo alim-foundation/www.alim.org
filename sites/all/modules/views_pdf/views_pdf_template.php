@@ -754,7 +754,7 @@ $titl= "<br/><h3>".arg(8)." - ".$sec_head."</h3>";
     $rowY = $this->y;
     
     if (!isset($options['position']['row_height']) || empty($options['position']['row_height'])) {
-      $options['position']['row_height'] = 0;
+      $options['position']['row_height'] = 10;
     }
     
     
