@@ -1,6 +1,8 @@
 //Search tab order 
 $(document).ready(function(){
-
+var coment_url = $('#post_comment a').attr('href')	;
+var n =coment_url.split("#comment-form");
+$('#post_comment a').attr('href',n[0] );
 //on window scroll fire it will call a function.
   set = $(document).scrollTop()+"px";
 
