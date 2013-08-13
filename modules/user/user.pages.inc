@@ -144,7 +144,7 @@ function user_pass_reset(&$form_state, $uid, $timestamp, $hashed_pass, $action =
 function user_logout() {
   global $user;
 
-  watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
+  //watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
 
   // Destroy the current session:
   session_destroy();
