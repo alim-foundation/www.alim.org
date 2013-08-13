@@ -96,19 +96,19 @@ $pagerq = "select COUNT(*) as count from (
                SELECT COUNT(*) AS c, d.tid as d_tid, d.name  as d_name, d.vid as d_vid, ct.tid as ct_tid , ct.date  as ct_date  FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid LEFT JOIN {community_tags} ct ON ct.tid=d.tid WHERE d.vid IN ('9')  GROUP BY d.tid, d.name, d.vid , ct.tid                   
        ) as t";
 		
-		$result = pager_query(db_rewrite_sql("SELECT COUNT(*) AS count, d.tid, d.name, d.vid, ct.tid, ct.date FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid LEFT JOIN {community_tags} ct ON ct.tid=d.tid WHERE d.vid IN ('9') GROUP BY d.tid, d.name, d.vid, ct.tid ORDER BY ct.date DESC"), 21,0,$pagerq); 
+		$result = pager_query(db_rewrite_sql("SELECT COUNT(*) AS count, d.tid as  d_tid, d.name as  d_name, d.vid as  d_vid, ct.tid as  ct_tid, ct.date as ct_date FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid LEFT JOIN {community_tags} ct ON ct.tid=d.tid WHERE d.vid IN ('9') GROUP BY d.tid, d.name, d.vid, ct.tid ORDER BY ct.date DESC"), 21,0,$pagerq); 
 		$i=0;
 		while ($tag = db_fetch_object($result)) {
 		              $dot= "";
-		             if(strlen($tag->name)>11)
+		             if(strlen($tag->d_name)>11)
 					 {
 					   $dot= "..";
 					 }
 		
 				$output .= '<td><div class="single-tag-rec" >';
-				$path = 'taxonomy/term/'.$tag->tid;
-				$output .=  l(substr($tag->name,0,11).$dot,$path,array('attributes' => array('title' =>$tag->name)));
-				$output .=  '<span>&nbsp;x&nbsp;'.taxonomy_term_count_nodes($tag->tid).'</span></div></td>';
+				$path = 'taxonomy/term/'.$tag->d_tid;
+				$output .=  l(substr($tag->d_name,0,11).$dot,$path,array('attributes' => array('title' =>$tag->d_name)));
+				$output .=  '<span>&nbsp;x&nbsp;'.taxonomy_term_count_nodes($tag->d_tid).'</span></div></td>';
 				$i++;
 	
 		 	if($i%3==0)
