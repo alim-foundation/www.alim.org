@@ -93,7 +93,7 @@ function alim_searchtags_block($op='list', $delta=0, $edit=array()) {
 		$output .= '<table border="0" width="430" class="tg_each" ><tr>';
 				
 		$pagerq = "select COUNT(*) as count from (
-               SELECT COUNT(*) AS c, d.tid, d.name, d.vid, ct.tid, ct.date FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid LEFT JOIN {community_tags} ct ON ct.tid=d.tid WHERE d.vid IN ('9')  GROUP BY d.tid, d.name, d.vid , ct.tid                   
+               SELECT COUNT(*) AS c, dd.tid, dd.name, dd.vid, ct.tid, ct.date FROM {term_data} dd INNER JOIN {term_node} n ON dd.tid = n.tid LEFT JOIN {community_tags} ct ON ct.tid=d.tid WHERE dd.vid IN ('9')  GROUP BY dd.tid, dd.name, dd.vid , ct.tid                   
        ) as t";
 		
 		$result = pager_query(db_rewrite_sql("SELECT COUNT(*) AS count, d.tid, d.name, d.vid, ct.tid, ct.date FROM {term_data} d INNER JOIN {term_node} n ON d.tid = n.tid LEFT JOIN {community_tags} ct ON ct.tid=d.tid WHERE d.vid IN ('9') GROUP BY d.tid, d.name, d.vid, ct.tid ORDER BY ct.date DESC"), 21,0,$pagerq); 
