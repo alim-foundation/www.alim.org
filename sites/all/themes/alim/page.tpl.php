@@ -404,7 +404,7 @@ $start_time = $_SESSION['start_time'];
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language ?>" lang="<?php print $language->language ?>" dir="<?php print $language->dir ?>">
   <head>
   
-  <meta http-equiv="X-UA-Compatible" content="IE=8">
+  <meta http-equiv="X-UA-Compatible" content="IE=8,IE=9"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <?php print $head ?>
 	<title><?php print $head_title ?></title>
