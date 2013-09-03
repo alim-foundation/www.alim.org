@@ -1,5 +1,4 @@
 <?php
-// $Id: jq_maphilight.module,v 1.1.2.4 2009/08/26 20:11:53 worldfallz Exp $
 
 /**
  * @file
@@ -12,28 +11,34 @@
 function jq_maphilight_init() {
   $available = _jq_maphilight_available();
   if ($available !== FALSE) {
+    $script =
+      "(function ($) {\n" .
+      "Drupal.behaviors.jq_maphilight = function(context, settings) {\n" .
+      "\$.fn.maphilight.defaults = {\n" .
+      "fill: " . variable_get('jq_maphilight_fill', 'true') . ",\n" .
+      "fillColor: '" . variable_get('jq_maphilight_fillcolor', '000000') . "',\n" .
+      "fillOpacity: " . (variable_get('jq_maphilight_fillopacity', '2') / 10) . ",\n" .
+      "stroke: " . variable_get('jq_maphilight_stroke', 'true') . ",\n" .
+      "strokeColor: '" . variable_get('jq_maphilight_strokecolor', 'ff0000') . "',\n" .
+      "strokeOpacity: " . (variable_get('jq_maphilight_strokeopacity', '10') / 10) . ",\n" .
+      "strokeWidth: " . variable_get('jq_maphilight_strokewidth', '2') . ",\n" .
+      "fade: " . variable_get('jq_maphilight_fade', 'true') . ",\n" .
+      "alwaysOn: " . variable_get('jq_maphilight_alwayson', 'false') . ",\n" .
+      "neverOn: " . variable_get('jq_maphilight_neveron', 'false') . ",\n" .
+      "groupBy: " . variable_get('jq_maphilight_groupby', 'false') . "};\n";
 
-    $script = "\$(document).ready(function() { \$.fn.maphilight.defaults = { "
-      ."fill: ". variable_get('jq_maphilight_fill', 'true') .","
-      ."fillColor: '". variable_get('jq_maphilight_fillcolor', 'ff0000') ."',"
-      ."fillOpacity: ". (variable_get('jq_maphilight_fillopacity', '2') / 10) .","
-      ."stroke: ". variable_get('jq_maphilight_stroke', 'true') .","
-      ."strokeColor: '". variable_get('jq_maphilight_strokecolor', 'D51910') ."',"
-      ."strokeOpacity: ". (variable_get('jq_maphilight_strokeopacity', '10') / 10) .","
-      ."strokeWidth: ". variable_get('jq_maphilight_strokewidth', '2') .","
-      ."fade: ". variable_get('jq_maphilight_fade', 'true') .","
-      ."alwaysOn: false}; ";
-      
-    if (variable_get('jq_maphilight_allmaps_enabled', 1) == 0) {
-      $script .= "\$('.jq_maphilight').maphilight();});";
-    } else {
-      $script .= "\$('img[usemap]').maphilight();});";
+    if (variable_get('jq_maphilight_allmaps_enabled', TRUE)) {
+      $script .= "\$('img[usemap]').maphilight();\n";
     }
+    else {
+      $script .= "\$('.jq_maphilight').maphilight();\n";
+    }
+    $script .= "}})(jQuery);";
     
     jquery_plugin_add('metadata');
-    jquery_plugin_add('maphilight');
-    drupal_add_js($script, 'inline');     
-  
+    drupal_add_js($available, 'module');
+    drupal_add_js($script, 'inline');
+
   }
   return '';
 }
@@ -49,7 +54,7 @@ function jq_maphilight_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('jq_maphilight_admin_settings'),
     'access callback' => 'user_access',
-    'access arguments' => array('access administration pages'),
+    'access arguments' => array('administer site configuration'),
     'type' => MENU_NORMAL_ITEM,
   );
 
@@ -64,7 +69,7 @@ function jq_maphilight_admin_settings() {
     '#type' => 'fieldset',
     '#title' => t('jQuery Map Hilight Plugin Status'),
     '#weight' => -10,
-    '#description' => (_jq_maphilight_available() !== false) ? t('The Map Hilight jQuery plugin is available at: /') . _jq_maphilight_available() : '<em><span style="color: #A50000;">'. t('The Map Hilight jQuery plugin is unavailable or not located in the jquery_plugin module directory.') .'</span></em>'
+    '#description' => (_jq_maphilight_available() !== false) ? t('The Map Hilight jQuery plugin is available at: /') . _jq_maphilight_available() : '<em><span style="color: #A50000;">'. t('The Map Hilight jQuery plugin is unavailable.') .'</span></em>'
   );
 
   $form['jq_maphilight_allmaps'] = array(
@@ -160,11 +165,21 @@ function jq_maphilight_admin_settings() {
  */
 function _jq_maphilight_available() {
 
-  $available = drupal_get_path('module', 'jquery_plugin') .'/jquery.maphilight.min.js'; 
-
-  if (!is_file($available)) {
-    return FALSE;
+  if (module_exists('libraries')) {
+    if (is_file($available = libraries_get_path('jquery.maphilight') . '/jquery.maphilight.min.js')) {
+      return $available;
+    }
+  }
+  if (is_file($available = 'sites/all/libraries/jquery.maphilight/jquery.maphilight.min.js')) {
+    return $available;
+  }
+  if (is_file($available = drupal_get_path('module', 'jq_maphilight') .'/jquery.maphilight.min.js')) {
+    return $available;
+  }
+  if (is_file($available = drupal_get_path('module', 'jquery_plugin') .'/jquery.maphilight.min.js')) {
+  if(arg(2)=='page')
+    return $available;
   }
 
-  return $available;
+  return FALSE;
 }

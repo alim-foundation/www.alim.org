@@ -1,4 +1,3 @@
-//$id$
 jQuery Map Hilight Module
 
 
@@ -28,10 +27,12 @@ INSTALLATION:
 
 2. Download the jquery Map Hilight plugin from http://plugins.jquery.com/project/maphilight.
 
-3. Extract the jquery.maphilight.min.js file into the jquery_plugin directory.
+3. Extract the jquery.maphilight.min.js file into the jq_maphilight directory (the module will also search
+   'sites/all/libraries/jquery.maphilight' and jquery_plugin module directory as well). It will also check
+   for and use the libraries module if enabled.
 
 4. Navigate to admin/settings/jq_maphilight. If the plugin is properly installed you should see a message
-indicating the path where it has been found in the "jQuery Map Hilight Plugin Status" fieldset.
+   indicating the path where it has been found in the "jQuery Map Hilight Plugin Status" fieldset.
 
 5. If desired, follow the instructions for the Test Page below to test the functionality of the module and plugin.
 
