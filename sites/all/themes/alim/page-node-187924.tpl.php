@@ -25,12 +25,12 @@ echo "<table><tr style='border:2px solid #666666'><th align='left'>USER NAME</th
 $query1=db_query('SELECT  users.uid, `name`  ,mail as email ,profile_values.value as fname  FROM `users`,profile_values WHERE  '.$qry_string.' AND profile_values.uid = users.uid  GROUP BY uid DESC');
 while ($row1 = db_fetch_object($query1)) 
 {
-	print '<tr style="border-bottom:1px solid #CCCCCC;">
+/*	print '<tr style="border-bottom:1px solid #CCCCCC;">
 	<td align="left" style="border-right:1px solid #CCCCCC; ">'. $row1->name.'</td>
 	<td align="left" style="border-right:1px solid #CCCCCC; ">'. $row1->fname.'</td>
-	<td align="left" style="border-right:1px solid #CCCCCC; ">'. $row1->email.'</td>
-	';
-    print $inner.'</tr>';
+	<td align="left" style="border-right:1px solid #CCCCCC; ">'. $row1->email.'</td>';
+    print $inner.'</tr>';*/
+	echo $row1->fname;
   
 }
 print '</table>';
