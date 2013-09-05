@@ -22,7 +22,7 @@ else
 $qry_string="DATE(FROM_UNIXTIME(created)) BETWEEN CONCAT('".$a ."',' ','00:00:00') AND CONCAT('".$b ."',' ','23:59:59')  ";
 
 echo "<table><tr style='border:2px solid #666666'><th align='left'>USER NAME</th><th align='left'>FULL NAME</th><th align='left'>EMAIL</th></tr>";  
-$query1=db_query('SELECT  users.uid, `name`  ,mail as email ,profile_values.value as fname  FROM `users`,profile_values WHERE  '.$qry_string.' AND profile_values.uid = users.uid  GROUP BY uid DESC');
+$query1=db_query('SELECT  users.uid,name,mail as email,profile_values.value as fname  FROM users , profile_values WHERE  profile_values.uid = users.uid  GROUP BY uid DESC');
 while ($row1 = db_fetch_object($query1)) 
 {
 /*	print '<tr style="border-bottom:1px solid #CCCCCC;">
