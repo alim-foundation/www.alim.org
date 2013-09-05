@@ -27,7 +27,7 @@ while ($row1 = db_fetch_object($query1))
 {
 	print '<tr style="border-bottom:1px solid #CCCCCC;">
 	<td align="left" style="border-right:1px solid #CCCCCC; ">'. $row1->name.'</td>
-	<td align="left" style="border-right:1px solid #CCCCCC; ">123'. $row1->fname.'</td>
+	<td align="left" style="border-right:1px solid #CCCCCC; ">'. $row1->fname.'</td>
 	<td align="left" style="border-right:1px solid #CCCCCC; ">'. $row1->email.'</td>
 	';
     print $inner.'</tr>';
