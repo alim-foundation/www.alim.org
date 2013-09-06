@@ -603,7 +603,7 @@ $("#recent-tab3").hide();
     <script type="text/javascript" src="https://rpxnow.com/openid/v2/widget"></script>
     <script type="text/javascript">
       <!-- Begin RPX Sign In from JanRain. Visit http://www.rpxnow.com/ -->
-      RPXNOW.token_url = <?php $base_url?>+"/rpx/end_point?destination=node%2F163643";
+      RPXNOW.token_url ="alim.org/rpx/end_point?destination=node%2F163643";
       RPXNOW.realm = "alim-foundation.rpxnow.com";
       RPXNOW.overlay = true;
       RPXNOW.language_preference = "en";
