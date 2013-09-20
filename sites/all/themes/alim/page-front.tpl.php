@@ -5,7 +5,7 @@ You need to include each js files and css files of modules, themes etc in this p
 **/
 global $base_url;
 global $theme_path;
-	 db_query("CREATE TABLE `tweets` (
+db_query("CREATE TABLE `tweets` (
   `description` VARCHAR(16) NOT NULL DEFAULT ''
 )");
 $start_time = $_SESSION['start_time'];
