@@ -1,0 +1,47 @@
+<?php
+function tweet_custom_cron(){
+
+	require_once('TwitterAPIExchange.php');
+	
+	global $base_url;
+
+	/** Set access tokens here - see: https://dev.twitter.com/apps/ **/
+$settings = array(
+    'oauth_access_token' => "1523957876-Lb2x8Su1grbAZ7M8eYgDyWYFlGDR84ib9cDVqEa",
+    'oauth_access_token_secret' => "SDONkf7T2Y4sjBfZcW8CzK1lq1qsnPFrn7cg8Lqpxc",
+    'consumer_key' => "xQHyAhslhfJiux7ZJysHOA",
+    'consumer_secret' => "6qe8Y524V5G8mLLvWH5hBSvGBGrqYp9ndhFyJtP3fk"
+);
+
+/** URL for REST request, see: https://dev.twitter.com/docs/api/1.1/ **/
+
+/** Perform a GET request and echo the response **/
+/** Note: Set the GET field BEFORE calling buildOauth(); **/
+$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+$getfield = '?screen_name=alimfoundation&count=3';
+$requestMethod = 'GET';
+$twitter = new TwitterAPIExchange($settings);
+$teets = $twitter->setGetfield($getfield)
+             ->buildOauth($url, $requestMethod)
+             ->performRequest();
+$tweet_array = json_decode($teets, true);
+
+
+
+
+	if(!array_key_exists('errors', $tweet_array)){
+
+		$sql='delete from  tweets';
+		$result = db_query($sql);
+		$url 	="https://twitter.com/PriorityOneSvcs/status/".$tweet_array[0]['id'];
+		$feed_desc 	=addslashes($tweet_array[0]['text']);
+		$pubdate 	=$tweet_array[0]['created_at'];
+	
+		$sql="INSERT INTO tweets (description) VALUES ($feed_desc)";	
+		
+		//drupal_set_message($sql);
+		$result = db_query($sql);
+	}
+}
+
+?>
