@@ -152,7 +152,7 @@ used to alter comment , bookmark node and other forms
 ******/ 
 function alim_commentedurl_form_alter(&$form, &$form_state, $form_id) {
 
-print_r($form_id);
+ 
 	global $base_url;
 	
 	switch ($form_id) {
