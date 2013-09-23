@@ -812,7 +812,7 @@ print_r($form_id);
 				break;
 			
 		case "taxonomy_form_term": // taxonomy add form 
-				print_r($form);
+				
 				if($form['#vocabulary']['vid'] ==  8 ){ // unset the synonyms , relation etc from clip category vocabulary 
 					//print_r($form['advanced']);
 					if(isset($form['#term']['tid'])){
@@ -839,10 +839,12 @@ print_r($form_id);
 				
 				}
 				break;	
-		case "community_tags_form":  //  TAGGING FEATURE community_tags_form	
+		case "community_tags_form":  //  TAGGING FEATURE community_tags_form
+		print_r($form);	
 				if(isset($form['login'])){
 					unset($form['login']);
 				}
+				
 				break;
 	  case "our_advisers_and_scholars_node_form": 
 				//print_r($form);
