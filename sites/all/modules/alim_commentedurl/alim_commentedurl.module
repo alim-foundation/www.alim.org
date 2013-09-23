@@ -841,7 +841,7 @@ print_r($form_id);
 				break;	
 		case "community_tags_form":  //  TAGGING FEATURE community_tags_form
 		
-		$form['cloud']['#value']  = strip_tags($form['cloud']['#value']);
+		echo strip_tags($form['cloud']['#value']);
 		print "<pre>";
 		print_r($form['cloud']['#value']);	
 		print "</pre>";
