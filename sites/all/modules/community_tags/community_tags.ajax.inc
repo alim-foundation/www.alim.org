@@ -19,9 +19,9 @@ function community_tags_from_js($node) {
   global $user;
 
   $tags = (isset($_POST['tags']) && is_array($_POST['tags'])) ? $_POST['tags'] : array();
-  $tags = strip_tags($tags );
+  
   // Merge in new tag and save.
-  $tags = array_unique(array_merge($tags, drupal_explode_tags($_POST['add'])));
+  $tags = array_unique(array_merge($tags, drupal_explode_tags($_POST['add'])));$tags = strip_tags($tags );
   $vid = array_shift(community_tags_vids_for_node($node));
   community_tags_taxonomy_node_save($node, array('tags' => array($vid => $tags)), FALSE, $user->uid);
 
