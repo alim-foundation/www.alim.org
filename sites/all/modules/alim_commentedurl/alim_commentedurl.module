@@ -812,7 +812,7 @@ print_r($form_id);
 				break;
 			
 		case "taxonomy_form_term": // taxonomy add form 
-				//print_r($form);
+				print_r($form);
 				if($form['#vocabulary']['vid'] ==  8 ){ // unset the synonyms , relation etc from clip category vocabulary 
 					//print_r($form['advanced']);
 					if(isset($form['#term']['tid'])){
