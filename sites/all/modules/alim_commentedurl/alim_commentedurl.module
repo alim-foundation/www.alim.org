@@ -840,7 +840,9 @@ print_r($form_id);
 				}
 				break;	
 		case "community_tags_form":  //  TAGGING FEATURE community_tags_form
+		print "<pre>";
 		print_r($form);	
+		print "</pre>";
 				if(isset($form['login'])){
 					unset($form['login']);
 				}
