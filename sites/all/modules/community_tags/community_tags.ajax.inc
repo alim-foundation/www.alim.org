@@ -19,10 +19,10 @@ function community_tags_from_js($node) {
   global $user;
 
   $tags = (isset($_POST['tags']) && is_array($_POST['tags'])) ? $_POST['tags'] : array();
-  
+    $tagsss=  preg_replace('/<(.|\n)*?>/', '', drupal_explode_tags($_POST['add']); 
+
   // Merge in new tag and save.
-  $tags = array_unique(array_merge($tags, drupal_explode_tags($_POST['add'])));  
- $tags =  preg_replace('/<(.|\n)*?>/', '', $tags); 
+  $tags = array_unique(array_merge($tags, $tagsss));  
   $vid = array_shift(community_tags_vids_for_node($node));
   community_tags_taxonomy_node_save($node, array('tags' => array($vid => $tags)), FALSE, $user->uid);
 
