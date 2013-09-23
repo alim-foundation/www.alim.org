@@ -840,11 +840,7 @@ print_r($form_id);
 				}
 				break;	
 		case "community_tags_form":  //  TAGGING FEATURE community_tags_form
-		
-		echo preg_replace("/<.*?>/", "", $form['cloud']['#value']);
-		print "<pre>";
-		print_r($form['cloud']['#value']);	
-		print "</pre>";
+
 		if(isset($form['login'])){
 					unset($form['login']);
 				}
