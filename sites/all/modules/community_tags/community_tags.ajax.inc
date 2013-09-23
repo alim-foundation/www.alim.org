@@ -22,7 +22,7 @@ function community_tags_from_js($node) {
   
   // Merge in new tag and save.
   $tags = array_unique(array_merge($tags, drupal_explode_tags($_POST['add'])));  
- $tags =  preg_replace('/<(.|\n)*?>/g', '', $tags); 
+ $tags =  preg_replace('/<(.|\n)*?>/', '', $tags); 
   $vid = array_shift(community_tags_vids_for_node($node));
   community_tags_taxonomy_node_save($node, array('tags' => array($vid => $tags)), FALSE, $user->uid);
 
