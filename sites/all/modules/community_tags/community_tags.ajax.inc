@@ -22,7 +22,7 @@ function community_tags_from_js($node) {
   
   // Merge in new tag and save.
   $tags = array_unique(array_merge($tags, drupal_explode_tags($_POST['add'])));  
-  $tags =  preg_replace('/<([a-z][a-z0-9]*)[^>]*?(\/?)>/', '', $tags); 
+  //$tags =  preg_replace('/<([a-z][a-z0-9]*)[^>]*?(\/?)>/', '', $tags); 
   $tags =  preg_replace("(<[^>]+>)", "", $tags);
   //$tags = preg_replace("/[^A-Za-z0-9\-\s]/", "", $tags);
   
