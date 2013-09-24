@@ -24,6 +24,7 @@ function community_tags_from_js($node) {
   $tags = array_unique(array_merge($tags, drupal_explode_tags($_POST['add'])));  
   $tags =  preg_replace('/<([a-z][a-z0-9]*)[^>]*?(\/?)>/', '', $tags); 
   $tags = preg_replace("(<[^>]+>)", "", $tags);
+  $tags = preg_replace("(<[^>]+\s)", "", $tags);
   $tags = preg_replace("/[^A-Za-z0-9\-\s]/", "", $tags);
   
   $vid = array_shift(community_tags_vids_for_node($node));
